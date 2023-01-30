@@ -1,0 +1,209 @@
+## These migrations cover moving from the Js namespace to the new stdlib.
+## Each job runs in alphabetical order, hence the slightly weird naming scheme.
+## You're encouraged to pick and choose as you'd like from these migrations. You don't have to run them all.
+[array-a-reduce]
+match="Js.Array2.reduce(:[mapper], :[init])"
+rewrite="Array.reduce(:[init], :[mapper])"
+
+[array-a-push]
+match="let _ = :[varName]->Js.Array2.push(:value)"
+rewrite=":[varName]->Array.push(:value)"
+
+[array-a-push-ignore]
+match="Js.Array2.push(:value)->ignore"
+rewrite="Array.push(:value)"
+
+[array-a-unshift]
+match="let _ = :[varName]->Js.Array2.unshift(:value)"
+rewrite=":[varName]->Array.unshift(:value)"
+
+[array-a-unshift-ignore]
+match="Js.Array2.unshift(:value)->ignore"
+rewrite="Array.unshift(:value)"
+
+[array-c-unsafe_get]
+match="Array.unsafe_get"
+rewrite="Array.getUnsafe"
+
+[array-a-sliceFrom]
+match="Js.Array2.sliceFrom(:[from])"
+rewrite="Array.sliceToEnd(~from=:[from])"
+
+[array-a-slice]
+match="Js.Array2.slice(~start=:[from], ~end_=:[to])"
+rewrite="Array.slice(~from=:[from], ~end=:[to])"
+
+[array-z]
+match="Js.Array2"
+rewrite="Array"
+
+[string-a-slice]
+match="Js.String2.slice(~from=:[from], ~to_=:[to])"
+rewrite="String.slice(~start=:[from], ~end=:[to])"
+
+[string-a-slice-to-end]
+match="Js.String2.sliceToEnd(~from=:[from])"
+rewrite="String.sliceToEnd(~start=:[from])"
+
+[string-a-replace]
+match="Js.String2.replace"
+rewrite="String.replaceString"
+
+[string-z]
+match="Js.String2"
+rewrite="String"
+
+[promise-a-then-pipe]
+match="Js.Promise.then_(:[cont], _)"
+rewrite="Promise.then(:[cont])"
+
+[promise-a-catch-pipe]
+match="Js.Promise.catch(:[cont], _)"
+rewrite="Promise.catch(:[cont])"
+
+[promise-z]
+match="Js.Promise"
+rewrite="Promise"
+
+[promise-z-type]
+match="Promise.t<:[typeArg]>"
+rewrite="promise<:[typeArg]>"
+
+[js-dict-a-entries]
+match="Js.Dict.entries"
+rewrite="Dict.toArray"
+
+[js-dict-a-keys]
+match="Js.Dict.keys"
+rewrite="Dict.keysToArray"
+
+[js-dict-z]
+match="Js.Dict"
+rewrite="Dict"
+
+[js-nullable-z]
+match="Js.Nullable"
+rewrite="Nullable"
+
+[js-log-z]
+match="Js.log"
+rewrite="Console.log"
+
+[js-exn-z]
+match="Js.Exn"
+rewrite="Exn"
+
+[js-re-a-test]
+match="Js.Re.test_"
+rewrite="RegExp.test"
+
+## BELT
+## Below are migrations that cover moving from Belt to equivalents 
+## available in the new stdlib.
+[belt-option]
+match="Belt.Option"
+rewrite="Option"
+
+[belt-result]
+match="Belt.Result"
+rewrite="Result"
+
+[belt-list-a-keep]
+match="Belt.List.keep"
+rewrite="List.filter"
+
+[belt-list-a-keepMap]
+match="Belt.List.keepMap"
+rewrite="List.filterMap"
+
+[belt-list-z]
+match="Belt.List"
+rewrite="List"
+
+[belt-array-a-reverse]
+match="Belt.Array.reverse"
+rewrite="Array.reverse"
+
+[belt-array-a-keep-map]
+match="Belt.Array.keepMap"
+rewrite="Array.filterMap"
+
+[belt-array-a-shuffle]
+match="Belt.Array.shuffle"
+rewrite="Array.shuffle"
+
+[belt-array-a-flat-map]
+match="Belt.Array.flatMap"
+rewrite="Array.flatMap"
+
+[belt-array-b-map]
+match="Belt.Array.map"
+rewrite="Array.map"
+
+[belt-array-a-copy]
+match="Belt.Array.copy"
+rewrite="Array.copy"
+
+[belt-array-a-concat]
+match="Belt.Array.concat"
+rewrite="Array.concat"
+
+[belt-array-a-some]
+match="Belt.Array.some"
+rewrite="Array.some"
+
+[belt-array-a-length]
+match="Belt.Array.length"
+rewrite="Array.length"
+
+[belt-array-a-forEach]
+match="Belt.Array.forEach"
+rewrite="Array.forEach"
+
+[belt-array-a-forEachWithIndex]
+match="Belt.Array.forEachWithIndex"
+rewrite="Array.forEachWithIndex"
+
+[belt-array-a-sliceToEnd]
+match="Belt.Array.sliceToEnd(:[from])"
+rewrite="Array.sliceToEnd(~from=:[from])"
+
+[belt-array-a-reduce]
+match="Belt.Array.reduce"
+rewrite="Array.reduce"
+
+[belt-array-a-mapWithIndex]
+match="Belt.Array.mapWithIndex((:[index], :[fn]) => :[fnBody])"
+rewrite="Array.mapWithIndex((:[fn], :[index]) => :[fnBody])"
+
+[belt-array-b-mapWithIndex]
+match="Belt.Array.mapWithIndex((:[index], :[fn]) => :[fnBody])"
+rewrite="Array.mapWithIndex((:[fn], :[index]) => :[fnBody])"
+
+[belt-array-a-filter]
+match="Belt.Array.keep"
+rewrite="Array.filter"
+
+[belt-array-b-get]
+match="Belt.Array.get"
+rewrite="Array.get"
+
+[belt-array-a-getBy]
+match="Belt.Array.getBy"
+rewrite="Array.find"
+
+[belt-array-a-getIndexBy]
+match="Belt.Array.getIndexBy"
+rewrite="Array.findIndexOpt"
+
+[belt-float-z]
+match="Belt.Float"
+rewrite="Float"
+
+[belt-int-a-applied-from-string]
+match="(Belt.Int.fromString)"
+rewrite="(Int.fromString(~radix=10))"
+
+[belt-int-z]
+match="Belt.Int"
+rewrite="Int"

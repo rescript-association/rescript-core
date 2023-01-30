@@ -1,0 +1,23 @@
+{
+  "name": "@rescript/core",
+  "version": "0.1.0",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    },
+    {
+      "dir": "test",
+      "subdirs": true,
+      "type": "dev"
+    }
+  ],
+  "suffix": ".mjs",
+  "package-specs": {
+    "module": "es6",
+    "in-source": true
+  },
+  "warnings": {
+    "error": "+101"
+  }
+}
