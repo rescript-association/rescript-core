@@ -8,7 +8,7 @@ It's designed to replace the usage of the current `Js` namespace as well as the 
 
 Core **ships as its own package**. The developer experience will get better continuously (adding proper documentation, doc strings, and so on), but you can **start using this today**. And if the community agrees on this direction and it stands the test of time, it could eventually become part of the compiler.
 
-Check out the [repository for the package here](https://github.com/rescript-association/rescript-standard-library).
+Check out the [repository for the package here](https://github.com/rescript-association/rescript-core).
 
 ## Acknowledgements
 
@@ -51,7 +51,7 @@ We've also carefully incorporated useful utilities and modules that we believe a
 - The entire `Option` and `Result` modules brought in from `Belt`. Because options (and to some extent result) is deeply ingrained into the language and ecosystem, they deserve to be first classed.
 - [Patrick's `rescript-promise`](https://github.com/ryyppy/rescript-promise) is fully brought in, finally incorporating the refreshed promise module.
 
-Check out all the [details on this in the repository](https://github.com/rescript-lang/rescript-standard-library).
+Check out all the [details on this in the repository](https://github.com/rescript-lang/rescript-core).
 
 ## Cleaning up the current standard library situation
 
@@ -85,7 +85,7 @@ However, removing it wouldn't happen in the near future. It would live on in its
 
 ## Migration
 
-We'll be supplying some basic utilities to ease migration, making most of it automatic. There will however be some manual work involved, but we are going to focus on allowing migration to be gradual. There are more details on [_migrating here_](https://github.com/rescript-association/rescript-standard-library#migration).
+We'll be supplying some basic utilities to ease migration, making most of it automatic. There will however be some manual work involved, but we are going to focus on allowing migration to be gradual. There are more details on [_migrating here_](https://github.com/rescript-association/rescript-core#migration).
 
 ## Documentation (we need your help!)
 
