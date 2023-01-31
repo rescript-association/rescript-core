@@ -2,7 +2,7 @@
 
 # [ANN] ReScript Core - a new, batteries included drop-in standard library
 
-ReScript core is a new drop-in standard library, intended to be familiar for JavaScript developers and rich enough that you don't need to reach for anything else for typical ReScript development.
+ReScript Core is a new drop-in standard library, intended to be familiar for JavaScript developers and rich enough that you don't need to reach for anything else for typical ReScript development.
 
 It's designed to replace the usage of the current `Js` namespace as well as the OCaml pervasives (global `Array`, `List` etc). `Belt` remains unchanged. This is going to clear up the current standard library situation, which can be quite confusing.
 
@@ -12,7 +12,7 @@ Check out the [repository for the package here](https://github.com/rescript-asso
 
 ## Acknowledgements
 
-First thing's first - a huge thanks to @bloodyowl and the rest of the contributors to `rescript-js`. This standard library is heavily based on `rescript-js`. Thank you for your great work!
+First thing's first - a huge thanks to [@bloodyowl](https://github.com/bloodyowl) and the rest of the contributors to `rescript-js`. This standard library is heavily based on `rescript-js`. Thank you for your great work!
 
 ## What does it look like?
 
@@ -85,13 +85,13 @@ However, removing it wouldn't happen in the near future. It would live on in its
 
 ## Migration
 
-We'll be supplying some basic utilities to ease migration, making most of it automatic. There will however be some manual work involved, but we are going to focus on allowing migration to be gradual. There are more details on [_migrating here_](https://github.com/rescript-association/rescript-core#migration).
+We'll be supplying some basic utilities to ease migration, making most of it automatic. There will however be some manual work involved, but we are going to focus on allowing migration to be gradual. There are more details on migrating [_here_](https://github.com/rescript-association/rescript-core#migration).
 
 ## Documentation (we need your help!)
 
 As the initial version of the standard library ships as its own package, it'll lack both some of the docstrings in the code, as well as actual documentation. This will be fixed continuously.
 
-If you're interested, **your help is much wanted**. We'd some love help crafting proper docstrings for the parts of the standard library that does not already have them. We'll get back here with more details on how you can help soon.
+If you're interested, **your help is much wanted**. We'd love some help crafting proper docstrings for the parts of the standard library that do not already have them. We'll get back here with more details on how you can help soon.
 
 ## Wrapping up
 

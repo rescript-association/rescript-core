@@ -12,23 +12,23 @@ We're proposing a new, experimental drop-in standard library intended to solve a
 
 In practice, the proposed standard library is a fusion of `rescript-js`, `rescript-promise`, and `Belt` - all battle tested and well liked, with a few minor additions sprinkled in. So while we're calling this a new standard library, the parts it's made up of isn't new.
 
-It ships as a separate package, so you can try it out and start migrating to it if you want at your convenience. Eventually, if the community likes it and it stands the test of time, it'll might its way into the compiler. And, at that point it would replace the current `Js` namespace.
+It ships as a separate package, so you can try it out and start migrating to it if you want at your convenience. Eventually, if the community likes it and it stands the test of time, it might make its way into the compiler. And, at that point it would replace the current `Js` namespace.
 
-We don't anticipate nor plan for larger changes to any of the API:s, but please beware _changes may still happen_ as this project stabilizes. We're of course also interested in the community's feedback on the APIs.
+We don't anticipate nor plan for larger changes to any of the APIs, but please be aware that _changes may still happen_ as this project stabilizes. We're of course also interested in the community's feedback on the APIs.
 
 ## Guiding principles
 
 We've been following a few guiding principles as we developed this:
 
-- Familiarity for JavaScript developers. Let APIs follow their JS equivalents as much as possible, and where there's new APIs that don't exist in the JS standard library, follow a naming and layout that we think will feel familiar to a JS developer. Example: `Belt.Array.keepMap` is included in the `Array` module, but here renamed to `Array.filterMap` to be more familiar to JS developers.
+- Familiarity for JavaScript developers. Let APIs follow their JS equivalents as much as possible, and where there are new APIs that don't exist in the JS standard library, follow a naming and layout that we think will feel familiar to a JS developer. Example: `Belt.Array.keepMap` is included in the `Array` module, but here renamed to `Array.filterMap` to be more familiar to JS developers.
 - Focus on zero cost APIs, but prioritize quality. Sometimes a small bit of runtime is required for the API to be as good as it can be.
 - Effortless inference is important here. Choose APIs where inference just works. Example: `Belt.Array.reduce` is included instead of `Js.Array2.reduce`, because the `Belt` version's inference is better than the `Js.Array2` version.
 
 ## Acknowledgements
 
-- @bloodyowl + contributors to `rescript-js` are the people who've done the heavy lifting here, since this stdlib is based heavily on `rescript-js`.
+- [@bloodyowl](https://github.com/bloodyowl) + contributors to `rescript-js` are the people who've done the heavy lifting here, since this stdlib is based heavily on `rescript-js`.
 - Also a shout out to the authors of `Belt`, as a few key things have been incorporated directly from `Belt`.
-- Patrick (@ryyppy) for his work on `rescript-promise`, which is fully inlined into the stdlib.
+- Patrick ([@ryyppy](https://github.com/ryyppy)) for his work on `rescript-promise`, which is fully inlined into the stdlib.
 
 ## Installation
 
@@ -98,7 +98,7 @@ open OCamlCompat
 
 ## Differences to `rescript-js`
 
-This standard library is based on `rescript-js`, but with the tweaks and modifications listed below. There are also no uncurried versions of anything in the standard library. This is because this will ship at the same time (or if anything, later) as _uncurried by default_, which will remove the need for explicit uncurried functions.
+This standard library is based on `rescript-js`, but with the tweaks and modifications listed below. There are also no uncurried versions of anything in the standard library. This is because _uncurried by default_ will be coming soon in ReScript 11, which will remove the need for explicitly uncurried functions.
 
 ### Array
 
