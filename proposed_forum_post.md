@@ -62,10 +62,7 @@ One of the main goals of this initiative is to clean up the current standard lib
 - `Js.Array2`. Data first, use this for zero cost bindings.
 - `Belt.Array`. Data first and "batteries included". Use this for more specialized usage.
 
-With this new standard library, you'll have 2 options:
-
-- `Array`. From the standard library.
-- `Belt.Array`.
+With this new standard library, just using `Array` directly is the way to go.
 
 Most importantly, this will make development feel more _natural_ and intuitive if you're used to JavaScript. Instead of reaching for `Js.Array2`, or `Belt.Array`, you'll just reach for `Array`. Simpler, easier and cleaner.
 
