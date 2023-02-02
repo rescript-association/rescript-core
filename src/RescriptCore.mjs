@@ -85,8 +85,6 @@ var $$Intl;
 
 var Serializer;
 
-var Fn;
-
 var MapperRt;
 
 var Internal;
@@ -144,7 +142,6 @@ export {
   $$BigUint64Array ,
   $$Intl ,
   Serializer ,
-  Fn ,
   MapperRt ,
   Internal ,
   Re ,
