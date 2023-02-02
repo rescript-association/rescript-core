@@ -56,7 +56,6 @@ external typeof: 'a => Core__Type.t = "#typeof"
 include Core__Global
 
 type t<'a> = Js.t<'a>
-module Fn = Js.Fn
 module MapperRt = Js.MapperRt
 module Internal = Js.Internal
 module Re = Core__RegExp // needed for the %re sugar
