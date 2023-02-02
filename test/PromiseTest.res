@@ -43,7 +43,7 @@ module ThenChaining = {
     })
   }
 
-  // It's not allowed to return a Promise.t<Promise.t<'a>> value
+  // It's not allowed to return a promise<promise<'a>> value
   // within a then. This operation will throw an error
   let testInvalidThen = () => {
     open Promise
@@ -138,7 +138,7 @@ module Rejection = {
 }
 
 module Catching = {
-  let asyncParseFail: unit => Js.Promise.t<string> = %raw(`
+  let asyncParseFail: unit => promise<string> = %raw(`
   function() {
     return new Promise((resolve) => {
       var result = JSON.parse("{..");
@@ -153,7 +153,7 @@ module Catching = {
     open Promise
 
     asyncParseFail()
-    ->then(_ => resolve()) // Since our asyncParse will fail anyways, we convert to Promise.t<unit> for our catch later
+    ->then(_ => resolve()) // Since our asyncParse will fail anyways, we convert to promise<unit> for our catch later
     ->catch(e => {
       let success = switch e {
       | Js.Exn.Error(err) => Js.Exn.message(err) == Some("Unexpected token . in JSON at position 1")

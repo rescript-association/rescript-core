@@ -12,7 +12,7 @@ type t<+'a> = promise<'a>
 [resolve(value)] creates a resolved Promise with a given `value`
 
 ```rescript
-let p = Promise.resolve(5) // Promise.t<int>
+let p = Promise.resolve(5) // promise<int>
 ```
 */
 @val
@@ -68,7 +68,7 @@ reject(SomeError("this is an error"))
 ->catch(e => {
   let msg = switch(e) {
     | SomeError(msg) => "ReScript error occurred: " ++ msg
-    | JsError(obj) =>
+    | Js.Exn.Error(obj) =>
       switch Js.Exn.message(obj) {
         | Some(msg) => "JS exception occurred: " ++ msg
         | None => "Some other JS value has been thrown"
@@ -180,7 +180,7 @@ let promises = [resolve(1), resolve(2), resolve(3)]
 
 all(promises)
 ->then((results) => {
-  ReScriptJs.Js.Array.forEach(results, (num) => {
+  results->Array.forEach(num => {
     Console.log2("Number: ", num)
   })
 
@@ -231,7 +231,7 @@ external all6: ((t<'a>, t<'b>, t<'c>, t<'d>, t<'e>, t<'f>)) => t<('a, 'b, 'c, 'd
 /**
 `done` is a safe way to ignore a promise. If a value is anything else than a promise, it will raise a type error.
 */
-external done: Js.Promise.t<'a> => unit = "%ignore"
+external done: promise<'a> => unit = "%ignore"
 
 external unsafe_async: 'a => promise<'a> = "%identity"
 external unsafe_await: promise<'a> => 'a = "?await"

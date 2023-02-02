@@ -109,7 +109,7 @@ let withNewProp = Object.assign(copy, {"bar": "baz"})
 Console.info("")
 Console.info("Promise")
 Console.info("---")
-let promise: Promise.t<int> = Promise.make((resolve, _reject) => {
+let promise: promise<int> = Promise.make((resolve, _reject) => {
   let _ = setTimeout(() => {
     resolve(. 1)
   }, 100)
