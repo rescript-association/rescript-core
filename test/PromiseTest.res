@@ -3,7 +3,7 @@ open RescriptCore
 exception TestError(string)
 
 let fail = msg => {
-  Js.Exn.raiseError(msg)
+  Exn.raiseError(msg)
 }
 
 let equal = (a, b) => {
@@ -62,7 +62,7 @@ module ThenChaining = {
     })
     ->catch(e => {
       let ret = switch e {
-      | Js.Exn.Error(m) => Js.Exn.message(m) === Some("p.then is not a function")
+      | Exn.Error(m) => Exn.message(m) === Some("p.then is not a function")
       | _ => false
       }
       Test.run(__POS_OF__("then should have thrown an error"), ret, equal, true)
@@ -101,7 +101,7 @@ module ThenChaining = {
     })
     ->catch(e => {
       let ret = switch e {
-      | Js.Exn.Error(m) => Js.Exn.message(m) === Some("p.then is not a function")
+      | Exn.Error(m) => Exn.message(m) === Some("p.then is not a function")
       | _ => false
       }
       Test.run(__POS_OF__("then should have thrown an error"), ret, equal, true)
@@ -156,7 +156,7 @@ module Catching = {
     ->then(_ => resolve()) // Since our asyncParse will fail anyways, we convert to promise<unit> for our catch later
     ->catch(e => {
       let success = switch e {
-      | Js.Exn.Error(err) => Js.Exn.message(err) == Some("Unexpected token . in JSON at position 1")
+      | Exn.Error(err) => Exn.message(err) == Some("Unexpected token . in JSON at position 1")
       | _ => false
       }
 
@@ -184,13 +184,13 @@ module Catching = {
     })
   }
 
-  // Should correctly capture a JS error raised with Js.Exn.raiseError
+  // Should correctly capture a JS error raised with Exn.raiseError
   // within a Promise then function
   let testRaiseErrorThrow = () => {
     open Promise
 
     let causeErr = () => {
-      Js.Exn.raiseError("Some JS error")
+      Exn.raiseError("Some JS error")
     }
 
     resolve()
@@ -199,7 +199,7 @@ module Catching = {
     })
     ->catch(e => {
       let isTestErr = switch e {
-      | Js.Exn.Error(err) => Js.Exn.message(err) == Some("Some JS error")
+      | Exn.Error(err) => Exn.message(err) == Some("Some JS error")
       | _ => false
       }
       Test.run(__POS_OF__("Should be some JS error"), isTestErr, equal, true)
@@ -290,7 +290,7 @@ module Concurrently = {
 
     let delayedMsg = (ms, msg) => {
       Promise.make((resolve, _) => {
-        Js.Global.setTimeout(() => {
+        setTimeout(() => {
           place := place.contents + 1
           resolve(. (place.contents, msg))
         }, ms)->ignore
@@ -313,7 +313,7 @@ module Concurrently = {
 
     let racer = (ms, name) => {
       Promise.make((resolve, _) => {
-        Js.Global.setTimeout(() => {
+        setTimeout(() => {
           resolve(. name)
         }, ms)->ignore
       })
@@ -334,7 +334,7 @@ module Concurrently = {
 
     let delayedMsg = (ms, msg) => {
       Promise.make((resolve, _) => {
-        Js.Global.setTimeout(() => {
+        setTimeout(() => {
           place := place.contents + 1
           resolve(. (place.contents, msg))
         }, ms)->ignore
@@ -358,7 +358,7 @@ module Concurrently = {
 
     let delayedMsg = (ms, msg) => {
       Promise.make((resolve, _) => {
-        Js.Global.setTimeout(() => {
+        setTimeout(() => {
           place := place.contents + 1
           resolve(. (place.contents, msg))
         }, ms)->ignore
@@ -383,7 +383,7 @@ module Concurrently = {
 
     let delayedMsg = (ms, msg) => {
       Promise.make((resolve, _) => {
-        Js.Global.setTimeout(() => {
+        setTimeout(() => {
           place := place.contents + 1
           resolve(. (place.contents, msg))
         }, ms)->ignore
@@ -409,7 +409,7 @@ module Concurrently = {
 
     let delayedMsg = (ms, msg) => {
       Promise.make((resolve, _) => {
-        Js.Global.setTimeout(() => {
+        setTimeout(() => {
           place := place.contents + 1
           resolve(. (place.contents, msg))
         }, ms)->ignore
@@ -436,7 +436,7 @@ module Concurrently = {
 
     let delayedMsg = (ms, msg) => {
       Promise.make((resolve, _) => {
-        Js.Global.setTimeout(() => {
+        setTimeout(() => {
           place := place.contents + 1
           resolve(. (place.contents, msg))
         }, ms)->ignore

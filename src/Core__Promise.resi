@@ -68,8 +68,8 @@ reject(SomeError("this is an error"))
 ->catch(e => {
   let msg = switch(e) {
     | SomeError(msg) => "ReScript error occurred: " ++ msg
-    | Js.Exn.Error(obj) =>
-      switch Js.Exn.message(obj) {
+    | Exn.Error(obj) =>
+      switch Exn.message(obj) {
         | Some(msg) => "JS exception occurred: " ++ msg
         | None => "Some other JS value has been thrown"
       }
