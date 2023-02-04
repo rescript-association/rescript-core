@@ -111,9 +111,6 @@ external splitByRegExpAtMost: (string, Core__RegExp.t, ~limit: int) => array<opt
 @send external startsWith: (string, string) => bool = "startsWith"
 @send external startsWithFrom: (string, string, ~from: int) => bool = "startsWith"
 
-@send external substr: (string, ~start: int, ~length: int) => string = "substr"
-@send external substrToEnd: (string, ~start: int) => string = "substr"
-
 @send external substring: (string, ~start: int, ~end: int) => string = "substring"
 @send external substringToEnd: (string, ~start: int) => string = "substring"
 
