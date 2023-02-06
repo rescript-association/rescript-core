@@ -13,8 +13,16 @@
   "homepage": "https://github.com/rescript-association/rescript-core",
   "author": "ReScript Team",
   "license": "MIT",
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "bsconfig.json",
+    "src/**/*.res",
+    "src/**/*.resi"
+  ],
   "devDependencies": {
-    "rescript": "10.1.0",
+    "rescript": "^10.1.2",
     "@babel/code-frame": "7.18.6"
   }
 }

@@ -14,7 +14,9 @@ In practice, the proposed standard library is a fusion of `rescript-js`, `rescri
 
 It ships as a separate package, so you can try it out and start migrating to it if you want at your convenience. Eventually, if the community likes it and it stands the test of time, it might make its way into the compiler. And, at that point it would replace the current `Js` namespace.
 
-We don't anticipate nor plan for larger changes to any of the APIs, but please be aware that _changes may still happen_ as this project stabilizes. We're of course also interested in the community's feedback on the APIs.
+## Versioning and current status
+
+You're encouraged to start using this today. We don't anticipate nor plan for larger changes to any of the APIs, but please be aware that _changes may still happen_ as this project stabilizes. We're of course also interested in the community's feedback on the APIs. The DX of using Core is going to gradually improve as we add doc strings, documentation and so on.
 
 ## Guiding principles
 
