@@ -17,10 +17,10 @@
 @variadic @send external concatMany: (string, array<string>) => string = "concat"
 
 @send external endsWith: (string, string) => bool = "endsWith"
-@send external endsWithFrom: (string, string, ~from: int) => bool = "endsWith"
+@send external endsWithFrom: (string, string, int) => bool = "endsWith"
 
 @send external includes: (string, string) => bool = "includes"
-@send external includesFrom: (string, string, ~from: int) => bool = "includes"
+@send external includesFrom: (string, string, int) => bool = "includes"
 
 @send external indexOf: (string, string) => int = "indexOf"
 let indexOfOpt = (s, search) =>
@@ -28,7 +28,7 @@ let indexOfOpt = (s, search) =>
   | -1 => None
   | index => Some(index)
   }
-@send external indexOfFrom: (string, string, ~from: int) => int = "indexOf"
+@send external indexOfFrom: (string, string, int) => int = "indexOf"
 
 @send external lastIndexOf: (string, string) => int = "lastIndexOf"
 let lastIndexOfOpt = (s, search) =>
@@ -36,7 +36,7 @@ let lastIndexOfOpt = (s, search) =>
   | -1 => None
   | index => Some(index)
   }
-@send external lastIndexOfFrom: (string, string, ~from: int) => int = "lastIndexOf"
+@send external lastIndexOfFrom: (string, string, int) => int = "lastIndexOf"
 
 @return(nullable) @send
 external match: (string, Core__RegExp.t) => option<Core__RegExp.Result.t> = "match"
@@ -109,7 +109,7 @@ external splitByRegExpAtMost: (string, Core__RegExp.t, ~limit: int) => array<opt
   "split"
 
 @send external startsWith: (string, string) => bool = "startsWith"
-@send external startsWithFrom: (string, string, ~from: int) => bool = "startsWith"
+@send external startsWithFrom: (string, string, int) => bool = "startsWith"
 
 @send external substring: (string, ~start: int, ~end: int) => string = "substring"
 @send external substringToEnd: (string, ~start: int) => string = "substring"

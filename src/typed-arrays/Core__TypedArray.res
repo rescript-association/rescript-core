@@ -8,7 +8,7 @@ type t<'a>
 @get external byteOffset: t<'a> => int = "byteOffset"
 
 @send external setArray: (t<'a>, array<'a>) => unit = "set"
-@send external setArrayFrom: (t<'a>, array<'a>, ~from: int) => unit = "set"
+@send external setArrayFrom: (t<'a>, array<'a>, int) => unit = "set"
 
 @get external length: t<'a> => int = "length"
 
@@ -27,19 +27,19 @@ external copyWithin: (t<'a>, ~target: int, ~start: int, ~end: int) => array<'a> 
 @send external includes: (t<'a>, 'a) => bool = "includes"
 
 @send external indexOf: (t<'a>, 'a) => int = "indexOf"
-@send external indexOfFrom: (t<'a>, 'a, ~from: int) => int = "indexOf"
+@send external indexOfFrom: (t<'a>, 'a, int) => int = "indexOf"
 
 @send external joinWith: (t<'a>, string) => string = "join"
 
 @send external lastIndexOf: (t<'a>, 'a) => int = "lastIndexOf"
-@send external lastIndexOfFrom: (t<'a>, 'a, ~from: int) => int = "lastIndexOf"
+@send external lastIndexOfFrom: (t<'a>, 'a, int) => int = "lastIndexOf"
 
-@send external slice: (t<'a>, ~from: int, ~end: int) => t<'a> = "slice"
-@send external sliceToEnd: (t<'a>, ~from: int) => t<'a> = "slice"
+@send external slice: (t<'a>, ~start: int, ~end: int) => t<'a> = "slice"
+@send external sliceToEnd: (t<'a>, ~start: int) => t<'a> = "slice"
 @send external copy: t<'a> => t<'a> = "slice"
 
-@send external subarray: (t<'a>, ~from: int, ~end: int) => t<'a> = "subarray"
-@send external subarrayToEnd: (t<'a>, ~from: int) => t<'a> = "subarray"
+@send external subarray: (t<'a>, ~start: int, ~end: int) => t<'a> = "subarray"
+@send external subarrayToEnd: (t<'a>, ~start: int) => t<'a> = "subarray"
 
 @send external toString: t<'a> => string = "toString"
 @send external toLocaleString: t<'a> => string = "toLocaleString"
