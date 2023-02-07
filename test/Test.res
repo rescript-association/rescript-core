@@ -21,7 +21,7 @@ let cleanUpStackTrace = stack => {
     if i >= Array.length(lines) {
       lines
     } else if Array.getUnsafe(lines, i)->String.indexOf(" (internal/") >= 0 {
-      lines->Array.slice(~from=0, ~end=i)
+      lines->Array.slice(~start=0, ~end=i)
     } else {
       removeInternalLines(lines, i + 1)
     }
@@ -30,7 +30,7 @@ let cleanUpStackTrace = stack => {
   stack
   ->String.split("\n")
   // first line is "Error ...". Second line is this frame's stack trace. Ignore the 2
-  ->Array.sliceToEnd(~from=2)
+  ->Array.sliceToEnd(~start=2)
   ->removeInternalLines(0)
   // stack is indented 4 spaces. Remove 2
   ->Array.map(line => line->String.sliceToEnd(~start=2))

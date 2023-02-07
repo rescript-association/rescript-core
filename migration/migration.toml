@@ -27,11 +27,11 @@ rewrite="Array.getUnsafe"
 
 [array-a-sliceFrom]
 match="Js.Array2.sliceFrom(:[from])"
-rewrite="Array.sliceToEnd(~from=:[from])"
+rewrite="Array.sliceToEnd(~start=:[from])"
 
 [array-a-slice]
 match="Js.Array2.slice(~start=:[from], ~end_=:[to])"
-rewrite="Array.slice(~from=:[from], ~end=:[to])"
+rewrite="Array.slice(~start=:[from], ~end=:[to])"
 
 [array-z]
 match="Js.Array2"
@@ -166,7 +166,7 @@ rewrite="Array.forEachWithIndex"
 
 [belt-array-a-sliceToEnd]
 match="Belt.Array.sliceToEnd(:[from])"
-rewrite="Array.sliceToEnd(~from=:[from])"
+rewrite="Array.sliceToEnd(~start=:[from])"
 
 [belt-array-a-reduce]
 match="Belt.Array.reduce"

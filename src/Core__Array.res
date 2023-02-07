@@ -62,7 +62,7 @@ let indexOfOpt = (arr, item) =>
   | -1 => None
   | index => Some(index)
   }
-@send external indexOfFrom: (array<'a>, 'a, ~from: int) => int = "indexOf"
+@send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
 
 @send external joinWith: (array<'a>, string) => string = "join"
 
@@ -72,10 +72,10 @@ let lastIndexOfOpt = (arr, item) =>
   | -1 => None
   | index => Some(index)
   }
-@send external lastIndexOfFrom: (array<'a>, 'a, ~from: int) => int = "lastIndexOf"
+@send external lastIndexOfFrom: (array<'a>, 'a, int) => int = "lastIndexOf"
 
-@send external slice: (array<'a>, ~from: int, ~end: int) => array<'a> = "slice"
-@send external sliceToEnd: (array<'a>, ~from: int) => array<'a> = "slice"
+@send external slice: (array<'a>, ~start: int, ~end: int) => array<'a> = "slice"
+@send external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
 @send external copy: array<'a> => array<'a> = "slice"
 
 @send external toString: array<'a> => string = "toString"
