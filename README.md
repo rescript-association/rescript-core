@@ -157,6 +157,11 @@ The migration script is a set of instructions that Comby runs in sequence. You'r
 
 ### Name clashes
 
-Since the standard library is designed to live in the global scope, you _might_ have your own modules whose names might collide with the modules from the standard library. The easiest way to solve this is to just rename your own module to something else.
+Since the standard library is designed to live in the global scope, you _might_ have your own modules or modules from one of your dependencies whose names collide with the modules from the standard library.
 
 This is a side effect of shipping the standard library as its own package, meaning it won't be a problem if the standard library is adopted and ships with the compiler. At that point you'll be able to have your own modules shadowing builtin modules.
+
+In the meantime, as a workaround:
+
+- For a conflict with your own module, the easiest way to solve this is to just rename your own module to something else.
+- For a conflict with a dependency - e.g., Core's `Intl` vs. rescript-react-intl's `Intl`, you could use [patch-package](https://github.com/ds300/patch-package) to rename the conflicting module in Core (or remove it altogether if you are not using it).
