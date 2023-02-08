@@ -1,3 +1,5 @@
+include Core__Global
+
 module Array = Core__Array
 module Console = Core__Console
 module DataView = Core__DataView
@@ -5,7 +7,6 @@ module Date = Core__Date
 module Dict = Core__Dict
 module Error = Core__Error
 module Float = Core__Float
-module Global = Core__Global
 module Int = Core__Int
 module BigInt = Core__BigInt
 module Math = Core__Math
@@ -52,8 +53,6 @@ module Serializer = Core__Serializer
 external null: Core__Null.t<'a> = "#null"
 external undefined: Core__Undefined.t<'a> = "#undefined"
 external typeof: 'a => Core__Type.t = "#typeof"
-
-include Core__Global
 
 type t<'a> = Js.t<'a>
 module MapperRt = Js.MapperRt
