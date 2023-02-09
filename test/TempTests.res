@@ -16,7 +16,7 @@ Console.log(date->Date.toUTCString)
 Console.info("")
 Console.info("Dict")
 Console.info("---")
-let dict = Dict.empty()
+let dict = Dict.make()
 dict->Dict.set("foo", "bar")
 let dict2 = dict->Dict.copy
 dict2->Dict.delete("foo")

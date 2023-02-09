@@ -73,6 +73,10 @@ rewrite="promise<:[typeArg]>"
 match="Js.Dict.entries"
 rewrite="Dict.toArray"
 
+[js-dict-a-make]
+match="Js.Dict.empty"
+rewrite="Dict.make"
+
 [js-dict-a-keys]
 match="Js.Dict.keys"
 rewrite="Dict.keysToArray"
