@@ -100,7 +100,7 @@ open OCamlCompat
 
 ## Differences to `rescript-js`
 
-This standard library is based on `rescript-js`, but with the tweaks and modifications listed below. There are also no uncurried versions of anything in the standard library. This is because _uncurried by default_ will be coming soon in ReScript 11, which will remove the need for explicitly uncurried functions.
+This standard library is based on `rescript-js`, but with the tweaks and modifications. Some of the changes are listed below. There are also no uncurried versions of anything in the standard library. This is because _uncurried by default_ will be coming soon in ReScript 11, which will remove the need for explicitly uncurried functions.
 
 ### Array
 
