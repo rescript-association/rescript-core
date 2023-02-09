@@ -15,8 +15,6 @@ var $$Error;
 
 var Float;
 
-var Global;
-
 var Int;
 
 var $$BigInt;
@@ -107,7 +105,6 @@ export {
   Dict ,
   $$Error ,
   Float ,
-  Global ,
   Int ,
   $$BigInt ,
   $$Math ,
