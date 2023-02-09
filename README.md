@@ -144,6 +144,15 @@ _Things are added to this section on migration gradually._
 
 Migrating to the new standard library should be easy to do gradually. In this section we'll gather information that's intended to help migrating as painlessly as possible.
 
+In general, we suggest you take the following gradual approach:
+
+1. Install the stdlib and open it in the global scope
+2. Fix any inconsistencies that uncovers. That will be things like module name clashes (more details below), `someArr[0]` now returning an option, and so on.
+3. Run the semi-automated migration below. This will uncover more things to fix.
+4. Do a final search for `Js.` in your project, and replace any leftovers that the migration script did not catch.
+
+Check out [this issue on the GitHub tracker](https://github.com/rescript-association/rescript-core/issues/20) if you get stuck. We'll do what we can to help out when migrating there.
+
 ### Semi-automated migration
 
 We've prepared a script you can run with [comby.dev](https://comby.dev) that will do parts of the migration for you automatically. The migration script is located in [`migration.toml`](migration/migration.toml). Here's an example of how you can run it:
@@ -151,6 +160,9 @@ We've prepared a script you can run with [comby.dev](https://comby.dev) that wil
 ```bash
 # Run in your project root. Assumes `migration.toml` has been copied in place to your project root.
 comby -config migration.toml -f .res -matcher .re -exclude-dir node_modules,__generated__ -i
+
+# You should run it twice - once for .res files, and once for .resi. The command below runs for .resi, and the one above for .res.
+comby -config migration.toml -f .resi -matcher .re -exclude-dir node_modules,__generated__ -i
 ```
 
 The migration script is a set of instructions that Comby runs in sequence. You're encouraged to take `migration.toml` and tweak it so it fits your needs. [Comby](https://comby.dev) is powerful. It can do interactive rewriting and numerous other useful stuff. Check it out, but please note it's _not_ intended to cover all of the migration necessary. You'll still likely need to do a few manual fixes after running the migration scripts.

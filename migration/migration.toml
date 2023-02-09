@@ -85,6 +85,10 @@ rewrite="Dict.keysToArray"
 match="Js.Dict"
 rewrite="Dict"
 
+[js-dict-t-z]
+match="Js.Dict.t"
+rewrite="Dict.t"
+
 [js-nullable-z]
 match="Js.Nullable"
 rewrite="Nullable"
@@ -100,6 +104,50 @@ rewrite="Exn"
 [js-re-a-test]
 match="Js.Re.test_"
 rewrite="RegExp.test"
+
+[json-t-a]
+match="Js.Json.t"
+rewrite="JSON.t"
+
+[json-t-rest]
+match="Js.Json"
+rewrite="JSON"
+
+[float-a]
+match="Js.Float"
+rewrite="Float"
+
+[int-a]
+match="Js.Int"
+rewrite="Int"
+
+[math-a]
+match="Js.Math"
+rewrite="Math"
+
+[math-a-a]
+match="Math.minMany_float"
+rewrite="Math.minMany"
+
+[math-a-b]
+match="Math.maxMany_float"
+rewrite="Math.maxMany"
+
+[math-a-c]
+match="Math.max_int"
+rewrite="Math.Int.max"
+
+[math-a-d]
+match="Math.min_int"
+rewrite="Math.Int.min"
+
+[math-a-e]
+match="Math.max_float"
+rewrite="Math.max"
+
+[math-a-f]
+match="Math.min_float"
+rewrite="Math.min"
 
 ## BELT
 ## Below are migrations that cover moving from Belt to equivalents 
@@ -211,3 +259,15 @@ rewrite="(Int.fromString(~radix=10))"
 [belt-int-z]
 match="Belt.Int"
 rewrite="Int"
+
+[date-t-a]
+match="Js.Date.fromFloat"
+rewrite="Date.fromTime"
+
+[date-t-rest]
+match="Js.Date"
+rewrite="Date"
+
+[js-global-a]
+match="Js.Global."
+rewrite=""
