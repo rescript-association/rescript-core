@@ -44,8 +44,6 @@ module BigUint64Array = Core__BigUint64Array
 
 module Intl = Core__Intl
 
-module Serializer = Core__Serializer
-
 @val external window: Dom.window = "window"
 @val external document: Dom.document = "document"
 @val external globalThis: {..} = "globalThis"
