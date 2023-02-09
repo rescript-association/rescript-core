@@ -57,7 +57,7 @@ $codeFrame
 `
     Console.log(errorMessage)
     // API: https://nodejs.org/api/errors.html#errors_error_capturestacktrace_targetobject_constructoropt
-    let obj = Js.Obj.empty()
+    let obj = Object.empty()
     captureStackTrace(obj)
     Console.log(obj["stack"]->cleanUpStackTrace)
   }

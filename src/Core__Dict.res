@@ -8,7 +8,7 @@ let delete = (dict, string) => {
   delete(get(dict, string))
 }
 
-@obj external empty: unit => t<'a> = ""
+@obj external make: unit => t<'a> = ""
 
 @val external fromArray: array<(string, 'a)> => t<'a> = "Object.fromEntries"
 @val external fromIterator: Core__Iterator.t<(string, 'a)> => t<'a> = "Object.fromEntries"
