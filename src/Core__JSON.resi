@@ -23,7 +23,7 @@ external stringifyAnyWithReplacer: ('a, jsonReplacer) => option<string> = "JSON.
 external stringifyAnyWithReplacerAndIndent: ('a, jsonReplacer, int) => option<string> =
   "JSON.stringify"
 
-module Classify = {
+module Classify: {
   type t =
     | Bool(bool)
     | Null
@@ -32,26 +32,10 @@ module Classify = {
     | Object(Core__Dict.t<t>)
     | Array(array<t>)
 
-  @val external _internalClass: 'a => string = "Object.prototype.toString.call"
-  external _asBool: 'a => bool = "%identity"
-  external _asString: 'a => string = "%identity"
-  external _asFloat: 'a => float = "%identity"
-  external _asArray: 'a => array<Js.Json.t> = "%identity"
-  external _asDict: 'a => Core__Dict.t<Js.Json.t> = "%identity"
-
-  let classify = value => {
-    switch _internalClass(value) {
-    | "[object Boolean]" => Bool(_asBool(value))
-    | "[object Null]" => Null
-    | "[object String]" => String(_asString(value))
-    | "[object Number]" => Number(_asFloat(value))
-    | "[object Array]" => Array(_asArray(value))
-    | _ => Object(_asDict(value))
-    }
-  }
+  let classify: 'a => t
 }
 
-module Encode = {
+module Encode: {
   external bool: bool => t = "%identity"
   external null: t = "#null"
   external string: string => t = "%identity"
@@ -61,23 +45,11 @@ module Encode = {
   external array: array<t> => t = "%identity"
 }
 
-module Decode = {
-  let bool = (json: t) =>
-    Core__Type.typeof(json) === #boolean ? Some((Obj.magic(json): bool)) : None
-  let null = (json: t) => Obj.magic(json) === Core__Null.null ? Some(Core__Null.null) : None
-  let string = (json: t) =>
-    Core__Type.typeof(json) === #string ? Some((Obj.magic(json): string)) : None
-  let float = (json: t) =>
-    Core__Type.typeof(json) === #number ? Some((Obj.magic(json): float)) : None
-  let object = (json: t) =>
-    if (
-      Core__Type.typeof(json) === #object &&
-      !Core__Array.isArray(json) &&
-      !(Obj.magic(json) === Core__Null.null)
-    ) {
-      Some((Obj.magic(json): Core__Dict.t<t>))
-    } else {
-      None
-    }
-  let array = (json: t) => Core__Array.isArray(json) ? Some((Obj.magic(json): array<t>)) : None
+module Decode: {
+  let bool: t => option<bool>
+  let null: t => option<Core__Null.t<'a>>
+  let string: t => option<string>
+  let float: t => option<float>
+  let object: t => option<Core__Dict.t<t>>
+  let array: t => option<array<t>>
 }
