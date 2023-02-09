@@ -118,14 +118,14 @@ console.info("---");
 
 var json = JSON.parse("{\"foo\": \"bar\"}");
 
-var json$1 = Core__JSON.Decode.classify(json);
+var json$1 = Core__JSON.Classify.classify(json);
 
 var tmp;
 
 if (typeof json$1 === "number" || json$1.TAG !== /* Object */3) {
   tmp = undefined;
 } else {
-  var value = Core__JSON.Decode.classify(json$1._0["foo"]);
+  var value = Core__JSON.Classify.classify(json$1._0["foo"]);
   tmp = typeof value === "number" || value.TAG !== /* String */1 ? undefined : value._0;
 }
 

@@ -57,9 +57,9 @@ Console.info("JSON")
 Console.info("---")
 let json = JSON.parseExn(`{"foo": "bar"}`)
 Console.log(
-  switch JSON.Decode.classify(json) {
+  switch JSON.Classify.classify(json) {
   | Object(json) =>
-    switch JSON.Decode.classify(json->Dict.get("foo")) {
+    switch JSON.Classify.classify(json->Dict.get("foo")) {
     | String(value) => Some(value)
     | _ => None
     }
