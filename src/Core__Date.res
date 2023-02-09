@@ -1,14 +1,12 @@
 type t = Js.Date.t
 
-module Time = {
-  type t = float
-}
+type time = float
 
-@send external valueOf: t => Time.t = "valueOf"
+@send external valueOf: t => time = "valueOf"
 
 @new external make: unit => t = "Date"
 @new external fromString: string => t = "Date"
-@new external fromTime: Time.t => t = "Date"
+@new external fromTime: time => t = "Date"
 
 @new external makeWithYM: (~year: int, ~month: int) => t = "Date"
 @new external makeWithYMD: (~year: int, ~month: int, ~date: int) => t = "Date"
@@ -37,10 +35,10 @@ external makeWithYMDHMSM: (
 ) => t = "Date"
 
 module UTC = {
-  @val external makeWithYM: (~year: int, ~month: int) => Time.t = "Date.UTC"
-  @val external makeWithYMD: (~year: int, ~month: int, ~date: int) => Time.t = "Date.UTC"
+  @val external makeWithYM: (~year: int, ~month: int) => time = "Date.UTC"
+  @val external makeWithYMD: (~year: int, ~month: int, ~date: int) => time = "Date.UTC"
   @val
-  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => Time.t = "Date.UTC"
+  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => time = "Date.UTC"
   @val
   external makeWithYMDHM: (
     ~year: int,
@@ -48,7 +46,7 @@ module UTC = {
     ~date: int,
     ~hours: int,
     ~minutes: int,
-  ) => Time.t = "Date.UTC"
+  ) => time = "Date.UTC"
   @val
   external makeWithYMDHMS: (
     ~year: int,
@@ -57,7 +55,7 @@ module UTC = {
     ~hours: int,
     ~minutes: int,
     ~seconds: int,
-  ) => Time.t = "Date.UTC"
+  ) => time = "Date.UTC"
   @val
   external makeWithYMDHMSM: (
     ~year: int,
@@ -67,12 +65,12 @@ module UTC = {
     ~minutes: int,
     ~seconds: int,
     ~milliseconds: int,
-  ) => Time.t = "Date.UTC"
+  ) => time = "Date.UTC"
 }
 
-@val external now: unit => Time.t = "Date.now"
+@val external now: unit => time = "Date.now"
 
-@send external getTime: t => Time.t = "getTime"
+@send external getTime: t => time = "getTime"
 @send external getTimezoneOffset: t => int = "getTimezoneOffset"
 
 // Locale
