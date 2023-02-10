@@ -20,6 +20,7 @@ external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<
 @variadic @send external pushMany: (array<'a>, array<'a>) => unit = "push"
 @send external reverseInPlace: array<'a> => unit = "reverse"
 @send external shift: array<'a> => option<'a> = "shift"
+let sort: (array<'a>, ('a, 'a) => int) => array<'a>
 @send external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
 @variadic @send
 external spliceInPlace: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit =
