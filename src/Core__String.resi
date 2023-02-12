@@ -2,13 +2,14 @@
 
 /**
 `make(value)` converts the given value to a `string`.
-
 ```rescript
 String.make(3.5) == "3.5"
 String.make([1, 2, 3]) == "1,2,3"
 ```
 */
-@val external make: 'a => string = "String"
+@val
+external make: 'a => string = "String"
+
 /**
 `fromCharCode(n)` creates a `string` containing the character corresponding to
 that number; `n` ranges from 0 to 65535.If out of range, the lower 16 bits of
@@ -23,14 +24,19 @@ String.fromCharCode(0xd55c) == `한`
 String.fromCharCode(-64568) == `ψ`
 ```
 */
-@val external fromCharCode: int => string = "String.fromCharCode"
+@val
+external fromCharCode: int => string = "String.fromCharCode"
+
 /**
 `fromCharCodeMany([n1, n2, n3])` creates a `string` from the characters
 corresponding to the given numbers, using the same rules as `fromCharCode`.
 See [`String.fromCharCode`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode)
 on MDN.
 */
-@variadic @val external fromCharCodeMany: array<int> => string = "String.fromCharCode"
+@variadic
+@val
+external fromCharCodeMany: array<int> => string = "String.fromCharCode"
+
 /**
 `fromCodePoint(n)` creates a `string` containing the character corresponding to
 that numeric code point. If the number is not a valid code point, it raises
@@ -46,7 +52,9 @@ String.fromCodePoint(0xd55c) == `한`
 String.fromCodePoint(0x1f63a) == `😺`
 ```
 */
-@val external fromCodePoint: int => string = "String.fromCodePoint"
+@val
+external fromCodePoint: int => string = "String.fromCodePoint"
+
 /**
 `fromCodePointMany([n1, n2, n3])` creates a `string` from the characters
 corresponding to the given code point numbers, using the same rules as
@@ -57,7 +65,10 @@ on MDN.
 String.fromCodePointMany([0xd55c, 0xae00, 0x1f63a]) == `한글😺`
 ```
 */
-@variadic @val external fromCodePointMany: array<int> => string = "String.fromCodePoint"
+@variadic
+@val
+external fromCodePointMany: array<int> => string = "String.fromCodePoint"
+
 /**
 `length(s)` returns the length of the given `string`.
 See [`String.length`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length)
@@ -66,7 +77,8 @@ on MDN.
 String.length("abcd") == 4
 ```
 */
-@get external length: string => int = "length"
+@get
+external length: string => int = "length"
 
 /**
 `get(s, n)` returns as a `string` the character at the given index number. If
@@ -78,7 +90,9 @@ String.get("Reason", 4) == "o"
 String.get(`Rẽasöń`, 5) == `ń`
 ```
 */
-@get_index external get: (string, int) => option<string> = ""
+@get_index
+external get: (string, int) => option<string> = ""
+
 /**
 `charAt(s, n)` gets the character at index `n` within string `s`. If `n` is
 negative or greater than the length of `s`, it returns the empty string. If the
@@ -92,7 +106,9 @@ String.charAt("Reason", 12) == ""
 String.charAt(`Rẽasöń`, 5) == `ń`
 ```
 */
-@send external charAt: (string, int) => string = "charAt"
+@send
+external charAt: (string, int) => string = "charAt"
+
 /**
 `charCodeAt(s, n)` returns the character code at position `n` in string `s`;
 the result is in the range 0-65535, unlke `codePointAt`, so it will not work
@@ -106,7 +122,9 @@ String.charCodeAt(`😺`, 0) == 0xd83d->Belt.Int.toFloat
 String.codePointAt(`😺`, 0) == Some(0x1f63a)
 ```
 */
-@send external charCodeAt: (string, int) => float = "charCodeAt"
+@send
+external charCodeAt: (string, int) => float = "charCodeAt"
+
 /**
 `codePointAt(s, n)` returns the code point at position `n` within string `s` as
 a `Some(value)`. The return value handles code points greater than or equal to
@@ -119,7 +137,9 @@ Js.String2.codePointAt(`¿😺?`, 1) == Some(0x1f63a)
 Js.String2.codePointAt("abc", 5) == None
 ```
 */
-@send external codePointAt: (string, int) => option<int> = "codePointAt"
+@send
+external codePointAt: (string, int) => option<int> = "codePointAt"
+
 /**
 `concat(original, append)` returns a new `string` with `append` added after
 `original`.
@@ -129,7 +149,9 @@ on MDN.
 String.concat("cow", "bell") == "cowbell"
 ```
 */
-@send external concat: (string, string) => string = "concat"
+@send
+external concat: (string, string) => string = "concat"
+
 /**
 `concatMany(original, arr)` returns a new `string` consisting of each item of an
 array of strings added to the `original` string.
@@ -139,7 +161,10 @@ on MDN.
 String.concatMany("1st", ["2nd", "3rd", "4th"]) == "1st2nd3rd4th"
 ```
 */
-@variadic @send external concatMany: (string, array<string>) => string = "concat"
+@variadic
+@send
+external concatMany: (string, array<string>) => string = "concat"
+
 /**
 ES2015: `endsWith(str, substr)` returns `true` if the `str` ends with `substr`,
 `false` otherwise.
@@ -150,7 +175,9 @@ String.endsWith("BuckleScript", "Script") == true
 String.endsWith("BuckleShoes", "Script") == false
 ```
 */
-@send external endsWith: (string, string) => bool = "endsWith"
+@send
+external endsWith: (string, string) => bool = "endsWith"
+
 /**
 `endsWithFrom(str, ending, len)` returns `true` if the first len characters of
 `str` end with `ending`, `false` otherwise. If `len` is greater than or equal
@@ -165,7 +192,9 @@ String.endsWithFrom("abcde", "cde", 99) == true
 String.endsWithFrom("example.dat", "ple", 7) == true
 ```
 */
-@send external endsWithFrom: (string, string, int) => bool = "endsWith"
+@send
+external endsWithFrom: (string, string, int) => bool = "endsWith"
+
 /**
 ES2015: `includes(str, searchValue)` returns `true` if `searchValue` is found
 anywhere within `str`, false otherwise.
@@ -178,7 +207,9 @@ String.includes("programmer", "pro") == true
 String.includes("programmer.dat", "xyz") == false
 ```
 */
-@send external includes: (string, string) => bool = "includes"
+@send
+external includes: (string, string) => bool = "includes"
+
 /**
 ES2015: `includes(str, searchValue start)` returns `true` if `searchValue` is
 found anywhere within `str` starting at character number `start` (where 0 is
@@ -191,7 +222,9 @@ String.includesFrom("programmer", "gram", 4) == false
 String.includesFrom(`대한민국`, `한`, 1) == true
 ```
 */
-@send external includesFrom: (string, string, int) => bool = "includes"
+@send
+external includesFrom: (string, string, int) => bool = "includes"
+
 /**
 ES2015: `indexOf(str, searchValue)` returns the position at which `searchValue`
 was first found within `str`, or -1 if `searchValue` is not in `str`.
@@ -204,32 +237,216 @@ String.indexOf("beekeeper", "ee") == 1
 String.indexOf("bookseller", "xyz") == -1
 ```
 */
-@send external indexOf: (string, string) => int = "indexOf"
+@send
+external indexOf: (string, string) => int = "indexOf"
 let indexOfOpt: (string, string) => option<int>
-@send external indexOfFrom: (string, string, int) => int = "indexOf"
-@send external lastIndexOf: (string, string) => int = "lastIndexOf"
+
+/**
+`indexOfFrom(str, searchValue, start)` returns the position at which
+`searchValue` was found within `str` starting at character position `start`, or
+-1 if `searchValue` is not found in that portion of `str`. The return value is
+relative to the beginning of the string, no matter where the search started
+from.
+See [`String.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)
+on MDN.
+```rescript
+String.indexOfFrom("bookseller", "ok", 1) == 2
+String.indexOfFrom("bookseller", "sell", 2) == 4
+String.indexOfFrom("bookseller", "sell", 5) == -1
+```
+*/
+@send
+external indexOfFrom: (string, string, int) => int = "indexOf"
+
+/**
+`lastIndexOf(str, searchValue)` returns the position of the last occurrence of
+`searchValue` within `str`, searching backwards from the end of the string.
+Returns -1 if `searchValue` is not in `str`. The return value is always
+relative to the beginning of the string.
+See [`String.lastIndexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
+on MDN.
+```rescript
+String.lastIndexOf("bookseller", "ok") == 2
+String.lastIndexOf("beekeeper", "ee") == 4
+String.lastIndexOf("abcdefg", "xyz") == -1
+```
+*/
+@send
+external lastIndexOf: (string, string) => int = "lastIndexOf"
 let lastIndexOfOpt: (string, string) => option<int>
-@send external lastIndexOfFrom: (string, string, int) => int = "lastIndexOf"
-@return(nullable) @send
+
+/**
+`lastIndexOfFrom(str, searchValue, start)` returns the position of the last
+occurrence of `searchValue` within `str`, searching backwards from the given
+start position. Returns -1 if `searchValue` is not in `str`. The return value
+is always relative to the beginning of the string.
+See [`String.lastIndexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
+on MDN.
+```rescript
+String.lastIndexOfFrom("bookseller", "ok", 6) == 2
+String.lastIndexOfFrom("beekeeper", "ee", 8) == 4
+String.lastIndexOfFrom("beekeeper", "ee", 3) == 1
+String.lastIndexOfFrom("abcdefg", "xyz", 4) == -1
+```
+*/
+@send
+external lastIndexOfFrom: (string, string, int) => int = "lastIndexOf"
+
+/**
+`match(str, regexp)` matches a `string` against the given `regexp`. If there is
+no match, it returns `None`. For regular expressions without the g modifier, if
+  there is a match, the return value is `Some(array)` where the array contains:
+- The entire matched string
+- Any capture groups if the regexp had parentheses
+For regular expressions with the g modifier, a matched expression returns
+`Some(array)` with all the matched substrings and no capture groups.
+See [`String.match`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
+on MDN.
+```rescript
+String.match("The better bats", %re("/b[aeiou]t/")) == Some(["bet"])
+String.match("The better bats", %re("/b[aeiou]t/g")) == Some(["bet", "bat"])
+String.match("Today is 2018-04-05.", %re("/(\d+)-(\d+)-(\d+)/")) ==
+  Some(["2018-04-05", "2018", "04", "05"])
+String.match("The large container.", %re("/b[aeiou]g/")) == None
+```
+*/
+@return(nullable)
+@send
 external match: (string, Core__RegExp.t) => option<Core__RegExp.Result.t> = "match"
 type normalizeForm = [#NFC | #NFD | #NFKC | #NFKD]
-@send external normalize: string => string = "normalize"
-@send external normalizeByForm: (string, normalizeForm) => string = "normalize"
-@send external repeat: (string, int) => string = "repeat"
-@send external replace: (string, string, string) => string = "replace"
-@send external replaceRegExp: (string, Core__RegExp.t, string) => string = "replace"
+
+/**
+`normalize(str)` returns the normalized Unicode string using Normalization Form
+Canonical (NFC) Composition. Consider the character ã, which can be represented
+as the single codepoint \u00e3 or the combination of a lower case letter A
+\u0061 and a combining tilde \u0303. Normalization ensures that both can be
+stored in an equivalent binary representation.
+See [`String.normalize`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize)
+on MDN. See also [Unicode technical report
+#15](https://unicode.org/reports/tr15/) for details.
+*/
+@send
+external normalize: string => string = "normalize"
+
+/**
+ES2015: `normalize(str, form)` returns the normalized Unicode string using the
+specified form of normalization, which may be one of:
+- "NFC" — Normalization Form Canonical Composition.
+- "NFD" — Normalization Form Canonical Decomposition.
+- "NFKC" — Normalization Form Compatibility Composition.
+- "NFKD" — Normalization Form Compatibility Decomposition.
+See [`String.normalize`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize) on MDN.
+See also [Unicode technical report #15](https://unicode.org/reports/tr15/) for details.
+*/
+@send
+external normalizeByForm: (string, normalizeForm) => string = "normalize"
+
+/**
+`repeat(str, n)` returns a `string` that consists of `n` repetitions of `str`.
+Raises `RangeError` if `n` is negative.
+See [`String.repeat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat)
+on MDN.
+```rescript
+String.repeat("ha", 3) == "hahaha"
+String.repeat("empty", 0) == ""
+```
+*/
+@send
+external repeat: (string, int) => string = "repeat"
+
+/**
+ES2015: `replace(str, substr, newSubstr)` returns a new `string` which is
+identical to `str` except with the first matching instance of `substr` replaced
+by `newSubstr`. `substr` is treated as a verbatim string to match, not a
+regular expression.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+on MDN.
+```rescript
+String.replace("old string", "old", "new") == "new string"
+String.replace("the cat and the dog", "the", "this") == "this cat and the dog"
+```
+*/
+@send
+external replace: (string, string, string) => string = "replace"
+
+/**
+`replaceByRe(str, regex, replacement)` returns a new `string` where occurrences
+matching regex have been replaced by `replacement`.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+on MDN.
+```rescript
+String.replaceByRe("vowels be gone", %re("/[aeiou]/g"), "x") == "vxwxls bx gxnx"
+String.replaceByRe("Juan Fulano", %re("/(\w+) (\w+)/"), "$2, $1") == "Fulano, Juan"
+```
+*/
+@send
+external replaceRegExp: (string, Core__RegExp.t, string) => string = "replace"
+
+/**
+Returns a new `string` with some or all matches of a pattern with no capturing
+parentheses replaced by the value returned from the given function. The
+function receives as its parameters the matched string, the offset at which the
+match begins, and the whole string being matched.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+on MDN.
+```rescript
+let str = "beautiful vowels"
+let re = %re("/[aeiou]/g")
+let matchFn = (matchPart, _offset, _wholeString) => String.toUpperCase(matchPart)
+String.unsafeReplaceBy0(str, re, matchFn) == "bEAUtIfUl vOwEls"
+```
+*/
 @send
 external unsafeReplaceRegExpBy0: (
   string,
   Core__RegExp.t,
   (@uncurry ~match: string, ~offset: int, ~input: string) => string,
 ) => string = "replace"
+
+/**
+Returns a new `string` with some or all matches of a pattern with one set of
+capturing parentheses replaced by the value returned from the given function.
+The function receives as its parameters the matched string, the captured
+string, the offset at which the match begins, and the whole string being
+matched.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+on MDN.
+```rescript
+let str = "Jony is 40"
+let re = %re("/(Jony is )\d+/g")
+let matchFn = (_match, part1, _offset, _wholeString) => {
+  part1 ++ "41"
+}
+String.unsafeReplaceBy1(str, re, matchFn) == "Jony is 41"
+```
+*/
 @send
 external unsafeReplaceRegExpBy1: (
   string,
   Core__RegExp.t,
   (@uncurry ~match: string, ~group1: string, ~offset: int, ~input: string) => string,
 ) => string = "replace"
+
+/**
+Returns a new `string` with some or all matches of a pattern with two sets of
+capturing parentheses replaced by the value returned from the given function.
+The function receives as its parameters the matched string, the captured
+strings, the offset at which the match begins, and the whole string being
+matched.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+on MDN.
+```rescript
+let str = "7 times 6"
+let re = %re("/(\d+) times (\d+)/")
+let matchFn = (_match, p1, p2, _offset, _wholeString) => {
+  switch (Belt.Int.fromString(p1), Belt.Int.fromString(p2)) {
+  | (Some(x), Some(y)) => Belt.Int.toString(x * y)
+  | _ => "???"
+  }
+}
+String.unsafeReplaceBy2(str, re, matchFn) == "42"
+```
+*/
 @send
 external unsafeReplaceRegExpBy2: (
   string,
@@ -242,6 +459,16 @@ external unsafeReplaceRegExpBy2: (
     ~input: string,
   ) => string,
 ) => string = "replace"
+
+/**
+Returns a new `string` with some or all matches of a pattern with three sets of
+capturing parentheses replaced by the value returned from the given function.
+The function receives as its parameters the matched string, the captured
+strings, the offset at which the match begins, and the whole string being
+matched.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+on MDN.
+*/
 @send
 external unsafeReplaceRegExpBy3: (
   string,
@@ -255,28 +482,252 @@ external unsafeReplaceRegExpBy3: (
     ~input: string,
   ) => string,
 ) => string = "replace"
-@send external search: (string, Core__RegExp.t) => int = "search"
+
+/**
+`search(str, regexp)` returns the starting position of the first match of
+`regexp` in the given `str`, or -1 if there is no match.
+See [`String.search`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search)
+on MDN.
+```rescript
+String.search("testing 1 2 3", %re("/\d+/")) == 8
+String.search("no numbers", %re("/\d+/")) == -1
+```
+*/
+@send
+external search: (string, Core__RegExp.t) => int = "search"
 let searchOpt: (string, Core__RegExp.t) => option<int>
-@send external slice: (string, ~start: int, ~end: int) => string = "slice"
-@send external sliceToEnd: (string, ~start: int) => string = "slice"
-@send external split: (string, string) => array<string> = "split"
-@send external splitAtMost: (string, string, ~limit: int) => array<string> = "split"
-@send external splitByRegExp: (string, Core__RegExp.t) => array<option<string>> = "split"
+
+/**
+`slice(str, start:n1, end:n2)` returns the substring of `str` starting at
+character `n1` up to but not including `n2`.
+- If either `n1` or `n2` is negative, then it is evaluated as `length(str - n1)` or `length(str - n2)`.
+- If `n2` is greater than the length of `str`, then it is treated as `length(str)`.
+- If `n1` is greater than `n2`, slice returns the empty string.
+See [`String.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) on MDN.
+```rescript
+String.slice("abcdefg", ~start=2, ~end=5) == "cde"
+String.slice("abcdefg", ~start=2, ~end=9) == "cdefg"
+String.slice("abcdefg", ~start=-4, ~end=-2) == "de"
+String.slice("abcdefg", ~start=5, ~end=1) == ""
+```
+*/
+@send
+external slice: (string, ~start: int, ~end: int) => string = "slice"
+
+/**
+`sliceToEnd(str, ~start:n)` returns the substring of `str` starting at character
+`n` to the end of the string.
+- If `n` is negative, then it is evaluated as `length(str - n)`.
+- If `n` is greater than the length of `str`, then sliceToEnd returns the empty string.
+See [`String.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) on MDN.
+```rescript
+String.sliceToEnd("abcdefg", ~start=4) == "efg"
+String.sliceToEnd("abcdefg", ~start=-2) == "fg"
+String.sliceToEnd("abcdefg", ~start=7) == ""
+```
+*/
+@send
+external sliceToEnd: (string, ~start: int) => string = "slice"
+
+/**
+`split(str, delimiter)` splits the given `str` at every occurrence of
+`delimiter` and returns an array of the resulting substrings.
+See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
+on MDN.
+```rescript
+String.split("2018-01-02", "-") == ["2018", "01", "02"]
+String.split("a,b,,c", ",") == ["a", "b", "", "c"]
+String.split("good::bad as great::awful", "::") == ["good", "bad as great", "awful"]
+String.split("has-no-delimiter", ";") == ["has-no-delimiter"]
+```
+*/
+@send
+external split: (string, string) => array<string> = "split"
+
+/**
+`splitAtMost(str, delimiter, ~limit: n)` splits the given `str` at every occurrence of `delimiter`
+and returns an array of the first `n` resulting substrings. If `n` is negative or greater than
+the number of substrings, the array will contain all the substrings.
+```rescript
+String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=3) = ["ant", "bee", "cat"]
+String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=0) = []
+String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=9) = ["ant", "bee", "cat", "dog", "elk"]
+```
+*/
+@send
+external splitAtMost: (string, string, ~limit: int) => array<string> = "split"
+
+/**
+`splitByRe(str, regex)` splits the given `str` at every occurrence of `regex`
+and returns an array of the resulting substrings.
+See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
+on MDN.
+*/
+@send
+external splitByRegExp: (string, Core__RegExp.t) => array<option<string>> = "split"
+
+/**
+`splitByReAtMost(str, regex, ~limit:n)` splits the given `str` at every
+occurrence of `regex` and returns an array of the first `n` resulting
+substrings. If `n` is negative or greater than the number of substrings, the
+array will contain all the substrings.
+See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
+on MDN.
+*/
 @send
 external splitByRegExpAtMost: (string, Core__RegExp.t, ~limit: int) => array<option<string>> =
   "split"
-@send external startsWith: (string, string) => bool = "startsWith"
-@send external startsWithFrom: (string, string, int) => bool = "startsWith"
-@send external substring: (string, ~start: int, ~end: int) => string = "substring"
-@send external substringToEnd: (string, ~start: int) => string = "substring"
-@send external toLowerCase: string => string = "toLowerCase"
-@send external toLocaleLowerCase: string => string = "toLocaleLowerCase"
-@send external toUpperCase: string => string = "toUpperCase"
-@send external toLocaleUpperCase: string => string = "toLocaleUpperCase"
-@send external trim: string => string = "trim"
-@send external trimStart: string => string = "trimStart"
-@send external trimEnd: string => string = "trimEnd"
-@send external padStart: (string, int, string) => string = "padStart"
+
+/**
+ES2015: `startsWith(str, substr)` returns `true` if the `str` starts with
+`substr`, `false` otherwise.
+See [`String.startsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith)
+on MDN.
+```rescript
+String.startsWith("BuckleScript", "Buckle") == true
+String.startsWith("BuckleScript", "") == true
+String.startsWith("JavaScript", "Buckle") == false
+```
+*/
+@send
+external startsWith: (string, string) => bool = "startsWith"
+
+/**
+ES2015: `startsWithFrom(str, substr, n)` returns `true` if the `str` starts
+with `substr` starting at position `n`, false otherwise. If `n` is negative,
+the search starts at the beginning of `str`.
+See [`String.startsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith)
+on MDN.
+```rescript
+String.startsWithFrom("BuckleScript", "kle", 3) == true
+String.startsWithFrom("BuckleScript", "", 3) == true
+String.startsWithFrom("JavaScript", "Buckle", 2) == false
+```
+*/
+@send
+external startsWithFrom: (string, string, int) => bool = "startsWith"
+
+/**
+`substring(str, ~start: start, ~end: end)` returns characters `start` up to
+but not including end from `str`.
+- If `start` is less than zero, it is treated as zero.
+- If `end` is zero or negative, the empty string is returned.
+- If `start` is greater than `end`, the `start` and `end` points are swapped.
+See [`String.substring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring) on MDN.
+```rescript
+String.substring("playground", ~start=3, ~end=6) == "ygr"
+String.substring("playground", ~start=6, ~end=3) == "ygr"
+String.substring("playground", ~start=4, ~end=12) == "ground"
+```
+*/
+@send
+external substring: (string, ~start: int, ~end: int) => string = "substring"
+
+/**
+`substringToEnd(str, ~start: start)` returns the substring of `str` from
+position `start` to the end.
+- If `start` is less than or equal to zero, the entire string is returned.
+- If `start` is greater than or equal to the length of `str`, the empty string is returned.
+See [`String.substring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring) on MDN.
+```rescript
+String.substringToEnd("playground", ~start=4) == "ground"
+String.substringToEnd("playground", ~start=-3) == "playground"
+String.substringToEnd("playground", ~start=12) == ""
+```
+*/
+@send
+external substringToEnd: (string, ~start: int) => string = "substring"
+
+/**
+`toLowerCase(str)` converts `str` to lower case using the locale-insensitive
+case mappings in the Unicode Character Database. Notice that the conversion can
+give different results depending upon context, for example with the Greek
+letter sigma, which has two different lower case forms; one when it is the last
+character in a string and another when it is not.
+See [`String.toLowerCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase)
+on MDN.
+```rescript
+String.toLowerCase("ABC") == "abc"
+String.toLowerCase(`ΣΠ`) == `σπ`
+String.toLowerCase(`ΠΣ`) == `πς`
+```
+*/
+@send
+external toLowerCase: string => string = "toLowerCase"
+
+/**
+`toLocaleLowerCase(str)` converts `str` to lower case using the current locale.
+See [`String.toLocaleLowerCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleLowerCase)
+on MDN.
+*/
+@send
+external toLocaleLowerCase: string => string = "toLocaleLowerCase"
+
+/**
+`toUpperCase(str)` converts `str` to upper case using the locale-insensitive
+case mappings in the Unicode Character Database. Notice that the conversion can
+expand the number of letters in the result; for example the German ß
+capitalizes to two Ses in a row.
+See [`String.toUpperCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase)
+on MDN.
+```rescript
+String.toUpperCase("abc") == "ABC"
+String.toUpperCase(`Straße`) == `STRASSE`
+String.toUpperCase(`πς`) == `ΠΣ`
+```
+*/
+@send
+external toUpperCase: string => string = "toUpperCase"
+
+/**
+`toLocaleUpperCase(str)` converts `str` to upper case using the current locale.
+See [`String.to:LocaleUpperCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleUpperCase)
+on MDN.
+*/
+@send
+external toLocaleUpperCase: string => string = "toLocaleUpperCase"
+
+/**
+`trim(str)` returns a string that is `str` with whitespace stripped from both
+ends. Internal whitespace is not removed.
+See [`String.trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim)
+on MDN.
+```rescript
+String.trim("   abc def   ") == "abc def"
+String.trim("\n\r\t abc def \n\n\t\r ") == "abc def"
+```
+*/
+@send
+external trim: string => string = "trim"
+
+/**
+`trimStart(str)` returns a string that is `str` with whitespace stripped from the beginning of a string.
+Internal whitespace is not removed.
+See [`String.trimStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimStart)
+on MDN.
+```rescript
+String.trimStart("   Hello world!   ") == "Hello world!   "
+String.trimStart("   Hello   world!   ") == "Hello   world!   "
+```
+*/
+@send
+external trimStart: string => string = "trimStart"
+
+/**
+`trinEnd(str)` returns a string that is `str` with whitespace stripped from the end of a string.
+Internal whitespace is not removed.
+See [`String.trimStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimStart)
+on MDN.
+```rescript
+String.trimStart("   Hello world!   ") == "   Hello world!"
+String.trimStart("   Hello   world!   ") == "   Hello   world!"
+```
+*/
+@send
+external trimEnd: string => string = "trimEnd"
+
+@send
+external padStart: (string, int, string) => string = "padStart"
 @send external padEnd: (string, int, string) => string = "padEnd"
 @get_index external getSymbol: (string, Core__Symbol.t) => option<'a> = ""
 @get_index external getSymbolUnsafe: (string, Core__Symbol.t) => 'a = ""
