@@ -81,7 +81,7 @@ String.length("abcd") == 4
 external length: string => int = "length"
 
 /**
-`get(s, n)` returns as a `string` the character at the given index number. If
+`get(str, n)` returns as a `string` the character at the given index number. If
 `n` is out of range, this function returns `undefined`,so at some point this
 function may be modified to return `option(string)`.
 ```rescript
@@ -94,10 +94,10 @@ String.get(`Rẽasöń`, 5) == `ń`
 external get: (string, int) => option<string> = ""
 
 /**
-`charAt(s, n)` gets the character at index `n` within string `s`. If `n` is
-negative or greater than the length of `s`, it returns the empty string. If the
-string contains characters outside the range \u0000-\uffff, it will return the
-first 16-bit value at that position in the string.
+`charAt(str, n)` gets the character at index `n` within string `str`. If `n` is
+negative or greater than the length of `str`, it returns the empty string. If 
+the string contains characters outside the range \u0000-\uffff, it will return 
+the first 16-bit value at that position in the string.
 See [`String.charAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
 on MDN.
 ```rescript
@@ -110,7 +110,7 @@ String.charAt(`Rẽasöń`, 5) == `ń`
 external charAt: (string, int) => string = "charAt"
 
 /**
-`charCodeAt(s, n)` returns the character code at position `n` in string `s`;
+`charCodeAt(str, n)` returns the character code at position `n` in string `str`
 the result is in the range 0-65535, unlke `codePointAt`, so it will not work
 correctly for characters with code points greater than or equal to 0x10000. The
 return type is `float` because this function returns NaN if `n` is less than
@@ -126,10 +126,10 @@ String.codePointAt(`😺`, 0) == Some(0x1f63a)
 external charCodeAt: (string, int) => float = "charCodeAt"
 
 /**
-`codePointAt(s, n)` returns the code point at position `n` within string `s` as
-a `Some(value)`. The return value handles code points greater than or equal to
-0x10000. If there is no code point at the given position, the function returns
-`None`.
+`codePointAt(str, n)` returns the code point at position `n` within string `str`
+as a `Some(value)`. The return value handles code points greater than or equal
+to 0x10000. If there is no code point at the given position, the function
+returns `None`.
 See [`String.codePointAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt)
 on MDN.
 ```rescript
@@ -197,7 +197,7 @@ external endsWithFrom: (string, string, int) => bool = "endsWith"
 
 /**
 ES2015: `includes(str, searchValue)` returns `true` if `searchValue` is found
-anywhere within `str`, false otherwise.
+anywhere within `str`, `false` otherwise.
 See [`String.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 on MDN.
 ```rescript
@@ -594,7 +594,7 @@ external startsWith: (string, string) => bool = "startsWith"
 
 /**
 ES2015: `startsWithFrom(str, substr, n)` returns `true` if the `str` starts
-with `substr` starting at position `n`, false otherwise. If `n` is negative,
+with `substr` starting at position `n`, `false` otherwise. If `n` is negative,
 the search starts at the beginning of `str`.
 See [`String.startsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith)
 on MDN.
@@ -681,7 +681,7 @@ external toUpperCase: string => string = "toUpperCase"
 
 /**
 `toLocaleUpperCase(str)` converts `str` to upper case using the current locale.
-See [`String.to:LocaleUpperCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleUpperCase)
+See [`String.toLocaleUpperCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleUpperCase)
 on MDN.
 */
 @send
@@ -701,8 +701,8 @@ String.trim("\n\r\t abc def \n\n\t\r ") == "abc def"
 external trim: string => string = "trim"
 
 /**
-`trimStart(str)` returns a string that is `str` with whitespace stripped from the beginning of a string.
-Internal whitespace is not removed.
+`trimStart(str)` returns a string that is `str` with whitespace stripped from
+the beginning of a string. Internal whitespace is not removed.
 See [`String.trimStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimStart)
 on MDN.
 ```rescript
@@ -714,13 +714,13 @@ String.trimStart("   Hello   world!   ") == "Hello   world!   "
 external trimStart: string => string = "trimStart"
 
 /**
-`trinEnd(str)` returns a string that is `str` with whitespace stripped from the end of a string.
-Internal whitespace is not removed.
-See [`String.trimStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimStart)
+`trinEnd(str)` returns a string that is `str` with whitespace stripped from the
+end of a string. Internal whitespace is not removed.
+See [`String.trimEnd`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimEnd)
 on MDN.
 ```rescript
-String.trimStart("   Hello world!   ") == "   Hello world!"
-String.trimStart("   Hello   world!   ") == "   Hello   world!"
+String.trimEnd("   Hello world!   ") == "   Hello world!"
+String.trimEnd("   Hello   world!   ") == "   Hello   world!"
 ```
 */
 @send
