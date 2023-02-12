@@ -22,8 +22,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. */
 
-/*** Functions for interacting with JavaScript strings.
-See: [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String).*/
+/***
+Functions for interacting with JavaScript strings.
+See: [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String).
+*/
 
 /**
 `make(value)` converts the given value to a `string`.
@@ -312,6 +314,8 @@ String.indexOf("bookseller", "xyz") == -1
 */
 @send
 external indexOf: (string, string) => int = "indexOf"
+
+//TODO
 let indexOfOpt: (string, string) => option<int>
 
 /**
@@ -352,6 +356,8 @@ String.lastIndexOf("abcdefg", "xyz") == -1
 */
 @send
 external lastIndexOf: (string, string) => int = "lastIndexOf"
+
+//TODO
 let lastIndexOfOpt: (string, string) => option<int>
 
 /**
@@ -397,7 +403,6 @@ String.match("The large container.", %re("/b[aeiou]g/")) == None
 @return(nullable)
 @send
 external match: (string, Core__RegExp.t) => option<Core__RegExp.Result.t> = "match"
-type normalizeForm = [#NFC | #NFD | #NFKC | #NFKD]
 
 /**
 `normalize(str)` returns the normalized Unicode string using Normalization Form
@@ -425,7 +430,7 @@ assert(normalizeString1 === normalizeString2)
 external normalize: string => string = "normalize"
 
 /**
-ES2015: `normalize(str, form)` returns the normalized Unicode string using the
+ES2015: `normalizeByForm(str, form)` returns the normalized Unicode string using the
 specified form of normalization, which may be one of:
 - "NFC" — Normalization Form Canonical Composition.
 - "NFD" — Normalization Form Canonical Decomposition.
@@ -446,6 +451,7 @@ let normalizeString2 = String.normalizeByForm(string2, #NFKD)
 assert(normalizeString1 === normalizeString2)
 ```
 */
+type normalizeForm = [#NFC | #NFD | #NFKC | #NFKD]
 @send
 external normalizeByForm: (string, normalizeForm) => string = "normalize"
 
@@ -484,7 +490,7 @@ String.replace("the cat and the dog", "the", "this") == "this cat and the dog"
 external replace: (string, string, string) => string = "replace"
 
 /**
-`replaceByRe(str, regex, replacement)` returns a new `string` where occurrences
+`replaceRegExp(str, regex, replacement)` returns a new `string` where occurrences
 matching regex have been replaced by `replacement`.
 See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
 on MDN.
@@ -492,8 +498,8 @@ on MDN.
 ## Examples
 
 ```rescript
-String.replaceByRe("vowels be gone", %re("/[aeiou]/g"), "x") == "vxwxls bx gxnx"
-String.replaceByRe("Juan Fulano", %re("/(\w+) (\w+)/"), "$2, $1") == "Fulano, Juan"
+String.replaceRegExp("vowels be gone", %re("/[aeiou]/g"), "x") == "vxwxls bx gxnx"
+String.replaceRegExp("Juan Fulano", %re("/(\w+) (\w+)/"), "$2, $1") == "Fulano, Juan"
 ```
 */
 @send
@@ -624,6 +630,8 @@ String.search("no numbers", %re("/\d+/")) == -1
 */
 @send
 external search: (string, Core__RegExp.t) => int = "search"
+
+// TODO:
 let searchOpt: (string, Core__RegExp.t) => option<int>
 
 /**
@@ -702,21 +710,37 @@ String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=9) = ["ant", "bee", "cat",
 external splitAtMost: (string, string, ~limit: int) => array<string> = "split"
 
 /**
-`splitByRe(str, regex)` splits the given `str` at every occurrence of `regex`
+`splitByRegExp(str, regex)` splits the given `str` at every occurrence of `regex`
 and returns an array of the resulting substrings.
 See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
 on MDN.
+
+## Examples
+
+```rescript
+String.splitByRegExp("Jan,Feb,Mar", %re("/,/")) == [Some("Jan"), Some("Feb"), Some("Mar")]
+```
 */
 @send
 external splitByRegExp: (string, Core__RegExp.t) => array<option<string>> = "split"
 
 /**
-`splitByReAtMost(str, regex, ~limit:n)` splits the given `str` at every
+`splitByRegExpAtMost(str, regex, ~limit:n)` splits the given `str` at every
 occurrence of `regex` and returns an array of the first `n` resulting
 substrings. If `n` is negative or greater than the number of substrings, the
 array will contain all the substrings.
 See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
 on MDN.
+
+## Examples
+
+```rescript
+String.splitByRegExpAtMost("Hello World. How are you doing?", %re("/ /"), ~limit=3) == [
+      Some("Hello"),
+      Some("World."),
+      Some("How"),
+    ]
+```
 */
 @send
 external splitByRegExpAtMost: (string, Core__RegExp.t, ~limit: int) => array<option<string>> =
@@ -932,6 +956,8 @@ String.padEnd("abc", 1, "") == "abc"
 */
 @send
 external padEnd: (string, int, string) => string = "padEnd"
+
+//TODO
 @get_index external getSymbol: (string, Core__Symbol.t) => option<'a> = ""
 @get_index external getSymbolUnsafe: (string, Core__Symbol.t) => 'a = ""
 @set_index external setSymbol: (string, Core__Symbol.t, 'a) => unit = ""
