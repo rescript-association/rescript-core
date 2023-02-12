@@ -142,7 +142,7 @@ zero or greater than the length of the string.
 See [`String.charCodeAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
 on MDN.
 ```rescript
-String.charCodeAt(`😺`, 0) == 0xd83d->Belt.Int.toFloat
+String.charCodeAt(`😺`, 0) == 0xd83d->Int.toFloat
 String.codePointAt(`😺`, 0) == Some(0x1f63a)
 ```
 */
@@ -157,8 +157,8 @@ returns `None`.
 See [`String.codePointAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt)
 on MDN.
 ```rescript
-Js.String2.codePointAt(`¿😺?`, 1) == Some(0x1f63a)
-Js.String2.codePointAt("abc", 5) == None
+String.codePointAt(`¿😺?`, 1) == Some(0x1f63a)
+String.codePointAt("abc", 5) == None
 ```
 */
 @send
@@ -202,11 +202,11 @@ String.endsWith("BuckleShoes", "Script") == false
 @send
 external endsWith: (string, string) => bool = "endsWith"
 
+// NOTE: Honestly, this should have been named endsWithAt, but oh well
 /**
 `endsWithFrom(str, ending, len)` returns `true` if the first len characters of
 `str` end with `ending`, `false` otherwise. If `len` is greater than or equal
-to the length of `str`, then it works like `endsWith`. (Honestly, this should
-have been named endsWithAt, but oh well).
+to the length of `str`, then it works like `endsWith`.
 See [`String.endsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith)
 on MDN.
 ```rescript
@@ -462,8 +462,8 @@ on MDN.
 let str = "7 times 6"
 let re = %re("/(\d+) times (\d+)/")
 let matchFn = (_match, p1, p2, _offset, _wholeString) => {
-  switch (Belt.Int.fromString(p1), Belt.Int.fromString(p2)) {
-  | (Some(x), Some(y)) => Belt.Int.toString(x * y)
+  switch (Int.fromString(p1), Int.fromString(p2)) {
+  | (Some(x), Some(y)) => Int.toString(x * y)
   | _ => "???"
   }
 }
