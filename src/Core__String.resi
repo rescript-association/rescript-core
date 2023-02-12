@@ -105,9 +105,8 @@ String.length("abcd") == 4
 external length: string => int = "length"
 
 /**
-`get(str, n)` returns as a `string` the character at the given index number. If
-`n` is out of range, this function returns `undefined`,so at some point this
-function may be modified to return `option(string)`.
+`get(str, n)` returns as a `option<string>` at the given index number. If `n`
+is out of range, this function returns `None`.
 ```rescript
 String.get("Reason", 0) == "R"
 String.get("Reason", 4) == "o"
@@ -119,8 +118,8 @@ external get: (string, int) => option<string> = ""
 
 /**
 `charAt(str, n)` gets the character at index `n` within string `str`. If `n` is
-negative or greater than the length of `str`, it returns the empty string. If 
-the string contains characters outside the range \u0000-\uffff, it will return 
+negative or greater than the length of `str`, it returns the empty string. If
+the string contains characters outside the range \u0000-\uffff, it will return
 the first 16-bit value at that position in the string.
 See [`String.charAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
 on MDN.
@@ -251,7 +250,7 @@ external includesFrom: (string, string, int) => bool = "includes"
 
 /**
 ES2015: `indexOf(str, searchValue)` returns the position at which `searchValue`
-was first found within `str`, or -1 if `searchValue` is not in `str`.
+was first found within `str`, or `-1` if `searchValue` is not in `str`.
 See [`String.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)
 on MDN.
 ```rescript
@@ -268,7 +267,7 @@ let indexOfOpt: (string, string) => option<int>
 /**
 `indexOfFrom(str, searchValue, start)` returns the position at which
 `searchValue` was found within `str` starting at character position `start`, or
--1 if `searchValue` is not found in that portion of `str`. The return value is
+`-1` if `searchValue` is not found in that portion of `str`. The return value is
 relative to the beginning of the string, no matter where the search started
 from.
 See [`String.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)
@@ -285,7 +284,7 @@ external indexOfFrom: (string, string, int) => int = "indexOf"
 /**
 `lastIndexOf(str, searchValue)` returns the position of the last occurrence of
 `searchValue` within `str`, searching backwards from the end of the string.
-Returns -1 if `searchValue` is not in `str`. The return value is always
+Returns `-1` if `searchValue` is not in `str`. The return value is always
 relative to the beginning of the string.
 See [`String.lastIndexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
 on MDN.
@@ -302,7 +301,7 @@ let lastIndexOfOpt: (string, string) => option<int>
 /**
 `lastIndexOfFrom(str, searchValue, start)` returns the position of the last
 occurrence of `searchValue` within `str`, searching backwards from the given
-start position. Returns -1 if `searchValue` is not in `str`. The return value
+start position. Returns `-1` if `searchValue` is not in `str`. The return value
 is always relative to the beginning of the string.
 See [`String.lastIndexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
 on MDN.
@@ -329,8 +328,7 @@ on MDN.
 ```rescript
 String.match("The better bats", %re("/b[aeiou]t/")) == Some(["bet"])
 String.match("The better bats", %re("/b[aeiou]t/g")) == Some(["bet", "bat"])
-String.match("Today is 2018-04-05.", %re("/(\d+)-(\d+)-(\d+)/")) ==
-  Some(["2018-04-05", "2018", "04", "05"])
+String.match("Today is 2018-04-05.", %re("/(\d+)-(\d+)-(\d+)/")) == Some(["2018-04-05", "2018", "04", "05"])
 String.match("The large container.", %re("/b[aeiou]g/")) == None
 ```
 */
@@ -522,7 +520,7 @@ external search: (string, Core__RegExp.t) => int = "search"
 let searchOpt: (string, Core__RegExp.t) => option<int>
 
 /**
-`slice(str, start:n1, end:n2)` returns the substring of `str` starting at
+`slice(str, ~start:n1, ~end:n2)` returns the substring of `str` starting at
 character `n1` up to but not including `n2`.
 - If either `n1` or `n2` is negative, then it is evaluated as `length(str - n1)` or `length(str - n2)`.
 - If `n2` is greater than the length of `str`, then it is treated as `length(str)`.
@@ -569,9 +567,10 @@ String.split("has-no-delimiter", ";") == ["has-no-delimiter"]
 external split: (string, string) => array<string> = "split"
 
 /**
-`splitAtMost(str, delimiter, ~limit: n)` splits the given `str` at every occurrence of `delimiter`
-and returns an array of the first `n` resulting substrings. If `n` is negative or greater than
-the number of substrings, the array will contain all the substrings.
+`splitAtMost(str, delimiter, ~limit:n)` splits the given `str` at every
+occurrence of `delimiter` and returns an array of the first `n` resulting
+substrings. If `n` is negative or greater than the number of substrings, the
+array will contain all the substrings.
 ```rescript
 String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=3) = ["ant", "bee", "cat"]
 String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=0) = []
@@ -632,8 +631,8 @@ String.startsWithFrom("JavaScript", "Buckle", 2) == false
 external startsWithFrom: (string, string, int) => bool = "startsWith"
 
 /**
-`substring(str, ~start: start, ~end: end)` returns characters `start` up to
-but not including end from `str`.
+`substring(str, ~start:start, ~end:end)` returns characters `start` up to but 
+not including end from `str`.
 - If `start` is less than zero, it is treated as zero.
 - If `end` is zero or negative, the empty string is returned.
 - If `start` is greater than `end`, the `start` and `end` points are swapped.
@@ -648,7 +647,7 @@ String.substring("playground", ~start=4, ~end=12) == "ground"
 external substring: (string, ~start: int, ~end: int) => string = "substring"
 
 /**
-`substringToEnd(str, ~start: start)` returns the substring of `str` from
+`substringToEnd(str, ~start:start)` returns the substring of `str` from
 position `start` to the end.
 - If `start` is less than or equal to zero, the entire string is returned.
 - If `start` is greater than or equal to the length of `str`, the empty string is returned.
@@ -750,10 +749,47 @@ String.trimEnd("   Hello   world!   ") == "   Hello   world!"
 @send
 external trimEnd: string => string = "trimEnd"
 
+/**
+`padStart(str, n, padStr)` returns a string that has been padded with `padStr`
+(multiple times, if needed) until the resulting string reaches the given `n`
+length. The padding is applied from the start of the current string.
+See [`String.padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
+on MDN.
+```rescript
+String.padStart("abc", 5, " ") == "  abc"
+String.padStart("abc", 6, "123465") == "123abc"
+```
+*/
 @send
 external padStart: (string, int, string) => string = "padStart"
-@send external padEnd: (string, int, string) => string = "padEnd"
+
+/**
+`padEnd(str, n, padStr)` returns a string that has been padded with `padStr`
+(multiple times, if needed) until the resulting string reaches the given `n`
+length. The padding is applied from the end of the current string.
+See [`String.padEnd`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd)
+on MDN.
+```rescript
+String.padEnd("Hello", 10, ".") == "Hello....."
+String.padEnd("abc", 1, "") == "abc"
+```
+*/
+@send
+external padEnd: (string, int, string) => string = "padEnd"
 @get_index external getSymbol: (string, Core__Symbol.t) => option<'a> = ""
 @get_index external getSymbolUnsafe: (string, Core__Symbol.t) => 'a = ""
 @set_index external setSymbol: (string, Core__Symbol.t, 'a) => unit = ""
+
+/**
+`localeCompare(referenceStr, compareStr)` returns a float than indicatings
+whether a reference string comes before or fater, or is the same as the given
+string in sort order. If `referenceStr` occurs before `compareStr` positive if
+the `referenceStr` occurs after `compareStr`; `0` if they are equivalent.
+Do not rely on exact return values of `-1` or `1`
+See [`String.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare)
+```rescript
+String.localeCompare("a", "c") < 0. == true
+String.localeCompare("a", "a") == 0.
+```
+*/
 @send external localeCompare: (string, string) => float = "localeCompare"
