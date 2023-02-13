@@ -136,9 +136,9 @@ is out of range, this function returns `None`.
 ## Examples
 
 ```rescript
-String.get("Reason", 0) == "R"
-String.get("Reason", 4) == "o"
-String.get(`Rẽasöń`, 5) == `ń`
+String.get("Reason", 0) == Some("R")
+String.get("Reason", 4) == Some("o")
+String.get(`Rẽasöń`, 5) == Some(`ń`)
 ```
 */
 @get_index
@@ -322,7 +322,16 @@ String.indexOf("bookseller", "xyz") == -1
 @send
 external indexOf: (string, string) => int = "indexOf"
 
-//TODO
+/**
+`indexOfOpt(str, searchValue)`. Like `indexOf`, but return a `option<int>`.
+
+## Examples
+
+```rescript
+String.indexOf("bookseller", "ok") == Some(2)
+String.indexOf("bookseller", "xyz") == None
+```
+*/
 let indexOfOpt: (string, string) => option<int>
 
 /**
@@ -364,7 +373,18 @@ String.lastIndexOf("abcdefg", "xyz") == -1
 @send
 external lastIndexOf: (string, string) => int = "lastIndexOf"
 
-//TODO
+/**
+`lastIndexOfOpt(str, searchValue)`. Like `lastIndexOfOpt`, but return a
+`option<int>`.
+
+## Examples
+
+```rescript
+String.lastIndexOf("bookseller", "ok") == Some(2)
+String.lastIndexOf("beekeeper", "ee") == Some(4)
+String.lastIndexOf("abcdefg", "xyz") == None
+```
+*/
 let lastIndexOfOpt: (string, string) => option<int>
 
 /**
@@ -638,7 +658,16 @@ String.search("no numbers", %re("/\d+/")) == -1
 @send
 external search: (string, Core__RegExp.t) => int = "search"
 
-// TODO:
+/**
+`searchOpt(str, regexp)`. Like `search`, but return a `option<int>`.
+
+## Examples
+
+```rescript
+String.search("testing 1 2 3", %re("/\d+/")) == Some(8)
+String.search("no numbers", %re("/\d+/")) == None
+```
+*/
 let searchOpt: (string, Core__RegExp.t) => option<int>
 
 /**
@@ -964,7 +993,7 @@ String.padEnd("abc", 1, "") == "abc"
 @send
 external padEnd: (string, int, string) => string = "padEnd"
 
-//TODO
+// TODO: add docs
 @get_index external getSymbol: (string, Core__Symbol.t) => option<'a> = ""
 @get_index external getSymbolUnsafe: (string, Core__Symbol.t) => 'a = ""
 @set_index external setSymbol: (string, Core__Symbol.t, 'a) => unit = ""
