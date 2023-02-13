@@ -65,6 +65,13 @@ external fromCharCode: int => string = "String.fromCharCode"
 corresponding to the given numbers, using the same rules as `fromCharCode`.
 See [`String.fromCharCode`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode)
 on MDN.
+
+## Examples
+
+```rescript
+String.fromCharCodeMany([189, 43, 190, 61]) == "½+¾="
+String.fromCharCode([65, 66, 67]) == "ABC"
+```
 */
 @variadic
 @val
@@ -280,8 +287,8 @@ String.includes("programmer.dat", "xyz") == false
 external includes: (string, string) => bool = "includes"
 
 /**
-ES2015: `includes(str, searchValue start)` returns `true` if `searchValue` is
-found anywhere within `str` starting at character number `start` (where 0 is
+ES2015: `includesFrom(str, searchValue start)` returns `true` if `searchValue`
+is found anywhere within `str` starting at character number `start` (where 0 is
 the first character), `false` otherwise.
 See [`String.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 on MDN.
@@ -383,7 +390,7 @@ external lastIndexOfFrom: (string, string, int) => int = "lastIndexOf"
 /**
 `match(str, regexp)` matches a `string` against the given `regexp`. If there is
 no match, it returns `None`. For regular expressions without the g modifier, if
-  there is a match, the return value is `Some(array)` where the array contains:
+there is a match, the return value is `Some(array)` where the array contains:
 - The entire matched string
 - Any capture groups if the regexp had parentheses
 For regular expressions with the g modifier, a matched expression returns
@@ -519,7 +526,7 @@ on MDN.
 let str = "beautiful vowels"
 let re = %re("/[aeiou]/g")
 let matchFn = (matchPart, _offset, _wholeString) => String.toUpperCase(matchPart)
-String.unsafeReplaceBy0(str, re, matchFn) == "bEAUtIfUl vOwEls"
+String.unsafeReplaceRegExpBy0(str, re, matchFn) == "bEAUtIfUl vOwEls"
 ```
 */
 @send
@@ -546,7 +553,7 @@ let re = %re("/(Jony is )\d+/g")
 let matchFn = (_match, part1, _offset, _wholeString) => {
   part1 ++ "41"
 }
-String.unsafeReplaceBy1(str, re, matchFn) == "Jony is 41"
+String.unsafeReplaceRegExpBy1(str, re, matchFn) == "Jony is 41"
 ```
 */
 @send
@@ -576,7 +583,7 @@ let matchFn = (_match, p1, p2, _offset, _wholeString) => {
   | _ => "???"
   }
 }
-String.unsafeReplaceBy2(str, re, matchFn) == "42"
+String.unsafeReplaceRegExpBy2(str, re, matchFn) == "42"
 ```
 */
 @send
