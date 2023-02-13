@@ -26,7 +26,7 @@ external log: 'a => unit = "console.log"
 
 ```rescript
 Console.log2("Hello", "World")
-Console.log2([1, 2, 3], [4])
+Console.log2([1, 2, 3], '4')
 ```
 */
 @val
@@ -39,7 +39,7 @@ external log2: ('a, 'b) => unit = "console.log"
 
 ```rescript
 Console.log3("Hello", "World", "ReScript")
-Console.log2([1, 2, 3], [4], [5])
+Console.log2("One", 2, #3)
 ```
 */
 @val
@@ -51,7 +51,7 @@ external log3: ('a, 'b, 'c) => unit = "console.log"
 
 ```rescript
 Console.log4("Hello", "World", "ReScript", "!!!")
-Console.log4([1, 2, 3], [4], [5])
+Console.log4([1, 2], (3, 4), [#5, #6], #"polyvar")
 ```
 */
 @val
@@ -63,8 +63,8 @@ external log4: ('a, 'b, 'c, 'd) => unit = "console.log"
 ## Examples
 
 ```rescript
-Console.log5("Hello", "World", "from", "JS", "!!!")
-Console.log5(1, 2, 3, 4, 5)
+Console.log5("Hello", "World", "JS", '!', '!')
+Console.log5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
 ```
 */
 @val
@@ -77,35 +77,34 @@ on MDN.
 ## Examples
 
 ```rescript
-Console.info("Hello")
-Console.info([1, 2, 3])
-Console.info(("Hello", "ReScript"))
+Console.info("Information")
+Console.info(("Hello", "JS"))
 ```
 */
 @val
 external info: 'a => unit = "console.info"
 
 /**
-`info2(v1, v2)`. Like `info`, but two arguments.
+`info2(v1, v2)`. Like `info`, but with two arguments.
 
 ## Examples
 
 ```rescript
-Console.info2("Failed to", "download")
-Console.info2([""])
+Console.info2("Info", "failed to download")
+Console.info2(#info, {"name": "ReScript"})
 ```
 */
 @val
 external info2: ('a, 'b) => unit = "console.info"
 
 /**
-`info3(v1, v2, v3)`. Like `info`, but three arguments.
+`info3(v1, v2, v3)`. Like `info`, but with three arguments.
 
 ## Examples
 
 ```rescript
 Console.info3("Hello", "World", "ReScript")
-Console.info3([1, 2, 3], [4], [5])
+Console.info3([1, 2, 3], #4, #5)
 ```
 */
 @val
@@ -117,8 +116,8 @@ external info3: ('a, 'b, 'c) => unit = "console.info"
 ## Examples
 
 ```rescript
-Console.info4("Hello", "World", "ReScript", "!!!")
-Console.info4([1, 2, 3], [4], [5])
+Console.info4("Hello", "World", "ReScript", '!')
+Console.info4([1, 2, 3], #4, #5, #lastinfo)
 ```
 */
 @val
@@ -131,7 +130,7 @@ external info4: ('a, 'b, 'c, 'd) => unit = "console.info"
 
 ```rescript
 Console.info5("Hello", "World", "from", "JS", "!!!")
-Console.info5(1, 2, 3, 4, 5)
+Console.info5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
 ```
 */
 @val
@@ -145,9 +144,8 @@ on MDN.
 ## Examples
 
 ```rescript
-Console.warn("Hello")
-Console.warn([1, 2, 3])
-Console.warn(("Hello", "ReScript"))
+Console.warn("Warning")
+Console.warn(("Warning", "invalid number"))
 ```
 */
 @val
@@ -160,7 +158,7 @@ external warn: 'a => unit = "console.warn"
 
 ```rescript
 Console.warn2("Hello", "World")
-Console.warn2([1, 2, 3], [4])
+Console.warn2([1, 2, 3], 4)
 ```
 */
 @val
@@ -173,7 +171,7 @@ external warn2: ('a, 'b) => unit = "console.warn"
 
 ```rescript
 Console.warn3("Hello", "World", "ReScript")
-Console.warn3([1, 2, 3], [4], [5])
+Console.warn3([1, 2, 3], #4, #5)
 ```
 */
 @val
@@ -186,7 +184,7 @@ external warn3: ('a, 'b, 'c) => unit = "console.warn"
 
 ```rescript
 Console.warn4("Hello", "World", "ReScript", "!!!")
-Console.warn4([1, 2, 3], [4], [5])
+Console.warn4(#first, #second, #third, ("fourth"))
 ```
 */
 @val
@@ -199,7 +197,7 @@ external warn4: ('a, 'b, 'c, 'd) => unit = "console.warn"
 
 ```rescript
 Console.warn5("Hello", "World", "from", "JS", "!!!")
-Console.warn5(1, 2, 3, 4, 5)
+Console.warn5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
 ```
 */
 @val
@@ -213,9 +211,8 @@ on MDN.
 ## Examples
 
 ```rescript
-Console.error("Hello")
-Console.error([1, 2, 3])
-Console.error(("Hello", "ReScript"))
+Console.error("error message")
+Console.error(("error", "invalid value"))
 ```
 */
 @val
@@ -227,8 +224,8 @@ external error: 'a => unit = "console.error"
 ## Examples
 
 ```rescript
-Console.error("Hello", "World")
-Console.error([1, 2, 3], [4])
+Console.error2("Error", "here")
+Console.error2(("log", "error"), "message")
 ```
 */
 @val
@@ -240,8 +237,8 @@ external error2: ('a, 'b) => unit = "console.error"
 ## Examples
 
 ```rescript
-Console.error3("Hello", "World", "ReScript")
-Console.error3([1, 2, 3], [4], [5])
+Console.error3("Hello", "World", "!!!")
+Console.error3(#first, #second, #third)
 ```
 */
 @val
@@ -253,8 +250,8 @@ external error3: ('a, 'b, 'c) => unit = "console.error"
 ## Examples
 
 ```rescript
-Console.error("Hello", "World", "ReScript", "!!!")
-Console.error([1, 2, 3], [4], [5])
+Console.error4("Hello", "World", "ReScript", '!')
+Console.error4(#first, #second, #third, ("fourth"))
 ```
 */
 @val
@@ -266,8 +263,8 @@ external error4: ('a, 'b, 'c, 'd) => unit = "console.error"
 ## Examples
 
 ```rescript
-Console.error5("Hello", "World", "from", "JS", "!!!")
-Console.error5(1, 2, 3, 4, 5)
+Console.error5('e', 'r, 'r', 'o', 'r')
+Console.error5(1, #second, #third, ("fourth"), 'c')
 ```
 */
 @val
