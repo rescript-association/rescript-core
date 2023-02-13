@@ -2,6 +2,20 @@ type t = Js.Date.t
 
 type time = float
 
+type localeOptions = {
+  dateStyle?: [#full | #long | #medium | #short],
+  timeStyle?: [#full | #long | #medium | #short],
+  weekday?: [#long | #short | #narrow],
+  era?: [#long | #short | #narrow],
+  year?: [#numeric | #"2-digit"],
+  month?: [#numeric | #"2-digit" | #long | #short | #narrow],
+  day?: [#numeric | #"2-digit"],
+  hour?: [#numeric | #"2-digit"],
+  minute?: [#numeric | #"2-digit"],
+  second?: [#numeric | #"2-digit"],
+  timeZoneName?: [#long | #short],
+}
+
 @send external valueOf: t => time = "valueOf"
 
 @new external make: unit => t = "Date"
@@ -146,8 +160,19 @@ external setUTCMinutesSMs: (t, ~minutes: int, ~seconds: int, ~milliseconds: int)
 @send external toTimeString: t => string = "toTimeString"
 
 @send external toLocaleDateString: t => string = "toLocaleDateString"
+@send external toLocaleDateStringWithLocale: (t, string) => string = "toLocaleDateString"
+@send
+external toLocaleDateStringWithLocaleAndOptions: (t, string, localeOptions) => string =
+  "toLocaleDateString"
 @send external toLocaleString: t => string = "toLocaleString"
+@send external toLocaleStringWithLocale: (t, string) => string = "toLocaleString"
+@send
+external toLocaleStringWithLocaleAndOptions: (t, string, localeOptions) => string = "toLocaleString"
 @send external toLocaleTimeString: t => string = "toLocaleTimeString"
+@send external toLocaleTimeStringWithLocale: (t, string) => string = "toLocaleTimeString"
+@send
+external toLocaleTimeStringWithLocaleAndOptions: (t, string, localeOptions) => string =
+  "toLocaleTimeString"
 
 @send external toISOString: t => string = "toISOString"
 @send external toUTCString: t => string = "toUTCString"
