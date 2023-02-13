@@ -24,5 +24,5 @@
 
 @val external trace: unit => unit = "console.trace"
 
-@val external timeStart: string => unit = "console.timeStart"
+@val external time: string => unit = "console.time"
 @val external timeEnd: string => unit = "console.timeEnd"
