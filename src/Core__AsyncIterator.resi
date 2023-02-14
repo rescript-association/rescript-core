@@ -1,3 +1,11 @@
+/***
+Bindings to async iterators, a way to do async iteration in JavaScript.
+
+See [async iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_async_iterator_and_async_iterable_protocols) on MDN.*/
+
+/**
+The type representing an async iterator.
+*/
 type t<'a>
 
 type value<'a> = {
