@@ -254,7 +254,11 @@ console.info("---");
 
 var set = new Set();
 
-set.add(1).add(2).delete(2);
+set.add(1);
+
+set.add(2);
+
+set.delete(2);
 
 console.log(set);
 
