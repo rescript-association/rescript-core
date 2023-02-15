@@ -1,7 +1,9 @@
 type t<'a>
-type next<'a>
 
-@get external done: next<'a> => bool = "done"
-@get external value: next<'a> => option<'a> = "value"
+type value<'a> = {
+  done: bool,
+  value: option<'a>,
+}
 
-@send external next: t<'a> => next<'a> = "next"
+@send external next: t<'a> => value<'a> = "next"
+@scope("Array") external toArray: t<'a> => array<'a> = "from"
