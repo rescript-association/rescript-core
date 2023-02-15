@@ -41,7 +41,7 @@ module Classify: {
   type function
 
   /**
-  An abstract type representing an unknown JavaScript object.
+  An abstract type representing a JavaScript object.
 
   See [`object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) on MDN.
   */
@@ -69,7 +69,7 @@ module Classify: {
 
   /**
 `classify(anyValue)`
-Classifies any value to its underlying JavaScript value.
+Classifies a JavaScript value.
 
 ## Examples
 ```rescript
