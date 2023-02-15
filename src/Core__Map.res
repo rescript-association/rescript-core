@@ -13,7 +13,7 @@ type t<'k, 'v>
 
 @send external get: (t<'k, 'v>, 'k) => option<'v> = "get"
 @send external has: (t<'k, 'v>, 'k) => bool = "has"
-@send external set: (t<'k, 'v>, 'k, 'v) => t<'k, 'v> = "set"
+@send external set: (t<'k, 'v>, 'k, 'v) => unit = "set"
 @send external delete: (t<'k, 'v>, 'k) => bool = "delete"
 
 @send external keys: t<'k, 'v> => Core__Iterator.t<'k> = "keys"
