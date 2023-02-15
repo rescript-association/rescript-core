@@ -4,7 +4,7 @@ See: [`Console`](https://developer.mozilla.org/en-US/docs/Web/API/Console).
 */
 
 /**
-`log(value)` outputs a message to console.
+`log(value)` print a message to console.
 See [`Console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
 on MDN.
 
@@ -70,7 +70,7 @@ Console.log5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
 @val
 external log5: ('a, 'b, 'c, 'd, 'e) => unit = "console.log"
 /**
-`info(value)` outputs an informational message to console.
+`info(value)` print an informational message to console.
 See [`Console.info`](https://developer.mozilla.org/en-US/docs/Web/API/console/info)
 on MDN.
 
@@ -137,7 +137,7 @@ Console.info5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
 external info5: ('a, 'b, 'c, 'd, 'e) => unit = "console.info"
 
 /**
-`warn(value)` outputs a warning message to console.
+`warn(value)` print a warning message to console.
 See [`Console.warn`](https://developer.mozilla.org/en-US/docs/Web/API/console/warn)
 on MDN.
 
@@ -204,7 +204,7 @@ Console.warn5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
 external warn5: ('a, 'b, 'c, 'd, 'e) => unit = "console.warn"
 
 /**
-`error(value)` outputs an error message to console.
+`error(value)` prints an error message to console.
 See [`Console.error`](https://developer.mozilla.org/en-US/docs/Web/API/console/error)
 on MDN.
 
@@ -271,7 +271,7 @@ Console.error5(1, #second, #third, ("fourth"), 'c')
 external error5: ('a, 'b, 'c, 'd, 'e) => unit = "console.error"
 
 /**
-`trace()` outputs a stack trace to console.
+`trace()` print a stack trace to console.
 See [`Console.trace`](https://developer.mozilla.org/en-US/docs/Web/API/console/trace)
 on MDN.
 
@@ -291,10 +291,9 @@ main()
 external trace: unit => unit = "console.trace"
 
 /**
-`time(label)` starts a timer you can use to track how long an operation takes.
-You give each timer a unique name `label`, and may have up to 10,000 timers
-running on a given page. Call `Console.timeEnd` with the same `label` to browser
-output time, in milliseconds.
+`time(label)` creates a timer to measure how long an operation takes. `label`
+must be a unique name. Call `Console.timeEnd` with the same `label` to print
+output time. 
 See [`Console.time`](https://developer.mozilla.org/en-US/docs/Web/API/console/time)
 on MDN.
 
@@ -312,8 +311,8 @@ Console.timeEnd("for_time")
 external time: string => unit = "console.time"
 
 /**
-`timeEnd(label)` stops a timer that was previously started by calling
-`Console.time(label)`. See [`Console.timeEnd`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd)
+`timeEnd(label)` stops a timer created by `time`.
+See [`Console.timeEnd`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd)
 on MDN.
 
 ## Examples
