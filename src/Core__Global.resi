@@ -63,11 +63,15 @@ external clearTimeout: timeoutId => unit = "clearTimeout"
 
 /**
 An `id` representing an interval started via `setInterval`.
+
+See [`setInterval`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) on MDN.
 */
 type intervalId = Js.Global.intervalId
 
 /**
 `setInterval(callback, intervalInMilliseconds)` starts an interval that will execute `callback` every `durationInMilliseconds` milliseconds.
+
+See [`setInterval`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) on MDN.
 
 ## Examples
 ```rescript
@@ -85,6 +89,8 @@ external setInterval: (unit => unit, int) => intervalId = "setInterval"
 
 The same as `setInterval`, but allows you to pass a `float` instead of an `int` for the duration.
 
+See [`setInterval`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) on MDN.
+
 ## Examples
 ```rescript
 // Log to the console ever 2 seconds (2000 milliseconds).
@@ -98,6 +104,8 @@ external setIntervalFloat: (unit => unit, float) => intervalId = "setInterval"
 
 /**
 `clearInterval(intervalId)` clears a scheduled interval.
+
+See [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) on MDN.
 
 ## Examples
 ```rescript
