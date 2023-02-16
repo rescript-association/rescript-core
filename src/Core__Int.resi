@@ -236,29 +236,33 @@ Int.toFloat(2) == 2.0
 external toFloat: int => float = "%identity"
 
 /**
-`fromFloat(n)` return an `int` representing the given value.
+`fromFloat(n)` return an `int` representing the given value. The conversion is
+done by truncating the decimal part.
 
 ## Examples
 
 ```rescript
 Int.fromFloat(2.0) == 2
-Int.fromFloat(1.0) == 1
+Int.fromFloat(1.999) == 1
+Int.fromFloat(1.5) == 1
+Int.fromFloat(0.9999) == 0
 ```
 */
 external fromFloat: float => int = "%intoffloat"
 
 /**
-`fromString(~radix?, v)` return an `option<int>` representing the given value
-`v`. `~radix` specifies the radix base to use for the formatted number.
+`fromString(~radix?, str)` return an `option<int>` representing the given value
+`str`. `~radix` specifies the radix base to use for the formatted number.
 
 ## Examples
 
 ```rescript
 Int.fromString("0") == Some(0)
 Int.fromString("NaN") == None
+Int.fromString(~radix=2, "6") == None
 ```
 */
-let fromString: (~radix: int=?, 'a) => option<int>
+let fromString: (~radix: int=?, string) => option<int>
 
 /**
 `mod(n1, n2)` calculates the modulo (remainder after division) of two integers.
