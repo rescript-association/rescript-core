@@ -231,7 +231,7 @@ external toLocaleString: int => string = "toLocaleString"
 ## Examples
 
 ```rescript
-Int.toFloat(100) == 100.
+Int.toFloat(100) == 100.0
 Int.toFloat(2) == 2.0
 ```
 */
