@@ -84,7 +84,8 @@ on MDN.
 Int.toExponentialWithPrecision(77, ~digits=2) // "7.70e+1"
 Int.toExponentialWithPrecision(5678, ~digits=2) // "5.68e+3"
 ```
-## Expections
+
+## Exceptions
 
 `RangeError`:
 
@@ -157,7 +158,7 @@ Int.toPrecision(100, ~digits=2) // "1.0e+2"
 Int.toPrecision(1) // "1.0"
 ```
 
-## Expections
+## Exceptions
 
 `RangeError`:
 
