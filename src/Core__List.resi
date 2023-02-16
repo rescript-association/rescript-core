@@ -46,7 +46,7 @@ List.length(list{1, 2, 3}) // 3
 let length: t<'a> => int
 
 /**
-`size(list)`. **See** [`length`](##length)
+`size(list)`. See [`length`](#length)
 
 ## Examples
 
@@ -70,8 +70,7 @@ List.head(list{1, 2, 3}) // Some(1)
 let head: t<'a> => option<'a>
 
 /**
-`headExn(list)` same as [`head`](#head), but raises an exception if `list` is
-empty. Use with care.
+`headExn(list)` same as [`head`](#head).
 
 ## Examples
 
@@ -80,6 +79,11 @@ List.headExn(list{1, 2, 3}) // 1
 
 List.headExn(list{}) // Raises an Error
 ```
+
+## Exceptions
+
+- Raises an Error if list is empty.
+
 */
 let headExn: t<'a> => 'a
 
@@ -98,8 +102,7 @@ List.tail(list{}) // None
 let tail: t<'a> => option<t<'a>>
 
 /**
-`tailExn(list)` same as [`tail`](#tail), but raises an exception if `list` is
-empty. Use with care.
+`tailExn(list)` same as [`tail`](#tail).
 
 ## Examples
 
@@ -108,6 +111,10 @@ List.tailExn(list{1, 2, 3}) // list{2, 3}
 
 List.tailExn(list{}) // Raises an Error
 ```
+
+## Exceptions
+
+- Raises an Error if list is empty.
 */
 let tailExn: t<'a> => t<'a>
 
@@ -141,8 +148,7 @@ abc->List.get(4) // None
 let get: (t<'a>, int) => option<'a>
 
 /**
-`getExn(list, index)` same as [`get`](#get), but raises an exception if `index`
-is larger than the length of list `list`. Use with care.
+`getExn(list, index)` same as [`get`](#get).
 
 ## Examples
 
@@ -153,6 +159,10 @@ abc->List.getExn(1) // "B"
 
 abc->List.getExn(4) // Raises an Error
 ```
+
+## Exceptions
+
+- Raises an Error if `index` is larger than the length of list.
 */
 let getExn: (t<'a>, int) => 'a
 
