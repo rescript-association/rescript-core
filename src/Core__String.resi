@@ -45,8 +45,7 @@ external make: 'a => string = "String"
 that number; `n` ranges from 0 to 65535.If out of range, the lower 16 bits of
 the value are used. Thus, `fromCharCode(0x1F63A)` gives the same result as
 `fromCharCode(0xF63A)`.
-See [`String.fromCharCode`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode)
-on MDN.
+See [`String.fromCharCode`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode) on MDN.
 
 ## Examples
 
@@ -63,8 +62,7 @@ external fromCharCode: int => string = "String.fromCharCode"
 /**
 `fromCharCodeMany([n1, n2, n3])` creates a `string` from the characters
 corresponding to the given numbers, using the same rules as `fromCharCode`.
-See [`String.fromCharCode`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode)
-on MDN.
+See [`String.fromCharCode`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode) on MDN.
 
 ## Examples
 
@@ -79,12 +77,8 @@ external fromCharCodeMany: array<int> => string = "String.fromCharCode"
 
 /**
 `fromCodePoint(n)` creates a `string` containing the character corresponding to
-that numeric code point. If the number is not a valid code point, it raises
-`RangeError`. Thus, `fromCodePoint(0x1F63A)` will produce a correct value,
-unlike `fromCharCode(0x1F63A)`, and `fromCodePoint(-5)` will raise a
-`RangeError`.
-See [`String.fromCodePoint`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint)
-on MDN.
+that numeric code point.
+See [`String.fromCodePoint`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint) on MDN.
 
 ## Examples
 
@@ -94,6 +88,10 @@ String.fromCodePoint(0x3c8) == `ψ`
 String.fromCodePoint(0xd55c) == `한`
 String.fromCodePoint(0x1f63a) == `😺`
 ```
+
+## Exceptions
+
+- `RangeError`: If the number is not a valid code point, like `fromCharCode(-5)`.
 */
 @val
 external fromCodePoint: int => string = "String.fromCodePoint"
@@ -102,8 +100,7 @@ external fromCodePoint: int => string = "String.fromCodePoint"
 `fromCodePointMany([n1, n2, n3])` creates a `string` from the characters
 corresponding to the given code point numbers, using the same rules as
 `fromCodePoint`.
-See [`String.fromCodePoint`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint)
-on MDN.
+See [`String.fromCodePoint`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint) on MDN.
 
 ## Examples
 
@@ -117,8 +114,7 @@ external fromCodePointMany: array<int> => string = "String.fromCodePoint"
 
 /**
 `length(str)` returns the length of the given `string`.
-See [`String.length`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length)
-on MDN.
+See [`String.length`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length) on MDN.
 
 ## Examples
 
@@ -149,8 +145,7 @@ external get: (string, int) => option<string> = ""
 negative or greater than the length of `str`, it returns the empty string. If
 the string contains characters outside the range \u0000-\uffff, it will return
 the first 16-bit value at that position in the string.
-See [`String.charAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
-on MDN.
+See [`String.charAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt) on MDN.
 
 ## Examples
 
@@ -169,8 +164,7 @@ the result is in the range 0-65535, unlke `codePointAt`, so it will not work
 correctly for characters with code points greater than or equal to 0x10000. The
 return type is `float` because this function returns NaN if `n` is less than
 zero or greater than the length of the string.
-See [`String.charCodeAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
-on MDN.
+See [`String.charCodeAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt) on MDN.
 
 ## Examples
 
@@ -187,8 +181,7 @@ external charCodeAt: (string, int) => float = "charCodeAt"
 as a `Some(value)`. The return value handles code points greater than or equal
 to 0x10000. If there is no code point at the given position, the function
 returns `None`.
-See [`String.codePointAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt)
-on MDN.
+See [`String.codePointAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt) on MDN.
 
 ## Examples
 
@@ -203,8 +196,7 @@ external codePointAt: (string, int) => option<int> = "codePointAt"
 /**
 `concat(original, append)` returns a new `string` with `append` added after
 `original`.
-See [`String.concat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/concat)
-on MDN.
+See [`String.concat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/concat) on MDN.
 
 ## Examples
 
@@ -219,8 +211,7 @@ external concat: (string, string) => string = "concat"
 /**
 `concatMany(original, arr)` returns a new `string` consisting of each item of an
 array of strings added to the `original` string.
-See [`String.concat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/concat)
-on MDN.
+See [`String.concat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/concat) on MDN.
 
 ## Examples
 
@@ -233,10 +224,9 @@ String.concatMany("1st", ["2nd", "3rd", "4th"]) == "1st2nd3rd4th"
 external concatMany: (string, array<string>) => string = "concat"
 
 /**
-ES2015: `endsWith(str, substr)` returns `true` if the `str` ends with `substr`,
+`endsWith(str, substr)` returns `true` if the `str` ends with `substr`,
 `false` otherwise.
-See [`String.endsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith)
-on MDN.
+See [`String.endsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith) on MDN.
 
 ## Examples
 
@@ -253,8 +243,7 @@ external endsWith: (string, string) => bool = "endsWith"
 `endsWithFrom(str, ending, len)` returns `true` if the first len characters of
 `str` end with `ending`, `false` otherwise. If `len` is greater than or equal
 to the length of `str`, then it works like `endsWith`.
-See [`String.endsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith)
-on MDN.
+See [`String.endsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith) on MDN.
 
 ## Examples
 
@@ -269,10 +258,9 @@ String.endsWithFrom("example.dat", "ple", 7) == true
 external endsWithFrom: (string, string, int) => bool = "endsWith"
 
 /**
-ES2015: `includes(str, searchValue)` returns `true` if `searchValue` is found
+`includes(str, searchValue)` returns `true` if `searchValue` is found
 anywhere within `str`, `false` otherwise.
-See [`String.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
-on MDN.
+See [`String.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) on MDN.
 
 ## Examples
 
@@ -287,11 +275,10 @@ String.includes("programmer.dat", "xyz") == false
 external includes: (string, string) => bool = "includes"
 
 /**
-ES2015: `includesFrom(str, searchValue start)` returns `true` if `searchValue`
+`includesFrom(str, searchValue start)` returns `true` if `searchValue`
 is found anywhere within `str` starting at character number `start` (where 0 is
 the first character), `false` otherwise.
-See [`String.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
-on MDN.
+See [`String.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) on MDN.
 
 ## Examples
 
@@ -305,10 +292,9 @@ String.includesFrom(`대한민국`, `한`, 1) == true
 external includesFrom: (string, string, int) => bool = "includes"
 
 /**
-ES2015: `indexOf(str, searchValue)` returns the position at which `searchValue`
+`indexOf(str, searchValue)` returns the position at which `searchValue`
 was first found within `str`, or `-1` if `searchValue` is not in `str`.
-See [`String.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)
-on MDN.
+See [`String.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) on MDN.
 
 ## Examples
 
@@ -340,8 +326,7 @@ let indexOfOpt: (string, string) => option<int>
 `-1` if `searchValue` is not found in that portion of `str`. The return value is
 relative to the beginning of the string, no matter where the search started
 from.
-See [`String.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)
-on MDN.
+See [`String.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) on MDN.
 
 ## Examples
 
@@ -359,8 +344,7 @@ external indexOfFrom: (string, string, int) => int = "indexOf"
 `searchValue` within `str`, searching backwards from the end of the string.
 Returns `-1` if `searchValue` is not in `str`. The return value is always
 relative to the beginning of the string.
-See [`String.lastIndexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
-on MDN.
+See [`String.lastIndexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf) on MDN.
 
 ## Examples
 
@@ -392,8 +376,7 @@ let lastIndexOfOpt: (string, string) => option<int>
 occurrence of `searchValue` within `str`, searching backwards from the given
 start position. Returns `-1` if `searchValue` is not in `str`. The return value
 is always relative to the beginning of the string.
-See [`String.lastIndexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
-on MDN.
+See [`String.lastIndexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf) on MDN.
 
 ## Examples
 
@@ -415,8 +398,7 @@ there is a match, the return value is `Some(array)` where the array contains:
 - Any capture groups if the regexp had parentheses
 For regular expressions with the g modifier, a matched expression returns
 `Some(array)` with all the matched substrings and no capture groups.
-See [`String.match`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
-on MDN.
+See [`String.match`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match) on MDN.
 
 ## Examples
 
@@ -437,9 +419,8 @@ Canonical (NFC) Composition. Consider the character ã, which can be represented
 as the single codepoint \u00e3 or the combination of a lower case letter A
 \u0061 and a combining tilde \u0303. Normalization ensures that both can be
 stored in an equivalent binary representation.
-See [`String.normalize`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize)
-on MDN. See also [Unicode technical report
-#15](https://unicode.org/reports/tr15/) for details.
+See [`String.normalize`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize) on MDN.
+See also [Unicode technical report #15](https://unicode.org/reports/tr15/) for details.
 
 ## Examples
 
@@ -457,7 +438,7 @@ assert(normalizeString1 === normalizeString2)
 external normalize: string => string = "normalize"
 
 /**
-ES2015: `normalizeByForm(str, form)` returns the normalized Unicode string using the
+`normalizeByForm(str, form)` returns the normalized Unicode string using the
 specified form of normalization, which may be one of:
 - "NFC" — Normalization Form Canonical Composition.
 - "NFD" — Normalization Form Canonical Decomposition.
@@ -484,9 +465,7 @@ external normalizeByForm: (string, normalizeForm) => string = "normalize"
 
 /**
 `repeat(str, n)` returns a `string` that consists of `n` repetitions of `str`.
-Raises `RangeError` if `n` is negative.
-See [`String.repeat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat)
-on MDN.
+See [`String.repeat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat) on MDN.
 
 ## Examples
 
@@ -494,17 +473,20 @@ on MDN.
 String.repeat("ha", 3) == "hahaha"
 String.repeat("empty", 0) == ""
 ```
+
+## Exceptions
+
+- `RangeError`: if `n` is negative.
 */
 @send
 external repeat: (string, int) => string = "repeat"
 
 /**
-ES2015: `replace(str, substr, newSubstr)` returns a new `string` which is
+`replace(str, substr, newSubstr)` returns a new `string` which is
 identical to `str` except with the first matching instance of `substr` replaced
 by `newSubstr`. `substr` is treated as a verbatim string to match, not a
 regular expression.
-See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-on MDN.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on MDN.
 
 ## Examples
 
@@ -519,8 +501,7 @@ external replace: (string, string, string) => string = "replace"
 /**
 `replaceRegExp(str, regex, replacement)` returns a new `string` where occurrences
 matching regex have been replaced by `replacement`.
-See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-on MDN.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on MDN.
 
 ## Examples
 
@@ -537,8 +518,7 @@ Returns a new `string` with some or all matches of a pattern with no capturing
 parentheses replaced by the value returned from the given function. The
 function receives as its parameters the matched string, the offset at which the
 match begins, and the whole string being matched.
-See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-on MDN.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on MDN.
 
 ## Examples
 
@@ -562,8 +542,7 @@ capturing parentheses replaced by the value returned from the given function.
 The function receives as its parameters the matched string, the captured
 string, the offset at which the match begins, and the whole string being
 matched.
-See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-on MDN.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on MDN.
 
 ## Examples
 
@@ -589,8 +568,7 @@ capturing parentheses replaced by the value returned from the given function.
 The function receives as its parameters the matched string, the captured
 strings, the offset at which the match begins, and the whole string being
 matched.
-See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-on MDN.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on MDN.
 
 ## Examples
 
@@ -625,8 +603,7 @@ capturing parentheses replaced by the value returned from the given function.
 The function receives as its parameters the matched string, the captured
 strings, the offset at which the match begins, and the whole string being
 matched.
-See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-on MDN.
+See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on MDN.
 */
 @send
 external unsafeReplaceRegExpBy3: (
@@ -645,8 +622,7 @@ external unsafeReplaceRegExpBy3: (
 /**
 `search(str, regexp)` returns the starting position of the first match of
 `regexp` in the given `str`, or -1 if there is no match.
-See [`String.search`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search)
-on MDN.
+See [`String.search`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search) on MDN.
 
 ## Examples
 
@@ -676,8 +652,7 @@ character `n1` up to but not including `n2`.
 - If either `n1` or `n2` is negative, then it is evaluated as `length(str - n1)` or `length(str - n2)`.
 - If `n2` is greater than the length of `str`, then it is treated as `length(str)`.
 - If `n1` is greater than `n2`, slice returns the empty string.
-See [`String.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice)
-on MDN.
+See [`String.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) on MDN.
 
 ## Examples
 
@@ -696,8 +671,7 @@ external slice: (string, ~start: int, ~end: int) => string = "slice"
 `n` to the end of the string.
 - If `n` is negative, then it is evaluated as `length(str - n)`.
 - If `n` is greater than the length of `str`, then sliceToEnd returns the empty string.
-See [`String.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice)
-on MDN.
+See [`String.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) on MDN.
 
 ## Examples
 
@@ -713,8 +687,7 @@ external sliceToEnd: (string, ~start: int) => string = "slice"
 /**
 `split(str, delimiter)` splits the given `str` at every occurrence of
 `delimiter` and returns an array of the resulting substrings.
-See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
-on MDN.
+See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) on MDN.
 
 ## Examples
 
@@ -748,8 +721,7 @@ external splitAtMost: (string, string, ~limit: int) => array<string> = "split"
 /**
 `splitByRegExp(str, regex)` splits the given `str` at every occurrence of `regex`
 and returns an array of the resulting substrings.
-See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
-on MDN.
+See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) on MDN.
 
 ## Examples
 
@@ -765,8 +737,7 @@ external splitByRegExp: (string, Core__RegExp.t) => array<option<string>> = "spl
 occurrence of `regex` and returns an array of the first `n` resulting
 substrings. If `n` is negative or greater than the number of substrings, the
 array will contain all the substrings.
-See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
-on MDN.
+See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) on MDN.
 
 ## Examples
 
@@ -783,10 +754,9 @@ external splitByRegExpAtMost: (string, Core__RegExp.t, ~limit: int) => array<opt
   "split"
 
 /**
-ES2015: `startsWith(str, substr)` returns `true` if the `str` starts with
+`startsWith(str, substr)` returns `true` if the `str` starts with
 `substr`, `false` otherwise.
-See [`String.startsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith)
-on MDN.
+See [`String.startsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith) on MDN.
 
 ## Examples
 
@@ -800,11 +770,10 @@ String.startsWith("JavaScript", "Buckle") == false
 external startsWith: (string, string) => bool = "startsWith"
 
 /**
-ES2015: `startsWithFrom(str, substr, n)` returns `true` if the `str` starts
+`startsWithFrom(str, substr, n)` returns `true` if the `str` starts
 with `substr` starting at position `n`, `false` otherwise. If `n` is negative,
 the search starts at the beginning of `str`.
-See [`String.startsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith)
-on MDN.
+See [`String.startsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith) on MDN.
 
 ## Examples
 
@@ -823,8 +792,7 @@ not including end from `str`.
 - If `start` is less than zero, it is treated as zero.
 - If `end` is zero or negative, the empty string is returned.
 - If `start` is greater than `end`, the `start` and `end` points are swapped.
-See [`String.substring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring)
-on MDN.
+See [`String.substring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring) on MDN.
 
 ## Examples
 
@@ -842,8 +810,7 @@ external substring: (string, ~start: int, ~end: int) => string = "substring"
 position `start` to the end.
 - If `start` is less than or equal to zero, the entire string is returned.
 - If `start` is greater than or equal to the length of `str`, the empty string is returned.
-See [`String.substring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring)
-on MDN.
+See [`String.substring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring) on MDN.
 
 ## Examples
 
@@ -862,8 +829,7 @@ case mappings in the Unicode Character Database. Notice that the conversion can
 give different results depending upon context, for example with the Greek
 letter sigma, which has two different lower case forms; one when it is the last
 character in a string and another when it is not.
-See [`String.toLowerCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase)
-on MDN.
+See [`String.toLowerCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase) on MDN.
 
 ## Examples
 
@@ -878,8 +844,7 @@ external toLowerCase: string => string = "toLowerCase"
 
 /**
 `toLocaleLowerCase(str)` converts `str` to lower case using the current locale.
-See [`String.toLocaleLowerCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleLowerCase)
-on MDN.
+See [`String.toLocaleLowerCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleLowerCase) on MDN.
 */
 @send
 external toLocaleLowerCase: string => string = "toLocaleLowerCase"
@@ -889,8 +854,7 @@ external toLocaleLowerCase: string => string = "toLocaleLowerCase"
 case mappings in the Unicode Character Database. Notice that the conversion can
 expand the number of letters in the result; for example the German ß
 capitalizes to two Ses in a row.
-See [`String.toUpperCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase)
-on MDN.
+See [`String.toUpperCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) on MDN.
 
 ## Examples
 
@@ -905,8 +869,7 @@ external toUpperCase: string => string = "toUpperCase"
 
 /**
 `toLocaleUpperCase(str)` converts `str` to upper case using the current locale.
-See [`String.toLocaleUpperCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleUpperCase)
-on MDN.
+See [`String.toLocaleUpperCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleUpperCase) on MDN.
 */
 @send
 external toLocaleUpperCase: string => string = "toLocaleUpperCase"
@@ -914,8 +877,7 @@ external toLocaleUpperCase: string => string = "toLocaleUpperCase"
 /**
 `trim(str)` returns a string that is `str` with whitespace stripped from both
 ends. Internal whitespace is not removed.
-See [`String.trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim)
-on MDN.
+See [`String.trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim) on MDN.
 
 ## Examples
 
@@ -930,8 +892,7 @@ external trim: string => string = "trim"
 /**
 `trimStart(str)` returns a string that is `str` with whitespace stripped from
 the beginning of a string. Internal whitespace is not removed.
-See [`String.trimStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimStart)
-on MDN.
+See [`String.trimStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimStart) on MDN.
 
 ## Examples
 
@@ -946,8 +907,7 @@ external trimStart: string => string = "trimStart"
 /**
 `trinEnd(str)` returns a string that is `str` with whitespace stripped from the
 end of a string. Internal whitespace is not removed.
-See [`String.trimEnd`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimEnd)
-on MDN.
+See [`String.trimEnd`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimEnd) on MDN.
 
 ## Examples
 
@@ -963,8 +923,7 @@ external trimEnd: string => string = "trimEnd"
 `padStart(str, n, padStr)` returns a string that has been padded with `padStr`
 (multiple times, if needed) until the resulting string reaches the given `n`
 length. The padding is applied from the start of the current string.
-See [`String.padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
-on MDN.
+See [`String.padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart) on MDN.
 
 ## Examples
 
@@ -980,8 +939,7 @@ external padStart: (string, int, string) => string = "padStart"
 `padEnd(str, n, padStr)` returns a string that has been padded with `padStr`
 (multiple times, if needed) until the resulting string reaches the given `n`
 length. The padding is applied from the end of the current string.
-See [`String.padEnd`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd)
-on MDN.
+See [`String.padEnd`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd) on MDN.
 
 ## Examples
 
@@ -1004,9 +962,9 @@ whether a reference string comes before or fater, or is the same as the given
 string in sort order. If `referenceStr` occurs before `compareStr` positive if
 the `referenceStr` occurs after `compareStr`; `0` if they are equivalent.
 Do not rely on exact return values of `-1` or `1`
-See [`String.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare)
+See [`String.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare) on MDN.
 
-## Examples
+See [`String.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare)
 
 ```rescript
 String.localeCompare("a", "c") < 0. == true
