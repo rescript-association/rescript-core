@@ -42,7 +42,7 @@ external make: 'a => string = "String"
 
 /**
 `fromCharCode(n)` creates a `string` containing the character corresponding to
-that number; `n` ranges from 0 to 65535.If out of range, the lower 16 bits of
+that number, `n` ranges from 0 to 65535. If out of range, the lower 16 bits of
 the value are used. Thus, `fromCharCode(0x1F63A)` gives the same result as
 `fromCharCode(0xF63A)`.
 See [`String.fromCharCode`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode) on MDN.
@@ -107,6 +107,12 @@ See [`String.fromCodePoint`](https://developer.mozilla.org/en-US/docs/Web/JavaSc
 ```rescript
 String.fromCodePointMany([0xd55c, 0xae00, 0x1f63a]) == `한글😺`
 ```
+
+## Exceptions
+
+- `RangeError`: If one of the number is not a valid code point, like
+`fromCharCode([1, -5])`.
+
 */
 @variadic
 @val
@@ -126,44 +132,44 @@ String.length("abcd") == 4
 external length: string => int = "length"
 
 /**
-`get(str, n)` returns as a `option<string>` at the given index number. If `n`
-is out of range, this function returns `None`.
+`get(str, index)` returns an `option<string>` at the given `index` number. If
+`index` is out of range, this function returns `None`.
 
 ## Examples
 
 ```rescript
-String.get("Reason", 0) == Some("R")
-String.get("Reason", 4) == Some("o")
-String.get(`Rẽasöń`, 5) == Some(`ń`)
+String.get("ReScript", 0) == Some("R")
+String.get("Hello", 4) == Some("o")
+String.get(`JS`, 4) == None
 ```
 */
 @get_index
 external get: (string, int) => option<string> = ""
 
 /**
-`charAt(str, n)` gets the character at index `n` within string `str`. If `n` is
-negative or greater than the length of `str`, it returns the empty string. If
-the string contains characters outside the range \u0000-\uffff, it will return
-the first 16-bit value at that position in the string.
+`charAt(str, index)` gets the character at `index` within string `str`. If
+`index` is negative or greater than the length of `str`, it returns the empty
+string. If the string contains characters outside the range \u0000-\uffff, it
+will return the first 16-bit value at that position in the string.
 See [`String.charAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt) on MDN.
 
 ## Examples
 
 ```rescript
-String.charAt("Reason", 0) == "R"
-String.charAt("Reason", 12) == ""
-String.charAt(`Rẽasöń`, 5) == `ń`
+String.charAt("ReScript", 0) == "R"
+String.charAt("Hello", 12) == ""
+String.charAt(`JS`, 5) == ""
 ```
 */
 @send
 external charAt: (string, int) => string = "charAt"
 
 /**
-`charCodeAt(str, n)` returns the character code at position `n` in string `str`
-the result is in the range 0-65535, unlke `codePointAt`, so it will not work
-correctly for characters with code points greater than or equal to 0x10000. The
-return type is `float` because this function returns NaN if `n` is less than
-zero or greater than the length of the string.
+`charCodeAt(str, index)` returns the character code at position `index` in
+string `str` the result is in the range 0-65535, unlike `codePointAt`, so it
+will not work correctly for characters with code points greater than or equal
+to 0x10000. The return type is `float` because this function returns NaN if
+`index` is less than zero or greater than the length of the string.
 See [`String.charCodeAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt) on MDN.
 
 ## Examples
@@ -177,10 +183,10 @@ String.codePointAt(`😺`, 0) == Some(0x1f63a)
 external charCodeAt: (string, int) => float = "charCodeAt"
 
 /**
-`codePointAt(str, n)` returns the code point at position `n` within string `str`
-as a `Some(value)`. The return value handles code points greater than or equal
-to 0x10000. If there is no code point at the given position, the function
-returns `None`.
+`codePointAt(str, index)` returns the code point at position `index` within
+string `str` as a `Some(value)`. The return value handles code points greater
+than or equal to 0x10000. If there is no code point at the given position, the
+function returns `None`.
 See [`String.codePointAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt) on MDN.
 
 ## Examples
@@ -224,8 +230,8 @@ String.concatMany("1st", ["2nd", "3rd", "4th"]) == "1st2nd3rd4th"
 external concatMany: (string, array<string>) => string = "concat"
 
 /**
-`endsWith(str, substr)` returns `true` if the `str` ends with `substr`,
-`false` otherwise.
+`endsWith(str, substr)` returns `true` if the `str` ends with `substr`, `false`
+otherwise.
 See [`String.endsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith) on MDN.
 
 ## Examples
@@ -258,8 +264,8 @@ String.endsWithFrom("example.dat", "ple", 7) == true
 external endsWithFrom: (string, string, int) => bool = "endsWith"
 
 /**
-`includes(str, searchValue)` returns `true` if `searchValue` is found
-anywhere within `str`, `false` otherwise.
+`includes(str, searchValue)` returns `true` if `searchValue` is found anywhere
+within `str`, `false` otherwise.
 See [`String.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) on MDN.
 
 ## Examples
@@ -275,9 +281,9 @@ String.includes("programmer.dat", "xyz") == false
 external includes: (string, string) => bool = "includes"
 
 /**
-`includesFrom(str, searchValue start)` returns `true` if `searchValue`
-is found anywhere within `str` starting at character number `start` (where 0 is
-the first character), `false` otherwise.
+`includesFrom(str, searchValue start)` returns `true` if `searchValue` is found
+anywhere within `str` starting at character number `start` (where 0 is the
+first character), `false` otherwise.
 See [`String.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) on MDN.
 
 ## Examples
@@ -292,8 +298,8 @@ String.includesFrom(`대한민국`, `한`, 1) == true
 external includesFrom: (string, string, int) => bool = "includes"
 
 /**
-`indexOf(str, searchValue)` returns the position at which `searchValue`
-was first found within `str`, or `-1` if `searchValue` is not in `str`.
+`indexOf(str, searchValue)` returns the position at which `searchValue` was
+first found within `str`, or `-1` if `searchValue` is not in `str`.
 See [`String.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) on MDN.
 
 ## Examples
@@ -309,7 +315,7 @@ String.indexOf("bookseller", "xyz") == -1
 external indexOf: (string, string) => int = "indexOf"
 
 /**
-`indexOfOpt(str, searchValue)`. Like `indexOf`, but return a `option<int>`.
+`indexOfOpt(str, searchValue)`. Like `indexOf`, but return an `option<int>`.
 
 ## Examples
 
@@ -358,7 +364,7 @@ String.lastIndexOf("abcdefg", "xyz") == -1
 external lastIndexOf: (string, string) => int = "lastIndexOf"
 
 /**
-`lastIndexOfOpt(str, searchValue)`. Like `lastIndexOfOpt`, but return a
+`lastIndexOfOpt(str, searchValue)`. Like `lastIndexOfOpt`, but return an
 `option<int>`.
 
 ## Examples
@@ -405,7 +411,8 @@ See [`String.match`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Ref
 ```rescript
 String.match("The better bats", %re("/b[aeiou]t/")) == Some(["bet"])
 String.match("The better bats", %re("/b[aeiou]t/g")) == Some(["bet", "bat"])
-String.match("Today is 2018-04-05.", %re("/(\d+)-(\d+)-(\d+)/")) == Some(["2018-04-05", "2018", "04", "05"])
+String.match("Today is 2018-04-05.", %re("/(\d+)-(\d+)-(\d+)/")) ==
+  Some(["2018-04-05", "2018", "04", "05"])
 String.match("The large container.", %re("/b[aeiou]g/")) == None
 ```
 */
@@ -445,18 +452,19 @@ specified form of normalization, which may be one of:
 - "NFKC" — Normalization Form Compatibility Composition.
 - "NFKD" — Normalization Form Compatibility Decomposition.
 See [`String.normalize`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize) on MDN.
-See also [Unicode technical report #15](https://unicode.org/reports/tr15/) for details.
+See also [Unicode technical report #15](https://unicode.org/reports/tr15/) for
+details.
 
 ## Examples
 
 ```rescript
 let string1 = "\uFB00"
 let string2 = "\u0066\u0066"
-Console.log(string1 === string2) // false
+Console.log(string1 == string2) // false
 
 let normalizeString1 = String.normalizeByForm(string1, #NFKD)
 let normalizeString2 = String.normalizeByForm(string2, #NFKD)
-assert(normalizeString1 === normalizeString2)
+Console.log(normalizeString1 == normalizeString2) // true
 ```
 */
 type normalizeForm = [#NFC | #NFD | #NFKC | #NFKD]
@@ -499,8 +507,8 @@ String.replace("the cat and the dog", "the", "this") == "this cat and the dog"
 external replace: (string, string, string) => string = "replace"
 
 /**
-`replaceRegExp(str, regex, replacement)` returns a new `string` where occurrences
-matching regex have been replaced by `replacement`.
+`replaceRegExp(str, regex, replacement)` returns a new `string` where
+occurrences matching regex have been replaced by `replacement`.
 See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on MDN.
 
 ## Examples
@@ -514,10 +522,11 @@ String.replaceRegExp("Juan Fulano", %re("/(\w+) (\w+)/"), "$2, $1") == "Fulano, 
 external replaceRegExp: (string, Core__RegExp.t, string) => string = "replace"
 
 /**
-Returns a new `string` with some or all matches of a pattern with no capturing
-parentheses replaced by the value returned from the given function. The
-function receives as its parameters the matched string, the offset at which the
-match begins, and the whole string being matched.
+`unsafeReplaceRegExpBy0(str, regex, f)` returns a new `string` with some or all
+matches of a pattern with no capturing parentheses replaced by the value
+returned from the given function. The function receives as its parameters the
+matched string, the offset at which the match begins, and the whole string being
+matched.
 See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on MDN.
 
 ## Examples
@@ -537,11 +546,8 @@ external unsafeReplaceRegExpBy0: (
 ) => string = "replace"
 
 /**
-Returns a new `string` with some or all matches of a pattern with one set of
-capturing parentheses replaced by the value returned from the given function.
-The function receives as its parameters the matched string, the captured
-string, the offset at which the match begins, and the whole string being
-matched.
+`unsafeReplaceRegExpBy1(str, regexp, f)`. Like `unsafeReplaceRegExpBy0`, but `f`
+has `group1` parameter.
 See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on MDN.
 
 ## Examples
@@ -563,11 +569,8 @@ external unsafeReplaceRegExpBy1: (
 ) => string = "replace"
 
 /**
-Returns a new `string` with some or all matches of a pattern with two sets of
-capturing parentheses replaced by the value returned from the given function.
-The function receives as its parameters the matched string, the captured
-strings, the offset at which the match begins, and the whole string being
-matched.
+`unsafeReplaceRegExpBy2(str, regexp, f)`. Like `unsafeReplaceRegExpBy1`, but `f`
+has two group parameters.
 See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on MDN.
 
 ## Examples
@@ -598,11 +601,8 @@ external unsafeReplaceRegExpBy2: (
 ) => string = "replace"
 
 /**
-Returns a new `string` with some or all matches of a pattern with three sets of
-capturing parentheses replaced by the value returned from the given function.
-The function receives as its parameters the matched string, the captured
-strings, the offset at which the match begins, and the whole string being
-matched.
+`unsafeReplaceRegExpBy3(str, regexp, f)`. Like `unsafeReplaceRegExpBy1`, but `f`
+has three group parameters.
 See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on MDN.
 */
 @send
@@ -635,7 +635,7 @@ String.search("no numbers", %re("/\d+/")) == -1
 external search: (string, Core__RegExp.t) => int = "search"
 
 /**
-`searchOpt(str, regexp)`. Like `search`, but return a `option<int>`.
+`searchOpt(str, regexp)`. Like `search`, but return an `option<int>`.
 
 ## Examples
 
@@ -647,11 +647,13 @@ String.search("no numbers", %re("/\d+/")) == None
 let searchOpt: (string, Core__RegExp.t) => option<int>
 
 /**
-`slice(str, ~start:n1, ~end:n2)` returns the substring of `str` starting at
-character `n1` up to but not including `n2`.
-- If either `n1` or `n2` is negative, then it is evaluated as `length(str - n1)` or `length(str - n2)`.
-- If `n2` is greater than the length of `str`, then it is treated as `length(str)`.
-- If `n1` is greater than `n2`, slice returns the empty string.
+`slice(str, ~start, ~end)` returns the substring of `str` starting at
+character `start` up to but not including `end`.
+- If either `start` or `end` is negative, then it is evaluated as 
+`length(str - start)` or `length(str - end)`.
+- If `end` is greater than the length of `str`, then it is treated as 
+`length(str)`.
+- If `start` is greater than `end`, slice returns the empty string.
 See [`String.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) on MDN.
 
 ## Examples
@@ -667,10 +669,10 @@ String.slice("abcdefg", ~start=5, ~end=1) == ""
 external slice: (string, ~start: int, ~end: int) => string = "slice"
 
 /**
-`sliceToEnd(str, ~start:n)` returns the substring of `str` starting at character
-`n` to the end of the string.
-- If `n` is negative, then it is evaluated as `length(str - n)`.
-- If `n` is greater than the length of `str`, then sliceToEnd returns the empty string.
+`sliceToEnd(str, ~start)` returns the substring of `str` starting at character
+`start` to the end of the string.
+- If `start` is negative, then it is evaluated as `length(str - start)`.
+- If `start` is greater than the length of `str`, then sliceToEnd returns the empty string.
 See [`String.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) on MDN.
 
 ## Examples
@@ -702,10 +704,10 @@ String.split("has-no-delimiter", ";") == ["has-no-delimiter"]
 external split: (string, string) => array<string> = "split"
 
 /**
-`splitAtMost(str, delimiter, ~limit:n)` splits the given `str` at every
-occurrence of `delimiter` and returns an array of the first `n` resulting
-substrings. If `n` is negative or greater than the number of substrings, the
-array will contain all the substrings.
+`splitAtMost(str, delimiter, ~limit)` splits the given `str` at every
+occurrence of `delimiter` and returns an array of the first `limit` resulting
+substrings. If `limit` is negative or greater than the number of substrings,
+the array will contain all the substrings.
 
 ## Examples
 
@@ -719,8 +721,8 @@ String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=9) = ["ant", "bee", "cat",
 external splitAtMost: (string, string, ~limit: int) => array<string> = "split"
 
 /**
-`splitByRegExp(str, regex)` splits the given `str` at every occurrence of `regex`
-and returns an array of the resulting substrings.
+`splitByRegExp(str, regexp)` splits the given `str` at every occurrence of
+`regexp` and returns an array of the resulting substrings.
 See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) on MDN.
 
 ## Examples
@@ -733,9 +735,9 @@ String.splitByRegExp("Jan,Feb,Mar", %re("/,/")) == [Some("Jan"), Some("Feb"), So
 external splitByRegExp: (string, Core__RegExp.t) => array<option<string>> = "split"
 
 /**
-`splitByRegExpAtMost(str, regex, ~limit:n)` splits the given `str` at every
-occurrence of `regex` and returns an array of the first `n` resulting
-substrings. If `n` is negative or greater than the number of substrings, the
+`splitByRegExpAtMost(str, regexp, ~limit)` splits the given `str` at every
+occurrence of `regexp` and returns an array of the first `limit` resulting
+substrings. If `limit` is negative or greater than the number of substrings, the
 array will contain all the substrings.
 See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) on MDN.
 
@@ -754,8 +756,8 @@ external splitByRegExpAtMost: (string, Core__RegExp.t, ~limit: int) => array<opt
   "split"
 
 /**
-`startsWith(str, substr)` returns `true` if the `str` starts with
-`substr`, `false` otherwise.
+`startsWith(str, substr)` returns `true` if the `str` starts with `substr`,
+`false` otherwise.
 See [`String.startsWith`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith) on MDN.
 
 ## Examples
@@ -787,8 +789,8 @@ String.startsWithFrom("JavaScript", "Buckle", 2) == false
 external startsWithFrom: (string, string, int) => bool = "startsWith"
 
 /**
-`substring(str, ~start:start, ~end:end)` returns characters `start` up to but 
-not including end from `str`.
+`substring(str, ~start, ~end)` returns characters `start` up to but not
+including end from `str`.
 - If `start` is less than zero, it is treated as zero.
 - If `end` is zero or negative, the empty string is returned.
 - If `start` is greater than `end`, the `start` and `end` points are swapped.
@@ -806,10 +808,11 @@ String.substring("playground", ~start=4, ~end=12) == "ground"
 external substring: (string, ~start: int, ~end: int) => string = "substring"
 
 /**
-`substringToEnd(str, ~start:start)` returns the substring of `str` from
-position `start` to the end.
+`substringToEnd(str, ~start)` returns the substring of `str` from position
+`start` to the end.
 - If `start` is less than or equal to zero, the entire string is returned.
-- If `start` is greater than or equal to the length of `str`, the empty string is returned.
+- If `start` is greater than or equal to the length of `str`, the empty string
+is returned.
 See [`String.substring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring) on MDN.
 
 ## Examples
@@ -827,7 +830,7 @@ external substringToEnd: (string, ~start: int) => string = "substring"
 `toLowerCase(str)` converts `str` to lower case using the locale-insensitive
 case mappings in the Unicode Character Database. Notice that the conversion can
 give different results depending upon context, for example with the Greek
-letter sigma, which has two different lower case forms; one when it is the last
+letter sigma, which has two different lower case forms, one when it is the last
 character in a string and another when it is not.
 See [`String.toLowerCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase) on MDN.
 
@@ -852,7 +855,7 @@ external toLocaleLowerCase: string => string = "toLocaleLowerCase"
 /**
 `toUpperCase(str)` converts `str` to upper case using the locale-insensitive
 case mappings in the Unicode Character Database. Notice that the conversion can
-expand the number of letters in the result; for example the German ß
+expand the number of letters in the result, for example the German ß
 capitalizes to two Ses in a row.
 See [`String.toUpperCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) on MDN.
 
@@ -960,11 +963,11 @@ external padEnd: (string, int, string) => string = "padEnd"
 `localeCompare(referenceStr, compareStr)` returns a float than indicatings
 whether a reference string comes before or fater, or is the same as the given
 string in sort order. If `referenceStr` occurs before `compareStr` positive if
-the `referenceStr` occurs after `compareStr`; `0` if they are equivalent.
+the `referenceStr` occurs after `compareStr`, `0` if they are equivalent.
 Do not rely on exact return values of `-1` or `1`
 See [`String.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare) on MDN.
 
-See [`String.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare)
+## Examples
 
 ```rescript
 String.localeCompare("a", "c") < 0. == true
