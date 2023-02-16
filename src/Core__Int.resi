@@ -123,7 +123,7 @@ Int.toFixed(300, ~digits=4) // "300.0000"
 Int.toFixed(300, ~digits=1) // "300.0"
 ```
 
-## Expections
+## Exceptions
 
 `RangeError`:
 
