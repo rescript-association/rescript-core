@@ -16,3 +16,4 @@
 - Docstrings for `Set`. https://github.com/rescript-association/rescript-core/pull/35
 - Docstrings for `AsyncIterator`. https://github.com/rescript-association/rescript-core/pull/33
 - Docstrings for `Type`. https://github.com/rescript-association/rescript-core/pull/32
+- Docstrings for `Int`. https://github.com/rescript-association/rescript-core/pull/37
