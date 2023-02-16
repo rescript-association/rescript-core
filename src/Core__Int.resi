@@ -123,9 +123,7 @@ Int.toFixed(300, ~digits=1) // "300.0"
 
 ## Exceptions
 
-`RangeError`:
-
-- If `digits` is less than 0 or larger than 100.
+- `RangeError`: If `digits` is less than 0 or larger than 100.
 */
 @send
 external toFixedWithPrecision: (int, ~digits: int) => string = "toFixed"
@@ -158,11 +156,9 @@ Int.toPrecision(1) // "1.0"
 
 ## Exceptions
 
-`RangeError`:
-
-- If `~digits` is not between 1 and 100 (inclusive). Implementations are allowed
-to support larger and smaller values as well. ECMA-262 only requires a precision
-of up to 21 significant digits.
+- `RangeError`: If `digits` is not between 1 and 100 (inclusive).
+Implementations are allowed to support larger and smaller values as well.
+ECMA-262 only requires a precision of up to 21 significant digits.
 
 */
 @send
@@ -199,9 +195,7 @@ Int.toStringWithRadix(123456, ~radix=36) // "2n9c"
 
 ## Exceptions
 
-`RangeError`:
-
-- if `~radix` is less than 2 or greater than 36.
+`RangeError`: if `radix` is less than 2 or greater than 36.
 */
 @send
 external toStringWithRadix: (int, ~radix: int) => string = "toString"
