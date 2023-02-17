@@ -1,6 +1,6 @@
 # @rescript/core Changelog
 
-## master
+## main
 
 ### API changes
 
