@@ -89,7 +89,7 @@ let dict = Dict.fromIterator(someIterator) // Dict.t<int>
 external fromIterator: Core__Iterator.t<(string, 'a)> => t<'a> = "Object.fromEntries"
 
 /**
-`toArray(dictionary)` turns the dictionary into an array of key/value pairs.
+`toArray(dictionary)` returns an array of all the key/value pairs of the dictionary.
 
 ## Examples
 ```rescript
@@ -104,7 +104,7 @@ Console.log(asArray) // Logs `[["someKey", 1], ["someKey2", 2]]` to the console
 external toArray: t<'a> => array<(string, 'a)> = "Object.entries"
 
 /**
-`keysToArray(dictionary)` turns the dictionary into an array of its keys.
+`keysToArray(dictionary)` returns an array of all the keys of the dictionary.
 
 ## Examples
 ```rescript
@@ -119,7 +119,7 @@ Console.log(keys) // Logs `["someKey", "someKey2"]` to the console
 external keysToArray: t<'a> => array<string> = "Object.keys"
 
 /**
-`valuesToArray(dictionary)` turns the dictionary into an array of its values.
+`valuesToArray(dictionary)` returns an array of all the values of the dictionary.
 
 ## Examples
 ```rescript
