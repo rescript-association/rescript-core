@@ -257,6 +257,19 @@ module Int: {
   @val external pow: (int, ~exp: int) => int = "Math.pow"
 
   // NOTE: In JS `Math.sin(2)` return a float
+
+  /**
+  `sign(a)` returns the sign of its integer argument: `-1` if negative, `0` if
+  zero, `1` if positive. See [`Math.sign`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign) on MDN.
+
+  ## Examples
+
+  ```rescript
+  Math.Int.sign(3) // 1
+  Math.Int.sign(-3) // 1
+  Math.Int.sign(0) // 0
+  ```
+  */
   @val external sign: int => int = "Math.sign"
 }
 @val external abs: float => float = "Math.abs"
