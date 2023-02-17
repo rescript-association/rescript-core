@@ -18,6 +18,6 @@ module Result = {
 @get external ignoreCase: t => bool = "ignoreCase"
 @get external global: t => bool = "global"
 @get external multiline: t => bool = "multiline"
-@get external source: t => bool = "source"
+@get external source: t => string = "source"
 @get external sticky: t => bool = "sticky"
 @get external unicode: t => bool = "unicode"
