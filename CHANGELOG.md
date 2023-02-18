@@ -9,6 +9,7 @@
 - Change `Iterator` bindings to have the same shape as `AsyncIterator` for consistency. https://github.com/rescript-association/rescript-core/pull/34
 - Add `Iterator.toArray` binding for turning an iterator into an array. https://github.com/rescript-association/rescript-core/pull/34
 - Add `Array.at` binding for returning an array item by its index. https://github.com/rescript-association/rescript-core/pull/48
+- Fixed type signatures of `Array.fromArrayLikeWithMap` and `Array.fromIteratorWithMap`. https://github.com/rescript-association/rescript-core/pull/50
 
 ### Documentation
 
