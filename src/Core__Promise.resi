@@ -40,7 +40,8 @@ exception TestError(string)
 let p = Promise.reject(TestError("some rejected value"))
 ```
 */
-@scope("Promise") @val
+@scope("Promise")
+@val
 external reject: exn => t<_> = "reject"
 
 /**
@@ -224,7 +225,8 @@ race(promises)->then(winner => {
 })
 ```
 */
-@scope("Promise") @val
+@scope("Promise")
+@val
 external race: array<t<'a>> => t<'a> = "race"
 
 /**
@@ -290,7 +292,3 @@ external all6: ((t<'a>, t<'b>, t<'c>, t<'d>, t<'e>, t<'f>)) => t<('a, 'b, 'c, 'd
 promise, it will raise a type error.
 */
 external done: promise<'a> => unit = "%ignore"
-
-// TODO: add docstring
-external unsafe_async: 'a => promise<'a> = "%identity"
-external unsafe_await: promise<'a> => 'a = "?await"
