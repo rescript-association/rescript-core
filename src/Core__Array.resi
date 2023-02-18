@@ -108,7 +108,7 @@ let flatMap: (array<'a>, 'a => array<'b>) => array<'b>
 /** 
   `at(array, index)`
 
-  Get an element by it's index. Negative indices count backwards from the last item.
+  Get an element by its index. Negative indices count backwards from the last item.
 
   ## Examples
   ```rescript
