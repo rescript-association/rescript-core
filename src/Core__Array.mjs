@@ -5,6 +5,17 @@ import * as Js_math from "rescript/lib/es6/js_math.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Caml_splice_call from "rescript/lib/es6/caml_splice_call.js";
 
+function init(len, f) {
+  if (len <= 0) {
+    return [];
+  }
+  var arr = new Array(len);
+  for(var i = 0; i < len; ++i){
+    arr[i] = Curry._1(f, i);
+  }
+  return arr;
+}
+
 function indexOfOpt(arr, item) {
   var index = arr.indexOf(item);
   if (index !== -1) {
@@ -129,6 +140,7 @@ function findMap(arr, f) {
 }
 
 export {
+  init ,
   sort ,
   indexOfOpt ,
   lastIndexOfOpt ,

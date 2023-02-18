@@ -1,3 +1,5 @@
+@new external makeUninitializedUnsafe: int => array<'a> = "Array"
+@set external truncateToLengthUnsafe: (array<'a>, int) => unit = "length"
 external getUnsafe: (array<'a>, int) => 'a = "%array_unsafe_get"
 external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 
@@ -10,6 +12,17 @@ external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b>
 
 @val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
 @val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
+
+let init = (len, f) =>
+  if len <= 0 {
+    []
+  } else {
+    let arr = makeUninitializedUnsafe(len)
+    for i in 0 to len - 1 {
+      arr->setUnsafe(i, f(i))
+    }
+    arr
+  }
 
 @val external isArray: 'a => bool = "Array.isArray"
 
@@ -151,8 +164,6 @@ let findIndexOpt = (array: array<'a>, finder: 'a => bool): option<int> =>
   | index => Some(index)
   }
 
-@new external makeUninitializedUnsafe: int => array<'a> = "Array"
-@set external truncateToLengthUnsafe: (array<'a>, int) => unit = "length"
 let swapUnsafe = (xs, i, j) => {
   let tmp = getUnsafe(xs, i)
   setUnsafe(xs, i, getUnsafe(xs, j))
