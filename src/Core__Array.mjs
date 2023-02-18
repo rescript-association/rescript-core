@@ -9,9 +9,7 @@ function make(len, x) {
     return [];
   }
   var arr = new Array(len);
-  for(var i = 0; i < len; ++i){
-    arr[i] = x;
-  }
+  arr.fill(x);
   return arr;
 }
 

@@ -13,14 +13,18 @@ external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b>
 @val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
 @val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
 
+@send external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
+
+@send external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
+
+@send external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
+
 let make = (len, x) =>
   if len <= 0 {
     []
   } else {
     let arr = makeUninitializedUnsafe(len)
-    for i in 0 to len - 1 {
-      arr->setUnsafe(i, x)
-    }
+    arr->fillAllInPlace(x)
     arr
   }
 
@@ -46,12 +50,6 @@ external copyWithinToEnd: (array<'a>, ~target: int, ~start: int) => array<'a> = 
 
 @send
 external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<'a> = "copyWithin"
-
-@send external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
-
-@send external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
-
-@send external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
 
 @send external pop: array<'a> => option<'a> = "pop"
 
