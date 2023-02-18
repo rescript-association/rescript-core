@@ -745,10 +745,10 @@ See [`String.split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Ref
 
 ```rescript
 String.splitByRegExpAtMost("Hello World. How are you doing?", %re("/ /"), ~limit=3) == [
-      Some("Hello"),
-      Some("World."),
-      Some("How"),
-    ]
+  Some("Hello"),
+  Some("World."),
+  Some("How"),
+]
 ```
 */
 @send
