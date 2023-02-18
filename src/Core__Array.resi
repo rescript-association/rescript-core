@@ -103,3 +103,21 @@ let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
 let shuffle: array<'a> => array<'a>
 let shuffleInPlace: array<'a> => unit
 let flatMap: (array<'a>, 'a => array<'b>) => array<'b>
+
+
+/** 
+  `at(array, index)`
+
+  Get an element by it's index. Negative indices count backwards from the last item.
+
+  ## Examples
+  ```rescript
+  ["a", "b", "c"]->Array.at(0) // Some("a")
+  ["a", "b", "c"]->Array.at(2) // Some("c")
+  ["a", "b", "c"]->Array.at(3) // None
+  ["a", "b", "c"]->Array.at(-1) // Some("c")
+  ["a", "b", "c"]->Array.at(-3) // Some("a")
+  ["a", "b", "c"]->Array.at(-4) // None
+  ```
+*/
+@send external at: (array<'a>, int) => option<'a> = "at"
