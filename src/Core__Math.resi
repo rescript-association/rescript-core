@@ -225,11 +225,6 @@ module Int: {
   */
   @val external max: (int, int) => int = "Math.max"
 
-  // NOTE: `Math.Int.maxMany([])` compile to `Math.max()` and return `Infinity`
-  // In JS `Math.max([])` return 0
-  // We should create a wrapper to handle an empty array?
-  // Same problem with `Math.Int.minMany`
-
   /**
   `maxMany(arr)` returns the maximum of the integers in the given array `arr`.
   Returns `Infinity` if `arr` is empty.
@@ -244,9 +239,6 @@ module Int: {
   ```
   */
   @variadic @val external maxMany: array<int> => int = "Math.max"
-
-  // NOTE: the return type may be not int, example `pow(3, ~exp=-3)` return a float
-  // We should remove this function?
 
   /**
   `pow(a, ~exp)` raises the given base `a` to the given exponent `exp`.
