@@ -13,6 +13,17 @@ external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b>
 @val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
 @val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
 
+let make = (len, x) =>
+  if len <= 0 {
+    []
+  } else {
+    let arr = makeUninitializedUnsafe(len)
+    for i in 0 to len - 1 {
+      arr->setUnsafe(i, x)
+    }
+    arr
+  }
+
 let init = (len, f) =>
   if len <= 0 {
     []
