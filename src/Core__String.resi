@@ -281,7 +281,7 @@ String.includes("programmer.dat", "xyz") == false
 external includes: (string, string) => bool = "includes"
 
 /**
-`includesFrom(str, searchValue start)` returns `true` if `searchValue` is found
+`includesFrom(str, searchValue, start)` returns `true` if `searchValue` is found
 anywhere within `str` starting at character number `start` (where 0 is the
 first character), `false` otherwise.
 See [`String.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) on MDN.
