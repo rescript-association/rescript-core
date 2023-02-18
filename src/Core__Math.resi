@@ -172,7 +172,8 @@ module Int: {
   /**
   `imul(a, b)` returns 32-bit integer multiplication. Use this only when you
   need to optimize performance of multiplication of numbers stored as 32-bit
-  integers. See [`Math.imul`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/imul) on MDN.
+  integers.
+  See [`Math.imul`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/imul) on MDN.
 
   ## Examples
 
@@ -184,7 +185,8 @@ module Int: {
   @val external imul: (int, int) => int = "Math.imul"
 
   /**
-  `min(a, b)` returns the minimum of its two integer arguments. See [`Math.min`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min) on MDN.
+  `min(a, b)` returns the minimum of its two integer arguments.
+  See [`Math.min`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min) on MDN.
 
   ## Examples
 
@@ -197,6 +199,7 @@ module Int: {
 
   /**
   `minMany(arr)` returns the minimum of the integers in the given array `arr`.
+  Returns `Infinity` if `arr` is empty.
   See [`Math.min`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min) on MDN.
 
   ## Examples
@@ -204,13 +207,14 @@ module Int: {
   ```rescript
   Math.Int.minMany([1, 2]) // 1
   Math.Int.minMany([-1, -2]) // -2
-  Math.Int.minMany([]) == 0 // false
+  Math.Int.minMany([])->Float.isFinite // false
   ```
   */
   @variadic @val external minMany: array<int> => int = "Math.min"
 
   /**
-  `max(a, b)` returns the maximum of its two integer arguments. See [`Math.max`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) on MDN.
+  `max(a, b)` returns the maximum of its two integer arguments.
+  See [`Math.max`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) on MDN.
 
   ## Examples
 
@@ -224,11 +228,11 @@ module Int: {
   // NOTE: `Math.Int.maxMany([])` compile to `Math.max()` and return `Infinity`
   // In JS `Math.max([])` return 0
   // We should create a wrapper to handle an empty array?
-  // An Example: `Math.Int.maxMany([])` not return an int.
   // Same problem with `Math.Int.minMany`
 
   /**
   `maxMany(arr)` returns the maximum of the integers in the given array `arr`.
+  Returns `Infinity` if `arr` is empty.
   See [`Math.max`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) on MDN.
 
   ## Examples
@@ -236,7 +240,7 @@ module Int: {
   ```rescript
   Math.Int.maxMany([1, 2]) // 2
   Math.Int.maxMany([-1, -2]) // -1
-  Math.Int.maxMany([]) == 0 // false
+  Math.Int.maxMany([])->Float.isFinite // false
   ```
   */
   @variadic @val external maxMany: array<int> => int = "Math.max"
@@ -245,7 +249,8 @@ module Int: {
   // We should remove this function?
 
   /**
-  `pow(a, ~exp)` raises the given base `a` to the given exponent `exp`. See [`Math.pow`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow) on MDN.
+  `pow(a, ~exp)` raises the given base `a` to the given exponent `exp`.
+  See [`Math.pow`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow) on MDN.
 
   ## Examples
 
@@ -257,8 +262,9 @@ module Int: {
   @val external pow: (int, ~exp: int) => int = "Math.pow"
 
   /**
-  `sign(a)` returns the sign of its integer argument: `-1` if negative, `0` if
-  zero, `1` if positive. See [`Math.sign`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign) on MDN.
+  `sign(v)` returns the sign of its integer argument: `-1` if negative, `0` if
+  zero, `1` if positive.
+  See [`Math.sign`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign) on MDN.
 
   ## Examples
 
@@ -270,39 +276,532 @@ module Int: {
   */
   @val external sign: int => int = "Math.sign"
 }
+
+/**
+`abs(v)` returns absolute value of `v`.
+See [`Math.abs`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs) on MDN.
+
+## Examples
+
+```rescript
+Math.abs(-2.0) // 2.0
+Math.abs(3.0) // 3.0
+```
+  */
 @val external abs: float => float = "Math.abs"
+
+/**
+`acos(v)` returns arccosine (in radians) of argument `v`, returns `NaN` if the
+argument is outside the range [-1.0, 1.0].
+See [`Math.acos`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acos) on MDN.
+
+## Examples
+
+```rescript
+Math.acos(-1) // 3.141592653589793
+Math.acos(-3)->Float.isNaN // true
+```
+*/
 @val external acos: float => float = "Math.acos"
+
+/**
+`acosh(v)` returns the inverse hyperbolic arccosine (in radians) of argument `v`,
+returns `NaN` if the argument is less than `1.0`.
+See [`Math.acosh`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acosh) on MDN.
+
+## Examples
+
+```rescript
+Math.acosh(1) // 0.0
+Math.acosh(0.5)->Float.isNaN // true
+```
+*/
 @val external acosh: float => float = "Math.acosh"
+
+/**
+`asin(v)` returns the inverse sine (in radians) of argument `v`, returns `NaN`
+if the argument `v` is outside the range [-1.0, 1.0].
+See [`Math.asin`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asin) on MDN.
+
+## Examples
+
+```rescript
+Math.asin(-1.0) // -1.5707963267948966
+Math.asin(-2.0)->Float.isNaN // true
+```
+*/
 @val external asin: float => float = "Math.asin"
+
+/**
+`asinh(v)` returns the inverse hyperbolic sine of argument `v`.
+See [`Math.asinh`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asinh) on MDN.
+
+## Examples
+
+```rescript
+Math.asinh(-1) // -0.881373587019543
+Math.asinh(-0) // -0.0
+```
+*/
 @val external asinh: float => float = "Math.asinh"
+
+/**
+`atan(v)` returns the inverse tangent (in radians) of argument `v`.
+See [`Math.atan`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan) on MDN.
+
+## Examples
+
+```rescript
+Math.atan(-0.0) // -0.0
+Math.atan(0.0) // 0.0
+Math.atan(1) // 0.7853981633974483
+```
+*/
 @val external atan: float => float = "Math.atan"
+
+/**
+`atanh(v)` returns the invert hyperbolic tangent of argument `v`. Returns `NaN`
+if the argument `v` is is outside the range [-1.0, 1.0] and `Infinity` if `v`
+is `-1.0` or `1.0`.
+See [`Math.atanh`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atanh) on MDN.
+
+## Examples
+
+```rescript
+Math.atanh(-2.0)->Float.isNaN // true
+Math.atanh(-1.0)->Float.isFinite // false
+Math.atanh(-0.0) // -0.0
+Math.atanh(0.0) // 0.0
+Math.atanh(0.5) // 0.5493061443340548
+```
+*/
 @val external atanh: float => float = "Math.atanh"
+
+/**
+`atan2(~x, ~y)` returns the angle (in radians) of the quotient `y /. x`. It is
+also the angle between the *x*-axis and point (*x*, *y*).
+See [`Math.atan2`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2) on MDN.
+
+## Examples
+
+```rescript
+Math.atan2(~y=0.0, ~x=10.0) == 0.0
+Math.atan2(~x=5.0, ~y=5.0) == Math.Constants.pi /. 4.0
+Math.atan2(~x=90.0, ~y=15.0) // 1.4056476493802699
+Math.atan2(~x=15.0, ~y=90.0) // 0.16514867741462683
+```
+*/
 @val external atan2: (~x: float, ~y: float) => float = "Math.atan2"
+
+/**
+`cbrt(v)` returns the cube root of argument `v`.
+See [`Math.cbrt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cbrt) on MDN.
+
+## Examples
+
+```rescript
+Math.cbrt(-1.0) // -1.0
+Math.cbrt(-0.0) // -0.0
+Math.cbrt(0.0) // 0.0
+```
+*/
 @val external cbrt: float => float = "Math.cbrt"
+
+/**
+`ceil(v)` returns the smallest integral value greater than or equal to the
+argument `v`. The result is a `float` and is not restricted to the `int` data
+type range.
+See [`Math.ceil`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil) on MDN.
+
+## Examples
+
+```rescript
+Math.ceil(3.1) == 4.0
+Math.ceil(3.0) == 3.0
+Math.ceil(-3.1) == -3.0
+Math.ceil(2_150_000_000.3) == 2_150_000_001.0
+```
+*/
 @val external ceil: float => float = "Math.ceil"
+
+/**
+`cos(v)` returns the cosine of argument `v`, which must be specified in radians.
+See [`Math.cos`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cos) on MDN.
+
+## Examples
+
+```rescript
+Math.cos(-0.0) // 1.0
+Math.cos(0.0) // 1.0
+Math.cos(1.0) // 0.5403023058681398
+```
+*/
 @val external cos: float => float = "Math.cos"
+
+/**
+`cosh(v)` returns the hyperbolic cosine of argument `v`, which must be specified
+in radians.
+See [`Math.cosh`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cosh) on MDN.
+
+## Examples
+
+```rescript
+Math.cosh(-1.0) // 1.5430806348152437
+Math.cosh(-0.0) // 1.0
+Math.cosh(0.0) // 1.0
+```
+*/
 @val external cosh: float => float = "Math.cosh"
+
+/**
+`exp(v)` returns natural exponentional, returns *e* (the base of natural logarithms)
+to the power of the given argument `v`.
+See [`Math.exp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/exp) on MDN.
+
+## Examples
+
+```rescript
+Math.exp(-1.0) // 0.36787944117144233
+Math.exp(0.0) // 1.0
+```
+*/
 @val external exp: float => float = "Math.exp"
+
+/**
+`expm1(v)` returns *e* (the base of natural logarithms) to the power of the given
+argument `v` minus 1.
+See [`Math.expm1`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/expm1) on MDN.
+
+## Examples
+
+```rescript
+Math.expm1(-1.0) // -0.6321205588285577
+Math.expm1(-0.0) // -0
+```
+*/
 @val external expm1: float => float = "Math.expm1"
+
+/**
+`floor(v)` returns the largest integral value less than or equal to the argument
+`v`. The result is a `float` and is not restricted to the `int` data type range.
+See [`Math.floor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor) on MDN.
+
+## Examples
+
+```rescript
+Math.floor(-45.95) // -46.0
+Math.floor(-45.05) // -46.0
+Math.floor(-0.0) // -0.0
+```
+*/
 @val external floor: float => float = "Math.floor"
+
+/**
+`fround(v)` returns the nearest single precision float.
+See [`Math.fround`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/fround) on MDN.
+
+## Examples
+
+```rescript
+Math.fround(5.5) == 5.5
+Math.fround(5.05) == 5.050000190734863
+```
+*/
 @val external fround: float => float = "Math.fround"
+
+/**
+`hypot(a, b)` returns the square root of the sum of squares of its two arguments
+(the Pythagorean formula).
+See [`Math.hypot`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot) on MDN.
+
+## Examples
+
+```rescript
+Math.hypot(3.0, 4.0) // 5.0
+Math.hypot(3.0, 5.0) // 5.8309518948453
+```
+*/
 @val external hypot: (float, float) => float = "Math.hypot"
+
+/**
+`hypotMany(arr)` returns the square root of the sum of squares of the numbers in
+the array argument (generalized Pythagorean equation). Using an array allows you
+to have more than two items. If `arr` is an empty array then returns `0.0`.
+See [`Math.hypot`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot) on MDN.
+
+## Examples
+
+```rescript
+Math.hypot([3.0, 4.0, 5.0]) // 7.0710678118654755
+Math.hypot([]) // 0.0
+```
+*/
 @variadic @val external hypotMany: array<float> => float = "Math.hypot"
+
+/**
+`log(v)` returns the natural logarithm of argument `v`, this is the number *x*
+such that `e^x` equals the argument. Returns `NaN` for negative arguments and
+`Infinity` for `0.0` or `-0.0`.
+See [`Math.log`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log) on MDN.
+
+## Examples
+
+```rescript
+Math.log(-1.0)->Float.isNaN // true
+Math.log(-0.0)->Float.isFinite // false
+Math.log(0.0)->Float.isFinite // false
+Math.log(1.0) // 0
+```
+*/
 @val external log: float => float = "Math.log"
+
+/**
+`log1p(v)` returns the natural logarithm of one plus the argument `v`.
+Returns `NaN` for arguments less than `-1` and `Infinity` if `v` is `-1.0`.
+See [`Math.log1p`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log1p) on MDN.
+
+## Examples
+
+```rescript
+Math.log1p(-2.0)->Float.isNaN // true
+Math.log1p(-1.0)->Float.isFinite // false
+Math.log1p(-0.0) // -0
+```
+*/
 @val external log1p: float => float = "Math.log1p"
+
+/**
+`log10(v)` returns the base 10 logarithm of argument `v`. Returns `NaN` for
+negative `v`. If `v` is `-0.0` or `0.0` returns `Infinity`.
+See [`Math.log10`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log10) on MDN.
+
+## Examples
+
+```rescript
+Math.log10(-2.0)->Float.isNaN // true
+Math.log10(-0.0)->Float.isFinite // false
+Math.log10(0.0)->Float.isFinite // false
+Math.log10(1.0) // 0
+```
+*/
 @val external log10: float => float = "Math.log10"
+
+/**
+`log2(v)` returns the base 2 logarithm of argument `v`. Returns `NaN` for
+negative `v` and `Infinity` if `v` is `-0.0` or `0.0`.
+See [`Math.log2`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log2) on MDN.
+
+## Examples
+
+```rescript
+Math.log2(-2.0)->Float.isNaN // true
+Math.log2(-0.0)->Float.isFinite // false
+Math.log2(0.0)->Float.isFinite // false
+Math.log2(1.0) // 0.0
+```
+*/
 @val external log2: float => float = "Math.log2"
+
+/**
+`min(a, b)` returns the minimum of its two float arguments.
+See [`Math.min`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min) on MDN.
+
+## Examples
+
+```rescript
+Math.min(1.0, 2.0) // 1.0
+Math.min(-1.0, -2.0) // -2.0
+```
+*/
 @val external min: (float, float) => float = "Math.min"
+
+/**
+`minMany(arr)` returns the minimum of the float in the given array `arr`.
+Returns `Infinity` if `arr` is empty.
+See [`Math.min`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min) on MDN.
+
+## Examples
+
+```rescript
+Math.minMany([1.0, 2.0]) // 1.0
+Math.minMany([-1.0, -2.0]) // -2.0
+Math.minMany([])->Float.isFinite // false
+```
+*/
 @variadic @val external minMany: array<float> => float = "Math.min"
+
+/**
+`max(a, b)` returns the maximum of its two float arguments.
+See [`Math.max`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) on MDN.
+
+## Examples
+
+```rescript
+Math.max(1.0, 2.0) // 2.0
+Math.max(-1.0, -2.0) // -1.0
+```
+*/
 @val external max: (float, float) => float = "Math.max"
+
+/**
+`maxMany(arr)` returns the maximum of the float in the given array `arr`.
+Returns `Infinity` if `arr` is empty.
+See [`Math.max`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) on MDN.
+
+## Examples
+
+```rescript
+Math.maxMany([1.0, 2.0]) // 2.0
+Math.maxMany([-1.0, -2.0]) // -1.0
+Math.maxMany([])->Float.isFinite // false
+```
+*/
 @variadic @val external maxMany: array<float> => float = "Math.max"
+
+/**
+`pow(a, ~exp)` raises the given base `a` to the given exponent `exp`.
+See [`Math.pow`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow) on MDN.
+
+## Examples
+
+```rescript
+Math.pow(2.0, ~exp=4.0) // 16.0
+Math.pow(3.0, ~exp=4.0) // 81.0
+```
+*/
 @val external pow: (float, ~exp: float) => float = "Math.pow"
+
+/**
+`random()` returns a random number in the half-closed interval [0,1].
+See [`Math.random`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) on MDN.
+
+## Examples
+
+```rescript
+Math.random()
+```
+*/
 @val external random: unit => float = "Math.random"
+
+/**
+`round(v)` returns then value of `v` rounded to nearest integral value
+(expressed as a float). If the fractional portion of the argument `v` is greater
+than `0.5`, the argument `v` is rounded to the float with the next higher
+absolute value.
+See [`Math.round`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round) on MDN.
+
+## Examples
+
+```rescript
+Math.round(-20.5) // -20.0
+Math.round(-0.1) // -0.0
+Math.round(0.0) // 0.0
+Math.round(-0.0) // -0.0
+```
+*/
 @val external round: float => float = "Math.round"
+
+/**
+`sign(v)` returns the sign of its foat argument: `-1` if negative, `0` if
+zero, `1` if positive.
+See [`Math.sign`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign) on MDN.
+
+## Examples
+
+```rescript
+Math.sign(3.0) // 1.0
+Math.sign(-3.0) // 1.0
+Math.sign(0.0) // 0.0
+```
+*/
 @val external sign: float => float = "Math.sign"
+
+/**
+`sin(v)` returns the sine of argument `v`, which must be specified in radians.
+See [`Math.sin`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sin) on MDN.
+
+## Examples
+
+```rescript
+Math.sin(-0.0) // -0.0
+Math.sin(0.0) // 0.0
+Math.sin(1.0) // 0.8414709848078965
+```
+*/
 @val external sin: float => float = "Math.sin"
+
+/**
+`sinh(v)` returns then hyperbolic sine of argument `v`, which must be specified
+in radians.
+See [`Math.sinh`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sinh) on MDN.
+
+## Examples
+
+```rescript
+Math.sinh(-0.0) // -0.0
+Math.sinh(0.0) // 0.0
+Math.sinh(1.0) // 1.1752011936438014
+```
+*/
 @val external sinh: float => float = "Math.sinh"
+
+/**
+`sqrt(v)` returns the square root of `v`. If `v` is negative returns `NaN`.
+See [`Math.sqrt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt) on MDN.
+
+## Examples
+
+```rescript
+Math.sqrt(-1.0)->Float.isNaN // true
+Math.sqrt(-0.0) // -0.0
+Math.sqrt(0.0) // 0.0
+Math.sqrt(1.0) // 1.0
+Math.sqrt(9.0) // 3.0
+```
+*/
 @val external sqrt: float => float = "Math.sqrt"
+
+/**
+`tan(v)` returns the tangent of argument `v`, which must be specified in
+radians. Returns `NaN` if `v` is positive `Infinity` or negative `Infinity`.
+See [`Math.tan`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tan) on MDN.
+
+## Examples
+
+```rescript
+Math.tan(-0.0) // -0.0
+Math.tan(0.0) // 0.0
+Math.tan(1.0) // 1.5574077246549023
+```
+*/
 @val external tan: float => float = "Math.tan"
+
+/**
+`tanh(v)` returns the hyperbolic tangent of argument `v`, which must be
+specified in radians.
+See [`Math.tanh`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tanh) on MDN.
+
+## Examples
+
+```rescript
+Math.tanh(-0.0) // -0.0
+Math.tanh(0.0) // 0.0
+Math.tanh(1.0) // 0.7615941559557649
+```
+*/
 @val external tanh: float => float = "Math.tanh"
+
+/**
+`trunc(v)` truncates the argument `v`, i.e., removes fractional digits.
+See [`Math.trunc`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc) on MDN.
+
+## Examples
+
+```rescript
+Math.trunc(0.123) // 0.0
+Math.trunc(1.999) // 1.0
+Math.trunc(13.37) // 13.0
+Math.trunc(42.84) // 42.0
+```
+*/
 @val external trunc: float => float = "Math.trunc"
