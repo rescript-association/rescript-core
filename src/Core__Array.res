@@ -196,3 +196,5 @@ let filterMap = (a, f) => filterMapU(a, (. a) => f(a))
 
 // TODO: Change this implementation?
 let flatMap = (a, f) => []->concatMany(map(a, f))
+
+@send external at: (array<'a>, int) => option<'a> = "at"
