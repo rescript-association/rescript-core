@@ -203,4 +203,18 @@ let filterMap = (a, f) => filterMapU(a, (. a) => f(a))
 // TODO: Change this implementation?
 let flatMap = (a, f) => []->concatMany(map(a, f))
 
+let findMap = (arr, f) => {
+  let rec loop = i =>
+    if i == arr->length {
+      None
+    } else {
+      switch f(getUnsafe(arr, i)) {
+      | None => loop(i + 1)
+      | Some(_) as r => r
+      }
+    }
+
+  loop(0)
+}
+
 @send external at: (array<'a>, int) => option<'a> = "at"

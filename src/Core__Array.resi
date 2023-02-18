@@ -104,8 +104,9 @@ let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
 let shuffle: array<'a> => array<'a>
 let shuffleInPlace: array<'a> => unit
 let flatMap: (array<'a>, 'a => array<'b>) => array<'b>
+let findMap: (array<'a>, 'a => option<'b>) => option<'b>
 
-/** 
+/**
   `at(array, index)`
 
   Get an element by its index. Negative indices count backwards from the last item.

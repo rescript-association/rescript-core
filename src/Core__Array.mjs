@@ -112,6 +112,22 @@ function flatMap(a, f) {
   return Caml_splice_call.spliceObjApply([], "concat", [a.map(f)]);
 }
 
+function findMap(arr, f) {
+  var _i = 0;
+  while(true) {
+    var i = _i;
+    if (i === arr.length) {
+      return ;
+    }
+    var r = Curry._1(f, arr[i]);
+    if (r !== undefined) {
+      return r;
+    }
+    _i = i + 1 | 0;
+    continue ;
+  };
+}
+
 export {
   sort ,
   indexOfOpt ,
@@ -125,5 +141,6 @@ export {
   shuffle ,
   shuffleInPlace ,
   flatMap ,
+  findMap ,
 }
 /* No side effect */
