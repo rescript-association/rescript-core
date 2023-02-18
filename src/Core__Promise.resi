@@ -35,9 +35,9 @@ See [`Promise.reject`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/R
 ## Examples
 
 ```rescript
-let p = Promise.make((_, reject) => {
-  reject(. #error)
-})
+exception TestError(string)
+
+let p = Promise.reject(TestError("some rejected value"))
 ```
 */
 @scope("Promise") @val
@@ -218,7 +218,7 @@ let racer = (ms, name) => {
 
 let promises = [racer(1000, "Turtle"), racer(500, "Hare"), racer(100, "Eagle")]
 
-race(promises)-then(winner => {
+race(promises)->then(winner => {
   Console.log("The winner is " ++ winner)
   resolve()
 })
