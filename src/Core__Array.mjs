@@ -130,6 +130,12 @@ function filterMap(a, f) {
   return r;
 }
 
+function keepSome(__x) {
+  return filterMap(__x, (function (x) {
+                return x;
+              }));
+}
+
 function flatMap(a, f) {
   return Caml_splice_call.spliceObjApply([], "concat", [a.map(f)]);
 }
@@ -162,6 +168,7 @@ export {
   findIndexOpt ,
   reverse ,
   filterMap ,
+  keepSome ,
   shuffle ,
   shuffleInPlace ,
   flatMap ,

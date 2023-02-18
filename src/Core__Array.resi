@@ -103,6 +103,7 @@ external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 let findIndexOpt: (array<'a>, 'a => bool) => option<int>
 let reverse: array<'a> => array<'a>
 let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
+let keepSome: array<option<'a>> => array<'a>
 let shuffle: array<'a> => array<'a>
 let shuffleInPlace: array<'a> => unit
 let flatMap: (array<'a>, 'a => array<'b>) => array<'b>

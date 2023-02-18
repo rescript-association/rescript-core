@@ -222,6 +222,8 @@ let filterMapU = (a, f) => {
 
 let filterMap = (a, f) => filterMapU(a, (. a) => f(a))
 
+let keepSome = filterMap(_, x => x)
+
 // TODO: Change this implementation?
 let flatMap = (a, f) => []->concatMany(map(a, f))
 
