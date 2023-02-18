@@ -6,10 +6,19 @@
 //
 // More details about polymorphism / invariance / covariance,... can be found here:
 // https://caml.inria.fr/pub/docs/manual-ocaml/polymorphism.html#ss:variance:abstract-data-types
+
+/***
+Functions for interacting with JavaScript Promise.
+See: [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+*/
+
 type t<+'a> = promise<'a>
 
 /**
-[resolve(value)] creates a resolved Promise with a given `value`
+`resolve(value)` creates a resolved Promise with a given `value`.
+See [`Promise.resolve`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve) on MDN.
+
+## Examples
 
 ```rescript
 let p = Promise.resolve(5) // promise<int>
@@ -19,12 +28,26 @@ let p = Promise.resolve(5) // promise<int>
 @scope("Promise")
 external resolve: 'a => t<'a> = "resolve"
 
+/**
+`reject(exn)` reject a Promise.
+See [`Promise.reject`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject) on MDN.
+
+## Examples
+
+```rescript
+exception TestError(string)
+
+let p = Promise.reject(TestError("some rejected value"))
+```
+*/
 @scope("Promise") @val
 external reject: exn => t<_> = "reject"
 
 /**
 `make(callback)` creates a new Promise based on a `callback` that receives two
 uncurried functions `resolve` and `reject` for defining the Promise's result.
+
+## Examples
 
 ```rescript
 open Promise
@@ -53,8 +76,11 @@ external make: ((@uncurry (. 'a) => unit, (. 'e) => unit) => unit) => t<'a> = "P
 
 /**
 `catch(promise, errorCallback)` registers an exception handler in a promise chain.
-The `errorCallback` receives an `exn` value that can later be refined into a JS error or ReScript
-error. The `errorCallback` needs to return a promise with the same type as the consumed promise.
+The `errorCallback` receives an `exn` value that can later be refined into a JS
+error or ReScript error. The `errorCallback` needs to return a promise with the
+same type as the consumed promise. See [`Promise.catch`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) on MDN.
+
+## Examples
 
 ```rescript
 open Promise
@@ -87,15 +113,17 @@ reject(SomeError("this is an error"))
 ->ignore // Ignore needed for side-effects
 ```
 
-In case you want to return another promise in your `callback`, consider using \`then\` instead.
+In case you want to return another promise in your `callback`, consider using
+`then` instead.
 */
 let catch: (t<'a>, exn => t<'a>) => t<'a>
 
 /**
-`then(promise, callback)` returns a new promise based on the result of `promise`'s value. 
-The `callback` needs to explicitly return a new promise via `resolve`.
-
+`then(promise, callback)` returns a new promise based on the result of `promise`'s 
+value. The `callback` needs to explicitly return a new promise via `resolve`.
 It is **not allowed** to resolve a nested promise (like `resolve(resolve(1))`).
+See [`Promise.then`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then) on MDN.
+## Examples
 
 ```rescript
 Promise.resolve(5)
@@ -113,9 +141,11 @@ Promise.resolve(5)
 external then: (t<'a>, @uncurry ('a => t<'b>)) => t<'b> = "then"
 
 /**
-`thenResolve(promise, callback)` converts an encapsulated value of a promise into another promise wrapped value. 
+`thenResolve(promise, callback)` converts an encapsulated value of a promise
+into another promise wrapped value. It is **not allowed** to return a promise
+within the provided callback (e.g. `thenResolve(value => resolve(value))`).
 
-It is **not allowed** to return a promise within the provided callback (e.g. `thenResolve(value => resolve(value))`).
+## Examples
 
 ```rescript
 resolve("Anna")
@@ -128,14 +158,18 @@ resolve("Anna")
 ->ignore // Ignore needed for side-effects
 ```
 
-In case you want to return another promise in your `callback`, consider using \`then\` instead.
+In case you want to return another promise in your `callback`, consider using
+`then` instead.
 */
 @send
 external thenResolve: (t<'a>, @uncurry ('a => 'b)) => t<'b> = "then"
 
 /**
-[finally(promise, callback)] is used to execute a function that is called no matter if a promise
-was resolved or rejected. It will return the same `promise` it originally received.
+`finally(promise, callback)` is used to execute a function that is called no
+matter if a promise was resolved or rejected. It will return the same `promise`
+it originally received. See [`Promise.finally`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally) on MDN.
+
+## Examples
 
 ```rescript
 exception SomeError(string)
@@ -167,12 +201,35 @@ resolve(5)
 @send
 external finally: (t<'a>, unit => unit) => t<'a> = "finally"
 
-/* Combining promises. */
+/**
+`race(arr)` combining `array` of promises. See [`Promise.race`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race) on MDN.
+
+## Examples
+
+```rescript
+open Promise
+let racer = (ms, name) => {
+  Promise.make((resolve, _) => {
+    Global.setTimeout(() => {
+      resolve(. name)
+    }, ms)->ignore
+  })
+}
+
+let promises = [racer(1000, "Turtle"), racer(500, "Hare"), racer(100, "Eagle")]
+
+race(promises)->then(winner => {
+  Console.log("The winner is " ++ winner)
+  resolve()
+})
+```
+*/
 @scope("Promise") @val
 external race: array<t<'a>> => t<'a> = "race"
 
 /**
-[all(promises)] runs all promises in parallel and returns a new promise resolving all gathered results in a unified array.
+`all(promises)` runs all promises in parallel and returns a new promise resolving
+all gathered results in a unified array. See [`Promise.all`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) on MDN.
 
 ```rescript
 open Promise
@@ -194,44 +251,46 @@ all(promises)
 external all: array<t<'a>> => t<array<'a>> = "all"
 
 /**
-[all2((p1, p2))]. Like `all()`, but with a fixed size tuple of 2
+`all2((p1, p2))`. Like `all()`, but with a fixed size tuple of 2
 */
 @scope("Promise")
 @val
 external all2: ((t<'a>, t<'b>)) => t<('a, 'b)> = "all"
 
 /**
-[all3((p1, p2, p3))]. Like `all()`, but with a fixed size tuple of 3
+`all3((p1, p2, p3))`. Like `all()`, but with a fixed size tuple of 3
 */
 @scope("Promise")
 @val
 external all3: ((t<'a>, t<'b>, t<'c>)) => t<('a, 'b, 'c)> = "all"
 
 /**
-[all4((p1, p2, p3, p4))]. Like `all()`, but with a fixed size tuple of 4
+`all4((p1, p2, p3, p4))`. Like `all()`, but with a fixed size tuple of 4
 */
 @scope("Promise")
 @val
 external all4: ((t<'a>, t<'b>, t<'c>, t<'d>)) => t<('a, 'b, 'c, 'd)> = "all"
 
 /**
-[all5((p1, p2, p3, p4, p5))]. Like `all()`, but with a fixed size tuple of 5
+`all5((p1, p2, p3, p4, p5))`. Like `all()`, but with a fixed size tuple of 5
 */
 @scope("Promise")
 @val
 external all5: ((t<'a>, t<'b>, t<'c>, t<'d>, t<'e>)) => t<('a, 'b, 'c, 'd, 'e)> = "all"
 
 /**
-[all6((p1, p2, p4, p5, p6))]. Like `all()`, but with a fixed size tuple of 6
+`all6((p1, p2, p4, p5, p6))`. Like `all()`, but with a fixed size tuple of 6
 ")*/
 @scope("Promise")
 @val
 external all6: ((t<'a>, t<'b>, t<'c>, t<'d>, t<'e>, t<'f>)) => t<('a, 'b, 'c, 'd, 'e, 'f)> = "all"
 
 /**
-`done` is a safe way to ignore a promise. If a value is anything else than a promise, it will raise a type error.
+`done(p)` is a safe way to ignore a promise. If a value is anything else than a
+promise, it will raise a type error.
 */
 external done: promise<'a> => unit = "%ignore"
 
+// TODO: add docstring
 external unsafe_async: 'a => promise<'a> = "%identity"
 external unsafe_await: promise<'a> => 'a = "?await"
