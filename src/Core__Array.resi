@@ -106,7 +106,7 @@ let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
 let keepSome: array<option<'a>> => array<'a>
 let shuffle: array<'a> => array<'a>
 let shuffleInPlace: array<'a> => unit
-let flatMap: (array<'a>, 'a => array<'b>) => array<'b>
+@send external flatMap: (array<'a>, 'a => array<'b>) => array<'b> = "flatMap"
 let findMap: (array<'a>, 'a => option<'b>) => option<'b>
 
 /**

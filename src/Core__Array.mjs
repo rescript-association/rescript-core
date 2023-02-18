@@ -3,7 +3,6 @@
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as Js_math from "rescript/lib/es6/js_math.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
-import * as Caml_splice_call from "rescript/lib/es6/caml_splice_call.js";
 
 function make(len, x) {
   if (len <= 0) {
@@ -136,10 +135,6 @@ function keepSome(__x) {
               }));
 }
 
-function flatMap(a, f) {
-  return Caml_splice_call.spliceObjApply([], "concat", [a.map(f)]);
-}
-
 function findMap(arr, f) {
   var _i = 0;
   while(true) {
@@ -171,7 +166,6 @@ export {
   keepSome ,
   shuffle ,
   shuffleInPlace ,
-  flatMap ,
   findMap ,
 }
 /* No side effect */
