@@ -11,6 +11,14 @@
 @val external count: string => unit = "console.count"
 @val external countReset: string => unit = "console.countReset"
 
+@val external debug: 'a => unit = "console.debug"
+@val external debug2: ('a, 'b) => unit = "console.debug"
+@val external debug3: ('a, 'b, 'c) => unit = "console.debug"
+@val external debug4: ('a, 'b, 'c, 'd) => unit = "console.debug"
+@val external debug5: ('a, 'b, 'c, 'd, 'e) => unit = "console.debug"
+@val external debug6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.debug"
+@val @variadic external debugMany: array<_> => unit = "console.debug"
+
 @val external log: 'a => unit = "console.log"
 @val external log2: ('a, 'b) => unit = "console.log"
 @val external log3: ('a, 'b, 'c) => unit = "console.log"

@@ -140,6 +140,101 @@ Console.countReset("rescript")
 external countReset: string => unit = "console.countReset"
 
 /**
+`debug(value)` print a debug message to console.
+See [`Console.debug`](https://developer.mozilla.org/en-US/docs/Web/API/console/debug)
+on MDN.
+
+## Examples
+
+```rescript
+Console.debug("Hello")
+let obj = {"name": "ReScript", "version": 10}
+Console.debug(obj)
+```
+*/
+@val
+external debug: 'a => unit = "console.debug"
+
+/**
+`debug2(v1, v2)`. Like `debug`, but with two arguments.
+
+## Examples
+
+```rescript
+Console.debug2("Hello", "World")
+Console.debug2([1, 2, 3], '4')
+```
+*/
+@val
+external debug2: ('a, 'b) => unit = "console.debug"
+
+/**
+`debug3(v1, v2, v3)`. Like `debug`, but with three arguments.
+
+## Examples
+
+```rescript
+Console.debug3("Hello", "World", "ReScript")
+Console.debug3("One", 2, #3)
+```
+*/
+@val
+external debug3: ('a, 'b, 'c) => unit = "console.debug"
+
+/**
+`debug4(v1, v2, v3, v4)`. Like `debug`, but with four arguments.
+
+## Examples
+
+```rescript
+Console.debug4("Hello", "World", "ReScript", "!!!")
+Console.debug4([1, 2], (3, 4), [#5, #6], #"polyvar")
+```
+*/
+@val
+external debug4: ('a, 'b, 'c, 'd) => unit = "console.debug"
+
+/**
+`debug5(v1, v2, v3, v4, v5)`. Like `debug`, but with five arguments.
+
+## Examples
+
+```rescript
+Console.debug5("Hello", "World", "JS", '!', '!')
+Console.debug5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
+```
+*/
+@val
+external debug5: ('a, 'b, 'c, 'd, 'e) => unit = "console.debug"
+
+/**
+`debug6(v1, v2, v3, v4, v5, v6)`. Like `debug`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.debug6("Hello", "World", "JS", '!', '!', '?')
+Console.debug6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external debug6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.debug"
+
+/**
+`debugMany(arr)`. Like `debug`, but variadic.
+
+## Examples
+
+```rescript
+Console.debugMany(["Hello", "World"])
+Console.debugMany([1, 2, 3])
+```
+*/
+@val
+@variadic
+external debugMany: array<_> => unit = "console.debug"
+
+/**
 `log(value)` print a message to console.
 See [`Console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
 on MDN.
@@ -180,6 +275,7 @@ Console.log3("One", 2, #3)
 */
 @val
 external log3: ('a, 'b, 'c) => unit = "console.log"
+
 /**
 `log4(v1, v2, v3, v4)`. Like `log`, but with four arguments.
 
