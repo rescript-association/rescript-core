@@ -92,6 +92,20 @@ Option.getExn(None) /* Raises an Error */
 let getExn: option<'a> => 'a
 
 /**
+`expect(opt, message)` returns `value` if `Some(value)`, raises a `Failure` expection with the given message if `None`.
+
+```rescript
+Option.expect(Some(3), "should not be None") // 3
+Option.expect(None, "should not be None") // Raises `Failure("should not be None")`
+```
+
+## Exceptions
+
+- Raises `Failure` if `opt` is `None`
+*/
+let expect: (option<'a>, string) => 'a
+
+/**
 `getUnsafe(value)` returns `value`.
 
 ## Examples

@@ -50,6 +50,12 @@ let getExn = x =>
   | None => raise(Not_found)
   }
 
+let expect = (opt, message) =>
+  switch opt {
+  | Some(value) => value
+  | None => raise(Failure(message))
+  }
+
 external getUnsafe: option<'a> => 'a = "%identity"
 
 let mapWithDefaultU = (opt, default, f) =>

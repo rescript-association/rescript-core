@@ -36,6 +36,17 @@ function getExn(x) {
       };
 }
 
+function expect(opt, message) {
+  if (opt !== undefined) {
+    return Caml_option.valFromOption(opt);
+  }
+  throw {
+        RE_EXN_ID: "Failure",
+        _1: message,
+        Error: new Error()
+      };
+}
+
 function mapWithDefault(opt, $$default, f) {
   var f$1 = Curry.__1(f);
   if (opt !== undefined) {
@@ -118,6 +129,7 @@ export {
   filter ,
   forEach ,
   getExn ,
+  expect ,
   mapWithDefault ,
   map ,
   flatMap ,
