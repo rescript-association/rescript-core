@@ -69,6 +69,20 @@ Console.log5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
 */
 @val
 external log5: ('a, 'b, 'c, 'd, 'e) => unit = "console.log"
+
+/**
+`log6(v1, v2, v3, v4, v5, v6)`. Like `log`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.log6("Hello", "World", "JS", '!', '!', '?')
+Console.log6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external log6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.log"
+
 /**
 `info(value)` print an informational message to console.
 See [`Console.info`](https://developer.mozilla.org/en-US/docs/Web/API/console/info)
@@ -135,6 +149,19 @@ Console.info5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
 */
 @val
 external info5: ('a, 'b, 'c, 'd, 'e) => unit = "console.info"
+
+/**
+`info6(v1, v2, v3, v4, v5, v6)`. Like `info`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.info6("Hello", "World", "from", "JS", "!!!", '!')
+Console.info6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external info6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.info"
 
 /**
 `warn(value)` print a warning message to console.
@@ -204,6 +231,19 @@ Console.warn5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
 external warn5: ('a, 'b, 'c, 'd, 'e) => unit = "console.warn"
 
 /**
+`warn6(v1, v2, v3, v4, v5, v6)`. Like `warn`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.warn6("Hello", "World", "from", "JS", "!!!", '!')
+Console.warn6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external warn6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.warn"
+
+/**
 `error(value)` prints an error message to console.
 See [`Console.error`](https://developer.mozilla.org/en-US/docs/Web/API/console/error)
 on MDN.
@@ -269,6 +309,19 @@ Console.error5(1, #second, #third, ("fourth"), 'c')
 */
 @val
 external error5: ('a, 'b, 'c, 'd, 'e) => unit = "console.error"
+
+/**
+`error6(v1, v2, v3, v4, v5, v6)`. Like `error`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.error6("Hello", "World", "from", "JS", "!!!", '!')
+Console.error6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external error6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.error"
 
 /**
 `trace()` print a stack trace to console.
