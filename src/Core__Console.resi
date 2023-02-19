@@ -578,6 +578,20 @@ Console.logMany([1, 2, 3])
 external logMany: array<_> => unit = "console.log"
 
 /**
+`table(object)` displays an tabular view of the object in the console.
+See [`Console.table`](https://developer.mozilla.org/en-US/docs/Web/API/console/table)
+on MDN.
+
+## Examples
+
+```rescript
+Console.table({"language": "rescript", "version": 10.1.2})
+```
+*/
+@val
+external table: 'a => unit = "console.table"
+
+/**
 `time(label)` creates a timer to measure how long an operation takes. `label`
 must be a unique name. Call `Console.timeEnd` with the same `label` to print
 output time.

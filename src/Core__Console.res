@@ -50,6 +50,8 @@
 @val external log6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.log"
 @val @variadic external logMany: array<_> => unit = "console.log"
 
+@val external table: 'a => unit = "console.table"
+
 @val external time: string => unit = "console.time"
 @val external timeEnd: string => unit = "console.timeEnd"
 
