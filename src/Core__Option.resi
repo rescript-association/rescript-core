@@ -40,7 +40,7 @@ let someString: option<string> = Some("hello")
 */
 
 /**
-`flat(value)` flattens a nested `option` value to a single level..
+`flat(value)` flattens a nested `option` value to a single level.
 
 ## Examples
 
@@ -115,7 +115,7 @@ Option.getUnsafe(Some(3)) == 3
 Option.getUnsafe(None) // Raises an error
 ```
 
-## Improtant
+## Important
 
 This is an unsafe operation, it assumes `value` is neither `None`, `Some(None))`, `Some(Some(None))` etc.
 */
