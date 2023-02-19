@@ -112,6 +112,34 @@ Console.clear()
 external clear: unit => unit = "console.clear"
 
 /**
+`count(label)` prints to the console the number of times it's been called with the given label.
+See [`Console.count`](https://developer.mozilla.org/en-US/docs/Web/API/console/count)
+on MDN.
+
+## Examples
+
+```rescript
+Console.count("rescript")
+```
+*/
+@val
+external count: string => unit = "console.count"
+
+/**
+`countReset(label)` resets the count for the given label to 0.
+See [`Console.countReset`](https://developer.mozilla.org/en-US/docs/Web/API/console/countReset)
+on MDN.
+
+## Examples
+
+```rescript
+Console.countReset("rescript")
+```
+*/
+@val
+external countReset: string => unit = "console.countReset"
+
+/**
 `log(value)` print a message to console.
 See [`Console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
 on MDN.
