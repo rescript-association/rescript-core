@@ -26,9 +26,9 @@ function forEach(opt, f) {
   
 }
 
-function getExn(x) {
-  if (x !== undefined) {
-    return Caml_option.valFromOption(x);
+function getExn(opt) {
+  if (opt !== undefined) {
+    return Caml_option.valFromOption(opt);
   }
   throw {
         RE_EXN_ID: "Not_found",
@@ -88,12 +88,12 @@ function orElse(opt, other) {
   }
 }
 
-function isSome(x) {
-  return x !== undefined;
+function isSome(opt) {
+  return opt !== undefined;
 }
 
-function isNone(x) {
-  return x === undefined;
+function isNone(value) {
+  return value === undefined;
 }
 
 function eq(a, b, f) {

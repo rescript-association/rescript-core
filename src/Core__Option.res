@@ -30,23 +30,23 @@ let flat = opt =>
 
 let filterU = (opt, p) =>
   switch opt {
-  | Some(x) as some if p(. x) => some
+  | Some(value) as some if p(. value) => some
   | _ => None
   }
 
-let filter = (opt, p) => filterU(opt, (. x) => p(x))
+let filter = (opt, p) => filterU(opt, (. value) => p(value))
 
 let forEachU = (opt, f) =>
   switch opt {
-  | Some(x) => f(. x)
+  | Some(value) => f(. value)
   | None => ()
   }
 
-let forEach = (opt, f) => forEachU(opt, (. x) => f(x))
+let forEach = (opt, f) => forEachU(opt, (. value) => f(value))
 
-let getExn = x =>
-  switch x {
-  | Some(x) => x
+let getExn = opt =>
+  switch opt {
+  | Some(value) => value
   | None => raise(Not_found)
   }
 
@@ -60,31 +60,31 @@ external getUnsafe: option<'a> => 'a = "%identity"
 
 let mapWithDefaultU = (opt, default, f) =>
   switch opt {
-  | Some(x) => f(. x)
+  | Some(value) => f(. value)
   | None => default
   }
 
-let mapWithDefault = (opt, default, f) => mapWithDefaultU(opt, default, (. x) => f(x))
+let mapWithDefault = (opt, default, f) => mapWithDefaultU(opt, default, (. value) => f(value))
 
 let mapU = (opt, f) =>
   switch opt {
-  | Some(x) => Some(f(. x))
+  | Some(value) => Some(f(. value))
   | None => None
   }
 
-let map = (opt, f) => mapU(opt, (. x) => f(x))
+let map = (opt, f) => mapU(opt, (. value) => f(value))
 
 let flatMapU = (opt, f) =>
   switch opt {
-  | Some(x) => f(. x)
+  | Some(value) => f(. value)
   | None => None
   }
 
-let flatMap = (opt, f) => flatMapU(opt, (. x) => f(x))
+let flatMap = (opt, f) => flatMapU(opt, (. value) => f(value))
 
 let getWithDefault = (opt, default) =>
   switch opt {
-  | Some(x) => x
+  | Some(value) => value
   | None => default
   }
 
@@ -94,13 +94,13 @@ let orElse = (opt, other) =>
   | None => other
   }
 
-let isSome = x =>
-  switch x {
+let isSome = opt =>
+  switch opt {
   | Some(_) => true
   | None => false
   }
 
-let isNone = x => x == None
+let isNone = value => value == None
 
 let eqU = (a, b, f) =>
   switch a {
