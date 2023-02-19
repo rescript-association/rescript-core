@@ -187,6 +187,19 @@ None->greet // "Greetings Anonymous"
 let getWithDefault: (option<'a>, 'a) => 'a
 
 /**
+`or(opt1, opt2)` returns `opt2` if `opt1` is `None`, otherwise `opt1`.
+
+## Examples
+
+```rescript
+Option.or(Some(1812), Some(1066)) == Some(1812)
+Option.or(None, Some(1066) == Some(1066)
+Option.or(None, None) == None
+```
+*/
+let or: (option<'a>, option<'a>) => option<'a>
+
+/**
 `orElse(opt1, opt2)` returns `opt2` if `opt1` is `None`, otherwise `opt1`.
 
 ## Examples
@@ -197,6 +210,7 @@ Option.orElse(None, Some(1066) == Some(1066)
 Option.orElse(None, None) == None
 ```
 */
+@deprecated
 let orElse: (option<'a>, option<'a>) => option<'a>
 
 /**

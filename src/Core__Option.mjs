@@ -80,7 +80,7 @@ function getWithDefault(opt, $$default) {
   }
 }
 
-function orElse(opt, other) {
+function or(opt, other) {
   if (opt !== undefined) {
     return opt;
   } else {
@@ -124,6 +124,8 @@ function cmp(a, b, f) {
   }
 }
 
+var orElse = or;
+
 export {
   flat ,
   filter ,
@@ -134,6 +136,7 @@ export {
   map ,
   flatMap ,
   getWithDefault ,
+  or ,
   orElse ,
   isSome ,
   isNone ,

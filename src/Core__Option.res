@@ -88,9 +88,9 @@ let getWithDefault = (opt, default) =>
   | None => default
   }
 
-let orElse = (opt, other) =>
+let or = (opt, other) =>
   switch opt {
-  | Some(_) as some => some
+  | Some(_) => opt
   | None => other
   }
 
@@ -99,6 +99,7 @@ let isSome = opt =>
   | Some(_) => true
   | None => false
   }
+let orElse = or
 
 let isNone = value => value == None
 
