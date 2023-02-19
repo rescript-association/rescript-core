@@ -4,6 +4,100 @@ See: [`Console`](https://developer.mozilla.org/en-US/docs/Web/API/Console).
 */
 
 /**
+`assert_(assertion, value)` print a message to console if `assertion` evaluates `false`. Does nothing if it's `true`.
+See [`Console.assert`](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
+on MDN.
+
+## Examples
+
+```rescript
+Console.assert_(false, "Hello World!")
+Console.assert_(n == 42, "The answer")
+```
+*/
+@val
+external assert_: (bool, 'a) => unit = "console.assert"
+
+/**
+`assert2(v1, v2)`. Like `assert_`, but with two arguments.
+
+## Examples
+
+```rescript
+Console.assert2(false, "Hello", "World")
+Console.assert2(n == 42, [1, 2, 3], '4')
+```
+*/
+@val
+external assert2: (bool, 'a, 'b) => unit = "console.assert"
+
+/**
+`assert3(v1, v2, v3)`. Like `assert_`, but with three arguments.
+
+## Examples
+
+```rescript
+Console.assert3(false, "Hello", "World", "ReScript")
+Console.assert3(n == 42, "One", 2, #3)
+```
+*/
+@val
+external assert3: (bool, 'a, 'b, 'c) => unit = "console.assert"
+
+/**
+`assert4(v1, v2, v3, v4)`. Like `assert_`, but with four arguments.
+
+## Examples
+
+```rescript
+Console.assert4(false, "Hello", "World", "ReScript", "!!!")
+Console.assert4(m == 42, [1, 2], (3, 4), [#5, #6], #"polyvar")
+```
+*/
+@val
+external assert4: (bool, 'a, 'b, 'c, 'd) => unit = "console.assert"
+
+/**
+`assert5(v1, v2, v3, v4, v5)`. Like `assert_`, but with five arguments.
+
+## Examples
+
+```rescript
+Console.assert5(false, "Hello", "World", "JS", '!', '!')
+Console.assert5(n == 42, [1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
+```
+*/
+@val
+external assert5: (bool, 'a, 'b, 'c, 'd, 'e) => unit = "console.assert"
+
+/**
+`assert6(v1, v2)`. Like `assert_`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.assert6(false, "Hello", "World", "JS", '!', '!', '?')
+Console.assert6(n == 42, [1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external assert6: (bool, 'a, 'b, 'c, 'd, 'e, 'f) => unit = "console.assert"
+
+/**
+`assertMany(assertion, arr)`. Like `assert_`, but variadic.
+
+## Examples
+
+```rescript
+Console.assertMany(false, ["Hello", "World"])
+Console.assertMany(n == 42, [1, 2, 3])
+```
+*/
+@val
+@variadic
+external assertMany: (bool, array<_>) => unit = "console.assert"
+
+/**
 `log(value)` print a message to console.
 See [`Console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
 on MDN.

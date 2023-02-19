@@ -1,3 +1,11 @@
+@val external assert_: (bool, 'a) => unit = "console.assert"
+@val external assert2: (bool, 'a, 'b) => unit = "console.assert"
+@val external assert3: (bool, 'a, 'b, 'c) => unit = "console.assert"
+@val external assert4: (bool, 'a, 'b, 'c, 'd) => unit = "console.assert"
+@val external assert5: (bool, 'a, 'b, 'c, 'd, 'e) => unit = "console.assert"
+@val external assert6: (bool, 'a, 'b, 'c, 'd, 'e, 'f) => unit = "console.assert"
+@val @variadic external assertMany: (bool, array<_>) => unit = "console.assert"
+
 @val external log: 'a => unit = "console.log"
 @val external log2: ('a, 'b) => unit = "console.log"
 @val external log3: ('a, 'b, 'c) => unit = "console.log"
