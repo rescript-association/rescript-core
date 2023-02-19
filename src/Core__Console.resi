@@ -39,7 +39,7 @@ external log2: ('a, 'b) => unit = "console.log"
 
 ```rescript
 Console.log3("Hello", "World", "ReScript")
-Console.log2("One", 2, #3)
+Console.log3("One", 2, #3)
 ```
 */
 @val
