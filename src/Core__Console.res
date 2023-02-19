@@ -54,6 +54,7 @@
 
 @val external time: string => unit = "console.time"
 @val external timeEnd: string => unit = "console.timeEnd"
+@val external timeLog: string => unit = "console.timeLog"
 
 @val external trace: unit => unit = "console.trace"
 

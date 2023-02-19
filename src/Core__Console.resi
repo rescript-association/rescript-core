@@ -604,6 +604,7 @@ on MDN.
 Console.time("for_time")
 for x in 3 downto 1 {
   Console.log(x)
+  Console.timeLog("for_time")
 }
 Console.timeEnd("for_time")
 ```
@@ -622,12 +623,32 @@ on MDN.
 Console.time("for_time")
 for x in 3 downto 1 {
   Console.log(x)
+  Console.timeLog("for_time")
 }
 Console.timeEnd("for_time")
 ```
 */
 @val
 external timeEnd: string => unit = "console.timeEnd"
+
+/**
+`timeLog(label)` prints the current elapsed time of the given timer to the console.
+See [`Console.timeLog`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeLog)
+on MDN.
+
+## Examples
+
+```rescript
+Console.time("for_time")
+for x in 3 downto 1 {
+  Console.log(x)
+  Console.timeLog("for_time")
+}
+Console.timeEnd("for_time")
+```
+*/
+@val
+external timeLog: string => unit = "console.timeLog"
 
 /**
 `trace()` print a stack trace to console.
