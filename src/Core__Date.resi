@@ -6,20 +6,20 @@ type t = Js.Date.t
 type time = float
 
 /**
-  A type representing date time format options.
+A type representing date time format options.
 
-  Note: There are some properties missing:
-    - fractionalSecondDigits
-    - dayPeriod
-    - calendar
-    - numberingSystem
-    - localeMatcher
-    - timeZone
-    - hour12
-    - hourCycle
-    - formatMatcher
+Note: There are some properties missing:
+- fractionalSecondDigits
+- dayPeriod
+- calendar
+- numberingSystem
+- localeMatcher
+- timeZone
+- hour12
+- hourCycle
+- formatMatcher
 
-  See full spec at https://tc39.es/ecma402/#datetimeformat-objects
+See full spec at https://tc39.es/ecma402/#datetimeformat-objects
 */
 type localeOptions = {
   dateStyle?: [#full | #long | #medium | #short],
@@ -167,123 +167,140 @@ external setUTCMinutesSMs: (t, ~minutes: int, ~seconds: int, ~milliseconds: int)
 @send external toTimeString: t => string = "toTimeString"
 
 /** 
-  `toLocaleDateString(date)`
+`toLocaleDateString(date)`
 
-  Converts a JavaScript date to a localized date string. It will use the current locale.
+Converts a JavaScript date to a localized date string. It will use the current locale.
 
-  ## Examples
-  ```rescript
-  Date.make()->Date.toLocaleDateString->Console.log
-  ```
+## Examples
+```rescript
+Date.make()->Date.toLocaleDateString->Console.log
+// 2/19/2023
+```
 */
 @send
 external toLocaleDateString: t => string = "toLocaleDateString"
 
 /** 
-  `toLocaleDateStringWithLocale(date, locale)`
+`toLocaleDateStringWithLocale(date, locale)`
 
-  Converts a JavaScript date to a localized date string. It will use the specified locale.
+Converts a JavaScript date to a localized date string. It will use the specified locale.
 
-  ## Examples
-  ```rescript
-  Date.make()->Date.toLocaleDateStringWithLocale("en-US")->Console.log
-  ```
+## Examples
+```rescript
+Date.make()->Date.toLocaleDateStringWithLocale("en-US")->Console.log
+// 2/19/2023
+```
 */
 @send
 external toLocaleDateStringWithLocale: (t, string) => string = "toLocaleDateString"
 
 /** 
-  `toLocaleDateStringWithLocaleAndOptions(date, locale, options)`
+`toLocaleDateStringWithLocaleAndOptions(date, locale, options)`
 
-  Converts a JavaScript date to a localized date string. It will use the specified locale and formatting options.
+Converts a JavaScript date to a localized date string. It will use the specified locale and formatting options.
 
-  ## Examples
-  ```rescript
-  Date.make()->Date.toLocaleDateStringWithLocaleAndOptions("en-US", { dateStyle: #long })->Console.log
-  Date.make()->Date.toLocaleDateStringWithLocaleAndOptions("de", { hour: #"2-digit", minute: #"2-digit" })->Console.log
-  Date.make()->Date.toLocaleDateStringWithLocaleAndOptions("de", { year: #numeric })->Console.log
-  ```
+## Examples
+```rescript
+Date.make()->Date.toLocaleDateStringWithLocaleAndOptions("en-US", { dateStyle: #long })->Console.log
+// February 19, 2023
+
+Date.make()->Date.toLocaleDateStringWithLocaleAndOptions("de", { hour: #"2-digit", minute: #"2-digit" })->Console.log
+// 19.2.2023, 15:40
+
+Date.make()->Date.toLocaleDateStringWithLocaleAndOptions("de", { year: #numeric })->Console.log
+// 2023
+```
 */
 @send
 external toLocaleDateStringWithLocaleAndOptions: (t, string, localeOptions) => string =
   "toLocaleDateString"
 
 /** 
-  `toLocaleString(date)`
+`toLocaleString(date)`
 
-  Converts a JavaScript date to a localized date-time string. It will use the current locale.
+Converts a JavaScript date to a localized date-time string. It will use the current locale.
 
-  ## Examples
-  ```rescript
-  Date.make()->Date.toLocaleString->Console.log
-  ```
+## Examples
+```rescript
+Date.make()->Date.toLocaleString->Console.log
+// 2/19/2023, 3:40:00 PM
+```
 */
 @send
 external toLocaleString: t => string = "toLocaleString"
 
 /** 
-  `toLocaleStringWithLocale(date, locale)`
+`toLocaleStringWithLocale(date, locale)`
 
-  Converts a JavaScript date to a localized date-time string. It will use the specified locale.
+Converts a JavaScript date to a localized date-time string. It will use the specified locale.
 
-  ## Examples
-  ```rescript
-  Date.make()->Date.toLocaleStringWithLocale("en-US")->Console.log
-  ```
+## Examples
+```rescript
+Date.make()->Date.toLocaleStringWithLocale("en-US")->Console.log
+// 2/19/2023, 3:40:00 PM
+```
 */
 @send
 external toLocaleStringWithLocale: (t, string) => string = "toLocaleString"
 
 /** 
-  `toLocaleStringWithLocaleAndOptions(date, locale, options)`
+`toLocaleStringWithLocaleAndOptions(date, locale, options)`
 
-  Converts a JavaScript date to a localized date-time string. It will use the specified locale and formatting options.
+Converts a JavaScript date to a localized date-time string. It will use the specified locale and formatting options.
 
-  ## Examples
-  ```rescript
-  Date.make()->Date.toLocaleStringWithLocaleAndOptions("en", { dateStyle: #short, timeStyle: #short })->Console.log
-  Date.make()->Date.toLocaleStringWithLocaleAndOptions("en", { era: #long, year: #numeric, month: #"2-digit", day: #"2-digit", hour: #numeric, timeZoneName: #short })->Console.log
-  ```
+## Examples
+```rescript
+Date.make()->Date.toLocaleStringWithLocaleAndOptions("en", { dateStyle: #short, timeStyle: #short })->Console.log
+// 2/19/23, 3:40 PM
+
+Date.make()->Date.toLocaleStringWithLocaleAndOptions("en", { era: #long, year: #numeric, month: #"2-digit", day: #"2-digit", hour: #numeric, timeZoneName: #short })->Console.log
+// 02/19/2023 Anno Domini, 3 PM GMT+1
+```
 */
 @send
 external toLocaleStringWithLocaleAndOptions: (t, string, localeOptions) => string = "toLocaleString"
 
 /** 
-  `toLocaleTimeString(date)`
+`toLocaleTimeString(date)`
 
-  Converts a JavaScript date to a localized time string. It will use the current locale.
+Converts a JavaScript date to a localized time string. It will use the current locale.
 
-  ## Examples
-  ```rescript
-  Date.make()->Date.toLocaleTimeString->Console.log
-  ```
+## Examples
+```rescript
+Date.make()->Date.toLocaleTimeString->Console.log
+// 3:40:00 PM
+```
 */
 @send
 external toLocaleTimeString: t => string = "toLocaleTimeString"
 
 /** 
-  `toLocaleTimeStringWithLocale(date, locale)`
+`toLocaleTimeStringWithLocale(date, locale)`
 
-  Converts a JavaScript date to a localized time string. It will use the specified locale.
+Converts a JavaScript date to a localized time string. It will use the specified locale.
 
-  ## Examples
-  ```rescript
-  Date.make()->Date.toLocaleTimeStringWithLocale("en-US")->Console.log
-  ```
+## Examples
+```rescript
+Date.make()->Date.toLocaleTimeStringWithLocale("en-US")->Console.log
+// 3:40:00 PM
+```
 */
 @send
 external toLocaleTimeStringWithLocale: (t, string) => string = "toLocaleTimeString"
 
 /** 
-  `toLocaleTimeStringWithLocaleAndOptions(date, locale, options)`
+`toLocaleTimeStringWithLocaleAndOptions(date, locale, options)`
 
-  Converts a JavaScript date to a localized time string. It will use the specified locale and formatting options.
+Converts a JavaScript date to a localized time string. It will use the specified locale and formatting options.
 
-  ## Examples
-  ```rescript
-  Date.make()->Date.toLocaleTimeStringWithLocaleAndOptions("en-US", { timeStyle: #long })->Console.log
-  Date.make()->Date.toLocaleTimeStringWithLocaleAndOptions("de", { hour: #"2-digit", minute: #"2-digit" })->Console.log
-  ```
+## Examples
+```rescript
+Date.make()->Date.toLocaleTimeStringWithLocaleAndOptions("en-US", { timeStyle: #long })->Console.log
+// 3:40:00 PM GMT+1
+
+Date.make()->Date.toLocaleTimeStringWithLocaleAndOptions("de", { hour: #"2-digit", minute: #"2-digit" })->Console.log
+// 15:40
+```
 */
 @send
 external toLocaleTimeStringWithLocaleAndOptions: (t, string, localeOptions) => string =

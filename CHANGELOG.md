@@ -11,6 +11,7 @@
 - Add `Array.at` binding for returning an array item by its index. https://github.com/rescript-association/rescript-core/pull/48
 - Fixed type signatures of `Array.fromArrayLikeWithMap` and `Array.fromIteratorWithMap`. https://github.com/rescript-association/rescript-core/pull/50
 - Remove internal async/await helpers that do not need to be exposed in `Core`.
+- Add locale and formatting options to `localeDateString`, `localeString` and `localTimeString` functions https://github.com/rescript-association/rescript-core/pull/30
 
 ### Documentation
 
