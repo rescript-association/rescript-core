@@ -84,6 +84,20 @@ Console.log6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
 external log6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.log"
 
 /**
+`logMany(arr)`. Like `log`, but variadic.
+
+## Examples
+
+```rescript
+Console.logMany(["Hello", "World"])
+Console.logMany([1, 2, 3])
+```
+*/
+@val
+@variadic
+external logMany: array<_> => unit = "console.log"
+
+/**
 `info(value)` print an informational message to console.
 See [`Console.info`](https://developer.mozilla.org/en-US/docs/Web/API/console/info)
 on MDN.
@@ -162,6 +176,20 @@ Console.info6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
 */
 @val
 external info6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.info"
+
+/**
+`infoMany(arr)`. Like `info`, but variadic.
+
+## Examples
+
+```rescript
+Console.infoMany(["Hello", "World"])
+Console.infoMany([1, 2, 3])
+```
+*/
+@val
+@variadic
+external infoMany: array<_> => unit = "console.info"
 
 /**
 `warn(value)` print a warning message to console.
@@ -244,6 +272,20 @@ Console.warn6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
 external warn6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.warn"
 
 /**
+`warnMany(arr)`. Like `warn`, but variadic.
+
+## Examples
+
+```rescript
+Console.warnMany(["Hello", "World"])
+Console.warnMany([1, 2, 3])
+```
+*/
+@val
+@variadic
+external warnMany: array<_> => unit = "console.warn"
+
+/**
 `error(value)` prints an error message to console.
 See [`Console.error`](https://developer.mozilla.org/en-US/docs/Web/API/console/error)
 on MDN.
@@ -322,6 +364,20 @@ Console.error6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
 */
 @val
 external error6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.error"
+
+/**
+`errorMany(arr)`. Like `error`, but variadic.
+
+## Examples
+
+```rescript
+Console.errorMany(["Hello", "World"])
+Console.errorMany([1, 2, 3])
+```
+*/
+@val
+@variadic
+external errorMany: array<_> => unit = "console.error"
 
 /**
 `trace()` print a stack trace to console.
