@@ -235,6 +235,20 @@ Console.debugMany([1, 2, 3])
 external debugMany: array<_> => unit = "console.debug"
 
 /**
+`dir(object)` displays an interactive view of the object in the console.
+See [`Console.dir`](https://developer.mozilla.org/en-US/docs/Web/API/console/dir)
+on MDN.
+
+## Examples
+
+```rescript
+Console.dir({"language": "rescript", "version": 10.1.2})
+```
+*/
+@val
+external dir: 'a => unit = "console.dir"
+
+/**
 `log(value)` print a message to console.
 See [`Console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
 on MDN.
