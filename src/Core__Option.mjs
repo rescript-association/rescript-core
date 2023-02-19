@@ -92,8 +92,8 @@ function isSome(opt) {
   return opt !== undefined;
 }
 
-function isNone(value) {
-  return value === undefined;
+function isNone(opt) {
+  return opt === undefined;
 }
 
 function eq(a, b, f) {

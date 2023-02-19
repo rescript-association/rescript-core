@@ -94,14 +94,11 @@ let or = (opt, other) =>
   | None => other
   }
 
-let isSome = opt =>
-  switch opt {
-  | Some(_) => true
-  | None => false
-  }
 let orElse = or
 
-let isNone = value => value == None
+let isSome = opt => opt !== None
+
+let isNone = opt => opt == None
 
 let eqU = (a, b, f) =>
   switch a {
