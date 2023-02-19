@@ -6,6 +6,8 @@
 @val external assert6: (bool, 'a, 'b, 'c, 'd, 'e, 'f) => unit = "console.assert"
 @val @variadic external assertMany: (bool, array<_>) => unit = "console.assert"
 
+@val external clear: unit => unit = "console.clear"
+
 @val external log: 'a => unit = "console.log"
 @val external log2: ('a, 'b) => unit = "console.log"
 @val external log3: ('a, 'b, 'c) => unit = "console.log"

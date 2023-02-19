@@ -98,6 +98,20 @@ Console.assertMany(n == 42, [1, 2, 3])
 external assertMany: (bool, array<_>) => unit = "console.assert"
 
 /**
+`clear()` clears the console, if allowed.
+See [`Console.clear`](https://developer.mozilla.org/en-US/docs/Web/API/console/clear)
+on MDN.
+
+## Examples
+
+```rescript
+Console.clear()
+```
+*/
+@val
+external clear: unit => unit = "console.clear"
+
+/**
 `log(value)` print a message to console.
 See [`Console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
 on MDN.
