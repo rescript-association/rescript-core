@@ -78,7 +78,7 @@ Option.forEach(None, x => Console.log(x)) // returns ()
 let forEach: (option<'a>, 'a => unit) => unit
 
 /**
-`getExn(opt)` returns `value` if `opt` is `Some(value)`, otherwise raises an exception.
+`getExn(opt)` returns `value` if `opt` is `Some(value)`, raises `Not_found` if `None`.
 
 ```rescript
 Option.getExn(Some(3)) // 3
@@ -87,7 +87,7 @@ Option.getExn(None) /* Raises an Error */
 
 ## Exceptions
 
-- Raises an error if `opt` is `None`
+- Raises `Not_found` if `opt` is `None`
 */
 let getExn: option<'a> => 'a
 
