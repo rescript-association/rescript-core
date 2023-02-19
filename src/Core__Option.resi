@@ -115,9 +115,9 @@ Option.getUnsafe(Some(3)) == 3
 Option.getUnsafe(None) // Raises an error
 ```
 
-## Exceptions
+## Improtant
 
-- This is an unsafe operation, it assumes `value` is neither `None` nor `Some(None(...)))`
+This is an unsafe operation, it assumes `value` is neither `None`, `Some(None))`, `Some(Some(None))` etc.
 */
 external getUnsafe: option<'a> => 'a = "%identity"
 
