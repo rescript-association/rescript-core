@@ -104,7 +104,6 @@ let shuffle: array<'a> => array<'a>
 let shuffleInPlace: array<'a> => unit
 let flatMap: (array<'a>, 'a => array<'b>) => array<'b>
 
-
 /** 
   `at(array, index)`
 
@@ -120,4 +119,5 @@ let flatMap: (array<'a>, 'a => array<'b>) => array<'b>
   ["a", "b", "c"]->Array.at(-4) // None
   ```
 */
-@send external at: (array<'a>, int) => option<'a> = "at"
+@send
+external at: (array<'a>, int) => option<'a> = "at"
