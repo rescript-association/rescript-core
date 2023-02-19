@@ -3,6 +3,13 @@
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 
+function flat(opt) {
+  if (opt !== undefined) {
+    return Caml_option.valFromOption(opt);
+  }
+  
+}
+
 function filter(opt, p) {
   var p$1 = Curry.__1(p);
   if (opt !== undefined && p$1(Caml_option.valFromOption(opt))) {
@@ -107,6 +114,7 @@ function cmp(a, b, f) {
 }
 
 export {
+  flat ,
   filter ,
   forEach ,
   getExn ,

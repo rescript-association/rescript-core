@@ -40,6 +40,18 @@ let someString: option<string> = Some("hello")
 */
 
 /**
+`flat(value)` flattens a nested `option` value to a single level..
+
+## Examples
+
+```rescript
+Option.float(Some(Some(10))) // Some(10)
+Option.flat(Some(None)) // None
+```
+*/
+let flat: option<option<'a>> => option<'a>
+
+/**
 `filter(opt, f)` applies `f` to `opt`, if `f` returns `true`, then it returns `Some(value)`, otherwise returns `None`.
 
 ## Examples
