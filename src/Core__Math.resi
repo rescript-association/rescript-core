@@ -182,7 +182,8 @@ module Int: {
   Math.Int.imul(-5, 12) // 60
   ```
   */
-  @val external imul: (int, int) => int = "Math.imul"
+  @val
+  external imul: (int, int) => int = "Math.imul"
 
   /**
   `min(a, b)` returns the minimum of its two integer arguments.
@@ -195,7 +196,8 @@ module Int: {
   Math.Int.min(-1, -2) // -2
   ```
   */
-  @val external min: (int, int) => int = "Math.min"
+  @val
+  external min: (int, int) => int = "Math.min"
 
   /**
   `minMany(arr)` returns the minimum of the integers in the given array `arr`.
@@ -210,7 +212,9 @@ module Int: {
   Math.Int.minMany([])->Float.isFinite // false
   ```
   */
-  @variadic @val external minMany: array<int> => int = "Math.min"
+  @variadic
+  @val
+  external minMany: array<int> => int = "Math.min"
 
   /**
   `max(a, b)` returns the maximum of its two integer arguments.
@@ -223,7 +227,8 @@ module Int: {
   Math.Int.max(-1, -2) // -1
   ```
   */
-  @val external max: (int, int) => int = "Math.max"
+  @val
+  external max: (int, int) => int = "Math.max"
 
   /**
   `maxMany(arr)` returns the maximum of the integers in the given array `arr`.
@@ -238,7 +243,9 @@ module Int: {
   Math.Int.maxMany([])->Float.isFinite // false
   ```
   */
-  @variadic @val external maxMany: array<int> => int = "Math.max"
+  @variadic
+  @val
+  external maxMany: array<int> => int = "Math.max"
 
   /**
   `pow(a, ~exp)` raises the given base `a` to the given exponent `exp`.
@@ -251,7 +258,8 @@ module Int: {
   Math.Int.pow(3, ~exp=4) // 81
   ```
   */
-  @val external pow: (int, ~exp: int) => int = "Math.pow"
+  @val
+  external pow: (int, ~exp: int) => int = "Math.pow"
 
   /**
   `sign(v)` returns the sign of its integer argument: `-1` if negative, `0` if
@@ -266,7 +274,8 @@ module Int: {
   Math.Int.sign(0) // 0
   ```
   */
-  @val external sign: int => int = "Math.sign"
+  @val
+  external sign: int => int = "Math.sign"
 }
 
 /**
@@ -280,7 +289,8 @@ Math.abs(-2.0) // 2.0
 Math.abs(3.0) // 3.0
 ```
   */
-@val external abs: float => float = "Math.abs"
+@val
+external abs: float => float = "Math.abs"
 
 /**
 `acos(v)` returns arccosine (in radians) of argument `v`, returns `NaN` if the
@@ -294,7 +304,8 @@ Math.acos(-1) // 3.141592653589793
 Math.acos(-3)->Float.isNaN // true
 ```
 */
-@val external acos: float => float = "Math.acos"
+@val
+external acos: float => float = "Math.acos"
 
 /**
 `acosh(v)` returns the inverse hyperbolic arccosine (in radians) of argument `v`,
@@ -308,7 +319,8 @@ Math.acosh(1) // 0.0
 Math.acosh(0.5)->Float.isNaN // true
 ```
 */
-@val external acosh: float => float = "Math.acosh"
+@val
+external acosh: float => float = "Math.acosh"
 
 /**
 `asin(v)` returns the inverse sine (in radians) of argument `v`, returns `NaN`
@@ -322,7 +334,8 @@ Math.asin(-1.0) // -1.5707963267948966
 Math.asin(-2.0)->Float.isNaN // true
 ```
 */
-@val external asin: float => float = "Math.asin"
+@val
+external asin: float => float = "Math.asin"
 
 /**
 `asinh(v)` returns the inverse hyperbolic sine of argument `v`.
@@ -335,7 +348,8 @@ Math.asinh(-1) // -0.881373587019543
 Math.asinh(-0) // -0.0
 ```
 */
-@val external asinh: float => float = "Math.asinh"
+@val
+external asinh: float => float = "Math.asinh"
 
 /**
 `atan(v)` returns the inverse tangent (in radians) of argument `v`.
@@ -349,7 +363,8 @@ Math.atan(0.0) // 0.0
 Math.atan(1) // 0.7853981633974483
 ```
 */
-@val external atan: float => float = "Math.atan"
+@val
+external atan: float => float = "Math.atan"
 
 /**
 `atanh(v)` returns the invert hyperbolic tangent of argument `v`. Returns `NaN`
@@ -367,7 +382,8 @@ Math.atanh(0.0) // 0.0
 Math.atanh(0.5) // 0.5493061443340548
 ```
 */
-@val external atanh: float => float = "Math.atanh"
+@val
+external atanh: float => float = "Math.atanh"
 
 /**
 `atan2(~x, ~y)` returns the angle (in radians) of the quotient `y /. x`. It is
@@ -383,7 +399,8 @@ Math.atan2(~x=90.0, ~y=15.0) // 1.4056476493802699
 Math.atan2(~x=15.0, ~y=90.0) // 0.16514867741462683
 ```
 */
-@val external atan2: (~x: float, ~y: float) => float = "Math.atan2"
+@val
+external atan2: (~x: float, ~y: float) => float = "Math.atan2"
 
 /**
 `cbrt(v)` returns the cube root of argument `v`.
@@ -397,7 +414,8 @@ Math.cbrt(-0.0) // -0.0
 Math.cbrt(0.0) // 0.0
 ```
 */
-@val external cbrt: float => float = "Math.cbrt"
+@val
+external cbrt: float => float = "Math.cbrt"
 
 /**
 `ceil(v)` returns the smallest integral value greater than or equal to the
@@ -414,7 +432,8 @@ Math.ceil(-3.1) == -3.0
 Math.ceil(2_150_000_000.3) == 2_150_000_001.0
 ```
 */
-@val external ceil: float => float = "Math.ceil"
+@val
+external ceil: float => float = "Math.ceil"
 
 /**
 `cos(v)` returns the cosine of argument `v`, which must be specified in radians.
@@ -428,7 +447,8 @@ Math.cos(0.0) // 1.0
 Math.cos(1.0) // 0.5403023058681398
 ```
 */
-@val external cos: float => float = "Math.cos"
+@val
+external cos: float => float = "Math.cos"
 
 /**
 `cosh(v)` returns the hyperbolic cosine of argument `v`, which must be specified
@@ -443,7 +463,8 @@ Math.cosh(-0.0) // 1.0
 Math.cosh(0.0) // 1.0
 ```
 */
-@val external cosh: float => float = "Math.cosh"
+@val
+external cosh: float => float = "Math.cosh"
 
 /**
 `exp(v)` returns natural exponentional, returns *e* (the base of natural logarithms)
@@ -457,7 +478,8 @@ Math.exp(-1.0) // 0.36787944117144233
 Math.exp(0.0) // 1.0
 ```
 */
-@val external exp: float => float = "Math.exp"
+@val
+external exp: float => float = "Math.exp"
 
 /**
 `expm1(v)` returns *e* (the base of natural logarithms) to the power of the given
@@ -471,7 +493,8 @@ Math.expm1(-1.0) // -0.6321205588285577
 Math.expm1(-0.0) // -0
 ```
 */
-@val external expm1: float => float = "Math.expm1"
+@val
+external expm1: float => float = "Math.expm1"
 
 /**
 `floor(v)` returns the largest integral value less than or equal to the argument
@@ -486,7 +509,8 @@ Math.floor(-45.05) // -46.0
 Math.floor(-0.0) // -0.0
 ```
 */
-@val external floor: float => float = "Math.floor"
+@val
+external floor: float => float = "Math.floor"
 
 /**
 `fround(v)` returns the nearest single precision float.
@@ -499,7 +523,8 @@ Math.fround(5.5) == 5.5
 Math.fround(5.05) == 5.050000190734863
 ```
 */
-@val external fround: float => float = "Math.fround"
+@val
+external fround: float => float = "Math.fround"
 
 /**
 `hypot(a, b)` returns the square root of the sum of squares of its two arguments
@@ -513,7 +538,8 @@ Math.hypot(3.0, 4.0) // 5.0
 Math.hypot(3.0, 5.0) // 5.8309518948453
 ```
 */
-@val external hypot: (float, float) => float = "Math.hypot"
+@val
+external hypot: (float, float) => float = "Math.hypot"
 
 /**
 `hypotMany(arr)` returns the square root of the sum of squares of the numbers in
@@ -528,7 +554,9 @@ Math.hypot([3.0, 4.0, 5.0]) // 7.0710678118654755
 Math.hypot([]) // 0.0
 ```
 */
-@variadic @val external hypotMany: array<float> => float = "Math.hypot"
+@variadic
+@val
+external hypotMany: array<float> => float = "Math.hypot"
 
 /**
 `log(v)` returns the natural logarithm of argument `v`, this is the number *x*
@@ -545,7 +573,8 @@ Math.log(0.0)->Float.isFinite // false
 Math.log(1.0) // 0
 ```
 */
-@val external log: float => float = "Math.log"
+@val
+external log: float => float = "Math.log"
 
 /**
 `log1p(v)` returns the natural logarithm of one plus the argument `v`.
@@ -560,7 +589,8 @@ Math.log1p(-1.0)->Float.isFinite // false
 Math.log1p(-0.0) // -0
 ```
 */
-@val external log1p: float => float = "Math.log1p"
+@val
+external log1p: float => float = "Math.log1p"
 
 /**
 `log10(v)` returns the base 10 logarithm of argument `v`. Returns `NaN` for
@@ -576,7 +606,8 @@ Math.log10(0.0)->Float.isFinite // false
 Math.log10(1.0) // 0
 ```
 */
-@val external log10: float => float = "Math.log10"
+@val
+external log10: float => float = "Math.log10"
 
 /**
 `log2(v)` returns the base 2 logarithm of argument `v`. Returns `NaN` for
@@ -592,7 +623,8 @@ Math.log2(0.0)->Float.isFinite // false
 Math.log2(1.0) // 0.0
 ```
 */
-@val external log2: float => float = "Math.log2"
+@val
+external log2: float => float = "Math.log2"
 
 /**
 `min(a, b)` returns the minimum of its two float arguments.
@@ -605,7 +637,8 @@ Math.min(1.0, 2.0) // 1.0
 Math.min(-1.0, -2.0) // -2.0
 ```
 */
-@val external min: (float, float) => float = "Math.min"
+@val
+external min: (float, float) => float = "Math.min"
 
 /**
 `minMany(arr)` returns the minimum of the float in the given array `arr`.
@@ -620,7 +653,9 @@ Math.minMany([-1.0, -2.0]) // -2.0
 Math.minMany([])->Float.isFinite // false
 ```
 */
-@variadic @val external minMany: array<float> => float = "Math.min"
+@variadic
+@val
+external minMany: array<float> => float = "Math.min"
 
 /**
 `max(a, b)` returns the maximum of its two float arguments.
@@ -633,7 +668,8 @@ Math.max(1.0, 2.0) // 2.0
 Math.max(-1.0, -2.0) // -1.0
 ```
 */
-@val external max: (float, float) => float = "Math.max"
+@val
+external max: (float, float) => float = "Math.max"
 
 /**
 `maxMany(arr)` returns the maximum of the float in the given array `arr`.
@@ -648,7 +684,9 @@ Math.maxMany([-1.0, -2.0]) // -1.0
 Math.maxMany([])->Float.isFinite // false
 ```
 */
-@variadic @val external maxMany: array<float> => float = "Math.max"
+@variadic
+@val
+external maxMany: array<float> => float = "Math.max"
 
 /**
 `pow(a, ~exp)` raises the given base `a` to the given exponent `exp`.
@@ -661,7 +699,8 @@ Math.pow(2.0, ~exp=4.0) // 16.0
 Math.pow(3.0, ~exp=4.0) // 81.0
 ```
 */
-@val external pow: (float, ~exp: float) => float = "Math.pow"
+@val
+external pow: (float, ~exp: float) => float = "Math.pow"
 
 /**
 `random()` returns a random number in the half-closed interval [0,1].
@@ -673,7 +712,8 @@ See [`Math.random`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 Math.random()
 ```
 */
-@val external random: unit => float = "Math.random"
+@val
+external random: unit => float = "Math.random"
 
 /**
 `round(v)` returns then value of `v` rounded to nearest integral value
@@ -691,7 +731,8 @@ Math.round(0.0) // 0.0
 Math.round(-0.0) // -0.0
 ```
 */
-@val external round: float => float = "Math.round"
+@val
+external round: float => float = "Math.round"
 
 /**
 `sign(v)` returns the sign of its foat argument: `-1` if negative, `0` if
@@ -706,7 +747,8 @@ Math.sign(-3.0) // 1.0
 Math.sign(0.0) // 0.0
 ```
 */
-@val external sign: float => float = "Math.sign"
+@val
+external sign: float => float = "Math.sign"
 
 /**
 `sin(v)` returns the sine of argument `v`, which must be specified in radians.
@@ -720,7 +762,8 @@ Math.sin(0.0) // 0.0
 Math.sin(1.0) // 0.8414709848078965
 ```
 */
-@val external sin: float => float = "Math.sin"
+@val
+external sin: float => float = "Math.sin"
 
 /**
 `sinh(v)` returns then hyperbolic sine of argument `v`, which must be specified
@@ -735,7 +778,8 @@ Math.sinh(0.0) // 0.0
 Math.sinh(1.0) // 1.1752011936438014
 ```
 */
-@val external sinh: float => float = "Math.sinh"
+@val
+external sinh: float => float = "Math.sinh"
 
 /**
 `sqrt(v)` returns the square root of `v`. If `v` is negative returns `NaN`.
@@ -751,7 +795,8 @@ Math.sqrt(1.0) // 1.0
 Math.sqrt(9.0) // 3.0
 ```
 */
-@val external sqrt: float => float = "Math.sqrt"
+@val
+external sqrt: float => float = "Math.sqrt"
 
 /**
 `tan(v)` returns the tangent of argument `v`, which must be specified in
@@ -766,7 +811,8 @@ Math.tan(0.0) // 0.0
 Math.tan(1.0) // 1.5574077246549023
 ```
 */
-@val external tan: float => float = "Math.tan"
+@val
+external tan: float => float = "Math.tan"
 
 /**
 `tanh(v)` returns the hyperbolic tangent of argument `v`, which must be
@@ -781,7 +827,8 @@ Math.tanh(0.0) // 0.0
 Math.tanh(1.0) // 0.7615941559557649
 ```
 */
-@val external tanh: float => float = "Math.tanh"
+@val
+external tanh: float => float = "Math.tanh"
 
 /**
 `trunc(v)` truncates the argument `v`, i.e., removes fractional digits.
@@ -796,4 +843,5 @@ Math.trunc(13.37) // 13.0
 Math.trunc(42.84) // 42.0
 ```
 */
-@val external trunc: float => float = "Math.trunc"
+@val
+external trunc: float => float = "Math.trunc"
