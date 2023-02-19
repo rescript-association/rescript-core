@@ -4,21 +4,21 @@ import * as Curry from "rescript/lib/es6/curry.js";
 import * as Js_math from "rescript/lib/es6/js_math.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 
-function make(len, x) {
-  if (len <= 0) {
+function make(length, x) {
+  if (length <= 0) {
     return [];
   }
-  var arr = new Array(len);
+  var arr = new Array(length);
   arr.fill(x);
   return arr;
 }
 
-function init(len, f) {
-  if (len <= 0) {
+function init(length, f) {
+  if (length <= 0) {
     return [];
   }
-  var arr = new Array(len);
-  for(var i = 0; i < len; ++i){
+  var arr = new Array(length);
+  for(var i = 0; i < length; ++i){
     arr[i] = Curry._1(f, i);
   }
   return arr;

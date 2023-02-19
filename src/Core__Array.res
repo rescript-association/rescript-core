@@ -19,21 +19,21 @@ external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b>
 
 @send external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
 
-let make = (len, x) =>
-  if len <= 0 {
+let make = (~length, x) =>
+  if length <= 0 {
     []
   } else {
-    let arr = makeUninitializedUnsafe(len)
+    let arr = makeUninitializedUnsafe(length)
     arr->fillAllInPlace(x)
     arr
   }
 
-let init = (len, f) =>
-  if len <= 0 {
+let init = (~length, f) =>
+  if length <= 0 {
     []
   } else {
-    let arr = makeUninitializedUnsafe(len)
-    for i in 0 to len - 1 {
+    let arr = makeUninitializedUnsafe(length)
+    for i in 0 to length - 1 {
       arr->setUnsafe(i, f(i))
     }
     arr
