@@ -8,7 +8,6 @@ import * as Core__Array from "../src/Core__Array.mjs";
 import * as Core__Float from "../src/Core__Float.mjs";
 import * as Core__BigInt from "../src/Core__BigInt.mjs";
 import * as Core__Option from "../src/Core__Option.mjs";
-import * as Core__Undefined from "../src/Core__Undefined.mjs";
 
 console.info("");
 
@@ -311,8 +310,6 @@ var resolvedOptions = new Intl.DateTimeFormat().resolvedOptions();
 
 var timeZone = resolvedOptions.timeZone;
 
-var x$1 = Core__Undefined.fromOption(1);
-
 var z = 1.2 % 1.4;
 
 var intFromBigInt = Core__BigInt.toInt(BigInt("10000000000"));
@@ -350,11 +347,11 @@ export {
   result$1 as result,
   set ,
   regexp ,
+  x ,
   array$1 as array,
   timeout ,
   resolvedOptions ,
   timeZone ,
-  x$1 as x,
   z ,
   intFromBigInt ,
   Bugfix ,
