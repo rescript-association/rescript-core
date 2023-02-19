@@ -8,7 +8,7 @@ type t<'a>
 
 @send external clear: t<'a> => unit = "clear"
 
-@send external add: (t<'a>, 'a) => t<'a> = "add"
+@send external add: (t<'a>, 'a) => unit = "add"
 @send external delete: (t<'a>, 'a) => bool = "delete"
 @send external has: (t<'a>, 'a) => bool = "has"
 
