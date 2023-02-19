@@ -1,10 +1,12 @@
 /***
 Functions for interacting with JavaScript console.
+
 See: [`console`](https://developer.mozilla.org/en-US/docs/Web/API/Console).
 */
 
 /**
 `assert_(assertion, value)` print a message to console if `assertion` evaluates `false`. Does nothing if it's `true`.
+
 See [`console.assert`](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
 on MDN.
 
@@ -99,6 +101,7 @@ external assertMany: (bool, array<_>) => unit = "console.assert"
 
 /**
 `clear()` clears the console, if allowed.
+
 See [`console.clear`](https://developer.mozilla.org/en-US/docs/Web/API/console/clear)
 on MDN.
 
@@ -113,6 +116,7 @@ external clear: unit => unit = "console.clear"
 
 /**
 `count(label)` prints to the console the number of times it's been called with the given label.
+
 See [`console.count`](https://developer.mozilla.org/en-US/docs/Web/API/console/count)
 on MDN.
 
@@ -127,6 +131,7 @@ external count: string => unit = "console.count"
 
 /**
 `countReset(label)` resets the count for the given label to 0.
+
 See [`console.countReset`](https://developer.mozilla.org/en-US/docs/Web/API/console/countReset)
 on MDN.
 
@@ -141,6 +146,7 @@ external countReset: string => unit = "console.countReset"
 
 /**
 `debug(value)` print a debug message to console.
+
 See [`console.debug`](https://developer.mozilla.org/en-US/docs/Web/API/console/debug)
 on MDN.
 
@@ -236,6 +242,7 @@ external debugMany: array<_> => unit = "console.debug"
 
 /**
 `dir(object)` displays an interactive view of the object in the console.
+
 See [`console.dir`](https://developer.mozilla.org/en-US/docs/Web/API/console/dir)
 on MDN.
 
@@ -250,6 +257,7 @@ external dir: 'a => unit = "console.dir"
 
 /**
 `dirxml(object)` displays an interactive tree view of an XML/HTML element in the console.
+
 See [`console.dirxml`](https://developer.mozilla.org/en-US/docs/Web/API/console/dirxml)
 on MDN.
 */
@@ -258,6 +266,7 @@ external dirxml: 'a => unit = "console.dirxml"
 
 /**
 `error(value)` prints an error message to console.
+
 See [`console.error`](https://developer.mozilla.org/en-US/docs/Web/API/console/error)
 on MDN.
 
@@ -390,6 +399,7 @@ external errorMany: array<_> => unit = "console.error"
 
 /**
 `info(value)` print an informational message to console.
+
 See [`console.info`](https://developer.mozilla.org/en-US/docs/Web/API/console/info)
 on MDN.
 
@@ -484,6 +494,7 @@ external infoMany: array<_> => unit = "console.info"
 
 /**
 `log(value)` print a message to console.
+
 See [`console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
 on MDN.
 
@@ -579,6 +590,7 @@ external logMany: array<_> => unit = "console.log"
 
 /**
 `table(object)` displays an tabular view of the object in the console.
+
 See [`console.table`](https://developer.mozilla.org/en-US/docs/Web/API/console/table)
 on MDN.
 
@@ -595,6 +607,7 @@ external table: 'a => unit = "console.table"
 `time(label)` creates a timer to measure how long an operation takes. `label`
 must be a unique name. Call `console.timeEnd` with the same `label` to print
 output time.
+
 See [`console.time`](https://developer.mozilla.org/en-US/docs/Web/API/console/time)
 on MDN.
 
@@ -614,6 +627,7 @@ external time: string => unit = "console.time"
 
 /**
 `timeEnd(label)` stops a timer created by `time`.
+
 See [`console.timeEnd`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd)
 on MDN.
 
@@ -633,6 +647,7 @@ external timeEnd: string => unit = "console.timeEnd"
 
 /**
 `timeLog(label)` prints the current elapsed time of the given timer to the console.
+
 See [`console.timeLog`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeLog)
 on MDN.
 
@@ -652,6 +667,7 @@ external timeLog: string => unit = "console.timeLog"
 
 /**
 `trace()` print a stack trace to console.
+
 See [`console.trace`](https://developer.mozilla.org/en-US/docs/Web/API/console/trace)
 on MDN.
 
@@ -672,6 +688,7 @@ external trace: unit => unit = "console.trace"
 
 /**
 `warn(value)` print a warning message to console.
+
 See [`console.warn`](https://developer.mozilla.org/en-US/docs/Web/API/console/warn)
 on MDN.
 
