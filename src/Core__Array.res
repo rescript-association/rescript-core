@@ -28,7 +28,7 @@ let make = (~length, x) =>
     arr
   }
 
-let init = (~length, f) =>
+let fromInitializer = (~length, f) =>
   if length <= 0 {
     []
   } else {

@@ -13,7 +13,7 @@ function make(length, x) {
   return arr;
 }
 
-function init(length, f) {
+function fromInitializer(length, f) {
   if (length <= 0) {
     return [];
   }
@@ -151,7 +151,7 @@ function findMap(arr, f) {
 
 export {
   make ,
-  init ,
+  fromInitializer ,
   sort ,
   indexOfOpt ,
   lastIndexOfOpt ,

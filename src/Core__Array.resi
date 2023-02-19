@@ -6,7 +6,7 @@ external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b>
 @val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
 @val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
 let make: (~length: int, 'a) => array<'a>
-let init: (~length: int, int => 'a) => array<'a>
+let fromInitializer: (~length: int, int => 'a) => array<'a>
 @val external isArray: 'a => bool = "Array.isArray"
 @get external length: array<'a> => int = "length"
 @send external copyAllWithin: (array<'a>, ~target: int) => array<'a> = "copyWithin"
