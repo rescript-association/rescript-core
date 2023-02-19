@@ -337,6 +337,44 @@ Console.error6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
 external error6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.error"
 
 /**
+`group(label)` creates a new "group" level with the given label.
+
+See [`Console.group`](https://developer.mozilla.org/en-US/docs/Web/API/console/group)
+on MDN.
+
+## Example
+
+```rescript
+Console.group("first group")
+Console.group("second group")
+Console.log("a message on the second level")
+Console.groupEnd()
+Console.log("a message message on the first level")
+Console.groupEnd()
+```
+*/
+@val
+external group: string => unit = "console.group"
+
+/**
+`groupCollapsed(label)`. Like `group` but collapses the group initially.
+
+See [`Console.groupCollapsed`](https://developer.mozilla.org/en-US/docs/Web/API/console/groupCollapsed)
+on MDN.
+*/
+@val
+external groupCollapsed: string => unit = "console.groupCollapsed"
+
+/**
+`groupEnd()` ends the current group.
+
+See [`Console.groupEnd`](https://developer.mozilla.org/en-US/docs/Web/API/console/groupEnd)
+on MDN.
+*/
+@val
+external groupEnd: unit => unit = "console.groupEnd"
+
+/**
 `errorMany(arr)`. Like `error`, but variadic.
 
 ## Examples

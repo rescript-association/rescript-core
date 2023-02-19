@@ -30,6 +30,10 @@
 @val external error6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.error"
 @val @variadic external errorMany: array<_> => unit = "console.error"
 
+@val external group: string => unit = "console.group"
+@val external groupCollapsed: string => unit = "console.groupCollapsed"
+@val external groupEnd: unit => unit = "console.groupEnd"
+
 @val external info: 'a => unit = "console.info"
 @val external info2: ('a, 'b) => unit = "console.info"
 @val external info3: ('a, 'b, 'c) => unit = "console.info"
