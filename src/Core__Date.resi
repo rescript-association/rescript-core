@@ -1,27 +1,44 @@
-type t = Js.Date.t
+/***
+  Functions for interacting with JavaScript Dates.
+*/
 
+type t = Js.Date.t
 type time = float
 
+/**
+A type representing date time format options.
+
+Note: There are some properties missing:
+- fractionalSecondDigits
+- dayPeriod
+- calendar
+- numberingSystem
+- localeMatcher
+- timeZone
+- hour12
+- hourCycle
+- formatMatcher
+
+See full spec at https://tc39.es/ecma402/#datetimeformat-objects
+*/
 type localeOptions = {
   dateStyle?: [#full | #long | #medium | #short],
   timeStyle?: [#full | #long | #medium | #short],
-  weekday?: [#long | #short | #narrow],
-  era?: [#long | #short | #narrow],
-  year?: [#numeric | #"2-digit"],
-  month?: [#numeric | #"2-digit" | #long | #short | #narrow],
-  day?: [#numeric | #"2-digit"],
-  hour?: [#numeric | #"2-digit"],
-  minute?: [#numeric | #"2-digit"],
-  second?: [#numeric | #"2-digit"],
+  weekday?: [#long | #narrow | #short],
+  era?: [#long | #narrow | #short],
+  year?: [#"2-digit" | #numeric],
+  month?: [#"2-digit" | #long | #narrow | #numeric | #short],
+  day?: [#"2-digit" | #numeric],
+  hour?: [#"2-digit" | #numeric],
+  minute?: [#"2-digit" | #numeric],
+  second?: [#"2-digit" | #numeric],
   timeZoneName?: [#long | #short],
 }
 
 @send external valueOf: t => time = "valueOf"
-
 @new external make: unit => t = "Date"
 @new external fromString: string => t = "Date"
 @new external fromTime: time => t = "Date"
-
 @new external makeWithYM: (~year: int, ~month: int) => t = "Date"
 @new external makeWithYMD: (~year: int, ~month: int, ~date: int) => t = "Date"
 @new external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => t = "Date"
@@ -47,8 +64,7 @@ external makeWithYMDHMSM: (
   ~seconds: int,
   ~milliseconds: int,
 ) => t = "Date"
-
-module UTC = {
+module UTC: {
   @val external makeWithYM: (~year: int, ~month: int) => time = "Date.UTC"
   @val external makeWithYMD: (~year: int, ~month: int, ~date: int) => time = "Date.UTC"
   @val
@@ -81,13 +97,9 @@ module UTC = {
     ~milliseconds: int,
   ) => time = "Date.UTC"
 }
-
 @val external now: unit => time = "Date.now"
-
 @send external getTime: t => time = "getTime"
 @send external getTimezoneOffset: t => int = "getTimezoneOffset"
-
-// Locale
 @send external getFullYear: t => int = "getFullYear"
 @send external getMonth: t => int = "getMonth"
 @send external getDate: t => int = "getDate"
@@ -96,7 +108,6 @@ module UTC = {
 @send external getSeconds: t => int = "getSeconds"
 @send external getMilliseconds: t => int = "getMilliseconds"
 @send external getDay: t => int = "getDay"
-
 @send external setFullYear: (t, int) => unit = "setFullYear"
 @send external setFullYearM: (t, ~year: int, ~month: int) => unit = "setFullYear"
 @send external setFullYearMD: (t, ~year: int, ~month: int, ~date: int) => unit = "setFullYear"
@@ -116,8 +127,6 @@ external setMinutesSMs: (t, ~minutes: int, ~seconds: int, ~milliseconds: int) =>
 @send external setSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setSeconds"
 @send external setMilliseconds: (t, int) => unit = "setMilliseconds"
 @send external setDay: (t, int) => unit = "setDay"
-
-// UTC
 @send external getUTCFullYear: t => int = "getUTCFullYear"
 @send external getUTCMonth: t => int = "getUTCMonth"
 @send external getUTCDate: t => int = "getUTCDate"
@@ -126,7 +135,6 @@ external setMinutesSMs: (t, ~minutes: int, ~seconds: int, ~milliseconds: int) =>
 @send external getUTCSeconds: t => int = "getUTCSeconds"
 @send external getUTCMilliseconds: t => int = "getUTCMilliseconds"
 @send external getUTCDay: t => int = "getUTCDay"
-
 @send external setUTCFullYear: (t, int) => unit = "setUTCFullYear"
 @send external setUTCFullYearM: (t, ~year: int, ~month: int) => unit = "setUTCFullYear"
 @send
@@ -154,22 +162,146 @@ external setUTCMinutesSMs: (t, ~minutes: int, ~seconds: int, ~milliseconds: int)
 @send external setUTCSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setUTCSeconds"
 @send external setUTCMilliseconds: (t, int) => unit = "setUTCMilliseconds"
 @send external setUTCDay: (t, int) => unit = "setUTCDay"
-
 @send external toDateString: t => string = "toDateString"
 @send external toString: t => string = "toString"
 @send external toTimeString: t => string = "toTimeString"
 
-@send external toLocaleDateString: t => string = "toLocaleDateString"
-@send external toLocaleDateStringWithLocale: (t, string) => string = "toLocaleDateString"
+/** 
+`toLocaleDateString(date)`
+
+Converts a JavaScript date to a localized date string. It will use the current locale.
+
+## Examples
+```rescript
+Date.make()->Date.toLocaleDateString->Console.log
+// 2/19/2023
+```
+*/
+@send
+external toLocaleDateString: t => string = "toLocaleDateString"
+
+/** 
+`toLocaleDateStringWithLocale(date, locale)`
+
+Converts a JavaScript date to a localized date string. It will use the specified locale.
+
+## Examples
+```rescript
+Date.make()->Date.toLocaleDateStringWithLocale("en-US")->Console.log
+// 2/19/2023
+```
+*/
+@send
+external toLocaleDateStringWithLocale: (t, string) => string = "toLocaleDateString"
+
+/** 
+`toLocaleDateStringWithLocaleAndOptions(date, locale, options)`
+
+Converts a JavaScript date to a localized date string. It will use the specified locale and formatting options.
+
+## Examples
+```rescript
+Date.make()->Date.toLocaleDateStringWithLocaleAndOptions("en-US", { dateStyle: #long })->Console.log
+// February 19, 2023
+
+Date.make()->Date.toLocaleDateStringWithLocaleAndOptions("de", { hour: #"2-digit", minute: #"2-digit" })->Console.log
+// 19.2.2023, 15:40
+
+Date.make()->Date.toLocaleDateStringWithLocaleAndOptions("de", { year: #numeric })->Console.log
+// 2023
+```
+*/
 @send
 external toLocaleDateStringWithLocaleAndOptions: (t, string, localeOptions) => string =
   "toLocaleDateString"
-@send external toLocaleString: t => string = "toLocaleString"
-@send external toLocaleStringWithLocale: (t, string) => string = "toLocaleString"
+
+/** 
+`toLocaleString(date)`
+
+Converts a JavaScript date to a localized date-time string. It will use the current locale.
+
+## Examples
+```rescript
+Date.make()->Date.toLocaleString->Console.log
+// 2/19/2023, 3:40:00 PM
+```
+*/
+@send
+external toLocaleString: t => string = "toLocaleString"
+
+/** 
+`toLocaleStringWithLocale(date, locale)`
+
+Converts a JavaScript date to a localized date-time string. It will use the specified locale.
+
+## Examples
+```rescript
+Date.make()->Date.toLocaleStringWithLocale("en-US")->Console.log
+// 2/19/2023, 3:40:00 PM
+```
+*/
+@send
+external toLocaleStringWithLocale: (t, string) => string = "toLocaleString"
+
+/** 
+`toLocaleStringWithLocaleAndOptions(date, locale, options)`
+
+Converts a JavaScript date to a localized date-time string. It will use the specified locale and formatting options.
+
+## Examples
+```rescript
+Date.make()->Date.toLocaleStringWithLocaleAndOptions("en", { dateStyle: #short, timeStyle: #short })->Console.log
+// 2/19/23, 3:40 PM
+
+Date.make()->Date.toLocaleStringWithLocaleAndOptions("en", { era: #long, year: #numeric, month: #"2-digit", day: #"2-digit", hour: #numeric, timeZoneName: #short })->Console.log
+// 02/19/2023 Anno Domini, 3 PM GMT+1
+```
+*/
 @send
 external toLocaleStringWithLocaleAndOptions: (t, string, localeOptions) => string = "toLocaleString"
-@send external toLocaleTimeString: t => string = "toLocaleTimeString"
-@send external toLocaleTimeStringWithLocale: (t, string) => string = "toLocaleTimeString"
+
+/** 
+`toLocaleTimeString(date)`
+
+Converts a JavaScript date to a localized time string. It will use the current locale.
+
+## Examples
+```rescript
+Date.make()->Date.toLocaleTimeString->Console.log
+// 3:40:00 PM
+```
+*/
+@send
+external toLocaleTimeString: t => string = "toLocaleTimeString"
+
+/** 
+`toLocaleTimeStringWithLocale(date, locale)`
+
+Converts a JavaScript date to a localized time string. It will use the specified locale.
+
+## Examples
+```rescript
+Date.make()->Date.toLocaleTimeStringWithLocale("en-US")->Console.log
+// 3:40:00 PM
+```
+*/
+@send
+external toLocaleTimeStringWithLocale: (t, string) => string = "toLocaleTimeString"
+
+/** 
+`toLocaleTimeStringWithLocaleAndOptions(date, locale, options)`
+
+Converts a JavaScript date to a localized time string. It will use the specified locale and formatting options.
+
+## Examples
+```rescript
+Date.make()->Date.toLocaleTimeStringWithLocaleAndOptions("en-US", { timeStyle: #long })->Console.log
+// 3:40:00 PM GMT+1
+
+Date.make()->Date.toLocaleTimeStringWithLocaleAndOptions("de", { hour: #"2-digit", minute: #"2-digit" })->Console.log
+// 15:40
+```
+*/
 @send
 external toLocaleTimeStringWithLocaleAndOptions: (t, string, localeOptions) => string =
   "toLocaleTimeString"
