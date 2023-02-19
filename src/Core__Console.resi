@@ -249,6 +249,14 @@ Console.dir({"language": "rescript", "version": 10.1.2})
 external dir: 'a => unit = "console.dir"
 
 /**
+`dirxml(object)` displays an interactive tree view of an XML/HTML element in the console.
+See [`Console.dirxml`](https://developer.mozilla.org/en-US/docs/Web/API/console/dirxml)
+on MDN.
+*/
+@val
+external dirxml: 'a => unit = "console.dirxml"
+
+/**
 `log(value)` print a message to console.
 See [`Console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
 on MDN.

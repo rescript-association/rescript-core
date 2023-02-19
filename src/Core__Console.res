@@ -20,6 +20,7 @@
 @val @variadic external debugMany: array<_> => unit = "console.debug"
 
 @val external dir: 'a => unit = "console.dir"
+@val external dirxml: 'a => unit = "console.dirxml"
 
 @val external log: 'a => unit = "console.log"
 @val external log2: ('a, 'b) => unit = "console.log"
