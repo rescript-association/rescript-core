@@ -2,9 +2,9 @@
 @val external fromWithMap: ('a, 'b => 'c) => array<'c> = "Array.from"
 @val external fromArrayLike: Js.Array2.array_like<'a> => array<'a> = "Array.from"
 @val
-external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'a> = "Array.from"
+external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b> = "Array.from"
 @val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
-@val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'c) => array<'a> = "Array.from"
+@val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
 @val external isArray: 'a => bool = "Array.isArray"
 @get external length: array<'a> => int = "length"
 @send external copyAllWithin: (array<'a>, ~target: int) => array<'a> = "copyWithin"
@@ -103,3 +103,21 @@ let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
 let shuffle: array<'a> => array<'a>
 let shuffleInPlace: array<'a> => unit
 let flatMap: (array<'a>, 'a => array<'b>) => array<'b>
+
+
+/** 
+  `at(array, index)`
+
+  Get an element by its index. Negative indices count backwards from the last item.
+
+  ## Examples
+  ```rescript
+  ["a", "b", "c"]->Array.at(0) // Some("a")
+  ["a", "b", "c"]->Array.at(2) // Some("c")
+  ["a", "b", "c"]->Array.at(3) // None
+  ["a", "b", "c"]->Array.at(-1) // Some("c")
+  ["a", "b", "c"]->Array.at(-3) // Some("a")
+  ["a", "b", "c"]->Array.at(-4) // None
+  ```
+*/
+@send external at: (array<'a>, int) => option<'a> = "at"

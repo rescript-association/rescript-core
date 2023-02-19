@@ -6,10 +6,10 @@ external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 
 @val external fromArrayLike: Js.Array2.array_like<'a> => array<'a> = "Array.from"
 @val
-external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'a> = "Array.from"
+external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b> = "Array.from"
 
 @val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
-@val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'c) => array<'a> = "Array.from"
+@val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
 
 @val external isArray: 'a => bool = "Array.isArray"
 
@@ -196,3 +196,5 @@ let filterMap = (a, f) => filterMapU(a, (. a) => f(a))
 
 // TODO: Change this implementation?
 let flatMap = (a, f) => []->concatMany(map(a, f))
+
+@send external at: (array<'a>, int) => option<'a> = "at"
