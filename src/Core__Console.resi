@@ -1,11 +1,11 @@
 /***
 Functions for interacting with JavaScript console.
-See: [`Console`](https://developer.mozilla.org/en-US/docs/Web/API/Console).
+See: [`console`](https://developer.mozilla.org/en-US/docs/Web/API/Console).
 */
 
 /**
 `assert_(assertion, value)` print a message to console if `assertion` evaluates `false`. Does nothing if it's `true`.
-See [`Console.assert`](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
+See [`console.assert`](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
 on MDN.
 
 ## Examples
@@ -99,7 +99,7 @@ external assertMany: (bool, array<_>) => unit = "console.assert"
 
 /**
 `clear()` clears the console, if allowed.
-See [`Console.clear`](https://developer.mozilla.org/en-US/docs/Web/API/console/clear)
+See [`console.clear`](https://developer.mozilla.org/en-US/docs/Web/API/console/clear)
 on MDN.
 
 ## Examples
@@ -113,7 +113,7 @@ external clear: unit => unit = "console.clear"
 
 /**
 `count(label)` prints to the console the number of times it's been called with the given label.
-See [`Console.count`](https://developer.mozilla.org/en-US/docs/Web/API/console/count)
+See [`console.count`](https://developer.mozilla.org/en-US/docs/Web/API/console/count)
 on MDN.
 
 ## Examples
@@ -127,7 +127,7 @@ external count: string => unit = "console.count"
 
 /**
 `countReset(label)` resets the count for the given label to 0.
-See [`Console.countReset`](https://developer.mozilla.org/en-US/docs/Web/API/console/countReset)
+See [`console.countReset`](https://developer.mozilla.org/en-US/docs/Web/API/console/countReset)
 on MDN.
 
 ## Examples
@@ -141,7 +141,7 @@ external countReset: string => unit = "console.countReset"
 
 /**
 `debug(value)` print a debug message to console.
-See [`Console.debug`](https://developer.mozilla.org/en-US/docs/Web/API/console/debug)
+See [`console.debug`](https://developer.mozilla.org/en-US/docs/Web/API/console/debug)
 on MDN.
 
 ## Examples
@@ -236,7 +236,7 @@ external debugMany: array<_> => unit = "console.debug"
 
 /**
 `dir(object)` displays an interactive view of the object in the console.
-See [`Console.dir`](https://developer.mozilla.org/en-US/docs/Web/API/console/dir)
+See [`console.dir`](https://developer.mozilla.org/en-US/docs/Web/API/console/dir)
 on MDN.
 
 ## Examples
@@ -250,7 +250,7 @@ external dir: 'a => unit = "console.dir"
 
 /**
 `dirxml(object)` displays an interactive tree view of an XML/HTML element in the console.
-See [`Console.dirxml`](https://developer.mozilla.org/en-US/docs/Web/API/console/dirxml)
+See [`console.dirxml`](https://developer.mozilla.org/en-US/docs/Web/API/console/dirxml)
 on MDN.
 */
 @val
@@ -258,7 +258,7 @@ external dirxml: 'a => unit = "console.dirxml"
 
 /**
 `error(value)` prints an error message to console.
-See [`Console.error`](https://developer.mozilla.org/en-US/docs/Web/API/console/error)
+See [`console.error`](https://developer.mozilla.org/en-US/docs/Web/API/console/error)
 on MDN.
 
 ## Examples
@@ -339,7 +339,7 @@ external error6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.error"
 /**
 `group(label)` creates a new "group" level with the given label.
 
-See [`Console.group`](https://developer.mozilla.org/en-US/docs/Web/API/console/group)
+See [`console.group`](https://developer.mozilla.org/en-US/docs/Web/API/console/group)
 on MDN.
 
 ## Example
@@ -359,7 +359,7 @@ external group: string => unit = "console.group"
 /**
 `groupCollapsed(label)`. Like `group` but collapses the group initially.
 
-See [`Console.groupCollapsed`](https://developer.mozilla.org/en-US/docs/Web/API/console/groupCollapsed)
+See [`console.groupCollapsed`](https://developer.mozilla.org/en-US/docs/Web/API/console/groupCollapsed)
 on MDN.
 */
 @val
@@ -368,7 +368,7 @@ external groupCollapsed: string => unit = "console.groupCollapsed"
 /**
 `groupEnd()` ends the current group.
 
-See [`Console.groupEnd`](https://developer.mozilla.org/en-US/docs/Web/API/console/groupEnd)
+See [`console.groupEnd`](https://developer.mozilla.org/en-US/docs/Web/API/console/groupEnd)
 on MDN.
 */
 @val
@@ -390,7 +390,7 @@ external errorMany: array<_> => unit = "console.error"
 
 /**
 `info(value)` print an informational message to console.
-See [`Console.info`](https://developer.mozilla.org/en-US/docs/Web/API/console/info)
+See [`console.info`](https://developer.mozilla.org/en-US/docs/Web/API/console/info)
 on MDN.
 
 ## Examples
@@ -484,7 +484,7 @@ external infoMany: array<_> => unit = "console.info"
 
 /**
 `log(value)` print a message to console.
-See [`Console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
+See [`console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
 on MDN.
 
 ## Examples
@@ -579,7 +579,7 @@ external logMany: array<_> => unit = "console.log"
 
 /**
 `table(object)` displays an tabular view of the object in the console.
-See [`Console.table`](https://developer.mozilla.org/en-US/docs/Web/API/console/table)
+See [`console.table`](https://developer.mozilla.org/en-US/docs/Web/API/console/table)
 on MDN.
 
 ## Examples
@@ -593,9 +593,9 @@ external table: 'a => unit = "console.table"
 
 /**
 `time(label)` creates a timer to measure how long an operation takes. `label`
-must be a unique name. Call `Console.timeEnd` with the same `label` to print
+must be a unique name. Call `console.timeEnd` with the same `label` to print
 output time.
-See [`Console.time`](https://developer.mozilla.org/en-US/docs/Web/API/console/time)
+See [`console.time`](https://developer.mozilla.org/en-US/docs/Web/API/console/time)
 on MDN.
 
 ## Examples
@@ -614,7 +614,7 @@ external time: string => unit = "console.time"
 
 /**
 `timeEnd(label)` stops a timer created by `time`.
-See [`Console.timeEnd`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd)
+See [`console.timeEnd`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd)
 on MDN.
 
 ## Examples
@@ -633,7 +633,7 @@ external timeEnd: string => unit = "console.timeEnd"
 
 /**
 `timeLog(label)` prints the current elapsed time of the given timer to the console.
-See [`Console.timeLog`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeLog)
+See [`console.timeLog`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeLog)
 on MDN.
 
 ## Examples
@@ -652,7 +652,7 @@ external timeLog: string => unit = "console.timeLog"
 
 /**
 `trace()` print a stack trace to console.
-See [`Console.trace`](https://developer.mozilla.org/en-US/docs/Web/API/console/trace)
+See [`console.trace`](https://developer.mozilla.org/en-US/docs/Web/API/console/trace)
 on MDN.
 
 ## Examples
@@ -672,7 +672,7 @@ external trace: unit => unit = "console.trace"
 
 /**
 `warn(value)` print a warning message to console.
-See [`Console.warn`](https://developer.mozilla.org/en-US/docs/Web/API/console/warn)
+See [`console.warn`](https://developer.mozilla.org/en-US/docs/Web/API/console/warn)
 on MDN.
 
 ## Examples
