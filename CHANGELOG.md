@@ -12,6 +12,7 @@
 - Fixed type signatures of `Array.fromArrayLikeWithMap` and `Array.fromIteratorWithMap`. https://github.com/rescript-association/rescript-core/pull/50
 - Remove internal async/await helpers that do not need to be exposed in `Core`.
 - Add locale and formatting options to `localeDateString`, `localeString` and `localTimeString` functions https://github.com/rescript-association/rescript-core/pull/30
+- Change `RegExp.source` to return a `string`. Was previously returning a `bool`, which is wrong. https://github.com/rescript-association/rescript-core/pull/47
 
 ### Documentation
 
@@ -22,3 +23,4 @@
 - Docstrings for `Type`. https://github.com/rescript-association/rescript-core/pull/32
 - Docstrings for `Int`. https://github.com/rescript-association/rescript-core/pull/37
 - Docstrings for `Dict`. https://github.com/rescript-association/rescript-core/pull/40
+- Docstrings for `RegExp`. https://github.com/rescript-association/rescript-core/pull/47
