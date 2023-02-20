@@ -9,10 +9,7 @@ external codeFrameColumns: (string, {..}, {..}) => string = "codeFrameColumns"
 @module("fs") @val external readFileSync: (string, {..}) => string = "readFileSync"
 @module("path") @val external join: (string, string) => string = "join"
 
-let dirname = switch %external(__dirname) {
-| None => ""
-| Some(dirname) => dirname
-}
+let dirname = %raw("new URL('.', import.meta.url).pathname")
 
 let cleanUpStackTrace = stack => {
   // Stack format: https://nodejs.org/api/errors.html#errors_error_stack
