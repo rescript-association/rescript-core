@@ -363,7 +363,7 @@ external toLocaleString: float => string = "toLocaleString"
 ```rescript
 Float.fromString("0") == Some(0.0)
 Float.fromString("NaN") == None
-Float.fromString("6") == None
+Float.fromString("6") == Some(6.0)
 ```
 */
 let fromString: 'a => option<float>
@@ -376,6 +376,8 @@ let fromString: 'a => option<float>
 ```rescript
 Float.toInt(2.0) == 2
 Float.toInt(1.0) == 1
+Float.toInt(1.1) == 1
+Float.toInt(1.6) == 1
 ```
 */
 external toInt: float => int = "%intoffloat"
@@ -387,7 +389,7 @@ external toInt: float => int = "%intoffloat"
 
 ```rescript
 Float.fromInt(2) == 2.0
-Float.toInt(1) == 1.0
+Float.fromInt(1) == 1.0
 ```
 */
 external fromInt: int => float = "%identity"
