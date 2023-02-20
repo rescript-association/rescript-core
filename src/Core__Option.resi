@@ -210,7 +210,7 @@ Option.orElse(None, Some(1066) == Some(1066)
 Option.orElse(None, None) == None
 ```
 */
-@deprecated
+@deprecated("Use `or` instead")
 let orElse: (option<'a>, option<'a>) => option<'a>
 
 /**
