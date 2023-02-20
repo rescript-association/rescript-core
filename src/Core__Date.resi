@@ -46,7 +46,7 @@ Returns the time in milliseconds between 1 January 1970 UTC and the given date.
 Invalid dates will return NaN.
 Dates before 1 January 1970 will return negative numbers.
 
-The function will return the same result as Date.getTime
+The function will return the same result as `Date.getTime`
 
 ## Examples
 ```rescript
@@ -185,23 +185,23 @@ external makeWithYMDHMSM: (
 ) => t = "Date"
 module UTC: {
   /** 
-  Same as Date.makeWithYM, but returns the time since 1 January 1970 in milliseconds.
+  Same as Date.makeWithYM, but returns the time since 1 January 1970 UTC in milliseconds.
   */
   @val external makeWithYM: (~year: int, ~month: int) => time = "Date.UTC"
 
   /** 
-  Same as Date.makeWithYMD, but returns the time since 1 January 1970 in milliseconds.
+  Same as Date.makeWithYMD, but returns the time since 1 January 1970 UTC in milliseconds.
   */
   @val external makeWithYMD: (~year: int, ~month: int, ~date: int) => time = "Date.UTC"
 
   /** 
-  Same as Date.makeWithYMDH, but returns the time since 1 January 1970 in milliseconds.
+  Same as Date.makeWithYMDH, but returns the time since 1 January 1970 UTC in milliseconds.
   */
   @val
   external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => time = "Date.UTC"
 
   /** 
-  Same as Date.makeWithYMDHM, but returns the time since 1 January 1970 in milliseconds.
+  Same as Date.makeWithYMDHM, but returns the time since 1 January 1970 UTC in milliseconds.
   */
   @val
   external makeWithYMDHM: (
@@ -213,7 +213,7 @@ module UTC: {
   ) => time = "Date.UTC"
 
   /** 
-  Same as Date.makeWithYMDHMS, but returns the time since 1 January 1970 in milliseconds.
+  Same as Date.makeWithYMDHMS, but returns the time since 1 January 1970 UTC in milliseconds.
   */
   @val
   external makeWithYMDHMS: (
@@ -226,7 +226,7 @@ module UTC: {
   ) => time = "Date.UTC"
 
   /** 
-  Same as Date.makeWithYMDHMSM, but returns the time since 1 January 1970 in milliseconds.
+  Same as Date.makeWithYMDHMSM, but returns the time since 1 January 1970 UTC in milliseconds.
   */
   @val
   external makeWithYMDHMSM: (
@@ -241,6 +241,8 @@ module UTC: {
 }
 
 /**
+`now()`
+
 Returns the time in milliseconds between 1 January 1970 UTC and the current date time.
 */
 @val external now: unit => time = "Date.now"
@@ -252,7 +254,7 @@ Returns the time in milliseconds between 1 January 1970 UTC and the given date.
 Invalid dates will return NaN.
 Dates before 1 January 1970 will return negative numbers.
 
-The function will return the same result as Date.valueOf
+The function will return the same result as `Date.valueOf`
 
 ## Examples
 ```rescript
@@ -261,52 +263,549 @@ Date.fromString("2023-02-20")->Date.getTime
 ```
 */
 @send external getTime: t => time = "getTime"
+
+/** 
+`getTimezoneOffset(date)`
+
+Returns the time in minutes between the UTC time and the locale time.
+The timezone of the given date doesn't matter.
+
+## Examples
+```rescript
+Date.fromString("2023-01-01")->Date.getTimezoneOffset
+// -60 with local time zone = Europe/Berlin
+
+Date.fromString("2023-06-01")->Date.getTimezoneOffset
+// -120 with local time zone = Europe/Berlin
+```
+*/
 @send external getTimezoneOffset: t => int = "getTimezoneOffset"
+
+/** 
+`getFullYear(date)`
+
+Returns the year of a given date (according to local time).
+
+## Examples
+```rescript
+Date.fromString("2023-02-20")->Date.getFullYear
+// 2023
+```
+*/
 @send external getFullYear: t => int = "getFullYear"
+
+/** 
+`getMonth(date)`
+
+Returns the month (0-indexed) of a given date (according to local time).
+
+## Examples
+```rescript
+Date.fromString("2023-01-01")->Date.getMonth
+// 0
+```
+*/
 @send external getMonth: t => int = "getMonth"
+
+/** 
+`getDate(date)`
+
+Returns the date (day of month) of a given date (according to local time).
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.getDate
+// 20
+```
+*/
 @send external getDate: t => int = "getDate"
+
+/** 
+`getHours(date)`
+
+Returns the hours of a given date (according to local time).
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.getHours
+// 16
+```
+*/
 @send external getHours: t => int = "getHours"
+
+/** 
+`getMinutes(date)`
+
+Returns the minutes of a given date (according to local time).
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.getMinutes
+// 40
+```
+*/
 @send external getMinutes: t => int = "getMinutes"
+
+/** 
+`getSeconds(date)`
+
+Returns the seconds of a given date (according to local time).
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.getSeconds
+// 0
+```
+*/
 @send external getSeconds: t => int = "getSeconds"
+
+/** 
+`getMilliseconds(date)`
+
+Returns the milliseconds of a given date (according to local time).
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.getMilliseconds
+// 0
+```
+*/
 @send external getMilliseconds: t => int = "getMilliseconds"
+
+/** 
+`getDay(date)`
+
+Returns the day of week of a given date (according to local time).
+0 = Sunday, 1 = Monday, ... 6 = Saturday
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.getDay
+// 1
+```
+*/
 @send external getDay: t => int = "getDay"
+
+/** 
+`setFullYear(date, year)`
+
+Sets the year of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setFullYear(2024)
+```
+*/
 @send external setFullYear: (t, int) => unit = "setFullYear"
+
+/** 
+`setFullYearM(date, ~year, ~month)`
+
+Sets the year and month of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setFullYearM(~year=2024, ~month=0)
+```
+*/
 @send external setFullYearM: (t, ~year: int, ~month: int) => unit = "setFullYear"
+
+/** 
+`setFullYearMD(date, ~year, ~month, ~date)`
+
+Sets the year, month and date (day of month) of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setFullYearMD(~year=2024, ~month=0, ~date=1)
+```
+*/
 @send external setFullYearMD: (t, ~year: int, ~month: int, ~date: int) => unit = "setFullYear"
+
+/** 
+`setMonth(date, month)`
+
+Sets the month of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setMonth(0)
+```
+*/
 @send external setMonth: (t, int) => unit = "setMonth"
+
+/** 
+`setDate(date, day)`
+
+Sets the date (day of month) of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setDate(1)
+```
+*/
 @send external setDate: (t, int) => unit = "setDate"
+
+/** 
+`setHours(date, hours)`
+
+Sets the hours of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setHours(0)
+```
+*/
 @send external setHours: (t, int) => unit = "setHours"
+
+/** 
+`setHoursM(date, ~hours, ~minutes)`
+
+Sets the hours and minutes of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setHoursM(~hours=0, ~minutes=0)
+```
+*/
 @send external setHoursM: (t, ~hours: int, ~minutes: int) => unit = "setHours"
+
+/** 
+`setHoursMS(date, ~hours, ~minutes, ~seconds)`
+
+Sets the hours, minutes and seconds of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setHoursMS(~hours=0, ~minutes=0, ~seconds=0)
+```
+*/
 @send external setHoursMS: (t, ~hours: int, ~minutes: int, ~seconds: int) => unit = "setHours"
+
+/** 
+`setHoursMSMs(date, ~hours, ~minutes, ~seconds, ~milliseconds)`
+
+Sets the hours, minutes, seconds and milliseconds of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setHoursMSMs(~hours=0, ~minutes=0, ~seconds=0, ~milliseconds=0)
+```
+*/
 @send
 external setHoursMSMs: (t, ~hours: int, ~minutes: int, ~seconds: int, ~milliseconds: int) => unit =
   "setHours"
+
+/** 
+`setMinutes(date, minutes)`
+
+Sets the minutes of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setMinutes(0)
+```
+*/
 @send external setMinutes: (t, int) => unit = "setMinutes"
+
+/** 
+`setMinutesS(date, ~minutes, ~seconds)`
+
+Sets the minutes and seconds of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setMinutesS(~minutes=0, ~seconds=0)
+```
+*/
 @send external setMinutesS: (t, ~minutes: int, ~seconds: int) => unit = "setMinutes"
+
+/** 
+`setMinutesSMs(date, ~minutes, ~seconds, ~milliseconds)`
+
+Sets the minutes, seconds and milliseconds of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setMinutesSMs(~minutes=0, ~seconds=0, ~milliseconds=0)
+```
+*/
 @send
 external setMinutesSMs: (t, ~minutes: int, ~seconds: int, ~milliseconds: int) => unit = "setMinutes"
+
+/** 
+`setSeconds(date, seconds)`
+
+Sets the seconds of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setSeconds(0)
+```
+*/
 @send external setSeconds: (t, int) => unit = "setSeconds"
+
+/** 
+`setSecondsMs(date, ~seconds, ~milliseconds)`
+
+Sets the seconds and milliseconds of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setSecondsMs(~seconds=0, ~milliseconds=0)
+```
+*/
 @send external setSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setSeconds"
+
+/** 
+`setMilliseconds(date, milliseconds)`
+
+Sets the milliseconds of a date (according to local time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setMilliseconds(0)
+```
+*/
 @send external setMilliseconds: (t, int) => unit = "setMilliseconds"
-@send external setDay: (t, int) => unit = "setDay"
+
+/** 
+`getUTCFullYear(date)`
+
+Returns the year of a given date (according to UTC time).
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCFullYear
+// 2022
+```
+*/
 @send external getUTCFullYear: t => int = "getUTCFullYear"
+
+/** 
+`getUTCMonth(date)`
+
+Returns the month of a given date (according to UTC time).
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCMonth
+// 11
+```
+*/
 @send external getUTCMonth: t => int = "getUTCMonth"
+
+/** 
+`getUTCDate(date)`
+
+Returns the date (day of month) of a given date (according to UTC time).
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCDate
+// 31
+```
+*/
 @send external getUTCDate: t => int = "getUTCDate"
+
+/** 
+`getUTCHours(date)`
+
+Returns the hours of a given date (according to UTC time).
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCHours
+// 23
+```
+*/
 @send external getUTCHours: t => int = "getUTCHours"
+
+/** 
+`getUTCMinutes(date)`
+
+Returns the minutes of a given date (according to UTC time).
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCMinutes
+// 0
+```
+*/
 @send external getUTCMinutes: t => int = "getUTCMinutes"
+
+/** 
+`getUTCSeconds(date)`
+
+Returns the seconds of a given date (according to UTC time).
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCSeconds
+// 0
+```
+*/
 @send external getUTCSeconds: t => int = "getUTCSeconds"
+
+/** 
+`getUTCMilliseconds(date)`
+
+Returns the milliseconds of a given date (according to UTC time).
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCMilliseconds
+// 0
+```
+*/
 @send external getUTCMilliseconds: t => int = "getUTCMilliseconds"
+
+/** 
+`getUTCDay(date)`
+
+Returns the day (day of week) of a given date (according to UTC time).
+0 = Sunday, 1 = Monday, ... 6 = Saturday
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCDay
+// 6
+```
+*/
 @send external getUTCDay: t => int = "getUTCDay"
+
+/** 
+`setUTCFullYear(date, year)`
+
+Sets the year of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCFullYear(2024)
+```
+*/
 @send external setUTCFullYear: (t, int) => unit = "setUTCFullYear"
+
+/** 
+`setUTCFullYearM(date, ~year, ~month)`
+
+Sets the year and month of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCFullYearM(~year=2024, ~month=0)
+```
+*/
 @send external setUTCFullYearM: (t, ~year: int, ~month: int) => unit = "setUTCFullYear"
+
+/** 
+`setUTCFullYearMD(date, ~year, ~month, ~date)`
+
+Sets the year, month and date (day of month) of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCFullYearMD(~year=2024, ~month=0, ~date=1)
+```
+*/
 @send
 external setUTCFullYearMD: (t, ~year: int, ~month: int, ~date: int) => unit = "setUTCFullYear"
+
+/** 
+`setUTCMonth(date, month)`
+
+Sets the month of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCMonth(0)
+```
+*/
 @send external setUTCMonth: (t, int) => unit = "setUTCMonth"
+
+/** 
+`setDate(date, day)`
+
+Sets the date (day of month) of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCDate(1)
+```
+*/
 @send external setUTCDate: (t, int) => unit = "setUTCDate"
+
+/** 
+`setUTCHours(date, hours)`
+
+Sets the hours of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCHours(0)
+```
+*/
 @send external setUTCHours: (t, int) => unit = "setUTCHours"
+
+/** 
+`setHoursM(date, ~hours, ~minutes)`
+
+Sets the hours and minutes of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCHoursM(~hours=0, ~minutes=0)
+```
+*/
 @send external setUTCHoursM: (t, ~hours: int, ~minutes: int) => unit = "setUTCHours"
+
+/** 
+`setUTCHoursMS(date, ~hours, ~minutes, ~seconds)`
+
+Sets the hours, minutes and seconds of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCHoursMS(~hours=0, ~minutes=0, ~seconds=0)
+```
+*/
 @send
 external setUTCHoursMS: (t, ~hours: int, ~minutes: int, ~seconds: int) => unit = "setUTCHours"
+
+/** 
+`setUTCHoursMSMs(date, ~hours, ~minutes, ~seconds, ~milliseconds)`
+
+Sets the hours, minutes, seconds and milliseconds of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCHoursMSMs(~hours=0, ~minutes=0, ~seconds=0, ~milliseconds=0)
+```
+*/
 @send
 external setUTCHoursMSMs: (
   t,
@@ -315,17 +814,136 @@ external setUTCHoursMSMs: (
   ~seconds: int,
   ~milliseconds: int,
 ) => unit = "setUTCHours"
+
+/** 
+`setUTCMinutes(date, minutes)`
+
+Sets the minutes of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCMinutes(0)
+```
+*/
 @send external setUTCMinutes: (t, int) => unit = "setUTCMinutes"
+
+/** 
+`setUTCMinutesS(date, ~minutes, ~seconds)`
+
+Sets the minutes and seconds of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCMinutesS(~minutes=0, ~seconds=0)
+```
+*/
 @send external setUTCMinutesS: (t, ~minutes: int, ~seconds: int) => unit = "setUTCMinutes"
+
+/** 
+`setUTCMinutesSMs(date, ~minutes, ~seconds, ~milliseconds)`
+
+Sets the minutes, seconds and milliseconds of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCMinutesSMs(~minutes=0, ~seconds=0, ~milliseconds=0)
+```
+*/
 @send
 external setUTCMinutesSMs: (t, ~minutes: int, ~seconds: int, ~milliseconds: int) => unit =
   "setUTCMinutes"
+
+/** 
+`setUTCSeconds(date, seconds)`
+
+Sets the seconds of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCSeconds(0)
+```
+*/
 @send external setUTCSeconds: (t, int) => unit = "setUTCSeconds"
+
+/** 
+`setUTCSecondsMs(date, ~seconds, ~milliseconds)`
+
+Sets the seconds and milliseconds of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCSecondsMs(~seconds=0, ~milliseconds=0)
+```
+*/
 @send external setUTCSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setUTCSeconds"
+
+/** 
+`setUTCMilliseconds(date, milliseconds)`
+
+Sets the milliseconds of a date (according to UTC time).
+Beware this will *mutate* the date.
+
+## Examples
+```rescript
+Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCMilliseconds(0)
+```
+*/
 @send external setUTCMilliseconds: (t, int) => unit = "setUTCMilliseconds"
-@send external setUTCDay: (t, int) => unit = "setUTCDay"
+
+/** 
+`toDateString(date)`
+
+Converts a JavaScript date to a standard date string. The date will be mapped to the current time zone.
+If you want to convert it to a localized string, use `Date.toLocaleDateString` instead.
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+01:00")->Date.toDateString->Console.log
+// Sun Jan 01 2023
+
+Date.fromString("2023-01-01T00:00:00.00+08:00")->Date.toDateString->Console.log
+// Sat Dec 31 2022
+```
+*/
 @send external toDateString: t => string = "toDateString"
+
+/** 
+`toString(date)`
+
+Converts a JavaScript date to a standard date time string. The date will be mapped to the current time zone.
+If you want to convert it to a localized string, use `Date.toLocaleString` instead.
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+01:00")->Date.toString->Console.log
+// Sun Jan 01 2023 00:00:00 GMT+0100 (Central European Standard Time)
+
+Date.fromString("2023-06-01T00:00:00.00+01:00")->Date.toString->Console.log
+// Thu Jun 01 2023 01:00:00 GMT+0200 (Central European Summer Time)
+```
+*/
 @send external toString: t => string = "toString"
+
+/** 
+`toTimeString(date)`
+
+Converts a JavaScript date to a standard time string. The date will be mapped to the current time zone.
+If you want to convert it to a localized string, use `Date.toLocaleStimeString` instead.
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+01:00")->Date.toTimeString->Console.log
+// 00:00:00 GMT+0100 (Central European Standard Time)
+
+Date.fromString("2023-01-01T00:00:00.00+08:00")->Date.toTimeString->Console.log
+// 17:00:00 GMT+0100 (Central European Standard Time)
+```
+*/
 @send external toTimeString: t => string = "toTimeString"
 
 /** 
@@ -468,6 +1086,52 @@ Date.make()->Date.toLocaleTimeStringWithLocaleAndOptions("de", { hour: #"2-digit
 external toLocaleTimeStringWithLocaleAndOptions: (t, string, localeOptions) => string =
   "toLocaleTimeString"
 
+/** 
+`toISOString(date)`
+
+Converts a JavaScript date to a ISO 8601 string (YYYY-MM-DDTHH:mm:ss.sssZ). The date will be mapped to the UTC time.
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+00:00")->Date.toISOString->Console.log
+// 2023-01-01T00:00:00.000Z
+
+Date.fromString("2023-01-01T00:00:00.00+08:00")->Date.toISOString->Console.log
+// 2022-12-31T16:00:00.000Z
+```
+*/
 @send external toISOString: t => string = "toISOString"
+
+/** 
+`toUTCString(date)`
+
+Converts a JavaScript date to date time string. The date will be mapped to the UTC time.
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+00:00")->Date.toISOString->Console.log
+// 2023-01-01T00:00:00.000Z
+
+Date.fromString("2023-01-01T00:00:00.00+08:00")->Date.toUTCString->Console.log
+// Sat, 31 Dec 2022 16:00:00 GMT
+```
+*/
 @send external toUTCString: t => string = "toUTCString"
+
+/** 
+`toJSON(date)`
+
+Converts a JavaScript date to a string.
+If the date is valid, the function will return the same result as `Date.toISOString`.
+Invalid dates will return `None`.
+
+## Examples
+```rescript
+Date.fromString("2023-01-01T00:00:00.00+00:00")->Date.toJSON
+// Some("2023-01-01T00:00:00.000Z")
+
+Date.fromString("")->Date.toJSON
+// None
+```
+*/
 @return(nullable) @send external toJSON: t => option<string> = "toJSON"
