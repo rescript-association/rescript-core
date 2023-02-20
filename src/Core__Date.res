@@ -115,7 +115,6 @@ external setMinutesSMs: (t, ~minutes: int, ~seconds: int, ~milliseconds: int) =>
 @send external setSeconds: (t, int) => unit = "setSeconds"
 @send external setSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setSeconds"
 @send external setMilliseconds: (t, int) => unit = "setMilliseconds"
-@send external setDay: (t, int) => unit = "setDay"
 
 // UTC
 @send external getUTCFullYear: t => int = "getUTCFullYear"
@@ -153,7 +152,6 @@ external setUTCMinutesSMs: (t, ~minutes: int, ~seconds: int, ~milliseconds: int)
 @send external setUTCSeconds: (t, int) => unit = "setUTCSeconds"
 @send external setUTCSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setUTCSeconds"
 @send external setUTCMilliseconds: (t, int) => unit = "setUTCMilliseconds"
-@send external setUTCDay: (t, int) => unit = "setUTCDay"
 
 @send external toDateString: t => string = "toDateString"
 @send external toString: t => string = "toString"
