@@ -45,7 +45,7 @@ let someString: option<string> = Some("hello")
 ## Examples
 
 ```rescript
-Option.float(Some(Some(10))) // Some(10)
+Option.flat(Some(Some(10))) // Some(10)
 Option.flat(Some(None)) // None
 ```
 */
