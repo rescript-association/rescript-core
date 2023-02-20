@@ -54,7 +54,8 @@ Date.fromString("2023-02-20")->Date.valueOf
 // 1676851200000
 ```
 */
-@send external valueOf: t => time = "valueOf"
+@send
+external valueOf: t => time = "valueOf"
 
 /** 
 `make()`
@@ -66,7 +67,8 @@ Creates a date object with the current date time as value.
 Date.make()
 ```
 */
-@new external make: unit => t = "Date"
+@new
+external make: unit => t = "Date"
 
 /** 
 `fromString(dateTimeString)` 
@@ -87,7 +89,8 @@ Date.fromString("2023-02-20T16:40:00.00Z")
 // 2023-02-20T16:40:00.000Z
 ```
 */
-@new external fromString: string => t = "Date"
+@new
+external fromString: string => t = "Date"
 
 /** 
 `fromTime(deltaMilliseconds)` 
@@ -106,7 +109,8 @@ Date.fromTime(86_400_000.0)
 // 1970-01-02T00:00:00.000Z
 ```
 */
-@new external fromTime: time => t = "Date"
+@new
+external fromTime: time => t = "Date"
 
 /** 
 Creates a date object with the given year and month.
@@ -128,21 +132,24 @@ Date.makeWithYM(~year=2023, ~month=-1)
 // 2022-12-01T00:00:00.000Z
 ```
 */
-@new external makeWithYM: (~year: int, ~month: int) => t = "Date"
+@new
+external makeWithYM: (~year: int, ~month: int) => t = "Date"
 
 /** 
 Creates a date object with the given year, month and date (day of month).
 Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
 Months are 0-indexed (0 = January, 11 = December).
 */
-@new external makeWithYMD: (~year: int, ~month: int, ~date: int) => t = "Date"
+@new
+external makeWithYMD: (~year: int, ~month: int, ~date: int) => t = "Date"
 
 /** 
 Creates a date object with the given year, month, date (day of month) and hours.
 Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
 Months are 0-indexed (0 = January, 11 = December).
 */
-@new external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => t = "Date"
+@new
+external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => t = "Date"
 
 /** 
 Creates a date object with the given year, month, date (day of month), hours and minutes.
@@ -187,12 +194,14 @@ module UTC: {
   /** 
   Same as Date.makeWithYM, but returns the time since 1 January 1970 UTC in milliseconds.
   */
-  @val external makeWithYM: (~year: int, ~month: int) => time = "Date.UTC"
+  @val
+  external makeWithYM: (~year: int, ~month: int) => time = "Date.UTC"
 
   /** 
   Same as Date.makeWithYMD, but returns the time since 1 January 1970 UTC in milliseconds.
   */
-  @val external makeWithYMD: (~year: int, ~month: int, ~date: int) => time = "Date.UTC"
+  @val
+  external makeWithYMD: (~year: int, ~month: int, ~date: int) => time = "Date.UTC"
 
   /** 
   Same as Date.makeWithYMDH, but returns the time since 1 January 1970 UTC in milliseconds.
@@ -245,7 +254,8 @@ module UTC: {
 
 Returns the time in milliseconds between 1 January 1970 UTC and the current date time.
 */
-@val external now: unit => time = "Date.now"
+@val
+external now: unit => time = "Date.now"
 
 /** 
 `getTime(date)`
@@ -262,7 +272,8 @@ Date.fromString("2023-02-20")->Date.getTime
 // 1676851200000
 ```
 */
-@send external getTime: t => time = "getTime"
+@send
+external getTime: t => time = "getTime"
 
 /** 
 `getTimezoneOffset(date)`
@@ -279,7 +290,8 @@ Date.fromString("2023-06-01")->Date.getTimezoneOffset
 // -120 with local time zone = Europe/Berlin
 ```
 */
-@send external getTimezoneOffset: t => int = "getTimezoneOffset"
+@send
+external getTimezoneOffset: t => int = "getTimezoneOffset"
 
 /** 
 `getFullYear(date)`
@@ -292,7 +304,8 @@ Date.fromString("2023-02-20")->Date.getFullYear
 // 2023
 ```
 */
-@send external getFullYear: t => int = "getFullYear"
+@send
+external getFullYear: t => int = "getFullYear"
 
 /** 
 `getMonth(date)`
@@ -305,7 +318,8 @@ Date.fromString("2023-01-01")->Date.getMonth
 // 0
 ```
 */
-@send external getMonth: t => int = "getMonth"
+@send
+external getMonth: t => int = "getMonth"
 
 /** 
 `getDate(date)`
@@ -318,7 +332,8 @@ Date.fromString("2023-02-20T16:40:00.00")->Date.getDate
 // 20
 ```
 */
-@send external getDate: t => int = "getDate"
+@send
+external getDate: t => int = "getDate"
 
 /** 
 `getHours(date)`
@@ -331,7 +346,8 @@ Date.fromString("2023-02-20T16:40:00.00")->Date.getHours
 // 16
 ```
 */
-@send external getHours: t => int = "getHours"
+@send
+external getHours: t => int = "getHours"
 
 /** 
 `getMinutes(date)`
@@ -344,7 +360,8 @@ Date.fromString("2023-02-20T16:40:00.00")->Date.getMinutes
 // 40
 ```
 */
-@send external getMinutes: t => int = "getMinutes"
+@send
+external getMinutes: t => int = "getMinutes"
 
 /** 
 `getSeconds(date)`
@@ -357,7 +374,8 @@ Date.fromString("2023-02-20T16:40:00.00")->Date.getSeconds
 // 0
 ```
 */
-@send external getSeconds: t => int = "getSeconds"
+@send
+external getSeconds: t => int = "getSeconds"
 
 /** 
 `getMilliseconds(date)`
@@ -370,7 +388,8 @@ Date.fromString("2023-02-20T16:40:00.00")->Date.getMilliseconds
 // 0
 ```
 */
-@send external getMilliseconds: t => int = "getMilliseconds"
+@send
+external getMilliseconds: t => int = "getMilliseconds"
 
 /** 
 `getDay(date)`
@@ -384,7 +403,8 @@ Date.fromString("2023-02-20T16:40:00.00")->Date.getDay
 // 1
 ```
 */
-@send external getDay: t => int = "getDay"
+@send
+external getDay: t => int = "getDay"
 
 /** 
 `setFullYear(date, year)`
@@ -397,7 +417,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setFullYear(2024)
 ```
 */
-@send external setFullYear: (t, int) => unit = "setFullYear"
+@send
+external setFullYear: (t, int) => unit = "setFullYear"
 
 /** 
 `setFullYearM(date, ~year, ~month)`
@@ -410,7 +431,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setFullYearM(~year=2024, ~month=0)
 ```
 */
-@send external setFullYearM: (t, ~year: int, ~month: int) => unit = "setFullYear"
+@send
+external setFullYearM: (t, ~year: int, ~month: int) => unit = "setFullYear"
 
 /** 
 `setFullYearMD(date, ~year, ~month, ~date)`
@@ -423,7 +445,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setFullYearMD(~year=2024, ~month=0, ~date=1)
 ```
 */
-@send external setFullYearMD: (t, ~year: int, ~month: int, ~date: int) => unit = "setFullYear"
+@send
+external setFullYearMD: (t, ~year: int, ~month: int, ~date: int) => unit = "setFullYear"
 
 /** 
 `setMonth(date, month)`
@@ -436,7 +459,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setMonth(0)
 ```
 */
-@send external setMonth: (t, int) => unit = "setMonth"
+@send
+external setMonth: (t, int) => unit = "setMonth"
 
 /** 
 `setDate(date, day)`
@@ -449,7 +473,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setDate(1)
 ```
 */
-@send external setDate: (t, int) => unit = "setDate"
+@send
+external setDate: (t, int) => unit = "setDate"
 
 /** 
 `setHours(date, hours)`
@@ -462,7 +487,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setHours(0)
 ```
 */
-@send external setHours: (t, int) => unit = "setHours"
+@send
+external setHours: (t, int) => unit = "setHours"
 
 /** 
 `setHoursM(date, ~hours, ~minutes)`
@@ -475,7 +501,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setHoursM(~hours=0, ~minutes=0)
 ```
 */
-@send external setHoursM: (t, ~hours: int, ~minutes: int) => unit = "setHours"
+@send
+external setHoursM: (t, ~hours: int, ~minutes: int) => unit = "setHours"
 
 /** 
 `setHoursMS(date, ~hours, ~minutes, ~seconds)`
@@ -488,7 +515,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setHoursMS(~hours=0, ~minutes=0, ~seconds=0)
 ```
 */
-@send external setHoursMS: (t, ~hours: int, ~minutes: int, ~seconds: int) => unit = "setHours"
+@send
+external setHoursMS: (t, ~hours: int, ~minutes: int, ~seconds: int) => unit = "setHours"
 
 /** 
 `setHoursMSMs(date, ~hours, ~minutes, ~seconds, ~milliseconds)`
@@ -516,7 +544,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setMinutes(0)
 ```
 */
-@send external setMinutes: (t, int) => unit = "setMinutes"
+@send
+external setMinutes: (t, int) => unit = "setMinutes"
 
 /** 
 `setMinutesS(date, ~minutes, ~seconds)`
@@ -529,7 +558,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setMinutesS(~minutes=0, ~seconds=0)
 ```
 */
-@send external setMinutesS: (t, ~minutes: int, ~seconds: int) => unit = "setMinutes"
+@send
+external setMinutesS: (t, ~minutes: int, ~seconds: int) => unit = "setMinutes"
 
 /** 
 `setMinutesSMs(date, ~minutes, ~seconds, ~milliseconds)`
@@ -556,7 +586,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setSeconds(0)
 ```
 */
-@send external setSeconds: (t, int) => unit = "setSeconds"
+@send
+external setSeconds: (t, int) => unit = "setSeconds"
 
 /** 
 `setSecondsMs(date, ~seconds, ~milliseconds)`
@@ -569,7 +600,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setSecondsMs(~seconds=0, ~milliseconds=0)
 ```
 */
-@send external setSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setSeconds"
+@send
+external setSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setSeconds"
 
 /** 
 `setMilliseconds(date, milliseconds)`
@@ -582,7 +614,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setMilliseconds(0)
 ```
 */
-@send external setMilliseconds: (t, int) => unit = "setMilliseconds"
+@send
+external setMilliseconds: (t, int) => unit = "setMilliseconds"
 
 /** 
 `getUTCFullYear(date)`
@@ -595,7 +628,8 @@ Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCFullYear
 // 2022
 ```
 */
-@send external getUTCFullYear: t => int = "getUTCFullYear"
+@send
+external getUTCFullYear: t => int = "getUTCFullYear"
 
 /** 
 `getUTCMonth(date)`
@@ -608,7 +642,8 @@ Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCMonth
 // 11
 ```
 */
-@send external getUTCMonth: t => int = "getUTCMonth"
+@send
+external getUTCMonth: t => int = "getUTCMonth"
 
 /** 
 `getUTCDate(date)`
@@ -621,7 +656,8 @@ Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCDate
 // 31
 ```
 */
-@send external getUTCDate: t => int = "getUTCDate"
+@send
+external getUTCDate: t => int = "getUTCDate"
 
 /** 
 `getUTCHours(date)`
@@ -634,7 +670,8 @@ Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCHours
 // 23
 ```
 */
-@send external getUTCHours: t => int = "getUTCHours"
+@send
+external getUTCHours: t => int = "getUTCHours"
 
 /** 
 `getUTCMinutes(date)`
@@ -647,7 +684,8 @@ Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCMinutes
 // 0
 ```
 */
-@send external getUTCMinutes: t => int = "getUTCMinutes"
+@send
+external getUTCMinutes: t => int = "getUTCMinutes"
 
 /** 
 `getUTCSeconds(date)`
@@ -660,7 +698,8 @@ Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCSeconds
 // 0
 ```
 */
-@send external getUTCSeconds: t => int = "getUTCSeconds"
+@send
+external getUTCSeconds: t => int = "getUTCSeconds"
 
 /** 
 `getUTCMilliseconds(date)`
@@ -673,7 +712,8 @@ Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCMilliseconds
 // 0
 ```
 */
-@send external getUTCMilliseconds: t => int = "getUTCMilliseconds"
+@send
+external getUTCMilliseconds: t => int = "getUTCMilliseconds"
 
 /** 
 `getUTCDay(date)`
@@ -687,7 +727,8 @@ Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCDay
 // 6
 ```
 */
-@send external getUTCDay: t => int = "getUTCDay"
+@send
+external getUTCDay: t => int = "getUTCDay"
 
 /** 
 `setUTCFullYear(date, year)`
@@ -700,7 +741,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCFullYear(2024)
 ```
 */
-@send external setUTCFullYear: (t, int) => unit = "setUTCFullYear"
+@send
+external setUTCFullYear: (t, int) => unit = "setUTCFullYear"
 
 /** 
 `setUTCFullYearM(date, ~year, ~month)`
@@ -713,7 +755,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCFullYearM(~year=2024, ~month=0)
 ```
 */
-@send external setUTCFullYearM: (t, ~year: int, ~month: int) => unit = "setUTCFullYear"
+@send
+external setUTCFullYearM: (t, ~year: int, ~month: int) => unit = "setUTCFullYear"
 
 /** 
 `setUTCFullYearMD(date, ~year, ~month, ~date)`
@@ -740,7 +783,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCMonth(0)
 ```
 */
-@send external setUTCMonth: (t, int) => unit = "setUTCMonth"
+@send
+external setUTCMonth: (t, int) => unit = "setUTCMonth"
 
 /** 
 `setDate(date, day)`
@@ -753,7 +797,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCDate(1)
 ```
 */
-@send external setUTCDate: (t, int) => unit = "setUTCDate"
+@send
+external setUTCDate: (t, int) => unit = "setUTCDate"
 
 /** 
 `setUTCHours(date, hours)`
@@ -766,7 +811,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCHours(0)
 ```
 */
-@send external setUTCHours: (t, int) => unit = "setUTCHours"
+@send
+external setUTCHours: (t, int) => unit = "setUTCHours"
 
 /** 
 `setHoursM(date, ~hours, ~minutes)`
@@ -779,7 +825,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCHoursM(~hours=0, ~minutes=0)
 ```
 */
-@send external setUTCHoursM: (t, ~hours: int, ~minutes: int) => unit = "setUTCHours"
+@send
+external setUTCHoursM: (t, ~hours: int, ~minutes: int) => unit = "setUTCHours"
 
 /** 
 `setUTCHoursMS(date, ~hours, ~minutes, ~seconds)`
@@ -826,7 +873,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCMinutes(0)
 ```
 */
-@send external setUTCMinutes: (t, int) => unit = "setUTCMinutes"
+@send
+external setUTCMinutes: (t, int) => unit = "setUTCMinutes"
 
 /** 
 `setUTCMinutesS(date, ~minutes, ~seconds)`
@@ -839,7 +887,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCMinutesS(~minutes=0, ~seconds=0)
 ```
 */
-@send external setUTCMinutesS: (t, ~minutes: int, ~seconds: int) => unit = "setUTCMinutes"
+@send
+external setUTCMinutesS: (t, ~minutes: int, ~seconds: int) => unit = "setUTCMinutes"
 
 /** 
 `setUTCMinutesSMs(date, ~minutes, ~seconds, ~milliseconds)`
@@ -867,7 +916,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCSeconds(0)
 ```
 */
-@send external setUTCSeconds: (t, int) => unit = "setUTCSeconds"
+@send
+external setUTCSeconds: (t, int) => unit = "setUTCSeconds"
 
 /** 
 `setUTCSecondsMs(date, ~seconds, ~milliseconds)`
@@ -880,7 +930,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCSecondsMs(~seconds=0, ~milliseconds=0)
 ```
 */
-@send external setUTCSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setUTCSeconds"
+@send
+external setUTCSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setUTCSeconds"
 
 /** 
 `setUTCMilliseconds(date, milliseconds)`
@@ -893,7 +944,8 @@ Beware this will *mutate* the date.
 Date.fromString("2023-02-20T16:40:00.00")->Date.setUTCMilliseconds(0)
 ```
 */
-@send external setUTCMilliseconds: (t, int) => unit = "setUTCMilliseconds"
+@send
+external setUTCMilliseconds: (t, int) => unit = "setUTCMilliseconds"
 
 /** 
 `toDateString(date)`
@@ -910,7 +962,8 @@ Date.fromString("2023-01-01T00:00:00.00+08:00")->Date.toDateString->Console.log
 // Sat Dec 31 2022
 ```
 */
-@send external toDateString: t => string = "toDateString"
+@send
+external toDateString: t => string = "toDateString"
 
 /** 
 `toString(date)`
@@ -927,7 +980,8 @@ Date.fromString("2023-06-01T00:00:00.00+01:00")->Date.toString->Console.log
 // Thu Jun 01 2023 01:00:00 GMT+0200 (Central European Summer Time)
 ```
 */
-@send external toString: t => string = "toString"
+@send
+external toString: t => string = "toString"
 
 /** 
 `toTimeString(date)`
@@ -944,7 +998,8 @@ Date.fromString("2023-01-01T00:00:00.00+08:00")->Date.toTimeString->Console.log
 // 17:00:00 GMT+0100 (Central European Standard Time)
 ```
 */
-@send external toTimeString: t => string = "toTimeString"
+@send
+external toTimeString: t => string = "toTimeString"
 
 /** 
 `toLocaleDateString(date)`
@@ -1100,7 +1155,8 @@ Date.fromString("2023-01-01T00:00:00.00+08:00")->Date.toISOString->Console.log
 // 2022-12-31T16:00:00.000Z
 ```
 */
-@send external toISOString: t => string = "toISOString"
+@send
+external toISOString: t => string = "toISOString"
 
 /** 
 `toUTCString(date)`
@@ -1116,7 +1172,8 @@ Date.fromString("2023-01-01T00:00:00.00+08:00")->Date.toUTCString->Console.log
 // Sat, 31 Dec 2022 16:00:00 GMT
 ```
 */
-@send external toUTCString: t => string = "toUTCString"
+@send
+external toUTCString: t => string = "toUTCString"
 
 /** 
 `toJSON(date)`
@@ -1134,4 +1191,6 @@ Date.fromString("")->Date.toJSON
 // None
 ```
 */
-@return(nullable) @send external toJSON: t => option<string> = "toJSON"
+@return(nullable)
+@send
+external toJSON: t => option<string> = "toJSON"
