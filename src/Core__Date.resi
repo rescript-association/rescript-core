@@ -2,7 +2,11 @@
   Functions for interacting with JavaScript Dates.
 */
 
+/** 
+A type representing a JavaScript date
+*/
 type t = Js.Date.t
+
 type time = float
 
 /**
@@ -35,16 +39,125 @@ type localeOptions = {
   timeZoneName?: [#long | #short],
 }
 
+/** 
+`valueOf(date)`
+
+Returns the time in milliseconds between 1 January 1970 UTC and the given date.
+Invalid dates will return NaN.
+Dates before 1 January 1970 will return negative numbers.
+
+The function will return the same result as Date.getTime
+
+## Examples
+```rescript
+Date.fromString("2023-02-20")->Date.valueOf
+// 1676851200000
+```
+*/
 @send external valueOf: t => time = "valueOf"
+
+/** 
+`make()`
+
+Creates a date object with the current date time as value.
+
+## Examples
+```rescript
+Date.make()
+```
+*/
 @new external make: unit => t = "Date"
+
+/** 
+`fromString(dateTimeString)` 
+
+Creates a date object from given date time string.
+The string has to be in the ISO 8601 format YYYY-MM-DDTHH:mm:ss.sssZ (https://tc39.es/ecma262/#sec-date-time-string-format).
+Invalid date time strings will create invalid dates.
+
+## Examples
+```rescript
+Date.fromString("2023")
+// 2023-01-01T00:00:00.000Z
+
+Date.fromString("2023-02-20")
+// 2023-02-20T00:00:00.000Z
+
+Date.fromString("2023-02-20T16:40:00.00Z")
+// 2023-02-20T16:40:00.000Z
+```
+*/
 @new external fromString: string => t = "Date"
+
+/** 
+`fromTime(deltaMilliseconds)` 
+
+Creates a date object from the given time in milliseconds since / until 1 January 1970 UTC.
+
+## Examples
+```rescript
+Date.fromTime(0.0)
+// 1970-01-01T00:00:00.000Z
+
+Date.fromTime(-86_400_000.0)
+// 1969-12-31T00:00:00.000Z
+
+Date.fromTime(86_400_000.0)
+// 1970-01-02T00:00:00.000Z
+```
+*/
 @new external fromTime: time => t = "Date"
+
+/** 
+Creates a date object with the given year and month.
+Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+Months are 0-indexed (0 = January, 11 = December).
+
+## Examples
+```rescript
+Date.makeWithYM(~year=2023, ~month=0)
+// 2023-01-01T00:00:00.000Z
+
+Date.makeWithYM(~year=2023, ~month=11)
+// 2023-12-01T00:00:00.000Z
+
+Date.makeWithYM(~year=2023, ~month=12)
+// 2024-01-01T00:00:00.000Z
+
+Date.makeWithYM(~year=2023, ~month=-1)
+// 2022-12-01T00:00:00.000Z
+```
+*/
 @new external makeWithYM: (~year: int, ~month: int) => t = "Date"
+
+/** 
+Creates a date object with the given year, month and date (day of month).
+Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+Months are 0-indexed (0 = January, 11 = December).
+*/
 @new external makeWithYMD: (~year: int, ~month: int, ~date: int) => t = "Date"
+
+/** 
+Creates a date object with the given year, month, date (day of month) and hours.
+Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+Months are 0-indexed (0 = January, 11 = December).
+*/
 @new external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => t = "Date"
+
+/** 
+Creates a date object with the given year, month, date (day of month), hours and minutes.
+Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+Months are 0-indexed (0 = January, 11 = December).
+*/
 @new
 external makeWithYMDHM: (~year: int, ~month: int, ~date: int, ~hours: int, ~minutes: int) => t =
   "Date"
+
+/** 
+Creates a date object with the given year, month, date (day of month), hours, minutes and seconds.
+Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+Months are 0-indexed (0 = January, 11 = December).
+*/
 @new
 external makeWithYMDHMS: (
   ~year: int,
@@ -54,6 +167,12 @@ external makeWithYMDHMS: (
   ~minutes: int,
   ~seconds: int,
 ) => t = "Date"
+
+/** 
+Creates a date object with the given year, month, date (day of month), hours, minutes, seconds and milliseconds.
+Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+Months are 0-indexed (0 = January, 11 = December).
+*/
 @new
 external makeWithYMDHMSM: (
   ~year: int,
@@ -65,10 +184,25 @@ external makeWithYMDHMSM: (
   ~milliseconds: int,
 ) => t = "Date"
 module UTC: {
+  /** 
+  Same as Date.makeWithYM, but returns the time since 1 January 1970 in milliseconds.
+  */
   @val external makeWithYM: (~year: int, ~month: int) => time = "Date.UTC"
+
+  /** 
+  Same as Date.makeWithYMD, but returns the time since 1 January 1970 in milliseconds.
+  */
   @val external makeWithYMD: (~year: int, ~month: int, ~date: int) => time = "Date.UTC"
+
+  /** 
+  Same as Date.makeWithYMDH, but returns the time since 1 January 1970 in milliseconds.
+  */
   @val
   external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => time = "Date.UTC"
+
+  /** 
+  Same as Date.makeWithYMDHM, but returns the time since 1 January 1970 in milliseconds.
+  */
   @val
   external makeWithYMDHM: (
     ~year: int,
@@ -77,6 +211,10 @@ module UTC: {
     ~hours: int,
     ~minutes: int,
   ) => time = "Date.UTC"
+
+  /** 
+  Same as Date.makeWithYMDHMS, but returns the time since 1 January 1970 in milliseconds.
+  */
   @val
   external makeWithYMDHMS: (
     ~year: int,
@@ -86,6 +224,10 @@ module UTC: {
     ~minutes: int,
     ~seconds: int,
   ) => time = "Date.UTC"
+
+  /** 
+  Same as Date.makeWithYMDHMSM, but returns the time since 1 January 1970 in milliseconds.
+  */
   @val
   external makeWithYMDHMSM: (
     ~year: int,
@@ -97,7 +239,27 @@ module UTC: {
     ~milliseconds: int,
   ) => time = "Date.UTC"
 }
+
+/**
+Returns the time in milliseconds between 1 January 1970 UTC and the current date time.
+*/
 @val external now: unit => time = "Date.now"
+
+/** 
+`getTime(date)`
+
+Returns the time in milliseconds between 1 January 1970 UTC and the given date.
+Invalid dates will return NaN.
+Dates before 1 January 1970 will return negative numbers.
+
+The function will return the same result as Date.valueOf
+
+## Examples
+```rescript
+Date.fromString("2023-02-20")->Date.getTime
+// 1676851200000
+```
+*/
 @send external getTime: t => time = "getTime"
 @send external getTimezoneOffset: t => int = "getTimezoneOffset"
 @send external getFullYear: t => int = "getFullYear"
