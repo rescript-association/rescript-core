@@ -50,7 +50,8 @@ module UTC = {
   @val external makeWithYM: (~year: int, ~month: int) => msSinceEpoch = "Date.UTC"
   @val external makeWithYMD: (~year: int, ~month: int, ~date: int) => msSinceEpoch = "Date.UTC"
   @val
-  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => msSinceEpoch = "Date.UTC"
+  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => msSinceEpoch =
+    "Date.UTC"
   @val
   external makeWithYMDHM: (
     ~year: int,
