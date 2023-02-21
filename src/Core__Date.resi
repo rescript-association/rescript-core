@@ -8,7 +8,8 @@ A type representing a JavaScript date.
 type t = Js.Date.t
 
 /** 
-A type representing the time since / until epoch (start of unix time = 1 January 1970) in milliseconds.
+Time, in milliseconds, since / until the UNIX epoch (January 1, 1970 00:00:00 UTC).
+Positive numbers represent dates after, negative numbers dates before epoch.
 */
 type msSinceEpoch = float
 
@@ -88,7 +89,8 @@ external fromString: string => t = "Date"
 /** 
 `fromTime(msSinceEpoch)` 
 
-Creates a date object from the given time in milliseconds since / until 1 January 1970 UTC.
+Creates a date object from the given time in milliseconds since / until UNIX epoch (January 1, 1970 00:00:00 UTC).
+Positive numbers create dates after epoch, negative numbers create dates before epoch.
 
 ## Examples
 ```rescript
@@ -251,7 +253,7 @@ external makeWithYMDHMSM: (
 ) => t = "Date"
 module UTC: {
   /** 
-  Returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time, in milliseconds, since UNIX epoch (January 1, 1970 00:00:00 UTC).
   Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
   Months are 0-indexed (0 = January, 11 = December).
   Values, which are out of range, will be carried over to the next bigger unit (s. example).
@@ -275,7 +277,7 @@ module UTC: {
   external makeWithYM: (~year: int, ~month: int) => msSinceEpoch = "Date.UTC"
 
   /** 
-  Returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time, in milliseconds, since UNIX epoch (January 1, 1970 00:00:00 UTC).
   Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
   Months are 0-indexed (0 = January, 11 = December).
   Values, which are out of range, will be carried over to the next bigger unit (s. example).
@@ -296,7 +298,7 @@ module UTC: {
   external makeWithYMD: (~year: int, ~month: int, ~date: int) => msSinceEpoch = "Date.UTC"
 
   /** 
-  Returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time, in milliseconds, since UNIX epoch (January 1, 1970 00:00:00 UTC).
   Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
   Months are 0-indexed (0 = January, 11 = December).
   Values, which are out of range, will be carried over to the next bigger unit (s. example).
@@ -318,7 +320,7 @@ module UTC: {
     "Date.UTC"
 
   /** 
-  Returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time, in milliseconds, since UNIX epoch (January 1, 1970 00:00:00 UTC).
   Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
   Months are 0-indexed (0 = January, 11 = December).
   Values, which are out of range, will be carried over to the next bigger unit (s. example).
@@ -345,7 +347,7 @@ module UTC: {
   ) => msSinceEpoch = "Date.UTC"
 
   /** 
-  Returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time, in milliseconds, since UNIX epoch (January 1, 1970 00:00:00 UTC).
   Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
   Months are 0-indexed (0 = January, 11 = December).
   Values, which are out of range, will be carried over to the next bigger unit (s. example).
@@ -373,7 +375,7 @@ module UTC: {
   ) => msSinceEpoch = "Date.UTC"
 
   /** 
-  Returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time, in milliseconds, since UNIX epoch (January 1, 1970 00:00:00 UTC).
   Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
   Months are 0-indexed (0 = January, 11 = December).
   Values, which are out of range, will be carried over to the next bigger unit (s. example).
@@ -405,7 +407,7 @@ module UTC: {
 /**
 `now()`
 
-Returns the time in milliseconds between 1 January 1970 UTC and the current date time.
+Returns the time, in milliseconds, between UNIX epoch (January 1, 1970 00:00:00 UTC) and the current date time.
 */
 @val
 external now: unit => msSinceEpoch = "Date.now"
@@ -413,9 +415,9 @@ external now: unit => msSinceEpoch = "Date.now"
 /** 
 `getTime(date)`
 
-Returns the time in milliseconds between 1 January 1970 UTC and the given date.
+Returns the time, in milliseconds, between UNIX epoch (January 1, 1970 00:00:00 UTC) and the current date time.
 Invalid dates will return NaN.
-Dates before 1 January 1970 will return negative numbers.
+Dates before epoch will return negative numbers.
 
 ## Examples
 ```rescript
