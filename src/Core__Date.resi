@@ -126,6 +126,10 @@ Date.makeWithYM(~year=2023, ~month=12)
 
 Date.makeWithYM(~year=2023, ~month=-1)
 // 2022-12-01T00:00:00.000Z
+
+// Note: The output depends on your local time zone.
+// In nodejs you can change it by using the TZ env (`export TZ='Europe/London' && node index.bs.js`)
+
 ```
 */
 @new
@@ -168,6 +172,10 @@ Date.makeWithYMDH(~year=2023, ~month=1, ~date=20, ~hours=24)
 
 Date.makeWithYMDH(~year=2023, ~month=1, ~date=20, ~hours=-1)
 // 2023-02-19T23:00:00.000Z
+
+// Note: The output depends on your local time zone.
+// In nodejs you can change it by using the TZ env (`export TZ='Europe/London' && node index.bs.js`)
+
 ```
 */
 @new
@@ -189,6 +197,10 @@ Date.makeWithYMDHM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=60)
 
 Date.makeWithYMDHM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=-1)
 // 2023-02-20T15:59:00.000Z
+
+// Note: The output depends on your local time zone.
+// In nodejs you can change it by using the TZ env (`export TZ='Europe/London' && node index.bs.js`)
+
 ```
 */
 @new
@@ -211,6 +223,10 @@ Date.makeWithYMDHMS(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~sec
 
 Date.makeWithYMDHMS(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=-1)
 // 2023-02-20T16:39:59.000Z
+
+// Note: The output depends on your local time zone.
+// In nodejs you can change it by using the TZ env (`export TZ='Europe/London' && node index.bs.js`)
+
 ```
 */
 @new
@@ -239,6 +255,10 @@ Date.makeWithYMDHMSM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~se
 
 Date.makeWithYMDHMSM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=0, ~milliseconds=-1)
 // 2023-02-20T16:39:59.999Z
+
+// Note: The output depends on your local time zone.
+// In nodejs you can change it by using the TZ env (`export TZ='Europe/London' && node index.bs.js`)
+
 ```
 */
 @new
@@ -1318,8 +1338,8 @@ Converts a JavaScript date to date time string. The date will be mapped to the U
 
 ## Examples
 ```rescript
-Date.fromString("2023-01-01T00:00:00.00+00:00")->Date.toISOString->Console.log
-// 2023-01-01T00:00:00.000Z
+Date.fromString("2023-01-01T00:00:00.00+00:00")->Date.toUTCString->Console.log
+// Sun, 01 Jan 2023 00:00:00 GMT
 
 Date.fromString("2023-01-01T00:00:00.00+08:00")->Date.toUTCString->Console.log
 // Sat, 31 Dec 2022 16:00:00 GMT
