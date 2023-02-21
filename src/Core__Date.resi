@@ -8,7 +8,7 @@ A type representing a JavaScript date.
 type t = Js.Date.t
 
 /** 
-A type representing the time since / until epoch (start of unix time = midnight 1 January 1970) in milliseconds.
+A type representing the time since / until epoch (start of unix time = 1 January 1970) in milliseconds.
 */
 type msSinceEpoch = float
 
@@ -251,25 +251,88 @@ external makeWithYMDHMSM: (
 ) => t = "Date"
 module UTC: {
   /** 
-  Same as Date.makeWithYM, but returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time since 1 January 1970 UTC in milliseconds.
+  Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+  Months are 0-indexed (0 = January, 11 = December).
+  Values, which are out of range, will be carried over to the next bigger unit (s. example).
+
+  ## Examples
+  ```rescript
+  Date.UTC.makeWithYM(~year=2023, ~month=0)
+  // 1672531200000
+
+  Date.UTC.makeWithYM(~year=2023, ~month=11)
+  // 1701388800000
+
+  Date.UTC.makeWithYM(~year=2023, ~month=12)
+  // 1704067200000
+
+  Date.UTC.makeWithYM(~year=2023, ~month=-1)
+  // 1669852800000
+  ```
   */
   @val
   external makeWithYM: (~year: int, ~month: int) => msSinceEpoch = "Date.UTC"
 
   /** 
-  Same as Date.makeWithYMD, but returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time since 1 January 1970 UTC in milliseconds.
+  Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+  Months are 0-indexed (0 = January, 11 = December).
+  Values, which are out of range, will be carried over to the next bigger unit (s. example).
+
+  ## Examples
+  ```rescript
+  Date.UTC.makeWithYMD(~year=2023, ~month=1, ~date=20)
+  // 1676851200000
+
+  Date.UTC.makeWithYMD(~year=2023, ~month=1, ~date=-1)
+  // 1675036800000
+
+  Date.UTC.makeWithYMD(~year=2023, ~month=1, ~date=29)
+  // 1677628800000
+  ```
   */
   @val
   external makeWithYMD: (~year: int, ~month: int, ~date: int) => msSinceEpoch = "Date.UTC"
 
   /** 
-  Same as Date.makeWithYMDH, but returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time since 1 January 1970 UTC in milliseconds.
+  Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+  Months are 0-indexed (0 = January, 11 = December).
+  Values, which are out of range, will be carried over to the next bigger unit (s. example).
+
+  ## Examples
+  ```rescript
+  Date.UTC.makeWithYMDH(~year=2023, ~month=1, ~date=20, ~hours=16)
+  // 1676908800000
+
+  Date.UTC.makeWithYMDH(~year=2023, ~month=1, ~date=20, ~hours=24)
+  // 1676937600000
+
+  Date.UTC.makeWithYMDH(~year=2023, ~month=1, ~date=20, ~hours=-1)
+  // 1676847600000
+  ```
   */
   @val
   external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => msSinceEpoch = "Date.UTC"
 
   /** 
-  Same as Date.makeWithYMDHM, but returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time since 1 January 1970 UTC in milliseconds.
+  Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+  Months are 0-indexed (0 = January, 11 = December).
+  Values, which are out of range, will be carried over to the next bigger unit (s. example).
+
+  ## Examples
+  ```rescript
+  Date.UTC.makeWithYMDHM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40)
+  // 1676911200000
+
+  Date.UTC.makeWithYMDHM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=60)
+  // 1676912400000
+
+  Date.UTC.makeWithYMDHM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=-1)
+  // 1676908740000
+  ```
   */
   @val
   external makeWithYMDHM: (
@@ -281,7 +344,22 @@ module UTC: {
   ) => msSinceEpoch = "Date.UTC"
 
   /** 
-  Same as Date.makeWithYMDHMS, but returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time since 1 January 1970 UTC in milliseconds.
+  Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+  Months are 0-indexed (0 = January, 11 = December).
+  Values, which are out of range, will be carried over to the next bigger unit (s. example).
+
+  ## Examples
+  ```rescript
+  Date.UTC.makeWithYMDHMS(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=0)
+  // 1676911200000
+
+  Date.UTC.makeWithYMDHMS(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=60)
+  // 1676911260000
+
+  Date.UTC.makeWithYMDHMS(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=-1)
+  // 1676911199000
+  ```
   */
   @val
   external makeWithYMDHMS: (
@@ -294,7 +372,22 @@ module UTC: {
   ) => msSinceEpoch = "Date.UTC"
 
   /** 
-  Same as Date.makeWithYMDHMSM, but returns the time since 1 January 1970 UTC in milliseconds.
+  Returns the time since 1 January 1970 UTC in milliseconds.
+  Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
+  Months are 0-indexed (0 = January, 11 = December).
+  Values, which are out of range, will be carried over to the next bigger unit (s. example).
+
+  ## Examples
+  ```rescript
+  ```
+  Date.UTC.makeWithYMDHMSM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=0, ~milliseconds=0)->Console.log
+  // 1676911200000
+
+  Date.UTC.makeWithYMDHMSM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=0, ~milliseconds=1000)->Console.log
+  // 1676911201000
+
+  Date.UTC.makeWithYMDHMSM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=0, ~milliseconds=-1)->Console.log
+  // 1676911199999
   */
   @val
   external makeWithYMDHMSM: (
