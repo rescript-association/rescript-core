@@ -314,7 +314,8 @@ module UTC: {
   ```
   */
   @val
-  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => msSinceEpoch = "Date.UTC"
+  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => msSinceEpoch =
+    "Date.UTC"
 
   /** 
   Returns the time since 1 January 1970 UTC in milliseconds.
