@@ -7,7 +7,10 @@ A type representing a JavaScript date.
 */
 type t = Js.Date.t
 
-type time = float
+/** 
+A type representing the time since / until epoch (start of unix time = midnight 1 January 1970) in milliseconds.
+*/
+type msSinceEpoch = float
 
 /**
 A type representing date time format options.
@@ -83,7 +86,7 @@ Date.fromString("")->getTime
 external fromString: string => t = "Date"
 
 /** 
-`fromTime(deltaMilliseconds)` 
+`fromTime(msSinceEpoch)` 
 
 Creates a date object from the given time in milliseconds since / until 1 January 1970 UTC.
 
@@ -100,7 +103,7 @@ Date.fromTime(86_400_000.0)
 ```
 */
 @new
-external fromTime: time => t = "Date"
+external fromTime: msSinceEpoch => t = "Date"
 
 /** 
 Creates a date object with the given year and month.
@@ -251,19 +254,19 @@ module UTC: {
   Same as Date.makeWithYM, but returns the time since 1 January 1970 UTC in milliseconds.
   */
   @val
-  external makeWithYM: (~year: int, ~month: int) => time = "Date.UTC"
+  external makeWithYM: (~year: int, ~month: int) => msSinceEpoch = "Date.UTC"
 
   /** 
   Same as Date.makeWithYMD, but returns the time since 1 January 1970 UTC in milliseconds.
   */
   @val
-  external makeWithYMD: (~year: int, ~month: int, ~date: int) => time = "Date.UTC"
+  external makeWithYMD: (~year: int, ~month: int, ~date: int) => msSinceEpoch = "Date.UTC"
 
   /** 
   Same as Date.makeWithYMDH, but returns the time since 1 January 1970 UTC in milliseconds.
   */
   @val
-  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => time = "Date.UTC"
+  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => msSinceEpoch = "Date.UTC"
 
   /** 
   Same as Date.makeWithYMDHM, but returns the time since 1 January 1970 UTC in milliseconds.
@@ -275,7 +278,7 @@ module UTC: {
     ~date: int,
     ~hours: int,
     ~minutes: int,
-  ) => time = "Date.UTC"
+  ) => msSinceEpoch = "Date.UTC"
 
   /** 
   Same as Date.makeWithYMDHMS, but returns the time since 1 January 1970 UTC in milliseconds.
@@ -288,7 +291,7 @@ module UTC: {
     ~hours: int,
     ~minutes: int,
     ~seconds: int,
-  ) => time = "Date.UTC"
+  ) => msSinceEpoch = "Date.UTC"
 
   /** 
   Same as Date.makeWithYMDHMSM, but returns the time since 1 January 1970 UTC in milliseconds.
@@ -302,7 +305,7 @@ module UTC: {
     ~minutes: int,
     ~seconds: int,
     ~milliseconds: int,
-  ) => time = "Date.UTC"
+  ) => msSinceEpoch = "Date.UTC"
 }
 
 /**
@@ -311,7 +314,7 @@ module UTC: {
 Returns the time in milliseconds between 1 January 1970 UTC and the current date time.
 */
 @val
-external now: unit => time = "Date.now"
+external now: unit => msSinceEpoch = "Date.now"
 
 /** 
 `getTime(date)`
@@ -327,7 +330,7 @@ Date.fromString("2023-02-20")->Date.getTime
 ```
 */
 @send
-external getTime: t => time = "getTime"
+external getTime: t => msSinceEpoch = "getTime"
 
 /** 
 `getTimezoneOffset(date)`
