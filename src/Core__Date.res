@@ -16,8 +16,6 @@ type localeOptions = {
   timeZoneName?: [#long | #short],
 }
 
-@send external valueOf: t => time = "valueOf"
-
 @new external make: unit => t = "Date"
 @new external fromString: string => t = "Date"
 @new external fromTime: time => t = "Date"

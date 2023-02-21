@@ -3,7 +3,7 @@
 */
 
 /** 
-A type representing a JavaScript date
+A type representing a JavaScript date.
 */
 type t = Js.Date.t
 
@@ -40,24 +40,6 @@ type localeOptions = {
 }
 
 /** 
-`valueOf(date)`
-
-Returns the time in milliseconds between 1 January 1970 UTC and the given date.
-Invalid dates will return NaN.
-Dates before 1 January 1970 will return negative numbers.
-
-The function will return the same result as `Date.getTime`
-
-## Examples
-```rescript
-Date.fromString("2023-02-20")->Date.valueOf
-// 1676851200000
-```
-*/
-@send
-external valueOf: t => time = "valueOf"
-
-/** 
 `make()`
 
 Creates a date object with the current date time as value.
@@ -75,7 +57,9 @@ external make: unit => t = "Date"
 
 Creates a date object from given date time string.
 The string has to be in the ISO 8601 format YYYY-MM-DDTHH:mm:ss.sssZ (https://tc39.es/ecma262/#sec-date-time-string-format).
+
 Invalid date time strings will create invalid dates.
+You can use the result like any valid date, but many functions like `toString` will return "Invalid Date" or functions like `Date.getTime` will return NaN.
 
 ## Examples
 ```rescript
@@ -87,6 +71,12 @@ Date.fromString("2023-02-20")
 
 Date.fromString("2023-02-20T16:40:00.00Z")
 // 2023-02-20T16:40:00.000Z
+
+Date.fromString("")
+// Invalid Date
+
+Date.fromString("")->getTime
+// NaN
 ```
 */
 @new
@@ -116,6 +106,7 @@ external fromTime: time => t = "Date"
 Creates a date object with the given year and month.
 Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
 Months are 0-indexed (0 = January, 11 = December).
+Values, which are out of range, will be carried over to the next bigger unit (s. example).
 
 ## Examples
 ```rescript
@@ -139,6 +130,19 @@ external makeWithYM: (~year: int, ~month: int) => t = "Date"
 Creates a date object with the given year, month and date (day of month).
 Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
 Months are 0-indexed (0 = January, 11 = December).
+Values, which are out of range, will be carried over to the next bigger unit (s. example).
+
+## Examples
+```rescript
+Date.makeWithYMD(~year=2023, ~month=1, ~date=20)
+// 2023-02-20T00:00:00.000Z
+
+Date.makeWithYMD(~year=2023, ~month=1, ~date=-1)
+// 2022-11-29T00:00:00.000Z
+
+Date.makeWithYMD(~year=2023, ~month=1, ~date=29)
+// 2023-03-01T00:00:00.000Z
+```
 */
 @new
 external makeWithYMD: (~year: int, ~month: int, ~date: int) => t = "Date"
@@ -147,6 +151,19 @@ external makeWithYMD: (~year: int, ~month: int, ~date: int) => t = "Date"
 Creates a date object with the given year, month, date (day of month) and hours.
 Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
 Months are 0-indexed (0 = January, 11 = December).
+Values, which are out of range, will be carried over to the next bigger unit (s. example).
+
+## Examples
+```rescript
+Date.makeWithYMDH(~year=2023, ~month=1, ~date=20, ~hours=16)
+// 2023-02-20T16:00:00.000Z
+
+Date.makeWithYMDH(~year=2023, ~month=1, ~date=20, ~hours=24)
+// 2023-02-21T00:00:00.000Z
+
+Date.makeWithYMDH(~year=2023, ~month=1, ~date=20, ~hours=-1)
+// 2023-02-19T23:00:00.000Z
+```
 */
 @new
 external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => t = "Date"
@@ -155,6 +172,19 @@ external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => t =
 Creates a date object with the given year, month, date (day of month), hours and minutes.
 Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
 Months are 0-indexed (0 = January, 11 = December).
+Values, which are out of range, will be carried over to the next bigger unit (s. example).
+
+## Examples
+```rescript
+Date.makeWithYMDHM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40)
+// 2023-02-20T16:40:00.000Z
+
+Date.makeWithYMDHM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=60)
+// 2023-02-20T17:00:00.000Z
+
+Date.makeWithYMDHM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=-1)
+// 2023-02-20T15:59:00.000Z
+```
 */
 @new
 external makeWithYMDHM: (~year: int, ~month: int, ~date: int, ~hours: int, ~minutes: int) => t =
@@ -164,6 +194,19 @@ external makeWithYMDHM: (~year: int, ~month: int, ~date: int, ~hours: int, ~minu
 Creates a date object with the given year, month, date (day of month), hours, minutes and seconds.
 Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
 Months are 0-indexed (0 = January, 11 = December).
+Values, which are out of range, will be carried over to the next bigger unit (s. example).
+
+## Examples
+```rescript
+Date.makeWithYMDHMS(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=0)
+// 2023-02-20T16:40:00.000Z
+
+Date.makeWithYMDHMS(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=60)
+// 2023-02-20T16:41:00.000Z
+
+Date.makeWithYMDHMS(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=-1)
+// 2023-02-20T16:39:59.000Z
+```
 */
 @new
 external makeWithYMDHMS: (
@@ -179,6 +222,19 @@ external makeWithYMDHMS: (
 Creates a date object with the given year, month, date (day of month), hours, minutes, seconds and milliseconds.
 Be aware of using a value for year < 100, because it behaves inconsistent (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years).
 Months are 0-indexed (0 = January, 11 = December).
+Values, which are out of range, will be carried over to the next bigger unit (s. example).
+
+## Examples
+```rescript
+Date.makeWithYMDHMSM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=0, ~milliseconds=0)
+// 2023-02-20T16:40:00.000Z
+
+Date.makeWithYMDHMSM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=0, ~milliseconds=1000)
+// 2023-02-20T16:40:01.000Z
+
+Date.makeWithYMDHMSM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=0, ~milliseconds=-1)
+// 2023-02-20T16:39:59.999Z
+```
 */
 @new
 external makeWithYMDHMSM: (
@@ -263,8 +319,6 @@ external now: unit => time = "Date.now"
 Returns the time in milliseconds between 1 January 1970 UTC and the given date.
 Invalid dates will return NaN.
 Dates before 1 January 1970 will return negative numbers.
-
-The function will return the same result as `Date.valueOf`
 
 ## Examples
 ```rescript
