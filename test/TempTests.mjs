@@ -93,24 +93,6 @@ console.log(Core__Float.fromString("0.1"));
 
 console.info("");
 
-console.info("Intl");
-
-console.info("---");
-
-var currencyFormatter = new Intl.NumberFormat("fr-FR", {
-      currency: "EUR",
-      style: "currency"
-    });
-
-console.log(Intl.NumberFormat.supportedLocalesOf([
-          "fr-FR",
-          "en-US"
-        ]));
-
-console.log(currencyFormatter.format(123.23));
-
-console.info("");
-
 console.info("JSON");
 
 console.info("---");
@@ -335,7 +317,6 @@ export {
   dict ,
   dict2 ,
   f ,
-  currencyFormatter ,
   json ,
   map ,
   myObject ,
