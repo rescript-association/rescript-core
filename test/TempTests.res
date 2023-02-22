@@ -180,9 +180,6 @@ if globalThis["hello"] !== undefined {
   Console.log("hello")
 }
 
-let resolvedOptions = Intl.DateTimeFormat.make()->Intl.DateTimeFormat.resolvedOptions
-let timeZone = resolvedOptions["timeZone"]
-
 let z = Float.mod(1.2, 1.4)
 
 let intFromBigInt = BigInt.fromString("10000000000")->BigInt.toInt

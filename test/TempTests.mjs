@@ -288,10 +288,6 @@ if (globalThis.hello !== undefined) {
   console.log("hello");
 }
 
-var resolvedOptions = new Intl.DateTimeFormat().resolvedOptions();
-
-var timeZone = resolvedOptions.timeZone;
-
 var z = 1.2 % 1.4;
 
 var intFromBigInt = Core__BigInt.toInt(BigInt("10000000000"));
@@ -331,8 +327,6 @@ export {
   x ,
   array$1 as array,
   timeout ,
-  resolvedOptions ,
-  timeZone ,
   z ,
   intFromBigInt ,
   Bugfix ,
