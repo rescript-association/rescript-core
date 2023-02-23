@@ -36,10 +36,19 @@ function map(value, f) {
   
 }
 
+function mapWithDefault(value, $$default, f) {
+  if (value == null) {
+    return $$default;
+  } else {
+    return Curry._1(f, value);
+  }
+}
+
 export {
   fromOption ,
   getWithDefault ,
   getExn ,
   map ,
+  mapWithDefault ,
 }
 /* No side effect */
