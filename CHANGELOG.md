@@ -13,6 +13,7 @@
 - Remove internal async/await helpers that do not need to be exposed in `Core`.
 - Add locale and formatting options to `localeDateString`, `localeString` and `localTimeString` functions https://github.com/rescript-association/rescript-core/pull/30
 - Change `RegExp.source` to return a `string`. Was previously returning a `bool`, which is wrong. https://github.com/rescript-association/rescript-core/pull/47
+- Remove `Date.valueOf` as it returns the same as `Date.getTime`. https://github.com/rescript-association/rescript-core/pull/61
 
 ### Documentation
 
@@ -24,3 +25,4 @@
 - Docstrings for `Int`. https://github.com/rescript-association/rescript-core/pull/37
 - Docstrings for `Dict`. https://github.com/rescript-association/rescript-core/pull/40
 - Docstrings for `RegExp`. https://github.com/rescript-association/rescript-core/pull/47
+- Docstrings for `Date`. https://github.com/rescript-association/rescript-core/pull/61

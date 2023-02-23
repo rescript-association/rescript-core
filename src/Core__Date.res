@@ -1,6 +1,6 @@
 type t = Js.Date.t
 
-type time = float
+type msSinceEpoch = float
 
 type localeOptions = {
   dateStyle?: [#full | #long | #medium | #short],
@@ -16,11 +16,9 @@ type localeOptions = {
   timeZoneName?: [#long | #short],
 }
 
-@send external valueOf: t => time = "valueOf"
-
 @new external make: unit => t = "Date"
 @new external fromString: string => t = "Date"
-@new external fromTime: time => t = "Date"
+@new external fromTime: msSinceEpoch => t = "Date"
 
 @new external makeWithYM: (~year: int, ~month: int) => t = "Date"
 @new external makeWithYMD: (~year: int, ~month: int, ~date: int) => t = "Date"
@@ -49,10 +47,11 @@ external makeWithYMDHMSM: (
 ) => t = "Date"
 
 module UTC = {
-  @val external makeWithYM: (~year: int, ~month: int) => time = "Date.UTC"
-  @val external makeWithYMD: (~year: int, ~month: int, ~date: int) => time = "Date.UTC"
+  @val external makeWithYM: (~year: int, ~month: int) => msSinceEpoch = "Date.UTC"
+  @val external makeWithYMD: (~year: int, ~month: int, ~date: int) => msSinceEpoch = "Date.UTC"
   @val
-  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => time = "Date.UTC"
+  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => msSinceEpoch =
+    "Date.UTC"
   @val
   external makeWithYMDHM: (
     ~year: int,
@@ -60,7 +59,7 @@ module UTC = {
     ~date: int,
     ~hours: int,
     ~minutes: int,
-  ) => time = "Date.UTC"
+  ) => msSinceEpoch = "Date.UTC"
   @val
   external makeWithYMDHMS: (
     ~year: int,
@@ -69,7 +68,7 @@ module UTC = {
     ~hours: int,
     ~minutes: int,
     ~seconds: int,
-  ) => time = "Date.UTC"
+  ) => msSinceEpoch = "Date.UTC"
   @val
   external makeWithYMDHMSM: (
     ~year: int,
@@ -79,12 +78,12 @@ module UTC = {
     ~minutes: int,
     ~seconds: int,
     ~milliseconds: int,
-  ) => time = "Date.UTC"
+  ) => msSinceEpoch = "Date.UTC"
 }
 
-@val external now: unit => time = "Date.now"
+@val external now: unit => msSinceEpoch = "Date.now"
 
-@send external getTime: t => time = "getTime"
+@send external getTime: t => msSinceEpoch = "getTime"
 @send external getTimezoneOffset: t => int = "getTimezoneOffset"
 
 // Locale
