@@ -355,8 +355,7 @@ Int.toLocaleString(1000.0) // "1.000"
 external toLocaleString: float => string = "toLocaleString"
 
 /**
-`fromString(~radix?, str)` return an `option<int>` representing the given value
-`str`.
+`fromString(str)` return an `option<int>` representing the given value `str`.
 
 ## Examples
 
@@ -366,7 +365,7 @@ Float.fromString("NaN") == None
 Float.fromString("6") == Some(6.0)
 ```
 */
-let fromString: 'a => option<float>
+let fromString: string => option<float>
 
 /**
 `toInt(v)` returns an int to given float `v`.
