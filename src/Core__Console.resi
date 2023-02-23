@@ -1,211 +1,273 @@
 /***
 Functions for interacting with JavaScript console.
-See: [`Console`](https://developer.mozilla.org/en-US/docs/Web/API/Console).
+
+See: [`console`](https://developer.mozilla.org/en-US/docs/Web/API/Console).
 */
 
 /**
-`log(value)` print a message to console.
-See [`Console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
+`assert_(assertion, value)` print a message to console if `assertion` evaluates `false`. Does nothing if it's `true`.
+
+See [`console.assert`](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
 on MDN.
 
 ## Examples
 
 ```rescript
-Console.log("Hello")
+Console.assert_(false, "Hello World!")
+Console.assert_(n == 42, "The answer")
+```
+*/
+@val
+external assert_: (bool, 'a) => unit = "console.assert"
+
+/**
+`assert2(v1, v2)`. Like `assert_`, but with two arguments.
+
+## Examples
+
+```rescript
+Console.assert2(false, "Hello", "World")
+Console.assert2(n == 42, [1, 2, 3], '4')
+```
+*/
+@val
+external assert2: (bool, 'a, 'b) => unit = "console.assert"
+
+/**
+`assert3(v1, v2, v3)`. Like `assert_`, but with three arguments.
+
+## Examples
+
+```rescript
+Console.assert3(false, "Hello", "World", "ReScript")
+Console.assert3(n == 42, "One", 2, #3)
+```
+*/
+@val
+external assert3: (bool, 'a, 'b, 'c) => unit = "console.assert"
+
+/**
+`assert4(v1, v2, v3, v4)`. Like `assert_`, but with four arguments.
+
+## Examples
+
+```rescript
+Console.assert4(false, "Hello", "World", "ReScript", "!!!")
+Console.assert4(m == 42, [1, 2], (3, 4), [#5, #6], #"polyvar")
+```
+*/
+@val
+external assert4: (bool, 'a, 'b, 'c, 'd) => unit = "console.assert"
+
+/**
+`assert5(v1, v2, v3, v4, v5)`. Like `assert_`, but with five arguments.
+
+## Examples
+
+```rescript
+Console.assert5(false, "Hello", "World", "JS", '!', '!')
+Console.assert5(n == 42, [1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
+```
+*/
+@val
+external assert5: (bool, 'a, 'b, 'c, 'd, 'e) => unit = "console.assert"
+
+/**
+`assert6(v1, v2)`. Like `assert_`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.assert6(false, "Hello", "World", "JS", '!', '!', '?')
+Console.assert6(n == 42, [1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external assert6: (bool, 'a, 'b, 'c, 'd, 'e, 'f) => unit = "console.assert"
+
+/**
+`assertMany(assertion, arr)`. Like `assert_`, but variadic.
+
+## Examples
+
+```rescript
+Console.assertMany(false, ["Hello", "World"])
+Console.assertMany(n == 42, [1, 2, 3])
+```
+*/
+@val
+@variadic
+external assertMany: (bool, array<_>) => unit = "console.assert"
+
+/**
+`clear()` clears the console, if allowed.
+
+See [`console.clear`](https://developer.mozilla.org/en-US/docs/Web/API/console/clear)
+on MDN.
+
+## Examples
+
+```rescript
+Console.clear()
+```
+*/
+@val
+external clear: unit => unit = "console.clear"
+
+/**
+`count(label)` prints to the console the number of times it's been called with the given label.
+
+See [`console.count`](https://developer.mozilla.org/en-US/docs/Web/API/console/count)
+on MDN.
+
+## Examples
+
+```rescript
+Console.count("rescript")
+```
+*/
+@val
+external count: string => unit = "console.count"
+
+/**
+`countReset(label)` resets the count for the given label to 0.
+
+See [`console.countReset`](https://developer.mozilla.org/en-US/docs/Web/API/console/countReset)
+on MDN.
+
+## Examples
+
+```rescript
+Console.countReset("rescript")
+```
+*/
+@val
+external countReset: string => unit = "console.countReset"
+
+/**
+`debug(value)` print a debug message to console.
+
+See [`console.debug`](https://developer.mozilla.org/en-US/docs/Web/API/console/debug)
+on MDN.
+
+## Examples
+
+```rescript
+Console.debug("Hello")
 let obj = {"name": "ReScript", "version": 10}
-Console.log(obj)
+Console.debug(obj)
 ```
 */
 @val
-external log: 'a => unit = "console.log"
+external debug: 'a => unit = "console.debug"
 
 /**
-`log2(v1, v2)`. Like `log`, but with two arguments.
+`debug2(v1, v2)`. Like `debug`, but with two arguments.
 
 ## Examples
 
 ```rescript
-Console.log2("Hello", "World")
-Console.log2([1, 2, 3], '4')
+Console.debug2("Hello", "World")
+Console.debug2([1, 2, 3], '4')
 ```
 */
 @val
-external log2: ('a, 'b) => unit = "console.log"
+external debug2: ('a, 'b) => unit = "console.debug"
 
 /**
-`log3(v1, v2, v3)`. Like `log`, but with three arguments.
+`debug3(v1, v2, v3)`. Like `debug`, but with three arguments.
 
 ## Examples
 
 ```rescript
-Console.log3("Hello", "World", "ReScript")
-Console.log2("One", 2, #3)
+Console.debug3("Hello", "World", "ReScript")
+Console.debug3("One", 2, #3)
 ```
 */
 @val
-external log3: ('a, 'b, 'c) => unit = "console.log"
+external debug3: ('a, 'b, 'c) => unit = "console.debug"
+
 /**
-`log4(v1, v2, v3, v4)`. Like `log`, but with four arguments.
+`debug4(v1, v2, v3, v4)`. Like `debug`, but with four arguments.
 
 ## Examples
 
 ```rescript
-Console.log4("Hello", "World", "ReScript", "!!!")
-Console.log4([1, 2], (3, 4), [#5, #6], #"polyvar")
+Console.debug4("Hello", "World", "ReScript", "!!!")
+Console.debug4([1, 2], (3, 4), [#5, #6], #"polyvar")
 ```
 */
 @val
-external log4: ('a, 'b, 'c, 'd) => unit = "console.log"
+external debug4: ('a, 'b, 'c, 'd) => unit = "console.debug"
 
 /**
-`log5(v1, v2, v3, v4, v5)`. Like `log`, but with five arguments.
+`debug5(v1, v2, v3, v4, v5)`. Like `debug`, but with five arguments.
 
 ## Examples
 
 ```rescript
-Console.log5("Hello", "World", "JS", '!', '!')
-Console.log5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
+Console.debug5("Hello", "World", "JS", '!', '!')
+Console.debug5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
 ```
 */
 @val
-external log5: ('a, 'b, 'c, 'd, 'e) => unit = "console.log"
+external debug5: ('a, 'b, 'c, 'd, 'e) => unit = "console.debug"
+
 /**
-`info(value)` print an informational message to console.
-See [`Console.info`](https://developer.mozilla.org/en-US/docs/Web/API/console/info)
+`debug6(v1, v2, v3, v4, v5, v6)`. Like `debug`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.debug6("Hello", "World", "JS", '!', '!', '?')
+Console.debug6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external debug6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.debug"
+
+/**
+`debugMany(arr)`. Like `debug`, but variadic.
+
+## Examples
+
+```rescript
+Console.debugMany(["Hello", "World"])
+Console.debugMany([1, 2, 3])
+```
+*/
+@val
+@variadic
+external debugMany: array<_> => unit = "console.debug"
+
+/**
+`dir(object)` displays an interactive view of the object in the console.
+
+See [`console.dir`](https://developer.mozilla.org/en-US/docs/Web/API/console/dir)
 on MDN.
 
 ## Examples
 
 ```rescript
-Console.info("Information")
-Console.info(("Hello", "JS"))
+Console.dir({"language": "rescript", "version": 10.1.2})
 ```
 */
 @val
-external info: 'a => unit = "console.info"
+external dir: 'a => unit = "console.dir"
 
 /**
-`info2(v1, v2)`. Like `info`, but with two arguments.
+`dirxml(object)` displays an interactive tree view of an XML/HTML element in the console.
 
-## Examples
-
-```rescript
-Console.info2("Info", "failed to download")
-Console.info2(#info, {"name": "ReScript"})
-```
-*/
-@val
-external info2: ('a, 'b) => unit = "console.info"
-
-/**
-`info3(v1, v2, v3)`. Like `info`, but with three arguments.
-
-## Examples
-
-```rescript
-Console.info3("Hello", "World", "ReScript")
-Console.info3([1, 2, 3], #4, #5)
-```
-*/
-@val
-external info3: ('a, 'b, 'c) => unit = "console.info"
-
-/**
-`info4(v1, v2, v3, v4)`. Like `info`, but with four arguments.
-
-## Examples
-
-```rescript
-Console.info4("Hello", "World", "ReScript", '!')
-Console.info4([1, 2, 3], #4, #5, #lastinfo)
-```
-*/
-@val
-external info4: ('a, 'b, 'c, 'd) => unit = "console.info"
-
-/**
-`info5(v1, v2, v3, v4, v5)`. Like `info`, but with five arguments.
-
-## Examples
-
-```rescript
-Console.info5("Hello", "World", "from", "JS", "!!!")
-Console.info5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
-```
-*/
-@val
-external info5: ('a, 'b, 'c, 'd, 'e) => unit = "console.info"
-
-/**
-`warn(value)` print a warning message to console.
-See [`Console.warn`](https://developer.mozilla.org/en-US/docs/Web/API/console/warn)
+See [`console.dirxml`](https://developer.mozilla.org/en-US/docs/Web/API/console/dirxml)
 on MDN.
-
-## Examples
-
-```rescript
-Console.warn("Warning")
-Console.warn(("Warning", "invalid number"))
-```
 */
 @val
-external warn: 'a => unit = "console.warn"
-
-/**
-`warn2(v1, v2)`. Like `warn`, but two arguments.
-
-## Examples
-
-```rescript
-Console.warn2("Hello", "World")
-Console.warn2([1, 2, 3], 4)
-```
-*/
-@val
-external warn2: ('a, 'b) => unit = "console.warn"
-
-/**
-`warn3(v1, v2, v3)`. Like `warn`, but three arguments.
-
-## Examples
-
-```rescript
-Console.warn3("Hello", "World", "ReScript")
-Console.warn3([1, 2, 3], #4, #5)
-```
-*/
-@val
-external warn3: ('a, 'b, 'c) => unit = "console.warn"
-
-/**
-`warn4(v1, v2, v3, v4)`. Like `warn`, but with four arguments.
-
-## Examples
-
-```rescript
-Console.warn4("Hello", "World", "ReScript", "!!!")
-Console.warn4(#first, #second, #third, ("fourth"))
-```
-*/
-@val
-external warn4: ('a, 'b, 'c, 'd) => unit = "console.warn"
-
-/**
-`warn5(v1, v2, v3, v4, v5)`. Like `warn`, but with five arguments.
-
-## Examples
-
-```rescript
-Console.warn5("Hello", "World", "from", "JS", "!!!")
-Console.warn5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
-```
-*/
-@val
-external warn5: ('a, 'b, 'c, 'd, 'e) => unit = "console.warn"
+external dirxml: 'a => unit = "console.dirxml"
 
 /**
 `error(value)` prints an error message to console.
-See [`Console.error`](https://developer.mozilla.org/en-US/docs/Web/API/console/error)
+
+See [`console.error`](https://developer.mozilla.org/en-US/docs/Web/API/console/error)
 on MDN.
 
 ## Examples
@@ -271,8 +333,342 @@ Console.error5(1, #second, #third, ("fourth"), 'c')
 external error5: ('a, 'b, 'c, 'd, 'e) => unit = "console.error"
 
 /**
+`error6(v1, v2, v3, v4, v5, v6)`. Like `error`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.error6("Hello", "World", "from", "JS", "!!!", '!')
+Console.error6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external error6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.error"
+
+/**
+`group(label)` creates a new "group" level with the given label.
+
+See [`console.group`](https://developer.mozilla.org/en-US/docs/Web/API/console/group)
+on MDN.
+
+## Example
+
+```rescript
+Console.group("first group")
+Console.group("second group")
+Console.log("a message on the second level")
+Console.groupEnd()
+Console.log("a message message on the first level")
+Console.groupEnd()
+```
+*/
+@val
+external group: string => unit = "console.group"
+
+/**
+`groupCollapsed(label)`. Like `group` but collapses the group initially.
+
+See [`console.groupCollapsed`](https://developer.mozilla.org/en-US/docs/Web/API/console/groupCollapsed)
+on MDN.
+*/
+@val
+external groupCollapsed: string => unit = "console.groupCollapsed"
+
+/**
+`groupEnd()` ends the current group.
+
+See [`console.groupEnd`](https://developer.mozilla.org/en-US/docs/Web/API/console/groupEnd)
+on MDN.
+*/
+@val
+external groupEnd: unit => unit = "console.groupEnd"
+
+/**
+`errorMany(arr)`. Like `error`, but variadic.
+
+## Examples
+
+```rescript
+Console.errorMany(["Hello", "World"])
+Console.errorMany([1, 2, 3])
+```
+*/
+@val
+@variadic
+external errorMany: array<_> => unit = "console.error"
+
+/**
+`info(value)` print an informational message to console.
+
+See [`console.info`](https://developer.mozilla.org/en-US/docs/Web/API/console/info)
+on MDN.
+
+## Examples
+
+```rescript
+Console.info("Information")
+Console.info(("Hello", "JS"))
+```
+*/
+@val
+external info: 'a => unit = "console.info"
+
+/**
+`info2(v1, v2)`. Like `info`, but with two arguments.
+
+## Examples
+
+```rescript
+Console.info2("Info", "failed to download")
+Console.info2(#info, {"name": "ReScript"})
+```
+*/
+@val
+external info2: ('a, 'b) => unit = "console.info"
+
+/**
+`info3(v1, v2, v3)`. Like `info`, but with three arguments.
+
+## Examples
+
+```rescript
+Console.info3("Hello", "World", "ReScript")
+Console.info3([1, 2, 3], #4, #5)
+```
+*/
+@val
+external info3: ('a, 'b, 'c) => unit = "console.info"
+
+/**
+`info4(v1, v2, v3, v4)`. Like `info`, but with four arguments.
+
+## Examples
+
+```rescript
+Console.info4("Hello", "World", "ReScript", '!')
+Console.info4([1, 2, 3], #4, #5, #lastinfo)
+```
+*/
+@val
+external info4: ('a, 'b, 'c, 'd) => unit = "console.info"
+
+/**
+`info5(v1, v2, v3, v4, v5)`. Like `info`, but with five arguments.
+
+## Examples
+
+```rescript
+Console.info5("Hello", "World", "from", "JS", "!!!")
+Console.info5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
+```
+*/
+@val
+external info5: ('a, 'b, 'c, 'd, 'e) => unit = "console.info"
+
+/**
+`info6(v1, v2, v3, v4, v5, v6)`. Like `info`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.info6("Hello", "World", "from", "JS", "!!!", '!')
+Console.info6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external info6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.info"
+
+/**
+`infoMany(arr)`. Like `info`, but variadic.
+
+## Examples
+
+```rescript
+Console.infoMany(["Hello", "World"])
+Console.infoMany([1, 2, 3])
+```
+*/
+@val
+@variadic
+external infoMany: array<_> => unit = "console.info"
+
+/**
+`log(value)` print a message to console.
+
+See [`console.log`](https://developer.mozilla.org/en-US/docs/Web/API/console/log)
+on MDN.
+
+## Examples
+
+```rescript
+Console.log("Hello")
+let obj = {"name": "ReScript", "version": 10}
+Console.log(obj)
+```
+*/
+@val
+external log: 'a => unit = "console.log"
+
+/**
+`log2(v1, v2)`. Like `log`, but with two arguments.
+
+## Examples
+
+```rescript
+Console.log2("Hello", "World")
+Console.log2([1, 2, 3], '4')
+```
+*/
+@val
+external log2: ('a, 'b) => unit = "console.log"
+
+/**
+`log3(v1, v2, v3)`. Like `log`, but with three arguments.
+
+## Examples
+
+```rescript
+Console.log3("Hello", "World", "ReScript")
+Console.log3("One", 2, #3)
+```
+*/
+@val
+external log3: ('a, 'b, 'c) => unit = "console.log"
+
+/**
+`log4(v1, v2, v3, v4)`. Like `log`, but with four arguments.
+
+## Examples
+
+```rescript
+Console.log4("Hello", "World", "ReScript", "!!!")
+Console.log4([1, 2], (3, 4), [#5, #6], #"polyvar")
+```
+*/
+@val
+external log4: ('a, 'b, 'c, 'd) => unit = "console.log"
+
+/**
+`log5(v1, v2, v3, v4, v5)`. Like `log`, but with five arguments.
+
+## Examples
+
+```rescript
+Console.log5("Hello", "World", "JS", '!', '!')
+Console.log5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
+```
+*/
+@val
+external log5: ('a, 'b, 'c, 'd, 'e) => unit = "console.log"
+
+/**
+`log6(v1, v2, v3, v4, v5, v6)`. Like `log`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.log6("Hello", "World", "JS", '!', '!', '?')
+Console.log6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external log6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.log"
+
+/**
+`logMany(arr)`. Like `log`, but variadic.
+
+## Examples
+
+```rescript
+Console.logMany(["Hello", "World"])
+Console.logMany([1, 2, 3])
+```
+*/
+@val
+@variadic
+external logMany: array<_> => unit = "console.log"
+
+/**
+`table(object)` displays an tabular view of the object in the console.
+
+See [`console.table`](https://developer.mozilla.org/en-US/docs/Web/API/console/table)
+on MDN.
+
+## Examples
+
+```rescript
+Console.table({"language": "rescript", "version": 10.1.2})
+```
+*/
+@val
+external table: 'a => unit = "console.table"
+
+/**
+`time(label)` creates a timer to measure how long an operation takes. `label`
+must be a unique name. Call `console.timeEnd` with the same `label` to print
+output time.
+
+See [`console.time`](https://developer.mozilla.org/en-US/docs/Web/API/console/time)
+on MDN.
+
+## Examples
+
+```rescript
+Console.time("for_time")
+for x in 3 downto 1 {
+  Console.log(x)
+  Console.timeLog("for_time")
+}
+Console.timeEnd("for_time")
+```
+*/
+@val
+external time: string => unit = "console.time"
+
+/**
+`timeEnd(label)` stops a timer created by `time`.
+
+See [`console.timeEnd`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd)
+on MDN.
+
+## Examples
+
+```rescript
+Console.time("for_time")
+for x in 3 downto 1 {
+  Console.log(x)
+  Console.timeLog("for_time")
+}
+Console.timeEnd("for_time")
+```
+*/
+@val
+external timeEnd: string => unit = "console.timeEnd"
+
+/**
+`timeLog(label)` prints the current elapsed time of the given timer to the console.
+
+See [`console.timeLog`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeLog)
+on MDN.
+
+## Examples
+
+```rescript
+Console.time("for_time")
+for x in 3 downto 1 {
+  Console.log(x)
+  Console.timeLog("for_time")
+}
+Console.timeEnd("for_time")
+```
+*/
+@val
+external timeLog: string => unit = "console.timeLog"
+
+/**
 `trace()` print a stack trace to console.
-See [`Console.trace`](https://developer.mozilla.org/en-US/docs/Web/API/console/trace)
+
+See [`console.trace`](https://developer.mozilla.org/en-US/docs/Web/API/console/trace)
 on MDN.
 
 ## Examples
@@ -291,39 +687,96 @@ main()
 external trace: unit => unit = "console.trace"
 
 /**
-`time(label)` creates a timer to measure how long an operation takes. `label`
-must be a unique name. Call `Console.timeEnd` with the same `label` to print
-output time. 
-See [`Console.time`](https://developer.mozilla.org/en-US/docs/Web/API/console/time)
+`warn(value)` print a warning message to console.
+
+See [`console.warn`](https://developer.mozilla.org/en-US/docs/Web/API/console/warn)
 on MDN.
 
 ## Examples
 
 ```rescript
-Console.time("for_time")
-for x in 3 downto 1 {
-  Console.log(x)
-}
-Console.timeEnd("for_time")
+Console.warn("Warning")
+Console.warn(("Warning", "invalid number"))
 ```
 */
 @val
-external time: string => unit = "console.time"
+external warn: 'a => unit = "console.warn"
 
 /**
-`timeEnd(label)` stops a timer created by `time`.
-See [`Console.timeEnd`](https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd)
-on MDN.
+`warn2(v1, v2)`. Like `warn`, but two arguments.
 
 ## Examples
 
 ```rescript
-Console.time("for_time")
-for x in 3 downto 1 {
-  Console.log(x)
-}
-Console.timeEnd("for_time")
+Console.warn2("Hello", "World")
+Console.warn2([1, 2, 3], 4)
 ```
 */
 @val
-external timeEnd: string => unit = "console.timeEnd"
+external warn2: ('a, 'b) => unit = "console.warn"
+
+/**
+`warn3(v1, v2, v3)`. Like `warn`, but three arguments.
+
+## Examples
+
+```rescript
+Console.warn3("Hello", "World", "ReScript")
+Console.warn3([1, 2, 3], #4, #5)
+```
+*/
+@val
+external warn3: ('a, 'b, 'c) => unit = "console.warn"
+
+/**
+`warn4(v1, v2, v3, v4)`. Like `warn`, but with four arguments.
+
+## Examples
+
+```rescript
+Console.warn4("Hello", "World", "ReScript", "!!!")
+Console.warn4(#first, #second, #third, ("fourth"))
+```
+*/
+@val
+external warn4: ('a, 'b, 'c, 'd) => unit = "console.warn"
+
+/**
+`warn5(v1, v2, v3, v4, v5)`. Like `warn`, but with five arguments.
+
+## Examples
+
+```rescript
+Console.warn5("Hello", "World", "from", "JS", "!!!")
+Console.warn5([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"})
+```
+*/
+@val
+external warn5: ('a, 'b, 'c, 'd, 'e) => unit = "console.warn"
+
+/**
+`warn6(v1, v2, v3, v4, v5, v6)`. Like `warn`, but with six arguments.
+
+## Examples
+
+```rescript
+Console.warn6("Hello", "World", "from", "JS", "!!!", '!')
+Console.warn6([1, 2], (3, 4), [#5, #6], #"polyvar", {"name": "ReScript"}, 42)
+```
+*/
+@val
+external warn6: ('a, 'b, 'c, 'd, 'e, 'f) => unit = "console.warn"
+
+/**
+`warnMany(arr)`. Like `warn`, but variadic.
+
+## Examples
+
+```rescript
+Console.warnMany(["Hello", "World"])
+Console.warnMany([1, 2, 3])
+```
+*/
+@val
+@variadic
+external warnMany: array<_> => unit = "console.warn"

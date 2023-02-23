@@ -1,12 +1,24 @@
 type t = Js.Date.t
 
-type time = float
+type msSinceEpoch = float
 
-@send external valueOf: t => time = "valueOf"
+type localeOptions = {
+  dateStyle?: [#full | #long | #medium | #short],
+  timeStyle?: [#full | #long | #medium | #short],
+  weekday?: [#long | #short | #narrow],
+  era?: [#long | #short | #narrow],
+  year?: [#numeric | #"2-digit"],
+  month?: [#numeric | #"2-digit" | #long | #short | #narrow],
+  day?: [#numeric | #"2-digit"],
+  hour?: [#numeric | #"2-digit"],
+  minute?: [#numeric | #"2-digit"],
+  second?: [#numeric | #"2-digit"],
+  timeZoneName?: [#long | #short],
+}
 
 @new external make: unit => t = "Date"
 @new external fromString: string => t = "Date"
-@new external fromTime: time => t = "Date"
+@new external fromTime: msSinceEpoch => t = "Date"
 
 @new external makeWithYM: (~year: int, ~month: int) => t = "Date"
 @new external makeWithYMD: (~year: int, ~month: int, ~date: int) => t = "Date"
@@ -35,10 +47,11 @@ external makeWithYMDHMSM: (
 ) => t = "Date"
 
 module UTC = {
-  @val external makeWithYM: (~year: int, ~month: int) => time = "Date.UTC"
-  @val external makeWithYMD: (~year: int, ~month: int, ~date: int) => time = "Date.UTC"
+  @val external makeWithYM: (~year: int, ~month: int) => msSinceEpoch = "Date.UTC"
+  @val external makeWithYMD: (~year: int, ~month: int, ~date: int) => msSinceEpoch = "Date.UTC"
   @val
-  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => time = "Date.UTC"
+  external makeWithYMDH: (~year: int, ~month: int, ~date: int, ~hours: int) => msSinceEpoch =
+    "Date.UTC"
   @val
   external makeWithYMDHM: (
     ~year: int,
@@ -46,7 +59,7 @@ module UTC = {
     ~date: int,
     ~hours: int,
     ~minutes: int,
-  ) => time = "Date.UTC"
+  ) => msSinceEpoch = "Date.UTC"
   @val
   external makeWithYMDHMS: (
     ~year: int,
@@ -55,7 +68,7 @@ module UTC = {
     ~hours: int,
     ~minutes: int,
     ~seconds: int,
-  ) => time = "Date.UTC"
+  ) => msSinceEpoch = "Date.UTC"
   @val
   external makeWithYMDHMSM: (
     ~year: int,
@@ -65,12 +78,12 @@ module UTC = {
     ~minutes: int,
     ~seconds: int,
     ~milliseconds: int,
-  ) => time = "Date.UTC"
+  ) => msSinceEpoch = "Date.UTC"
 }
 
-@val external now: unit => time = "Date.now"
+@val external now: unit => msSinceEpoch = "Date.now"
 
-@send external getTime: t => time = "getTime"
+@send external getTime: t => msSinceEpoch = "getTime"
 @send external getTimezoneOffset: t => int = "getTimezoneOffset"
 
 // Locale
@@ -101,7 +114,6 @@ external setMinutesSMs: (t, ~minutes: int, ~seconds: int, ~milliseconds: int) =>
 @send external setSeconds: (t, int) => unit = "setSeconds"
 @send external setSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setSeconds"
 @send external setMilliseconds: (t, int) => unit = "setMilliseconds"
-@send external setDay: (t, int) => unit = "setDay"
 
 // UTC
 @send external getUTCFullYear: t => int = "getUTCFullYear"
@@ -139,15 +151,25 @@ external setUTCMinutesSMs: (t, ~minutes: int, ~seconds: int, ~milliseconds: int)
 @send external setUTCSeconds: (t, int) => unit = "setUTCSeconds"
 @send external setUTCSecondsMs: (t, ~seconds: int, ~milliseconds: int) => unit = "setUTCSeconds"
 @send external setUTCMilliseconds: (t, int) => unit = "setUTCMilliseconds"
-@send external setUTCDay: (t, int) => unit = "setUTCDay"
 
 @send external toDateString: t => string = "toDateString"
 @send external toString: t => string = "toString"
 @send external toTimeString: t => string = "toTimeString"
 
 @send external toLocaleDateString: t => string = "toLocaleDateString"
+@send external toLocaleDateStringWithLocale: (t, string) => string = "toLocaleDateString"
+@send
+external toLocaleDateStringWithLocaleAndOptions: (t, string, localeOptions) => string =
+  "toLocaleDateString"
 @send external toLocaleString: t => string = "toLocaleString"
+@send external toLocaleStringWithLocale: (t, string) => string = "toLocaleString"
+@send
+external toLocaleStringWithLocaleAndOptions: (t, string, localeOptions) => string = "toLocaleString"
 @send external toLocaleTimeString: t => string = "toLocaleTimeString"
+@send external toLocaleTimeStringWithLocale: (t, string) => string = "toLocaleTimeString"
+@send
+external toLocaleTimeStringWithLocaleAndOptions: (t, string, localeOptions) => string =
+  "toLocaleTimeString"
 
 @send external toISOString: t => string = "toISOString"
 @send external toUTCString: t => string = "toUTCString"
