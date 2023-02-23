@@ -13,3 +13,9 @@ let fromOption: option<'a> => t<'a> = option =>
   | Some(x) => make(x)
   | None => undefined
   }
+
+let getExn: t<'a> => 'a = value =>
+  switch value->toOption {
+  | Some(x) => x
+  | None => raise(Invalid_argument("Nullable.getExn: value is null or undefined"))
+  }

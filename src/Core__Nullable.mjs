@@ -9,7 +9,19 @@ function fromOption(option) {
   
 }
 
+function getExn(value) {
+  if (!(value == null)) {
+    return value;
+  }
+  throw {
+        RE_EXN_ID: "Invalid_argument",
+        _1: "Nullable.getExn: value is null or undefined",
+        Error: new Error()
+      };
+}
+
 export {
   fromOption ,
+  getExn ,
 }
 /* No side effect */
