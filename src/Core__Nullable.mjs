@@ -44,11 +44,19 @@ function mapWithDefault(value, $$default, f) {
   }
 }
 
+function flatMap(value, f) {
+  if (!(value == null)) {
+    return Curry._1(f, value);
+  }
+  
+}
+
 export {
   fromOption ,
   getWithDefault ,
   getExn ,
   map ,
   mapWithDefault ,
+  flatMap ,
 }
 /* No side effect */

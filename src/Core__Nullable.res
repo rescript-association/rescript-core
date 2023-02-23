@@ -39,3 +39,9 @@ let mapWithDefault = (value, default, f) =>
   | Some(x) => f(x)
   | None => default
   }
+
+let flatMap = (value, f) =>
+  switch value->toOption {
+  | Some(x) => f(x)
+  | None => undefined
+  }
