@@ -159,7 +159,7 @@ noneValue->Nullable.mapWithDefault(0, x => x + 5) // 0
 let mapWithDefault: (t<'a>, 'b, 'a => 'b) => 'b
 
 /**
-`flatMap(value, f)` returns `f(x)` if `value` is not `null` or `undefined`, otherwise `undefined`.
+`flatMap(value, f)` returns `f(value)` if `value` is not `null` or `undefined`, otherwise `undefined`.
 
 ## Examples
 
