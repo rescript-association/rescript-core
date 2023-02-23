@@ -14,6 +14,12 @@ let fromOption: option<'a> => t<'a> = option =>
   | None => undefined
   }
 
+let getWithDefault = (value, default) =>
+  switch value->toOption {
+  | Some(x) => x
+  | None => default
+  }
+
 let getExn: t<'a> => 'a = value =>
   switch value->toOption {
   | Some(x) => x

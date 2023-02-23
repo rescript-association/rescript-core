@@ -9,6 +9,14 @@ function fromOption(option) {
   
 }
 
+function getWithDefault(value, $$default) {
+  if (value == null) {
+    return $$default;
+  } else {
+    return value;
+  }
+}
+
 function getExn(value) {
   if (!(value == null)) {
     return value;
@@ -22,6 +30,7 @@ function getExn(value) {
 
 export {
   fromOption ,
+  getWithDefault ,
   getExn ,
 }
 /* No side effect */
