@@ -52,20 +52,8 @@ module ThenChaining = {
       resolve(resolve(first + 1))
     })
     ->then(p => {
-      p
-      ->then(value => {
-        Test.run(__POS_OF__("Should be 2"), value, equal, 2)
-        resolve()
-      })
-      ->ignore
-      resolve()
-    })
-    ->catch(e => {
-      let ret = switch e {
-      | Exn.Error(m) => Exn.name(m) === Some("TypeError")
-      | _ => false
-      }
-      Test.run(__POS_OF__("then should have thrown an error"), ret, equal, true)
+      let isPromise = Type.typeof((p: promise<_>)) == #object
+      Test.run(__POS_OF__("Should not be a promise"), isPromise, equal, false)
       resolve()
     })
   }
@@ -91,20 +79,8 @@ module ThenChaining = {
       resolve(num)
     })
     ->then(p => {
-      // This will throw because of the auto-collapsing of promises
-      p
-      ->thenResolve(num => {
-        num + 1
-      })
-      ->ignore
-      resolve()
-    })
-    ->catch(e => {
-      let ret = switch e {
-      | Exn.Error(m) => Exn.name(m) === Some("TypeError")
-      | _ => false
-      }
-      Test.run(__POS_OF__("then should have thrown an error"), ret, equal, true)
+      let isPromise = Type.typeof((p: promise<_>)) == #object
+      Test.run(__POS_OF__("Should not be a promise"), isPromise, equal, false)
       resolve()
     })
   }
