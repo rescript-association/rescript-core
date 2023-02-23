@@ -81,3 +81,99 @@ let asNullable = optString->Nullable.fromOption // Nullable.t<string>
 ```
 */
 let fromOption: option<'a> => t<'a>
+
+/**
+`getWithDefault(value, default)` returns `value` if not `null` or `undefined`,
+otherwise return `default`.
+
+## Examples
+
+```rescript
+Nullable.getWithDefault(Nullable.null, "Banana") // Banana
+Nullable.getWithDefault(Nulalble.make("Apple"), "Banana") // Apple
+
+let greet = (firstName: option<string>) =>
+  "Greetings " ++ firstName->Nullable.getWithDefault("Anonymous")
+
+Nullable.make("Jane")->greet // "Greetings Jane"
+Nullable.null->greet // "Greetings Anonymous"
+```
+*/
+let getWithDefault: (t<'a>, 'a) => 'a
+
+/**
+`getExn(value)` raises an exception if `null` or `undefined`, otherwise returns the value.
+
+```rescript
+Nullable.getExn(Nullable.make(3)) // 3
+Nullable.getExn(Nullable.null) /* Raises an Error */
+```
+
+## Exceptions
+
+- Raises `Invalid_argument` if `value` is `null` or `undefined`
+*/
+let getExn: t<'a> => 'a
+
+/**
+`getUnsafe(value)` returns `value`.
+
+## Examples
+
+```rescript
+Nullable.getUnsafe(Nullable.make(3)) == 3
+Nullable.getUnsafe(Nullable.null) // Raises an error
+```
+
+## Important
+
+- This is an unsafe operation, it assumes `value` is not `null` or `undefined`.
+*/
+external getUnsafe: t<'a> => 'a = "%identity"
+
+/**
+`map(value, f)` returns `f(value)` if `value` is not `null` or `undefined`, otherwise `undefined`.
+
+## Examples
+
+```rescript
+Nullable.map(Nullable.make(3), x => x * x) // Nullable.make(9)
+Nullable.map(Nullable.undefined, x => x * x) // Nullable.undefined
+```
+*/
+let map: (t<'a>, 'a => 'b) => t<'b>
+
+/**
+`mapWithDefault(value, default, f)` returns `f(value)` if `value` is not `null` or `undefined`, otherwise `default`.
+
+## Examples
+
+```rescript
+let someValue = Nullable.make(3)
+someValue->Nullable.mapWithDefault(0, x => x + 5) // 8
+
+let noneValue = Nullable.null
+noneValue->Nullable.mapWithDefault(0, x => x + 5) // 0
+```
+*/
+let mapWithDefault: (t<'a>, 'b, 'a => 'b) => 'b
+
+/**
+`flatMap(value, f)` returns `f(x)` if `value` is not `null` or `undefined`, otherwise `undefined`.
+
+## Examples
+
+```rescript
+let addIfAboveOne = value =>
+  if (value > 1) {
+    Nullable.make(value + 1)
+  } else {
+    Nullable.null
+  }
+
+Nullable.flatMap(Nullable.make(2), addIfAboveOne) // Nullable.make(3)
+Nullable.flatMap(Nullable.make(-4), addIfAboveOne) // Nullable.undefined
+Nullable.flatMap(Nullable.null, addIfAboveOne) // Nullable.undefined
+```
+*/
+let flatMap: (t<'a>, 'a => t<'b>) => t<'b>
