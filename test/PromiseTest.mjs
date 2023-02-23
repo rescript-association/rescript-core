@@ -72,7 +72,7 @@ function testInvalidThen(param) {
                       });
                   return Promise.resolve(undefined);
                 }), (function (e) {
-                var ret = e.RE_EXN_ID === Js_exn.$$Error ? e._1.message === "p.then is not a function" : false;
+                var ret = e.RE_EXN_ID === Js_exn.$$Error ? e._1.name === "TypeError" : false;
                 Test.run([
                       [
                         "PromiseTest.res",
@@ -111,7 +111,7 @@ function testInvalidThenResolve(param) {
                       });
                   return Promise.resolve(undefined);
                 }), (function (e) {
-                var ret = e.RE_EXN_ID === Js_exn.$$Error ? e._1.message === "p.then is not a function" : false;
+                var ret = e.RE_EXN_ID === Js_exn.$$Error ? e._1.name === "TypeError" : false;
                 Test.run([
                       [
                         "PromiseTest.res",
@@ -181,7 +181,7 @@ function testExternalPromiseThrow(param) {
   return Core__Promise.$$catch(Curry._1(asyncParseFail, undefined).then(function (param) {
                   return Promise.resolve(undefined);
                 }), (function (e) {
-                var success = e.RE_EXN_ID === Js_exn.$$Error ? Caml_obj.equal(e._1.message, "Unexpected token . in JSON at position 1") : false;
+                var success = e.RE_EXN_ID === Js_exn.$$Error ? Caml_obj.equal(e._1.name, "SyntaxError") : false;
                 Test.run([
                       [
                         "PromiseTest.res",

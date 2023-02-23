@@ -62,7 +62,7 @@ module ThenChaining = {
     })
     ->catch(e => {
       let ret = switch e {
-      | Exn.Error(m) => Exn.message(m) === Some("p.then is not a function")
+      | Exn.Error(m) => Exn.name(m) === Some("TypeError")
       | _ => false
       }
       Test.run(__POS_OF__("then should have thrown an error"), ret, equal, true)
@@ -101,7 +101,7 @@ module ThenChaining = {
     })
     ->catch(e => {
       let ret = switch e {
-      | Exn.Error(m) => Exn.message(m) === Some("p.then is not a function")
+      | Exn.Error(m) => Exn.name(m) === Some("TypeError")
       | _ => false
       }
       Test.run(__POS_OF__("then should have thrown an error"), ret, equal, true)
@@ -156,7 +156,7 @@ module Catching = {
     ->then(_ => resolve()) // Since our asyncParse will fail anyways, we convert to promise<unit> for our catch later
     ->catch(e => {
       let success = switch e {
-      | Exn.Error(err) => Exn.message(err) == Some("Unexpected token . in JSON at position 1")
+      | Exn.Error(err) => Exn.name(err) == Some("SyntaxError")
       | _ => false
       }
 
