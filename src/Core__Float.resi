@@ -140,7 +140,8 @@ external isFinite: float => bool = "isFinite"
 
 /**
 `parseFloat(v)` parse the given `v` and returns a float. Leading whitespace in
-`v` is ignored. Returns `NaN` if `v` can't be parsed.
+`v` is ignored. Returns `NaN` if `v` can't be parsed. Use [`fromString`] to
+ensure it returns a valid float and not `NaN`.
 See [`parseFloat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat) on MDN.
 
 ## Examples
@@ -154,7 +155,7 @@ Float.parseFloat("error")->Float.isNaN // true
 ```
 */
 @val
-external parseFloat: 'a => float = "parseFloat"
+external parseFloat: string => float = "parseFloat"
 
 /**
 `parseInt(v)` parse the given `v` and returns a float. Leading whitespace in
