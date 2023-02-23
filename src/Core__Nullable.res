@@ -27,3 +27,9 @@ let getExn: t<'a> => 'a = value =>
   }
 
 external getUnsafe: t<'a> => 'a = "%identity"
+
+let map = (value, f) =>
+  switch value->toOption {
+  | Some(x) => make(f(x))
+  | None => undefined
+  }
