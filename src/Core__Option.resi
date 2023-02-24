@@ -66,7 +66,7 @@ Option.forEach(None, x => Console.log(x)) // returns ()
 let forEach: (option<'a>, 'a => unit) => unit
 
 /**
-`getExn(opt)` raises an Error in case `None` is provided.
+`getExn(opt)` returns `value` if `opt` is `Some(value)`, otherwise raises an exception.
 
 ```rescript
 Option.getExn(Some(3)) // 3
@@ -96,8 +96,7 @@ Option.getUnsafe(None) // Raises an error
 external getUnsafe: option<'a> => 'a = "%identity"
 
 /**
-`mapWithDefault(opt, default, f)` applies `f` to `opt`, if `opt` is `None`, then
-`f` return `default`, otherwise return that value applied with `f`.
+`mapWithDefault(opt, default, f)` returns `Some(f(value))` if `opt` is `Some(value)`, otherwise `default`.
 
 ## Examples
 
@@ -112,8 +111,7 @@ noneValue->Option.mapWithDefault(0, x => x + 5) // 0
 let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b
 
 /**
-`map(opt f)` applies `f` to `opt`, if `opt` is `Some(value)` this returns
-`f(value)`, otherwise it returns `None`.
+`map(opt, f)` returns `Some(f(value))` if `opt` is `Some(value)`, otherwise `None`.
 
 ## Examples
 
@@ -125,8 +123,7 @@ Option.map(None, x => x * x) // None
 let map: (option<'a>, 'a => 'b) => option<'b>
 
 /**
-`flatMap(opt, f)` returns `f` applied to `opt` if `opt` is `Some(value)`,
-otherwise `None`. The function `f` must have a return type of `option<'b>`.
+`flatMap(opt, f)` returns `f(value)` if `opt` is `Some(value)`, otherwise `None`.
 
 ## Examples
 
@@ -146,8 +143,7 @@ Option.flatMap(None, addIfAboveOne) // None
 let flatMap: (option<'a>, 'a => option<'b>) => option<'b>
 
 /**
-`getWithDefault(opt, default)` returns `value` if `opt` is `Some(value)`,
-otherwise return `default` if `opt` is `None`.
+`getWithDefault(opt, default)` returns `value` if `opt` is `Some(value)`, otherwise `default`.
 
 ## Examples
 
