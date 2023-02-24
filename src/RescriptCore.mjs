@@ -33,8 +33,6 @@ var $$RegExp;
 
 var $$String;
 
-var Undefined;
-
 var $$Symbol;
 
 var Type;
@@ -112,7 +110,6 @@ export {
   $$Promise ,
   $$RegExp ,
   $$String ,
-  Undefined ,
   $$Symbol ,
   Type ,
   $$JSON ,
