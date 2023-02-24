@@ -30,10 +30,11 @@ function getExn(value) {
 }
 
 function map(value, f) {
-  if (!(value == null)) {
+  if (value == null) {
+    return value;
+  } else {
     return Curry._1(f, value);
   }
-  
 }
 
 function mapWithDefault(value, $$default, f) {
@@ -45,10 +46,11 @@ function mapWithDefault(value, $$default, f) {
 }
 
 function flatMap(value, f) {
-  if (!(value == null)) {
+  if (value == null) {
+    return value;
+  } else {
     return Curry._1(f, value);
   }
-  
 }
 
 export {

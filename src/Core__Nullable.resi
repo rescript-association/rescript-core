@@ -132,7 +132,8 @@ Nullable.getUnsafe(Nullable.null) // Raises an error
 external getUnsafe: t<'a> => 'a = "%identity"
 
 /**
-`map(value, f)` returns `f(value)` if `value` is not `null` or `undefined`, otherwise `undefined`.
+`map(value, f)` returns `f(value)` if `value` is not `null` or `undefined`,
+otherwise returns `value` unchanged.
 
 ## Examples
 
@@ -144,7 +145,8 @@ Nullable.map(Nullable.undefined, x => x * x) // Nullable.undefined
 let map: (t<'a>, 'a => 'b) => t<'b>
 
 /**
-`mapWithDefault(value, default, f)` returns `f(value)` if `value` is not `null` or `undefined`, otherwise `default`.
+`mapWithDefault(value, default, f)` returns `f(value)` if `value` is not `null`
+or `undefined`, otherwise returns `default`.
 
 ## Examples
 
@@ -159,7 +161,8 @@ noneValue->Nullable.mapWithDefault(0, x => x + 5) // 0
 let mapWithDefault: (t<'a>, 'b, 'a => 'b) => 'b
 
 /**
-`flatMap(value, f)` returns `f(value)` if `value` is not `null` or `undefined`, otherwise `undefined`.
+`flatMap(value, f)` returns `f(value)` if `value` is not `null` or `undefined`,
+otherwise returns `value` unchanged.
 
 ## Examples
 

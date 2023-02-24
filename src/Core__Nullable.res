@@ -31,7 +31,7 @@ external getUnsafe: t<'a> => 'a = "%identity"
 let map = (value, f) =>
   switch value->toOption {
   | Some(x) => make(f(x))
-  | None => undefined
+  | None => Obj.magic(value)
   }
 
 let mapWithDefault = (value, default, f) =>
@@ -43,5 +43,5 @@ let mapWithDefault = (value, default, f) =>
 let flatMap = (value, f) =>
   switch value->toOption {
   | Some(x) => f(x)
-  | None => undefined
+  | None => Obj.magic(value)
   }
