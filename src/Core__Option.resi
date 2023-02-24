@@ -96,7 +96,7 @@ Option.getUnsafe(None) // Raises an error
 external getUnsafe: option<'a> => 'a = "%identity"
 
 /**
-`mapWithDefault(opt, default, f)` returns `Some(f(value))` if `opt` is `Some(value)`, otherwise `default`.
+`mapWithDefault(opt, default, f)` returns `f(value)` if `opt` is `Some(value)`, otherwise `default`.
 
 ## Examples
 
