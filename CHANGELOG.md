@@ -15,6 +15,8 @@
 - Remove `Undefined` module. `Nullable` or `option` directly (where appropriate) can be used instead. https://github.com/rescript-association/rescript-core/pull/59
 - Change `RegExp.source` to return a `string`. Was previously returning a `bool`, which is wrong. https://github.com/rescript-association/rescript-core/pull/47
 - Remove `Date.valueOf` as it returns the same as `Date.getTime`. https://github.com/rescript-association/rescript-core/pull/61
+- Change `Float.fromString` signature. Now accepts only string. https://github.com/rescript-association/rescript-core/pull/54
+- Change `Float.parseFloat` signature. Now accepts only string. https://github.com/rescript-association/rescript-core/pull/54
 
 ### Documentation
 
@@ -27,3 +29,4 @@
 - Docstrings for `Dict`. https://github.com/rescript-association/rescript-core/pull/40
 - Docstrings for `RegExp`. https://github.com/rescript-association/rescript-core/pull/47
 - Docstrings for `Date`. https://github.com/rescript-association/rescript-core/pull/61
+- Docstrings for `Float`. https://github.com/rescript-association/rescript-core/pull/54
