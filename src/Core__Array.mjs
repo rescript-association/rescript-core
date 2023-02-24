@@ -21,6 +21,12 @@ function lastIndexOfOpt(arr, item) {
   
 }
 
+function sort(arr, cmp) {
+  var result = arr.slice();
+  result.sort(cmp);
+  return result;
+}
+
 function reduce(a, x, f) {
   var f$1 = Curry.__2(f);
   var r = x;
@@ -107,6 +113,7 @@ function flatMap(a, f) {
 }
 
 export {
+  sort ,
   indexOfOpt ,
   lastIndexOfOpt ,
   reduce ,

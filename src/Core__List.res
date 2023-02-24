@@ -793,13 +793,11 @@ let setAssocU = (xs, x, k, eq) =>
 
 let setAssoc = (xs, x, k, eq) => setAssocU(xs, x, k, (. a, b) => eq(a, b))
 
-let sortU = (xs, cmp) => {
+let sort = (xs, cmp) => {
   let arr = toArray(xs)
-  Belt_SortArray.stableSortInPlaceByU(arr, cmp)
+  Core__Array.sortInPlace(arr, cmp)
   fromArray(arr)
 }
-
-let sort = (xs, cmp) => sortU(xs, (. x, y) => cmp(x, y))
 
 let rec getByU = (xs, p) =>
   switch xs {

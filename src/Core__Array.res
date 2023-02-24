@@ -39,8 +39,6 @@ external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<
 
 @send external shift: array<'a> => option<'a> = "shift"
 
-@send external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
-
 @variadic @send
 external spliceInPlace: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit =
   "splice"
@@ -77,6 +75,14 @@ let lastIndexOfOpt = (arr, item) =>
 @send external slice: (array<'a>, ~start: int, ~end: int) => array<'a> = "slice"
 @send external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
 @send external copy: array<'a> => array<'a> = "slice"
+
+@send external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
+
+let sort = (arr, cmp) => {
+  let result = copy(arr)
+  sortInPlace(result, cmp)
+  result
+}
 
 @send external toString: array<'a> => string = "toString"
 @send external toLocaleString: array<'a> => string = "toLocaleString"

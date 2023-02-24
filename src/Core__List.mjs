@@ -4,7 +4,6 @@ import * as Curry from "rescript/lib/es6/curry.js";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Core__Array from "./Core__Array.mjs";
-import * as Belt_SortArray from "rescript/lib/es6/belt_SortArray.js";
 
 function head(x) {
   if (x) {
@@ -1177,9 +1176,8 @@ function setAssoc(xs, x, k, eq) {
 }
 
 function sort(xs, cmp) {
-  var cmp$1 = Curry.__2(cmp);
   var arr = toArray(xs);
-  Belt_SortArray.stableSortInPlaceByU(arr, cmp$1);
+  arr.sort(cmp);
   return fromArray(arr);
 }
 
