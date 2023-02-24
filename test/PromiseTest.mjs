@@ -55,35 +55,21 @@ function testThen(param) {
 }
 
 function testInvalidThen(param) {
-  return Core__Promise.$$catch(Promise.resolve(1).then(function (first) {
-                    return Promise.resolve(Promise.resolve(first + 1 | 0));
-                  }).then(function (p) {
-                  p.then(function (value) {
-                        Test.run([
-                              [
-                                "PromiseTest.res",
-                                57,
-                                28,
-                                41
-                              ],
-                              "Should be 2"
-                            ], value, equal, 2);
-                        return Promise.resolve(undefined);
-                      });
-                  return Promise.resolve(undefined);
-                }), (function (e) {
-                var ret = e.RE_EXN_ID === Js_exn.$$Error ? e._1.message === "p.then is not a function" : false;
-                Test.run([
-                      [
-                        "PromiseTest.res",
-                        68,
-                        26,
-                        60
-                      ],
-                      "then should have thrown an error"
-                    ], ret, equal, true);
-                return Promise.resolve(undefined);
-              }));
+  return Promise.resolve(1).then(function (first) {
+                return Promise.resolve(Promise.resolve(first + 1 | 0));
+              }).then(function (p) {
+              var isPromise = typeof p === "object";
+              Test.run([
+                    [
+                      "PromiseTest.res",
+                      56,
+                      26,
+                      51
+                    ],
+                    "Should not be a promise"
+                  ], isPromise, equal, false);
+              return Promise.resolve(undefined);
+            });
 }
 
 function testThenResolve(param) {
@@ -93,7 +79,7 @@ function testThenResolve(param) {
               Test.run([
                     [
                       "PromiseTest.res",
-                      81,
+                      69,
                       26,
                       39
                     ],
@@ -103,26 +89,21 @@ function testThenResolve(param) {
 }
 
 function testInvalidThenResolve(param) {
-  return Core__Promise.$$catch(Promise.resolve(1).then(function (num) {
-                    return Promise.resolve(num);
-                  }).then(function (p) {
-                  p.then(function (num) {
-                        return num + 1 | 0;
-                      });
-                  return Promise.resolve(undefined);
-                }), (function (e) {
-                var ret = e.RE_EXN_ID === Js_exn.$$Error ? e._1.message === "p.then is not a function" : false;
-                Test.run([
-                      [
-                        "PromiseTest.res",
-                        107,
-                        26,
-                        60
-                      ],
-                      "then should have thrown an error"
-                    ], ret, equal, true);
-                return Promise.resolve(undefined);
-              }));
+  return Promise.resolve(1).then(function (num) {
+                return Promise.resolve(num);
+              }).then(function (p) {
+              var isPromise = typeof p === "object";
+              Test.run([
+                    [
+                      "PromiseTest.res",
+                      83,
+                      26,
+                      51
+                    ],
+                    "Should not be a promise"
+                  ], isPromise, equal, false);
+              return Promise.resolve(undefined);
+            });
 }
 
 function runTests$1(param) {
@@ -148,7 +129,7 @@ function testExnRejection(param) {
           Test.run([
                 [
                   "PromiseTest.res",
-                  129,
+                  105,
                   26,
                   30
                 ],
@@ -181,11 +162,11 @@ function testExternalPromiseThrow(param) {
   return Core__Promise.$$catch(Curry._1(asyncParseFail, undefined).then(function (param) {
                   return Promise.resolve(undefined);
                 }), (function (e) {
-                var success = e.RE_EXN_ID === Js_exn.$$Error ? Caml_obj.equal(e._1.message, "Unexpected token . in JSON at position 1") : false;
+                var success = e.RE_EXN_ID === Js_exn.$$Error ? Caml_obj.equal(e._1.name, "SyntaxError") : false;
                 Test.run([
                       [
                         "PromiseTest.res",
-                        163,
+                        139,
                         26,
                         76
                       ],
@@ -207,7 +188,7 @@ function testExnThrow(param) {
                 Test.run([
                       [
                         "PromiseTest.res",
-                        182,
+                        158,
                         26,
                         49
                       ],
@@ -225,7 +206,7 @@ function testRaiseErrorThrow(param) {
                 Test.run([
                       [
                         "PromiseTest.res",
-                        205,
+                        181,
                         26,
                         51
                       ],
@@ -249,7 +230,7 @@ function thenAfterCatch(param) {
               Test.run([
                     [
                       "PromiseTest.res",
-                      228,
+                      204,
                       26,
                       45
                     ],
@@ -278,7 +259,7 @@ function testCatchFinally(param) {
         Test.run([
               [
                 "PromiseTest.res",
-                250,
+                226,
                 26,
                 48
               ],
@@ -287,7 +268,7 @@ function testCatchFinally(param) {
         Test.run([
               [
                 "PromiseTest.res",
-                251,
+                227,
                 26,
                 59
               ],
@@ -309,7 +290,7 @@ function testResolveFinally(param) {
         Test.run([
               [
                 "PromiseTest.res",
-                268,
+                244,
                 26,
                 45
               ],
@@ -318,7 +299,7 @@ function testResolveFinally(param) {
         Test.run([
               [
                 "PromiseTest.res",
-                269,
+                245,
                 26,
                 59
               ],
@@ -388,7 +369,7 @@ function testParallel(param) {
               Test.run([
                     [
                       "PromiseTest.res",
-                      306,
+                      282,
                       26,
                       55
                     ],
@@ -415,7 +396,7 @@ function testRace(param) {
               Test.run([
                     [
                       "PromiseTest.res",
-                      325,
+                      301,
                       26,
                       44
                     ],
@@ -449,7 +430,7 @@ function testParallel2(param) {
               Test.run([
                     [
                       "PromiseTest.res",
-                      349,
+                      325,
                       26,
                       55
                     ],
@@ -494,7 +475,7 @@ function testParallel3(param) {
               Test.run([
                     [
                       "PromiseTest.res",
-                      374,
+                      350,
                       26,
                       55
                     ],
@@ -545,7 +526,7 @@ function testParallel4(param) {
               Test.run([
                     [
                       "PromiseTest.res",
-                      400,
+                      376,
                       26,
                       55
                     ],
@@ -602,7 +583,7 @@ function testParallel5(param) {
               Test.run([
                     [
                       "PromiseTest.res",
-                      427,
+                      403,
                       26,
                       55
                     ],
@@ -665,7 +646,7 @@ function testParallel6(param) {
               Test.run([
                     [
                       "PromiseTest.res",
-                      455,
+                      431,
                       26,
                       55
                     ],
