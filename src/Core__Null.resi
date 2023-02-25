@@ -27,7 +27,7 @@ See [`null`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/O
 
 ## Examples
 ```rescript
-Console.log(Null.null) // Logs `null` to the console.
+Console.log(null) // Logs `null` to the console.
 ```
 */
 external null: t<'a> = "#null"
@@ -67,7 +67,7 @@ Turns an `option` into a `Null.t`. `None` will be converted to `null`.
 ```rescript
 let optString: option<string> = None
 let asNull = optString->Null.fromOption // Null.t<string>
-Console.log(asNull == Null.null) // Logs `true` to the console.
+Console.log(asNull == null) // Logs `true` to the console.
 ```
 */
 let fromOption: option<'a> => t<'a>
@@ -79,14 +79,14 @@ let fromOption: option<'a> => t<'a>
 ## Examples
 
 ```rescript
-Null.getWithDefault(Null.null, "Banana") // Banana
+Null.getWithDefault(null, "Banana") // Banana
 Null.getWithDefault(Nulalble.make("Apple"), "Banana") // Apple
 
 let greet = (firstName: option<string>) =>
   "Greetings " ++ firstName->Null.getWithDefault("Anonymous")
 
 Null.make("Jane")->greet // "Greetings Jane"
-Null.null->greet // "Greetings Anonymous"
+null->greet // "Greetings Anonymous"
 ```
 */
 let getWithDefault: (t<'a>, 'a) => 'a
@@ -96,7 +96,7 @@ let getWithDefault: (t<'a>, 'a) => 'a
 
 ```rescript
 Null.getExn(Null.make(3)) // 3
-Null.getExn(Null.null) /* Raises an Error */
+Null.getExn(null) /* Raises an Error */
 ```
 
 ## Exceptions
@@ -112,7 +112,7 @@ let getExn: t<'a> => 'a
 
 ```rescript
 Null.getUnsafe(Null.make(3)) == 3
-Null.getUnsafe(Null.null) // Raises an error
+Null.getUnsafe(null) // Raises an error
 ```
 
 ## Important
@@ -129,7 +129,7 @@ external getUnsafe: t<'a> => 'a = "%identity"
 
 ```rescript
 Null.map(Null.make(3), x => x * x) // Null.make(9)
-Null.map(Null.null, x => x * x) // Null.null
+Null.map(null, x => x * x) // null
 ```
 */
 let map: (t<'a>, 'a => 'b) => t<'b>
@@ -144,7 +144,7 @@ otherwise returns `default`.
 let someValue = Null.make(3)
 someValue->Null.mapWithDefault(0, x => x + 5) // 8
 
-let noneValue = Null.null
+let noneValue = null
 noneValue->Null.mapWithDefault(0, x => x + 5) // 0
 ```
 */
@@ -161,12 +161,12 @@ let addIfAboveOne = value =>
   if (value > 1) {
     Null.make(value + 1)
   } else {
-    Null.null
+    null
   }
 
 Null.flatMap(Null.make(2), addIfAboveOne) // Null.make(3)
-Null.flatMap(Null.make(-4), addIfAboveOne) // Null.null
-Null.flatMap(Null.null, addIfAboveOne) // Null.null
+Null.flatMap(Null.make(-4), addIfAboveOne) // null
+Null.flatMap(null, addIfAboveOne) // null
 ```
 */
 let flatMap: (t<'a>, 'a => t<'b>) => t<'b>
