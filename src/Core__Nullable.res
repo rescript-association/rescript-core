@@ -13,3 +13,35 @@ let fromOption: option<'a> => t<'a> = option =>
   | Some(x) => make(x)
   | None => undefined
   }
+
+let getWithDefault = (value, default) =>
+  switch value->toOption {
+  | Some(x) => x
+  | None => default
+  }
+
+let getExn: t<'a> => 'a = value =>
+  switch value->toOption {
+  | Some(x) => x
+  | None => raise(Invalid_argument("Nullable.getExn: value is null or undefined"))
+  }
+
+external getUnsafe: t<'a> => 'a = "%identity"
+
+let map = (value, f) =>
+  switch value->toOption {
+  | Some(x) => make(f(x))
+  | None => Obj.magic(value)
+  }
+
+let mapWithDefault = (value, default, f) =>
+  switch value->toOption {
+  | Some(x) => f(x)
+  | None => default
+  }
+
+let flatMap = (value, f) =>
+  switch value->toOption {
+  | Some(x) => f(x)
+  | None => Obj.magic(value)
+  }
