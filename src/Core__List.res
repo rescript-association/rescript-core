@@ -94,7 +94,7 @@ let head = x =>
 
 let headExn = x =>
   switch x {
-  | list{} => raise(Not_found)
+  | list{} => Core__Error.panic("List.headExn: list is empty")
   | list{x, ..._} => x
   }
 
@@ -106,7 +106,7 @@ let tail = x =>
 
 let tailExn = x =>
   switch x {
-  | list{} => raise(Not_found)
+  | list{} => Core__Error.panic("List.tailExn: list is empty")
   | list{_, ...t} => t
   }
 
@@ -132,7 +132,7 @@ let rec nthAuxAssert = (x, n) =>
     } else {
       nthAuxAssert(t, n - 1)
     }
-  | _ => raise(Not_found)
+  | list{} => Core__Error.panic("List.nthAuxAssert: list is empty")
   }
 
 let get = (x, n) =>
@@ -144,7 +144,7 @@ let get = (x, n) =>
 
 let getExn = (x, n) =>
   if n < 0 {
-    raise(Not_found)
+    Core__Error.panic("List.getExn: n < 0")
   } else {
     nthAuxAssert(x, n)
   }

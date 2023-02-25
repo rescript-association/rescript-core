@@ -2,6 +2,7 @@
 
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
+import * as Core__Error from "./Core__Error.mjs";
 
 function filter(opt, p) {
   var p$1 = Curry.__1(p);
@@ -22,11 +23,9 @@ function forEach(opt, f) {
 function getExn(x) {
   if (x !== undefined) {
     return Caml_option.valFromOption(x);
+  } else {
+    return Core__Error.panic("List.headExn: option is None");
   }
-  throw {
-        RE_EXN_ID: "Not_found",
-        Error: new Error()
-      };
 }
 
 function mapWithDefault(opt, $$default, f) {

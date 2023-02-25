@@ -75,7 +75,7 @@ Option.getExn(None) /* Raises an Error */
 
 ## Exceptions
 
-- Raises an error if `opt` is `None`
+- Panics if `opt` is `None`
 */
 let getExn: option<'a> => 'a
 

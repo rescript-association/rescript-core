@@ -55,6 +55,10 @@ type t<'a, 'b> = result<'a, 'b> = Ok('a) | Error('b)
 
   Result.getExn(Result.Error("Invalid data")) /* raises exception */
   ```
+
+## Exceptions
+
+- Panics if `res` is `Error(_)`
 */
 let getExn: t<'a, 'b> => 'a
 

@@ -82,7 +82,7 @@ List.headExn(list{}) // Raises an Error
 
 ## Exceptions
 
-- Raises an Error if list is empty.
+- Panics if list is empty.
 
 */
 let headExn: t<'a> => 'a
@@ -114,7 +114,7 @@ List.tailExn(list{}) // Raises an Error
 
 ## Exceptions
 
-- Raises an Error if list is empty.
+- Panics if list is empty.
 */
 let tailExn: t<'a> => t<'a>
 
@@ -162,7 +162,7 @@ abc->List.getExn(4) // Raises an Error
 
 ## Exceptions
 
-- Raises an Error if `index` is larger than the length of list.
+- Panics if `index` is less than 0 or larger than the length of list.
 */
 let getExn: (t<'a>, int) => 'a
 

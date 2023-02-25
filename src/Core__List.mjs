@@ -4,6 +4,7 @@ import * as Curry from "rescript/lib/es6/curry.js";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Core__Array from "./Core__Array.mjs";
+import * as Core__Error from "./Core__Error.mjs";
 
 function head(x) {
   if (x) {
@@ -15,11 +16,9 @@ function head(x) {
 function headExn(x) {
   if (x) {
     return x.hd;
+  } else {
+    return Core__Error.panic("List.headExn: list is empty");
   }
-  throw {
-        RE_EXN_ID: "Not_found",
-        Error: new Error()
-      };
 }
 
 function tail(x) {
@@ -32,11 +31,9 @@ function tail(x) {
 function tailExn(x) {
   if (x) {
     return x.tl;
+  } else {
+    return Core__Error.panic("List.tailExn: list is empty");
   }
-  throw {
-        RE_EXN_ID: "Not_found",
-        Error: new Error()
-      };
 }
 
 function add(xs, x) {
@@ -70,29 +67,24 @@ function get(x, n) {
 
 function getExn(x, n) {
   if (n < 0) {
-    throw {
-          RE_EXN_ID: "Not_found",
-          Error: new Error()
-        };
-  }
-  var _x = x;
-  var _n = n;
-  while(true) {
-    var n$1 = _n;
-    var x$1 = _x;
-    if (x$1) {
+    return Core__Error.panic("List.getExn: n < 0");
+  } else {
+    var _x = x;
+    var _n = n;
+    while(true) {
+      var n$1 = _n;
+      var x$1 = _x;
+      if (!x$1) {
+        return Core__Error.panic("List.nthAuxAssert: list is empty");
+      }
       if (n$1 === 0) {
         return x$1.hd;
       }
       _n = n$1 - 1 | 0;
       _x = x$1.tl;
       continue ;
-    }
-    throw {
-          RE_EXN_ID: "Not_found",
-          Error: new Error()
-        };
-  };
+    };
+  }
 }
 
 function partitionAux(p, _cell, _precX, _precY) {
