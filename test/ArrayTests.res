@@ -15,12 +15,12 @@ Test.run(__POS_OF__("reduce"), Array.reduce([1, 2, 3], List.add, list{}), eq, li
 Test.run(__POS_OF__("reduce - empty"), Array.reduce([], List.add, list{}), eq, list{})
 
 Test.run(
-  __POS_OF__("reduceReverse"),
-  Array.reduceReverse([1, 2, 3], list{}, List.add),
+  __POS_OF__("reduceRight"),
+  Array.reduceRight([1, 2, 3], List.add, list{}),
   eq,
   list{1, 2, 3},
 )
-Test.run(__POS_OF__("reduceReverse - empty"), Array.reduceReverse([], list{}, List.add), eq, list{})
+Test.run(__POS_OF__("reduceRight - empty"), Array.reduceRight([], List.add, list{}), eq, list{})
 
 Test.run(__POS_OF__("shuffle - length"), Array.shuffle([1, 2, 3])->Array.length, eq, 3)
 

@@ -55,15 +55,6 @@ function reduceWithIndex(a, x, f) {
   return r;
 }
 
-function reduceReverse(a, x, f) {
-  var f$1 = Curry.__2(f);
-  var r = x;
-  for(var i = a.length - 1 | 0; i >= 0; --i){
-    r = f$1(r, a[i]);
-  }
-  return r;
-}
-
 function findIndexOpt(array, finder) {
   var index = array.findIndex(finder);
   if (index !== -1) {
@@ -146,7 +137,6 @@ export {
   sort ,
   indexOfOpt ,
   lastIndexOfOpt ,
-  reduceReverse ,
   reduceWithIndex ,
   findIndexOpt ,
   reverse ,

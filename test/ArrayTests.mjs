@@ -82,14 +82,14 @@ Test.run([
         "ArrayTests.res",
         18,
         13,
-        28
+        26
       ],
-      "reduceReverse"
-    ], Core__Array.reduceReverse([
-          1,
-          2,
-          3
-        ], /* [] */0, Core__List.add), eq, {
+      "reduceRight"
+    ], [
+        1,
+        2,
+        3
+      ].reduceRight(Core__List.add, /* [] */0), eq, {
       hd: 1,
       tl: {
         hd: 2,
@@ -105,10 +105,10 @@ Test.run([
         "ArrayTests.res",
         23,
         20,
-        43
+        41
       ],
-      "reduceReverse - empty"
-    ], Core__Array.reduceReverse([], /* [] */0, Core__List.add), eq, /* [] */0);
+      "reduceRight - empty"
+    ], [].reduceRight(Core__List.add, /* [] */0), eq, /* [] */0);
 
 Test.run([
       [

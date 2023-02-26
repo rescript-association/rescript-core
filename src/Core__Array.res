@@ -139,15 +139,8 @@ let reduceWithIndexU = (a, x, f) => {
 
 let reduceWithIndex = (a, x, f) => reduceWithIndexU(a, x, (. a, b, c) => f(a, b, c))
 
-let reduceReverseU = (a, x, f) => {
-  let r = ref(x)
-  for i in length(a) - 1 downto 0 {
-    r.contents = f(. r.contents, getUnsafe(a, i))
-  }
-  r.contents
-}
-
-let reduceReverse = (a, x, f) => reduceReverseU(a, x, (. a, b) => f(a, b))
+@send
+external reduceRight: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduceRight"
 
 @send external some: (array<'a>, 'a => bool) => bool = "some"
 @send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"

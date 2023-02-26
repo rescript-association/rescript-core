@@ -73,15 +73,16 @@ let lastIndexOfOpt: (array<'a>, 'a) => option<int>
 external reduce: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduce"
 
 /**
-  `reduceReverse(xs, init, f)`
+  `reduceRight(xs, f, init)`
 
   Works like `Array.reduce`; except that function `f` is applied to each item of `xs` from the last back to the first.
 
   ```res example
-  Array.reduceReverse(["a", "b", "c", "d"], "", (a, b) => a ++ b) == "dcba"
+  Array.reduceRight(["a", "b", "c", "d"], (a, b) => a ++ b, "") == "dcba"
   ```
 */
-let reduceReverse: (array<'b>, 'a, ('a, 'b) => 'a) => 'a
+@send
+external reduceRight: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduceRight"
 
 /**
   Applies `f` to each element of `xs` from beginning to end. Function `f` has three parameters: the item from the array and an “accumulator”, which starts with a value of `init` and the index of each element. `reduceWithIndex` returns the final value of the accumulator.
