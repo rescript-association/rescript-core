@@ -52,11 +52,11 @@ Test.run([
         28
       ],
       "reduce"
-    ], Core__Array.reduce([
-          1,
-          2,
-          3
-        ], /* [] */0, Core__List.add), eq, {
+    ], [
+        1,
+        2,
+        3
+      ].reduce(Core__List.add, /* [] */0), eq, {
       hd: 3,
       tl: {
         hd: 2,
@@ -75,7 +75,7 @@ Test.run([
         36
       ],
       "reduce - empty"
-    ], Core__Array.reduce([], /* [] */0, Core__List.add), eq, /* [] */0);
+    ], [].reduce(Core__List.add, /* [] */0), eq, /* [] */0);
 
 Test.run([
       [

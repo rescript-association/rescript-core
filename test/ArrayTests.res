@@ -11,8 +11,8 @@ Test.run(
   [3, 4, 5, 6, 7, 8, 9],
 )
 
-Test.run(__POS_OF__("reduce"), Array.reduce([1, 2, 3], list{}, List.add), eq, list{3, 2, 1})
-Test.run(__POS_OF__("reduce - empty"), Array.reduce([], list{}, List.add), eq, list{})
+Test.run(__POS_OF__("reduce"), Array.reduce([1, 2, 3], List.add, list{}), eq, list{3, 2, 1})
+Test.run(__POS_OF__("reduce - empty"), Array.reduce([], List.add, list{}), eq, list{})
 
 Test.run(
   __POS_OF__("reduceReverse"),

@@ -46,15 +46,6 @@ function sort(arr, cmp) {
   return result;
 }
 
-function reduce(a, x, f) {
-  var f$1 = Curry.__2(f);
-  var r = x;
-  for(var i = 0 ,i_finish = a.length; i < i_finish; ++i){
-    r = f$1(r, a[i]);
-  }
-  return r;
-}
-
 function reduceWithIndex(a, x, f) {
   var f$1 = Curry.__3(f);
   var r = x;
@@ -155,7 +146,6 @@ export {
   sort ,
   indexOfOpt ,
   lastIndexOfOpt ,
-  reduce ,
   reduceReverse ,
   reduceWithIndex ,
   findIndexOpt ,

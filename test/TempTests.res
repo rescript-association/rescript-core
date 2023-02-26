@@ -4,7 +4,7 @@ Console.info("")
 Console.info("Array")
 Console.info("---")
 let array = [1, 2, 3, 4]
-Console.info(array->Array.map(x => x * 2)->Array.reduce(0, (a, b) => a + b))
+Console.info(array->Array.map(x => x * 2)->Array.reduce((a, b) => a + b, 0))
 Console.info(typeof(array))
 
 Console.info("")

@@ -4,7 +4,6 @@ import * as Core__Int from "../src/Core__Int.mjs";
 import * as Core__Dict from "../src/Core__Dict.mjs";
 import * as Core__JSON from "../src/Core__JSON.mjs";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
-import * as Core__Array from "../src/Core__Array.mjs";
 import * as Core__Float from "../src/Core__Float.mjs";
 import * as Core__BigInt from "../src/Core__BigInt.mjs";
 import * as Core__Option from "../src/Core__Option.mjs";
@@ -22,11 +21,11 @@ var array = [
   4
 ];
 
-console.info(Core__Array.reduce(array.map(function (x) {
-              return (x << 1);
-            }), 0, (function (a, b) {
+console.info(array.map(function (x) {
+            return (x << 1);
+          }).reduce((function (a, b) {
             return a + b | 0;
-          })));
+          }), 0));
 
 console.info(typeof array);
 

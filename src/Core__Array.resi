@@ -59,17 +59,18 @@ let lastIndexOfOpt: (array<'a>, 'a) => option<int>
 @send external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
 /**
-  `reduce(xs, init, f)`
+  `reduce(xs, f, init)`
 
   Applies `f` to each element of `xs` from beginning to end. Function `f` has two parameters: the item from the list and an “accumulator”; which starts with a value of `init`. `reduce` returns the final value of the accumulator.
 
   ```res example
-  Array.reduce([2, 3, 4], 1, (a, b) => a + b) == 10
+  Array.reduce([2, 3, 4], (a, b) => a + b, 1) == 10
 
-  Array.reduce(["a", "b", "c", "d"], "", (a, b) => a ++ b) == "abcd"
+  Array.reduce(["a", "b", "c", "d"], (a, b) => a ++ b, "") == "abcd"
   ```
 */
-let reduce: (array<'b>, 'a, ('a, 'b) => 'a) => 'a
+@send
+external reduce: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduce"
 
 /**
   `reduceReverse(xs, init, f)`
