@@ -29,7 +29,7 @@ See [`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 ## Examples
 ```rescript
-Console.log(Nullable.undefined) // Logs `undefined` to the console.
+Console.log(undefined) // Logs `undefined` to the console.
 ```
 */
 external undefined: t<'a> = "#undefined"
@@ -139,7 +139,7 @@ otherwise returns `value` unchanged.
 
 ```rescript
 Nullable.map(Nullable.make(3), x => x * x) // Nullable.make(9)
-Nullable.map(Nullable.undefined, x => x * x) // Nullable.undefined
+Nullable.map(undefined, x => x * x) // undefined
 ```
 */
 let map: (t<'a>, 'a => 'b) => t<'b>
@@ -175,8 +175,8 @@ let addIfAboveOne = value =>
   }
 
 Nullable.flatMap(Nullable.make(2), addIfAboveOne) // Nullable.make(3)
-Nullable.flatMap(Nullable.make(-4), addIfAboveOne) // Nullable.undefined
-Nullable.flatMap(Nullable.null, addIfAboveOne) // Nullable.undefined
+Nullable.flatMap(Nullable.make(-4), addIfAboveOne) // undefined
+Nullable.flatMap(Nullable.null, addIfAboveOne) // undefined
 ```
 */
 let flatMap: (t<'a>, 'a => t<'b>) => t<'b>
