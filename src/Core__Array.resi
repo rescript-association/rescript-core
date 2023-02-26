@@ -73,6 +73,18 @@ let lastIndexOfOpt: (array<'a>, 'a) => option<int>
 external reduce: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduce"
 
 /**
+  `reduceWithIndex(xs, f, init)`
+
+  Applies `f` to each element of `xs` from beginning to end. Function `f` has three parameters: the item from the array and an “accumulator”, which starts with a value of `init` and the index of each element. `reduceWithIndex` returns the final value of the accumulator.
+
+  ```res example
+  Array.reduceWithIndex([1, 2, 3, 4], (acc, x, i) => acc + x + i, 0) == 16
+  ```
+*/
+@send
+external reduceWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduce"
+
+/**
   `reduceRight(xs, f, init)`
 
   Works like `Array.reduce`; except that function `f` is applied to each item of `xs` from the last back to the first.
@@ -83,15 +95,6 @@ external reduce: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduce"
 */
 @send
 external reduceRight: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduceRight"
-
-/**
-  Applies `f` to each element of `xs` from beginning to end. Function `f` has three parameters: the item from the array and an “accumulator”, which starts with a value of `init` and the index of each element. `reduceWithIndex` returns the final value of the accumulator.
-
-  ```res example
-  Array.reduceWithIndex([1, 2, 3, 4], 0, (acc, x, i) => acc + x + i) == 16
-  ```
-*/
-let reduceWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
 
 @send external some: (array<'a>, 'a => bool) => bool = "some"
 @send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"

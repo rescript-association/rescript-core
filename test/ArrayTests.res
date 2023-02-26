@@ -15,6 +15,19 @@ Test.run(__POS_OF__("reduce"), Array.reduce([1, 2, 3], List.add, list{}), eq, li
 Test.run(__POS_OF__("reduce - empty"), Array.reduce([], List.add, list{}), eq, list{})
 
 Test.run(
+  __POS_OF__("reduceWithIndex"),
+  Array.reduceWithIndex([1, 2, 3], (acc, v, i) => list{v + i, ...acc}, list{}),
+  eq,
+  list{5, 3, 1},
+)
+Test.run(
+  __POS_OF__("reduceWithIndex - empty"),
+  Array.reduceWithIndex([], (acc, v, i) => list{v + i, ...acc}, list{}),
+  eq,
+  list{},
+)
+
+Test.run(
   __POS_OF__("reduceRight"),
   Array.reduceRight([1, 2, 3], List.add, list{}),
   eq,

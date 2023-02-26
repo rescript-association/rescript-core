@@ -128,17 +128,7 @@ let sort = (arr, cmp) => {
 @send external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
 @send external reduce: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduce"
-
-let reduceWithIndexU = (a, x, f) => {
-  let r = ref(x)
-  for i in 0 to length(a) - 1 {
-    r.contents = f(. r.contents, getUnsafe(a, i), i)
-  }
-  r.contents
-}
-
-let reduceWithIndex = (a, x, f) => reduceWithIndexU(a, x, (. a, b, c) => f(a, b, c))
-
+@send external reduceWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduce"
 @send
 external reduceRight: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduceRight"
 

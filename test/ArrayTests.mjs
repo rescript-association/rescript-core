@@ -82,6 +82,49 @@ Test.run([
         "ArrayTests.res",
         18,
         13,
+        30
+      ],
+      "reduceWithIndex"
+    ], [
+        1,
+        2,
+        3
+      ].reduce((function (acc, v, i) {
+            return {
+                    hd: v + i | 0,
+                    tl: acc
+                  };
+          }), /* [] */0), eq, {
+      hd: 5,
+      tl: {
+        hd: 3,
+        tl: {
+          hd: 1,
+          tl: /* [] */0
+        }
+      }
+    });
+
+Test.run([
+      [
+        "ArrayTests.res",
+        24,
+        13,
+        38
+      ],
+      "reduceWithIndex - empty"
+    ], [].reduce((function (acc, v, i) {
+            return {
+                    hd: v + i | 0,
+                    tl: acc
+                  };
+          }), /* [] */0), eq, /* [] */0);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        31,
+        13,
         26
       ],
       "reduceRight"
@@ -103,7 +146,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        23,
+        36,
         20,
         41
       ],
@@ -113,7 +156,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        25,
+        38,
         20,
         38
       ],
@@ -133,7 +176,7 @@ var arr = [
 Test.run([
       [
         "ArrayTests.res",
-        28,
+        41,
         13,
         38
       ],
@@ -143,7 +186,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        39,
+        52,
         13,
         24
       ],
@@ -169,7 +212,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        44,
+        57,
         20,
         42
       ],
@@ -188,7 +231,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        46,
+        59,
         13,
         32
       ],
@@ -203,7 +246,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        52,
+        65,
         20,
         30
       ],
@@ -220,7 +263,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        54,
+        67,
         13,
         34
       ],
@@ -238,7 +281,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        59,
+        72,
         20,
         41
       ],
@@ -252,7 +295,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        60,
+        73,
         20,
         38
       ],
@@ -262,7 +305,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        63,
+        76,
         13,
         22
       ],
@@ -284,7 +327,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        68,
+        81,
         20,
         40
       ],
@@ -303,7 +346,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        70,
+        83,
         13,
         30
       ],
