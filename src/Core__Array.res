@@ -131,6 +131,8 @@ let sort = (arr, cmp) => {
 @send external reduceWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduce"
 @send
 external reduceRight: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduceRight"
+@send
+external reduceRightWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduceRight"
 
 @send external some: (array<'a>, 'a => bool) => bool = "some"
 @send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"

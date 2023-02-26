@@ -96,6 +96,18 @@ external reduceWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduce"
 @send
 external reduceRight: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduceRight"
 
+/**
+  `reduceRightWithIndex(xs, f, init)`
+
+  Like `reduceRight`, but with an additional index argument on the callback function.
+
+  ```res example
+  Array.reduceRightWithIndex([1, 2, 3, 4], (acc, x, i) => acc + x + i, 0) == 16
+  ```
+*/
+@send
+external reduceRightWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduceRight"
+
 @send external some: (array<'a>, 'a => bool) => bool = "some"
 @send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"
 @get_index external get: (array<'a>, int) => option<'a> = ""

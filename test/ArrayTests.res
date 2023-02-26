@@ -35,6 +35,19 @@ Test.run(
 )
 Test.run(__POS_OF__("reduceRight - empty"), Array.reduceRight([], List.add, list{}), eq, list{})
 
+Test.run(
+  __POS_OF__("reduceEightWithIndex"),
+  Array.reduceRightWithIndex([1, 2, 3], (acc, v, i) => list{v + i, ...acc}, list{}),
+  eq,
+  list{1, 3, 5},
+)
+Test.run(
+  __POS_OF__("reduceWithIndex - empty"),
+  Array.reduceRightWithIndex([], (acc, v, i) => list{v + i, ...acc}, list{}),
+  eq,
+  list{},
+)
+
 Test.run(__POS_OF__("shuffle - length"), Array.shuffle([1, 2, 3])->Array.length, eq, 3)
 
 Test.run(
