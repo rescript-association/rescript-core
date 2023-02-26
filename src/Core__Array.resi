@@ -5,8 +5,29 @@
 external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b> = "Array.from"
 @val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
 @val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
+
+/**
+  `make(~length, init)`
+
+  Creates an array of length `length` initialized with the value of `init`.
+
+  ```res example
+  Array.make(~length=3, #apple) == [#apple, #apple, #apple]
+  ```
+*/
 let make: (~length: int, 'a) => array<'a>
+
+/**
+  `fromInitializer(~length, f)`
+
+  Creates an array of length `length` initialized with the value returned from `f ` for each index.
+
+  ```res example
+  Array.make(~length=3, i => i + 3) == [3, 4, 5]
+  ```
+*/
 let fromInitializer: (~length: int, int => 'a) => array<'a>
+
 @val external isArray: 'a => bool = "Array.isArray"
 @get external length: array<'a> => int = "length"
 @send external copyAllWithin: (array<'a>, ~target: int) => array<'a> = "copyWithin"
@@ -120,10 +141,31 @@ external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 let findIndexOpt: (array<'a>, 'a => bool) => option<int>
 let reverse: array<'a> => array<'a>
 let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
+
+/**
+  `fromInitializer(~length, f)`
+
+  Creates an array of length `length` initialized with the value returned from `f ` for each index.
+
+  ```res example
+  Array.make(~length=3, i => i + 3) == [3, 4, 5]
+  ```
+*/
 let keepSome: array<option<'a>> => array<'a>
 let shuffle: array<'a> => array<'a>
 let shuffleInPlace: array<'a> => unit
 @send external flatMap: (array<'a>, 'a => array<'b>) => array<'b> = "flatMap"
+
+/**
+  `findMap(arr, f)`
+
+  Calls `f` for each element and returns the first value from `f` that is `Some(_)`.
+  Otherwise returns `None`
+
+  ```res example
+  Array.findMap([1, 2, 3], n => mod(n, 2) ? Some(n - 2) : None) == 0
+  ```
+*/
 let findMap: (array<'a>, 'a => option<'b>) => option<'b>
 
 /**
