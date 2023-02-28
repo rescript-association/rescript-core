@@ -29,7 +29,21 @@ let make: (~length: int, 'a) => array<'a>
 let fromInitializer: (~length: int, int => 'a) => array<'a>
 
 @val external isArray: 'a => bool = "Array.isArray"
-@get external length: array<'a> => int = "length"
+
+/**
+`length(array)` returns the `int` length (number of items) of the array.
+
+See [`Array.length`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+
+Console.log(someArray->Array.length) // 2
+```
+*/
+@get
+external length: array<'a> => int = "length"
 @send external copyAllWithin: (array<'a>, ~target: int) => array<'a> = "copyWithin"
 @send
 external copyWithinToEnd: (array<'a>, ~target: int, ~start: int) => array<'a> = "copyWithin"
@@ -38,22 +52,205 @@ external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<
 @send external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
 @send external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
 @send external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
-@send external pop: array<'a> => option<'a> = "pop"
-@send external push: (array<'a>, 'a) => unit = "push"
-@variadic @send external pushMany: (array<'a>, array<'a>) => unit = "push"
-@send external reverseInPlace: array<'a> => unit = "reverse"
-@send external shift: array<'a> => option<'a> = "shift"
+
+/**
+`pop(array)` pops off the last item in the array, and returns it.
+
+Beware this will *mutate* the array.
+
+See [`Array.pop`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+let lastItem = someArray->Array.pop // "hello"
+
+Console.log(someArray) // ["hi"]. Notice last item is gone.
+```
+*/
+@send
+external pop: array<'a> => option<'a> = "pop"
+
+/**
+`push(array, item)` pushes a new item to the end of the array.
+
+Beware this will *mutate* the array.
+
+See [`Array.push`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+someArray->Array.push("yay")
+
+Console.log(someArray) // ["hi", "hello", "yay"]
+```
+*/
+@send
+external push: (array<'a>, 'a) => unit = "push"
+
+/**
+`pushMany(array, itemsArray)` pushes many new items to the end of the array.
+
+Beware this will *mutate* the array.
+
+See [`Array.push`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+someArray->Array.pushMany(["yay", "wehoo"])
+
+Console.log(someArray) // ["hi", "hello", "yay", "wehoo"]
+```
+*/
+@variadic
+@send
+external pushMany: (array<'a>, array<'a>) => unit = "push"
+
+/**
+`reverse(array)` reverses the order of the items in the array.
+
+Beware this will *mutate* the array.
+
+See [`Array.reverse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+someArray->Array.reverse
+
+Console.log(someArray) // ["hello", "h1"]
+```
+*/
+@send
+external reverseInPlace: array<'a> => unit = "reverse"
+
+/**
+`shift(array)` removes the first item in the array, and returns it.
+
+Beware this will *mutate* the array.
+
+See [`Array.shift`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+let lastItem = someArray->Array.shift // "hi"
+
+Console.log(someArray) // ["hello"]. Notice first item is gone.
+```
+*/
+@send
+external shift: array<'a> => option<'a> = "shift"
 let sort: (array<'a>, ('a, 'a) => int) => array<'a>
 @send external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
 @variadic @send
 external spliceInPlace: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit =
   "splice"
-@send external unshift: (array<'a>, 'a) => unit = "unshift"
-@variadic @send external unshiftMany: (array<'a>, array<'a>) => unit = "unshift"
-@send external concat: (array<'a>, array<'a>) => array<'a> = "concat"
-@variadic @send external concatMany: (array<'a>, array<array<'a>>) => array<'a> = "concat"
-@send external flat: array<array<'a>> => array<'a> = "flat"
-@send external includes: (array<'a>, 'a) => bool = "includes"
+
+/**
+`unshift(array, item)` inserts a new item at the start of the array.
+
+Beware this will *mutate* the array.
+
+See [`Array.unshift`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+someArray->Array.unshift("yay")
+
+Console.log(someArray) // ["yay", "hi", "hello"]
+```
+*/
+@send
+external unshift: (array<'a>, 'a) => unit = "unshift"
+
+/**
+`unshiftMany(array, itemsArray)` inserts many new items to the start of the array.
+
+Beware this will *mutate* the array.
+
+See [`Array.push`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+someArray->Array.unshiftMany(["yay", "wehoo"])
+
+Console.log(someArray) // ["yay", "wehoo", "hi", "hello"]
+```
+*/
+@variadic
+@send
+external unshiftMany: (array<'a>, array<'a>) => unit = "unshift"
+
+/**
+`concat(array1, array2)` concatenates two arrays, creating a new array.
+
+See [`Array.concat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) on MDN.
+
+## Examples
+```rescript
+let array1 = ["hi", "hello"]
+let array2 = ["yay", "wehoo"]
+
+let someArray = array1->Array.concat(array2)
+
+Console.log(someArray) // ["hi", "hello", "yay", "wehoo"]
+```
+*/
+@send
+external concat: (array<'a>, array<'a>) => array<'a> = "concat"
+
+/**
+`concatMany(array1, arrays)` concatenates array1 with several other arrays, creating a new array.
+
+See [`Array.concat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) on MDN.
+
+## Examples
+```rescript
+let array1 = ["hi", "hello"]
+let array2 = ["yay"]
+let array3 = ["wehoo"]
+
+let someArray = array1->Array.concatMany([array2, array3])
+
+Console.log(someArray) // ["hi", "hello", "yay", "wehoo"]
+```
+*/
+@variadic
+@send
+external concatMany: (array<'a>, array<array<'a>>) => array<'a> = "concat"
+
+/**
+`flat(arrays)` flattens the provided arrays into a single array.
+
+See [`Array.flat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) on MDN.
+
+## Examples
+```rescript
+Console.log([[1], [2], [3, 4]]->Array.flat) // [1, 2, 3, 4]
+```
+*/
+@send
+external flat: array<array<'a>> => array<'a> = "flat"
+
+/**
+`includes(array, item)` checks whether `array` includes `item`, by doing a [strict check for equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality).
+
+See [`Array.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) on MDN.
+
+## Examples
+```rescript
+Console.log([1, 2]->Array.includes(1)) // true
+Console.log([1, 2]->Array.includes(3)) // false
+Console.log([{"language": "ReScript"}]->Array.includes({"language": "ReScript"})) // false, because of strict equality
+```
+*/
+@send
+external includes: (array<'a>, 'a) => bool = "includes"
 @send external indexOf: (array<'a>, 'a) => int = "indexOf"
 let indexOfOpt: (array<'a>, 'a) => option<int>
 @send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
