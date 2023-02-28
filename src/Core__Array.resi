@@ -143,12 +143,13 @@ let reverse: array<'a> => array<'a>
 let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
 
 /**
-  `fromInitializer(~length, f)`
+  `keepSome(arr)`
 
-  Creates an array of length `length` initialized with the value returned from `f ` for each index.
+  Returns a new array containing `value` for all elements that are `Some(value)`
+  and ignoring every value that is `None`
 
   ```res example
-  Array.make(~length=3, i => i + 3) == [3, 4, 5]
+  Array.keepSome([Some(1), None, Some(3)]) == [1, 3]
   ```
 */
 let keepSome: array<option<'a>> => array<'a>
