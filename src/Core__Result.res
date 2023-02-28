@@ -27,7 +27,7 @@ type t<'a, 'b> = result<'a, 'b> = Ok('a) | Error('b)
 let getExn = x =>
   switch x {
   | Ok(x) => x
-  | Error(_) => raise(Not_found)
+  | Error(_) => Core__Error.panic("Result.getExn: result is Error")
   }
 
 let mapWithDefaultU = (opt, default, f) =>

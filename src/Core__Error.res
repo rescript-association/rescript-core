@@ -35,3 +35,5 @@ module URIError = {
 }
 
 external raise: t => 'a = "%raise"
+
+let panic = msg => make(j`Panic! $msg`)->raise

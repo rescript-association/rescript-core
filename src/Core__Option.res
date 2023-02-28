@@ -41,7 +41,7 @@ let forEach = (opt, f) => forEachU(opt, (. x) => f(x))
 let getExn = x =>
   switch x {
   | Some(x) => x
-  | None => raise(Not_found)
+  | None => Core__Error.panic("List.headExn: option is None")
   }
 
 external getUnsafe: option<'a> => 'a = "%identity"
