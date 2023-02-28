@@ -52,11 +52,11 @@ Test.run([
         28
       ],
       "reduce"
-    ], [
-        1,
-        2,
-        3
-      ].reduce(Core__List.add, /* [] */0), eq, {
+    ], Core__Array.reduce([
+          1,
+          2,
+          3
+        ], /* [] */0, Core__List.add), eq, {
       hd: 3,
       tl: {
         hd: 2,
@@ -75,7 +75,7 @@ Test.run([
         36
       ],
       "reduce - empty"
-    ], [].reduce(Core__List.add, /* [] */0), eq, /* [] */0);
+    ], Core__Array.reduce([], /* [] */0, Core__List.add), eq, /* [] */0);
 
 Test.run([
       [
@@ -85,16 +85,16 @@ Test.run([
         30
       ],
       "reduceWithIndex"
-    ], [
-        1,
-        2,
-        3
-      ].reduce((function (acc, v, i) {
+    ], Core__Array.reduceWithIndex([
+          1,
+          2,
+          3
+        ], /* [] */0, (function (acc, v, i) {
             return {
                     hd: v + i | 0,
                     tl: acc
                   };
-          }), /* [] */0), eq, {
+          })), eq, {
       hd: 5,
       tl: {
         hd: 3,
@@ -113,12 +113,12 @@ Test.run([
         38
       ],
       "reduceWithIndex - empty"
-    ], [].reduce((function (acc, v, i) {
+    ], Core__Array.reduceWithIndex([], /* [] */0, (function (acc, v, i) {
             return {
                     hd: v + i | 0,
                     tl: acc
                   };
-          }), /* [] */0), eq, /* [] */0);
+          })), eq, /* [] */0);
 
 Test.run([
       [
@@ -128,11 +128,11 @@ Test.run([
         26
       ],
       "reduceRight"
-    ], [
-        1,
-        2,
-        3
-      ].reduceRight(Core__List.add, /* [] */0), eq, {
+    ], Core__Array.reduceRight([
+          1,
+          2,
+          3
+        ], /* [] */0, Core__List.add), eq, {
       hd: 1,
       tl: {
         hd: 2,
@@ -151,7 +151,7 @@ Test.run([
         41
       ],
       "reduceRight - empty"
-    ], [].reduceRight(Core__List.add, /* [] */0), eq, /* [] */0);
+    ], Core__Array.reduceRight([], /* [] */0, Core__List.add), eq, /* [] */0);
 
 Test.run([
       [
@@ -161,16 +161,16 @@ Test.run([
         35
       ],
       "reduceEightWithIndex"
-    ], [
-        1,
-        2,
-        3
-      ].reduceRight((function (acc, v, i) {
+    ], Core__Array.reduceRightWithIndex([
+          1,
+          2,
+          3
+        ], /* [] */0, (function (acc, v, i) {
             return {
                     hd: v + i | 0,
                     tl: acc
                   };
-          }), /* [] */0), eq, {
+          })), eq, {
       hd: 1,
       tl: {
         hd: 3,
@@ -189,12 +189,12 @@ Test.run([
         38
       ],
       "reduceWithIndex - empty"
-    ], [].reduceRight((function (acc, v, i) {
+    ], Core__Array.reduceRightWithIndex([], /* [] */0, (function (acc, v, i) {
             return {
                     hd: v + i | 0,
                     tl: acc
                   };
-          }), /* [] */0), eq, /* [] */0);
+          })), eq, /* [] */0);
 
 Test.run([
       [

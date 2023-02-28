@@ -46,6 +46,22 @@ function sort(arr, cmp) {
   return result;
 }
 
+function reduce(arr, init, f) {
+  return arr.reduce(f, init);
+}
+
+function reduceWithIndex(arr, init, f) {
+  return arr.reduce(f, init);
+}
+
+function reduceRight(arr, init, f) {
+  return arr.reduceRight(f, init);
+}
+
+function reduceRightWithIndex(arr, init, f) {
+  return arr.reduceRight(f, init);
+}
+
 function findIndexOpt(array, finder) {
   var index = array.findIndex(finder);
   if (index !== -1) {
@@ -128,6 +144,10 @@ export {
   sort ,
   indexOfOpt ,
   lastIndexOfOpt ,
+  reduce ,
+  reduceWithIndex ,
+  reduceRight ,
+  reduceRightWithIndex ,
   findIndexOpt ,
   reverse ,
   filterMap ,

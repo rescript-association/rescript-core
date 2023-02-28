@@ -90,8 +90,7 @@ let lastIndexOfOpt: (array<'a>, 'a) => option<int>
   Array.reduce(["a", "b", "c", "d"], (a, b) => a ++ b, "") == "abcd"
   ```
 */
-@send
-external reduce: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduce"
+let reduce: (array<'b>, 'a, ('a, 'b) => 'a) => 'a
 
 /**
   `reduceWithIndex(xs, f, init)`
@@ -102,8 +101,7 @@ external reduce: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduce"
   Array.reduceWithIndex([1, 2, 3, 4], (acc, x, i) => acc + x + i, 0) == 16
   ```
 */
-@send
-external reduceWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduce"
+let reduceWithIndex: (array<'b>, 'a, ('a, 'b, int) => 'a) => 'a
 
 /**
   `reduceRight(xs, f, init)`
@@ -114,8 +112,7 @@ external reduceWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduce"
   Array.reduceRight(["a", "b", "c", "d"], (a, b) => a ++ b, "") == "dcba"
   ```
 */
-@send
-external reduceRight: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduceRight"
+let reduceRight: (array<'b>, 'a, ('a, 'b) => 'a) => 'a
 
 /**
   `reduceRightWithIndex(xs, f, init)`
@@ -126,8 +123,7 @@ external reduceRight: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduceRight"
   Array.reduceRightWithIndex([1, 2, 3, 4], (acc, x, i) => acc + x + i, 0) == 16
   ```
 */
-@send
-external reduceRightWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduceRight"
+let reduceRightWithIndex: (array<'b>, 'a, ('a, 'b, int) => 'a) => 'a
 
 @send external some: (array<'a>, 'a => bool) => bool = "some"
 @send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"

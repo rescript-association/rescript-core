@@ -128,11 +128,15 @@ let sort = (arr, cmp) => {
 @send external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
 @send external reduce: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduce"
+let reduce = (arr, init, f) => reduce(arr, f, init)
 @send external reduceWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduce"
+let reduceWithIndex = (arr, init, f) => reduceWithIndex(arr, f, init)
 @send
 external reduceRight: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduceRight"
+let reduceRight = (arr, init, f) => reduceRight(arr, f, init)
 @send
 external reduceRightWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduceRight"
+let reduceRightWithIndex = (arr, init, f) => reduceRightWithIndex(arr, f, init)
 
 @send external some: (array<'a>, 'a => bool) => bool = "some"
 @send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"

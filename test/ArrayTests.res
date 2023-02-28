@@ -11,39 +11,39 @@ Test.run(
   [3, 4, 5, 6, 7, 8, 9],
 )
 
-Test.run(__POS_OF__("reduce"), Array.reduce([1, 2, 3], List.add, list{}), eq, list{3, 2, 1})
-Test.run(__POS_OF__("reduce - empty"), Array.reduce([], List.add, list{}), eq, list{})
+Test.run(__POS_OF__("reduce"), Array.reduce([1, 2, 3], list{}, List.add), eq, list{3, 2, 1})
+Test.run(__POS_OF__("reduce - empty"), Array.reduce([], list{}, List.add), eq, list{})
 
 Test.run(
   __POS_OF__("reduceWithIndex"),
-  Array.reduceWithIndex([1, 2, 3], (acc, v, i) => list{v + i, ...acc}, list{}),
+  Array.reduceWithIndex([1, 2, 3], list{}, (acc, v, i) => list{v + i, ...acc}),
   eq,
   list{5, 3, 1},
 )
 Test.run(
   __POS_OF__("reduceWithIndex - empty"),
-  Array.reduceWithIndex([], (acc, v, i) => list{v + i, ...acc}, list{}),
+  Array.reduceWithIndex([], list{}, (acc, v, i) => list{v + i, ...acc}),
   eq,
   list{},
 )
 
 Test.run(
   __POS_OF__("reduceRight"),
-  Array.reduceRight([1, 2, 3], List.add, list{}),
+  Array.reduceRight([1, 2, 3], list{}, List.add),
   eq,
   list{1, 2, 3},
 )
-Test.run(__POS_OF__("reduceRight - empty"), Array.reduceRight([], List.add, list{}), eq, list{})
+Test.run(__POS_OF__("reduceRight - empty"), Array.reduceRight([], list{}, List.add), eq, list{})
 
 Test.run(
   __POS_OF__("reduceEightWithIndex"),
-  Array.reduceRightWithIndex([1, 2, 3], (acc, v, i) => list{v + i, ...acc}, list{}),
+  Array.reduceRightWithIndex([1, 2, 3], list{}, (acc, v, i) => list{v + i, ...acc}),
   eq,
   list{1, 3, 5},
 )
 Test.run(
   __POS_OF__("reduceWithIndex - empty"),
-  Array.reduceRightWithIndex([], (acc, v, i) => list{v + i, ...acc}, list{}),
+  Array.reduceRightWithIndex([], list{}, (acc, v, i) => list{v + i, ...acc}),
   eq,
   list{},
 )
