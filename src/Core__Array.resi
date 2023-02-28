@@ -251,7 +251,36 @@ Console.log([{"language": "ReScript"}]->Array.includes({"language": "ReScript"})
 */
 @send
 external includes: (array<'a>, 'a) => bool = "includes"
-@send external indexOf: (array<'a>, 'a) => int = "indexOf"
+
+/**
+`indexOf(array, item)` returns the index of the provided `item` in `array`. Uses [strict check for equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) when comparing items.
+
+Returns `-1` if the item doesn not exist. Check out `Array.indexOfOpt` for a version that returns `None` instead of `-1` if the item does not exist.
+
+See [`Array.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) on MDN.
+
+## Examples
+```rescript
+Console.log([1, 2]->Array.indexOf(2)) // 1
+Console.log([1, 2]->Array.indexOf(3)) // -1
+Console.log([{"language": "ReScript"}]->Array.indexOf({"language": "ReScript"})) // -1, because of strict equality
+```
+*/
+@send
+external indexOf: (array<'a>, 'a) => int = "indexOf"
+
+/**
+`indexOfOpt(array, item)` returns an option of the index of the provided `item` in `array`. Uses [strict check for equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) when comparing items.
+
+See [`Array.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) on MDN.
+
+## Examples
+```rescript
+Console.log([1, 2]->Array.indexOfOpt(2)) // Some(1)
+Console.log([1, 2]->Array.indexOfOpt(3)) // None
+Console.log([{"language": "ReScript"}]->Array.indexOfOpt({"language": "ReScript"})) // None, because of strict equality
+```
+*/
 let indexOfOpt: (array<'a>, 'a) => option<int>
 @send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
 @send external joinWith: (array<'a>, string) => string = "join"
