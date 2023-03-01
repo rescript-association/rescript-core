@@ -19,6 +19,9 @@
 - Change `Float.parseFloat` signature. Now accepts only string. https://github.com/rescript-association/rescript-core/pull/54
 - Add `getExn`, `getUnsafe`, `getWithDefault`, `map`, `mapWithDefault` and `flatMap` to `Nullable`. https://github.com/rescript-association/rescript-core/pull/67
 - Add `getExn`, `getUnsafe`, `getWithDefault`, `map`, `mapWithDefault` and `flatMap` to `Null`. https://github.com/rescript-association/rescript-core/pull/73
+- Add `make`, `fromInitializer`, `findMap`, `keepSome`, `reduceRight` and `reduceRightWithIndex`. https://github.com/rescript-association/rescript-core/pull/49
+- Remove `reduceReverse` in favor of `reduceRight`. https://github.com/rescript-association/rescript-core/pull/49
+- Fixed type signatures of `reduce` and `reduceWithIndex`. https://github.com/rescript-association/rescript-core/pull/49
 - Add `panic`/`Error.panic`. https://github.com/rescript-association/rescript-core/pull/72
 
 ### Documentation

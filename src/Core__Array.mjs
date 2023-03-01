@@ -3,7 +3,26 @@
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as Js_math from "rescript/lib/es6/js_math.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
-import * as Caml_splice_call from "rescript/lib/es6/caml_splice_call.js";
+
+function make(length, x) {
+  if (length <= 0) {
+    return [];
+  }
+  var arr = new Array(length);
+  arr.fill(x);
+  return arr;
+}
+
+function fromInitializer(length, f) {
+  if (length <= 0) {
+    return [];
+  }
+  var arr = new Array(length);
+  for(var i = 0; i < length; ++i){
+    arr[i] = Curry._1(f, i);
+  }
+  return arr;
+}
 
 function indexOfOpt(arr, item) {
   var index = arr.indexOf(item);
@@ -27,31 +46,20 @@ function sort(arr, cmp) {
   return result;
 }
 
-function reduce(a, x, f) {
-  var f$1 = Curry.__2(f);
-  var r = x;
-  for(var i = 0 ,i_finish = a.length; i < i_finish; ++i){
-    r = f$1(r, a[i]);
-  }
-  return r;
+function reduce(arr, init, f) {
+  return arr.reduce(f, init);
 }
 
-function reduceWithIndex(a, x, f) {
-  var f$1 = Curry.__3(f);
-  var r = x;
-  for(var i = 0 ,i_finish = a.length; i < i_finish; ++i){
-    r = f$1(r, a[i], i);
-  }
-  return r;
+function reduceWithIndex(arr, init, f) {
+  return arr.reduce(f, init);
 }
 
-function reduceReverse(a, x, f) {
-  var f$1 = Curry.__2(f);
-  var r = x;
-  for(var i = a.length - 1 | 0; i >= 0; --i){
-    r = f$1(r, a[i]);
-  }
-  return r;
+function reduceRight(arr, init, f) {
+  return arr.reduceRight(f, init);
+}
+
+function reduceRightWithIndex(arr, init, f) {
+  return arr.reduceRight(f, init);
 }
 
 function findIndexOpt(array, finder) {
@@ -108,22 +116,44 @@ function filterMap(a, f) {
   return r;
 }
 
-function flatMap(a, f) {
-  return Caml_splice_call.spliceObjApply([], "concat", [a.map(f)]);
+function keepSome(__x) {
+  return filterMap(__x, (function (x) {
+                return x;
+              }));
+}
+
+function findMap(arr, f) {
+  var _i = 0;
+  while(true) {
+    var i = _i;
+    if (i === arr.length) {
+      return ;
+    }
+    var r = Curry._1(f, arr[i]);
+    if (r !== undefined) {
+      return r;
+    }
+    _i = i + 1 | 0;
+    continue ;
+  };
 }
 
 export {
+  make ,
+  fromInitializer ,
   sort ,
   indexOfOpt ,
   lastIndexOfOpt ,
   reduce ,
-  reduceReverse ,
   reduceWithIndex ,
+  reduceRight ,
+  reduceRightWithIndex ,
   findIndexOpt ,
   reverse ,
   filterMap ,
+  keepSome ,
   shuffle ,
   shuffleInPlace ,
-  flatMap ,
+  findMap ,
 }
 /* No side effect */
