@@ -65,3 +65,5 @@ type null<+'a> = Js.null<'a>
 type undefined<+'a> = Js.undefined<'a>
 
 type nullable<+'a> = Js.nullable<'a>
+
+let panic = Core__Error.panic
