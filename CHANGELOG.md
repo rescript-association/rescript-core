@@ -19,7 +19,7 @@
 - Change `Float.parseFloat` signature. Now accepts only string. https://github.com/rescript-association/rescript-core/pull/54
 - Add `getExn`, `getUnsafe`, `getWithDefault`, `map`, `mapWithDefault` and `flatMap` to `Nullable`. https://github.com/rescript-association/rescript-core/pull/67
 - Add `getExn`, `getUnsafe`, `getWithDefault`, `map`, `mapWithDefault` and `flatMap` to `Null`. https://github.com/rescript-association/rescript-core/pull/73
-- Add `panic`/`Error.panic` and use that where appropriate: https://github.com/rescript-association/rescript-core/pull/72
+- Add `panic`/`Error.panic`. https://github.com/rescript-association/rescript-core/pull/72
 
 ### Documentation
 
