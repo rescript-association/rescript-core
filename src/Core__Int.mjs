@@ -6,7 +6,7 @@ function fromString(radix, x) {
   if (isNaN(maybeInt) || maybeInt > 2147483647 || maybeInt < -2147483648) {
     return ;
   } else {
-    return maybeInt | 0;
+    return maybeInt;
   }
 }
 
