@@ -17,7 +17,6 @@ module Int = {
   @variadic @val external minMany: array<int> => int = "Math.min"
   @val external max: (int, int) => int = "Math.max"
   @variadic @val external maxMany: array<int> => int = "Math.max"
-  @val external pow: (int, ~exp: int) => int = "Math.pow"
   @val external sign: int => int = "Math.sign"
 }
 
