@@ -247,7 +247,6 @@ module Int: {
   @val
   external maxMany: array<int> => int = "Math.max"
 
-
   /**
   `sign(v)` returns the sign of its integer argument: `-1` if negative, `0` if
   zero, `1` if positive.
