@@ -2,7 +2,7 @@ module Constants = {
   @inline let minValue = -2147483648
   @inline let maxValue = 2147483647
 }
-
+@val external isNaN: int => bool = "isNaN"
 @send external toExponential: int => string = "toExponential"
 @send external toExponentialWithPrecision: (int, ~digits: int) => string = "toExponential"
 
@@ -19,18 +19,20 @@ module Constants = {
 external toFloat: int => float = "%identity"
 external fromFloat: float => int = "%intoffloat"
 
+@val external parseInt: 'a => int = "parseInt"
+@val external parseIntWithRadix: ('a, ~radix: int) => int = "parseInt"
+
 let fromString = (~radix=?, x) => {
   let maybeInt = switch radix {
-  | Some(radix) => Core__Float.parseIntWithRadix(x, ~radix)
-  | None => Core__Float.parseInt(x)
+  | Some(radix) => parseIntWithRadix(x, ~radix)
+  | None => parseInt(x)
   }
-  if Core__Float.isNaN(maybeInt) {
+  if isNaN(maybeInt) {
     None
-  } else if maybeInt > Constants.maxValue->toFloat || maybeInt < Constants.minValue->toFloat {
+  } else if maybeInt > Constants.maxValue || maybeInt < Constants.minValue {
     None
   } else {
-    let asInt = fromFloat(maybeInt)
-    Some(asInt)
+    Some(maybeInt)
   }
 }
 
