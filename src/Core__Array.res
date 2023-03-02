@@ -1,3 +1,5 @@
+@new external makeUninitializedUnsafe: int => array<'a> = "Array"
+@set external truncateToLengthUnsafe: (array<'a>, int) => unit = "length"
 external getUnsafe: (array<'a>, int) => 'a = "%array_unsafe_get"
 external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 
@@ -11,6 +13,32 @@ external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b>
 @val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
 @val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
 
+@send external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
+
+@send external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
+
+@send external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
+
+let make = (~length, x) =>
+  if length <= 0 {
+    []
+  } else {
+    let arr = makeUninitializedUnsafe(length)
+    arr->fillAllInPlace(x)
+    arr
+  }
+
+let fromInitializer = (~length, f) =>
+  if length <= 0 {
+    []
+  } else {
+    let arr = makeUninitializedUnsafe(length)
+    for i in 0 to length - 1 {
+      arr->setUnsafe(i, f(i))
+    }
+    arr
+  }
+
 @val external isArray: 'a => bool = "Array.isArray"
 
 @get external length: array<'a> => int = "length"
@@ -23,12 +51,6 @@ external copyWithinToEnd: (array<'a>, ~target: int, ~start: int) => array<'a> = 
 @send
 external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<'a> = "copyWithin"
 
-@send external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
-
-@send external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
-
-@send external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
-
 @send external pop: array<'a> => option<'a> = "pop"
 
 @send external push: (array<'a>, 'a) => unit = "push"
@@ -38,8 +60,6 @@ external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<
 @send external reverseInPlace: array<'a> => unit = "reverse"
 
 @send external shift: array<'a> => option<'a> = "shift"
-
-@send external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
 
 @variadic @send
 external spliceInPlace: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit =
@@ -78,6 +98,14 @@ let lastIndexOfOpt = (arr, item) =>
 @send external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
 @send external copy: array<'a> => array<'a> = "slice"
 
+@send external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
+
+let sort = (arr, cmp) => {
+  let result = copy(arr)
+  sortInPlace(result, cmp)
+  result
+}
+
 @send external toString: array<'a> => string = "toString"
 @send external toLocaleString: array<'a> => string = "toLocaleString"
 
@@ -99,35 +127,16 @@ let lastIndexOfOpt = (arr, item) =>
 @send external map: (array<'a>, 'a => 'b) => array<'b> = "map"
 @send external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
-let reduceU = (a, x, f) => {
-  let r = ref(x)
-  for i in 0 to length(a) - 1 {
-    r.contents = f(. r.contents, getUnsafe(a, i))
-  }
-  r.contents
-}
-
-let reduce = (a, x, f) => reduceU(a, x, (. a, b) => f(a, b))
-
-let reduceWithIndexU = (a, x, f) => {
-  let r = ref(x)
-  for i in 0 to length(a) - 1 {
-    r.contents = f(. r.contents, getUnsafe(a, i), i)
-  }
-  r.contents
-}
-
-let reduceWithIndex = (a, x, f) => reduceWithIndexU(a, x, (. a, b, c) => f(a, b, c))
-
-let reduceReverseU = (a, x, f) => {
-  let r = ref(x)
-  for i in length(a) - 1 downto 0 {
-    r.contents = f(. r.contents, getUnsafe(a, i))
-  }
-  r.contents
-}
-
-let reduceReverse = (a, x, f) => reduceReverseU(a, x, (. a, b) => f(a, b))
+@send external reduce: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduce"
+let reduce = (arr, init, f) => reduce(arr, f, init)
+@send external reduceWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduce"
+let reduceWithIndex = (arr, init, f) => reduceWithIndex(arr, f, init)
+@send
+external reduceRight: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduceRight"
+let reduceRight = (arr, init, f) => reduceRight(arr, f, init)
+@send
+external reduceRightWithIndex: (array<'b>, ('a, 'b, int) => 'a, 'a) => 'a = "reduceRight"
+let reduceRightWithIndex = (arr, init, f) => reduceRightWithIndex(arr, f, init)
 
 @send external some: (array<'a>, 'a => bool) => bool = "some"
 @send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"
@@ -145,8 +154,6 @@ let findIndexOpt = (array: array<'a>, finder: 'a => bool): option<int> =>
   | index => Some(index)
   }
 
-@new external makeUninitializedUnsafe: int => array<'a> = "Array"
-@set external truncateToLengthUnsafe: (array<'a>, int) => unit = "length"
 let swapUnsafe = (xs, i, j) => {
   let tmp = getUnsafe(xs, i)
   setUnsafe(xs, i, getUnsafe(xs, j))
@@ -194,7 +201,22 @@ let filterMapU = (a, f) => {
 
 let filterMap = (a, f) => filterMapU(a, (. a) => f(a))
 
-// TODO: Change this implementation?
-let flatMap = (a, f) => []->concatMany(map(a, f))
+let keepSome = filterMap(_, x => x)
+
+@send external flatMap: (array<'a>, 'a => array<'b>) => array<'b> = "flatMap"
+
+let findMap = (arr, f) => {
+  let rec loop = i =>
+    if i == arr->length {
+      None
+    } else {
+      switch f(getUnsafe(arr, i)) {
+      | None => loop(i + 1)
+      | Some(_) as r => r
+      }
+    }
+
+  loop(0)
+}
 
 @send external at: (array<'a>, int) => option<'a> = "at"

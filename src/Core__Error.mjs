@@ -13,6 +13,10 @@ var $$TypeError = {};
 
 var $$URIError = {};
 
+function panic(msg) {
+  throw new Error("Panic! " + msg);
+}
+
 export {
   $$EvalError ,
   $$RangeError ,
@@ -20,5 +24,6 @@ export {
   $$SyntaxError ,
   $$TypeError ,
   $$URIError ,
+  panic ,
 }
 /* No side effect */

@@ -5,11 +5,9 @@
     "clean": "rescript clean",
     "build": "rescript",
     "watch": "rescript build -w",
-    "test": "node test/PromiseTest.mjs && node test/TempTests.mjs"
+    "test": "node test/TestSuite.mjs && node test/TempTests.mjs"
   },
-  "keywords": [
-    "rescript"
-  ],
+  "keywords": ["rescript"],
   "homepage": "https://github.com/rescript-association/rescript-core",
   "author": "ReScript Team",
   "license": "MIT",

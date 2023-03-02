@@ -5,6 +5,29 @@
 external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b> = "Array.from"
 @val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
 @val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
+
+/**
+  `make(~length, init)`
+
+  Creates an array of length `length` initialized with the value of `init`.
+
+  ```res example
+  Array.make(~length=3, #apple) == [#apple, #apple, #apple]
+  ```
+*/
+let make: (~length: int, 'a) => array<'a>
+
+/**
+  `fromInitializer(~length, f)`
+
+  Creates an array of length `length` initialized with the value returned from `f ` for each index.
+
+  ```res example
+  Array.make(~length=3, i => i + 3) == [3, 4, 5]
+  ```
+*/
+let fromInitializer: (~length: int, int => 'a) => array<'a>
+
 @val external isArray: 'a => bool = "Array.isArray"
 @get external length: array<'a> => int = "length"
 @send external copyAllWithin: (array<'a>, ~target: int) => array<'a> = "copyWithin"
@@ -20,6 +43,7 @@ external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<
 @variadic @send external pushMany: (array<'a>, array<'a>) => unit = "push"
 @send external reverseInPlace: array<'a> => unit = "reverse"
 @send external shift: array<'a> => option<'a> = "shift"
+let sort: (array<'a>, ('a, 'a) => int) => array<'a>
 @send external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
 @variadic @send
 external spliceInPlace: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit =
@@ -56,37 +80,50 @@ let lastIndexOfOpt: (array<'a>, 'a) => option<int>
 @send external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
 /**
-  `reduce(xs, init, f)`
+  `reduce(xs, f, init)`
 
   Applies `f` to each element of `xs` from beginning to end. Function `f` has two parameters: the item from the list and an “accumulator”; which starts with a value of `init`. `reduce` returns the final value of the accumulator.
 
   ```res example
-  Array.reduce([2, 3, 4], 1, (a, b) => a + b) == 10
+  Array.reduce([2, 3, 4], (a, b) => a + b, 1) == 10
 
-  Array.reduce(["a", "b", "c", "d"], "", (a, b) => a ++ b) == "abcd"
+  Array.reduce(["a", "b", "c", "d"], (a, b) => a ++ b, "") == "abcd"
   ```
 */
-let reduce: (array<'b>, 'a, ('a, 'b) => 'a) => 'a
+let reduce: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
 
 /**
-  `reduceReverse(xs, init, f)`
+  `reduceWithIndex(xs, f, init)`
+
+  Applies `f` to each element of `xs` from beginning to end. Function `f` has three parameters: the item from the array and an “accumulator”, which starts with a value of `init` and the index of each element. `reduceWithIndex` returns the final value of the accumulator.
+
+  ```res example
+  Array.reduceWithIndex([1, 2, 3, 4], (acc, x, i) => acc + x + i, 0) == 16
+  ```
+*/
+let reduceWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
+
+/**
+  `reduceRight(xs, f, init)`
 
   Works like `Array.reduce`; except that function `f` is applied to each item of `xs` from the last back to the first.
 
   ```res example
-  Array.reduceReverse(["a", "b", "c", "d"], "", (a, b) => a ++ b) == "dcba"
+  Array.reduceRight(["a", "b", "c", "d"], (a, b) => a ++ b, "") == "dcba"
   ```
 */
-let reduceReverse: (array<'b>, 'a, ('a, 'b) => 'a) => 'a
+let reduceRight: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
 
 /**
-  Applies `f` to each element of `xs` from beginning to end. Function `f` has three parameters: the item from the array and an “accumulator”, which starts with a value of `init` and the index of each element. `reduceWithIndex` returns the final value of the accumulator.
+  `reduceRightWithIndex(xs, f, init)`
+
+  Like `reduceRight`, but with an additional index argument on the callback function.
 
   ```res example
-  Array.reduceWithIndex([1, 2, 3, 4], 0, (acc, x, i) => acc + x + i) == 16
+  Array.reduceRightWithIndex([1, 2, 3, 4], (acc, x, i) => acc + x + i, 0) == 16
   ```
 */
-let reduceWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
+let reduceRightWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
 
 @send external some: (array<'a>, 'a => bool) => bool = "some"
 @send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"
@@ -100,11 +137,35 @@ external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 let findIndexOpt: (array<'a>, 'a => bool) => option<int>
 let reverse: array<'a> => array<'a>
 let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
+
+/**
+  `keepSome(arr)`
+
+  Returns a new array containing `value` for all elements that are `Some(value)`
+  and ignoring every value that is `None`
+
+  ```res example
+  Array.keepSome([Some(1), None, Some(3)]) == [1, 3]
+  ```
+*/
+let keepSome: array<option<'a>> => array<'a>
 let shuffle: array<'a> => array<'a>
 let shuffleInPlace: array<'a> => unit
-let flatMap: (array<'a>, 'a => array<'b>) => array<'b>
+@send external flatMap: (array<'a>, 'a => array<'b>) => array<'b> = "flatMap"
 
-/** 
+/**
+  `findMap(arr, f)`
+
+  Calls `f` for each element and returns the first value from `f` that is `Some(_)`.
+  Otherwise returns `None`
+
+  ```res example
+  Array.findMap([1, 2, 3], n => mod(n, 2) ? Some(n - 2) : None) == 0
+  ```
+*/
+let findMap: (array<'a>, 'a => option<'b>) => option<'b>
+
+/**
   `at(array, index)`
 
   Get an element by its index. Negative indices count backwards from the last item.

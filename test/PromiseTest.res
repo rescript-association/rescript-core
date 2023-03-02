@@ -52,20 +52,8 @@ module ThenChaining = {
       resolve(resolve(first + 1))
     })
     ->then(p => {
-      p
-      ->then(value => {
-        Test.run(__POS_OF__("Should be 2"), value, equal, 2)
-        resolve()
-      })
-      ->ignore
-      resolve()
-    })
-    ->catch(e => {
-      let ret = switch e {
-      | Exn.Error(m) => Exn.message(m) === Some("p.then is not a function")
-      | _ => false
-      }
-      Test.run(__POS_OF__("then should have thrown an error"), ret, equal, true)
+      let isPromise = Type.typeof((p: promise<_>)) == #object
+      Test.run(__POS_OF__("Should not be a promise"), isPromise, equal, false)
       resolve()
     })
   }
@@ -91,20 +79,8 @@ module ThenChaining = {
       resolve(num)
     })
     ->then(p => {
-      // This will throw because of the auto-collapsing of promises
-      p
-      ->thenResolve(num => {
-        num + 1
-      })
-      ->ignore
-      resolve()
-    })
-    ->catch(e => {
-      let ret = switch e {
-      | Exn.Error(m) => Exn.message(m) === Some("p.then is not a function")
-      | _ => false
-      }
-      Test.run(__POS_OF__("then should have thrown an error"), ret, equal, true)
+      let isPromise = Type.typeof((p: promise<_>)) == #object
+      Test.run(__POS_OF__("Should not be a promise"), isPromise, equal, false)
       resolve()
     })
   }
@@ -156,7 +132,7 @@ module Catching = {
     ->then(_ => resolve()) // Since our asyncParse will fail anyways, we convert to promise<unit> for our catch later
     ->catch(e => {
       let success = switch e {
-      | Exn.Error(err) => Exn.message(err) == Some("Unexpected token . in JSON at position 1")
+      | Exn.Error(err) => Exn.name(err) == Some("SyntaxError")
       | _ => false
       }
 

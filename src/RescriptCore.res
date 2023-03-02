@@ -16,7 +16,6 @@ module Object = Core__Object
 module Promise = Core__Promise
 module RegExp = Core__RegExp
 module String = Core__String
-module Undefined = Core__Undefined
 module Symbol = Core__Symbol
 module Type = Core__Type
 module JSON = Core__JSON
@@ -49,7 +48,7 @@ module Intl = Core__Intl
 @val external globalThis: {..} = "globalThis"
 
 external null: Core__Null.t<'a> = "#null"
-external undefined: Core__Undefined.t<'a> = "#undefined"
+external undefined: Core__Nullable.t<'a> = "#undefined"
 external typeof: 'a => Core__Type.t = "#typeof"
 
 type t<'a> = Js.t<'a>
@@ -66,3 +65,5 @@ type null<+'a> = Js.null<'a>
 type undefined<+'a> = Js.undefined<'a>
 
 type nullable<+'a> = Js.nullable<'a>
+
+let panic = Core__Error.panic
