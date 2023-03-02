@@ -118,6 +118,10 @@ String.fromCodePointMany([0xd55c, 0xae00, 0x1f63a]) == `한글😺`
 @val
 external fromCodePointMany: array<int> => string = "String.fromCodePoint"
 
+let equal: (string, string) => bool
+
+let compare: (string, string) => int
+
 /**
 `length(str)` returns the length of the given `string`.
 See [`String.length`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length) on MDN.
