@@ -2,11 +2,9 @@
 
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 
-console.info("");
+console.log("---");
 
-console.info("Intl");
-
-console.info("---");
+console.log("Intl.NumberFormat");
 
 var currencyFormatter = new Intl.NumberFormat("fr-FR", {
       currency: "EUR",

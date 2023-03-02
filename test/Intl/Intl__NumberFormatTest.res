@@ -1,8 +1,8 @@
 open RescriptCore
 
-Console.info("")
-Console.info("Intl")
-Console.info("---")
+Console.log("---")
+Console.log("Intl.NumberFormat")
+
 let currencyFormatter = Intl.NumberFormat.makeWithLocaleAndOptions(
   "fr-FR",
   {currency: "EUR", style: #currency},

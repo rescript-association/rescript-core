@@ -12,7 +12,7 @@ type segmentData = {
 }
 
 @send
-external containing: unit => segmentData = "containing"
+external containing: t => segmentData = "containing"
 
 @send
-external containingWithIndex: int => segmentData = "containing"
+external containingWithIndex: (t, int) => segmentData = "containing"

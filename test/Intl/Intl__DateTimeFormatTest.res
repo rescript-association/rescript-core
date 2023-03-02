@@ -1,5 +1,14 @@
 open RescriptCore
 
+Console.log("---")
+Console.log("Intl.DateTimeFormat")
+
+Intl.DateTimeFormat.supportedLocalesOf(["en-US", "en-GB"])->ignore
+Intl.DateTimeFormat.supportedLocalesOfWithOptions(
+  ["en-US", "en-GB"],
+  {localeMatcher: #lookup},
+)->ignore
+
 let formatter = Intl.DateTimeFormat.makeWithOptions({dateStyle: #full, timeStyle: #full})
 
 Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))

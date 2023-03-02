@@ -1,5 +1,7 @@
 open RescriptCore
 
+include IntlTests
+
 Console.info("")
 Console.info("Array")
 Console.info("---")

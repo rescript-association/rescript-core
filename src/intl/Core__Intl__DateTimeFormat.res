@@ -2,26 +2,6 @@ type t
 
 type dateStyle = [#full | #long | #medium | #short]
 type timeStyle = [#full | #long | #medium | #short]
-type calendar = [
-  | #buddhist
-  | #chinese
-  | #coptic
-  | #dangi
-  | #ethioaa
-  | #ethiopic
-  | #gregory
-  | #hebrew
-  | #indian
-  | #islamic
-  | #"islamic-umalqura"
-  | #"islamic-tbla"
-  | #"islamic-civil"
-  | #"islamic-rgsa"
-  | #iso8601
-  | #japanese
-  | #persian
-  | #roc
-]
 type dayPeriod = [#narrow | #short | #long]
 type weekday = [#narrow | #short | #long]
 type era = [#narrow | #short | #long]
@@ -49,7 +29,7 @@ type fractionalSecondDigits = [#0 | #1 | #2 | #3]
 type options = {
   dateStyle?: dateStyle, // can be used with timeStyle, but not other options
   timeStyle?: timeStyle, // can be used with dateStyle, but not other options
-  calendar?: calendar,
+  calendar?: Core__Intl__Common.calendar,
   dayPeriod?: dayPeriod, // only has an effect if a 12-hour clock is used
   numberingSystem?: Core__Intl__Common.numberingSystem,
   localeMatcher?: Core__Intl__Common.localeMatcher,
@@ -83,7 +63,7 @@ type resolvedOptions = {
   second?: second,
   fractionalSecondDigits?: fractionalSecondDigits,
   timeZoneName?: timeZoneName,
-  calendar: calendar,
+  calendar: Core__Intl__Common.calendar,
   hour12: bool,
   hourCycle: hourCycle,
   locale: string,
