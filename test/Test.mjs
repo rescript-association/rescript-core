@@ -5,9 +5,7 @@ import * as Path from "path";
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as CodeFrame from "@babel/code-frame";
 
-var dirname = typeof __dirname === "undefined" ? undefined : __dirname;
-
-var dirname$1 = dirname !== undefined ? dirname : "";
+var dirname = (new URL('.', import.meta.url).pathname);
 
 function cleanUpStackTrace(stack) {
   var removeInternalLines = function (lines, _i) {
@@ -35,7 +33,7 @@ function run(loc, left, comparator, right) {
   var match = loc[0];
   var line = match[1];
   var file = match[0];
-  var fileContent = Fs.readFileSync(Path.join(dirname$1, file), {
+  var fileContent = Fs.readFileSync(Path.join(dirname, file), {
         encoding: "utf-8"
       });
   var left$1 = JSON.stringify(left);
@@ -55,7 +53,7 @@ function run(loc, left, comparator, right) {
 }
 
 export {
-  dirname$1 as dirname,
+  dirname ,
   cleanUpStackTrace ,
   run ,
 }

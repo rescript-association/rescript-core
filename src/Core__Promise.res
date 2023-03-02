@@ -47,6 +47,3 @@ let catch = (promise: promise<'a>, callback: exn => promise<'a>): promise<'a> =>
 external race: array<t<'a>> => t<'a> = "race"
 
 external done: promise<'a> => unit = "%ignore"
-
-external unsafe_async: 'a => promise<'a> = "%identity"
-external unsafe_await: promise<'a> => 'a = "?await"
