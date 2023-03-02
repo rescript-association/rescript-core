@@ -27,6 +27,10 @@ let make: (~length: int, 'a) => array<'a>
 */
 let fromInitializer: (~length: int, int => 'a) => array<'a>
 
+let equal: (array<'a>, array<'a>, ('a, 'a) => bool) => bool
+
+let compare: (array<'a>, array<'a>, ('a, 'a) => int) => int
+
 @val external isArray: 'a => bool = "Array.isArray"
 
 /**
