@@ -23,7 +23,7 @@
 - Remove `reduceReverse` in favor of `reduceRight`. https://github.com/rescript-association/rescript-core/pull/49
 - Fixed type signatures of `reduce` and `reduceWithIndex`. https://github.com/rescript-association/rescript-core/pull/49
 - Add `panic`/`Error.panic`. https://github.com/rescript-association/rescript-core/pull/72
-- Remove `Math.Int.pow`.
+- Remove `Math.Int.pow`. https://github.com/rescript-association/rescript-core/pull/81
 
 ### Documentation
 
