@@ -57,6 +57,20 @@ module Constants: {
 }
 
 /**
+`isNaN(v)` tests if the given `v` is `NaN`.
+See [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN) on MDN.
+
+## Examples
+
+```rescript
+Int.isNaN(3) // false
+Int.isNaN(Int.parseInt("error")) // true
+```
+*/
+@val
+external isNaN: int => bool = "isNaN"
+
+/**
 `toExponential(n)` return a `string` representing the given value in exponential
 notation.
 See [`Number.toExponential`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toExponential)
@@ -244,6 +258,43 @@ Int.fromFloat(0.9999) == 0
 */
 external fromFloat: float => int = "%intoffloat"
 
+/**
+`parseInt(v)` parse the given `v` and returns a float. Leading whitespace in
+`v` is ignored. Returns `NaN` if `v` can't be parsed.
+See [`parseInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt) on MDN.
+
+## Examples
+
+```rescript
+Int.parseInt("1.0") // 1
+Int.parseInt("  3.14   ") // 3
+Int.parseInt(3) // 3
+Int.parseInt("3.14some non-digit characters") // 3
+Int.parseInt("error")->Int.isNaN // true
+```
+*/
+@val
+external parseInt: 'a => float = "parseInt"
+
+/**
+`parseIntWithRadix(v, ~radix)` parse the given `v` and returns a float. Leading
+whitespace in this argument `v`is ignored. `radix` specifies the radix base to
+use for the formatted number. The value must be in the range [2, 36] (inclusive).
+Returns `NaN` if `v` can't be parsed and `radix` is smaller than 2 or bigger
+than 36.
+See [`parseInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt) on MDN.
+
+## Examples
+
+```rescript
+Int.parseInt("10.0", ~radix=2) // 2.0
+Int.parseInt("15 * 3", ~radix=10) // 15.0
+Int.parseInt("12", ~radix=13) // 15.0
+Int.parseInt("17", ~radix=40)->Int.isNaN // true
+```
+*/
+@val
+external parseIntWithRadix: ('a, ~radix: int) => float = "parseInt"
 /**
 `fromString(~radix?, str)` return an `option<int>` representing the given value
 `str`. `~radix` specifies the radix base to use for the formatted number.
