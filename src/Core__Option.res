@@ -53,7 +53,7 @@ let getExn = opt =>
 let expect = (opt, message) =>
   switch opt {
   | Some(value) => value
-  | None => raise(Failure(message))
+  | None => Core__Error.panic(message)
   }
 
 external getUnsafe: option<'a> => 'a = "%identity"

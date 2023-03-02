@@ -101,7 +101,7 @@ Option.expect(None, "should not be None") // Raises `Failure("should not be None
 
 ## Exceptions
 
-- Raises `Failure` if `opt` is `None`
+- Panics if `opt` is `None`
 */
 let expect: (option<'a>, string) => 'a
 

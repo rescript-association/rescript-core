@@ -2,6 +2,7 @@
 
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
+import * as Core__Error from "./Core__Error.mjs";
 
 function flat(opt) {
   if (opt !== undefined) {
@@ -39,12 +40,9 @@ function getExn(opt) {
 function expect(opt, message) {
   if (opt !== undefined) {
     return Caml_option.valFromOption(opt);
+  } else {
+    return Core__Error.panic(message);
   }
-  throw {
-        RE_EXN_ID: "Failure",
-        _1: message,
-        Error: new Error()
-      };
 }
 
 function mapWithDefault(opt, $$default, f) {
