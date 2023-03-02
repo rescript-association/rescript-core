@@ -90,7 +90,7 @@ let isSome = x =>
 
 let isNone = x => x == None
 
-let eqU = (a, b, f) =>
+let equalU = (a, b, f) =>
   switch a {
   | Some(a) =>
     switch b {
@@ -100,9 +100,9 @@ let eqU = (a, b, f) =>
   | None => b == None
   }
 
-let eq = (a, b, f) => eqU(a, b, (. x, y) => f(x, y))
+let equal = (a, b, f) => equalU(a, b, (. x, y) => f(x, y))
 
-let cmpU = (a, b, f) =>
+let compareU = (a, b, f) =>
   switch (a, b) {
   | (Some(a), Some(b)) => f(. a, b)
   | (None, Some(_)) => -1
@@ -110,4 +110,4 @@ let cmpU = (a, b, f) =>
   | (None, None) => 0
   }
 
-let cmp = (a, b, f) => cmpU(a, b, (. x, y) => f(x, y))
+let compare = (a, b, f) => compareU(a, b, (. x, y) => f(x, y))

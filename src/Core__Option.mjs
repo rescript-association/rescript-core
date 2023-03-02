@@ -78,7 +78,7 @@ function isNone(x) {
   return x === undefined;
 }
 
-function eq(a, b, f) {
+function equal(a, b, f) {
   var f$1 = Curry.__2(f);
   if (a !== undefined) {
     if (b !== undefined) {
@@ -91,7 +91,7 @@ function eq(a, b, f) {
   }
 }
 
-function cmp(a, b, f) {
+function compare(a, b, f) {
   var f$1 = Curry.__2(f);
   if (a !== undefined) {
     if (b !== undefined) {
@@ -117,7 +117,7 @@ export {
   orElse ,
   isSome ,
   isNone ,
-  eq ,
-  cmp ,
+  equal ,
+  compare ,
 }
 /* No side effect */
