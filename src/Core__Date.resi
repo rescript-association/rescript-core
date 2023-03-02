@@ -432,6 +432,10 @@ Returns the time, in milliseconds, between UNIX epoch (January 1, 1970 00:00:00 
 @val
 external now: unit => msSinceEpoch = "Date.now"
 
+let equal: (t, t) => bool
+
+let compare: (t, t) => int
+
 /** 
 `getTime(date)`
 
