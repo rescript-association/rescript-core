@@ -3,6 +3,14 @@
 import * as Pervasives from "rescript/lib/es6/pervasives.js";
 import * as Core__Array from "./Core__Array.mjs";
 
+function equal(a, b) {
+  return a === b;
+}
+
+function compare(a, b) {
+  return a - b | 0;
+}
+
 function fromString(radix, x) {
   var maybeInt = radix !== undefined ? parseInt(x, radix) : parseInt(x);
   if (isNaN(maybeInt) || maybeInt > 2147483647 || maybeInt < -2147483648) {
@@ -54,6 +62,8 @@ var Constants = {
 
 export {
   Constants ,
+  equal ,
+  compare ,
   fromString ,
   range ,
   rangeWithOptions ,

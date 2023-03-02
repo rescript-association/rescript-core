@@ -3,6 +3,10 @@ module Constants = {
   @inline let maxValue = 2147483647
 }
 
+let equal = (a: int, b: int) => a === b
+
+let compare = (a, b) => a - b
+
 @send external toExponential: int => string = "toExponential"
 @send external toExponentialWithPrecision: (int, ~digits: int) => string = "toExponential"
 
