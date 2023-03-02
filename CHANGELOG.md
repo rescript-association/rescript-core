@@ -26,3 +26,4 @@
 - Docstrings for `Dict`. https://github.com/rescript-association/rescript-core/pull/40
 - Docstrings for `RegExp`. https://github.com/rescript-association/rescript-core/pull/47
 - Docstrings for `Date`. https://github.com/rescript-association/rescript-core/pull/61
+- Docstrings for `String`. https://github.com/rescript-association/rescript-core/pull/27
