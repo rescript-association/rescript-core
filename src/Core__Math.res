@@ -56,17 +56,17 @@ module Int = {
 @val external min: (float, float) => float = "Math.min"
 @variadic @val external _minMany: array<float> => float = "Math.min"
 let minMany = arr =>
-    switch arr {
-    | [] => 0.0
-    | arr => _minMany(arr)
-    }
+  switch arr {
+  | [] => 0.0
+  | arr => _minMany(arr)
+  }
 @val external max: (float, float) => float = "Math.max"
 @variadic @val external _maxMany: array<float> => float = "Math.max"
 let maxMany = arr =>
-    switch arr {
-    | [] => 0.0
-    | arr => _maxMany(arr)
-    }
+  switch arr {
+  | [] => 0.0
+  | arr => _maxMany(arr)
+  }
 @val external pow: (float, ~exp: float) => float = "Math.pow"
 @val external random: unit => float = "Math.random"
 @val external round: float => float = "Math.round"
