@@ -1,5 +1,40 @@
 type localeMatcher = [#lookup | @as("best fit") #bestFit]
 
+type calendar = [
+  | #buddhist
+  | #chinese
+  | #coptic
+  | #dangi
+  | #ethioaa
+  | #ethiopic
+  | #gregory
+  | #hebrew
+  | #indian
+  | #islamic
+  | #"islamic-umalqura"
+  | #"islamic-tbla"
+  | #"islamic-civil"
+  | #"islamic-rgsa"
+  | #iso8601
+  | #japanese
+  | #persian
+  | #roc
+]
+
+type collation = [
+  | #compat // (Arabic)
+  | #dict // (Sinhala)
+  | #emoji // (root)
+  | #eor // (root)
+  | #phonebk // (German)
+  | #phonetic // (Lingala)
+  | #pinyin // (Chinese)
+  | #stroke // (Chinese)
+  | #trad
+  | #unihan // (Chinese, Japanese, and Korean; not available in Chrome or Edge)
+  | #zhuyin
+] // (Chinese)
+
 type numberingSystem = [
   | #adlm
   | #ahom

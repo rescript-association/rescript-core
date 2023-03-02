@@ -2,8 +2,8 @@ type t
 
 type options = {
   baseName?: string,
-  calendar?: string, // TODO: probably the same as Core__Intl__DateTimeFormat.calendar?
-  collation?: string, // TODO: probably the same as Core__Intl__Collator.collation?
+  calendar?: Core__Intl__Common.calendar,
+  collation?: Core__Intl__Common.collation,
   hourCycle?: [#h11 | #h12 | #h23 | #h24],
   caseFirst?: [#upper | #lower | #"false"],
   numberingSystem?: Core__Intl__Common.numberingSystem,
