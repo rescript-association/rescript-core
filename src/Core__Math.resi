@@ -247,19 +247,6 @@ module Int: {
   @val
   external maxMany: array<int> => int = "Math.max"
 
-  /**
-  `pow(a, ~exp)` raises the given base `a` to the given exponent `exp`.
-  See [`Math.pow`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow) on MDN.
-
-  ## Examples
-
-  ```rescript
-  Math.Int.pow(2, ~exp=4) // 16
-  Math.Int.pow(3, ~exp=4) // 81
-  ```
-  */
-  @val
-  external pow: (int, ~exp: int) => int = "Math.pow"
 
   /**
   `sign(v)` returns the sign of its integer argument: `-1` if negative, `0` if
