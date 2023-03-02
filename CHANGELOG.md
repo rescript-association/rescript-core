@@ -36,3 +36,4 @@
 - Docstrings for `RegExp`. https://github.com/rescript-association/rescript-core/pull/47
 - Docstrings for `Date`. https://github.com/rescript-association/rescript-core/pull/61
 - Docstrings for `Float`. https://github.com/rescript-association/rescript-core/pull/54
+- Docstrings for `String`. https://github.com/rescript-association/rescript-core/pull/27
