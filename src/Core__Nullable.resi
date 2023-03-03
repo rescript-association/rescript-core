@@ -55,6 +55,10 @@ switch asNullable->Nullable.toOption {
 */
 external make: 'a => t<'a> = "%identity"
 
+let equal: (t<'a>, t<'b>, ('a, 'b) => bool) => bool
+
+let compare: (t<'a>, t<'b>, ('a, 'b) => int) => int
+
 /**
 Converts a nullable value into an option, so it can be pattern matched on.
 Will convert both `null` and `undefined` to `None`, and a present value to `Some(value)`.
