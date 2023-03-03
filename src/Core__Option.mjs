@@ -78,11 +78,10 @@ function isNone(x) {
   return x === undefined;
 }
 
-function equal(a, b, f) {
-  var f$1 = Curry.__2(f);
+function equal(a, b, eq) {
   if (a !== undefined) {
     if (b !== undefined) {
-      return f$1(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
+      return Curry._2(eq, Caml_option.valFromOption(a), Caml_option.valFromOption(b));
     } else {
       return false;
     }
@@ -91,11 +90,10 @@ function equal(a, b, f) {
   }
 }
 
-function compare(a, b, f) {
-  var f$1 = Curry.__2(f);
+function compare(a, b, cmp) {
   if (a !== undefined) {
     if (b !== undefined) {
-      return f$1(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
+      return Curry._2(cmp, Caml_option.valFromOption(a), Caml_option.valFromOption(b));
     } else {
       return 1;
     }
