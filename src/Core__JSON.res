@@ -1,22 +1,19 @@
 type t = Js.Json.t
 
-type jsonReplacer
-external asJsonReplacer: 'a => jsonReplacer = "%identity"
-
 @raises @val external parseExn: string => t = "JSON.parse"
 @raises @val external parseExnWithReviver: (string, (string, t) => t) => t = "JSON.parse"
 @val external stringify: t => string = "JSON.stringify"
 @val external stringifyWithIndent: (t, @as(json`null`) _, int) => string = "JSON.stringify"
-@val external stringifyWithReplacer: (t, jsonReplacer) => string = "JSON.stringify"
-@val external stringifyWithReplacerAndIndent: (t, jsonReplacer, int) => string = "JSON.stringify"
-
+@val external stringifyWithReplacer: (t, (string, t) => t) => string = "JSON.stringify"
+@val
+external stringifyWithReplacerAndIndent: (t, (string, t) => t, int) => string = "JSON.stringify"
 @raises @val external stringifyAny: 'a => option<string> = "JSON.stringify"
 @raises @val
 external stringifyAnyWithIndent: ('a, @as(json`null`) _, int) => option<string> = "JSON.stringify"
 @raises @val
-external stringifyAnyWithReplacer: ('a, jsonReplacer) => option<string> = "JSON.stringify"
+external stringifyAnyWithReplacer: ('a, (string, t) => t) => option<string> = "JSON.stringify"
 @raises @val
-external stringifyAnyWithReplacerAndIndent: ('a, jsonReplacer, int) => option<string> =
+external stringifyAnyWithReplacerAndIndent: ('a, (string, t) => t, int) => option<string> =
   "JSON.stringify"
 
 module Classify = {

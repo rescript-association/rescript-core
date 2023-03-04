@@ -7,13 +7,6 @@ A type representing a JSON object.
 */
 type t = Js.Json.t
 
-/**
-A type which describes how the value should be transformed while stringification.
-It is a function which receives a key and a value.
-*/
-type jsonReplacer
-external asJsonReplacer: 'a => jsonReplacer = "%identity"
-
 /** 
 `parseExn(string)` 
 
@@ -79,11 +72,15 @@ If you want to stringify any type, use `JSON.stringifyAny` instead.
 
 ## Examples
 ```rescript
-Dict.fromArray([("foo", JSON.Encode.string("bar")), ("hello", JSON.Encode.string("world"))])
-->JSON.Encode.object
-->JSON.stringify
-// {"foo":"bar","hello":"world"}
-}
+let json =
+  Dict.fromArray([
+    ("foo", JSON.Encode.string("bar")),
+    ("hello", JSON.Encode.string("world")),
+    ("someNumber", JSON.Encode.int(42)),
+  ])->JSON.Encode.object
+
+JSON.stringify(json)
+// {"foo":"bar","hello":"world","someNumber":42}
 ```
 */
 @val
@@ -97,21 +94,26 @@ If you want to stringify any type, use `JSON.stringifyAnyWithIndent` instead.
 
 ## Examples
 ```rescript
-Dict.fromArray([("foo", JSON.Encode.string("bar")), ("hello", JSON.Encode.string("world"))])
-->JSON.Encode.object
-->JSON.stringify
+let json =
+  Dict.fromArray([
+    ("foo", JSON.Encode.string("bar")),
+    ("hello", JSON.Encode.string("world")),
+    ("someNumber", JSON.Encode.int(42)),
+  ])->JSON.Encode.object
+
+JSON.stringifyWithIndent(json, 2)
 // {
 //   "foo": "bar",
-//   "hello": "world"
+//   "hello": "world",
+//   "someNumber": 42
 // }
-}
 ```
 */
 @val
 external stringifyWithIndent: (t, @as(json`null`) _, int) => string = "JSON.stringify"
 
 /** 
-`stringifyWithReplacer(json, jsonReplacer)` 
+`stringifyWithReplacer(json, replacer)` 
 
 Converts a JSON object to a JSON string.
 The replacer describes how the value should be transformed. It is a function which receives a key and a value.
@@ -119,70 +121,84 @@ If you want to stringify any type, use `JSON.stringifyAnyWithReplacer` instead.
 
 ## Examples
 ```rescript
-let replacer = JSON.asJsonReplacer((key, value) => {
-  if key === "foo" {
-    String.toUpperCase(value)
-  } else if value === "world" {
-    value ++ "!"
-  } else {
-    value
-  }
-})
+let json =
+  Dict.fromArray([
+    ("foo", JSON.Encode.string("bar")),
+    ("hello", JSON.Encode.string("world")),
+    ("someNumber", JSON.Encode.int(42)),
+  ])->JSON.Encode.object
 
-Dict.fromArray([("foo", JSON.Encode.string("bar")), ("hello", JSON.Encode.string("world"))])
-->JSON.Encode.object
-->JSON.stringifyWithReplacer(replacer)
-// {"foo":"BAR","hello":"world!"}
+let replacer = (key, value) => {
+  let decodedValue = value->JSON.Decode.string
+
+  switch decodedValue {
+  | Some(string) => string->String.toUpperCase->JSON.Encode.string
+  | None => value
+  }
+}
+
+JSON.stringifyWithReplacer(json, replacer)
+// {"foo":"BAR","hello":"WORLD","someNumber":42}
 ```
 */
 @val
-external stringifyWithReplacer: (t, jsonReplacer) => string = "JSON.stringify"
+external stringifyWithReplacer: (t, (string, t) => t) => string = "JSON.stringify"
 
 /** 
-`stringifyWithReplacerAndIndent(json, jsonReplacer, indentation)` 
+`stringifyWithReplacerAndIndent(json, replacer, indentation)` 
 
 Converts a JSON object to a JSON string. The output will be indented.
 The replacer describes how the value should be transformed. It is a function which receives a key and a value.
 
 ## Examples
 ```rescript
-let replacer = JSON.asJsonReplacer((key, value) => {
-  if key === "foo" {
-    String.toUpperCase(value)
-  } else if value === "world" {
-    value ++ "!"
-  } else {
-    value
-  }
-})
+let json =
+  Dict.fromArray([
+    ("foo", JSON.Encode.string("bar")),
+    ("hello", JSON.Encode.string("world")),
+    ("someNumber", JSON.Encode.int(42)),
+  ])->JSON.Encode.object
 
-Dict.fromArray([("foo", JSON.Encode.string("bar")), ("hello", JSON.Encode.string("world"))])
-->JSON.Encode.object
-->JSON.stringifyWithReplacerAndIndent(replacer, 2)
+let replacer = (key, value) => {
+  let decodedValue = value->JSON.Decode.string
+
+  switch decodedValue {
+  | Some(string) => string->String.toUpperCase->JSON.Encode.string
+  | None => value
+  }
+}
+
+JSON.stringifyWithReplacerAndIndent(json, replacer, 2)
 // {
-//   "foo": "BAR",
-//   "hello": "world!"
-// }
+  "foo": "BAR",
+  "hello": "WORLD",
+  "someNumber": 42
+}
 ```
 */
 @val
-external stringifyWithReplacerAndIndent: (t, jsonReplacer, int) => string = "JSON.stringify"
+external stringifyWithReplacerAndIndent: (t, (string, t) => t, int) => string = "JSON.stringify"
 
 /** 
 `stringifyAny(any)` 
 
-Converts any type to a JSON string. Values which can't be strinfified will return `None`. 
-Throws a JavaScript exception (TypeError), if the value can't be stringified.
+Converts any type to a JSON string.
+Stringifing a function or `undefined` will return `None`.
+If the value contains circular references or `BigInt`s, the function will throw a JavaScript exception (TypeError).
 If you want to stringify a JSON object, use `JSON.stringify` instead.
 
 ## Examples
 ```rescript
-Dict.fromArray([("foo", "bar"), ("hello", "world")])->JSON.stringifyAny
-// Some({"foo":"bar","hello":"world"})
+let json = Dict.fromArray([
+  ("foo", JSON.Encode.string("bar")),
+  ("hello", JSON.Encode.string("world")),
+  ("someNumber", JSON.Encode.int(42)),
+])
 
-let someFunction = () => {"hello world"}
+JSON.stringifyAny(json)
+// {"foo":"bar","hello":"world","someNumber":42}
 
-someFunction->JSON.stringifyAny
+JSON.stringifyAny(() => "hello world")
 // None
 
 BigInt.fromInt(0)->JSON.stringifyAny
@@ -196,24 +212,30 @@ external stringifyAny: 'a => option<string> = "JSON.stringify"
 /** 
 `stringifyAnyWithIndent(any, indentation)` 
 
-Converts any type to a JSON string. Values which can't be strinfified will return `None`. 
-Throws a JavaScript exception (TypeError), if the value can't be stringified.
+Converts any type to a JSON string.
+Stringifing a function or `undefined` will return `None`.
+If the value contains circular references or `BigInt`s, the function will throw a JavaScript exception (TypeError).
 If you want to stringify a JSON object, use `JSON.stringifyWithIndent` instead.
 
 ## Examples
 ```rescript
-Dict.fromArray([("foo", "bar"), ("hello", "world")])->JSON.stringifyAnyWithIndent(2)
-// Some({
+let json = Dict.fromArray([
+  ("foo", JSON.Encode.string("bar")),
+  ("hello", JSON.Encode.string("world")),
+  ("someNumber", JSON.Encode.int(42)),
+])
+
+JSON.stringifyAnyWithIndent(json, 2)
+// {
 //   "foo": "bar",
-//   "hello": "world"
-// })
+//   "hello": "world",
+//   "someNumber": 42
+// }
 
-let someFunction = () => {"hello world"}
-
-someFunction->JSON.stringifyAnyWithIndent(2)
+JSON.stringifyAny(() => "hello world")
 // None
 
-BigInt.fromInt(0)->JSON.stringifyAnyWithIndent(2)
+BigInt.fromInt(0)->JSON.stringifyAny
 // exception
 ```
 */
@@ -222,7 +244,46 @@ BigInt.fromInt(0)->JSON.stringifyAnyWithIndent(2)
 external stringifyAnyWithIndent: ('a, @as(json`null`) _, int) => option<string> = "JSON.stringify"
 
 /** 
-`stringifyAnyWithReplacer(json, jsonReplacer)` 
+`stringifyAnyWithReplacer(json, replacer)` 
+
+Converts any type to a JSON string.
+Stringifing a function or `undefined` will return `None`.
+If the value contains circular references or `BigInt`s, the function will throw a JavaScript exception (TypeError).
+If you want to stringify a JSON object, use `JSON.stringifyWithReplacer` instead.
+
+## Examples
+```rescript
+let json = Dict.fromArray([
+  ("foo", JSON.Encode.string("bar")),
+  ("hello", JSON.Encode.string("world")),
+  ("someNumber", JSON.Encode.int(42)),
+])
+
+let replacer = (key, value) => {
+  let decodedValue = value->JSON.Decode.string
+
+  switch decodedValue {
+  | Some(string) => string->String.toUpperCase->JSON.Encode.string
+  | None => value
+  }
+}
+
+JSON.stringifyAnyWithReplacer(json, replacer)
+// {"foo":"BAR","hello":"WORLD","someNumber":42}
+
+JSON.stringifyAny(() => "hello world")
+// None
+
+BigInt.fromInt(0)->JSON.stringifyAny
+// exception
+```
+*/
+@raises
+@val
+external stringifyAnyWithReplacer: ('a, (string, t) => t) => option<string> = "JSON.stringify"
+
+/** 
+`stringifyAnyWithReplacerAndIndent(json, replacer, indentation)` 
 
 Converts any type to a JSON string. Values which can't be strinfified will return `None`. 
 The replacer describes how the value should be transformed. It is a function which receives a key and a value.
@@ -231,71 +292,38 @@ If you want to stringify a JSON object, use `JSON.stringifyWithReplacer` instead
 
 ## Examples
 ```rescript
-let replacer = JSON.asJsonReplacer((key, value) => {
-  if key === "foo" {
-    String.toUpperCase(value)
-  } else if value === "world" {
-    value ++ "!"
-  } else {
-    value
+let json = Dict.fromArray([
+  ("foo", JSON.Encode.string("bar")),
+  ("hello", JSON.Encode.string("world")),
+  ("someNumber", JSON.Encode.int(42)),
+])
+
+let replacer = (key, value) => {
+  let decodedValue = value->JSON.Decode.string
+
+  switch decodedValue {
+  | Some(string) => string->String.toUpperCase->JSON.Encode.string
+  | None => value
   }
-})
+}
 
-Dict.fromArray([("foo", "bar"), ("hello", "world")])->JSON.stringifyAnyWithReplacer(replacer)
-// Some({"foo":"BAR","hello":"world!"})
-
-let someFunction = () => {"hello world"}
-
-someFunction->JSON.stringifyAnyWithReplacer(replacer)
-// None
-
-BigInt.fromInt(0)->JSON.stringifyAnyWithReplacer(replacer)
-// exception
-```
-*/
-@raises
-@val
-external stringifyAnyWithReplacer: ('a, jsonReplacer) => option<string> = "JSON.stringify"
-
-/** 
-`stringifyAnyWithReplacerAndIndent(json, jsonReplacer, indentation)` 
-
-Converts any type to a JSON string. The output will be indented. Values which can't be strinfified will return `None`. 
-The replacer describes how the value should be transformed. It is a function which receives a key and a value.
-Throws a JavaScript exception (TypeError), if the value can't be stringified.
-If you want to stringify a JSON object, use `JSON.stringifyWithReplacer` instead.
-
-## Examples
-```rescript
-let replacer = JSON.asJsonReplacer((key, value) => {
-  if key === "foo" {
-    String.toUpperCase(value)
-  } else if value === "world" {
-    value ++ "!"
-  } else {
-    value
-  }
-})
-
-Dict.fromArray([("foo", "bar"), ("hello", "world")])
-->JSON.stringifyAnyWithReplacerAndIndent(replacer, 2)
-// Some({
+JSON.stringifyAnyWithReplacerAndIndent(json, replacer, 2)
+// {
 //   "foo": "BAR",
-//   "hello": "world!"
-// })
+//   "hello": "WORLD",
+//   "someNumber": 42
+// }
 
-let someFunction = () => {"hello world"}
-
-someFunction->JSON.stringifyAnyWithReplacerAndIndent(replacer, 2)
+JSON.stringifyAny(() => "hello world")
 // None
 
-BigInt.fromInt(0)->JSON.stringifyAnyWithReplacerAndIndent(replacer, 2)
+BigInt.fromInt(0)->JSON.stringifyAny
 // exception
 ```
 */
 @raises
 @val
-external stringifyAnyWithReplacerAndIndent: ('a, jsonReplacer, int) => option<string> =
+external stringifyAnyWithReplacerAndIndent: ('a, (string, t) => t, int) => option<string> =
   "JSON.stringify"
 
 module Classify: {
