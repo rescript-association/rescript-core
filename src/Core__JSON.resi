@@ -200,7 +200,8 @@ JSON.stringifyWithFilter(json, ["foo", "someNumber"])
 // {"foo":"bar","someNumber":42}
 ```
 */
-@val external stringifyWithFilter: (t, array<string>) => string = "JSON.stringify"
+@val
+external stringifyWithFilter: (t, array<string>) => string = "JSON.stringify"
 
 /** 
 `stringifyWithFilterAndIndent(json, filter, indentation)` 
@@ -225,7 +226,8 @@ JSON.stringifyWithFilterAndIndent(json, ["foo", "someNumber"], 2)
 // }
 ```
 */
-@val external stringifyWithFilterAndIndent: (t, array<string>, int) => string = "JSON.stringify"
+@val
+external stringifyWithFilterAndIndent: (t, array<string>, int) => string = "JSON.stringify"
 
 /** 
 `stringifyAny(any)` 
@@ -403,7 +405,9 @@ BigInt.fromInt(0)->JSON.stringifyAny
 // exception
 ```
 */
-@raises @val external stringifyAnyWithFilter: ('a, array<string>) => string = "JSON.stringify"
+@raises
+@val
+external stringifyAnyWithFilter: ('a, array<string>) => string = "JSON.stringify"
 
 /** 
 `stringifyAnyWithFilterAndIndent(json, filter, indentation)` 
@@ -435,7 +439,9 @@ BigInt.fromInt(0)->JSON.stringifyAny
 // exception
 ```
 */
-@raises @val external stringifyAnyWithFilterAndIndent: ('a, array<string>, int) => string = "JSON.stringify"
+@raises
+@val
+external stringifyAnyWithFilterAndIndent: ('a, array<string>, int) => string = "JSON.stringify"
 
 module Classify: {
   /**
