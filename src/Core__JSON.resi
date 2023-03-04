@@ -233,7 +233,7 @@ external stringifyWithFilterAndIndent: (t, array<string>, int) => string = "JSON
 `stringifyAny(any)` 
 
 Converts any type to a JSON string.
-Stringifing a function or `undefined` will return `None`.
+Stringifying a function or `undefined` will return `None`.
 If the value contains circular references or `BigInt`s, the function will throw a JavaScript exception (TypeError).
 If you want to stringify a JSON object, use `JSON.stringify` instead.
 
@@ -263,7 +263,7 @@ external stringifyAny: 'a => option<string> = "JSON.stringify"
 `stringifyAnyWithIndent(any, indentation)` 
 
 Converts any type to a JSON string. The output will be indented.
-Stringifing a function or `undefined` will return `None`.
+Stringifying a function or `undefined` will return `None`.
 If the value contains circular references or `BigInt`s, the function will throw a JavaScript exception (TypeError).
 If you want to stringify a JSON object, use `JSON.stringifyWithIndent` instead.
 
@@ -298,7 +298,7 @@ external stringifyAnyWithIndent: ('a, @as(json`null`) _, int) => option<string> 
 
 Converts any type to a JSON string.
 The replacer describes how the value should be transformed. It is a function which receives a key and a value.
-Stringifing a function or `undefined` will return `None`.
+Stringifying a function or `undefined` will return `None`.
 If the value contains circular references or `BigInt`s, the function will throw a JavaScript exception (TypeError).
 If you want to stringify a JSON object, use `JSON.stringifyWithReplacer` instead.
 
@@ -338,7 +338,7 @@ external stringifyAnyWithReplacer: ('a, (string, t) => t) => option<string> = "J
 
 Converts any type to a JSON string. The output will be indented.
 The replacer describes how the value should be transformed. It is a function which receives a key and a value.
-Stringifing a function or `undefined` will return `None`.
+Stringifying a function or `undefined` will return `None`.
 If the value contains circular references or `BigInt`s, the function will throw a JavaScript exception (TypeError).
 If you want to stringify a JSON object, use `JSON.stringifyWithReplacerAndIndent` instead.
 
@@ -383,7 +383,7 @@ external stringifyAnyWithReplacerAndIndent: ('a, (string, t) => t, int) => optio
 
 Converts any type to a JSON string.
 The filter is an array of keys, which should be included in the output.
-Stringifing a function or `undefined` will return `None`.
+Stringifying a function or `undefined` will return `None`.
 If the value contains circular references or `BigInt`s, the function will throw a JavaScript exception (TypeError).
 If you want to stringify a JSON object, use `JSON.stringifyWithFilter` instead.
 
@@ -414,7 +414,7 @@ external stringifyAnyWithFilter: ('a, array<string>) => string = "JSON.stringify
 
 Converts any type to a JSON string. The output will be indented.
 The filter is an array of keys, which should be included in the output.
-Stringifing a function or `undefined` will return `None`.
+Stringifying a function or `undefined` will return `None`.
 If the value contains circular references or `BigInt`s, the function will throw a JavaScript exception (TypeError).
 If you want to stringify a JSON object, use `JSON.stringifyWithFilterAndIndent` instead.
 
