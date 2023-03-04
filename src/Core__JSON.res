@@ -7,6 +7,8 @@ type t = Js.Json.t
 @val external stringifyWithReplacer: (t, (string, t) => t) => string = "JSON.stringify"
 @val
 external stringifyWithReplacerAndIndent: (t, (string, t) => t, int) => string = "JSON.stringify"
+@val external stringifyWithFilter: (t, array<string>) => string = "JSON.stringify"
+@val external stringifyWithFilterAndIndent: (t, array<string>, int) => string = "JSON.stringify"
 @raises @val external stringifyAny: 'a => option<string> = "JSON.stringify"
 @raises @val
 external stringifyAnyWithIndent: ('a, @as(json`null`) _, int) => option<string> = "JSON.stringify"
@@ -15,6 +17,9 @@ external stringifyAnyWithReplacer: ('a, (string, t) => t) => option<string> = "J
 @raises @val
 external stringifyAnyWithReplacerAndIndent: ('a, (string, t) => t, int) => option<string> =
   "JSON.stringify"
+@raises @val external stringifyAnyWithFilter: ('a, array<string>) => string = "JSON.stringify"
+@raises @val
+external stringifyAnyWithFilterAndIndent: ('a, array<string>, int) => string = "JSON.stringify"
 
 module Classify = {
   type t =
