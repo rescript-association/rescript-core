@@ -40,20 +40,22 @@ It returns a JSON type.
 ## Examples
 ```rescript
 let reviver = (key, value) => {
-  if key->String.toLowerCase->String.includes("date") {
-    value->JSON.Decode.string->Option.map(Date.fromString)->JSON.Encode.any
-  } else {
-    value
+  let valueType = JSON.Classify.classify(value)
+
+  switch valueType {
+  | String(string) => string->String.toUpperCase->JSON.Encode.string
+  | Number(number) => (number *. 2.0)->JSON.Encode.float
+  | _ => value
   }
 }
 
-let jsonString = `{"parseAsDate":"2023-02-26","parseAsString":"2023-02-26"}`
+let jsonString = `{"hello":"world","someNumber":21}`
 
 try {
-  JSON.parseExnWithReviver(jsonString, reviver)
-  // { parseAsDate: 2023-02-26T00:00:00.000Z, parseAsString: '2023-02-26' }
+  JSON.parseExnWithReviver(jsonString, reviver)->Console.log
+  // { hello: 'WORLD', someNumber: 42 }
 
-  JSON.parseExnWithReviver("", reviver)
+  JSON.parseExnWithReviver("", reviver)->Console.log
   // error
 } catch {
 | Js.Exn.Error(_) => Console.log("error")
@@ -547,16 +549,6 @@ module Encode: {
   ```
   */
   external array: array<t> => t = "%identity"
-
-  /**
-  Returns any as a JSON object.
-
-  ## Examples
-  ```rescript
-  JSON.Encode.any("test")
-  ```
-  */
-  external any: 'a => t = "%identity"
 }
 
 module Decode: {

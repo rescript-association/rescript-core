@@ -57,7 +57,6 @@ module Encode = {
   external float: float => t = "%identity"
   external object: Core__Dict.t<t> => t = "%identity"
   external array: array<t> => t = "%identity"
-  external any: 'a => t = "%identity"
 }
 
 module Decode = {
