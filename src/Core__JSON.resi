@@ -8,13 +8,6 @@ A type representing a JSON object.
 type t = Js.Json.t
 
 /**
-A type which describes how the value should be transformed while parsing.
-It is a function which receives a key and a value.
-*/
-type jsonReviver
-external asJsonReviver: 'a => jsonReviver = "%identity"
-
-/**
 A type which describes how the value should be transformed while stringification.
 It is a function which receives a key and a value.
 */
@@ -45,7 +38,7 @@ try {
 external parseExn: string => t = "JSON.parse"
 
 /** 
-`parseExnWithReviver(string, jsonReviver)` 
+`parseExnWithReviver(string, reviver)` 
 
 Parses a JSON string or throws a JavaScript exception (SyntaxError), if the string isn't valid.
 The reviver describes how the value should be transformed. It is a function which receives a key and a value.
@@ -53,13 +46,13 @@ It returns a JSON type. If you want to get any type, use `JSON.parseToAnyExnWith
 
 ## Examples
 ```rescript
-let reviver = JSON.asJsonReviver((key, value) => {
+let reviver = (key, value) => {
   if key->String.toLowerCase->String.includes("date") {
-    Date.fromString(value)->Obj.magic
+    value->JSON.Decode.string->Option.map(Date.fromString)->JSON.Encode.any
   } else {
     value
   }
-})
+}
 
 let jsonString = `{"parseAsDate":"2023-02-26","parseAsString":"2023-02-26"}`
 
@@ -76,7 +69,7 @@ try {
 */
 @raises
 @val
-external parseExnWithReviver: (string, jsonReviver) => t = "JSON.parse"
+external parseExnWithReviver: (string, (string, t) => t) => t = "JSON.parse"
 
 /** 
 `stringify(json)` 
@@ -230,7 +223,7 @@ try {
 */
 @raises
 @val
-external parseToAnyExnWithReviver: (string, jsonReviver) => 'a = "JSON.parse"
+external parseToAnyExnWithReviver: (string, (string, t) => t) => 'a = "JSON.parse"
 
 /** 
 `stringifyAny(any)` 
@@ -466,6 +459,16 @@ module Encode: {
   ```
   */
   external array: array<t> => t = "%identity"
+
+  /**
+  Returns any as a JSON object.
+
+  ## Examples
+  ```rescript
+  JSON.Encode.any("test")
+  ```
+  */
+  external any: 'a => t = "%identity"
 }
 
 module Decode: {

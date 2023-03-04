@@ -1,19 +1,17 @@
 type t = Js.Json.t
 
-type jsonReviver
-external asJsonReviver: 'a => jsonReviver = "%identity"
 type jsonReplacer
 external asJsonReplacer: 'a => jsonReplacer = "%identity"
 
 @val external parseExn: string => t = "JSON.parse"
-@val external parseExnWithReviver: (string, jsonReviver) => t = "JSON.parse"
+@val external parseExnWithReviver: (string, (string, t) => t) => t = "JSON.parse"
 @val external stringify: t => string = "JSON.stringify"
 @val external stringifyWithIndent: (t, @as(json`null`) _, int) => string = "JSON.stringify"
 @val external stringifyWithReplacer: (t, jsonReplacer) => string = "JSON.stringify"
 @val external stringifyWithReplacerAndIndent: (t, jsonReplacer, int) => string = "JSON.stringify"
 
 @val external parseToAnyExn: string => 'a = "JSON.parse"
-@val external parseToAnyExnWithReviver: (string, jsonReviver) => 'a = "JSON.parse"
+@val external parseToAnyExnWithReviver: (string, (string, t) => t) => 'a = "JSON.parse"
 @val external stringifyAny: 'a => option<string> = "JSON.stringify"
 @val
 external stringifyAnyWithIndent: ('a, @as(json`null`) _, int) => option<string> = "JSON.stringify"
@@ -59,6 +57,7 @@ module Encode = {
   external float: float => t = "%identity"
   external object: Core__Dict.t<t> => t = "%identity"
   external array: array<t> => t = "%identity"
+  external any: 'a => t = "%identity"
 }
 
 module Decode = {
