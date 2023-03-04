@@ -18,7 +18,7 @@ external asJsonReplacer: 'a => jsonReplacer = "%identity"
 `parseExn(string)` 
 
 Parses a JSON string or throws a JavaScript exception (SyntaxError), if the string isn't valid.
-It returns a JSON type. If you want to get any type, use `JSON.parseToAnyExn` instead.
+It returns a JSON type.
 
 ## Examples
 ```rescript
@@ -42,7 +42,7 @@ external parseExn: string => t = "JSON.parse"
 
 Parses a JSON string or throws a JavaScript exception (SyntaxError), if the string isn't valid.
 The reviver describes how the value should be transformed. It is a function which receives a key and a value.
-It returns a JSON type. If you want to get any type, use `JSON.parseToAnyExnWithReviver` instead.
+It returns a JSON type.
 
 ## Examples
 ```rescript
@@ -167,63 +167,6 @@ Dict.fromArray([("foo", JSON.Encode.string("bar")), ("hello", JSON.Encode.string
 */
 @val
 external stringifyWithReplacerAndIndent: (t, jsonReplacer, int) => string = "JSON.stringify"
-
-/** 
-`parseToAnyExn(string)` 
-
-Parses a JSON string or throws a JavaScript exception (SyntaxError), if the string isn't valid.
-It returns any type. If you want to get a JSON type, use `JSON.parseExn` instead.
-
-## Examples
-```rescript
-try {
-  JSON.parseToAnyExn(`{"foo":"bar","hello":"world"}`)
-  // { foo: 'bar', hello: 'world' }
-
-  JSON.parseExn("")
-  // error
-} catch {
-| Js.Exn.Error(obj) => Console.log("error")
-}
-```
-*/
-@raises
-@val
-external parseToAnyExn: string => 'a = "JSON.parse"
-
-/** 
-`parseToAnyExnWithReviver(string, jsonReviver)` 
-
-Parses a JSON string or throws a JavaScript exception (SyntaxError), if the string isn't valid.
-The reviver describes how the value should be transformed. It is a function which receives a key and a value.
-It returns any type. If you want to get a JSON type, use `JSON.parseExnWithReviver` instead.
-
-## Examples
-```rescript
-let reviver = JSON.asJsonReviver((key, value) => {
-  if key->String.toLowerCase->String.includes("date") {
-    Date.fromString(value)->Obj.magic
-  } else {
-    value
-  }
-})
-
-let jsonString = `{"parseAsDate":"2023-02-26","parseAsString":"2023-02-26"}`
-
-try {
-  JSON.parseToAnyExnWithReviver(jsonString, reviver)
-  // { parseAsDate: 2023-02-26T00:00:00.000Z, parseAsString: '2023-02-26' }
-
-  JSON.parseToAnyExnWithReviver("", reviver)
-  // error
-} catch {
-| Js.Exn.Error(_) => Console.log("error")
-}
-```
-*/
-@raises
-@val
-external parseToAnyExnWithReviver: (string, (string, t) => t) => 'a = "JSON.parse"
 
 /** 
 `stringifyAny(any)` 
