@@ -3,21 +3,21 @@ type t = Js.Json.t
 type jsonReplacer
 external asJsonReplacer: 'a => jsonReplacer = "%identity"
 
-@val external parseExn: string => t = "JSON.parse"
-@val external parseExnWithReviver: (string, (string, t) => t) => t = "JSON.parse"
+@raises @val external parseExn: string => t = "JSON.parse"
+@raises @val external parseExnWithReviver: (string, (string, t) => t) => t = "JSON.parse"
 @val external stringify: t => string = "JSON.stringify"
 @val external stringifyWithIndent: (t, @as(json`null`) _, int) => string = "JSON.stringify"
 @val external stringifyWithReplacer: (t, jsonReplacer) => string = "JSON.stringify"
 @val external stringifyWithReplacerAndIndent: (t, jsonReplacer, int) => string = "JSON.stringify"
 
-@val external parseToAnyExn: string => 'a = "JSON.parse"
-@val external parseToAnyExnWithReviver: (string, (string, t) => t) => 'a = "JSON.parse"
-@val external stringifyAny: 'a => option<string> = "JSON.stringify"
-@val
+@raises @val external parseToAnyExn: string => 'a = "JSON.parse"
+@raises @val external parseToAnyExnWithReviver: (string, (string, t) => t) => 'a = "JSON.parse"
+@raises @val external stringifyAny: 'a => option<string> = "JSON.stringify"
+@raises @val
 external stringifyAnyWithIndent: ('a, @as(json`null`) _, int) => option<string> = "JSON.stringify"
-@val
+@raises @val
 external stringifyAnyWithReplacer: ('a, jsonReplacer) => option<string> = "JSON.stringify"
-@val
+@raises @val
 external stringifyAnyWithReplacerAndIndent: ('a, jsonReplacer, int) => option<string> =
   "JSON.stringify"
 
