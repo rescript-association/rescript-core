@@ -1,5 +1,5 @@
 /***
-  Functions for interacting with JSON.
+Functions for interacting with JSON.
 */
 
 /** 
@@ -22,7 +22,7 @@ try {
   JSON.parseExn("")
   // error
 } catch {
-| Js.Exn.Error(obj) => Console.log("error")
+| Exn.Error(obj) => Console.log("error")
 }
 ```
 */
@@ -58,7 +58,7 @@ try {
   JSON.parseExnWithReviver("", reviver)->Console.log
   // error
 } catch {
-| Js.Exn.Error(_) => Console.log("error")
+| Exn.Error(_) => Console.log("error")
 }
 ```
 */
