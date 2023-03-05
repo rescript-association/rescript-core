@@ -23,6 +23,7 @@
 - Remove `reduceReverse` in favor of `reduceRight`. https://github.com/rescript-association/rescript-core/pull/49
 - Fixed type signatures of `reduce` and `reduceWithIndex`. https://github.com/rescript-association/rescript-core/pull/49
 - Add `panic`/`Error.panic`. https://github.com/rescript-association/rescript-core/pull/72
+- The globally available `null` value now originates from `Nullable` and not `Null`, just like the globally available `undefined` value does. https://github.com/rescript-association/rescript-core/pull/88
 
 ### Documentation
 
