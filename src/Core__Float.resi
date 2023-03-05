@@ -408,3 +408,19 @@ Int.mod(7.0, 4.0) == 3
 ```
 */
 external mod: (float, float) => float = "?fmod_float"
+
+/**
+`clamp(~min=?, ~max=?, value)` returns `value`, optionally bounded by `min` and `max`.
+
+if `max` < `min` returns `min`.
+
+## Examples
+
+```rescript
+Int.clamp(4.2) == 4.2
+Int.clamp(4.2, ~min=4.3) == 4.3
+Int.clamp(4.2, ~max=4.1) == 4.1
+Int.clamp(4.2, ~min=4.3, ~max=4.1) == 4.3
+```
+*/
+let clamp: (~min: float=?, ~max: float=?, float) => float
