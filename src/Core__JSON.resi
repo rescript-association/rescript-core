@@ -25,6 +25,10 @@ try {
 | Exn.Error(obj) => Console.log("error")
 }
 ```
+
+## Exceptions 
+
+- Raises a SyntaxError (Exn.t) if the string isn't valid JSON.
 */
 @raises
 @val
@@ -61,6 +65,10 @@ try {
 | Exn.Error(_) => Console.log("error")
 }
 ```
+
+## Exceptions 
+
+- Raises a SyntaxError if the string isn't valid JSON.
 */
 @raises
 @val
@@ -256,6 +264,11 @@ JSON.stringifyAny(() => "hello world")
 BigInt.fromInt(0)->JSON.stringifyAny
 // exception
 ```
+
+## Exceptions 
+
+- Raises a TypeError if the value contains circular references.
+- Raises a TypeError if the value contains `BigInt`s.
 */
 @raises
 @val
@@ -290,6 +303,11 @@ JSON.stringifyAny(() => "hello world")
 BigInt.fromInt(0)->JSON.stringifyAny
 // exception
 ```
+
+## Exceptions 
+
+- Raises a TypeError if the value contains circular references.
+- Raises a TypeError if the value contains `BigInt`s.
 */
 @raises
 @val
@@ -330,6 +348,11 @@ JSON.stringifyAny(() => "hello world")
 BigInt.fromInt(0)->JSON.stringifyAny
 // exception
 ```
+
+## Exceptions 
+
+- Raises a TypeError if the value contains circular references.
+- Raises a TypeError if the value contains `BigInt`s.
 */
 @raises
 @val
@@ -374,6 +397,11 @@ JSON.stringifyAny(() => "hello world")
 BigInt.fromInt(0)->JSON.stringifyAny
 // exception
 ```
+
+## Exceptions 
+
+- Raises a TypeError if the value contains circular references.
+- Raises a TypeError if the value contains `BigInt`s.
 */
 @raises
 @val
@@ -406,6 +434,11 @@ JSON.stringifyAny(() => "hello world")
 BigInt.fromInt(0)->JSON.stringifyAny
 // exception
 ```
+
+## Exceptions 
+
+- Raises a TypeError if the value contains circular references.
+- Raises a TypeError if the value contains `BigInt`s.
 */
 @raises
 @val
@@ -440,6 +473,11 @@ JSON.stringifyAny(() => "hello world")
 BigInt.fromInt(0)->JSON.stringifyAny
 // exception
 ```
+
+## Exceptions 
+
+- Raises a TypeError if the value contains circular references.
+- Raises a TypeError if the value contains `BigInt`s.
 */
 @raises
 @val
