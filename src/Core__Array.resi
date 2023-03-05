@@ -28,6 +28,10 @@ let make: (~length: int, 'a) => array<'a>
 */
 let fromInitializer: (~length: int, int => 'a) => array<'a>
 
+let equal: (array<'a>, array<'a>, ('a, 'a) => bool) => bool
+
+let compare: (array<'a>, array<'a>, ('a, 'a) => int) => int
+
 @val external isArray: 'a => bool = "Array.isArray"
 @get external length: array<'a> => int = "length"
 @send external copyAllWithin: (array<'a>, ~target: int) => array<'a> = "copyWithin"

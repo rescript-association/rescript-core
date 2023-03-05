@@ -14,6 +14,10 @@ let fromOption: option<'a> => t<'a> = option =>
   | None => null
   }
 
+let equal = (a, b, eq) => Core__Option.equal(a->toOption, b->toOption, eq)
+
+let compare = (a, b, cmp) => Core__Option.compare(a->toOption, b->toOption, cmp)
+
 let getWithDefault = (value, default) =>
   switch value->toOption {
   | Some(x) => x

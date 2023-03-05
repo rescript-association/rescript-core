@@ -86,6 +86,10 @@ module UTC = {
 @send external getTime: t => msSinceEpoch = "getTime"
 @send external getTimezoneOffset: t => int = "getTimezoneOffset"
 
+let equal = (a, b) => a->getTime === b->getTime
+
+let compare = (a, b) => Core__Float.compare(a->getTime, b->getTime)
+
 // Locale
 @send external getFullYear: t => int = "getFullYear"
 @send external getMonth: t => int = "getMonth"

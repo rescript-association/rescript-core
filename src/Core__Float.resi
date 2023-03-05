@@ -109,6 +109,10 @@ module Constants: {
   external maxValue: float = "Number.MAX_VALUE"
 }
 
+let equal: (float, float) => bool
+
+let compare: (float, float) => int
+
 /**
 `isNaN(v)` tests if the given `v` is `NaN`.
 See [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN) on MDN.

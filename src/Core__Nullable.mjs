@@ -2,12 +2,21 @@
 
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
+import * as Core__Option from "./Core__Option.mjs";
 
 function fromOption(option) {
   if (option !== undefined) {
     return Caml_option.valFromOption(option);
   }
   
+}
+
+function equal(a, b, eq) {
+  return Core__Option.equal((a == null) ? undefined : Caml_option.some(a), (b == null) ? undefined : Caml_option.some(b), eq);
+}
+
+function compare(a, b, cmp) {
+  return Core__Option.compare((a == null) ? undefined : Caml_option.some(a), (b == null) ? undefined : Caml_option.some(b), cmp);
 }
 
 function getWithDefault(value, $$default) {
@@ -54,6 +63,8 @@ function flatMap(value, f) {
 }
 
 export {
+  equal ,
+  compare ,
   fromOption ,
   getWithDefault ,
   getExn ,

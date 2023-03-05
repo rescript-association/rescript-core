@@ -24,6 +24,52 @@ function fromInitializer(length, f) {
   return arr;
 }
 
+function equal(a, b, eq) {
+  var eq$1 = Curry.__2(eq);
+  var len = a.length;
+  if (len === b.length) {
+    var _i = 0;
+    while(true) {
+      var i = _i;
+      if (i === len) {
+        return true;
+      }
+      if (!eq$1(a[i], b[i])) {
+        return false;
+      }
+      _i = i + 1 | 0;
+      continue ;
+    };
+  } else {
+    return false;
+  }
+}
+
+function compare(a, b, cmp) {
+  var cmp$1 = Curry.__2(cmp);
+  var lenA = a.length;
+  var lenB = b.length;
+  if (lenA > lenB) {
+    return 1;
+  } else if (lenA < lenB) {
+    return -1;
+  } else {
+    var _i = 0;
+    while(true) {
+      var i = _i;
+      if (i === lenA) {
+        return 0;
+      }
+      var c = cmp$1(a[i], b[i]);
+      if (c !== 0) {
+        return c;
+      }
+      _i = i + 1 | 0;
+      continue ;
+    };
+  }
+}
+
 function indexOfOpt(arr, item) {
   var index = arr.indexOf(item);
   if (index !== -1) {
@@ -141,6 +187,8 @@ function findMap(arr, f) {
 export {
   make ,
   fromInitializer ,
+  equal ,
+  compare ,
   sort ,
   indexOfOpt ,
   lastIndexOfOpt ,

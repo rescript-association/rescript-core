@@ -969,7 +969,7 @@ function every2(l1, l2, p) {
   };
 }
 
-function cmpByLength(_l1, _l2) {
+function compareLength(_l1, _l2) {
   while(true) {
     var l2 = _l2;
     var l1 = _l1;
@@ -989,7 +989,7 @@ function cmpByLength(_l1, _l2) {
   };
 }
 
-function cmp(l1, l2, f) {
+function compare(l1, l2, f) {
   var _l1 = l1;
   var _l2 = l2;
   var p = Curry.__2(f);
@@ -1016,7 +1016,7 @@ function cmp(l1, l2, f) {
   };
 }
 
-function eq(l1, l2, f) {
+function equal(l1, l2, f) {
   var _l1 = l1;
   var _l2 = l2;
   var p = Curry.__2(f);
@@ -1386,9 +1386,9 @@ export {
   some ,
   every2 ,
   some2 ,
-  cmpByLength ,
-  cmp ,
-  eq ,
+  compareLength ,
+  compare ,
+  equal ,
   has ,
   getBy ,
   filter ,

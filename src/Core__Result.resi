@@ -134,7 +134,7 @@ let isOk: t<'a, 'b> => bool
 let isError: t<'a, 'b> => bool
 
 /**
-  `eq(res1, res2, f)`: Determine if two `Result` variables are equal with
+  `equal(res1, res2, f)`: Determine if two `Result` variables are equal with
   respect to an equality function. If `res1` and `res2` are of the form `Ok(n)`
   and `Ok(m)`, return the result of `f(n, m)`. If one of `res1` and `res2` are of
   the form `Error(e)`, return false If both `res1` and `res2` are of the form
@@ -151,19 +151,19 @@ let isError: t<'a, 'b> => bool
 
   let mod10equal = (a, b) => mod(a, 10) === mod(b, 10)
 
-  Result.eq(good1, good2, mod10equal) == true
+  Result.equal(good1, good2, mod10equal) == true
 
-  Result.eq(good1, bad1, mod10equal) == false
+  Result.equal(good1, bad1, mod10equal) == false
 
-  Result.eq(bad2, good2, mod10equal) == false
+  Result.equal(bad2, good2, mod10equal) == false
 
-  Result.eq(bad1, bad2, mod10equal) == true
+  Result.equal(bad1, bad2, mod10equal) == true
   ```
 */
-let eq: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
+let equal: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
 
 /**
-  `cmp(res1, res2, f)`: Compare two `Result` variables with respect to a
+  `compare(res1, res2, f)`: Compare two `Result` variables with respect to a
   comparison function. The comparison function returns -1 if the first variable
   is "less than" the second, 0 if the two variables are equal, and 1 if the first
   is "greater than" the second.
@@ -185,15 +185,15 @@ let eq: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
 
   let mod10cmp = (a, b) => Pervasives.compare(mod(a, 10), mod(b, 10))
 
-  Result.cmp(Ok(39), Ok(57), mod10cmp) == 1
+  Result.compare(Ok(39), Ok(57), mod10cmp) == 1
 
-  Result.cmp(Ok(57), Ok(39), mod10cmp) == (-1)
+  Result.compare(Ok(57), Ok(39), mod10cmp) == (-1)
 
-  Result.cmp(Ok(39), Error("y"), mod10cmp) == 1
+  Result.compare(Ok(39), Error("y"), mod10cmp) == 1
 
-  Result.cmp(Error("x"), Ok(57), mod10cmp) == (-1)
+  Result.compare(Error("x"), Ok(57), mod10cmp) == (-1)
 
-  Result.cmp(Error("x"), Error("y"), mod10cmp) == 0
+  Result.compare(Error("x"), Error("y"), mod10cmp) == 0
   ```
 */
-let cmp: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => int) => int
+let compare: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => int) => int

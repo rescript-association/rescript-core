@@ -72,7 +72,7 @@ function isError(x) {
   }
 }
 
-function eq(a, b, f) {
+function equal(a, b, f) {
   var f$1 = Curry.__2(f);
   if (a.TAG === /* Ok */0) {
     if (b.TAG === /* Ok */0) {
@@ -87,7 +87,7 @@ function eq(a, b, f) {
   }
 }
 
-function cmp(a, b, f) {
+function compare(a, b, f) {
   var f$1 = Curry.__2(f);
   if (a.TAG === /* Ok */0) {
     if (b.TAG === /* Ok */0) {
@@ -110,7 +110,7 @@ export {
   getWithDefault ,
   isOk ,
   isError ,
-  eq ,
-  cmp ,
+  equal ,
+  compare ,
 }
 /* No side effect */

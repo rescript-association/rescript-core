@@ -44,6 +44,10 @@ let asNullValue = myStr->Null.make // The compiler now thinks this can be `strin
 */
 external make: 'a => t<'a> = "%identity"
 
+let equal: (t<'a>, t<'b>, ('a, 'b) => bool) => bool
+
+let compare: (t<'a>, t<'b>, ('a, 'b) => int) => int
+
 /**
 Converts a nullable value into an option, so it can be pattern matched on.
 Will convert `null` to `None`, and a present value to `Some(value)`.

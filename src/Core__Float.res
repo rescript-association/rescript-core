@@ -7,6 +7,17 @@ module Constants = {
   @val external maxValue: float = "Number.MAX_VALUE"
 }
 
+let equal = (a: float, b: float) => a === b
+
+let compare = (a: float, b: float) =>
+  if a === b {
+    0
+  } else if a > b {
+    1
+  } else {
+    -1
+  }
+
 @val external isNaN: float => bool = "isNaN"
 @val external isFinite: float => bool = "isFinite"
 @val external parseFloat: 'a => float = "parseFloat"
