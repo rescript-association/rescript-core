@@ -209,12 +209,10 @@ module Int: {
   ```rescript
   Math.Int.minMany([1, 2]) // 1
   Math.Int.minMany([-1, -2]) // -2
-  Math.Int.minMany([])->Float.isFinite // false
+  Math.Int.minMany([]) // 0
   ```
   */
-  @variadic
-  @val
-  external minMany: array<int> => int = "Math.min"
+  let minMany: array<int> => int
 
   /**
   `max(a, b)` returns the maximum of its two integer arguments.
@@ -240,12 +238,10 @@ module Int: {
   ```rescript
   Math.Int.maxMany([1, 2]) // 2
   Math.Int.maxMany([-1, -2]) // -1
-  Math.Int.maxMany([])->Float.isFinite // false
+  Math.Int.maxMany([]) // 0
   ```
   */
-  @variadic
-  @val
-  external maxMany: array<int> => int = "Math.max"
+  let maxMany: array<int> => int
 
   /**
   `pow(a, ~exp)` raises the given base `a` to the given exponent `exp`.
@@ -650,12 +646,10 @@ See [`Math.min`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referen
 ```rescript
 Math.minMany([1.0, 2.0]) // 1.0
 Math.minMany([-1.0, -2.0]) // -2.0
-Math.minMany([])->Float.isFinite // false
+Math.minMany([]) // 0.0
 ```
 */
-@variadic
-@val
-external minMany: array<float> => float = "Math.min"
+let minMany: array<float> => float
 
 /**
 `max(a, b)` returns the maximum of its two float arguments.
@@ -681,12 +675,10 @@ See [`Math.max`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referen
 ```rescript
 Math.maxMany([1.0, 2.0]) // 2.0
 Math.maxMany([-1.0, -2.0]) // -1.0
-Math.maxMany([])->Float.isFinite // false
+Math.maxMany([]) // 0.0
 ```
 */
-@variadic
-@val
-external maxMany: array<float> => float = "Math.max"
+let maxMany: array<float> => float
 
 /**
 `pow(a, ~exp)` raises the given base `a` to the given exponent `exp`.
