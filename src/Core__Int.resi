@@ -270,7 +270,7 @@ Int.mod(7, 4) == 3
 external mod: (int, int) => int = "%modint"
 
 /**
-`range(start, end)` returns an int array of the sequence of integeres in the
+`range(start, end)` returns an int array of the sequence of integers in the
 range `[start, end)`. That is, including `start` but excluding `end`.
 
 If `start < end` the sequence will be increasing in steps of 1.
