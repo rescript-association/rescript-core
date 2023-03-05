@@ -4,6 +4,7 @@ import * as IntTests from "./IntTests.mjs";
 import * as TestTests from "./TestTests.mjs";
 import * as ArrayTests from "./ArrayTests.mjs";
 import * as ErrorTests from "./ErrorTests.mjs";
+import * as FloatTests from "./FloatTests.mjs";
 import * as ObjectTests from "./ObjectTests.mjs";
 import * as PromiseTest from "./PromiseTest.mjs";
 import * as ResultTests from "./ResultTests.mjs";
@@ -49,8 +50,6 @@ var forEachIfOkCallFunction = ResultTests.forEachIfOkCallFunction;
 
 var forEachIfErrorDoNotCallFunction = ResultTests.forEachIfErrorDoNotCallFunction;
 
-var eq = TypedArrayTests.eq;
-
 var num1 = TypedArrayTests.num1;
 
 var num2 = TypedArrayTests.num2;
@@ -64,6 +63,8 @@ var assertWillThrow = TypedArrayTests.assertWillThrow;
 var areSame = TypedArrayTests.areSame;
 
 var o = TypedArrayTests.o;
+
+var eq = FloatTests.eq;
 
 export {
   bign ,
@@ -86,7 +87,6 @@ export {
   getSymbolTestWhenExists ,
   forEachIfOkCallFunction ,
   forEachIfErrorDoNotCallFunction ,
-  eq ,
   num1 ,
   num2 ,
   num3 ,
@@ -94,5 +94,6 @@ export {
   assertWillThrow ,
   areSame ,
   o ,
+  eq ,
 }
 /* IntTests Not a pure module */
