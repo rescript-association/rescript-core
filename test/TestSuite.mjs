@@ -3,6 +3,7 @@
 import * as IntTests from "./IntTests.mjs";
 import * as ArrayTests from "./ArrayTests.mjs";
 import * as ErrorTests from "./ErrorTests.mjs";
+import * as FloatTests from "./FloatTests.mjs";
 import * as PromiseTest from "./PromiseTest.mjs";
 
 var TestError = PromiseTest.TestError;
@@ -23,7 +24,7 @@ var Concurrently = PromiseTest.Concurrently;
 
 var panicTest = ErrorTests.panicTest;
 
-var eq = IntTests.eq;
+var eq = FloatTests.eq;
 
 var $$catch = IntTests.$$catch;
 
