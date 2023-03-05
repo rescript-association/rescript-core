@@ -81,6 +81,7 @@
 - Add `Int.range` and `Int.rangeWithOptions`, https://github.com/rescript-association/rescript-core/pull/52
 - Remove `Array.fromIterator` and `Array.fromIteratorWithMap`. The same functions exist in `Iterator` as `Iterator.fromArray` and `Iterator.fromArrayWithMapper`. https://github.com/rescript-association/rescript-core/pull/78
 - Remove unsafe `Array.from` and `Array.fromWithMap`. https://github.com/rescript-association/rescript-core/pull/78
+- Add `Int.clamp` and `Float.clamp`, https://github.com/rescript-association/rescript-core/pull/90
 
 ### Documentation
 
