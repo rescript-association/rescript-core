@@ -326,3 +326,19 @@ Int.rangeWithOptions(3, 6, {step: -2}) // RangeError
 - Raises `RangeError` if `step == 0 && start != end`.
 */
 let rangeWithOptions: (int, int, rangeOptions) => array<int>
+
+/**
+`clamp(~min=?, ~max=?, value)` returns `value`, optionally bounded by `min` and `max`.
+
+if `max` < `min` returns `min`.
+
+## Examples
+
+```rescript
+Int.clamp(42) == 42
+Int.clamp(42, ~min=50) == 50
+Int.clamp(42, ~max=40) == 40
+Int.clamp(42, ~min=50, ~max=40) == 50
+```
+*/
+let clamp: (~min: int=?, ~max: int=?, int) => int

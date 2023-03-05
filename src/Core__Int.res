@@ -66,3 +66,14 @@ let rangeWithOptions = (start, end, options) => {
 }
 
 let range = (start, end) => rangeWithOptions(start, end, {})
+
+let clamp = (~min=?, ~max=?, value) => {
+  let value = switch max {
+  | Some(max) if max < value => max
+  | _ => value
+  }
+  switch min {
+  | Some(min) if min > value => min
+  | _ => value
+  }
+}
