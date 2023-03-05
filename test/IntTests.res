@@ -161,3 +161,13 @@ Test.run(
   eq,
   [-3, -5],
 )
+
+Test.run(__POS_OF__("clamp"), Int.clamp(42), eq, 42)
+Test.run(__POS_OF__("clamp - < min"), Int.clamp(~min=50, 42), eq, 50)
+Test.run(__POS_OF__("clamp - > min"), Int.clamp(~min=40, 42), eq, 42)
+Test.run(__POS_OF__("clamp - < max"), Int.clamp(~max=50, 42), eq, 42)
+Test.run(__POS_OF__("clamp - > max"), Int.clamp(~max=40, 42), eq, 40)
+Test.run(__POS_OF__("clamp - < min, < max"), Int.clamp(~min=50, ~max=60, 42), eq, 50)
+Test.run(__POS_OF__("clamp - < min, > max"), Int.clamp(~min=50, ~max=40, 42), eq, 50) // min wins
+Test.run(__POS_OF__("clamp - > min, < max"), Int.clamp(~min=40, ~max=60, 42), eq, 42)
+Test.run(__POS_OF__("clamp - > min, > max"), Int.clamp(~min=40, ~max=40, 42), eq, 40)
