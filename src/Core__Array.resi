@@ -47,9 +47,60 @@ external length: array<'a> => int = "length"
 external copyWithinToEnd: (array<'a>, ~target: int, ~start: int) => array<'a> = "copyWithin"
 @send
 external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<'a> = "copyWithin"
-@send external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
-@send external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
-@send external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
+
+/**
+`fillAllInPlace(array, value)` fills the entire provided `array` with the provided `value`.
+
+Beware this will *mutate* the array.
+
+See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) on MDN.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3, 4]
+myArray->Array.fillAllInPlace(9)
+
+Console.log(myArray) // [9, 9, 9, 9]
+```
+*/
+@send
+external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
+
+/**
+`fillInPlaceToEnd` fills the entire provided `array` with the provided `value`, starting from the index provided to `start`.
+
+Beware this will *mutate* the array.
+
+See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) on MDN.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3, 4]
+myArray->Array.fillInPlaceToEnd(9, ~start=1)
+
+Console.log(myArray) // [1, 9, 9, 9]
+```
+*/
+@send
+external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
+
+/**
+`fillInPlace` fills the entire provided `array` with the provided `value`, starting from the index provided to `start`, going to the index provided to `end`.
+
+Beware this will *mutate* the array.
+
+See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) on MDN.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3, 4]
+myArray->Array.fillInPlace(9, ~start=1, ~end=2)
+
+Console.log(myArray) // [1, 9, 9, 4]
+```
+*/
+@send
+external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
 
 /**
 `pop(array)` pops off the last item in the array, and returns it.
@@ -107,7 +158,7 @@ Console.log(someArray) // ["hi", "hello", "yay", "wehoo"]
 external pushMany: (array<'a>, array<'a>) => unit = "push"
 
 /**
-`reverse(array)` reverses the order of the items in the array.
+`reverseInPlace(array)` reverses the order of the items in the array.
 
 Beware this will *mutate* the array.
 
@@ -116,7 +167,7 @@ See [`Array.reverse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 ## Examples
 ```rescript
 let someArray = ["hi", "hello"]
-someArray->Array.reverse
+someArray->Array.reverseInPlace
 
 Console.log(someArray) // ["hello", "h1"]
 ```
@@ -141,8 +192,39 @@ Console.log(someArray) // ["hello"]. Notice first item is gone.
 */
 @send
 external shift: array<'a> => option<'a> = "shift"
+
+/**
+`sort(array, comparator)` returns a new, sorted array from `array`, using the provided `comparator` function.
+
+See [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) on MDN.
+
+## Examples
+```rescript
+let someArray = [3, 2, 1]
+let sortedArray = someArray->Array.sort((a, b) => a > b ? 1 : -1)
+
+Console.log(sortedArray) // [1, 2, 3]
+```
+*/
 let sort: (array<'a>, ('a, 'a) => int) => array<'a>
-@send external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
+
+/**
+`sortInPlace(array, comparator)` sorts the provided `array` using the provided `comparator` function.
+
+Beware this will *mutate* the array.
+
+See [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) on MDN.
+
+## Examples
+```rescript
+let someArray = [3, 2, 1]
+someArray->Array.sortInPlace((a, b) => a > b ? 1 : -1)
+
+Console.log(someArray) // [1, 2, 3]
+```
+*/
+@send
+external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
 @variadic @send
 external spliceInPlace: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit =
   "splice"
@@ -285,9 +367,50 @@ let indexOfOpt: (array<'a>, 'a) => option<int>
 @send external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
 let lastIndexOfOpt: (array<'a>, 'a) => option<int>
 @send external lastIndexOfFrom: (array<'a>, 'a, int) => int = "lastIndexOf"
-@send external slice: (array<'a>, ~start: int, ~end: int) => array<'a> = "slice"
-@send external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
-@send external copy: array<'a> => array<'a> = "slice"
+
+/**
+`slice(array, start, end)` creates a new array from the provided `array`, with all items from `array` starting from `start`, stopping _before_ `end` (`end` is not included).
+
+See [`Array.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) on MDN.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3, 4]
+
+Console.log(myArray->Array.slice(~start=1, ~end=3)) // [2, 3]
+```
+*/
+@send
+external slice: (array<'a>, ~start: int, ~end: int) => array<'a> = "slice"
+
+/**
+`sliceToEnd(array, start)` creates a new array from the provided `array`, with all items from `array` starting from `start`.
+
+See [`Array.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) on MDN.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3, 4]
+
+Console.log(myArray->Array.sliceToEnd(~start=1)) // [2, 3, 4]
+```
+*/
+@send
+external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
+/**
+`copy(array)` makes a shallow copy of the provided `array`.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3]
+let copyOfMyArray = myArray->Array.copy
+
+Console.log(copyOfMyArray) // [1, 2, 3]
+Console.log(myArray === copyOfMyArray) // false
+```
+*/
+@send
+external copy: array<'a> => array<'a> = "slice"
 @send external toString: array<'a> => string = "toString"
 @send external toLocaleString: array<'a> => string = "toLocaleString"
 @send external every: (array<'a>, 'a => bool) => bool = "every"
@@ -359,6 +482,20 @@ let reduceRightWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
 external getUnsafe: (array<'a>, int) => 'a = "%array_unsafe_get"
 external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 let findIndexOpt: (array<'a>, 'a => bool) => option<int>
+
+/**
+`reverse(array)` creates a new array with all items from `array` in reversed order.
+
+See [`Array.reverse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+let reversed = someArray->Array.reverse
+
+Console.log(reversed) // ["hello", "h1"]
+```
+*/
 let reverse: array<'a> => array<'a>
 let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
 
