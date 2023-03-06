@@ -197,3 +197,29 @@ let eq: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
   ```
 */
 let cmp: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => int) => int
+
+/**
+  `fromArray(xs)`: If `xs` exclusively contains `Ok` values, returns a 
+  `Result` of those values. Otherwise returns an `Error` for the first
+  error encountered.
+
+  ```res example
+  Result.fromArray([Ok(1), Ok(2)]) == Ok([1, 2])
+  Result.fromArray([Ok(1), Error("a"), Ok(2)]) == Error("a")
+  Result.fromArray([]) == Ok([])
+  ```
+*/
+let fromArray: array<result<'a, 'b>> => result<array<'a>, 'b>
+
+/**
+  `fromArrayWith(xs, f)`: Lazily applies `f` to each item in the source
+  array. If `xs` exclusively contains `Ok` values, returns a `Result` of
+  those values. Otherwise returns an `Error` for the first error encountered.
+
+  ```res example
+  Result.fromArray([Ok(2), Ok(3)], i=>i*2) == Ok([4, 6])
+  Result.fromArray([Ok(1), Error("a"), Ok(2)], i=>i*2) == Error("a")
+  Result.fromArray([]) == Ok([])
+  ```
+*/
+let fromArrayWith: (array<'v>, 'v => result<'ok, 'err>) => result<array<'ok>, 'err>

@@ -91,3 +91,33 @@ let cmpU = (a, b, f) =>
   }
 
 let cmp = (a, b, f) => cmpU(a, b, (. x, y) => f(x, y))
+
+// Written in imperative style for performance. The source
+// array is scanned only until an error is found, if any.
+let fromArrayWith = (xs, f) => {
+  let error = ref(None)
+  let index = ref(0)
+  let oks = []
+  let break = ref(false)
+  while !break.contents {
+    switch xs->Array.get(index.contents) {
+    | None => break := true
+    | Some(x) =>
+      switch f(x) {
+      | Ok(ok) =>
+        oks->Array.push(ok)
+        index := index.contents + 1
+      | Error(e) => {
+          error := Some(e)
+          break := true
+        }
+      }
+    }
+  }
+  switch error.contents {
+  | None => Ok(oks)
+  | Some(err) => Error(err)
+  }
+}
+
+let fromArray = xs => xs->fromArrayWith(i => i)
