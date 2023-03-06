@@ -275,7 +275,7 @@ range `[start, end)`. That is, including `start` but excluding `end`.
 
 If `start < end` the sequence will be increasing in steps of 1.
 
-If `start < end` the sequence will be decreasing in steps of -1.
+If `start > end` the sequence will be decreasing in steps of -1.
 
 This is equivalent to `rangeWithOptions` with `inclusive` set to `false` and
 `step` set to `1` if `start < end` and `-1` otherwise.
@@ -297,7 +297,7 @@ type rangeOptions = {step?: int, inclusive?: bool}
 
 /**
 `rangeWithOptions(start, end, options)` is like `range`, but with `step` and
-`inlusive` options configurable.
+`inclusive` options configurable.
 
 If `step` is set, the sequence will increase or decrease by that amount for each
 step. If `start < end` and `step` is negative, or vice versa, an empty array is
