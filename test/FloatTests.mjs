@@ -105,7 +105,7 @@ Test.run([
         33
       ],
       "clamp - nan"
-    ], Core__Float.clamp(4.1, 4.3, Number.NaN), eq, 4.1);
+    ], isNaN(Core__Float.clamp(4.1, 4.3, Number.NaN)), eq, true);
 
 Test.run([
       [
@@ -135,7 +135,7 @@ Test.run([
         37
       ],
       "clamp - min nan"
-    ], isNaN(Core__Float.clamp(Number.NaN, undefined, 4.2)), eq, true);
+    ], Core__Float.clamp(Number.NaN, undefined, 4.2), eq, 4.2);
 
 Test.run([
       [
@@ -150,17 +150,17 @@ Test.run([
 Test.run([
       [
         "FloatTests.res",
+        19,
         20,
-        13,
-        39
+        46
       ],
       "clamp - min nan, max nan"
-    ], isNaN(Core__Float.clamp(Number.NaN, Number.NaN, 4.2)), eq, true);
+    ], Core__Float.clamp(Number.NaN, Number.NaN, 4.2), eq, 4.2);
 
 Test.run([
       [
         "FloatTests.res",
-        25,
+        20,
         20,
         42
       ],
@@ -170,7 +170,7 @@ Test.run([
 Test.run([
       [
         "FloatTests.res",
-        26,
+        21,
         20,
         42
       ],
@@ -180,7 +180,7 @@ Test.run([
 Test.run([
       [
         "FloatTests.res",
-        27,
+        22,
         20,
         43
       ],
@@ -190,7 +190,7 @@ Test.run([
 Test.run([
       [
         "FloatTests.res",
-        28,
+        23,
         20,
         43
       ],
@@ -200,7 +200,7 @@ Test.run([
 Test.run([
       [
         "FloatTests.res",
-        30,
+        25,
         13,
         49
       ],
@@ -210,7 +210,7 @@ Test.run([
 Test.run([
       [
         "FloatTests.res",
-        36,
+        31,
         13,
         50
       ],
@@ -220,7 +220,7 @@ Test.run([
 Test.run([
       [
         "FloatTests.res",
-        42,
+        37,
         13,
         50
       ],
@@ -230,7 +230,7 @@ Test.run([
 Test.run([
       [
         "FloatTests.res",
-        48,
+        43,
         13,
         51
       ],
