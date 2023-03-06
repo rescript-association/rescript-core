@@ -217,9 +217,8 @@ let fromArray: array<result<'a, 'b>> => result<array<'a>, 'b>
   those values. Otherwise returns an `Error` for the first error encountered.
 
   ```res example
-  Result.fromArray([Ok(2), Ok(3)], i=>i*2) == Ok([4, 6])
-  Result.fromArray([Ok(1), Error("a"), Ok(2)], i=>i*2) == Error("a")
-  Result.fromArray([]) == Ok([])
+  Result.fromArray([3, 6, 9], i=> i < 10 ? Ok(i * 2) : Error(i)) == Ok([6, 12, 18])
+  Result.fromArray([3, 6, 9], i=> i < 5 ? Ok(i * 2) : Error(i)) == Error(6)
   ```
 */
 let fromArrayWith: (array<'v>, 'v => result<'ok, 'err>) => result<array<'ok>, 'err>
