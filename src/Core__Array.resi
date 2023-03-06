@@ -3,8 +3,6 @@
 @val external fromArrayLike: Js.Array2.array_like<'a> => array<'a> = "Array.from"
 @val
 external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b> = "Array.from"
-@val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
-@val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
 
 /**
   `make(~length, init)`

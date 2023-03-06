@@ -10,9 +10,6 @@ external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 @val
 external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b> = "Array.from"
 
-@val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
-@val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
-
 @send external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
 
 @send external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"

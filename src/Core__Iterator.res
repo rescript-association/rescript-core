@@ -6,4 +6,5 @@ type value<'a> = {
 }
 
 @send external next: t<'a> => value<'a> = "next"
-@scope("Array") external toArray: t<'a> => array<'a> = "from"
+external toArray: t<'a> => array<'a> = "Array.from"
+external toArrayWithMapper: (t<'a>, 'a => 'b) => array<'b> = "Array.from"
