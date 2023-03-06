@@ -43,7 +43,7 @@ external fromInt: int => float = "%identity"
 
 @unboxed @noalloc external mod: (float, float) => float = "?fmod_float"
 
-let clamp = (~min=?, ~max=?, value) => {
+let clamp = (~min=?, ~max=?, value): float => {
   let value = switch max {
   | Some(max) if max < value => max
   | _ => value

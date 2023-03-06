@@ -11,17 +11,12 @@ Test.run(__POS_OF__("clamp - < min, < max"), Float.clamp(~min=4.3, ~max=4.5, 4.2
 Test.run(__POS_OF__("clamp - < min, > max"), Float.clamp(~min=4.3, ~max=4.1, 4.2), eq, 4.3) // min wins
 Test.run(__POS_OF__("clamp - > min, < max"), Float.clamp(~min=4.1, ~max=4.5, 4.2), eq, 4.2)
 Test.run(__POS_OF__("clamp - > min, > max"), Float.clamp(~min=4.1, ~max=4.1, 4.2), eq, 4.1)
-Test.run(__POS_OF__("clamp - nan"), Float.clamp(~min=4.1, ~max=4.3, nan), eq, 4.1) // min wins ??
+Test.run(__POS_OF__("clamp - nan"), Float.clamp(~min=4.1, ~max=4.3, nan)->Float.isNaN, eq, true)
 Test.run(__POS_OF__("clamp - infinity"), Float.clamp(~min=4.1, ~max=4.3, infinity), eq, 4.3)
 Test.run(__POS_OF__("clamp - -infinity"), Float.clamp(~min=4.1, ~max=4.3, neg_infinity), eq, 4.1)
-Test.run(__POS_OF__("clamp - min nan"), Float.clamp(~min=nan, 4.2)->Float.isNaN, eq, true) // ??
+Test.run(__POS_OF__("clamp - min nan"), Float.clamp(~min=nan, 4.2), eq, 4.2)
 Test.run(__POS_OF__("clamp - max nan"), Float.clamp(~max=nan, 4.2), eq, 4.2)
-Test.run(
-  __POS_OF__("clamp - min nan, max nan"),
-  Float.clamp(~min=nan, ~max=nan, 4.2)->Float.isNaN,
-  eq,
-  true, // ??
-)
+Test.run(__POS_OF__("clamp - min nan, max nan"), Float.clamp(~min=nan, ~max=nan, 4.2), eq, 4.2)
 Test.run(__POS_OF__("clamp - min infinity"), Float.clamp(~min=infinity, 4.2), eq, infinity)
 Test.run(__POS_OF__("clamp - max infinity"), Float.clamp(~max=infinity, 4.2), eq, 4.2)
 Test.run(__POS_OF__("clamp - min -infinity"), Float.clamp(~min=neg_infinity, 4.2), eq, 4.2)
