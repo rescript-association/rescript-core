@@ -24,9 +24,9 @@ var Concurrently = PromiseTest.Concurrently;
 
 var panicTest = ErrorTests.panicTest;
 
-var eq = FloatTests.eq;
-
 var $$catch = IntTests.$$catch;
+
+var eq = FloatTests.eq;
 
 export {
   TestError ,
@@ -38,7 +38,7 @@ export {
   Catching ,
   Concurrently ,
   panicTest ,
-  eq ,
   $$catch ,
+  eq ,
 }
 /* IntTests Not a pure module */
