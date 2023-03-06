@@ -2,7 +2,9 @@
 
 import * as Fs from "fs";
 import * as Path from "path";
+import * as Util from "util";
 import * as Curry from "rescript/lib/es6/curry.js";
+import * as Core__Option from "../src/Core__Option.mjs";
 import * as CodeFrame from "@babel/code-frame";
 
 var dirname = (new URL('.', import.meta.url).pathname);
@@ -26,6 +28,17 @@ function cleanUpStackTrace(stack) {
               }).join("\n");
 }
 
+function print(value) {
+  var match = typeof value;
+  if (match === "object" || match === "bigint") {
+    return Util.inspect(value);
+  } else if (match === "string") {
+    return Core__Option.getExn(JSON.stringify(value));
+  } else {
+    return String(value);
+  }
+}
+
 function run(loc, left, comparator, right) {
   if (Curry._2(comparator, left, right)) {
     return ;
@@ -36,8 +49,8 @@ function run(loc, left, comparator, right) {
   var fileContent = Fs.readFileSync(Path.join(dirname, file), {
         encoding: "utf-8"
       });
-  var left$1 = JSON.stringify(left);
-  var right$1 = JSON.stringify(right);
+  var left$1 = print(left);
+  var right$1 = print(right);
   var codeFrame = CodeFrame.codeFrameColumns(fileContent, {
         start: {
           line: line
@@ -55,6 +68,7 @@ function run(loc, left, comparator, right) {
 export {
   dirname ,
   cleanUpStackTrace ,
+  print ,
   run ,
 }
 /* dirname Not a pure module */

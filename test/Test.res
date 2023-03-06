@@ -34,12 +34,20 @@ let cleanUpStackTrace = stack => {
   ->Array.joinWith("\n")
 }
 
+@val @module("util") external inspect: _ => string = "inspect"
+let print = value =>
+  switch Type.typeof(value) {
+  | #string => JSON.stringifyAny(value)->Option.getExn // uses " instead of '
+  | #object | #bigint => inspect(value)
+  | _ => String.make(value)
+  }
+
 let run = (loc, left, comparator, right) => {
   if !comparator(left, right) {
     let ((file, line, _, _), _) = loc
     let fileContent = readFileSync(join(dirname, file), {"encoding": "utf-8"})
-    let left = JSON.stringifyAny(left)
-    let right = JSON.stringifyAny(right)
+    let left = print(left)
+    let right = print(right)
     let codeFrame = codeFrameColumns(
       fileContent,
       {"start": {"line": line}},
