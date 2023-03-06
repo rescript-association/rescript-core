@@ -218,7 +218,7 @@ let fromArray: array<result<'a, 'b>> => result<array<'a>, 'b>
 
   ```res example
   let lessThanTen = n => n < 10 ? Ok(n) : Error(n)
-  Result.fromArray([3, 6, 9], lessThanTen) == Ok([6, 12, 18])
+  Result.fromArray([3, 6, 9], lessThanTen) == Ok([3, 6, 9])
   Result.fromArray([6, 12, 18], lessThanTen) == Error(12)
   ```
 */
