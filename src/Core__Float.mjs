@@ -3,14 +3,14 @@
 
 var Constants = {};
 
-function fromString(i) {
-  var i$1 = parseFloat(i);
-  if (isNaN(i$1)) {
-    return ;
-  } else {
-    return i$1;
+var fromString = (function (str) {
+  if (!str || !str.trim()) {
+    return undefined;
   }
-}
+
+  let num = +str;
+  return isNaN(num) ? undefined : num;
+});
 
 export {
   Constants ,

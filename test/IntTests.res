@@ -10,6 +10,27 @@ let catch = f =>
   | Exn.Error(err) => err
   }
 
+Test.run(__POS_OF__("fromString"), Int.fromString("4.2"), eq, None)
+Test.run(__POS_OF__("fromString"), Int.fromString("4."), eq, Some(4))
+Test.run(__POS_OF__("fromString"), Int.fromString("4.0"), eq, Some(4))
+Test.run(__POS_OF__("fromString"), Int.fromString("4.2foo"), eq, None)
+Test.run(__POS_OF__("fromString"), Int.fromString("4,2"), eq, None)
+Test.run(__POS_OF__("fromString"), Int.fromString("4 2"), eq, None)
+Test.run(__POS_OF__("fromString"), Int.fromString("4_2"), eq, None)
+Test.run(__POS_OF__("fromString"), Int.fromString("42"), eq, Some(42))
+Test.run(__POS_OF__("fromString"), Int.fromString("  42  "), eq, Some(42))
+Test.run(__POS_OF__("fromString"), Int.fromString("4.2e1"), eq, Some(42))
+Test.run(__POS_OF__("fromString"), Int.fromString("4.2E1"), eq, Some(42))
+Test.run(__POS_OF__("fromString"), Int.fromString("4.2e+1"), eq, Some(42))
+Test.run(__POS_OF__("fromString"), Int.fromString("4.2e-1"), eq, None)
+Test.run(__POS_OF__("fromString"), Int.fromString("0xF"), eq, Some(15))
+Test.run(__POS_OF__("fromString"), Int.fromString("0777"), eq, Some(777))
+Test.run(__POS_OF__("fromString"), Int.fromString("0o777"), eq, Some(511))
+Test.run(__POS_OF__("fromString"), Int.fromString("0b101"), eq, Some(5))
+Test.run(__POS_OF__("fromString"), Int.fromString("foo"), eq, None)
+Test.run(__POS_OF__("fromString"), Int.fromString("NaN"), eq, None)
+Test.run(__POS_OF__("fromString"), Int.fromString("Infinity"), eq, None)
+
 Test.run(__POS_OF__("range - positive, increasing"), Int.range(3, 6), eq, [3, 4, 5])
 Test.run(__POS_OF__("range - negative, increasing"), Int.range(-3, -1), eq, [-3, -2])
 Test.run(__POS_OF__("range - cross-zero, incresing"), Int.range(-1, 2), eq, [-1, 0, 1])

@@ -25,6 +25,7 @@
 - Add `panic`/`Error.panic`. https://github.com/rescript-association/rescript-core/pull/72
 - The globally available `null` value now originates from `Nullable` and not `Null`, just like the globally available `undefined` value does. https://github.com/rescript-association/rescript-core/pull/88
 - Add `Int.range` and `Int.rangeWithOptions`, https://github.com/rescript-association/rescript-core/pull/52
+- Stricter number parsing in `Float.fromString` and `Int.fromString`, https://github.com/rescript-association/rescript-core/pull/93
 
 ### Documentation
 

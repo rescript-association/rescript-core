@@ -19,18 +19,10 @@ module Constants = {
 external toFloat: int => float = "%identity"
 external fromFloat: float => int = "%intoffloat"
 
-let fromString = (~radix=?, x) => {
-  let maybeInt = switch radix {
-  | Some(radix) => Core__Float.parseIntWithRadix(x, ~radix)
-  | None => Core__Float.parseInt(x)
-  }
-  if Core__Float.isNaN(maybeInt) {
-    None
-  } else if maybeInt > Constants.maxValue->toFloat || maybeInt < Constants.minValue->toFloat {
-    None
-  } else {
-    let asInt = fromFloat(maybeInt)
-    Some(asInt)
+let fromString = str => {
+  switch Core__Float.fromString(str) {
+  | Some(num) => num === %raw("num | 0") && Core__Float.isFinite(num) ? Obj.magic(num) : None
+  | None => None
   }
 }
 

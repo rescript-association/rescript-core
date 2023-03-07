@@ -27,11 +27,14 @@ module Constants = {
 @send external toStringWithRadix: (float, ~radix: int) => string = "toString"
 @send external toLocaleString: float => string = "toLocaleString"
 
-let fromString = i =>
-  switch parseFloat(i) {
-  | i if isNaN(i) => None
-  | i => Some(i)
+let fromString: string => option<float> = %raw(`function (str) {
+  if (!str || !str.trim()) {
+    return undefined;
   }
+
+  let num = +str;
+  return isNaN(num) ? undefined : num;
+}`)
 
 external toInt: float => int = "%intoffloat"
 external fromInt: int => float = "%identity"

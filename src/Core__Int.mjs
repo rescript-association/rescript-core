@@ -2,14 +2,14 @@
 
 import * as Pervasives from "rescript/lib/es6/pervasives.js";
 import * as Core__Array from "./Core__Array.mjs";
+import * as Core__Float from "./Core__Float.mjs";
 
-function fromString(radix, x) {
-  var maybeInt = radix !== undefined ? parseInt(x, radix) : parseInt(x);
-  if (isNaN(maybeInt) || maybeInt > 2147483647 || maybeInt < -2147483648) {
-    return ;
-  } else {
-    return maybeInt | 0;
+function fromString(str) {
+  var num = Core__Float.fromString(str);
+  if (num !== undefined && num === (num | 0) && isFinite(num)) {
+    return num;
   }
+  
 }
 
 function rangeWithOptions(start, end, options) {

@@ -29,6 +29,206 @@ Test.run([
         "IntTests.res",
         13,
         20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("4.2"), eq, undefined);
+
+Test.run([
+      [
+        "IntTests.res",
+        14,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("4."), eq, 4);
+
+Test.run([
+      [
+        "IntTests.res",
+        15,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("4.0"), eq, 4);
+
+Test.run([
+      [
+        "IntTests.res",
+        16,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("4.2foo"), eq, undefined);
+
+Test.run([
+      [
+        "IntTests.res",
+        17,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("4,2"), eq, undefined);
+
+Test.run([
+      [
+        "IntTests.res",
+        18,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("4 2"), eq, undefined);
+
+Test.run([
+      [
+        "IntTests.res",
+        19,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("4_2"), eq, undefined);
+
+Test.run([
+      [
+        "IntTests.res",
+        20,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("42"), eq, 42);
+
+Test.run([
+      [
+        "IntTests.res",
+        21,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("  42  "), eq, 42);
+
+Test.run([
+      [
+        "IntTests.res",
+        22,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("4.2e1"), eq, 42);
+
+Test.run([
+      [
+        "IntTests.res",
+        23,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("4.2E1"), eq, 42);
+
+Test.run([
+      [
+        "IntTests.res",
+        24,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("4.2e+1"), eq, 42);
+
+Test.run([
+      [
+        "IntTests.res",
+        25,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("4.2e-1"), eq, undefined);
+
+Test.run([
+      [
+        "IntTests.res",
+        26,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("0xF"), eq, 15);
+
+Test.run([
+      [
+        "IntTests.res",
+        27,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("0777"), eq, 777);
+
+Test.run([
+      [
+        "IntTests.res",
+        28,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("0o777"), eq, 511);
+
+Test.run([
+      [
+        "IntTests.res",
+        29,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("0b101"), eq, 5);
+
+Test.run([
+      [
+        "IntTests.res",
+        30,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("foo"), eq, undefined);
+
+Test.run([
+      [
+        "IntTests.res",
+        31,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("NaN"), eq, undefined);
+
+Test.run([
+      [
+        "IntTests.res",
+        32,
+        20,
+        32
+      ],
+      "fromString"
+    ], Core__Int.fromString("Infinity"), eq, undefined);
+
+Test.run([
+      [
+        "IntTests.res",
+        34,
+        20,
         50
       ],
       "range - positive, increasing"
@@ -41,7 +241,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        14,
+        35,
         20,
         50
       ],
@@ -54,7 +254,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        15,
+        36,
         20,
         51
       ],
@@ -68,7 +268,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        16,
+        37,
         20,
         42
       ],
@@ -78,7 +278,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        17,
+        38,
         20,
         50
       ],
@@ -91,7 +291,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        18,
+        39,
         20,
         50
       ],
@@ -104,7 +304,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        21,
+        42,
         13,
         62
       ],
@@ -119,7 +319,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        27,
+        48,
         13,
         62
       ],
@@ -134,7 +334,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        33,
+        54,
         13,
         62
       ],
@@ -150,7 +350,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        39,
+        60,
         13,
         62
       ],
@@ -165,7 +365,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        45,
+        66,
         13,
         62
       ],
@@ -179,7 +379,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        51,
+        72,
         13,
         54
       ],
@@ -191,7 +391,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        57,
+        78,
         13,
         63
       ],
@@ -203,7 +403,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        63,
+        84,
         13,
         62
       ],
@@ -215,7 +415,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        69,
+        90,
         13,
         63
       ],
@@ -230,7 +430,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        75,
+        96,
         13,
         63
       ],
@@ -245,7 +445,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        81,
+        102,
         13,
         63
       ],
@@ -261,7 +461,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        87,
+        108,
         13,
         63
       ],
@@ -276,7 +476,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        93,
+        114,
         13,
         73
       ],
@@ -292,7 +492,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        99,
+        120,
         13,
         73
       ],
@@ -309,7 +509,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        105,
+        126,
         13,
         73
       ],
@@ -326,7 +526,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        111,
+        132,
         13,
         73
       ],
@@ -342,7 +542,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        117,
+        138,
         13,
         73
       ],
@@ -357,7 +557,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        123,
+        144,
         13,
         65
       ],
@@ -370,7 +570,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        129,
+        150,
         13,
         74
       ],
@@ -383,7 +583,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        135,
+        156,
         13,
         73
       ],
@@ -396,7 +596,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        141,
+        162,
         13,
         74
       ],
@@ -412,7 +612,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        147,
+        168,
         13,
         74
       ],
@@ -429,7 +629,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        153,
+        174,
         13,
         74
       ],
@@ -446,7 +646,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        159,
+        180,
         13,
         74
       ],
