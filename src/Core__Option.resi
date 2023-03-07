@@ -96,18 +96,21 @@ Option.getUnsafe(None: option<int>) // Returns `undefined`, which is not a valid
 external getUnsafe: option<'a> => 'a = "%identity"
 
 /**
-`mapWithDefault(opt, default, f)` returns `f(value)` if `opt` is `Some(value)`, otherwise `default`.
+`mapOr(opt, default, f)` returns `f(value)` if `opt` is `Some(value)`, otherwise `default`.
 
 ## Examples
 
 ```rescript
 let someValue = Some(3)
-someValue->Option.mapWithDefault(0, x => x + 5) // 8
+someValue->Option.mapOr(0, x => x + 5) // 8
 
 let noneValue = None
-noneValue->Option.mapWithDefault(0, x => x + 5) // 0
+noneValue->Option.mapOr(0, x => x + 5) // 0
 ```
 */
+let mapOr: (option<'a>, 'b, 'a => 'b) => 'b
+
+@deprecated("Use mapOr instead")
 let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b
 
 /**
@@ -143,21 +146,24 @@ Option.flatMap(None, addIfAboveOne) // None
 let flatMap: (option<'a>, 'a => option<'b>) => option<'b>
 
 /**
-`getWithDefault(opt, default)` returns `value` if `opt` is `Some(value)`, otherwise `default`.
+`getOr(opt, default)` returns `value` if `opt` is `Some(value)`, otherwise `default`.
 
 ## Examples
 
 ```rescript
-Option.getWithDefault(None, "Banana") // Banana
-Option.getWithDefault(Some("Apple"), "Banana") // Apple
+Option.getOr(None, "Banana") // Banana
+Option.getOr(Some("Apple"), "Banana") // Apple
 
 let greet = (firstName: option<string>) =>
-  "Greetings " ++ firstName->Option.getWithDefault("Anonymous")
+  "Greetings " ++ firstName->Option.getOr("Anonymous")
 
 Some("Jane")->greet // "Greetings Jane"
 None->greet // "Greetings Anonymous"
 ```
 */
+let getOr: (option<'a>, 'a) => 'a
+
+@deprecated("Use getOr instead")
 let getWithDefault: (option<'a>, 'a) => 'a
 
 /**

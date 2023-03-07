@@ -555,7 +555,7 @@ runGetTest({
                 };
         }),
       get: (function (i) {
-          return Core__Option.getWithDefault(Core__Option.map(i["a"], (function (i) {
+          return Core__Option.getOr(Core__Option.map(i["a"], (function (i) {
                             return i.concat([
                                         4,
                                         5
