@@ -115,8 +115,14 @@ let fromArrayWith = (xs, f) => {
 
 let fromArray = xs => xs->fromArrayWith(i => i)
 
+// If the source result is Ok, should we return it as is, using
+// an expression like Ok(_) as ok => ok? The other mapping functions
+// do not do that even though it results in less code. I'm recreating
+// the result here out of caution. The F# code for the same function
+// also recreates the result.
+// https://github.com/fsharp/fsharp/blob/master/src/fsharp/FSharp.Core/result.fs
 let mapError = (r, f) =>
   switch r {
-  | Ok(_) as ok => ok
+  | Ok(ok) => Ok(ok)
   | Error(e) => Error(f(e))
   }

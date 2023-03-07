@@ -131,7 +131,10 @@ function fromArray(xs) {
 
 function mapError(r, f) {
   if (r.TAG === /* Ok */0) {
-    return r;
+    return {
+            TAG: /* Ok */0,
+            _0: r._0
+          };
   } else {
     return {
             TAG: /* Error */1,
