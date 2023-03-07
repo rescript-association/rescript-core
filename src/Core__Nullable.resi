@@ -87,22 +87,25 @@ let asNullable = optString->Nullable.fromOption // Nullable.t<string>
 let fromOption: option<'a> => t<'a>
 
 /**
-`getWithDefault(value, default)` returns `value` if not `null` or `undefined`,
+`getOr(value, default)` returns `value` if not `null` or `undefined`,
 otherwise return `default`.
 
 ## Examples
 
 ```rescript
-Nullable.getWithDefault(Nullable.null, "Banana") // Banana
-Nullable.getWithDefault(Nulalble.make("Apple"), "Banana") // Apple
+Nullable.getOr(Nullable.null, "Banana") // Banana
+Nullable.getOr(Nulalble.make("Apple"), "Banana") // Apple
 
 let greet = (firstName: option<string>) =>
-  "Greetings " ++ firstName->Nullable.getWithDefault("Anonymous")
+  "Greetings " ++ firstName->Nullable.getOr("Anonymous")
 
 Nullable.make("Jane")->greet // "Greetings Jane"
 Nullable.null->greet // "Greetings Anonymous"
 ```
 */
+let getOr: (t<'a>, 'a) => 'a
+
+@deprecated("Use getOr instead")
 let getWithDefault: (t<'a>, 'a) => 'a
 
 /**
@@ -149,19 +152,22 @@ Nullable.map(undefined, x => x * x) // undefined
 let map: (t<'a>, 'a => 'b) => t<'b>
 
 /**
-`mapWithDefault(value, default, f)` returns `f(value)` if `value` is not `null`
+`mapOr(value, default, f)` returns `f(value)` if `value` is not `null`
 or `undefined`, otherwise returns `default`.
 
 ## Examples
 
 ```rescript
 let someValue = Nullable.make(3)
-someValue->Nullable.mapWithDefault(0, x => x + 5) // 8
+someValue->Nullable.mapOr(0, x => x + 5) // 8
 
 let noneValue = Nullable.null
-noneValue->Nullable.mapWithDefault(0, x => x + 5) // 0
+noneValue->Nullable.mapOr(0, x => x + 5) // 0
 ```
 */
+let mapOr: (t<'a>, 'b, 'a => 'b) => 'b
+
+@deprecated("Use mapOr instead")
 let mapWithDefault: (t<'a>, 'b, 'a => 'b) => 'b
 
 /**

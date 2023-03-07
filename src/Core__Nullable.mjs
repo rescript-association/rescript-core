@@ -19,7 +19,7 @@ function compare(a, b, cmp) {
   return Core__Option.compare((a == null) ? undefined : Caml_option.some(a), (b == null) ? undefined : Caml_option.some(b), cmp);
 }
 
-function getWithDefault(value, $$default) {
+function getOr(value, $$default) {
   if (value == null) {
     return $$default;
   } else {
@@ -46,7 +46,7 @@ function map(value, f) {
   }
 }
 
-function mapWithDefault(value, $$default, f) {
+function mapOr(value, $$default, f) {
   if (value == null) {
     return $$default;
   } else {
@@ -62,13 +62,19 @@ function flatMap(value, f) {
   }
 }
 
+var getWithDefault = getOr;
+
+var mapWithDefault = mapOr;
+
 export {
   equal ,
   compare ,
   fromOption ,
+  getOr ,
   getWithDefault ,
   getExn ,
   map ,
+  mapOr ,
   mapWithDefault ,
   flatMap ,
 }

@@ -29,7 +29,7 @@ function getExn(x) {
       };
 }
 
-function mapWithDefault(opt, $$default, f) {
+function mapOr(opt, $$default, f) {
   var f$1 = Curry.__1(f);
   if (opt !== undefined) {
     return f$1(Caml_option.valFromOption(opt));
@@ -54,7 +54,7 @@ function flatMap(opt, f) {
   
 }
 
-function getWithDefault(opt, $$default) {
+function getOr(opt, $$default) {
   if (opt !== undefined) {
     return Caml_option.valFromOption(opt);
   } else {
@@ -104,13 +104,19 @@ function compare(a, b, cmp) {
   }
 }
 
+var mapWithDefault = mapOr;
+
+var getWithDefault = getOr;
+
 export {
   filter ,
   forEach ,
   getExn ,
+  mapOr ,
   mapWithDefault ,
   map ,
   flatMap ,
+  getOr ,
   getWithDefault ,
   orElse ,
   isSome ,

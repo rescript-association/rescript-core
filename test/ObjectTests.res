@@ -127,7 +127,7 @@ let runGetTest = i =>
 {
   title: "prop exists and is an array, can get it",
   source: () => {"a": [1, 2, 3]},
-  get: i => i->Object.get("a")->Option.map(i => i->Array.concat([4, 5]))->Option.getWithDefault([]),
+  get: i => i->Object.get("a")->Option.map(i => i->Array.concat([4, 5]))->Option.getOr([]),
   expected: [1, 2, 3, 4, 5],
 }->runGetTest
 
