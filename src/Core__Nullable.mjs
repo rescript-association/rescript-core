@@ -10,7 +10,7 @@ function fromOption(option) {
   
 }
 
-function getWithDefault(value, $$default) {
+function getOr(value, $$default) {
   if (value == null) {
     return $$default;
   } else {
@@ -37,7 +37,7 @@ function map(value, f) {
   }
 }
 
-function mapWithDefault(value, $$default, f) {
+function mapOr(value, $$default, f) {
   if (value == null) {
     return $$default;
   } else {
@@ -53,11 +53,17 @@ function flatMap(value, f) {
   }
 }
 
+var getWithDefault = getOr;
+
+var mapWithDefault = mapOr;
+
 export {
   fromOption ,
+  getOr ,
   getWithDefault ,
   getExn ,
   map ,
+  mapOr ,
   mapWithDefault ,
   flatMap ,
 }

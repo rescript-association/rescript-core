@@ -14,11 +14,13 @@ let fromOption: option<'a> => t<'a> = option =>
   | None => null
   }
 
-let getWithDefault = (value, default) =>
+let getOr = (value, default) =>
   switch value->toOption {
   | Some(x) => x
   | None => default
   }
+
+let getWithDefault = getOr
 
 let getExn: t<'a> => 'a = value =>
   switch value->toOption {
@@ -34,11 +36,13 @@ let map = (value, f) =>
   | None => null
   }
 
-let mapWithDefault = (value, default, f) =>
+let mapOr = (value, default, f) =>
   switch value->toOption {
   | Some(x) => f(x)
   | None => default
   }
+
+let mapWithDefault = mapOr
 
 let flatMap = (value, f) =>
   switch value->toOption {
