@@ -217,6 +217,42 @@ fromArrayWithTestCases.forEach(function (param) {
           ], Core__Result.fromArrayWith(param[1], fromArrayWithMapper), eq, param[2]);
     });
 
+Test.run([
+      [
+        "ResultTests.res",
+        35,
+        20,
+        48
+      ],
+      "mapError: if ok, return it"
+    ], Core__Result.mapError({
+          TAG: /* Ok */0,
+          _0: 5
+        }, (function (i) {
+            return Math.imul(i, 3);
+          })), eq, {
+      TAG: /* Ok */0,
+      _0: 5
+    });
+
+Test.run([
+      [
+        "ResultTests.res",
+        38,
+        13,
+        48
+      ],
+      "mapError: if error, apply f to it"
+    ], Core__Result.mapError({
+          TAG: /* Error */1,
+          _0: 5
+        }, (function (i) {
+            return Math.imul(i, 3);
+          })), eq, {
+      TAG: /* Error */1,
+      _0: 15
+    });
+
 export {
   eq ,
   fromArrayTestCases ,

@@ -223,3 +223,16 @@ let fromArray: array<result<'a, 'b>> => result<array<'a>, 'b>
   ```
 */
 let fromArrayWith: (array<'v>, 'v => result<'a, 'b>) => result<array<'a>, 'b>
+
+/**
+  `mapError(res, f)`: If the source result is `Ok`, return it. Otherwise 
+  apply the mapping function to the `Error` result value.
+
+  ```res example
+
+  let convertErrorToText = n => `Error code: ${n->Int.toString}`
+  mapError(Error(14), convertErrorToText) // evaluate to Error("Error code: 14")
+  mapError(Ok(4), convertErrorToText) // evaluates to Ok(4)
+  ```
+*/
+let mapError: (result<'a, 'b>, 'b => 'c) => result<'a, 'c>

@@ -114,3 +114,9 @@ let fromArrayWith = (xs, f) => {
 }
 
 let fromArray = xs => xs->fromArrayWith(i => i)
+
+let mapError = (r, f) =>
+  switch r {
+  | Ok(_) as ok => ok
+  | Error(e) => Error(f(e))
+  }
