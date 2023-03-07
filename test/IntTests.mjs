@@ -459,6 +459,96 @@ Test.run([
       -5
     ]);
 
+Test.run([
+      [
+        "IntTests.res",
+        165,
+        20,
+        27
+      ],
+      "clamp"
+    ], Core__Int.clamp(undefined, undefined, 42), eq, 42);
+
+Test.run([
+      [
+        "IntTests.res",
+        166,
+        20,
+        35
+      ],
+      "clamp - < min"
+    ], Core__Int.clamp(50, undefined, 42), eq, 50);
+
+Test.run([
+      [
+        "IntTests.res",
+        167,
+        20,
+        35
+      ],
+      "clamp - > min"
+    ], Core__Int.clamp(40, undefined, 42), eq, 42);
+
+Test.run([
+      [
+        "IntTests.res",
+        168,
+        20,
+        35
+      ],
+      "clamp - < max"
+    ], Core__Int.clamp(undefined, 50, 42), eq, 42);
+
+Test.run([
+      [
+        "IntTests.res",
+        169,
+        20,
+        35
+      ],
+      "clamp - > max"
+    ], Core__Int.clamp(undefined, 40, 42), eq, 40);
+
+Test.run([
+      [
+        "IntTests.res",
+        170,
+        20,
+        42
+      ],
+      "clamp - < min, < max"
+    ], Core__Int.clamp(50, 60, 42), eq, 50);
+
+Test.run([
+      [
+        "IntTests.res",
+        171,
+        20,
+        42
+      ],
+      "clamp - < min, > max"
+    ], Core__Int.clamp(50, 40, 42), eq, 50);
+
+Test.run([
+      [
+        "IntTests.res",
+        172,
+        20,
+        42
+      ],
+      "clamp - > min, < max"
+    ], Core__Int.clamp(40, 60, 42), eq, 42);
+
+Test.run([
+      [
+        "IntTests.res",
+        173,
+        20,
+        42
+      ],
+      "clamp - > min, > max"
+    ], Core__Int.clamp(40, 40, 42), eq, 40);
+
 export {
   eq ,
   $$catch ,

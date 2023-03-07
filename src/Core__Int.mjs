@@ -47,6 +47,15 @@ function range(start, end) {
   return rangeWithOptions(start, end, {});
 }
 
+function clamp(min, max, value) {
+  var value$1 = max !== undefined && max < value ? max : value;
+  if (min !== undefined && min > value$1) {
+    return min;
+  } else {
+    return value$1;
+  }
+}
+
 var Constants = {
   minValue: -2147483648,
   maxValue: 2147483647
@@ -57,5 +66,6 @@ export {
   fromString ,
   range ,
   rangeWithOptions ,
+  clamp ,
 }
 /* No side effect */

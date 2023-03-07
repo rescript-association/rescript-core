@@ -12,8 +12,18 @@ function fromString(i) {
   }
 }
 
+function clamp(min, max, value) {
+  var value$1 = max !== undefined && max < value ? max : value;
+  if (min !== undefined && min > value$1) {
+    return min;
+  } else {
+    return value$1;
+  }
+}
+
 export {
   Constants ,
   fromString ,
+  clamp ,
 }
 /* No side effect */
