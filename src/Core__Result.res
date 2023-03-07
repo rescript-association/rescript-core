@@ -94,32 +94,23 @@ let cmp = (a, b, f) => cmpU(a, b, (. x, y) => f(x, y))
 
 // Written in imperative style for performance. The source
 // array is scanned only until an error is found.
-let fromArrayWith = (xs: array<'a>, f) => {
-  let push = Core__Array.push
-  let get = Core__Array.get
-  let error = ref(None)
-  let index = ref(0)
-  let oks = []
-  let break = ref(false)
-  while !break.contents {
-    switch xs->get(index.contents) {
-    | None => break := true
-    | Some(x) =>
-      switch f(x) {
-      | Ok(ok) =>
-        oks->push(ok)
-        index := index.contents + 1
-      | Error(e) => {
-          error := Some(e)
-          break := true
-        }
+@new external makeUninitializedUnsafe: int => array<'a> = "Array"
+let fromArrayWith = (xs, f) => {
+  let setUnsafe = Core__Array.setUnsafe
+  let getUnsafe = Core__Array.getUnsafe
+  let oks = makeUninitializedUnsafe(xs->Array.length)
+  let rec loop = i =>
+    if i >= xs->Array.length {
+      Ok(oks)
+    } else {
+      switch xs->getUnsafe(i)->f {
+      | Ok(x) =>
+        oks->setUnsafe(i, x)
+        loop(i + 1)
+      | Error(_) as err => err
       }
     }
-  }
-  switch error.contents {
-  | None => Ok(oks)
-  | Some(err) => Error(err)
-  }
+  loop(0)
 }
 
 let fromArray = xs => xs->fromArrayWith(i => i)
