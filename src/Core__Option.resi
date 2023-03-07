@@ -40,6 +40,18 @@ let someString: option<string> = Some("hello")
 */
 
 /**
+`flat(value)` flattens a nested `option` value to a single level.
+
+## Examples
+
+```rescript
+Option.flat(Some(Some(10))) // Some(10)
+Option.flat(Some(None)) // None
+```
+*/
+let flat: option<option<'a>> => option<'a>
+
+/**
 `filter(opt, f)` applies `f` to `opt`, if `f` returns `true`, then it returns `Some(value)`, otherwise returns `None`.
 
 ## Examples
@@ -66,7 +78,7 @@ Option.forEach(None, x => Console.log(x)) // returns ()
 let forEach: (option<'a>, 'a => unit) => unit
 
 /**
-`getExn(opt)` returns `value` if `opt` is `Some(value)`, otherwise raises an exception.
+`getExn(opt)` returns `value` if `opt` is `Some(value)`, raises `Not_found` if `None`.
 
 ```rescript
 Option.getExn(Some(3)) // 3
@@ -75,9 +87,23 @@ Option.getExn(None) /* Raises an Error */
 
 ## Exceptions
 
-- Raises an error if `opt` is `None`
+- Raises `Not_found` if `opt` is `None`
 */
 let getExn: option<'a> => 'a
+
+/**
+`expect(opt, message)` returns `value` if `Some(value)`, raises a `Failure` expection with the given message if `None`.
+
+```rescript
+Option.expect(Some(3), "should not be None") // 3
+Option.expect(None, "should not be None") // Raises `Failure("should not be None")`
+```
+
+## Exceptions
+
+- Panics if `opt` is `None`
+*/
+let expect: (option<'a>, string) => 'a
 
 /**
 `getUnsafe(value)` returns `value`.
@@ -89,9 +115,9 @@ Option.getUnsafe(Some(3)) == 3
 Option.getUnsafe(None) // Raises an error
 ```
 
-## Exceptions
+## Important
 
-- This is an unsafe operation, it assumes `value` is neither `None` nor `Some(None(...)))`
+This is an unsafe operation, it assumes `value` is neither `None`, `Some(None))`, `Some(Some(None))` etc.
 */
 external getUnsafe: option<'a> => 'a = "%identity"
 
@@ -161,6 +187,19 @@ None->greet // "Greetings Anonymous"
 let getWithDefault: (option<'a>, 'a) => 'a
 
 /**
+`or(opt1, opt2)` returns `opt2` if `opt1` is `None`, otherwise `opt1`.
+
+## Examples
+
+```rescript
+Option.or(Some(1812), Some(1066)) == Some(1812)
+Option.or(None, Some(1066) == Some(1066)
+Option.or(None, None) == None
+```
+*/
+let or: (option<'a>, option<'a>) => option<'a>
+
+/**
 `orElse(opt1, opt2)` returns `opt2` if `opt1` is `None`, otherwise `opt1`.
 
 ## Examples
@@ -171,6 +210,7 @@ Option.orElse(None, Some(1066) == Some(1066)
 Option.orElse(None, None) == None
 ```
 */
+@deprecated("Use `or` instead")
 let orElse: (option<'a>, option<'a>) => option<'a>
 
 /**

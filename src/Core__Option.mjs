@@ -2,6 +2,14 @@
 
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
+import * as Core__Error from "./Core__Error.mjs";
+
+function flat(opt) {
+  if (opt !== undefined) {
+    return Caml_option.valFromOption(opt);
+  }
+  
+}
 
 function filter(opt, p) {
   var p$1 = Curry.__1(p);
@@ -19,14 +27,22 @@ function forEach(opt, f) {
   
 }
 
-function getExn(x) {
-  if (x !== undefined) {
-    return Caml_option.valFromOption(x);
+function getExn(opt) {
+  if (opt !== undefined) {
+    return Caml_option.valFromOption(opt);
   }
   throw {
         RE_EXN_ID: "Not_found",
         Error: new Error()
       };
+}
+
+function expect(opt, message) {
+  if (opt !== undefined) {
+    return Caml_option.valFromOption(opt);
+  } else {
+    return Core__Error.panic(message);
+  }
 }
 
 function mapWithDefault(opt, $$default, f) {
@@ -62,7 +78,7 @@ function getWithDefault(opt, $$default) {
   }
 }
 
-function orElse(opt, other) {
+function or(opt, other) {
   if (opt !== undefined) {
     return opt;
   } else {
@@ -70,12 +86,12 @@ function orElse(opt, other) {
   }
 }
 
-function isSome(x) {
-  return x !== undefined;
+function isSome(opt) {
+  return opt !== undefined;
 }
 
-function isNone(x) {
-  return x === undefined;
+function isNone(opt) {
+  return opt === undefined;
 }
 
 function eq(a, b, f) {
@@ -106,14 +122,19 @@ function cmp(a, b, f) {
   }
 }
 
+var orElse = or;
+
 export {
+  flat ,
   filter ,
   forEach ,
   getExn ,
+  expect ,
   mapWithDefault ,
   map ,
   flatMap ,
   getWithDefault ,
+  or ,
   orElse ,
   isSome ,
   isNone ,
