@@ -25,7 +25,7 @@ Test.run([
         32
       ],
       "fromString"
-    ], Core__Float.fromString("4.2foo"), eq, 4.2);
+    ], Core__Float.fromString("4.2foo"), eq, undefined);
 
 Test.run([
       [
@@ -35,7 +35,7 @@ Test.run([
         32
       ],
       "fromString"
-    ], Core__Float.fromString("4,2"), eq, 4);
+    ], Core__Float.fromString("4,2"), eq, undefined);
 
 Test.run([
       [
@@ -45,7 +45,7 @@ Test.run([
         32
       ],
       "fromString"
-    ], Core__Float.fromString("4 2"), eq, 4);
+    ], Core__Float.fromString("4 2"), eq, undefined);
 
 Test.run([
       [
@@ -55,7 +55,7 @@ Test.run([
         32
       ],
       "fromString"
-    ], Core__Float.fromString("4_2"), eq, 4);
+    ], Core__Float.fromString("4_2"), eq, undefined);
 
 Test.run([
       [
@@ -135,7 +135,7 @@ Test.run([
         32
       ],
       "fromString"
-    ], Core__Float.fromString("0xF"), eq, 0);
+    ], Core__Float.fromString("0xF"), eq, 15);
 
 Test.run([
       [
@@ -155,7 +155,7 @@ Test.run([
         32
       ],
       "fromString"
-    ], Core__Float.fromString("0o777"), eq, 0);
+    ], Core__Float.fromString("0o777"), eq, 511);
 
 Test.run([
       [
@@ -165,7 +165,7 @@ Test.run([
         32
       ],
       "fromString"
-    ], Core__Float.fromString("0b101"), eq, 0);
+    ], Core__Float.fromString("0b101"), eq, 5);
 
 Test.run([
       [
