@@ -1,5 +1,15 @@
 type t
 
+type parsed = [#bool(bool) | #always | #auto | #min2]
+
 external fromBool: bool => t = "%identity"
 external fromString: [#always | #auto | #min2] => t = "%identity"
-// TODO: unwrap this for consumption coming back in resolvedOptions
+
+let parseJsValue = value =>
+  switch Core__Type.Classify.classify(value) {
+  | String("always") => Some(#always)
+  | String("auto") => Some(#auto)
+  | String("min2") => Some(#min2)
+  | Bool(value) => Some(#bool(value))
+  | _ => None
+  }

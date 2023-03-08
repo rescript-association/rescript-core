@@ -82,6 +82,8 @@ var groupingFormatter2 = Intl__NumberFormatTest.groupingFormatter2;
 
 var sigFormatter = Intl__NumberFormatTest.sigFormatter;
 
+var options = Intl__NumberFormatTest.options;
+
 var formatter = Intl__SegmenterTest.formatter;
 
 var segments = Intl__SegmenterTest.segments;
@@ -96,6 +98,7 @@ export {
   groupingFormatter1 ,
   groupingFormatter2 ,
   sigFormatter ,
+  options ,
   formatter ,
   segments ,
 }

@@ -30,3 +30,7 @@ let sigFormatter = Intl.NumberFormat.makeWithOptions({
   minimumSignificantDigits: #1,
   maximumSignificantDigits: #1,
 })
+
+let options = sigFormatter->Intl.NumberFormat.resolvedOptions
+Console.log(options)
+options.useGrouping->Core__Intl__NumberFormat.Grouping.parseJsValue->Console.log

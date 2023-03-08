@@ -327,6 +327,8 @@ var groupingFormatter2 = IntlTests.groupingFormatter2;
 
 var sigFormatter = IntlTests.sigFormatter;
 
+var options = IntlTests.options;
+
 var formatter = IntlTests.formatter;
 
 var segments = IntlTests.segments;
@@ -341,6 +343,7 @@ export {
   groupingFormatter1 ,
   groupingFormatter2 ,
   sigFormatter ,
+  options ,
   formatter ,
   segments ,
   date ,
