@@ -101,7 +101,6 @@ let sort = (arr, cmp) => {
 }
 
 @send external toString: array<'a> => string = "toString"
-@send external toLocaleString: array<'a> => string = "toLocaleString"
 
 @send external every: (array<'a>, 'a => bool) => bool = "every"
 @send external everyWithIndex: (array<'a>, ('a, int) => bool) => bool = "every"
