@@ -30,7 +30,7 @@ let fromInitializer: (~length: int, int => 'a) => array<'a>
 @val external isArray: 'a => bool = "Array.isArray"
 
 /**
-`length(array)` returns the `int` length (number of items) of the array.
+`length(array)` returns the length of (i.e. number of items in) the array.
 
 See [`Array.length`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length) on MDN.
 
@@ -74,7 +74,7 @@ Console.log(myArray) // [9, 9, 9, 9]
 external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
 
 /**
-`fillInPlaceToEnd` fills the entire provided `array` with the provided `value`, starting from the index provided to `start`.
+`fillInPlaceToEnd(array, value, ~start)` fills `array` with `value` from the `start` index.
 
 Beware this will *mutate* the array.
 
@@ -92,7 +92,7 @@ Console.log(myArray) // [1, 9, 9, 9]
 external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
 
 /**
-`fillInPlace` fills the entire provided `array` with the provided `value`, starting from the index provided to `start`, going to the index provided to `end`.
+`fillInPlace(array, value, ~start, ~end)` fills `array` with `value` from `start` to `end`.
 
 Beware this will *mutate* the array.
 
@@ -110,7 +110,7 @@ Console.log(myArray) // [1, 9, 9, 4]
 external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
 
 /**
-`pop(array)` pops off the last item in the array, and returns it.
+`pop(array)` removes the last item from `array` and returns it.
 
 Beware this will *mutate* the array.
 
@@ -128,7 +128,7 @@ Console.log(someArray) // ["hi"]. Notice last item is gone.
 external pop: array<'a> => option<'a> = "pop"
 
 /**
-`push(array, item)` pushes a new item to the end of the array.
+`push(array, item)` appends `item` to the end of `array`.
 
 Beware this will *mutate* the array.
 
@@ -312,7 +312,7 @@ Console.log(someArray) // ["hi", "hello", "yay", "wehoo"]
 external concatMany: (array<'a>, array<array<'a>>) => array<'a> = "concat"
 
 /**
-`flat(arrays)` flattens the provided arrays into a single array.
+`flat(arrays)` concatenates an array of arrays into a single array.
 
 See [`Array.flat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) on MDN.
 
@@ -376,7 +376,7 @@ let lastIndexOfOpt: (array<'a>, 'a) => option<int>
 @send external lastIndexOfFrom: (array<'a>, 'a, int) => int = "lastIndexOf"
 
 /**
-`slice(array, start, end)` creates a new array from the provided `array`, with all items from `array` starting from `start`, stopping _before_ `end` (`end` is not included).
+`slice(array, ~start, ~end)` creates a new array of items copied from `array` from `start` until (but not including) `end`.
 
 See [`Array.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) on MDN.
 
@@ -405,7 +405,7 @@ Console.log(myArray->Array.sliceToEnd(~start=1)) // [2, 3, 4]
 @send
 external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
 /**
-`copy(array)` makes a shallow copy of the provided `array`.
+`copy(array)` makes a copy of the array with the items in it, but does not make copies of the items themselves.
 
 ## Examples
 ```rescript
@@ -435,7 +435,7 @@ Console.log(array->Array.toString) // "1,2,3,4"
 external toString: array<'a> => string = "toString"
 
 /**
-`every(array, checker)` returns true if all items in `array` returns true when running the provided `checker` function.
+`every(array, predicate)` returns true if `predicate` returns true for all items in `array`.
 
 See [`Array.every`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every) on MDN.
 
@@ -692,7 +692,7 @@ let reduceRight: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
 let reduceRightWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
 
 /**
-`some(array, checker)` returns true if running the provided `checker` function on any element in `array` returns true.
+`some(array, predicate)` returns true if `predicate` returns true for any element in `array`.
 
 See [`Array.some`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) on MDN.
 
@@ -877,7 +877,7 @@ Console.log(array)
 let shuffleInPlace: array<'a> => unit
 
 /**
-`flatMap(array, mapper)` returns a new array with all items from `array` run through the provided `mapper` function, and arrays flattened one level.
+`flatMap(array, mapper)` returns a new array concatenating the arrays returned from running `mapper` on all items in `array`.
 
 ## Examples
 ```rescript

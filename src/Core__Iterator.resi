@@ -58,7 +58,7 @@ Console.log(mapKeysAsArray) // Logs ["someKey", "someKey2"] to the console.
 external toArray: t<'a> => array<'a> = "Array.from"
 
 /**
-Turns an iterator into an array of the remaining values, applying the provided mapper function on each item.
+`toArray(iterator)` turns `iterator` into an array of its remaining values, applying the provided mapper function on each item.
 Remember that each invocation of `next` of an iterator consumes a value. `Iterator.toArrayWithMapper` will consume all remaining values of the iterator and return them in an array to you.
 
 See [iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) on MDN.
