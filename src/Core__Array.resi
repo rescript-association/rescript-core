@@ -434,6 +434,8 @@ Console.log(array->Array.toString) // "1,2,3,4"
 @send
 external toString: array<'a> => string = "toString"
 
+@send external toLocaleString: array<'a> => string = "toLocaleString"
+
 /**
 `every(array, predicate)` returns true if `predicate` returns true for all items in `array`.
 
