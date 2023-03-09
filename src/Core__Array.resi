@@ -56,7 +56,7 @@ external copyWithinToEnd: (array<'a>, ~target: int, ~start: int) => array<'a> = 
 external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<'a> = "copyWithin"
 
 /**
-`fillAllInPlace(array, value)` fills the entire provided `array` with the provided `value`.
+`fillAllInPlace(array, value)` fills the entire `array` with `value`.
 
 Beware this will *mutate* the array.
 
@@ -146,7 +146,7 @@ Console.log(someArray) // ["hi", "hello", "yay"]
 external push: (array<'a>, 'a) => unit = "push"
 
 /**
-`pushMany(array, itemsArray)` pushes many new items to the end of the array.
+`pushMany(array, itemsArray)` appends many new items to the end of the array.
 
 Beware this will *mutate* the array.
 
@@ -216,7 +216,7 @@ Console.log(sortedArray) // [1, 2, 3]
 let sort: (array<'a>, ('a, 'a) => int) => array<'a>
 
 /**
-`sortInPlace(array, comparator)` sorts the provided `array` using the provided `comparator` function.
+`sortInPlace(array, comparator)` sorts `array` using the `comparator` function.
 
 Beware this will *mutate* the array.
 
@@ -274,7 +274,7 @@ Console.log(someArray) // ["yay", "wehoo", "hi", "hello"]
 external unshiftMany: (array<'a>, array<'a>) => unit = "unshift"
 
 /**
-`concat(array1, array2)` concatenates two arrays, creating a new array.
+`concat(array1, array2)` concatenates the two arrays, creating a new array.
 
 See [`Array.concat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) on MDN.
 
@@ -370,7 +370,19 @@ Console.log([{"language": "ReScript"}]->Array.indexOfOpt({"language": "ReScript"
 */
 let indexOfOpt: (array<'a>, 'a) => option<int>
 @send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
-@send external joinWith: (array<'a>, string) => string = "join"
+
+/**
+`joinWith(array, separator)` produces a string where all items of `array` are printed, separated by `separator`. Under the hood this will run JavaScript's `toString` on all the array items.
+
+## Examples
+```rescript
+let array = [1, 2, 3]
+
+Console.log(array->Array.joinWith(" -- ")) // 1 -- 2 -- 3
+```
+*/
+@send
+external joinWith: (array<'a>, string) => string = "join"
 @send external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
 let lastIndexOfOpt: (array<'a>, 'a) => option<int>
 @send external lastIndexOfFrom: (array<'a>, 'a, int) => int = "lastIndexOf"
@@ -391,7 +403,7 @@ Console.log(myArray->Array.slice(~start=1, ~end=3)) // [2, 3]
 external slice: (array<'a>, ~start: int, ~end: int) => array<'a> = "slice"
 
 /**
-`sliceToEnd(array, start)` creates a new array from the provided `array`, with all items from `array` starting from `start`.
+`sliceToEnd(array, start)` creates a new array from `array`, with all items from `array` starting from `start`.
 
 See [`Array.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) on MDN.
 
@@ -420,7 +432,7 @@ Console.log(myArray === copyOfMyArray) // false
 external copy: array<'a> => array<'a> = "slice"
 
 /**
-`toString(array)` stringifies the provided `array`, by running `toString` on all of the array elements and joining them with ",".
+`toString(array)` stringifies `array` by running `toString` on all of the array elements and joining them with ",".
 
 See [`Array.toString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString) on MDN.
 
