@@ -777,7 +777,19 @@ Console.log(array->Array.getUnsafe(3)) // Fails and raises exception
 @raises(Not_found)
 external getUnsafe: (array<'a>, int) => 'a = "%array_unsafe_get"
 
-// TODO: Docs. Is there any practical difference from `set`?
+/**
+`setUnsafe(array, index, item)` sets the provided `item` at `index` of `array`.
+
+Beware this will *mutate* the array, and is *unsafe*.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+array->Array.setUnsafe(1, "Hello")
+
+Console.log(array[1]) // "Hello"
+```
+*/
 external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 
 /**
@@ -851,7 +863,7 @@ let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
 let keepSome: array<option<'a>> => array<'a>
 
 /**
-`shuffle(array)` returns a new array with all items in `array` shuffled.
+`shuffle(array)` returns a new array with all items in `array` in a random order.
 
 ## Examples
 ```rescript
@@ -864,7 +876,7 @@ Console.log(shuffledArray)
 let shuffle: array<'a> => array<'a>
 
 /**
-`shuffleInPlace(array)` shuffles all items in `array` in place.
+`shuffleInPlace(array)` randomizes the position of all items in `array`.
 
 Beware this will *mutate* the array.
 
