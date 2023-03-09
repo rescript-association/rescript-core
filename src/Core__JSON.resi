@@ -70,7 +70,7 @@ try {
 
 - Raises a SyntaxError if the string isn't valid JSON.
 */
-@raises
+@raises(Exn.Error)
 @val
 external parseExnWithReviver: (string, (string, t) => t) => t = "JSON.parse"
 
