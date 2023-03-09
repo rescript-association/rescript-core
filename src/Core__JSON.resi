@@ -496,7 +496,7 @@ module Classify: {
     | Array(array<t>)
 
   /**
-  Returns the JavaScript type of any value.
+  Returns the JSON type of any value.
 
   ## Examples
   ```rescript
