@@ -19,6 +19,14 @@
 - Change `Float.parseFloat` signature. Now accepts only string. https://github.com/rescript-association/rescript-core/pull/54
 - Add `getExn`, `getUnsafe`, `getWithDefault`, `map`, `mapWithDefault` and `flatMap` to `Nullable`. https://github.com/rescript-association/rescript-core/pull/67
 - Add `getExn`, `getUnsafe`, `getWithDefault`, `map`, `mapWithDefault` and `flatMap` to `Null`. https://github.com/rescript-association/rescript-core/pull/73
+- Add `make`, `fromInitializer`, `findMap`, `keepSome`, `reduceRight` and `reduceRightWithIndex`. https://github.com/rescript-association/rescript-core/pull/49
+- Remove `reduceReverse` in favor of `reduceRight`. https://github.com/rescript-association/rescript-core/pull/49
+- Fixed type signatures of `reduce` and `reduceWithIndex`. https://github.com/rescript-association/rescript-core/pull/49
+- Add `panic`/`Error.panic`. https://github.com/rescript-association/rescript-core/pull/72
+- The globally available `null` value now originates from `Nullable` and not `Null`, just like the globally available `undefined` value does. https://github.com/rescript-association/rescript-core/pull/88
+- Add `Int.range` and `Int.rangeWithOptions`, https://github.com/rescript-association/rescript-core/pull/52
+- Remove `Array.fromIterator` and `Array.fromIteratorWithMap`. The same functions exist in `Iterator` as `Iterator.fromArray` and `Iterator.fromArrayWithMapper`. https://github.com/rescript-association/rescript-core/pull/78
+- Remove unsafe `Array.from` and `Array.fromWithMap`. https://github.com/rescript-association/rescript-core/pull/78
 
 ### Documentation
 
@@ -32,3 +40,5 @@
 - Docstrings for `RegExp`. https://github.com/rescript-association/rescript-core/pull/47
 - Docstrings for `Date`. https://github.com/rescript-association/rescript-core/pull/61
 - Docstrings for `Float`. https://github.com/rescript-association/rescript-core/pull/54
+- Docstrings for `String`. https://github.com/rescript-association/rescript-core/pull/27
+- Docstrings from `Array`. https://github.com/rescript-association/rescript-core/pull/78

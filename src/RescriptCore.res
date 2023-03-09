@@ -47,7 +47,7 @@ module Intl = Core__Intl
 @val external document: Dom.document = "document"
 @val external globalThis: {..} = "globalThis"
 
-external null: Core__Null.t<'a> = "#null"
+external null: Core__Nullable.t<'a> = "#null"
 external undefined: Core__Nullable.t<'a> = "#undefined"
 external typeof: 'a => Core__Type.t = "#typeof"
 
@@ -65,3 +65,5 @@ type null<+'a> = Js.null<'a>
 type undefined<+'a> = Js.undefined<'a>
 
 type nullable<+'a> = Js.nullable<'a>
+
+let panic = Core__Error.panic

@@ -35,3 +35,29 @@ let fromString = (~radix=?, x) => {
 }
 
 external mod: (int, int) => int = "%modint"
+
+type rangeOptions = {step?: int, inclusive?: bool}
+let rangeWithOptions = (start, end, options) => {
+  let isInverted = start > end
+
+  let step = switch options.step {
+  | None => isInverted ? -1 : 1
+  | Some(0) if start !== end =>
+    Core__Error.raise(Core__Error.RangeError.make("Incorrect range arguments"))
+  | Some(n) => n
+  }
+
+  let length = if isInverted === (step >= 0) {
+    0 // infinite because step goes in opposite direction of end
+  } else if step == 0 {
+    options.inclusive === Some(true) ? 1 : 0
+  } else {
+    let range = isInverted ? start - end : end - start
+    let range = options.inclusive === Some(true) ? range + 1 : range
+    ceil(float(range) /. float(abs(step)))->Core__Float.toInt
+  }
+
+  Core__Array.fromInitializer(~length, i => start + i * step)
+}
+
+let range = (start, end) => rangeWithOptions(start, end, {})
