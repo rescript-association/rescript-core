@@ -30,7 +30,7 @@ try {
 
 - Raises a SyntaxError (Exn.t) if the string isn't valid JSON.
 */
-@raises
+@raises(Exn.Error)
 @val
 external parseExn: string => t = "JSON.parse"
 
