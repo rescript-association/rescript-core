@@ -30,7 +30,7 @@ try {
 
 - Raises a SyntaxError (Exn.t) if the string isn't valid JSON.
 */
-@raises(Exn.Error)
+@raises(Exn.t)
 @val
 external parseExn: string => t = "JSON.parse"
 
@@ -70,7 +70,7 @@ try {
 
 - Raises a SyntaxError if the string isn't valid JSON.
 */
-@raises(Exn.Error)
+@raises(Exn.t)
 @val
 external parseExnWithReviver: (string, (string, t) => t) => t = "JSON.parse"
 
@@ -270,7 +270,7 @@ BigInt.fromInt(0)->JSON.stringifyAny
 - Raises a TypeError if the value contains circular references.
 - Raises a TypeError if the value contains `BigInt`s.
 */
-@raises(Exn.Error)
+@raises(Exn.t)
 @val
 external stringifyAny: 'a => option<string> = "JSON.stringify"
 
@@ -309,7 +309,7 @@ BigInt.fromInt(0)->JSON.stringifyAny
 - Raises a TypeError if the value contains circular references.
 - Raises a TypeError if the value contains `BigInt`s.
 */
-@raises(Exn.Error)
+@raises(Exn.t)
 @val
 external stringifyAnyWithIndent: ('a, @as(json`null`) _, int) => option<string> = "JSON.stringify"
 
