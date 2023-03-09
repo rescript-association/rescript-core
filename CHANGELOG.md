@@ -25,6 +25,8 @@
 - Add `panic`/`Error.panic`. https://github.com/rescript-association/rescript-core/pull/72
 - The globally available `null` value now originates from `Nullable` and not `Null`, just like the globally available `undefined` value does. https://github.com/rescript-association/rescript-core/pull/88
 - Add `Int.range` and `Int.rangeWithOptions`, https://github.com/rescript-association/rescript-core/pull/52
+- Remove `Array.fromIterator` and `Array.fromIteratorWithMap`. The same functions exist in `Iterator` as `Iterator.fromArray` and `Iterator.fromArrayWithMapper`. https://github.com/rescript-association/rescript-core/pull/78
+- Remove unsafe `Array.from` and `Array.fromWithMap`. https://github.com/rescript-association/rescript-core/pull/78
 
 ### Documentation
 

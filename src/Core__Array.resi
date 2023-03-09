@@ -1,10 +1,9 @@
-@val external from: 'a => array<'b> = "Array.from"
-@val external fromWithMap: ('a, 'b => 'c) => array<'c> = "Array.from"
+// TODO: Docs
 @val external fromArrayLike: Js.Array2.array_like<'a> => array<'a> = "Array.from"
+
+// TODO: Docs
 @val
 external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b> = "Array.from"
-@val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
-@val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
 
 /**
   `make(~length, init)`
@@ -29,55 +28,636 @@ let make: (~length: int, 'a) => array<'a>
 let fromInitializer: (~length: int, int => 'a) => array<'a>
 
 @val external isArray: 'a => bool = "Array.isArray"
-@get external length: array<'a> => int = "length"
+
+/**
+`length(array)` returns the length of (i.e. number of items in) the array.
+
+See [`Array.length`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+
+Console.log(someArray->Array.length) // 2
+```
+*/
+@get
+external length: array<'a> => int = "length"
+
+// TODO: Docs
 @send external copyAllWithin: (array<'a>, ~target: int) => array<'a> = "copyWithin"
+
+// TODO: Docs
 @send
 external copyWithinToEnd: (array<'a>, ~target: int, ~start: int) => array<'a> = "copyWithin"
+
+// TODO: Docs
 @send
 external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<'a> = "copyWithin"
-@send external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
-@send external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
-@send external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
-@send external pop: array<'a> => option<'a> = "pop"
-@send external push: (array<'a>, 'a) => unit = "push"
-@variadic @send external pushMany: (array<'a>, array<'a>) => unit = "push"
-@send external reverseInPlace: array<'a> => unit = "reverse"
-@send external shift: array<'a> => option<'a> = "shift"
+
+/**
+`fillAllInPlace(array, value)` fills the entire `array` with `value`.
+
+Beware this will *mutate* the array.
+
+See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) on MDN.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3, 4]
+myArray->Array.fillAllInPlace(9)
+
+Console.log(myArray) // [9, 9, 9, 9]
+```
+*/
+@send
+external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
+
+/**
+`fillInPlaceToEnd(array, value, ~start)` fills `array` with `value` from the `start` index.
+
+Beware this will *mutate* the array.
+
+See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) on MDN.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3, 4]
+myArray->Array.fillInPlaceToEnd(9, ~start=1)
+
+Console.log(myArray) // [1, 9, 9, 9]
+```
+*/
+@send
+external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
+
+/**
+`fillInPlace(array, value, ~start, ~end)` fills `array` with `value` from `start` to `end`.
+
+Beware this will *mutate* the array.
+
+See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) on MDN.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3, 4]
+myArray->Array.fillInPlace(9, ~start=1, ~end=2)
+
+Console.log(myArray) // [1, 9, 9, 4]
+```
+*/
+@send
+external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
+
+/**
+`pop(array)` removes the last item from `array` and returns it.
+
+Beware this will *mutate* the array.
+
+See [`Array.pop`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+let lastItem = someArray->Array.pop // "hello"
+
+Console.log(someArray) // ["hi"]. Notice last item is gone.
+```
+*/
+@send
+external pop: array<'a> => option<'a> = "pop"
+
+/**
+`push(array, item)` appends `item` to the end of `array`.
+
+Beware this will *mutate* the array.
+
+See [`Array.push`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+someArray->Array.push("yay")
+
+Console.log(someArray) // ["hi", "hello", "yay"]
+```
+*/
+@send
+external push: (array<'a>, 'a) => unit = "push"
+
+/**
+`pushMany(array, itemsArray)` appends many new items to the end of the array.
+
+Beware this will *mutate* the array.
+
+See [`Array.push`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+someArray->Array.pushMany(["yay", "wehoo"])
+
+Console.log(someArray) // ["hi", "hello", "yay", "wehoo"]
+```
+*/
+@variadic
+@send
+external pushMany: (array<'a>, array<'a>) => unit = "push"
+
+/**
+`reverseInPlace(array)` reverses the order of the items in the array.
+
+Beware this will *mutate* the array.
+
+See [`Array.reverse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+someArray->Array.reverseInPlace
+
+Console.log(someArray) // ["hello", "h1"]
+```
+*/
+@send
+external reverseInPlace: array<'a> => unit = "reverse"
+
+/**
+`shift(array)` removes the first item in the array, and returns it.
+
+Beware this will *mutate* the array.
+
+See [`Array.shift`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+let lastItem = someArray->Array.shift // "hi"
+
+Console.log(someArray) // ["hello"]. Notice first item is gone.
+```
+*/
+@send
+external shift: array<'a> => option<'a> = "shift"
+
+/**
+`sort(array, comparator)` returns a new, sorted array from `array`, using the provided `comparator` function.
+
+See [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) on MDN.
+
+## Examples
+```rescript
+let someArray = [3, 2, 1]
+let sortedArray = someArray->Array.sort((a, b) => a > b ? 1 : -1)
+
+Console.log(sortedArray) // [1, 2, 3]
+```
+*/
 let sort: (array<'a>, ('a, 'a) => int) => array<'a>
-@send external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
+
+/**
+`sortInPlace(array, comparator)` sorts `array` using the `comparator` function.
+
+Beware this will *mutate* the array.
+
+See [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) on MDN.
+
+## Examples
+```rescript
+let someArray = [3, 2, 1]
+someArray->Array.sortInPlace((a, b) => a > b ? 1 : -1)
+
+Console.log(someArray) // [1, 2, 3]
+```
+*/
+@send
+external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
 @variadic @send
 external spliceInPlace: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit =
   "splice"
-@send external unshift: (array<'a>, 'a) => unit = "unshift"
-@variadic @send external unshiftMany: (array<'a>, array<'a>) => unit = "unshift"
-@send external concat: (array<'a>, array<'a>) => array<'a> = "concat"
-@variadic @send external concatMany: (array<'a>, array<array<'a>>) => array<'a> = "concat"
-@send external flat: array<array<'a>> => array<'a> = "flat"
-@send external includes: (array<'a>, 'a) => bool = "includes"
-@send external indexOf: (array<'a>, 'a) => int = "indexOf"
+
+/**
+`unshift(array, item)` inserts a new item at the start of the array.
+
+Beware this will *mutate* the array.
+
+See [`Array.unshift`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+someArray->Array.unshift("yay")
+
+Console.log(someArray) // ["yay", "hi", "hello"]
+```
+*/
+@send
+external unshift: (array<'a>, 'a) => unit = "unshift"
+
+/**
+`unshiftMany(array, itemsArray)` inserts many new items to the start of the array.
+
+Beware this will *mutate* the array.
+
+See [`Array.push`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+someArray->Array.unshiftMany(["yay", "wehoo"])
+
+Console.log(someArray) // ["yay", "wehoo", "hi", "hello"]
+```
+*/
+@variadic
+@send
+external unshiftMany: (array<'a>, array<'a>) => unit = "unshift"
+
+/**
+`concat(array1, array2)` concatenates the two arrays, creating a new array.
+
+See [`Array.concat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) on MDN.
+
+## Examples
+```rescript
+let array1 = ["hi", "hello"]
+let array2 = ["yay", "wehoo"]
+
+let someArray = array1->Array.concat(array2)
+
+Console.log(someArray) // ["hi", "hello", "yay", "wehoo"]
+```
+*/
+@send
+external concat: (array<'a>, array<'a>) => array<'a> = "concat"
+
+/**
+`concatMany(array1, arrays)` concatenates array1 with several other arrays, creating a new array.
+
+See [`Array.concat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) on MDN.
+
+## Examples
+```rescript
+let array1 = ["hi", "hello"]
+let array2 = ["yay"]
+let array3 = ["wehoo"]
+
+let someArray = array1->Array.concatMany([array2, array3])
+
+Console.log(someArray) // ["hi", "hello", "yay", "wehoo"]
+```
+*/
+@variadic
+@send
+external concatMany: (array<'a>, array<array<'a>>) => array<'a> = "concat"
+
+/**
+`flat(arrays)` concatenates an array of arrays into a single array.
+
+See [`Array.flat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) on MDN.
+
+## Examples
+```rescript
+Console.log([[1], [2], [3, 4]]->Array.flat) // [1, 2, 3, 4]
+```
+*/
+@send
+external flat: array<array<'a>> => array<'a> = "flat"
+
+/**
+`includes(array, item)` checks whether `array` includes `item`, by doing a [strict check for equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality).
+
+See [`Array.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) on MDN.
+
+## Examples
+```rescript
+Console.log([1, 2]->Array.includes(1)) // true
+Console.log([1, 2]->Array.includes(3)) // false
+Console.log([{"language": "ReScript"}]->Array.includes({"language": "ReScript"})) // false, because of strict equality
+```
+*/
+@send
+external includes: (array<'a>, 'a) => bool = "includes"
+
+/**
+`indexOf(array, item)` returns the index of the provided `item` in `array`. Uses [strict check for equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) when comparing items.
+
+Returns `-1` if the item doesn not exist. Check out `Array.indexOfOpt` for a version that returns `None` instead of `-1` if the item does not exist.
+
+See [`Array.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) on MDN.
+
+## Examples
+```rescript
+Console.log([1, 2]->Array.indexOf(2)) // 1
+Console.log([1, 2]->Array.indexOf(3)) // -1
+Console.log([{"language": "ReScript"}]->Array.indexOf({"language": "ReScript"})) // -1, because of strict equality
+```
+*/
+@send
+external indexOf: (array<'a>, 'a) => int = "indexOf"
+
+/**
+`indexOfOpt(array, item)` returns an option of the index of the provided `item` in `array`. Uses [strict check for equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) when comparing items.
+
+See [`Array.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) on MDN.
+
+## Examples
+```rescript
+Console.log([1, 2]->Array.indexOfOpt(2)) // Some(1)
+Console.log([1, 2]->Array.indexOfOpt(3)) // None
+Console.log([{"language": "ReScript"}]->Array.indexOfOpt({"language": "ReScript"})) // None, because of strict equality
+```
+*/
 let indexOfOpt: (array<'a>, 'a) => option<int>
 @send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
-@send external joinWith: (array<'a>, string) => string = "join"
+
+/**
+`joinWith(array, separator)` produces a string where all items of `array` are printed, separated by `separator`. Under the hood this will run JavaScript's `toString` on all the array items.
+
+## Examples
+```rescript
+let array = [1, 2, 3]
+
+Console.log(array->Array.joinWith(" -- ")) // 1 -- 2 -- 3
+```
+*/
+@send
+external joinWith: (array<'a>, string) => string = "join"
 @send external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
 let lastIndexOfOpt: (array<'a>, 'a) => option<int>
 @send external lastIndexOfFrom: (array<'a>, 'a, int) => int = "lastIndexOf"
-@send external slice: (array<'a>, ~start: int, ~end: int) => array<'a> = "slice"
-@send external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
-@send external copy: array<'a> => array<'a> = "slice"
-@send external toString: array<'a> => string = "toString"
+
+/**
+`slice(array, ~start, ~end)` creates a new array of items copied from `array` from `start` until (but not including) `end`.
+
+See [`Array.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) on MDN.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3, 4]
+
+Console.log(myArray->Array.slice(~start=1, ~end=3)) // [2, 3]
+```
+*/
+@send
+external slice: (array<'a>, ~start: int, ~end: int) => array<'a> = "slice"
+
+/**
+`sliceToEnd(array, start)` creates a new array from `array`, with all items from `array` starting from `start`.
+
+See [`Array.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) on MDN.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3, 4]
+
+Console.log(myArray->Array.sliceToEnd(~start=1)) // [2, 3, 4]
+```
+*/
+@send
+external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
+/**
+`copy(array)` makes a copy of the array with the items in it, but does not make copies of the items themselves.
+
+## Examples
+```rescript
+let myArray = [1, 2, 3]
+let copyOfMyArray = myArray->Array.copy
+
+Console.log(copyOfMyArray) // [1, 2, 3]
+Console.log(myArray === copyOfMyArray) // false
+```
+*/
+@send
+external copy: array<'a> => array<'a> = "slice"
+
+/**
+`toString(array)` stringifies `array` by running `toString` on all of the array elements and joining them with ",".
+
+See [`Array.toString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString) on MDN.
+
+## Examples
+```rescript
+let array = [1, 2, 3, 4]
+
+Console.log(array->Array.toString) // "1,2,3,4"
+```
+*/
+@send
+external toString: array<'a> => string = "toString"
+
 @send external toLocaleString: array<'a> => string = "toLocaleString"
-@send external every: (array<'a>, 'a => bool) => bool = "every"
-@send external everyWithIndex: (array<'a>, ('a, int) => bool) => bool = "every"
-@send external filter: (array<'a>, 'a => bool) => array<'a> = "filter"
-@send external filterWithIndex: (array<'a>, ('a, int) => bool) => array<'a> = "filter"
-@send external find: (array<'a>, 'a => bool) => option<'a> = "find"
-@send external findWithIndex: (array<'a>, ('a, int) => bool) => option<'a> = "find"
-@send external findIndex: (array<'a>, 'a => bool) => int = "findIndex"
-@send external findIndexWithIndex: (array<'a>, ('a, int) => bool) => int = "findIndex"
-@send external forEach: (array<'a>, 'a => unit) => unit = "forEach"
-@send external forEachWithIndex: (array<'a>, ('a, int) => unit) => unit = "forEach"
-@send external map: (array<'a>, 'a => 'b) => array<'b> = "map"
-@send external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
+
+/**
+`every(array, predicate)` returns true if `predicate` returns true for all items in `array`.
+
+See [`Array.every`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every) on MDN.
+
+## Examples
+```rescript
+let array = [1, 2, 3, 4]
+
+Console.log(array->Array.every(num => num > 4)) // true
+Console.log(array->Array.every(num => num === 1)) // false
+```
+*/
+@send
+external every: (array<'a>, 'a => bool) => bool = "every"
+
+/**
+`everyWithIndex(array, checker)` returns true if all items in `array` returns true when running the provided `checker` function.
+
+See [`Array.every`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every) on MDN.
+
+## Examples
+```rescript
+let array = [1, 2, 3, 4]
+
+Console.log(array->Array.everyWithIndex((num, index) => index < 2 && num <= 2)) // true
+Console.log(array->Array.everyWithIndex((num, index) => index < 2 && num >= 2)) // false
+```
+*/
+@send
+external everyWithIndex: (array<'a>, ('a, int) => bool) => bool = "every"
+
+/**
+`filter(array, checker)` returns a new array containing all elements from `array` for which the provided `checker` function returns true.
+
+See [`Array.filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) on MDN.
+
+## Examples
+```rescript
+let array = [1, 2, 3, 4]
+
+Console.log(array->Array.filter(num => num > 2)) // [3, 4]
+```
+*/
+@send
+external filter: (array<'a>, 'a => bool) => array<'a> = "filter"
+
+/**
+`filterWithIndex(array, checker)` returns a new array containing all elements from `array` for which the provided `checker` function returns true.
+
+See [`Array.filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) on MDN.
+
+## Examples
+```rescript
+let array = [1, 2, 3, 4]
+
+Console.log(array->Array.filterWithIndex((num, index) => index === 0 || num === 2)) // [1, 2]
+```
+*/
+@send
+external filterWithIndex: (array<'a>, ('a, int) => bool) => array<'a> = "filter"
+
+/**
+`find(array, checker)` returns the first element of `array` where the provided `checker` function returns true.
+
+See [`Array.find`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) on MDN.
+
+## Examples
+```rescript
+type languages = ReScript | TypeScript | JavaScript
+
+let array = [ReScript, TypeScript, JavaScript]
+
+switch array->Array.find(item => item == ReScript) {
+| None => Console.log("No item...")
+| Some(_) => Console.log("Yay, ReScript!")
+}
+```
+*/
+@send
+external find: (array<'a>, 'a => bool) => option<'a> = "find"
+
+/**
+`findWithIndex(array, checker)` returns the first element of `array` where the provided `checker` function returns true.
+
+See [`Array.find`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) on MDN.
+
+## Examples
+```rescript
+type languages = ReScript | TypeScript | JavaScript
+
+let array = [TypeScript, JavaScript, ReScript]
+
+switch array->Array.findWithIndex((item, index) => index > 1 && item == ReScript) {
+| None => Console.log("No item...")
+| Some(_) => Console.log("Yay, ReScript exists in a later position!")
+}
+```
+*/
+@send
+external findWithIndex: (array<'a>, ('a, int) => bool) => option<'a> = "find"
+
+/**
+`findIndex(array, checker)` returns the index of the first element of `array` where the provided `checker` function returns true.
+
+Returns `-1` if the item does not exist. Consider using `Array.findIndexOpt` if you want an option instead (where `-1` would be `None`).
+
+See [`Array.findIndex`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) on MDN.
+
+## Examples
+```rescript
+type languages = ReScript | TypeScript | JavaScript
+
+let array = [ReScript, JavaScript]
+
+Console.log(array->Array.findIndex(item => item == ReScript)) // 0
+Console.log(array->Array.findIndex(item => item == TypeScript)) // -1
+```
+*/
+@send
+external findIndex: (array<'a>, 'a => bool) => int = "findIndex"
+
+/**
+`findIndexWithIndex(array, checker)` returns the index of the first element of `array` where the provided `checker` function returns true.
+
+Returns `-1` if the item does not exist. Consider using `Array.findIndexOpt` if you want an option instead (where `-1` would be `None`).
+
+See [`Array.findIndex`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) on MDN.
+
+## Examples
+```rescript
+type languages = ReScript | TypeScript | JavaScript
+
+let array = [ReScript, JavaScript]
+
+Console.log(array->Array.findIndexWithIndex((item, index) => index === 0 && item == ReScript)) // 0
+Console.log(array->Array.findIndex((item, index) => index === 0 && item == TypeScript)) // -1
+```
+*/
+@send
+external findIndexWithIndex: (array<'a>, ('a, int) => bool) => int = "findIndex"
+
+/**
+`forEach(array, fn)` runs the provided `fn` on every element of `array`.
+
+See [`Array.forEach`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) on MDN.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+
+array->Array.forEach(item => {
+  Console.log(item)
+})
+```
+*/
+@send
+external forEach: (array<'a>, 'a => unit) => unit = "forEach"
+
+/**
+`forEachWithIndex(array, fn)` runs the provided `fn` on every element of `array`.
+
+See [`Array.forEach`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) on MDN.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+
+array->Array.forEachWithIndex((item, index) => {
+  Console.log("At item " ++ Int.toString(index) ++ ": " ++ item)
+})
+```
+*/
+@send
+external forEachWithIndex: (array<'a>, ('a, int) => unit) => unit = "forEach"
+
+/**
+`map(array, fn)` returns a new array with all elements from `array`, each element transformed using the provided `fn`.
+
+See [`Array.map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) on MDN.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+let mappedArray = array->Array.map(greeting => greeting ++ " to you")
+
+Console.log(mappedArray) // ["Hello to you", "Hi to you", "Good bye to you"]
+```
+*/
+@send
+external map: (array<'a>, 'a => 'b) => array<'b> = "map"
+
+/**
+`mapWithIndex(array, fn)` returns a new array with all elements from `array`, each element transformed using the provided `fn`.
+
+See [`Array.map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) on MDN.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+let mappedArray =
+  array->Array.mapWithIndex((greeting, index) =>
+    greeting ++ " at position " ++ Int.toString(index)
+  )
+
+Console.log(mappedArray) // ["Hello at position 0", "Hi at position 1", "Good bye at position 2"]
+```
+*/
+@send
+external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
 /**
   `reduce(xs, f, init)`
@@ -125,17 +705,161 @@ let reduceRight: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
 */
 let reduceRightWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
 
-@send external some: (array<'a>, 'a => bool) => bool = "some"
-@send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"
-@get_index external get: (array<'a>, int) => option<'a> = ""
-@set_index external set: (array<'a>, int, 'a) => unit = ""
+/**
+`some(array, predicate)` returns true if `predicate` returns true for any element in `array`.
+
+See [`Array.some`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) on MDN.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+
+Console.log(array->Array.some(greeting => greeting === "Hello")) // true
+```
+*/
+@send
+external some: (array<'a>, 'a => bool) => bool = "some"
+
+/**
+`someWithIndex(array, checker)` returns true if running the provided `checker` function on any element in `array` returns true.
+
+See [`Array.some`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) on MDN.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+
+Console.log(array->Array.someWithIndex((greeting, index) => greeting === "Hello" && index === 0)) // true
+```
+*/
+@send
+external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"
+
+/**
+`get(array, index)` returns the element at `index` of `array`.
+
+Returns `None` if the index does not exist in the array. Equivalent to doing `array[index]` in JavaScript.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+
+array->Array.get(0) == Some("Hello") // true
+```
+*/
+@get_index
+external get: (array<'a>, int) => option<'a> = ""
+
+/**
+`set(array, index, item)` sets the provided `item` at `index` of `array`.
+
+Beware this will *mutate* the array.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+array->Array.set(1, "Hello")
+
+Console.log(array[1]) // "Hello"
+```
+*/
+@set_index
+external set: (array<'a>, int, 'a) => unit = ""
 @get_index external getSymbol: (array<'a>, Core__Symbol.t) => option<'b> = ""
 @get_index external getSymbolUnsafe: (array<'a>, Core__Symbol.t) => 'b = ""
 @set_index external setSymbol: (array<'a>, Core__Symbol.t, 'b) => unit = ""
+
+/**
+`getUnsafe(array, index)` returns the element at `index` of `array`.
+
+This is _unsafe_, meaning it will fail with an exception if `index` does not exist in `array`.
+
+## Exceptions
+
+- `Not_found`: If the provided `index` does not exist in `array`.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+
+Console.log(array->Array.getUnsafe(0)) // "Hello"
+Console.log(array->Array.getUnsafe(3)) // Fails and raises exception
+```
+*/
+@raises(Not_found)
 external getUnsafe: (array<'a>, int) => 'a = "%array_unsafe_get"
+
+/**
+`setUnsafe(array, index, item)` sets the provided `item` at `index` of `array`.
+
+Beware this will *mutate* the array, and is *unsafe*.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+array->Array.setUnsafe(1, "Hello")
+
+Console.log(array[1]) // "Hello"
+```
+*/
 external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
+
+/**
+`findIndexOpt(array, checker)` returns the index of the first element of `array` where the provided `checker` function returns true. 
+
+Returns `None` if no item matches.
+
+See [`Array.findIndex`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) on MDN.
+
+## Examples
+```rescript
+type languages = ReScript | TypeScript | JavaScript
+
+let array = [ReScript, TypeScript, JavaScript]
+
+switch array->Array.findIndexOpt(item => item == ReScript) {
+| None => Console.log("Ahh, no ReScript...")
+| Some(index) => Console.log("Yay, ReScript at index " ++ Int.toString(index))
+}
+```
+*/
 let findIndexOpt: (array<'a>, 'a => bool) => option<int>
+
+/**
+`reverse(array)` creates a new array with all items from `array` in reversed order.
+
+See [`Array.reverse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) on MDN.
+
+## Examples
+```rescript
+let someArray = ["hi", "hello"]
+let reversed = someArray->Array.reverse
+
+Console.log(reversed) // ["hello", "h1"]
+```
+*/
 let reverse: array<'a> => array<'a>
+
+/**
+`get(array, index)` returns the element at `index` of `array`.
+
+Returns `None` if the index does not exist in the array. Equivalent to doing `array[index]` in JavaScript.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+
+Console.log(
+  array->Array.filterMap(item =>
+    switch item {
+    | "Hello" => Some(item->String.length)
+    | _ => None
+    }
+  ),
+)
+// [5]
+```
+*/
 let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
 
 /**
@@ -149,9 +873,58 @@ let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
   ```
 */
 let keepSome: array<option<'a>> => array<'a>
+
+/**
+`shuffle(array)` returns a new array with all items in `array` in a random order.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+let shuffledArray = array->Array.shuffle
+
+Console.log(shuffledArray)
+```
+*/
 let shuffle: array<'a> => array<'a>
+
+/**
+`shuffleInPlace(array)` randomizes the position of all items in `array`.
+
+Beware this will *mutate* the array.
+
+## Examples
+```rescript
+let array = ["Hello", "Hi", "Good bye"]
+array->Array.shuffle
+
+Console.log(array)
+```
+*/
 let shuffleInPlace: array<'a> => unit
-@send external flatMap: (array<'a>, 'a => array<'b>) => array<'b> = "flatMap"
+
+/**
+`flatMap(array, mapper)` returns a new array concatenating the arrays returned from running `mapper` on all items in `array`.
+
+## Examples
+```rescript
+type language = ReScript | TypeScript | JavaScript
+
+let array = [ReScript, TypeScript, JavaScript]
+
+Console.log(
+  array->Array.flatMap(item =>
+    switch item {
+    | ReScript => [1, 2, 3]
+    | TypeScript => [4, 5, 6]
+    | JavaScript => [7, 8, 9]
+    }
+  ),
+)
+// [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+*/
+@send
+external flatMap: (array<'a>, 'a => array<'b>) => array<'b> = "flatMap"
 
 /**
   `findMap(arr, f)`
