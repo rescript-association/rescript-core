@@ -309,7 +309,7 @@ BigInt.fromInt(0)->JSON.stringifyAny
 - Raises a TypeError if the value contains circular references.
 - Raises a TypeError if the value contains `BigInt`s.
 */
-@raises
+@raises(Exn.Error)
 @val
 external stringifyAnyWithIndent: ('a, @as(json`null`) _, int) => option<string> = "JSON.stringify"
 
