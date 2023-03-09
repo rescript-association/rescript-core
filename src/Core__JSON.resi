@@ -16,7 +16,7 @@ It returns a JSON type.
 ## Examples
 ```rescript
 try {
-  JSON.parseExn(`{"foo":"bar","hello":"world"}`)
+  let _ = JSON.parseExn(`{"foo":"bar","hello":"world"}`)
   // { foo: 'bar', hello: 'world' }
 
   JSON.parseExn("")
