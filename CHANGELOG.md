@@ -2,6 +2,8 @@
 
 ## main
 
+## 0.2.0
+
 ### API changes
 
 - Change `Map.set` to not return self, to indicate that it's mutable. https://github.com/rescript-association/rescript-core/pull/34

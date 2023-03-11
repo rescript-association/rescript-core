@@ -1,13 +1,15 @@
 {
   "name": "@rescript/core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "clean": "rescript clean",
     "build": "rescript",
     "watch": "rescript build -w",
     "test": "node test/TestSuite.mjs && node test/TempTests.mjs"
   },
-  "keywords": ["rescript"],
+  "keywords": [
+    "rescript"
+  ],
   "homepage": "https://github.com/rescript-association/rescript-core",
   "author": "ReScript Team",
   "license": "MIT",
