@@ -1,5 +1,7 @@
 open RescriptCore
 
+include IntlTests
+
 Console.info("")
 Console.info("Array")
 Console.info("---")
@@ -40,17 +42,6 @@ Console.log(10.2->Float.toFixedWithPrecision(~digits=2))
 Console.log(10->Int.toFixedWithPrecision(~digits=2))
 Console.log("0"->Int.fromString)
 Console.log("0.1"->Float.fromString)
-
-Console.info("")
-Console.info("Intl")
-Console.info("---")
-let currencyFormatter = Intl.NumberFormat.makeWithLocaleAndOptions(
-  "fr-FR",
-  {"currency": "EUR", "style": "currency"},
-)
-
-Console.log(Intl.NumberFormat.supportedLocalesOf(["fr-FR", "en-US"]))
-Console.log(currencyFormatter->Intl.NumberFormat.format(123.23))
 
 Console.info("")
 Console.info("JSON")
@@ -190,9 +181,6 @@ if globalThis["hello"] !== undefined {
   Console.log(globalThis["hello"]["bar"])
   Console.log("hello")
 }
-
-let resolvedOptions = Intl.DateTimeFormat.make()->Intl.DateTimeFormat.resolvedOptions
-let timeZone = resolvedOptions["timeZone"]
 
 let z = Float.mod(1.2, 1.4)
 
