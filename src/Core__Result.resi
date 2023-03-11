@@ -59,17 +59,20 @@ type t<'a, 'b> = result<'a, 'b> = Ok('a) | Error('b)
 let getExn: t<'a, 'b> => 'a
 
 /**
-  `mapWithDefault(res, default, f)`: When res is `Ok(n)`, returns `f(n)`,
+  `mapOr(res, default, f)`: When res is `Ok(n)`, returns `f(n)`,
   otherwise `default`.
 
   ```res example
   let ok = Result.Ok(42)
-  Result.mapWithDefault(ok, 0, (x) => x / 2) == 21
+  Result.mapOr(ok, 0, (x) => x / 2) == 21
 
   let error = Result.Error("Invalid data")
-  Result.mapWithDefault(error, 0, (x) => x / 2) == 0
+  Result.mapOr(error, 0, (x) => x / 2) == 0
   ```
 */
+let mapOr: (t<'a, 'c>, 'b, 'a => 'b) => 'b
+
+@deprecated("Use mapOr instead")
 let mapWithDefault: (t<'a, 'c>, 'b, 'a => 'b) => 'b
 
 /**
@@ -110,15 +113,18 @@ let map: (t<'a, 'c>, 'a => 'b) => t<'b, 'c>
 let flatMap: (t<'a, 'c>, 'a => t<'b, 'c>) => t<'b, 'c>
 
 /**
-  `getWithDefault(res, defaultValue)`: If `res` is `Ok(n)`, returns `n`,
+  `getOr(res, defaultValue)`: If `res` is `Ok(n)`, returns `n`,
   otherwise `default`
 
   ```res example
-  Result.getWithDefault(Ok(42), 0) == 42
+  Result.getOr(Ok(42), 0) == 42
 
-  Result.getWithDefault(Error("Invalid Data"), 0) == 0
+  Result.getOr(Error("Invalid Data"), 0) == 0
   ```
 */
+let getOr: (t<'a, 'b>, 'a) => 'a
+
+@deprecated("Use getOr instead")
 let getWithDefault: (t<'a, 'b>, 'a) => 'a
 
 /**

@@ -46,13 +46,15 @@ let getExn = x =>
 
 external getUnsafe: option<'a> => 'a = "%identity"
 
-let mapWithDefaultU = (opt, default, f) =>
+let mapOrU = (opt, default, f) =>
   switch opt {
   | Some(x) => f(. x)
   | None => default
   }
 
-let mapWithDefault = (opt, default, f) => mapWithDefaultU(opt, default, (. x) => f(x))
+let mapOr = (opt, default, f) => mapOrU(opt, default, (. x) => f(x))
+
+let mapWithDefault = mapOr
 
 let mapU = (opt, f) =>
   switch opt {
@@ -70,11 +72,13 @@ let flatMapU = (opt, f) =>
 
 let flatMap = (opt, f) => flatMapU(opt, (. x) => f(x))
 
-let getWithDefault = (opt, default) =>
+let getOr = (opt, default) =>
   switch opt {
   | Some(x) => x
   | None => default
   }
+
+let getWithDefault = getOr
 
 let orElse = (opt, other) =>
   switch opt {
