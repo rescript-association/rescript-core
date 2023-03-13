@@ -114,3 +114,13 @@ let fromArrayWith = (xs, f) => {
 }
 
 let fromArray = xs => xs->fromArrayWith(i => i)
+
+// If the source result is Ok, should we return that instance, or
+// create it again? In this implementation I'm returning that specific
+// instance. However this is not consistent with the implementation for
+// other functions like mapU and flatMapU, which recreate the result.
+let mapError = (r, f) =>
+  switch r {
+  | Ok(_) as ok => ok
+  | Error(e) => Error(f(e))
+  }
