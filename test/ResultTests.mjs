@@ -122,7 +122,7 @@ fromArrayTestCases.forEach(function (param) {
           ], Core__Result.fromArray(param[1]), eq, param[2]);
     });
 
-var fromArrayWithTestCases = [
+var fromArrayMapTestCases = [
   [
     "when empty, return empty",
     [],
@@ -191,7 +191,7 @@ var fromArrayWithTestCases = [
   ]
 ];
 
-function fromArrayWithMapper(n) {
+function fromArrayMap(n) {
   if (n < 10) {
     return {
             TAG: /* Ok */0,
@@ -205,22 +205,22 @@ function fromArrayWithMapper(n) {
   }
 }
 
-fromArrayWithTestCases.forEach(function (param) {
+fromArrayMapTestCases.forEach(function (param) {
       Test.run([
             [
               "ResultTests.res",
               35,
               15,
-              40
+              39
             ],
-            "fromArrayWith: " + param[0] + ""
-          ], Core__Result.fromArrayWith(param[1], fromArrayWithMapper), eq, param[2]);
+            "fromArrayMap: " + param[0] + ""
+          ], Core__Result.fromArrayMap(param[1], fromArrayMap), eq, param[2]);
     });
 
 export {
   eq ,
   fromArrayTestCases ,
-  fromArrayWithTestCases ,
-  fromArrayWithMapper ,
+  fromArrayMapTestCases ,
+  fromArrayMap ,
 }
 /*  Not a pure module */

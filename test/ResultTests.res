@@ -2,9 +2,9 @@ open RescriptCore
 
 let eq = (a, b) => a == b
 
-// =========
-// fromArray
-// =========
+// ============
+// fromArrayMap
+// ============
 
 let fromArrayTestCases = [
   ("when empty, return empty", [], Ok([])),
@@ -19,7 +19,7 @@ fromArrayTestCases->Array.forEach(((title, input, output)) =>
   Test.run(__POS_OF__(`fromArray: ${title}`), input->Result.fromArray, eq, output)
 )
 
-let fromArrayWithTestCases = [
+let fromArrayMapTestCases = [
   ("when empty, return empty", [], Ok([])),
   ("when one error, return it", [30], Error("30")),
   ("when one ok, return it", [2], Ok([4])),
@@ -28,12 +28,12 @@ let fromArrayWithTestCases = [
   ("when mix, return first error", [1, 2, 14, 3, 4], Error("14")),
 ]
 
-let fromArrayWithMapper = n => n < 10 ? Ok(n * 2) : Error(n->Int.toString)
+let fromArrayMap = n => n < 10 ? Ok(n * 2) : Error(n->Int.toString)
 
-fromArrayWithTestCases->Array.forEach(((title, input, output)) =>
+fromArrayMapTestCases->Array.forEach(((title, input, output)) =>
   Test.run(
-    __POS_OF__(`fromArrayWith: ${title}`),
-    input->Result.fromArrayWith(fromArrayWithMapper),
+    __POS_OF__(`fromArrayMap: ${title}`),
+    input->Result.fromArrayMap(fromArrayMap),
     eq,
     output,
   )

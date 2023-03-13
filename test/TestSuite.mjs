@@ -33,9 +33,9 @@ var eq = ResultTests.eq;
 
 var fromArrayTestCases = ResultTests.fromArrayTestCases;
 
-var fromArrayWithTestCases = ResultTests.fromArrayWithTestCases;
+var fromArrayMapTestCases = ResultTests.fromArrayMapTestCases;
 
-var fromArrayWithMapper = ResultTests.fromArrayWithMapper;
+var fromArrayMap = ResultTests.fromArrayMap;
 
 export {
   bign ,
@@ -51,7 +51,7 @@ export {
   $$catch ,
   eq ,
   fromArrayTestCases ,
-  fromArrayWithTestCases ,
-  fromArrayWithMapper ,
+  fromArrayMapTestCases ,
+  fromArrayMap ,
 }
 /* IntTests Not a pure module */

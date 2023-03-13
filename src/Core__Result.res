@@ -92,25 +92,32 @@ let cmpU = (a, b, f) =>
 
 let cmp = (a, b, f) => cmpU(a, b, (. x, y) => f(x, y))
 
-// Written in imperative style for performance. The source
-// array is scanned only until an error is found.
-@new external makeUninitializedUnsafe: int => array<'a> = "Array"
-let fromArrayWith = (xs, f) => {
-  let setUnsafe = Core__Array.setUnsafe
-  let getUnsafe = Core__Array.getUnsafe
-  let oks = makeUninitializedUnsafe(xs->Array.length)
-  let rec loop = i =>
-    if i >= xs->Array.length {
-      Ok(oks)
-    } else {
-      switch xs->getUnsafe(i)->f {
-      | Ok(x) =>
-        oks->setUnsafe(i, x)
-        loop(i + 1)
-      | Error(_) as err => err
+// I don't think tail-call optimization is guaranteed
+// so a non-recursive implementation is safer.
+// https://chromestatus.com/feature/5516876633341952
+let fromArrayMap = (xs, f) => {
+  let oks = []
+  let firstError = ref(None)
+  let index = ref(0)
+  let break = ref(false)
+  while !break.contents {
+    switch xs->Core__Array.at(index.contents) {
+    | None => break := true
+    | Some(x) =>
+      switch f(x) {
+      | Ok(ok) =>
+        oks->Core__Array.push(ok)
+        index := index.contents + 1
+      | Error(_) as err =>
+        firstError := Some(err)
+        break := true
       }
     }
-  loop(0)
+  }
+  switch firstError.contents {
+  | None => Ok(oks)
+  | Some(err) => err
+  }
 }
 
-let fromArray = xs => xs->fromArrayWith(i => i)
+let fromArray = xs => xs->fromArrayMap(i => i)
