@@ -197,3 +197,17 @@ let eq: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
   ```
 */
 let cmp: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => int) => int
+
+/**
+`mapError(res, f)` - If the source is `Ok`, return it. Otherwise apply 
+the provided mapping function to the `Error` value.
+
+## Examples
+  ```rescript
+
+let formatError = n => `Error code: ${n->Int.toString}`
+mapError(Error(14), formatError) // evaluates to Error("Error code: 14")
+mapError(Ok("abc"), formatError) // evaluates to Ok("abc")
+```
+*/
+let mapError: (result<'a, 'b>, 'b => 'c) => result<'a, 'c>
