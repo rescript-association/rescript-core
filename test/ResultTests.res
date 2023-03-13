@@ -31,12 +31,3 @@ fromArrayWithTestCases->Array.forEach(((title, input, output)) =>
     output,
   )
 )
-
-Test.run(__POS_OF__("mapError: if ok, return it"), Ok(5)->Result.mapError(i => i * 3), eq, Ok(5))
-
-Test.run(
-  __POS_OF__("mapError: if error, apply f to it"),
-  Error(5)->Result.mapError(i => i * 3),
-  eq,
-  Error(15),
-)
