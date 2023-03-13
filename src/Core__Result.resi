@@ -203,7 +203,7 @@ let cmp: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => int) => int
 the provided mapping function to the `Error` value.
 
 ## Examples
-  ```rescript
+```rescript
 
 let formatError = n => `Error code: ${n->Int.toString}`
 mapError(Error(14), formatError) // evaluates to Error("Error code: 14")
