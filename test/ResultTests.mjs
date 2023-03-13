@@ -52,6 +52,42 @@ function forEachIfErrorDoNotCallFunction(param) {
 
 forEachIfErrorDoNotCallFunction(undefined);
 
+Test.run([
+      [
+        "ResultTests.res",
+        27,
+        20,
+        48
+      ],
+      "mapError: if ok, return it"
+    ], Core__Result.mapError({
+          TAG: /* Ok */0,
+          _0: 5
+        }, (function (i) {
+            return Math.imul(i, 3);
+          })), eq, {
+      TAG: /* Ok */0,
+      _0: 5
+    });
+
+Test.run([
+      [
+        "ResultTests.res",
+        30,
+        13,
+        42
+      ],
+      "mapError: if error, apply f"
+    ], Core__Result.mapError({
+          TAG: /* Error */1,
+          _0: 5
+        }, (function (i) {
+            return Math.imul(i, 3);
+          })), eq, {
+      TAG: /* Error */1,
+      _0: 15
+    });
+
 export {
   eq ,
   forEachIfOkCallFunction ,

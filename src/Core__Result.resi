@@ -209,3 +209,16 @@ Result.forEach(Error("x"), Console.log) // Does nothing, returns ()
 ```
 */
 let forEach: (t<'a, 'b>, 'a => unit) => unit
+
+/**
+`mapError(r, f)` generates a new `result` by applying the function `f` to the `Error` value. If the source is `Ok`, return it as-is.
+
+## Examples
+
+```rescript
+let format = n => `Error code: ${n->Int.toString}`
+mapError(Error(14), format) // Error("Error code: 14")
+mapError(Ok("abc"), format) // Ok("abc")
+```
+*/
+let mapError: (result<'a, 'b>, 'b => 'c) => result<'a, 'c>
