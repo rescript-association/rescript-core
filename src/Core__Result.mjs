@@ -107,6 +107,17 @@ function forEach(r, f) {
   
 }
 
+function mapError(r, f) {
+  if (r.TAG === /* Ok */0) {
+    return r;
+  } else {
+    return {
+            TAG: /* Error */1,
+            _0: Curry._1(f, r._0)
+          };
+  }
+}
+
 export {
   getExn ,
   mapWithDefault ,
@@ -118,5 +129,6 @@ export {
   equal ,
   compare ,
   forEach ,
+  mapError ,
 }
 /* No side effect */

@@ -93,3 +93,15 @@ let forEach = (r, f) =>
   | Ok(ok) => f(ok)
   | Error(_) => ()
   }
+
+// If the source result is Ok, should we return that instance, or
+// create it again? In this implementation I'm returning that specific
+// instance. However this is not consistent with the implementation for
+// other functions like mapU and flatMapU, which recreate the result.
+// This is more efficient. I'm not sure why the other implementations
+// return a new instance.
+let mapError = (r, f) =>
+  switch r {
+  | Ok(_) as ok => ok
+  | Error(e) => Error(f(e))
+  }
