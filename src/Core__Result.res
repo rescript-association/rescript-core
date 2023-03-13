@@ -91,3 +91,26 @@ let cmpU = (a, b, f) =>
   }
 
 let cmp = (a, b, f) => cmpU(a, b, (. x, y) => f(x, y))
+
+// Written in imperative style for performance. The source
+// array is scanned only until an error is found.
+@new external makeUninitializedUnsafe: int => array<'a> = "Array"
+let fromArrayWith = (xs, f) => {
+  let setUnsafe = Core__Array.setUnsafe
+  let getUnsafe = Core__Array.getUnsafe
+  let oks = makeUninitializedUnsafe(xs->Array.length)
+  let rec loop = i =>
+    if i >= xs->Array.length {
+      Ok(oks)
+    } else {
+      switch xs->getUnsafe(i)->f {
+      | Ok(x) =>
+        oks->setUnsafe(i, x)
+        loop(i + 1)
+      | Error(_) as err => err
+      }
+    }
+  loop(0)
+}
+
+let fromArray = xs => xs->fromArrayWith(i => i)

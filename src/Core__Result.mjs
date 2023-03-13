@@ -102,6 +102,33 @@ function cmp(a, b, f) {
   }
 }
 
+function fromArrayWith(xs, f) {
+  var oks = new Array(xs.length);
+  var _i = 0;
+  while(true) {
+    var i = _i;
+    if (i >= xs.length) {
+      return {
+              TAG: /* Ok */0,
+              _0: oks
+            };
+    }
+    var x = Curry._1(f, xs[i]);
+    if (x.TAG !== /* Ok */0) {
+      return x;
+    }
+    oks[i] = x._0;
+    _i = i + 1 | 0;
+    continue ;
+  };
+}
+
+function fromArray(xs) {
+  return fromArrayWith(xs, (function (i) {
+                return i;
+              }));
+}
+
 export {
   getExn ,
   mapWithDefault ,
@@ -112,5 +139,7 @@ export {
   isError ,
   eq ,
   cmp ,
+  fromArray ,
+  fromArrayWith ,
 }
 /* No side effect */
