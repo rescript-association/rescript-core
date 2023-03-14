@@ -1,13 +1,14 @@
 @obj external empty: unit => {..} = ""
 
 /**
-`Object.is` determines if two objects are identical in all contexts. Objects, arrays, records, and other non-primitives are only identical if they reference the **exact** same object in memory. Primitives like ints, floats, bools, and strings are identical if they have the same value.
+`Object.is` determines if two objects are identical in all contexts. Objects, arrays, records, and other non-primitives are only identical if they reference the **exact** same object in memory. Primitives like ints, floats, and strings are identical if they have the same value. `+0` and `-0` are distinct. NaN is 
+equal to itself.
 
-**Note:** In most scenarios use `==` and `===`. If the data type you want to compare by value has an `equals` function, use it.
+**Note:** In most scenarios use `==` and `===`. If the type you want to compare by value has an `equals` function, use it.
 
-The `==` operator is different in ReScript than Javascript. Non-primitives like arrays and records are considered equal if they have the same contents.
+The `==` operator [is different in ReScript than Javascript](https://rescript-lang.org/docs/manual/latest/overview#boolean). Arrays, records and other non-primitives are equal if they have the same contents (deep equality).
 
-In ReScript, the `===` operator performs a strict equality check, like Javascript, and is similar to (but not idential to) `Object.is`. See the references. 
+In ReScript, the `===` operator performs a strict equality check, like Javascript, and is similar but not identical to `Object.is`; see [Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is). 
 
 ## Examples
 ```rescript
@@ -31,6 +32,7 @@ Object.is([1, 2, 3], [1, 2, 3]) // false
 ## Specifications
 - [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.is)
 - [`Object.is on Mozilla`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
+- [Equality operators in ReScript](https://rescript-lang.org/docs/manual/latest/overview#boolean)
 */
 @val
 external is: ('a, 'b) => bool = "Object.is"
