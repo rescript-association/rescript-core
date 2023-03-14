@@ -1,6 +1,39 @@
 @obj external empty: unit => {..} = ""
 
-@val external is: ('a, 'b) => bool = "Object.is"
+/**
+`Object.is` determines if two objects are identical in all contexts. Objects, arrays, records, and other non-primitives are only identical if they reference the **exact** same object in memory. Primitives like ints, floats, bools, and strings are identical if they have the same value.
+
+**Note:** In most scenarios use `==` and `===`. If the data type you want to compare by value has an `equals` function, use it.
+
+The `==` operator is different in ReScript than Javascript. Non-primitives like arrays and records are considered equal if they have the same contents.
+
+In ReScript, the `===` operator performs a strict equality check, like Javascript, and is similar to (but not idential to) `Object.is`. See the references. 
+
+## Examples
+```rescript
+Object.is(25, 13) // false
+Object.is("abc", "abc") // true
+Object.is(undefined, undefined) // true
+Object.is(undefined, null) // false
+Object.is(-0.0, 0.0) // false
+Object.is(list{1, 2}, list{1, 2}) // false
+
+let fruit = {"name": "Apple" }
+Object.is(fruit, fruit) // true
+Object.is(fruit, {"name": "Apple" }) // false
+fruit == {"name": "Apple" } // true
+fruit === {"name": "Apple" } // false
+
+Object.is([1, 2, 3], [1, 2, 3]) // false
+[1, 2, 3] == [1, 2, 3] // true
+[1, 2, 3] === [1, 2, 3] // false
+```
+## Specifications
+- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.is)
+- [`Object.is on Mozilla`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
+*/
+@val
+external is: ('a, 'b) => bool = "Object.is"
 
 @val external create: {..} => {..} = "Object.create"
 @val external createWithProperties: ({..}, {..}) => {..} = "Object.create"
