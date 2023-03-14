@@ -4,6 +4,7 @@ import * as IntTests from "./IntTests.mjs";
 import * as TestTests from "./TestTests.mjs";
 import * as ArrayTests from "./ArrayTests.mjs";
 import * as ErrorTests from "./ErrorTests.mjs";
+import * as ObjectTests from "./ObjectTests.mjs";
 import * as PromiseTest from "./PromiseTest.mjs";
 
 var bign = TestTests.bign;
@@ -26,9 +27,17 @@ var Concurrently = PromiseTest.Concurrently;
 
 var panicTest = ErrorTests.panicTest;
 
-var eq = IntTests.eq;
-
 var $$catch = IntTests.$$catch;
+
+var eq = ObjectTests.eq;
+
+var nums = ObjectTests.nums;
+
+var d = ObjectTests.d;
+
+var x = ObjectTests.x;
+
+var mkBig = ObjectTests.mkBig;
 
 export {
   bign ,
@@ -41,7 +50,11 @@ export {
   Catching ,
   Concurrently ,
   panicTest ,
-  eq ,
   $$catch ,
+  eq ,
+  nums ,
+  d ,
+  x ,
+  mkBig ,
 }
 /* IntTests Not a pure module */
