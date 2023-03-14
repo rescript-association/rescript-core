@@ -197,3 +197,16 @@ let eq: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
   ```
 */
 let cmp: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => int) => int
+
+/**
+`mapError(r, f)` generates a new `result` by applying a function to the contained `Error` value, leaving an `Ok` untouched.
+
+## Examples
+
+```rescript
+let format = n => `Error code: ${n->Int.toString}`
+mapError(Error(14), format) // Error("Error code: 14")
+mapError(Ok("abc"), format) // Ok("abc")
+```
+*/
+let mapError: (result<'a, 'b>, 'b => 'c) => result<'a, 'c>
