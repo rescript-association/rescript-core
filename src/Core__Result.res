@@ -91,3 +91,33 @@ let cmpU = (a, b, f) =>
   }
 
 let cmp = (a, b, f) => cmpU(a, b, (. x, y) => f(x, y))
+
+// I don't think tail-call optimization is guaranteed
+// so a non-recursive implementation is safer.
+// https://chromestatus.com/feature/5516876633341952
+let fromArrayMap = (xs, f) => {
+  let oks = []
+  let firstError = ref(None)
+  let index = ref(0)
+  let break = ref(false)
+  while !break.contents {
+    switch xs->Core__Array.at(index.contents) {
+    | None => break := true
+    | Some(x) =>
+      switch f(x) {
+      | Ok(ok) =>
+        oks->Core__Array.push(ok)
+        index := index.contents + 1
+      | Error(_) as err =>
+        firstError := Some(err)
+        break := true
+      }
+    }
+  }
+  switch firstError.contents {
+  | None => Ok(oks)
+  | Some(err) => err
+  }
+}
+
+let fromArray = xs => xs->fromArrayMap(i => i)

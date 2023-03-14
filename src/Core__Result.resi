@@ -197,3 +197,29 @@ let eq: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
   ```
 */
 let cmp: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => int) => int
+
+/**
+`fromArray(xs)` converts an array of results to a single result. If `xs` only contains `Ok` values, returns an `Ok` that contains an array of those values. Otherwise returns the first `Error`.
+
+## Examples
+
+```rescript
+Result.fromArray([Ok(1), Ok(2)]) // Ok([1, 2])
+Result.fromArray([Ok(1), Error("a"), Ok(2)]) // Error("a")
+Result.fromArray([]) // Ok([])
+```
+*/
+let fromArray: array<result<'a, 'b>> => result<array<'a>, 'b>
+
+/**
+`fromArrayMap(xs, f)` lazily applies `f` to each item in `xs`. If there are only `Ok` results, returns an `Ok` that contains an array of those values. Otherwise returns the first `Error`.
+
+## Examples
+
+```rescript
+let lessThanTen = n => n < 10 ? Ok(n) : Error(n)
+Result.fromArray([6, 12, 18], lessThanTen) // Error(12)
+Result.fromArray([3, 6, 9], lessThanTen) // Ok([3, 6, 9])
+```
+*/
+let fromArrayMap: (array<'v>, 'v => result<'a, 'b>) => result<array<'a>, 'b>
