@@ -3,7 +3,7 @@
 /**
 `is` determines if two objects are identical in all contexts. Objects, arrays, records, and other non-primitives are only identical if they reference the **exact** same object in memory. Primitives like ints, floats, and strings are identical if they have the same value. `+0` and `-0` are distinct. NaN is equal to itself.
 
-**Note:** In most scenarios use `==` and `===`. If the type you want to compare by value has an `equals` function, use it.
+**Note:** In most scenarios use `==` or `===` or the custom `equals` function (if provided) for the type.
 
 The `==` operator [is different in ReScript than Javascript](https://rescript-lang.org/docs/manual/latest/overview#boolean). Arrays, records and other non-primitives are equal if they have the same contents (deep equality).
 
