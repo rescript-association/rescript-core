@@ -24,8 +24,46 @@
 
 @val external seal: 'a => 'a = "Object.seal"
 @val external preventExtensions: 'a => 'a = "Object.preventExtensions"
-@val external freeze: 'a => 'a = "Object.freeze"
+/**
+`freeze` freezes an object. Freezing an object makes existing properties non-writable and prevents extensions. Once an object is frozen, new properties cannot be be added, existing properties cannot be removed, and their values cannot be changed. `freeze` returns the same object that was passed in; it does not create a frozen copy.
+ 
+Any attempt to change a frozen object will fail, either silently or by throwing an exception.
+
+Rescript usually [disallows modifying objects](https://rescript-lang.org/docs/manual/latest/object#update) regardless of whether they are frozen.
+
+ ## Examples
+
+ ```rescript
+let point = {"x": 1, "y": 3}->Object.freeze
+let pointIsFrozen = point->Object.isFrozen // true
+let fruit = {"name": "Apple" }
+let fruitIsFrozen = fruit->Object.isFrozen // false
+ ```
+ ## Specifications
+- [Updating objects in Rescript](https://rescript-lang.org/docs/manual/latest/object#update)
+- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.freeze)
+- [Object.freeze on Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
+ */
+@val
+external freeze: 'a => 'a = "Object.freeze"
 
 @val external isSealed: 'a => bool = "Object.isSealed"
-@val external isFrozen: 'a => bool = "Object.isFrozen"
+/**
+`isFrozen` determines if an object is frozen. An object is frozen if an only if it is not extensible, all its properties are non-configurable, and all its data properties are non-writable.
+
+## Examples
+
+```rescript
+let point = {"x": 1, "y": 3}->Object.freeze
+let pointIsFrozen = point->Object.isFrozen // true
+let fruit = {"name": "Apple" }
+let fruitIsFrozen = fruit->Object.isFrozen // false
+ ```
+ ## Specifications
+- [Updating objects in Rescript](https://rescript-lang.org/docs/manual/latest/object#update)
+- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.isfrozen)
+- [Object.isFrozen on Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)
+ */
+@val
+external isFrozen: 'a => bool = "Object.isFrozen"
 @val external isExtensible: 'a => bool = "Object.isExtensible"
