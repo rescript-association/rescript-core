@@ -23,9 +23,41 @@
 @val external hasOwnProperty: ({..}, string) => bool = "Object.prototype.hasOwnProperty.call"
 
 @val external seal: 'a => 'a = "Object.seal"
-@val external preventExtensions: 'a => 'a = "Object.preventExtensions"
+/**
+`preventExtensions` prevents new properties from being added to the object. It modifies the object (rather than creating a copy) and returns it.
+
+## Examples
+
+```rescript
+let obj = {"a": 1}
+obj->Object.set("b", 2) // succeeds
+obj->Object.preventExtensions->ignore
+obj->Object.set("c", 3) // fails
+```
+## Specifications
+- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.preventextensions)
+- [Object.preventExtensions on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
+*/
+@val
+external preventExtensions: 'a => 'a = "Object.preventExtensions"
 @val external freeze: 'a => 'a = "Object.freeze"
 
 @val external isSealed: 'a => bool = "Object.isSealed"
 @val external isFrozen: 'a => bool = "Object.isFrozen"
-@val external isExtensible: 'a => bool = "Object.isExtensible"
+/**
+ `isExtensible` determines if an object is extensible (whether it can have new properties added to it).
+
+ ## Examples
+
+ ```rescript
+let obj = {"a": 1}
+obj->Object.isExtensible // true
+obj->Object.preventExtensions->ignore
+obj->Object.isExtensible // false
+```
+## Specifications
+- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.isextensible)
+- [Object.isExtensible on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)
+*/
+@val
+external isExtensible: 'a => bool = "Object.isExtensible"
