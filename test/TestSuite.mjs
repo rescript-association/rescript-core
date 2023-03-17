@@ -26,6 +26,10 @@ var Concurrently = PromiseTest.Concurrently;
 
 var panicTest = ErrorTests.panicTest;
 
+var singletonTest = ArrayTests.singletonTest;
+
+var m = ArrayTests.m;
+
 var eq = IntTests.eq;
 
 var $$catch = IntTests.$$catch;
@@ -41,6 +45,8 @@ export {
   Catching ,
   Concurrently ,
   panicTest ,
+  singletonTest ,
+  m ,
   eq ,
   $$catch ,
 }

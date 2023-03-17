@@ -214,3 +214,5 @@ let findMap = (arr, f) => {
 }
 
 @send external at: (array<'a>, int) => option<'a> = "at"
+
+@val external fromSingleton: 'a => array<'a> = "Array.of"
