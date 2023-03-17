@@ -26,6 +26,8 @@ var Concurrently = PromiseTest.Concurrently;
 
 var panicTest = ErrorTests.panicTest;
 
+var generator = ArrayTests.generator;
+
 var eq = IntTests.eq;
 
 var $$catch = IntTests.$$catch;
@@ -41,6 +43,7 @@ export {
   Catching ,
   Concurrently ,
   panicTest ,
+  generator ,
   eq ,
   $$catch ,
 }

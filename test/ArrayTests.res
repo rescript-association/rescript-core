@@ -98,3 +98,10 @@ Test.run(
   eq,
   None,
 )
+
+let generator = i => i < 100 ? Some(i, i * 2) : None
+
+Test.run(__POS_OF__("fromFormula"), Array.fromFormula(1, generator), eq, [1, 2, 4, 8, 16, 32, 64])
+Test.run(__POS_OF__("fromFormula"), Array.fromFormula(12, generator), eq, [12, 24, 48, 96])
+Test.run(__POS_OF__("fromFormula"), Array.fromFormula(99, generator), eq, [99])
+Test.run(__POS_OF__("fromFormula"), Array.fromFormula(100, generator), eq, [])

@@ -138,6 +138,22 @@ function findMap(arr, f) {
   };
 }
 
+function fromFormula(state, generator) {
+  var result = [];
+  var state$1 = state;
+  var $$break = false;
+  while(!$$break) {
+    var match = Curry._1(generator, state$1);
+    if (match !== undefined) {
+      result.push(match[0]);
+      state$1 = match[1];
+    } else {
+      $$break = true;
+    }
+  };
+  return result;
+}
+
 export {
   make ,
   fromInitializer ,
@@ -155,5 +171,6 @@ export {
   shuffle ,
   shuffleInPlace ,
   findMap ,
+  fromFormula ,
 }
 /* No side effect */
