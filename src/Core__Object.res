@@ -32,7 +32,7 @@ fruit === {"name": "Apple" } // false
 ## Specifications
 
 - [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.is)
-- [`Object.is on Mozilla`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
+- [`Object.is on MDN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
 - [Equality operators in ReScript](https://rescript-lang.org/docs/manual/latest/overview#boolean)
 */
 @val
