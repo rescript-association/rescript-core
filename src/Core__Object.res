@@ -11,7 +11,21 @@
 @variadic @val external assignMany: ({..}, array<{..}>) => {..} = "Object.assign"
 @val external copy: (@as(json`{}`) _, {..}) => {..} = "Object.assign"
 
-@get_index external get: ({..}, string) => option<'a> = ""
+/**
+`get` gets the value of a property by name. Returns `None` if the property does not exist or has the value `undefined`. Otherwise returns `Some`, including if the value is `null`.
+
+## Examples
+
+```rescript
+{"a": 1}->Object.get("a") // Some(1)
+{"a": 1}->Object.get("b") // None
+{"a": undefined}->Object.get("a") // None
+{"a": null}->Object.get("a") // Some(null)
+{"a": 1}->Object.get("toString")->Option.isSome // true
+```
+*/
+@get_index
+external get: ({..}, string) => option<'a> = ""
 @get_index external getSymbol: ({..}, Core__Symbol.t) => option<'a> = ""
 @get_index external getSymbolUnsafe: ({..}, Core__Symbol.t) => 'a = ""
 
