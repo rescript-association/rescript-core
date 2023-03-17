@@ -53,12 +53,12 @@ let run = (loc, left, comparator, right) => {
       {"start": {"line": line}},
       {"highlightCode": true},
     )
-    let errorMessage = j`
+    let errorMessage = `
   \u001b[31mTest Failure!
-  \u001b[36m$file\u001b[0m:\u001b[2m$line
-$codeFrame
-  \u001b[39mLeft: \u001b[31m$left
-  \u001b[39mRight: \u001b[31m$right\u001b[0m
+  \u001b[36m${file}\u001b[0m:\u001b[2m${string_of_int(line)}
+${codeFrame}
+  \u001b[39mLeft: \u001b[31m${left}
+  \u001b[39mRight: \u001b[31m${right}\u001b[0m
 `
     Console.log(errorMessage)
     // API: https://nodejs.org/api/errors.html#errors_error_capturestacktrace_targetobject_constructoropt
