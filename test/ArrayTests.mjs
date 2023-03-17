@@ -407,27 +407,27 @@ function singletonTest(a, title) {
           "ArrayTests.res",
           103,
           22,
-          46
+          48
         ],
-        "fromOneItem : " + title + ""
+        "fromSingleton : " + title + ""
       ], Array.of(a), Caml_obj.equal, [a]);
   Test.run([
         [
           "ArrayTests.res",
           104,
           22,
-          46
+          48
         ],
-        "fromOneItem : " + title + ""
+        "fromSingleton : " + title + ""
       ], Array.of(a).length, eq, 1);
   Test.run([
         [
           "ArrayTests.res",
           106,
           15,
-          39
+          41
         ],
-        "fromOneItem : " + title + ""
+        "fromSingleton : " + title + ""
       ], Array.of(a)[0], (function (i, j) {
           return i === j;
         }), a);

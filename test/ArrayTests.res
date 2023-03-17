@@ -100,16 +100,16 @@ Test.run(
 )
 
 let singletonTest = (a, title) => {
-  Test.run(__POS_OF__(`fromOneItem : ${title}`), Array.fromOneItem(a), (i, j) => i == j, [a])
-  Test.run(__POS_OF__(`fromOneItem : ${title}`), Array.fromOneItem(a)->Array.length, eq, 1)
+  Test.run(__POS_OF__(`fromSingleton : ${title}`), Array.fromSingleton(a), (i, j) => i == j, [a])
+  Test.run(__POS_OF__(`fromSingleton : ${title}`), Array.fromSingleton(a)->Array.length, eq, 1)
   Test.run(
-    __POS_OF__(`fromOneItem : ${title}`),
-    Array.fromOneItem(a)->Array.getUnsafe(0),
+    __POS_OF__(`fromSingleton : ${title}`),
+    Array.fromSingleton(a)->Array.getUnsafe(0),
     (i, j) => i === j,
     a,
   )
 }
-let m = {"x": 3, "y": 5}->Array.fromOneItem
+let m = {"x": 3, "y": 5}->Array.fromSingleton
 3->singletonTest("Single integer")
 "abc"->singletonTest("Single string")
 undefined->singletonTest("undefined")
