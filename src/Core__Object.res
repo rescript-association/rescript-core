@@ -42,7 +42,7 @@ let fruitIsFrozen = fruit->Object.isFrozen // false
  ## Specifications
 - [Updating objects in Rescript](https://rescript-lang.org/docs/manual/latest/object#update)
 - [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.freeze)
-- [Object.freeze on Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
+- [Object.freeze on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
  */
 @val
 external freeze: 'a => 'a = "Object.freeze"
@@ -62,7 +62,7 @@ let fruitIsFrozen = fruit->Object.isFrozen // false
  ## Specifications
 - [Updating objects in Rescript](https://rescript-lang.org/docs/manual/latest/object#update)
 - [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.isfrozen)
-- [Object.isFrozen on Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)
+- [Object.isFrozen on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)
  */
 @val
 external isFrozen: 'a => bool = "Object.isFrozen"
