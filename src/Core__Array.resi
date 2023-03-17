@@ -965,6 +965,7 @@ external at: (array<'a>, int) => option<'a> = "at"
 3->Array.fromSingleton // [3]
 undefined->Array.fromSingleton // [undefined]
 Some("abc")->Array.fromSingleton // [Some("abc")]
+[1,2,3]->Array.fromSingleton // [[1,2,3]]
 {"x": 3, "y": 5}->Array.fromSingleton // Some({"x": 3, "y": 5})
 ```
 
