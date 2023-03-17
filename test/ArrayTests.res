@@ -118,3 +118,14 @@ null->singletonTest("null")
 []->singletonTest("empty array")
 Some(5)->singletonTest("Some")
 None->singletonTest("None")
+
+let fromOptionTest = (wrap, title) =>
+  Test.run(__POS_OF__(`fromOption : ${title}`), Some(wrap)->Array.fromOption, eq, [wrap])
+
+3->fromOptionTest("int")
+"abc"->fromOptionTest("string")
+undefined->fromOptionTest("undefined")
+[1, 2, 3]->fromOptionTest("array")
+[]->fromOptionTest("empty array")
+
+Test.run(__POS_OF__("fromOption : if none"), None->Array.fromOption, eq, [])

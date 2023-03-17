@@ -976,3 +976,16 @@ Some("abc")->Array.fromSingleton // [Some("abc")]
 */
 @val
 external fromSingleton: 'a => array<'a> = "Array.of"
+
+/**
+`fromOption` creates an empty array if the option is `None`, or creates an array of length 1 if the option is `Some`.
+
+## Examples
+
+```rescript
+Some(3)->Array.fromOption // [3]
+None->Array.fromOption // []
+Some([1,2,3])->Array.fromOption // [[1,2,3]]
+```
+*/
+let fromOption: option<'a> => array<'a>

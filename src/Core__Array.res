@@ -216,3 +216,11 @@ let findMap = (arr, f) => {
 @send external at: (array<'a>, int) => option<'a> = "at"
 
 @val external fromSingleton: 'a => array<'a> = "Array.of"
+
+@val external of0: unit => array<'a> = "Array.of"
+
+let fromOption = opt =>
+  switch opt {
+  | None => of0()
+  | Some(a) => a->fromSingleton
+  }

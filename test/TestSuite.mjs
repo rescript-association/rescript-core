@@ -30,6 +30,8 @@ var singletonTest = ArrayTests.singletonTest;
 
 var m = ArrayTests.m;
 
+var fromOptionTest = ArrayTests.fromOptionTest;
+
 var eq = IntTests.eq;
 
 var $$catch = IntTests.$$catch;
@@ -47,6 +49,7 @@ export {
   panicTest ,
   singletonTest ,
   m ,
+  fromOptionTest ,
   eq ,
   $$catch ,
 }
