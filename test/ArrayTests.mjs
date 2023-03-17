@@ -401,7 +401,66 @@ Test.run([
             
           })), eq, undefined);
 
+function singletonTest(a, title) {
+  Test.run([
+        [
+          "ArrayTests.res",
+          103,
+          22,
+          48
+        ],
+        "fromSingleton : " + title + ""
+      ], Array.of(a), Caml_obj.equal, [a]);
+  Test.run([
+        [
+          "ArrayTests.res",
+          104,
+          22,
+          48
+        ],
+        "fromSingleton : " + title + ""
+      ], Array.of(a).length, eq, 1);
+  Test.run([
+        [
+          "ArrayTests.res",
+          106,
+          15,
+          41
+        ],
+        "fromSingleton : " + title + ""
+      ], Array.of(a)[0], (function (i, j) {
+          return i === j;
+        }), a);
+}
+
+var m = Array.of({
+      x: 3,
+      y: 5
+    });
+
+singletonTest(3, "Single integer");
+
+singletonTest("abc", "Single string");
+
+singletonTest(undefined, "undefined");
+
+singletonTest(null, "null");
+
+singletonTest([
+      1,
+      2,
+      3
+    ], "full array of integers");
+
+singletonTest([], "empty array");
+
+singletonTest(5, "Some");
+
+singletonTest(undefined, "None");
+
 export {
   eq ,
+  singletonTest ,
+  m ,
 }
 /*  Not a pure module */

@@ -28,6 +28,10 @@ var Concurrently = PromiseTest.Concurrently;
 
 var panicTest = ErrorTests.panicTest;
 
+var singletonTest = ArrayTests.singletonTest;
+
+var m = ArrayTests.m;
+
 var $$catch = IntTests.$$catch;
 
 var forEachIfOkCallFunction = ResultTests.forEachIfOkCallFunction;
@@ -61,6 +65,8 @@ export {
   Catching ,
   Concurrently ,
   panicTest ,
+  singletonTest ,
+  m ,
   $$catch ,
   forEachIfOkCallFunction ,
   forEachIfErrorDoNotCallFunction ,
