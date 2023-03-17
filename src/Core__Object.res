@@ -23,19 +23,18 @@
 @val external hasOwnProperty: ({..}, string) => bool = "Object.prototype.hasOwnProperty.call"
 
 /**
-`seal` seals an object. Sealing an object prevents extensions and makes existing properties non-configurable. A sealed object has a fixed set of properties. Unlike `freeze`, values of existing properties can still be changed as long as they are writable. `seal` returns the same object that was passed in.
- 
-Any attempt to delete or add properties to a sealed object will fail, either silently or by throwing an error. 
+`seal` seals an object. Sealing an object prevents extensions and makes existing properties non-configurable. A sealed object has a fixed set of properties. Unlike `freeze`, values of existing properties can still be changed as long as they are writable. 
 
-Rescript usually [disallows modifying objects](https://rescript-lang.org/docs/manual/latest/object#update) regardless of whether they are sealed.
+**Note:** `seal` returns the same object that was passed in; it does not create a copy. Any attempt to delete or add properties to a sealed object will fail, either silently or by throwing an error. 
 
 ## Examples
 
 ```rescript
-let point = {"x": 1, "y": 3}->Object.seal
-let pointIsSealed = point->Object.isSealed // true
-let fruit = {"name": "Apple" }
-let fruitIsSealed = fruit->Object.isSealed // false
+let point = {"x": 1, "y": 2}
+point->Object.set("x", -7) // succeeds
+point->Object.seal->ignore
+point->Object.set("z", 9) // fails
+point->Object.set("x", 13) // succeeds
 ```
 ## Specifications
 - [Updating objects in Rescript](https://rescript-lang.org/docs/manual/latest/object#update)
