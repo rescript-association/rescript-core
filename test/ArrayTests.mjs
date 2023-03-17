@@ -3,6 +3,7 @@
 import * as Test from "./Test.mjs";
 import * as Caml_obj from "rescript/lib/es6/caml_obj.js";
 import * as Core__List from "../src/Core__List.mjs";
+import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Core__Array from "../src/Core__Array.mjs";
 
 var eq = Caml_obj.equal;
@@ -401,7 +402,44 @@ Test.run([
             
           })), eq, undefined);
 
+function fromOptionTest(wrap, title) {
+  Test.run([
+        [
+          "ArrayTests.res",
+          103,
+          22,
+          45
+        ],
+        "fromOption : " + title + ""
+      ], Core__Array.fromOption(Caml_option.some(wrap)), eq, [wrap]);
+}
+
+fromOptionTest(3, "int");
+
+fromOptionTest("abc", "string");
+
+fromOptionTest(undefined, "undefined");
+
+fromOptionTest([
+      1,
+      2,
+      3
+    ], "array");
+
+fromOptionTest([], "empty array");
+
+Test.run([
+      [
+        "ArrayTests.res",
+        111,
+        20,
+        42
+      ],
+      "fromOption : if none"
+    ], Core__Array.fromOption(undefined), eq, []);
+
 export {
   eq ,
+  fromOptionTest ,
 }
 /*  Not a pure module */

@@ -138,6 +138,14 @@ function findMap(arr, f) {
   };
 }
 
+function fromOption(opt) {
+  if (opt !== undefined) {
+    return Array.of(Caml_option.valFromOption(opt));
+  } else {
+    return Array.of();
+  }
+}
+
 export {
   make ,
   fromInitializer ,
@@ -155,5 +163,6 @@ export {
   shuffle ,
   shuffleInPlace ,
   findMap ,
+  fromOption ,
 }
 /* No side effect */
