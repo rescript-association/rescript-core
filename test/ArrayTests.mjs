@@ -401,7 +401,71 @@ Test.run([
             
           })), eq, undefined);
 
+function generator(i) {
+  if (i < 100) {
+    return [
+            i,
+            (i << 1)
+          ];
+  }
+  
+}
+
+Test.run([
+      [
+        "ArrayTests.res",
+        104,
+        20,
+        33
+      ],
+      "fromFormula"
+    ], Core__Array.fromFormula(1, generator), eq, [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ]);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        105,
+        20,
+        33
+      ],
+      "fromFormula"
+    ], Core__Array.fromFormula(12, generator), eq, [
+      12,
+      24,
+      48,
+      96
+    ]);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        106,
+        20,
+        33
+      ],
+      "fromFormula"
+    ], Core__Array.fromFormula(99, generator), eq, [99]);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        107,
+        20,
+        33
+      ],
+      "fromFormula"
+    ], Core__Array.fromFormula(100, generator), eq, []);
+
 export {
   eq ,
+  generator ,
 }
 /*  Not a pure module */

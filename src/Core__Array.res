@@ -214,3 +214,19 @@ let findMap = (arr, f) => {
 }
 
 @send external at: (array<'a>, int) => option<'a> = "at"
+
+let fromFormula = (state, generator) => {
+  let result = []
+  let state = ref(state)
+  let break = ref(false)
+  while !break.contents {
+    switch generator(state.contents) {
+    | None => break := true
+    | Some((item, nextState)) => {
+        result->push(item)
+        state := nextState
+      }
+    }
+  }
+  result
+}
