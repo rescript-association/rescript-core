@@ -962,10 +962,12 @@ external at: (array<'a>, int) => option<'a> = "at"
 ## Examples
 
 ```rescript
-let generator = i => i<100 ? Some(i, i*2) : None
-1->Array.fromFormula(generator) // [1, 2, 4, 8, 16, 32, 64]
-12->Array.fromFormula(generator) // [12, 24, 48, 96]
-100->Array.fromFormula(generator) // []
+let f = i => i<100 ? Some(i, i*2) : None
+Array.fromFormula(1, f) // [1, 2, 4, 8, 16, 32, 64]
+Array.fromFormula(100, f) // []
+
+let g = i => i >= 0.0 ? Some(i, i -. 0.5) : None 
+Array.fromFormula(3.0, g) // [3.0, 2.5, 2.0, 1.5, 1.0, 0.5, 0.0]
 ```
 */
 let fromFormula: ('state, 'state => option<('a, 'state)>) => array<'a>
