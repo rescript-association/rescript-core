@@ -971,16 +971,16 @@ let findMap: (array<'a>, 'a => option<'b>) => option<'b>
 external at: (array<'a>, int) => option<'a> = "at"
 
 /**
-`fromSingleton` generates a new array from a single value.
+`fromOneItem` generates a new array from a single value.
 
 ## Examples
 
 ```rescript
-3->Array.fromSingleton // [3]
-undefined->Array.fromSingleton // [undefined]
-Some("abc")->Array.fromSingleton // [Some("abc")]
-[1,2,3]->Array.fromSingleton // [[1,2,3]]
-{"x": 3, "y": 5}->Array.fromSingleton // Some({"x": 3, "y": 5})
+3->Array.fromOneItem // [3]
+undefined->Array.fromOneItem // [undefined]
+Some("abc")->Array.fromOneItem // [Some("abc")]
+[1,2,3]->Array.fromOneItem // [[1,2,3]]
+{"x": 3, "y": 5}->Array.fromOneItem // Some({"x": 3, "y": 5})
 ```
 
 ## Specifications
@@ -989,4 +989,4 @@ Some("abc")->Array.fromSingleton // [Some("abc")]
 - [Array.of ECMAScript Language Specification](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.of)
 */
 @val
-external fromSingleton: 'a => array<'a> = "Array.of"
+external fromOneItem: 'a => array<'a> = "Array.of"
