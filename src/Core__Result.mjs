@@ -102,6 +102,13 @@ function cmp(a, b, f) {
   }
 }
 
+function forEach(r, f) {
+  if (r.TAG === /* Ok */0) {
+    return Curry._1(f, r._0);
+  }
+  
+}
+
 export {
   getExn ,
   mapWithDefault ,
@@ -112,5 +119,6 @@ export {
   isError ,
   eq ,
   cmp ,
+  forEach ,
 }
 /* No side effect */
