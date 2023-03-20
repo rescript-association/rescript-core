@@ -112,8 +112,37 @@ runGetTest({
       ]
     });
 
+function getSymbolTestWhenExists(param) {
+  var obj = {};
+  var fruit = Symbol("fruit");
+  obj[fruit] = "banana";
+  var retrieved = obj[fruit];
+  Test.run([
+        [
+          "ObjectTests.res",
+          75,
+          15,
+          63
+        ],
+        "Object.getSymbol when exists return it as Some"
+      ], retrieved, eq, "banana");
+}
+
+getSymbolTestWhenExists(undefined);
+
+Test.run([
+      [
+        "ObjectTests.res",
+        84,
+        13,
+        65
+      ],
+      "Object.getSymbol when not exists return it as None"
+    ], ({})[Symbol("fruit")], eq, undefined);
+
 export {
   eq ,
   runGetTest ,
+  getSymbolTestWhenExists ,
 }
 /*  Not a pure module */

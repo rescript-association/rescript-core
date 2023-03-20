@@ -26,7 +26,20 @@
 */
 @get_index
 external get: ({..}, string) => option<'a> = ""
-@get_index external getSymbol: ({..}, Core__Symbol.t) => option<'a> = ""
+/**
+`getSymbol` gets the value of a property by symbol. Returns `None` if the property does not exist or has the value `undefined`. Otherwise returns `Some`, including if the value is `null`.
+
+## Examples
+
+```rescript
+let fruit = Symbol.make("fruit")
+let x = Object.empty()
+x->Object.setSymbol(fruit, "banana")
+x->Object.getSymbol(fruit) // Some("banana")
+```
+*/
+@get_index
+external getSymbol: ({..}, Core__Symbol.t) => option<'a> = ""
 @get_index external getSymbolUnsafe: ({..}, Core__Symbol.t) => 'a = ""
 
 @set_index external set: ({..}, string, 'a) => unit = ""

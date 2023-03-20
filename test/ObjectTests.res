@@ -63,3 +63,26 @@ let runGetTest = i =>
 //   get: i => i->Object.get("a")->Option.map(i => i->Array.concat([4, 5]))->Option.getWithDefault([]),
 //   expected: [],
 // }->runGetTest
+
+// ===== getSymbol =====
+
+let getSymbolTestWhenExists = () => {
+  let obj = Object.empty()
+  let fruit = Symbol.make("fruit")
+  obj->Object.setSymbol(fruit, "banana")
+  let retrieved = obj->Object.getSymbol(fruit)
+  Test.run(
+    __POS_OF__(`Object.getSymbol when exists return it as Some`),
+    retrieved,
+    eq,
+    Some("banana"),
+  )
+}
+getSymbolTestWhenExists()
+
+Test.run(
+  __POS_OF__(`Object.getSymbol when not exists return it as None`),
+  Object.empty()->Object.getSymbol(Symbol.make("fruit")),
+  eq,
+  None,
+)

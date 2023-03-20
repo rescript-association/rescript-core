@@ -33,6 +33,8 @@ var eq = ObjectTests.eq;
 
 var runGetTest = ObjectTests.runGetTest;
 
+var getSymbolTestWhenExists = ObjectTests.getSymbolTestWhenExists;
+
 export {
   bign ,
   TestError ,
@@ -47,5 +49,6 @@ export {
   $$catch ,
   eq ,
   runGetTest ,
+  getSymbolTestWhenExists ,
 }
 /* IntTests Not a pure module */
