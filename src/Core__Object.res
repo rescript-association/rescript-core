@@ -7,8 +7,26 @@
 @val external createWithNull: (@as(json`null`) _, unit) => {..} = "Object.create"
 @val external createWithNullAndProperties: (@as(json`null`) _, {..}) => {..} = "Object.create"
 
-@val external assign: ({..}, {..}) => {..} = "Object.assign"
-@variadic @val external assignMany: ({..}, array<{..}>) => {..} = "Object.assign"
+/**
+`assign(target, source)` copies enumerable own properties from the source to the target, overwriting properties with the same name. It returns the modified target object. A deep clone is not created; properties are copied by reference.
+
+**Note:** ReScript provides [first-class support for immutable objects](https://rescript-lang.org/docs/manual/latest/object), including spreading one object into another. This is often more convenient than using `assign`.  
+
+## Examples
+
+```rescript
+Object.assign({"a": 1}, {"a": 2}) // {"a": 2}
+Object.assign({"a": 1, "b": 2}, {"a": 0}) // {"a": 0, "b": 2}
+Object.assign({"a": 1}, {"a": null}) // {"a": null}
+```
+## Specifications
+- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.assign)
+- [Object.assign on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+*/
+@val
+external assign: ({..}, {..}) => {..} = "Object.assign"
+@variadic @val
+external assignMany: ({..}, array<{..}>) => {..} = "Object.assign"
 @val external copy: (@as(json`{}`) _, {..}) => {..} = "Object.assign"
 
 @get_index external get: ({..}, string) => option<'a> = ""
