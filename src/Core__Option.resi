@@ -248,3 +248,33 @@ compare(None, None, clockCompare) // 0.
 ```
 */
 let compare: (option<'a>, option<'b>, ('a, 'b) => Core__Ordering.t) => Core__Ordering.t
+
+/**
+`isSomeAnd(option, predicate)` tests whether the option is `Some` **and** the predicate applied to its value is true.
+
+An option can be thought of as an array with 0 or 1 items in it. `isSomeAnd` is similar to `Array.some` and acts like the "there exists" quantifier in mathematics. It returns false for a `None` option.
+
+## Examples
+
+```rescript
+Option.isSomeAnd(None, i => i >= 0) // false
+Option.isSomeAnd(Some(3), i => i > 1) // true
+Option.isSomeAnd(Some(3), i => i < 0) // false
+```
+*/
+let isSomeAnd: (option<'a>, 'a => bool) => bool
+
+/**
+`isNoneOr(option, predicate)` tests whether the option is `None` **or** the predicate applied to its value is true.
+
+An option can be thought of as an array with 0 or 1 items in it. `isNoneOr` is similar to `Array.every` and acts like the "for all" quantifier in mathematics. In particular it returns true when the option is `None`.
+
+## Examples
+
+```rescript
+Option.isNoneOr(None, i => i >= 0) // true
+Option.isNoneOr(Some(3), i => i > 1) // true
+Option.isNoneOr(Some(3), i => i < 0) // false
+```
+*/
+let isNoneOr: (option<'a>, 'a => bool) => bool

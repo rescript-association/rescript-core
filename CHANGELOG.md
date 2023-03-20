@@ -2,6 +2,10 @@
 
 ## Next version
 
+### API changes
+
+- Add `Option.isNoneOr` and `Option.isSomeAnd` https://github.com/rescript-association/rescript-core/pull/124
+
 ## 0.4.0
 
 ### API changes

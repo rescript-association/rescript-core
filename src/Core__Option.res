@@ -104,3 +104,15 @@ let compare = (a, b, cmp) =>
   | (Some(_), None) => Core__Ordering.greater
   | (None, None) => Core__Ordering.equal
   }
+
+let isSomeAnd = (o, p) =>
+  switch o {
+  | None => false
+  | Some(v) => p(v)
+  }
+
+let isNoneOr = (o, p) =>
+  switch o {
+  | None => true
+  | Some(v) => p(v)
+  }
