@@ -27,27 +27,27 @@
 /**
 `freeze` freezes an object. Freezing an object makes existing properties non-writable and prevents extensions. Once an object is frozen, new properties cannot be be added, existing properties cannot be removed, and their values cannot be changed.
 
-**Note:** `freeze` returns the same object that was passed in; it does not create a frozen copy. Any attempt to change a frozen object will fail, either silently or by throwing an exception. 
+**Note:** `freeze` returns the same object that was passed in; it does not create a frozen copy. Any attempt to change a frozen object will fail, either silently or by throwing an exception.
 
- ## Examples
+See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.isfrozen) and [Object.isFrozen on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen).
+
+## Examples
 
  ```rescript
 let obj = {"a": 1}
 obj->Object.set("a", 2) // succeeds
 obj->Object.freeze->ignore
 obj->Object.set("a", 3) // fails
- ```
- ## Specifications
-- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.freeze)
-- [Object.freeze on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
-- [Updating objects in Rescript](https://rescript-lang.org/docs/manual/latest/object#update)
- */
+```
+*/
 @val
 external freeze: 'a => 'a = "Object.freeze"
 
 @val external isSealed: 'a => bool = "Object.isSealed"
 /**
 `isFrozen` determines if an object is frozen. An object is frozen if an only if it is not extensible, all its properties are non-configurable, and all its data properties are non-writable.
+
+See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.isfrozen) and [Object.isFrozen on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen).
 
 ## Examples
 
@@ -57,11 +57,7 @@ let pointIsFrozen = point->Object.isFrozen // true
 let fruit = {"name": "Apple" }
 let fruitIsFrozen = fruit->Object.isFrozen // false
  ```
- ## Specifications
-- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.isfrozen)
-- [Object.isFrozen on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)
-- [Updating objects in Rescript](https://rescript-lang.org/docs/manual/latest/object#update)
- */
+*/
 @val
 external isFrozen: 'a => bool = "Object.isFrozen"
 @val external isExtensible: 'a => bool = "Object.isExtensible"
