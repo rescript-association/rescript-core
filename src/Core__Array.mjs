@@ -140,9 +140,9 @@ function findMap(arr, f) {
 
 function fromOption(opt) {
   if (opt !== undefined) {
-    return Array.of(Caml_option.valFromOption(opt));
+    return [Caml_option.valFromOption(opt)];
   } else {
-    return Array.of();
+    return [];
   }
 }
 
