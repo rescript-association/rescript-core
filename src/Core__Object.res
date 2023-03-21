@@ -1,13 +1,13 @@
 @obj external empty: unit => {..} = ""
 
 /**
-`is` determines if two objects are identical in all contexts. Objects, arrays, records, and other non-primitives are only identical if they reference the **exact** same object in memory. Primitives like ints, floats, and strings are identical if they have the same value. `+0` and `-0` are distinct. NaN is equal to itself.
+`is` determines if two objects are identical in all contexts. Objects, arrays, records, and other non-primitives are only identical if they reference the **exact** same object in memory. Primitives like ints, floats, and strings are identical if they have the same value. `+0` and `-0` are distinct. NaN is equal to itself. See [Object.is on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
 
-**Note:** In most scenarios use `==` or `===` or the custom `equals` function (if provided) for the type.
+In most scenarios use `==` or `===` or the custom `equals` function (if provided) for the type.
 
 The `==` operator [is different in ReScript than Javascript](https://rescript-lang.org/docs/manual/latest/overview#boolean). Arrays, records and other non-primitives are equal if they have the same contents (deep equality).
 
-In ReScript, the `===` operator performs a strict equality check, like Javascript, and is similar but not identical to `Object.is`; see [Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is). 
+In ReScript, the `===` operator performs a strict equality check, like Javascript, and is similar but not identical to `is`
 
 ## Examples
 
@@ -29,11 +29,6 @@ Object.is(fruit, {"name": "Apple" }) // false
 fruit == {"name": "Apple" } // true
 fruit === {"name": "Apple" } // false
 ```
-## Specifications
-
-- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.is)
-- [`Object.is on MDN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
-- [Equality operators in ReScript](https://rescript-lang.org/docs/manual/latest/overview#boolean)
 */
 @val
 external is: ('a, 'b) => bool = "Object.is"
