@@ -26,6 +26,8 @@ var Concurrently = PromiseTest.Concurrently;
 
 var panicTest = ErrorTests.panicTest;
 
+var fromOptionTest = ArrayTests.fromOptionTest;
+
 var eq = IntTests.eq;
 
 var $$catch = IntTests.$$catch;
@@ -41,6 +43,7 @@ export {
   Catching ,
   Concurrently ,
   panicTest ,
+  fromOptionTest ,
   eq ,
   $$catch ,
 }

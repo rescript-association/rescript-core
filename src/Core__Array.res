@@ -214,3 +214,9 @@ let findMap = (arr, f) => {
 }
 
 @send external at: (array<'a>, int) => option<'a> = "at"
+
+let fromOption = opt =>
+  switch opt {
+  | None => []
+  | Some(a) => [a]
+  }
