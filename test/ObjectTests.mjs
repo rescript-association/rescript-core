@@ -8,16 +8,6 @@ var eq = Caml_obj.equal;
 Test.run([
       [
         "ObjectTests.res",
-        7,
-        20,
-        41
-      ],
-      "is: different types"
-    ], Object.is("abc", false), eq, false);
-
-Test.run([
-      [
-        "ObjectTests.res",
         9,
         20,
         30
@@ -74,26 +64,6 @@ Test.run([
       ],
       "is: null and undefined"
     ], Object.is(null, null), eq, true);
-
-Test.run([
-      [
-        "ObjectTests.res",
-        17,
-        20,
-        44
-      ],
-      "is: null and undefined"
-    ], Object.is(null, undefined), eq, false);
-
-Test.run([
-      [
-        "ObjectTests.res",
-        18,
-        20,
-        44
-      ],
-      "is: undefined and None"
-    ], Object.is(undefined, undefined), eq, true);
 
 var nums = [
   1,

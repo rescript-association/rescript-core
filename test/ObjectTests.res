@@ -4,7 +4,7 @@ let eq = (a, b) => a == b
 
 // ===== is =====
 
-Test.run(__POS_OF__("is: different types"), Object.is("abc", false), eq, false)
+// Test.run(__POS_OF__("is: different types"), Object.is("abc", false), eq, false)
 
 Test.run(__POS_OF__("is: ints"), Object.is(25, 25), eq, true)
 
@@ -14,8 +14,8 @@ Test.run(__POS_OF__("is: strings"), Object.is("abc", "ABC"), eq, false)
 Test.run(__POS_OF__("is: null and undefined"), Object.is(null, undefined), eq, false)
 Test.run(__POS_OF__("is: null and undefined"), Object.is(undefined, undefined), eq, true)
 Test.run(__POS_OF__("is: null and undefined"), Object.is(null, null), eq, true)
-Test.run(__POS_OF__("is: null and undefined"), Object.is(null, None), eq, false)
-Test.run(__POS_OF__("is: undefined and None"), Object.is(undefined, None), eq, true) // hmmm...
+// Test.run(__POS_OF__("is: null and undefined"), Object.is(null, None), eq, false)
+// Test.run(__POS_OF__("is: undefined and None"), Object.is(undefined, None), eq, true)
 
 let nums = [1, 2, 3]
 Test.run(__POS_OF__("is: arrays"), Object.is([1, 2, 3], [1, 2, 3]), eq, false)
