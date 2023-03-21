@@ -197,3 +197,15 @@ let eq: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
   ```
 */
 let cmp: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => int) => int
+
+/**
+`forEach(res, f)` runs the provided function `f` on the `Ok` value. If `res` is `Error`, nothing happens. 
+
+## Examples
+
+```rescript
+Result.forEach(Ok(3), Console.log) // Logs "3", returns ()
+Result.forEach(Error("x"), Console.log) // Does nothing, returns ()
+```
+*/
+let forEach: (t<'a, 'b>, 'a => unit) => unit
