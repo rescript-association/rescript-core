@@ -27,6 +27,8 @@
 
 **Note:** `seal` returns the same object that was passed in; it does not create a copy. Any attempt to delete or add properties to a sealed object will fail, either silently or by throwing an error. 
 
+See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.seal) and [Object.seal on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)
+
 ## Examples
 
 ```rescript
@@ -36,10 +38,6 @@ point->Object.seal->ignore
 point->Object.set("z", 9) // fails
 point->Object.set("x", 13) // succeeds
 ```
-## Specifications
-- [Updating objects in Rescript](https://rescript-lang.org/docs/manual/latest/object#update)
-- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.seal)
-- [Object.seal on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)
 */
 @val
 external seal: 'a => 'a = "Object.seal"
@@ -47,21 +45,19 @@ external seal: 'a => 'a = "Object.seal"
 @val external freeze: 'a => 'a = "Object.freeze"
 
 /**
- `isSealed` determines if an object is sealed. A sealed object has a fixed set of properties.
+`isSealed` determines if an object is sealed. A sealed object has a fixed set of properties.
 
- ## Examples
+See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.issealed) and [Object.isSealed on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)
 
- ```rescript
- let point = {"x": 1, "y": 3}->Object.seal
- let pointIsSealed = point->Object.isSealed // true
- let fruit = {"name": "Apple" }
- let fruitIsSealed = fruit->Object.isSealed // false
-  ```
-  ## Specifications
- - [Updating objects in Rescript](https://rescript-lang.org/docs/manual/latest/object#update)
- - [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.issealed)
- - [Object.isSealed on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)
-  */
+## Examples
+
+```rescript
+let point = {"x": 1, "y": 3}->Object.seal
+let pointIsSealed = point->Object.isSealed // true
+let fruit = {"name": "Apple" }
+let fruitIsSealed = fruit->Object.isSealed // false
+ ```
+*/
 @val
 external isSealed: 'a => bool = "Object.isSealed"
 @val external isFrozen: 'a => bool = "Object.isFrozen"
