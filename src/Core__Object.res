@@ -5,10 +5,6 @@
 
 In most scenarios use `==` or `===` or the custom `equals` function (if provided) for the type.
 
-The `==` operator [is different in ReScript than Javascript](https://rescript-lang.org/docs/manual/latest/overview#boolean). Arrays, records and other non-primitives are equal if they have the same contents (deep equality).
-
-In ReScript, the `===` operator performs a strict equality check, like Javascript, and is similar but not identical to `is`
-
 ## Examples
 
 ```rescript
