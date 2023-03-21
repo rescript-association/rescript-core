@@ -25,8 +25,7 @@
 
 ```rescript
 {"a": 1, "b": 2}->Object.keysToArray // ["a", "b"]
-{"a": undefined}->Object.keysToArray // ["a"]
-Object.empty()->Object.keysToArray // []
+{"a": None}->Object.keysToArray // ["a"]Object.empty()->Object.keysToArray // []
 ```
 ## Specifications
 - [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.keys)
