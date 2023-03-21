@@ -26,6 +26,8 @@
 /**
 `preventExtensions` prevents new properties from being added to the object. It modifies the object (rather than creating a copy) and returns it.
 
+See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.preventextensions) and [Object.preventExtensions on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
+
 ## Examples
 
 ```rescript
@@ -34,9 +36,6 @@ obj->Object.set("b", 2) // succeeds
 obj->Object.preventExtensions->ignore
 obj->Object.set("c", 3) // fails
 ```
-## Specifications
-- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.preventextensions)
-- [Object.preventExtensions on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
 */
 @val
 external preventExtensions: 'a => 'a = "Object.preventExtensions"
@@ -45,19 +44,18 @@ external preventExtensions: 'a => 'a = "Object.preventExtensions"
 @val external isSealed: 'a => bool = "Object.isSealed"
 @val external isFrozen: 'a => bool = "Object.isFrozen"
 /**
- `isExtensible` determines if an object is extensible (whether it can have new properties added to it).
+`isExtensible` determines if an object is extensible (whether it can have new properties added to it).
 
- ## Examples
+See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.isextensible) and [Object.isExtensible on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)
 
- ```rescript
+## Examples
+
+```rescript
 let obj = {"a": 1}
 obj->Object.isExtensible // true
 obj->Object.preventExtensions->ignore
 obj->Object.isExtensible // false
 ```
-## Specifications
-- [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.isextensible)
-- [Object.isExtensible on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)
 */
 @val
 external isExtensible: 'a => bool = "Object.isExtensible"
