@@ -27,7 +27,7 @@ fruit === {"name": "Apple" } // false
 ```
 */
 @val
-external is: ('a, 'b) => bool = "Object.is"
+external is: ('a, 'a) => bool = "Object.is"
 
 @val external create: {..} => {..} = "Object.create"
 @val external createWithProperties: ({..}, {..}) => {..} = "Object.create"
