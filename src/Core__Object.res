@@ -49,8 +49,28 @@ external is: ('a, 'a) => bool = "Object.is"
 
 @val external hasOwnProperty: ({..}, string) => bool = "Object.prototype.hasOwnProperty.call"
 
-@val external seal: 'a => 'a = "Object.seal"
+/**
+`seal` seals an object. Sealing an object prevents extensions and makes existing properties non-configurable. A sealed object has a fixed set of properties. Unlike `freeze`, values of existing properties can still be changed as long as they are writable. 
+
+**Note:** `seal` returns the same object that was passed in; it does not create a copy. Any attempt to delete or add properties to a sealed object will fail, either silently or by throwing an error. 
+
+See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.seal) and [Object.seal on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)
+
+## Examples
+
+```rescript
+let point = {"x": 1, "y": 2}
+point->Object.set("x", -7) // succeeds
+point->Object.seal->ignore
+point->Object.set("z", 9) // fails
+point->Object.set("x", 13) // succeeds
+```
+*/
+@val
+external seal: 'a => 'a = "Object.seal"
+
 @val external preventExtensions: 'a => 'a = "Object.preventExtensions"
+
 /**
 `freeze` freezes an object. Freezing an object makes existing properties non-writable and prevents extensions. Once an object is frozen, new properties cannot be be added, existing properties cannot be removed, and their values cannot be changed.
 
@@ -70,7 +90,23 @@ obj->Object.set("a", 3) // fails
 @val
 external freeze: 'a => 'a = "Object.freeze"
 
-@val external isSealed: 'a => bool = "Object.isSealed"
+/**
+`isSealed` determines if an object is sealed. A sealed object has a fixed set of properties.
+
+See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.issealed) and [Object.isSealed on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)
+
+## Examples
+
+```rescript
+let point = {"x": 1, "y": 3}->Object.seal
+let pointIsSealed = point->Object.isSealed // true
+let fruit = {"name": "Apple" }
+let fruitIsSealed = fruit->Object.isSealed // false
+ ```
+*/
+@val
+external isSealed: 'a => bool = "Object.isSealed"
+
 /**
 `isFrozen` determines if an object is frozen. An object is frozen if an only if it is not extensible, all its properties are non-configurable, and all its data properties are non-writable.
 
