@@ -5,6 +5,7 @@
 ### API changes
 
 - Add `Result.forEach` https://github.com/rescript-association/rescript-core/pull/116
+- Add `Array.fromOption` https://github.com/rescript-association/rescript-core/pull/111
 
 ## 0.2.0
 
