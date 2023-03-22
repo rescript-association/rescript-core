@@ -2,6 +2,14 @@
 
 ## main
 
+### API changes
+
+- Add `Result.forEach` https://github.com/rescript-association/rescript-core/pull/116
+
+### Documentation
+
+- Docstrings for `Object`. Not yet complete. https://github.com/rescript-association/rescript-core/pull/117
+
 ## 0.2.0
 
 ### API changes
