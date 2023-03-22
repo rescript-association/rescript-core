@@ -45,7 +45,20 @@ external is: ('a, 'a) => bool = "Object.is"
 @set_index external set: ({..}, string, 'a) => unit = ""
 @set_index external setSymbol: ({..}, Core__Symbol.t, 'a) => unit = ""
 
-@val external keysToArray: {..} => array<string> = "Object.keys"
+/**
+`keysToArray` returns an array of an object's own enumerable string-keyed property names. See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.keys) 
+or [Object.keys on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys).
+
+## Examples
+
+```rescript
+{"a": 1, "b": 2}->Object.keysToArray // ["a", "b"]
+{"a": None}->Object.keysToArray // ["a"]
+Object.empty()->Object.keysToArray // []
+```
+*/
+@val
+external keysToArray: {..} => array<string> = "Object.keys"
 
 @val external hasOwnProperty: ({..}, string) => bool = "Object.prototype.hasOwnProperty.call"
 
