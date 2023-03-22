@@ -69,7 +69,22 @@ point->Object.set("x", 13) // succeeds
 @val
 external seal: 'a => 'a = "Object.seal"
 
-@val external preventExtensions: 'a => 'a = "Object.preventExtensions"
+/**
+`preventExtensions` prevents new properties from being added to the object. It modifies the object (rather than creating a copy) and returns it.
+
+See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.preventextensions) and [Object.preventExtensions on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
+
+## Examples
+
+```rescript
+let obj = {"a": 1}
+obj->Object.set("b", 2) // succeeds
+obj->Object.preventExtensions->ignore
+obj->Object.set("c", 3) // fails
+```
+*/
+@val
+external preventExtensions: 'a => 'a = "Object.preventExtensions"
 
 /**
 `freeze` freezes an object. Freezing an object makes existing properties non-writable and prevents extensions. Once an object is frozen, new properties cannot be be added, existing properties cannot be removed, and their values cannot be changed.
@@ -123,4 +138,20 @@ let fruitIsFrozen = fruit->Object.isFrozen // false
 */
 @val
 external isFrozen: 'a => bool = "Object.isFrozen"
-@val external isExtensible: 'a => bool = "Object.isExtensible"
+
+/**
+`isExtensible` determines if an object is extensible (whether it can have new properties added to it).
+
+See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.isextensible) and [Object.isExtensible on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)
+
+## Examples
+
+```rescript
+let obj = {"a": 1}
+obj->Object.isExtensible // true
+obj->Object.preventExtensions->ignore
+obj->Object.isExtensible // false
+```
+*/
+@val
+external isExtensible: 'a => bool = "Object.isExtensible"
