@@ -91,9 +91,3 @@ let cmpU = (a, b, f) =>
   }
 
 let cmp = (a, b, f) => cmpU(a, b, (. x, y) => f(x, y))
-
-let forEach = (r, f) =>
-  switch r {
-  | Ok(ok) => f(ok)
-  | Error(_) => ()
-  }
