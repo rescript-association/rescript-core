@@ -39,6 +39,8 @@ var x = ObjectTests.x;
 
 var mkBig = ObjectTests.mkBig;
 
+var assignOverwritesTarget = ObjectTests.assignOverwritesTarget;
+
 export {
   bign ,
   TestError ,
@@ -56,5 +58,6 @@ export {
   d ,
   x ,
   mkBig ,
+  assignOverwritesTarget ,
 }
 /* IntTests Not a pure module */
