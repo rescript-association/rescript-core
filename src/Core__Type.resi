@@ -1,75 +1,65 @@
 /***
-Utilities for classifying the type of JavaScript values at runtime.
+Utilities for classifying and safely using JavaScript values at runtime.
 */
 
 /**
-The possible types of JavaScript values.
+The possible types of JavaScript values. See [typeof on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
 */
-type t = [#undefined | #object | #boolean | #number | #bigint | #string | #symbol | #function]
+type typeof = [
+  | #undefined
+  | #object
+  | #boolean
+  | #number
+  | #bigint
+  | #string
+  | #symbol
+  | #function
+]
 
 /**
-`typeof(someValue)`
+An abstract type-safe representation for values whose contents are a mystery, or at least not 100% guaranteed to be what you expect. A value of type `unknown` could a number, string, function, null, or any other JavaScript type. To safely use an `unknown` value use the functions in this module to test and classify it as its true underlying type.
+*/
+type unknown
 
-Returns the underlying JavaScript type of any runtime value.
+external toUnknown: 'a => unknown = "%identity"
 
-See [`typeof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) on MDN.
+/**
+`typeof(value)` returns the underlying JavaScript type of `value` at runtime. **Note** null values return `object`. See [typeof on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
 
 ## Examples
 ```rescript
-Console.log(Type.typeof("Hello")) // Logs "string" to the console.
-
-let someVariable = true
-
-switch someVariable->Type.typeof {
-| #boolean => Console.log("This is a bool, yay!")
-| _ => Console.log("Oh, not a bool sadly...")
-}
+Type.typeof("Hello") // "string"
+Type.typeof(3) // "number"
+Type.typeof(3.14) // "number"
+Type.typeof(null) // "object"
 ```
 */
-external typeof: 'a => t = "#typeof"
+external typeof: 'a => typeof = "#typeof"
 
-module Classify: {
-  /***
-  Classifies JavaScript runtime values.
+// Why can't this be {..} so it can be used by the Object module?
+type object
+
+/**
+  An abstract type representing a JavaScript function. See [`function on MDN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function)
   */
+type function
 
-  /**
-  An abstract type representing a JavaScript function.
+/**
+Represents a classified JavaScript value.
+*/
+type jsType =
+  | Undefined
+  | Null
+  | Object(object)
+  | Bool(bool)
+  | Number(float)
+  | BigInt(Core__BigInt.t)
+  | String(string)
+  | Symbol(Core__Symbol.t)
+  | Function(function)
 
-  See [`function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function) on MDN.
-  */
-  type function
-
-  /**
-  An abstract type representing a JavaScript object.
-
-  See [`object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) on MDN.
-  */
-  type object
-
-  /**
-  An abstract type representing a JavaScript symbol.
-
-  See [`symbol`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) on MDN.
-  */
-  type symbol
-
-  /**
-  The type representing a classified JavaScript value.
-  */
-  type t =
-    | Bool(bool)
-    | Null
-    | Undefined
-    | String(string)
-    | Number(float)
-    | Object(object)
-    | Function(function)
-    | Symbol(symbol)
-
-  /**
-`classify(anyValue)`
-Classifies a JavaScript value.
+/**
+`classify(value)` inspects a value and determines its type using the `typeof` function.
 
 ## Examples
 ```rescript
@@ -79,5 +69,29 @@ switch %raw(`null`)->Type.Classify.classify {
 }
 ```
 */
-  let classify: 'a => t
-}
+let classify: 'a => jsType
+
+let isUndefined: 'a => bool
+let isNull: 'a => bool
+let isNullOrUndefined: 'a => bool
+
+let toObject: 'a => option<object>
+let toBool: 'a => option<bool>
+let toFloat: 'a => option<float>
+let toBigInt: 'a => option<Core__BigInt.t>
+let toString: 'a => option<string>
+let toSymbol: 'a => option<Core__Symbol.t>
+let toFunction: 'a => option<function>
+
+// == EXPERIMENTAL ==
+// Might be helpful for pulling data out of an exception or Error
+// or unknown object, without having to add getters to additional
+// objects.
+
+// Throws on null or undefined
+@get_index external getUnsafe: ('a, string) => option<unknown> = ""
+@get_index external getBySymbolUnsafe: ('a, Core__Symbol.t) => option<unknown> = ""
+
+// Checks for null and undefined before trying the indexer
+let get: ('a, string) => option<unknown>
+let getBySymbol: ('a, Core__Symbol.t) => option<unknown>
