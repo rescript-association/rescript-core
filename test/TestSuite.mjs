@@ -41,6 +41,10 @@ var mkBig = ObjectTests.mkBig;
 
 var assignOverwritesTarget = ObjectTests.assignOverwritesTarget;
 
+var runGetTest = ObjectTests.runGetTest;
+
+var getSymbolTestWhenExists = ObjectTests.getSymbolTestWhenExists;
+
 export {
   bign ,
   TestError ,
@@ -59,5 +63,7 @@ export {
   x ,
   mkBig ,
   assignOverwritesTarget ,
+  runGetTest ,
+  getSymbolTestWhenExists ,
 }
 /* IntTests Not a pure module */

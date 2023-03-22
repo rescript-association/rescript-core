@@ -4,7 +4,10 @@ let eq = (a, b) => a == b
 
 // ===== is =====
 
+// == Removed when argument types were changed to be the same ==
 // Test.run(__POS_OF__("is: different types"), Object.is("abc", false), eq, false)
+// Test.run(__POS_OF__("is: null and undefined"), Object.is(null, None), eq, false)
+// Test.run(__POS_OF__("is: undefined and None"), Object.is(undefined, None), eq, true)
 
 Test.run(__POS_OF__("is: ints"), Object.is(25, 25), eq, true)
 
@@ -14,8 +17,6 @@ Test.run(__POS_OF__("is: strings"), Object.is("abc", "ABC"), eq, false)
 Test.run(__POS_OF__("is: null and undefined"), Object.is(null, undefined), eq, false)
 Test.run(__POS_OF__("is: null and undefined"), Object.is(undefined, undefined), eq, true)
 Test.run(__POS_OF__("is: null and undefined"), Object.is(null, null), eq, true)
-// Test.run(__POS_OF__("is: null and undefined"), Object.is(null, None), eq, false)
-// Test.run(__POS_OF__("is: undefined and None"), Object.is(undefined, None), eq, true)
 
 let nums = [1, 2, 3]
 Test.run(__POS_OF__("is: arrays"), Object.is([1, 2, 3], [1, 2, 3]), eq, false)
@@ -75,3 +76,88 @@ assignOverwritesTarget(~title="when source is undefined", ~source=undefined)
 assignOverwritesTarget(~title="when source is null", ~source=null)
 assignOverwritesTarget(~title="when source is a number", ~source=1)
 assignOverwritesTarget(~title="when source is a string", ~source="abc")
+
+// ===== get =====
+
+type getTestData<'obj, 'res, 'expected> = {
+  title: string,
+  source: unit => 'obj,
+  get: 'obj => 'res,
+  expected: 'expected,
+}
+
+let runGetTest = i =>
+  Test.run(__POS_OF__(`Object.get: ${i.title}`), i.source()->i.get, eq, i.expected)
+
+{
+  title: "prop exists, return Some",
+  source: () => {"a": 1},
+  get: Object.get(_, "a"),
+  expected: Some(1),
+}->runGetTest
+
+{
+  title: "prop NOT exist, return None",
+  source: () => {"a": 1},
+  get: i => i->Object.get("banana"),
+  expected: None,
+}->runGetTest
+
+{
+  title: "prop like toString, return Some",
+  source: () => {"a": 1},
+  get: i => i->Object.get("toString")->Option.isSome,
+  expected: true,
+}->runGetTest
+
+{
+  title: "prop exist but explicitly undefined, return None",
+  source: () => {"a": undefined},
+  get: i => i->Object.get("a"),
+  expected: None,
+}->runGetTest
+
+{
+  title: "prop exist but explicitly null, return None",
+  source: () => {"a": null},
+  get: i => i->Object.get("a"),
+  expected: Some(null),
+}->runGetTest
+
+{
+  title: "prop exists and is an array, can get it",
+  source: () => {"a": [1, 2, 3]},
+  get: i => i->Object.get("a")->Option.map(i => i->Array.concat([4, 5]))->Option.getWithDefault([]),
+  expected: [1, 2, 3, 4, 5],
+}->runGetTest
+
+// This throws an exception
+// {
+//   title: "prop exists but casted wrong on get",
+//   source: () => {"a": 34},
+//   get: i => i->Object.get("a")->Option.map(i => i->Array.concat([4, 5]))->Option.getWithDefault([]),
+//   expected: [],
+// }->runGetTest
+
+// ===== getSymbol =====
+
+let getSymbolTestWhenExists = () => {
+  let obj = Object.empty()
+  let fruit = Symbol.make("fruit")
+  obj->Object.setSymbol(fruit, "banana")
+  let retrieved = obj->Object.getSymbol(fruit)
+  Test.run(
+    __POS_OF__(`Object.getSymbol when exists return it as Some`),
+    retrieved,
+    eq,
+    Some("banana"),
+  )
+}
+getSymbolTestWhenExists()
+
+Test.run(
+  __POS_OF__(`Object.getSymbol when not exists return it as None`),
+  Object.empty()->Object.getSymbol(Symbol.make("fruit")),
+  eq,
+  None,
+)
