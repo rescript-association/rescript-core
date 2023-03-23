@@ -59,47 +59,13 @@ let classify = value => {
   }
 }
 
-let toObject = i =>
-  switch i->classify {
-  | Object(i) => Some(i)
-  | _ => None
-  }
-
-let toBool = i =>
-  switch i->classify {
-  | Bool(b) => Some(b)
-  | _ => None
-  }
-
-let toFloat = i =>
-  switch i->classify {
-  | Number(i) => Some(i)
-  | _ => None
-  }
-
-let toBigInt = i =>
-  switch i->classify {
-  | BigInt(i) => Some(i)
-  | _ => None
-  }
-
-let toString = i =>
-  switch i->classify {
-  | String(i) => Some(i)
-  | _ => None
-  }
-
-let toSymbol = i =>
-  switch i->classify {
-  | Symbol(i) => Some(i)
-  | _ => None
-  }
-
-let toFunction = i =>
-  switch i->classify {
-  | Function(i) => Some(i)
-  | _ => None
-  }
+let toObject = i => typeof(i) === #object ? i->Obj.magic->Some : None
+let toBool = i => typeof(i) === #boolean ? i->Obj.magic->Some : None
+let toFloat = i => typeof(i) === #number ? i->Obj.magic->Some : None
+let toBigInt = i => typeof(i) === #bigint ? i->Obj.magic->Some : None
+let toString = i => typeof(i) === #string ? i->Obj.magic->Some : None
+let toSymbol = i => typeof(i) === #symbol ? i->Obj.magic->Some : None
+let toFunction = i => typeof(i) === #function ? i->Obj.magic->Some : None
 
 // throws on null or undefined
 @get_index external getUnsafe: ('a, string) => option<unknown> = ""

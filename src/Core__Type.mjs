@@ -55,66 +55,52 @@ function classify(value) {
 }
 
 function toObject(i) {
-  var i$1 = classify(i);
-  if (typeof i$1 === "number" || i$1.TAG !== /* Object */0) {
-    return ;
-  } else {
-    return Caml_option.some(i$1._0);
+  if (typeof i === "object") {
+    return Caml_option.some(i);
   }
+  
 }
 
 function toBool(i) {
-  var b = classify(i);
-  if (typeof b === "number" || b.TAG !== /* Bool */1) {
-    return ;
-  } else {
-    return b._0;
+  if (typeof i === "boolean") {
+    return Caml_option.some(i);
   }
+  
 }
 
 function toFloat(i) {
-  var i$1 = classify(i);
-  if (typeof i$1 === "number" || i$1.TAG !== /* Number */2) {
-    return ;
-  } else {
-    return i$1._0;
+  if (typeof i === "number") {
+    return Caml_option.some(i);
   }
+  
 }
 
 function toBigInt(i) {
-  var i$1 = classify(i);
-  if (typeof i$1 === "number" || i$1.TAG !== /* BigInt */3) {
-    return ;
-  } else {
-    return Caml_option.some(i$1._0);
+  if (typeof i === "bigint") {
+    return Caml_option.some(i);
   }
+  
 }
 
 function toString(i) {
-  var i$1 = classify(i);
-  if (typeof i$1 === "number" || i$1.TAG !== /* String */4) {
-    return ;
-  } else {
-    return i$1._0;
+  if (typeof i === "string") {
+    return Caml_option.some(i);
   }
+  
 }
 
 function toSymbol(i) {
-  var i$1 = classify(i);
-  if (typeof i$1 === "number" || i$1.TAG !== /* Symbol */5) {
-    return ;
-  } else {
-    return Caml_option.some(i$1._0);
+  if (typeof i === "symbol") {
+    return Caml_option.some(i);
   }
+  
 }
 
 function toFunction(i) {
-  var i$1 = classify(i);
-  if (typeof i$1 === "number" || i$1.TAG !== /* Function */6) {
-    return ;
-  } else {
-    return Caml_option.some(i$1._0);
+  if (typeof i === "function") {
+    return Caml_option.some(i);
   }
+  
 }
 
 function get(item, name) {
