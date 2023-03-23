@@ -1,4 +1,16 @@
-@obj external empty: unit => {..} = ""
+/**
+`empty` create a new object that inherits the properties and methods from the standard built-in Object, such as `toString`. See [Object on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+## Examples
+
+```rescript
+let x = Object.empty()
+x->Object.keysToArray->Array.length // 0
+x->Object.get("toString")->Option.isSome // true
+```
+*/
+@obj
+external empty: unit => {..} = ""
 
 /**
 `is` determines if two objects are identical in all contexts. Objects, arrays, records, and other non-primitives are only identical if they reference the **exact** same object in memory. Primitives like ints, floats, and strings are identical if they have the same value. `+0` and `-0` are distinct. NaN is equal to itself. See [Object.is on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
