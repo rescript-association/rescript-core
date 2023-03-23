@@ -140,7 +140,20 @@ Object.empty()->Object.keysToArray // []
 @val
 external keysToArray: {..} => array<string> = "Object.keys"
 
-@val external hasOwnProperty: ({..}, string) => bool = "Object.prototype.hasOwnProperty.call"
+/**
+`hasOwnProperty` determines whether the object has the specified property as its **own** property, as opposed to inheriting it. See [hasOwnProperty on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
+
+## Examples
+
+```rescript
+let point = {"x": 1, "y": 2}
+{"a": 1}->hasOwnProperty("a") // true
+{"a": 1}->hasOwnProperty("b") // false
+{"a": 1}->hasOwnProperty("toString") // false
+```
+*/
+@val
+external hasOwnProperty: ({..}, string) => bool = "Object.prototype.hasOwnProperty.call"
 
 /**
 `seal` seals an object. Sealing an object prevents extensions and makes existing properties non-configurable. A sealed object has a fixed set of properties. Unlike `freeze`, values of existing properties can still be changed as long as they are writable. 
