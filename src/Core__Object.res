@@ -109,7 +109,20 @@ x->Object.getSymbol(fruit) // Some("banana")
 external getSymbol: ({..}, Core__Symbol.t) => option<'a> = ""
 @get_index external getSymbolUnsafe: ({..}, Core__Symbol.t) => 'a = ""
 
-@set_index external set: ({..}, string, 'a) => unit = ""
+/**
+`set(name, value)` assigns a value to the named object property, overwriting the previous value if any. See [Working with Objects on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects#objects_and_properties)
+
+## Examples
+
+```rescript
+{"a": 1}->Object.set("a", 2) // {"a": 2}
+{"a": 1}->Object.set("a", None) // {"a": None}
+{"a": 1}->Object.set("b", 2) // {"a": 1, "b": 2}
+```
+*/
+@set_index
+external set: ({..}, string, 'a) => unit = ""
+
 @set_index external setSymbol: ({..}, Core__Symbol.t, 'a) => unit = ""
 
 /**
