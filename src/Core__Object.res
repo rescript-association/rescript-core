@@ -75,7 +75,7 @@ See [Object.assign on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScri
 */
 external assignMany: ({..}, array<{..}>) => {..} = "Object.assign"
 
-@val external copy: (@as(json`{}`) _, {..}) => {..} = "Object.assign"
+@val external copy: (@as(json`{}`) _, {..} as 'a) => 'a = "Object.assign"
 
 /**
 `get` gets the value of a property by name. Returns `None` if the property does not exist or has the value `undefined`. Otherwise returns `Some`, including if the value is `null`.
@@ -160,7 +160,7 @@ point->Object.set("x", 13) // succeeds
 ```
 */
 @val
-external seal: 'a => 'a = "Object.seal"
+external seal: ({..} as 'a) => 'a = "Object.seal"
 
 /**
 `preventExtensions` prevents new properties from being added to the object. It modifies the object (rather than creating a copy) and returns it.
@@ -177,7 +177,7 @@ obj->Object.set("c", 3) // fails
 ```
 */
 @val
-external preventExtensions: 'a => 'a = "Object.preventExtensions"
+external preventExtensions: ({..} as 'a) => 'a = "Object.preventExtensions"
 
 /**
 `freeze` freezes an object. Freezing an object makes existing properties non-writable and prevents extensions. Once an object is frozen, new properties cannot be be added, existing properties cannot be removed, and their values cannot be changed.
@@ -196,7 +196,7 @@ obj->Object.set("a", 3) // fails
 ```
 */
 @val
-external freeze: 'a => 'a = "Object.freeze"
+external freeze: ({..} as 'a) => 'a = "Object.freeze"
 
 /**
 `isSealed` determines if an object is sealed. A sealed object has a fixed set of properties.
