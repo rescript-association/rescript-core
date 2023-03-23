@@ -89,9 +89,9 @@ let toFunction: 'a => option<function>
 // objects.
 
 // Throws on null or undefined
-@get_index external getUnsafe: ('a, string) => option<unknown> = ""
-@get_index external getBySymbolUnsafe: ('a, Core__Symbol.t) => option<unknown> = ""
+// @get_index external getUnsafe: ('a, string) => option<unknown> = ""
+// @get_index external getBySymbolUnsafe: ('a, Core__Symbol.t) => option<unknown> = ""
 
-// Checks for null and undefined before trying the indexer
+// Checks for null and undefined first; are these safe?
 let get: ('a, string) => option<unknown>
 let getBySymbol: ('a, Core__Symbol.t) => option<unknown>
