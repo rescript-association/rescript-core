@@ -599,6 +599,30 @@ Test.run([
       "Object.getSymbol when not exists return it as None"
     ], ({})[Symbol("fruit")], eq, undefined);
 
+Test.run([
+      [
+        "ObjectTests.res",
+        168,
+        13,
+        46
+      ],
+      "Object.create clones properties"
+    ], Object.create({
+            a: 1
+          })["a"], eq, 1);
+
+Test.run([
+      [
+        "ObjectTests.res",
+        175,
+        13,
+        46
+      ],
+      "Object.create clones properties"
+    ], Object.create({
+            a: 1
+          })["b"], eq, undefined);
+
 export {
   eq ,
   nums ,

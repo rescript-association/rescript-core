@@ -161,3 +161,20 @@ Test.run(
   eq,
   None,
 )
+
+// ===== create =====
+
+Test.run(
+  __POS_OF__(`Object.create clones properties`),
+  {"a": 1}->Object.create->Object.get("a"),
+  eq,
+  Some(1),
+)
+
+Test.run(
+  __POS_OF__(`Object.create clones properties`),
+  {"a": 1}->Object.create->Object.get("b"),
+  eq,
+  None,
+)
+

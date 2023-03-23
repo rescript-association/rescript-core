@@ -41,8 +41,24 @@ fruit === {"name": "Apple" } // false
 @val
 external is: ('a, 'a) => bool = "Object.is"
 
-@val external create: {..} => {..} = "Object.create"
-@val external createWithProperties: ({..}, {..}) => {..} = "Object.create"
+/**
+`create` creates a new object, using an existing object as the prototype of the new object. See [Object.create on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
+
+**Note:** ReScript provides [first-class support for immutable objects](https://rescript-lang.org/docs/manual/latest/object) and [records](https://rescript-lang.org/docs/manual/latest/record). This is often safer and more convenient than using `create` and other functions in this module.
+
+## Examples
+
+```rescript
+let x = {"fruit": "banana"}
+let y = Object.create(x)
+y->Object.get("fruit") // Some("banana")
+```
+*/
+@val
+external create: {..} => {..} = "Object.create"
+
+@val
+external createWithProperties: ({..}, {..}) => {..} = "Object.create"
 @val external createWithNull: (@as(json`null`) _, unit) => {..} = "Object.create"
 @val external createWithNullAndProperties: (@as(json`null`) _, {..}) => {..} = "Object.create"
 
