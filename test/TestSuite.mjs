@@ -6,6 +6,7 @@ import * as ArrayTests from "./ArrayTests.mjs";
 import * as ErrorTests from "./ErrorTests.mjs";
 import * as PromiseTest from "./PromiseTest.mjs";
 import * as ResultTests from "./ResultTests.mjs";
+import * as TypedArrayTests from "./TypedArrayTests.mjs";
 
 var bign = TestTests.bign;
 
@@ -29,11 +30,25 @@ var panicTest = ErrorTests.panicTest;
 
 var $$catch = IntTests.$$catch;
 
-var eq = ResultTests.eq;
-
 var forEachIfOkCallFunction = ResultTests.forEachIfOkCallFunction;
 
 var forEachIfErrorDoNotCallFunction = ResultTests.forEachIfErrorDoNotCallFunction;
+
+var eq = TypedArrayTests.eq;
+
+var num1 = TypedArrayTests.num1;
+
+var num2 = TypedArrayTests.num2;
+
+var num3 = TypedArrayTests.num3;
+
+var assertTrue = TypedArrayTests.assertTrue;
+
+var assertWillThrow = TypedArrayTests.assertWillThrow;
+
+var areSame = TypedArrayTests.areSame;
+
+var o = TypedArrayTests.o;
 
 export {
   bign ,
@@ -47,8 +62,15 @@ export {
   Concurrently ,
   panicTest ,
   $$catch ,
-  eq ,
   forEachIfOkCallFunction ,
   forEachIfErrorDoNotCallFunction ,
+  eq ,
+  num1 ,
+  num2 ,
+  num3 ,
+  assertTrue ,
+  assertWillThrow ,
+  areSame ,
+  o ,
 }
 /* IntTests Not a pure module */
