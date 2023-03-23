@@ -83,6 +83,14 @@ let toString: 'a => option<string>
 let toSymbol: 'a => option<Core__Symbol.t>
 let toFunction: 'a => option<function>
 
+let toObjectUnsafe: 'a => object
+let toBoolUnsafe: 'a => bool
+let toFloatUnsafe: 'a => float
+let toBigIntUnsafe: 'a => Core__BigInt.t
+let toStringUnsafe: 'a => string
+let toSymbolUnsafe: 'a => Core__Symbol.t
+let toFunctionUnsafe: 'a => function
+
 // == EXPERIMENTAL ==
 // Might be helpful for pulling data out of an exception or Error
 // or unknown object, without having to add getters to additional

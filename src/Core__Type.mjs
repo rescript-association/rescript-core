@@ -119,6 +119,34 @@ function getBySymbol(item, sym) {
   }
 }
 
+function toObjectUnsafe(prim) {
+  return prim;
+}
+
+function toBoolUnsafe(prim) {
+  return prim;
+}
+
+function toFloatUnsafe(prim) {
+  return prim;
+}
+
+function toBigIntUnsafe(prim) {
+  return prim;
+}
+
+function toStringUnsafe(prim) {
+  return prim;
+}
+
+function toSymbolUnsafe(prim) {
+  return prim;
+}
+
+function toFunctionUnsafe(prim) {
+  return prim;
+}
+
 export {
   classify ,
   isUndefined ,
@@ -131,6 +159,13 @@ export {
   toString ,
   toSymbol ,
   toFunction ,
+  toObjectUnsafe ,
+  toBoolUnsafe ,
+  toFloatUnsafe ,
+  toBigIntUnsafe ,
+  toStringUnsafe ,
+  toSymbolUnsafe ,
+  toFunctionUnsafe ,
   get ,
   getBySymbol ,
 }
