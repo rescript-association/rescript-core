@@ -49,7 +49,7 @@ external is: ('a, 'a) => bool = "Object.is"
 /**
 `assign(target, source)` copies enumerable own properties from the source to the target, overwriting properties with the same name. It returns the modified target object. A deep clone is not created; properties are copied by reference.
 
-**Note:** ReScript provides [first-class support for immutable objects](https://rescript-lang.org/docs/manual/latest/object), including spreading one object into another. This is often more convenient than using `assign`.  
+**Warning:** ReScript provides compile-time support for type-safe access to JavaScript objects. This eliminates common errors such as accessing properties that do not exist, or using a property of type x as if it were a y. Using `assign` can bypass these safety checks and lead to run-time errors (if you are not careful). ReScript provides [first-class support for immutable objects](https://rescript-lang.org/docs/manual/latest/object) and [records](https://rescript-lang.org/docs/manual/latest/record). This is often safer and more convenient than using `assign` and other functions in this module.
 
 See [Object.assign on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) or [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.assign).
 
