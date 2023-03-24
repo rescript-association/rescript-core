@@ -9,30 +9,12 @@ external toException: t => exn = "%identity"
 @get external fileName: t => option<string> = "fileName"
 
 @new external make: string => t = "Error"
-
-module EvalError = {
-  @new external make: string => t = "EvalError"
-}
-
-module RangeError = {
-  @new external make: string => t = "RangeError"
-}
-
-module ReferenceError = {
-  @new external make: string => t = "ReferenceError"
-}
-
-module SyntaxError = {
-  @new external make: string => t = "SyntaxError"
-}
-
-module TypeError = {
-  @new external make: string => t = "TypeError"
-}
-
-module URIError = {
-  @new external make: string => t = "URIError"
-}
+@new external makeEvalError: string => t = "EvalError"
+@new external makeRangeError: string => t = "RangeError"
+@new external makeReferenceError: string => t = "ReferenceError"
+@new external makeSyntaxError: string => t = "SyntaxError"
+@new external makeTypeError: string => t = "TypeError"
+@new external makeURIError: string => t = "URIError"
 
 external raise: t => 'a = "%raise"
 
