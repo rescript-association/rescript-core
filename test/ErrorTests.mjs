@@ -2,6 +2,7 @@
 
 import * as Test from "./Test.mjs";
 import * as Js_exn from "rescript/lib/es6/js_exn.js";
+import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as RescriptCore from "../src/RescriptCore.mjs";
 import * as Caml_js_exceptions from "rescript/lib/es6/caml_js_exceptions.js";
 
@@ -33,29 +34,40 @@ function panicTest(param) {
 
 panicTest(undefined);
 
-var received = false;
-
-var err = new Error("something went wrong");
-
-try {
-  throw err;
+function raiseAnyCanThrowAgain(param) {
+  var received = false;
+  var err = new Error("something went wrong");
+  try {
+    throw err;
+  }
+  catch (exn){
+    console.log("An exception happened!");
+    try {
+      throw exn;
+    }
+    catch (raw_exn){
+      var exn$1 = Caml_js_exceptions.internalToOCamlException(raw_exn);
+      var e = Caml_js_exceptions.as_js_exn(exn$1);
+      if (e !== undefined) {
+        received = Caml_option.valFromOption(e) === err;
+      }
+      
+    }
+  }
+  Test.run([
+        [
+          "ErrorTests.res",
+          33,
+          22,
+          39
+        ],
+        "Can throw again"
+      ], received, (function (prim0, prim1) {
+          return prim0 === prim1;
+        }), true);
 }
-catch (exn){
-  console.log("An exception happened!");
-  throw exn;
-}
 
-var raiseAnyCanThrowAgain = Test.run([
-      [
-        "ErrorTests.res",
-        34,
-        22,
-        39
-      ],
-      "Can throw again"
-    ], received, (function (prim0, prim1) {
-        return prim0 === prim1;
-      }), true);
+raiseAnyCanThrowAgain(undefined);
 
 export {
   panicTest ,

@@ -12,7 +12,7 @@ panicTest()
 
 // ===== raiseAny =====
 
-let raiseAnyCanThrowAgain = {
+let raiseAnyCanThrowAgain = () => {
   let received = ref(false)
   let err = Error.make("something went wrong")
   try {
@@ -20,7 +20,6 @@ let raiseAnyCanThrowAgain = {
   } catch {
   | _ as exn =>
     Console.log("An exception happened!")
-    Error.raiseAny(exn) // throw it again
     try {
       Error.raiseAny(exn) // rethrow it
     } catch {
@@ -33,3 +32,5 @@ let raiseAnyCanThrowAgain = {
   }
   Test.run(__POS_OF__("Can throw again"), received.contents, \"==", true)
 }
+
+raiseAnyCanThrowAgain()
