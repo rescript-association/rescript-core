@@ -2,6 +2,34 @@
 
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 
+function toObjectUnsafe(i) {
+  return i;
+}
+
+function toBoolUnsafe(i) {
+  return i;
+}
+
+function toFloatUnsafe(i) {
+  return i;
+}
+
+function toBigIntUnsafe(i) {
+  return i;
+}
+
+function toStringUnsafe(i) {
+  return i;
+}
+
+function toSymbolUnsafe(i) {
+  return i;
+}
+
+function toFunctionUnsafe(i) {
+  return i;
+}
+
 var isNull = (function(a) { return (a===null); });
 
 var isNullOrUndefined = (function(a) { return (a===null || a===undefined); });
@@ -117,34 +145,6 @@ function getBySymbol(item, sym) {
   } else {
     return item[sym];
   }
-}
-
-function toObjectUnsafe(prim) {
-  return prim;
-}
-
-function toBoolUnsafe(prim) {
-  return prim;
-}
-
-function toFloatUnsafe(prim) {
-  return prim;
-}
-
-function toBigIntUnsafe(prim) {
-  return prim;
-}
-
-function toStringUnsafe(prim) {
-  return prim;
-}
-
-function toSymbolUnsafe(prim) {
-  return prim;
-}
-
-function toFunctionUnsafe(prim) {
-  return prim;
 }
 
 export {

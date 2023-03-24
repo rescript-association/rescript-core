@@ -30,13 +30,13 @@ type jsType =
   | Symbol(Core__Symbol.t)
   | Function(function)
 
-external toObjectUnsafe: 'a => object = "%identity"
-external toBoolUnsafe: 'a => bool = "%identity"
-external toFloatUnsafe: 'a => float = "%identity"
-external toBigIntUnsafe: 'a => Core__BigInt.t = "%identity"
-external toStringUnsafe: 'a => string = "%identity"
-external toSymbolUnsafe: 'a => Core__Symbol.t = "%identity"
-external toFunctionUnsafe: 'a => function = "%identity"
+let toObjectUnsafe = i => i->Obj.magic
+let toBoolUnsafe = i => i->Obj.magic
+let toFloatUnsafe = i => i->Obj.magic
+let toBigIntUnsafe = i => i->Obj.magic
+let toStringUnsafe = i => i->Obj.magic
+let toSymbolUnsafe = i => i->Obj.magic
+let toFunctionUnsafe = i => i->Obj.magic
 
 let isNull = %raw(`function(a) { return (a===null); }`)
 let isNullOrUndefined = %raw(`function(a) { return (a===null || a===undefined); }`)
