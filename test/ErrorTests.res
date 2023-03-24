@@ -10,7 +10,7 @@ let panicTest = () => {
 
 panicTest()
 
-// ===== RaiseAny =====
+// ===== raiseAny =====
 
 let raiseAnyCanThrowAgain = {
   let received = ref(false)
