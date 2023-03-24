@@ -37,3 +37,5 @@ module URIError = {
 external raise: t => 'a = "%raise"
 
 let panic = msg => make(`Panic! ${msg}`)->raise
+
+external raiseAny: 'a => unit = "%raise"

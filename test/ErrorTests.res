@@ -9,3 +9,27 @@ let panicTest = () => {
 }
 
 panicTest()
+
+// ===== RaiseAny =====
+
+let raiseAnyCanThrowAgain = {
+  let received = ref(false)
+  let err = Error.make("something went wrong")
+  try {
+    Error.raise(err)
+  } catch {
+  | _ as exn =>
+    Console.log("An exception happened!")
+    Error.raiseAny(exn) // throw it again
+    try {
+      Error.raiseAny(exn) // rethrow it
+    } catch {
+    | _ as exn =>
+      switch exn->Error.fromException {
+      | None => ()
+      | Some(e) => received := e === err
+      }
+    }
+  }
+  Test.run(__POS_OF__("Can throw again"), received.contents, \"==", true)
+}

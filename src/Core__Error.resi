@@ -169,3 +169,17 @@ Error.panic("Uh oh. This was unexpected!")
 ```
 */
 let panic: string => 'a
+
+/** `raiseAny` throws (or re-throws) an exception of any kind. See [throw on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw) and [exceptions in ReScript](https://rescript-lang.org/docs/manual/latest/exception)
+
+## Examples
+```rescript
+try {
+  Error.make("A problem occurred.")->Error.raise
+} catch {
+| _ as exn =>
+  Console.log("Caught it but can't handle it.")
+  Error.raiseAny(exn) // throw it again
+```
+*/
+external raiseAny: 'a => unit = "%raise"

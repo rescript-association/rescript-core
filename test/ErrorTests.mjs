@@ -33,7 +33,32 @@ function panicTest(param) {
 
 panicTest(undefined);
 
+var received = false;
+
+var err = new Error("something went wrong");
+
+try {
+  throw err;
+}
+catch (exn){
+  console.log("An exception happened!");
+  throw exn;
+}
+
+var raiseAnyCanThrowAgain = Test.run([
+      [
+        "ErrorTests.res",
+        34,
+        22,
+        39
+      ],
+      "Can throw again"
+    ], received, (function (prim0, prim1) {
+        return prim0 === prim1;
+      }), true);
+
 export {
   panicTest ,
+  raiseAnyCanThrowAgain ,
 }
 /*  Not a pure module */
