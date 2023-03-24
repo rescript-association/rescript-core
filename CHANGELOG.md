@@ -2,6 +2,10 @@
 
 ## Next version
 
+### API changes
+
+- `Error.makeSyntaxError` not `Error.SyntaxError.make` and for all similar error types. Makes the Intellisense menu easier to navigate. https://github.com/rescript-association/rescript-core/pull/122
+
 ## 0.4.0
 
 ### API changes
