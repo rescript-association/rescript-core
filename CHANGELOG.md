@@ -5,6 +5,7 @@
 ### API changes
 
 - Add `Result.forEach` https://github.com/rescript-association/rescript-core/pull/116
+- Add `Error.raiseAny` https://github.com/rescript-association/rescript-core/pull/120
 
 ## 0.2.0
 
