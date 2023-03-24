@@ -169,3 +169,27 @@ Error.panic("Uh oh. This was unexpected!")
 ```
 */
 let panic: string => 'a
+
+/**
+`getUnsafe` returns a custom property on an error object, given its name. This is useful for working with custom exceptions thrown from JavaScript.
+
+**Warning:** The return type is not guaranteed to be what you expect. It can be a string or null or anthing else. Run-time errors can occur if you use it as something that it is not. Consider the functions in the `Type` module to safely access its contents. ReScript exceptions can be handled in a type-safe way. See [Exceptions in ReScript](https://rescript-lang.org/docs/manual/latest/exception).
+
+## Examples
+```rescript
+switch exn->Error.fromException {
+| None => raise(exn) 
+| Some(err) =>
+  switch err->Error.getUnsafe("code") {
+  | None => raise(exn)
+  | Some(code) => {
+      if (code === "invalid-password") {
+        Console.log("Try again!")  
+      }
+    }
+  }
+}
+```
+*/
+@get_index
+external getUnsafe: (t, string) => option<'a> = ""
