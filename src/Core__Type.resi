@@ -17,10 +17,13 @@ type typeof = [
 ]
 
 /**
-An abstract type-safe representation for values whose contents are a mystery, or at least not 100% guaranteed to be what you expect. A value of type `unknown` could a number, string, function, null, or any other JavaScript type. To safely use an `unknown` value use the functions in this module to test and classify it as its true underlying type.
+An abstract representation for values whose contents are a mystery, or at least not 100% guaranteed to be what you expect. A value of type `unknown` could be undefined, null, a number, string, function, or any other JavaScript type. To safely use an `unknown` value use the functions in this module to test and classify it as its true underlying type.
 */
 type unknown
 
+/**
+`toUnknown` convert any type to `unknown`, forcing consumers of that value to test its contents before using it.
+*/
 external toUnknown: 'a => unknown = "%identity"
 
 /**
@@ -40,12 +43,12 @@ external typeof: 'a => typeof = "#typeof"
 type object
 
 /**
-  An abstract type representing a JavaScript function. See [`function on MDN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function)
+An abstract type representing a JavaScript function. See [`function on MDN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function)
   */
 type function
 
 /**
-Represents a classified JavaScript value.
+Represents a classified JavaScript value. **Note:** Unlike ReScript, JavaScript does not distinguish between floats and ints. A classified `float` can be later converted to an `int` if desired.
 */
 type jsType =
   | Undefined
@@ -59,11 +62,11 @@ type jsType =
   | Function(function)
 
 /**
-`classify(value)` inspects a value and determines its type using the `typeof` function.
+`classify(value)` inspects a value and determines its type.
 
 ## Examples
 ```rescript
-switch %raw(`null`)->Type.Classify.classify {
+switch %raw(`null`)->classify {
 | Null => Console.log("Yup, that's null.")
 | _ => Console.log("This doesn't actually appear to be null...")
 }
@@ -75,6 +78,7 @@ let isUndefined: 'a => bool
 let isNull: 'a => bool
 let isNullOrUndefined: 'a => bool
 
+// Safely converts any type to the desigated type. Simply a convience wrapper around the `classify` function.
 let toObject: 'a => option<object>
 let toBool: 'a => option<bool>
 let toFloat: 'a => option<float>
@@ -83,6 +87,7 @@ let toString: 'a => option<string>
 let toSymbol: 'a => option<Core__Symbol.t>
 let toFunction: 'a => option<function>
 
+// Unsafely converts any type to the designated type.
 let toObjectUnsafe: 'a => object
 let toBoolUnsafe: 'a => bool
 let toFloatUnsafe: 'a => float
@@ -91,15 +96,29 @@ let toStringUnsafe: 'a => string
 let toSymbolUnsafe: 'a => Core__Symbol.t
 let toFunctionUnsafe: 'a => function
 
-// == EXPERIMENTAL ==
-// Might be helpful for pulling data out of an exception or Error
-// or unknown object, without having to add getters to additional
-// objects.
+// Safely access properties on unknown types either by name or symbol. These
+// have safety checks: (a) The object is not null or undefined, and (b) the
+// return value must be what the user expects it to be. These functions don't
+// distinguish between a property that exists with an undefined or null value,
+// or one where the property does not exist at all.
 
-// Throws on null or undefined
-// @get_index external getUnsafe: ('a, string) => option<unknown> = ""
-// @get_index external getBySymbolUnsafe: ('a, Core__Symbol.t) => option<unknown> = ""
+let getObject: ('a, string) => option<object>
+let getObjectBySymbol: ('a, Core__Symbol.t) => option<object>
 
-// Checks for null and undefined first; are these safe?
-let get: ('a, string) => option<unknown>
-let getBySymbol: ('a, Core__Symbol.t) => option<unknown>
+let getBool: ('a, string) => option<bool>
+let getBoolBySymbol: ('a, Core__Symbol.t) => option<bool>
+
+let getFloat: ('a, string) => option<float>
+let getFloatBySymbol: ('a, Core__Symbol.t) => option<float>
+
+let getBigInt: ('a, string) => option<Core__BigInt.t>
+let getBigIntBySymbol: ('a, Core__Symbol.t) => option<Core__BigInt.t>
+
+let getString: ('a, string) => option<string>
+let getStringBySymbol: ('a, Core__Symbol.t) => option<string>
+
+let getSymbol: ('a, string) => option<Core__Symbol.t>
+let getSymbolBySymbol: ('a, Core__Symbol.t) => option<Core__Symbol.t>
+
+let getFunction: ('a, string) => option<function>
+let getFunctionBySymbol: ('a, Core__Symbol.t) => option<function>

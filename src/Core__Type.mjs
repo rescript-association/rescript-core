@@ -91,14 +91,14 @@ function toObject(i) {
 
 function toBool(i) {
   if (typeof i === "boolean") {
-    return Caml_option.some(i);
+    return i;
   }
   
 }
 
 function toFloat(i) {
   if (typeof i === "number") {
-    return Caml_option.some(i);
+    return i;
   }
   
 }
@@ -112,7 +112,7 @@ function toBigInt(i) {
 
 function toString(i) {
   if (typeof i === "string") {
-    return Caml_option.some(i);
+    return i;
   }
   
 }
@@ -131,19 +131,115 @@ function toFunction(i) {
   
 }
 
-function get(item, name) {
-  if (isNullOrUndefined(item)) {
+function getObject(o, n) {
+  if (isNullOrUndefined(o)) {
     return ;
   } else {
-    return item[name];
+    return toObject(o[n]);
   }
 }
 
-function getBySymbol(item, sym) {
-  if (isNullOrUndefined(item)) {
+function getObjectBySymbol(o, s) {
+  if (isNullOrUndefined(o)) {
     return ;
   } else {
-    return item[sym];
+    return toObject(o[s]);
+  }
+}
+
+function getBool(o, n) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toBool(o[n]);
+  }
+}
+
+function getBoolBySymbol(o, s) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toBool(o[s]);
+  }
+}
+
+function getFloat(o, n) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toFloat(o[n]);
+  }
+}
+
+function getFloatBySymbol(o, s) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toFloat(o[s]);
+  }
+}
+
+function getBigInt(o, n) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toBigInt(o[n]);
+  }
+}
+
+function getBigIntBySymbol(o, s) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toBigInt(o[s]);
+  }
+}
+
+function getString(o, n) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toString(o[n]);
+  }
+}
+
+function getStringBySymbol(o, s) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toString(o[s]);
+  }
+}
+
+function getSymbol(o, n) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toSymbol(o[n]);
+  }
+}
+
+function getSymbolBySymbol(o, s) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toSymbol(o[s]);
+  }
+}
+
+function getFunction(o, n) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toFunction(o[n]);
+  }
+}
+
+function getFunctionBySymbol(o, s) {
+  if (isNullOrUndefined(o)) {
+    return ;
+  } else {
+    return toFunction(o[s]);
   }
 }
 
@@ -166,7 +262,19 @@ export {
   toStringUnsafe ,
   toSymbolUnsafe ,
   toFunctionUnsafe ,
-  get ,
-  getBySymbol ,
+  getObject ,
+  getObjectBySymbol ,
+  getBool ,
+  getBoolBySymbol ,
+  getFloat ,
+  getFloatBySymbol ,
+  getBigInt ,
+  getBigIntBySymbol ,
+  getString ,
+  getStringBySymbol ,
+  getSymbol ,
+  getSymbolBySymbol ,
+  getFunction ,
+  getFunctionBySymbol ,
 }
 /* No side effect */
