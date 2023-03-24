@@ -175,10 +175,10 @@ let panic: string => 'a
 ## Examples
 ```rescript
 try {
-  Error.make("A problem occurred.")->Error.raise
+  somethingDangerous()   
 } catch {
 | _ as exn =>
-  Console.log("Caught it but can't handle it.")
+  Console.log("Caught it...but can't handle it.")
   Error.raiseAny(exn) // throw it again
 ```
 */
