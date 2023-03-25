@@ -62,6 +62,22 @@ function flatMap(value, f) {
   }
 }
 
+function isNull(i) {
+  return i === null;
+}
+
+function isUndefined(i) {
+  return i === undefined;
+}
+
+function isNullOrUndefined(i) {
+  if (i === undefined) {
+    return true;
+  } else {
+    return i === null;
+  }
+}
+
 export {
   equal ,
   compare ,
@@ -71,5 +87,8 @@ export {
   map ,
   mapWithDefault ,
   flatMap ,
+  isNull ,
+  isUndefined ,
+  isNullOrUndefined ,
 }
 /* No side effect */
