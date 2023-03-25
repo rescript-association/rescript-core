@@ -38,9 +38,10 @@ external toStringUnsafe: 'a => string = "%identity"
 external toSymbolUnsafe: 'a => Core__Symbol.t = "%identity"
 external toFunctionUnsafe: 'a => function = "%identity"
 
-let isNull = %raw(`function(a) { return (a===null); }`)
-let isNullOrUndefined = %raw(`function(a) { return (a===null || a===undefined); }`)
-let isUndefined = %raw(`function(a) { return (a===undefined); }`)
+module N = Core__Nullable
+let isNull = i => N.make(i) == N.null
+let isNullOrUndefined = i => N.make(i) == N.null || N.make(i) == N.undefined
+let isUndefined = i => N.make(i) == N.undefined
 
 let classify = value => {
   switch typeof(value) {
