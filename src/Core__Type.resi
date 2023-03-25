@@ -88,13 +88,13 @@ let toSymbol: 'a => option<Core__Symbol.t>
 let toFunction: 'a => option<function>
 
 // Unsafely converts any type to the designated type.
-let toObjectUnsafe: 'a => object
-let toBoolUnsafe: 'a => bool
-let toFloatUnsafe: 'a => float
-let toBigIntUnsafe: 'a => Core__BigInt.t
-let toStringUnsafe: 'a => string
-let toSymbolUnsafe: 'a => Core__Symbol.t
-let toFunctionUnsafe: 'a => function
+external toObjectUnsafe: 'a => object = "%identity"
+external toBoolUnsafe: 'a => bool = "%identity"
+external toFloatUnsafe: 'a => float = "%identity"
+external toBigIntUnsafe: 'a => Core__BigInt.t = "%identity"
+external toStringUnsafe: 'a => string = "%identity"
+external toSymbolUnsafe: 'a => Core__Symbol.t = "%identity"
+external toFunctionUnsafe: 'a => function = "%identity"
 
 // Safely access properties on unknown types either by name or symbol. These
 // have safety checks: (a) The object is not null or undefined, and (b) the
