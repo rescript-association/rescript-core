@@ -181,12 +181,8 @@ switch exn->Error.fromException {
 | None => raise(exn) 
 | Some(err) =>
   switch err->Error.getUnsafe("code") {
-  | None => raise(exn)
-  | Some(code) => {
-      if (code === "invalid-password") {
-        Console.log("Try again!")  
-      }
-    }
+  | Some("invalid-password") => Console.log("Try again!")
+  | _ => raise(exn)
   }
 }
 ```
