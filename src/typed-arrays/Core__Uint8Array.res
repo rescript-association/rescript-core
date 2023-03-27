@@ -1,4 +1,4 @@
-/** The `Uint8Array` typed array represents an array of 64-bit signed integers in platform byte order. See [Uint8Array on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)
+/** The `Uint8Array` typed array represents an array of 8-bit unsigned integers. See [Uint8Array on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)
 */
 type t = Core__TypedArray.t<int>
 

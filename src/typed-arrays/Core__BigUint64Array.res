@@ -1,4 +1,4 @@
-/** The `BigUint64Array` typed array represents an array of 64-bit signed integers in platform byte order. See [BigUint64Array on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigUint64Array)
+/** The `BigUint64Array` typed array represents an array of 64-bit unsigned integers in platform byte order. See [BigUint64Array on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigUint64Array)
 */
 type t = Core__TypedArray.t<Core__BigInt.t>
 

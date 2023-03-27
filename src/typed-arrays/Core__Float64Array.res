@@ -1,4 +1,4 @@
-/** The `Float64Array` typed array represents an array of 64-bit signed integers in platform byte order. See [Float64Array on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array)
+/** The `Float64Array` typed array represents an array of floats in platform byte order. See [Float64Array on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array)
 */
 type t = Core__TypedArray.t<float>
 

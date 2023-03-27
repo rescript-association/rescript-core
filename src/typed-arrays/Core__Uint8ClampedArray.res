@@ -1,4 +1,4 @@
-/** The `Uint8ClampedArray` typed array represents an array of 64-bit signed integers in platform byte order. See [Uint8ClampedArray on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray)
+/** The `Uint8ClampedArray` typed array represents an array of 8-bit unsigned integers clamped to 0-255. See [Uint8ClampedArray on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray)
 */
 type t = Core__TypedArray.t<int>
 
