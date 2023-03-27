@@ -1,15 +1,55 @@
-type t = Core__TypedArray.t<int>
+/** The `Uint8ClampedArray` typed array represents an array of 64-bit signed integers in platform byte order. See [Uint8ClampedArray on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray)
+*/
+type t = Core__TypedArray.t<Core__BigInt.t>
 
 module Constants = {
-  @val external bytesPerElement: int = "Uint8ClampedArray.BYTES_PER_ELEMENT"
+  /**`bytesPerElement` returns the element size. See [BYTES_PER_ELEMENT on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/BYTES_PER_ELEMENT)
+  */
+  @val
+  external bytesPerElement: int = "Uint8ClampedArray.BYTES_PER_ELEMENT"
 }
 
-@new external make: array<int> => t = "Uint8ClampedArray"
-@new external fromBuffer: Core__ArrayBuffer.t => t = "Uint8ClampedArray"
+/** `fromArray` creates a `Uint8ClampedArray` from an array of values. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray/Uint8ClampedArray)
+*/
+@new
+external fromArray: array<Core__BigInt.t> => t = "Uint8ClampedArray"
+
+/** `fromBuffer` creates a `Uint8ClampedArray` from an `ArrayBuffer.t`. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray/Uint8ClampedArray)
+
+**Note:** This is a potentially unsafe operation. Ensure the buffer is large enough and only accessed within its bounds. 
+*/
+@new
+external fromBuffer: Core__ArrayBuffer.t => t = "Uint8ClampedArray"
+
+/** `fromBufferToEnd` creates a `Uint8ClampedArray` from an `ArrayBuffer.t`, starting at a particular offset and continuing through to the end. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray/Uint8ClampedArray)
+
+**Note:** This is a potentially unsafe operation. Ensure the buffer is large enough and only accessed within its bounds. 
+*/
 @new
 external fromBufferToEnd: (Core__ArrayBuffer.t, ~byteOffset: int) => t = "Uint8ClampedArray"
+
+/** `fromBufferWithRange` creates a `Uint8ClampedArray` from an `ArrayBuffer.t`, starting at a particular offset and consuming `length` **bytes**. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray/Uint8ClampedArray)
+
+**Note:** This is a potentially unsafe operation. Ensure the buffer is large enough and only accessed within its bounds. 
+*/
 @new
 external fromBufferWithRange: (Core__ArrayBuffer.t, ~byteOffset: int, ~length: int) => t =
   "Uint8ClampedArray"
-@new external fromLength: int => t = "Uint8ClampedArray"
-@val external from: 'a => t = "Uint8ClampedArray.from"
+
+/** `fromLength` creates a zero-initialized `Uint8ClampedArray` to hold the specified count of numbers; this is **not** a byte length. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray/Uint8ClampedArray)
+
+**Note:** This is a potentially unsafe operation. Ensure the buffer is large enough and only accessed within its bounds. 
+*/
+@new
+external fromLength: int => t = "Uint8ClampedArray"
+
+/** `fromArrayLikeOrIterable` creates a `Uint8ClampedArray` from an array-like or iterable object. See [TypedArray.from on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/from)
+*/
+@val
+external fromArrayLikeOrIterable: 'a => t = "Uint8ClampedArray.from"
+
+/** `fromArrayLikeOrIterableWithMap` creates a `Uint8ClampedArray` from an array-like or iterable object and applies the mapping function to each item. The mapping function expects (value, index). See [TypedArray.from on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/from)
+*/
+@val
+external fromArrayLikeOrIterableWithMap: ('a, ('b, int) => Core__BigInt.t) => t =
+  "Uint8ClampedArray.from"
