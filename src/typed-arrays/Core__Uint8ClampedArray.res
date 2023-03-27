@@ -1,6 +1,6 @@
 /** The `Uint8ClampedArray` typed array represents an array of 64-bit signed integers in platform byte order. See [Uint8ClampedArray on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray)
 */
-type t = Core__TypedArray.t<Core__BigInt.t>
+type t = Core__TypedArray.t<int>
 
 module Constants = {
   /**`bytesPerElement` returns the element size. See [BYTES_PER_ELEMENT on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/BYTES_PER_ELEMENT)
