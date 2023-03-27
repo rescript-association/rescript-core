@@ -12,7 +12,7 @@ module Constants = {
 /** `fromArray` creates a `Uint16Array` from an array of values. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array/Uint16Array)
 */
 @new
-external fromArray: array<Core__BigInt.t> => t = "Uint16Array"
+external fromArray: array<int> => t = "Uint16Array"
 
 /** `fromBuffer` creates a `Uint16Array` from an `ArrayBuffer.t`. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array/Uint16Array)
 
@@ -51,4 +51,4 @@ external fromArrayLikeOrIterable: 'a => t = "Uint16Array.from"
 /** `fromArrayLikeOrIterableWithMap` creates a `Uint16Array` from an array-like or iterable object and applies the mapping function to each item. The mapping function expects (value, index). See [TypedArray.from on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/from)
 */
 @val
-external fromArrayLikeOrIterableWithMap: ('a, ('b, int) => Core__BigInt.t) => t = "Uint16Array.from"
+external fromArrayLikeOrIterableWithMap: ('a, ('b, int) => int) => t = "Uint16Array.from"

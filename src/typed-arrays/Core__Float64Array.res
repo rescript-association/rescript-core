@@ -12,7 +12,7 @@ module Constants = {
 /** `fromArray` creates a `Float64Array` from an array of values. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array/Float64Array)
 */
 @new
-external fromArray: array<Core__BigInt.t> => t = "Float64Array"
+external fromArray: array<float> => t = "Float64Array"
 
 /** `fromBuffer` creates a `Float64Array` from an `ArrayBuffer.t`. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array/Float64Array)
 
@@ -51,5 +51,5 @@ external fromArrayLikeOrIterable: 'a => t = "Float64Array.from"
 /** `fromArrayLikeOrIterableWithMap` creates a `Float64Array` from an array-like or iterable object and applies the mapping function to each item. The mapping function expects (value, index). See [TypedArray.from on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/from)
 */
 @val
-external fromArrayLikeOrIterableWithMap: ('a, ('b, int) => Core__BigInt.t) => t =
+external fromArrayLikeOrIterableWithMap: ('a, ('b, int) => float) => t =
   "Float64Array.from"
