@@ -1,4 +1,4 @@
-/** The `Float32Array` typed array represents an array of floats in platform byte order. See [Float32Array on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array)
+/** The `Float32Array` typed array represents an array of 32-bit floating point numbers in platform byte order. See [Float32Array on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array)
 */
 type t = Core__TypedArray.t<float>
 
