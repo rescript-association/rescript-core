@@ -12,7 +12,7 @@ module Constants = {
 /** `fromArray` creates a `Float32Array` from an array of values. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array/Float32Array)
 */
 @new
-external fromArray: array<Core__BigInt.t> => t = "Float32Array"
+external fromArray: array<float> => t = "Float32Array"
 
 /** `fromBuffer` creates a `Float32Array` from an `ArrayBuffer.t`. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array/Float32Array)
 
@@ -51,5 +51,4 @@ external fromArrayLikeOrIterable: 'a => t = "Float32Array.from"
 /** `fromArrayLikeOrIterableWithMap` creates a `Float32Array` from an array-like or iterable object and applies the mapping function to each item. The mapping function expects (value, index). See [TypedArray.from on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/from)
 */
 @val
-external fromArrayLikeOrIterableWithMap: ('a, ('b, int) => Core__BigInt.t) => t =
-  "Float32Array.from"
+external fromArrayLikeOrIterableWithMap: ('a, ('b, int) => float) => t = "Float32Array.from"

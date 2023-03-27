@@ -12,7 +12,7 @@ module Constants = {
 /** `fromArray` creates a `Int8Array` from an array of values. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array/Int8Array)
 */
 @new
-external fromArray: array<Core__BigInt.t> => t = "Int8Array"
+external fromArray: array<int> => t = "Int8Array"
 
 /** `fromBuffer` creates a `Int8Array` from an `ArrayBuffer.t`. See [TypedArray constructor on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array/Int8Array)
 
@@ -51,4 +51,4 @@ external fromArrayLikeOrIterable: 'a => t = "Int8Array.from"
 /** `fromArrayLikeOrIterableWithMap` creates a `Int8Array` from an array-like or iterable object and applies the mapping function to each item. The mapping function expects (value, index). See [TypedArray.from on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/from)
 */
 @val
-external fromArrayLikeOrIterableWithMap: ('a, ('b, int) => Core__BigInt.t) => t = "Int8Array.from"
+external fromArrayLikeOrIterableWithMap: ('a, ('b, int) => int) => t = "Int8Array.from"
