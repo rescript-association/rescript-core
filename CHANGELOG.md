@@ -5,7 +5,7 @@
 ### API changes
 
 - Add `Result.forEach` https://github.com/rescript-association/rescript-core/pull/116
-- Add missing Array functions : `indexOfFromOpt`, `findLast`, `findLastIndex`, `findLastIndexOpt`, `findLastIndexWithIndex`, `findLastIndexWithIndexOpt`
+- Add missing Array functions : `indexOfFromOpt`, `findLast`, `findLastIndex`, `findLastIndexOpt`, `findLastIndexWithIndex`, `findLastIndexWithIndexOpt` https://github.com/rescript-association/rescript-core/pull/126/files
 
 ## 0.2.0
 
