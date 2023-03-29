@@ -104,14 +104,14 @@ Test.run(__POS_OF__("lastIndexOf"), [3, 5, 7, 5, 8]->Array.lastIndexOf(100), eq,
 Test.run(__POS_OF__("lastIndexOf"), []->Array.lastIndexOf(100), eq, -1)
 Test.run(__POS_OF__("lastIndexOf"), [{"a": 1}]->Array.lastIndexOf({"a": 1}), eq, -1)
 
-Test.run(__POS_OF__("lastIndexOfFrom"), [3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, -3), eq, 1)
-Test.run(__POS_OF__("lastIndexOfFrom"), [3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, 4), eq, 3)
-Test.run(__POS_OF__("lastIndexOfFrom"), [3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, 0), eq, -1)
-
 Test.run(__POS_OF__("lastIndexOfOpt"), [3, 5, 7, 5, 8]->Array.lastIndexOfOpt(5), eq, Some(3))
 Test.run(__POS_OF__("lastIndexOfOpt"), [3, 5, 7, 5, 8]->Array.lastIndexOfOpt(100), eq, None)
 Test.run(__POS_OF__("lastIndexOfOpt"), []->Array.lastIndexOfOpt(100), eq, None)
 Test.run(__POS_OF__("lastIndexOfOpt"), [{"a": 1}]->Array.lastIndexOfOpt({"a": 1}), eq, None)
+
+Test.run(__POS_OF__("lastIndexOfFrom"), [3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, -3), eq, 1)
+Test.run(__POS_OF__("lastIndexOfFrom"), [3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, 4), eq, 3)
+Test.run(__POS_OF__("lastIndexOfFrom"), [3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, 0), eq, -1)
 
 Test.run(__POS_OF__("findLast"), [3, 5, 7, 5, 8]->Array.findLast(i => i < 8), eq, Some(5))
 Test.run(__POS_OF__("findLast"), []->Array.findLast(_ => true), eq, None)

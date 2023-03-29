@@ -462,54 +462,6 @@ Test.run([
         "ArrayTests.res",
         107,
         20,
-        37
-      ],
-      "lastIndexOfFrom"
-    ], [
-        3,
-        5,
-        7,
-        5,
-        8
-      ].lastIndexOf(5, -3), eq, 1);
-
-Test.run([
-      [
-        "ArrayTests.res",
-        108,
-        20,
-        37
-      ],
-      "lastIndexOfFrom"
-    ], [
-        3,
-        5,
-        7,
-        5,
-        8
-      ].lastIndexOf(5, 4), eq, 3);
-
-Test.run([
-      [
-        "ArrayTests.res",
-        109,
-        20,
-        37
-      ],
-      "lastIndexOfFrom"
-    ], [
-        3,
-        5,
-        7,
-        5,
-        8
-      ].lastIndexOf(5, 0), eq, -1);
-
-Test.run([
-      [
-        "ArrayTests.res",
-        111,
-        20,
         36
       ],
       "lastIndexOfOpt"
@@ -524,7 +476,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        112,
+        108,
         20,
         36
       ],
@@ -540,7 +492,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        113,
+        109,
         20,
         36
       ],
@@ -550,7 +502,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        114,
+        110,
         20,
         36
       ],
@@ -560,6 +512,54 @@ Test.run([
           }], {
           a: 1
         }), eq, undefined);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        112,
+        20,
+        37
+      ],
+      "lastIndexOfFrom"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].lastIndexOf(5, -3), eq, 1);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        113,
+        20,
+        37
+      ],
+      "lastIndexOfFrom"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].lastIndexOf(5, 4), eq, 3);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        114,
+        20,
+        37
+      ],
+      "lastIndexOfFrom"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].lastIndexOf(5, 0), eq, -1);
 
 Test.run([
       [
