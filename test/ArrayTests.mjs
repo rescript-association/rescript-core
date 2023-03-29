@@ -576,13 +576,25 @@ Test.run([
         5,
         8
       ].findLast(function (i) {
-          return i < 7;
+          return i < 8;
         }), eq, 5);
 
 Test.run([
       [
         "ArrayTests.res",
         117,
+        20,
+        30
+      ],
+      "findLast"
+    ], [].findLast(function (param) {
+          return true;
+        }), eq, undefined);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        118,
         20,
         30
       ],
@@ -595,18 +607,6 @@ Test.run([
         8
       ].findLast(function (i) {
           return i > 100;
-        }), eq, undefined);
-
-Test.run([
-      [
-        "ArrayTests.res",
-        118,
-        20,
-        30
-      ],
-      "findLast"
-    ], [].findLast(function (param) {
-          return true;
         }), eq, undefined);
 
 Test.run([
