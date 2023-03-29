@@ -383,9 +383,53 @@ Console.log(array->Array.joinWith(" -- ")) // 1 -- 2 -- 3
 */
 @send
 external joinWith: (array<'a>, string) => string = "join"
-@send external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
+
+/**
+`lastIndexOf(array, item)` returns the last index of `item` in `array`, or `-1` if it is not present. **Note:** [Strict equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) is used when searching, which may produce unexpected results; use `Array.findLastIndexOf` to search by value.
+
+See [Array.lastIndexOf on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf).
+
+## Examples
+```rescript
+[3, 5, 7, 5, 8]->Array.lastIndexOf(5) // 3
+[3, 5, 7, 5, 8]->Array.lastIndexOf(99) // -1
+[{"color": "red"}]->Array.lastIndexOf({"color": "red"}) // -1, because of strict equality
+```
+*/
+@send
+external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
+
+/**
+`lastIndexOfOpt(array, item)` returns the last index of `item` in `array`, or `None` if it is not present. **Note:** [Strict equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) is used when searching, which may produce unexpected results; use `Array.findLastIndexOf` to search by value.
+
+See [Array.lastIndexOf on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf).
+
+## Examples
+```rescript
+[3, 5, 7, 5, 8]->Array.lastIndexOf(5) // Some(3)
+[3, 5, 7, 5, 8]->Array.lastIndexOf(99) // None
+[{"color": "red"}]->Array.lastIndexOf({"color": "red"}) // None, because of strict equality
+```
+*/
 let lastIndexOfOpt: (array<'a>, 'a) => option<int>
-@send external lastIndexOfFrom: (array<'a>, 'a, int) => int = "lastIndexOf"
+
+/**
+`lastIndexOfFrom(array, item, fromIndex)` returns the last index of `item` in `array`, or `-1` if it is not present. The search begins at `fromIndex`. A negative index counts back from the end of the array.
+
+**Note:** [Strict equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) is used when searching, which may produce unexpected results; use `Array.findLastIndexOf` to search by value.
+
+See [Array.lastIndexOf on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf).
+
+## Examples
+```rescript
+[3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, -3) // 1
+[3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, 4) // 3
+[3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, 0) // -1
+[{"color": "red"}]->Array.lastIndexOfFrom({"color": "red"}, 99) // -1, because of strict equality
+```
+*/
+@send
+external lastIndexOfFrom: (array<'a>, 'a, int) => int = "lastIndexOf"
 
 /**
 `slice(array, ~start, ~end)` creates a new array of items copied from `array` from `start` until (but not including) `end`.
