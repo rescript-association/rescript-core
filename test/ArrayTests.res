@@ -122,6 +122,20 @@ Test.run(__POS_OF__("findLastIndex"), [3, 5, 7, 5, 8]->Array.findLastIndex(i => 
 Test.run(__POS_OF__("findLastIndex"), []->Array.findLastIndex(_ => true), eq, -1)
 
 Test.run(
+  __POS_OF__("findLastIndexOpt"),
+  [3, 5, 7, 5, 8]->Array.findLastIndexOpt(i => i == 5),
+  eq,
+  Some(3),
+)
+Test.run(
+  __POS_OF__("findLastIndexOpt"),
+  [3, 5, 7, 5, 8]->Array.findLastIndexOpt(i => i > 100),
+  eq,
+  None,
+)
+Test.run(__POS_OF__("findLastIndexOpt"), []->Array.findLastIndexOpt(_ => true), eq, None)
+
+Test.run(
   __POS_OF__("findLastIndexWithIndex"),
   [3, 5, 7, 5, 8]->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx <= 2),
   eq,
@@ -139,17 +153,3 @@ Test.run(
   eq,
   -1,
 )
-
-Test.run(
-  __POS_OF__("findLastIndexOpt"),
-  [3, 5, 7, 5, 8]->Array.findLastIndexOpt(i => i == 5),
-  eq,
-  Some(3),
-)
-Test.run(
-  __POS_OF__("findLastIndexOpt"),
-  [3, 5, 7, 5, 8]->Array.findLastIndexOpt(i => i > 100),
-  eq,
-  None,
-)
-Test.run(__POS_OF__("findLastIndexOpt"), []->Array.findLastIndexOpt(_ => true), eq, None)

@@ -662,6 +662,54 @@ Test.run([
         "ArrayTests.res",
         125,
         13,
+        31
+      ],
+      "findLastIndexOpt"
+    ], Core__Array.findLastIndexOpt([
+          3,
+          5,
+          7,
+          5,
+          8
+        ], (function (i) {
+            return i === 5;
+          })), eq, 3);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        131,
+        13,
+        31
+      ],
+      "findLastIndexOpt"
+    ], Core__Array.findLastIndexOpt([
+          3,
+          5,
+          7,
+          5,
+          8
+        ], (function (i) {
+            return i > 100;
+          })), eq, undefined);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        136,
+        20,
+        38
+      ],
+      "findLastIndexOpt"
+    ], Core__Array.findLastIndexOpt([], (function (param) {
+            return true;
+          })), eq, undefined);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        139,
+        13,
         37
       ],
       "findLastIndexWithIndex"
@@ -682,7 +730,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        131,
+        145,
         13,
         37
       ],
@@ -704,7 +752,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        137,
+        151,
         13,
         37
       ],
@@ -722,54 +770,6 @@ Test.run([
             return false;
           }
         }), eq, -1);
-
-Test.run([
-      [
-        "ArrayTests.res",
-        144,
-        13,
-        31
-      ],
-      "findLastIndexOpt"
-    ], Core__Array.findLastIndexOpt([
-          3,
-          5,
-          7,
-          5,
-          8
-        ], (function (i) {
-            return i === 5;
-          })), eq, 3);
-
-Test.run([
-      [
-        "ArrayTests.res",
-        150,
-        13,
-        31
-      ],
-      "findLastIndexOpt"
-    ], Core__Array.findLastIndexOpt([
-          3,
-          5,
-          7,
-          5,
-          8
-        ], (function (i) {
-            return i > 100;
-          })), eq, undefined);
-
-Test.run([
-      [
-        "ArrayTests.res",
-        155,
-        20,
-        38
-      ],
-      "findLastIndexOpt"
-    ], Core__Array.findLastIndexOpt([], (function (param) {
-            return true;
-          })), eq, undefined);
 
 export {
   eq ,
