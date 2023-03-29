@@ -1062,3 +1062,18 @@ nums->Array.findLastIndexWithIndex((val, inx) => val >= 8 && inx < 2) // -1
 */
 @send
 external findLastIndexWithIndex: (array<'a>, ('a, int) => bool) => int = "findLastIndex"
+
+/**
+`findLastIndexWithIndexOpt(array, predicate)` iterates the array in **reverse** order and returns the index of the first element that satisfies the callback `predicate`. The callback receives the current element being processed followed by its index. Returns `None` if no elements satisfy the predicate.
+
+See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex)
+
+## Examples
+```rescript
+let nums = [3, 5, 7, 5, 8] 
+nums->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx <= 2) // 1
+nums->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx >= 1) // 3
+nums->Array.findLastIndexWithIndex((val, inx) => val >= 8 && inx < 2) // None 
+```
+*/
+let findLastIndexWithIndexOpt: (array<'a>, ('a, int) => bool) => option<int>

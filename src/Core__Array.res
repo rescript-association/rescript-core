@@ -224,8 +224,14 @@ external findLastIndex: (array<'a>, 'a => bool) => int = "findLastIndex"
 let findLastIndexOpt = (xs, pred) =>
   switch findLastIndex(xs, pred) {
   | -1 => None
-  | _ as inx => Some(inx)
+  | inx => Some(inx)
   }
 
 @send
 external findLastIndexWithIndex: (array<'a>, ('a, int) => bool) => int = "findLastIndex"
+
+let findLastIndexWithIndexOpt = (xs, pred) =>
+  switch findLastIndexWithIndex(xs, pred) {
+  | -1 => None
+  | inx => Some(inx)
+  }

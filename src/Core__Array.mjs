@@ -146,6 +146,14 @@ function findLastIndexOpt(xs, pred) {
   
 }
 
+function findLastIndexWithIndexOpt(xs, pred) {
+  var inx = xs.findLastIndex(pred);
+  if (inx !== -1) {
+    return inx;
+  }
+  
+}
+
 export {
   make ,
   fromInitializer ,
@@ -164,5 +172,6 @@ export {
   shuffleInPlace ,
   findMap ,
   findLastIndexOpt ,
+  findLastIndexWithIndexOpt ,
 }
 /* No side effect */
