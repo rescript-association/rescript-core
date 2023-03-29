@@ -999,3 +999,47 @@ let findMap: (array<'a>, 'a => option<'b>) => option<'b>
 */
 @send
 external at: (array<'a>, int) => option<'a> = "at"
+
+/**
+`findLast(array, predicate)` iterates the array in **reverse** order and returns the value of the first element that satisfies the provided testing function. Returns `None` if no elements satisfy the predicate.
+
+See [Array.findLast on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLast)
+
+## Examples
+```rescript
+[3, 5, 7, 5, 8]->Array.findLast(i => i < 7) // Some(5)
+[3, 5, 7, 5, 8]->Array.findLast(i=> i > 100) // None
+[]->Array.findLast(_ => true) // None
+```
+*/
+@send
+external findLast: (array<'a>, 'a => bool) => option<'a> = "findLast"
+
+/**
+`findLastIndex(array, predicate)` iterates the array in **reverse** order and returns the index of the first element that satisfies the provided testing function. Returns `-1` if no elements satisfy the predicate.
+
+See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex)
+
+## Examples
+```rescript
+[3, 5, 7, 5, 8]->Array.findLastIndex(i => i < 7) // 3
+[3, 5, 7, 5, 8]->Array.findLast(i => i > 100) // -1
+[]->Array.findLast(_ => true) // -1
+```
+*/
+@send
+external findLastIndex: (array<'a>, 'a => bool) => int = "findLastIndex"
+
+/**
+`findLastIndexOpt(array, predicate)` iterates the array in **reverse** order and returns the index of the first element that satisfies the provided testing function. Returns `None` if no elements satisfy the predicate.
+
+See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex)
+
+## Examples
+```rescript
+[3, 5, 7, 5, 8]->Array.findLastIndex(i => i < 7) // Some(3)
+[3, 5, 7, 5, 8]->Array.findLast(i => i > 100) // None
+[]->Array.findLast(_ => true) // None
+```
+*/
+let findLastIndexOpt: (array<'a>, 'a => bool) => option<int>

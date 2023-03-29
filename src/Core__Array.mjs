@@ -138,6 +138,14 @@ function findMap(arr, f) {
   };
 }
 
+function findLastIndexOpt(xs, pred) {
+  var inx = xs.findLastIndex(pred);
+  if (inx !== -1) {
+    return inx;
+  }
+  
+}
+
 export {
   make ,
   fromInitializer ,
@@ -155,5 +163,6 @@ export {
   shuffle ,
   shuffleInPlace ,
   findMap ,
+  findLastIndexOpt ,
 }
 /* No side effect */
