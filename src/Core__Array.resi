@@ -1007,8 +1007,9 @@ See [Array.findLast on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScr
 
 ## Examples
 ```rescript
-[3, 5, 7, 5, 8]->Array.findLast(i => i < 7) // Some(5)
-[3, 5, 7, 5, 8]->Array.findLast(i=> i > 100) // None
+let nums = [3, 5, 7, 5, 8] 
+nums->Array.findLast(i => i < 7) // Some(5)
+nums->Array.findLast(i=> i > 100) // None
 []->Array.findLast(_ => true) // None
 ```
 */
@@ -1022,8 +1023,9 @@ See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/Ja
 
 ## Examples
 ```rescript
-[3, 5, 7, 5, 8]->Array.findLastIndex(i => i < 7) // 3
-[3, 5, 7, 5, 8]->Array.findLast(i => i > 100) // -1
+let nums = [3, 5, 7, 5, 8]
+nums->Array.findLastIndex(i => i < 7) // 3
+nums->Array.findLast(i => i > 100) // -1
 []->Array.findLast(_ => true) // -1
 ```
 */
@@ -1037,22 +1039,25 @@ See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/Ja
 
 ## Examples
 ```rescript
-[3, 5, 7, 5, 8]->Array.findLastIndex(i => i < 7) // Some(3)
-[3, 5, 7, 5, 8]->Array.findLast(i => i > 100) // None
+let nums = [3, 5, 7, 5, 8] 
+nums->Array.findLastIndex(i => i < 7) // Some(3)
+nums->Array.findLast(i => i > 100) // None
 []->Array.findLast(_ => true) // None
 ```
 */
 let findLastIndexOpt: (array<'a>, 'a => bool) => option<int>
 
 /**
-`findLastIndexWithIndex(array, predicate)` iterates the array in **reverse** order and returns the index of the first element that satisfies the  callback `predicate`. The `predicate` receives the current element being processed followed by its index. Returns `-1` if no elements satisfy the predicate.
+`findLastIndexWithIndex(array, predicate)` iterates the array in **reverse** order and returns the index of the first element that satisfies the callback `predicate`. The callback receives the current element being processed followed by its index. Returns `-1` if no elements satisfy the predicate.
 
 See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex)
 
 ## Examples
 ```rescript
-["a", "x", "j", "b", "x"]->Array.findLastIndex((i, j) => i == "x" && j > 2) // 4
-["a", "x", "j", "b", "x"]->Array.findLastIndex((i, j) => i == "x" && j < 3) // 2
+let nums = [3, 5, 7, 5, 8] 
+nums->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx <= 2) // 1
+nums->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx >= 1) // 3
+nums->Array.findLastIndexWithIndex((val, inx) => val >= 8 && inx < 2) // -1
 ```
 */
 @send

@@ -609,14 +609,10 @@ Test.run([
           return true;
         }), eq, undefined);
 
-function isDigit(s) {
-  return "0123456789".includes(s);
-}
-
 Test.run([
       [
         "ArrayTests.res",
-        122,
+        120,
         20,
         35
       ],
@@ -634,7 +630,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        123,
+        121,
         20,
         35
       ],
@@ -652,7 +648,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        124,
+        122,
         20,
         35
       ],
@@ -665,86 +661,19 @@ Test.run([
       [
         "ArrayTests.res",
         125,
-        20,
-        35
+        13,
+        37
       ],
-      "findLastIndex"
-    ], [
-        "3",
-        "a",
-        "4",
-        "x"
-      ].findLastIndex(isDigit), eq, 3);
-
-Test.run([
-      [
-        "ArrayTests.res",
-        126,
-        20,
-        35
-      ],
-      "findLastIndex"
+      "findLastIndexWithIndex"
     ], [
         3,
         5,
         7,
         5,
         8
-      ].findLastIndex(function (i) {
-          return i > 100;
-        }), eq, -1);
-
-Test.run([
-      [
-        "ArrayTests.res",
-        127,
-        20,
-        35
-      ],
-      "findLastIndex"
-    ], [].findLastIndex(function (param) {
-          return true;
-        }), eq, -1);
-
-Test.run([
-      [
-        "ArrayTests.res",
-        130,
-        13,
-        37
-      ],
-      "findLastIndexWithIndex"
-    ], [
-        "a",
-        "2",
-        "e",
-        "4",
-        "x"
-      ].findLastIndex(function (i, j) {
-          if ("0123456789".includes(i)) {
-            return j > 2;
-          } else {
-            return false;
-          }
-        }), eq, 4);
-
-Test.run([
-      [
-        "ArrayTests.res",
-        136,
-        13,
-        37
-      ],
-      "findLastIndexWithIndex"
-    ], [
-        "a",
-        "x",
-        "j",
-        "b",
-        "x"
-      ].findLastIndex(function (i, j) {
-          if (i === "x") {
-            return j < 3;
+      ].findLastIndex(function (val, inx) {
+          if (val === 5) {
+            return inx <= 2;
           } else {
             return false;
           }
@@ -753,7 +682,51 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        143,
+        131,
+        13,
+        37
+      ],
+      "findLastIndexWithIndex"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].findLastIndex(function (val, inx) {
+          if (val === 5) {
+            return inx >= 1;
+          } else {
+            return false;
+          }
+        }), eq, 3);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        137,
+        13,
+        37
+      ],
+      "findLastIndexWithIndex"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].findLastIndex(function (val, inx) {
+          if (val >= 8) {
+            return inx < 2;
+          } else {
+            return false;
+          }
+        }), eq, -1);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        144,
         13,
         31
       ],
@@ -771,7 +744,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        149,
+        150,
         13,
         31
       ],
@@ -789,7 +762,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        154,
+        155,
         20,
         38
       ],
@@ -800,6 +773,5 @@ Test.run([
 
 export {
   eq ,
-  isDigit ,
 }
 /*  Not a pure module */

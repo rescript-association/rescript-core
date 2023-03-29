@@ -27,8 +27,6 @@ var Concurrently = PromiseTest.Concurrently;
 
 var panicTest = ErrorTests.panicTest;
 
-var isDigit = ArrayTests.isDigit;
-
 var $$catch = IntTests.$$catch;
 
 var eq = ResultTests.eq;
@@ -48,7 +46,6 @@ export {
   Catching ,
   Concurrently ,
   panicTest ,
-  isDigit ,
   $$catch ,
   eq ,
   forEachIfOkCallFunction ,

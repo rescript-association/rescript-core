@@ -123,15 +123,21 @@ Test.run(__POS_OF__("findLastIndex"), []->Array.findLastIndex(_ => true), eq, -1
 
 Test.run(
   __POS_OF__("findLastIndexWithIndex"),
-  ["a", "2", "e", "4", "x"]->Array.findLastIndexWithIndex((i, j) => isDigit(i) && j > 2),
+  [3, 5, 7, 5, 8]->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx <= 2),
   eq,
-  4,
+  1,
 )
 Test.run(
   __POS_OF__("findLastIndexWithIndex"),
-  ["a", "x", "j", "b", "x"]->Array.findLastIndexWithIndex((i, j) => i == "x" && j < 3),
+  [3, 5, 7, 5, 8]->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx >= 1),
   eq,
-  1,
+  3,
+)
+Test.run(
+  __POS_OF__("findLastIndexWithIndex"),
+  [3, 5, 7, 5, 8]->Array.findLastIndexWithIndex((val, inx) => val >= 8 && inx < 2),
+  eq,
+  -1,
 )
 
 Test.run(
