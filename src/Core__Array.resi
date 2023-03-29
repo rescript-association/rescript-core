@@ -1043,3 +1043,17 @@ See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/Ja
 ```
 */
 let findLastIndexOpt: (array<'a>, 'a => bool) => option<int>
+
+/**
+`findLastIndexWithIndex(array, predicate)` iterates the array in **reverse** order and returns the index of the first element that satisfies the  callback `predicate`. The `predicate` receives the current element being processed followed by its index. Returns `-1` if no elements satisfy the predicate.
+
+See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex)
+
+## Examples
+```rescript
+["a", "x", "j", "b", "x"]->Array.findLastIndex((i, j) => i == "x" && j > 2) // 4
+["a", "x", "j", "b", "x"]->Array.findLastIndex((i, j) => i == "x" && j < 3) // 2
+```
+*/
+@send
+external findLastIndexWithIndex: (array<'a>, ('a, int) => bool) => int = "findLastIndex"

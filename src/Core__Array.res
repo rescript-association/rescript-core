@@ -226,3 +226,6 @@ let findLastIndexOpt = (xs, pred) =>
   | -1 => None
   | _ as inx => Some(inx)
   }
+
+@send
+external findLastIndexWithIndex: (array<'a>, ('a, int) => bool) => int = "findLastIndex"
