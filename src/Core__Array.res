@@ -235,3 +235,9 @@ let findLastIndexWithIndexOpt = (xs, pred) =>
   | -1 => None
   | inx => Some(inx)
   }
+
+let indexOfFromOpt = (xs, val, fromInx) =>
+  switch indexOfFrom(xs, val, fromInx) {
+  | -1 => None
+  | inx => Some(inx)
+  }

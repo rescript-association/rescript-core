@@ -369,7 +369,10 @@ Console.log([{"language": "ReScript"}]->Array.indexOfOpt({"language": "ReScript"
 ```
 */
 let indexOfOpt: (array<'a>, 'a) => option<int>
+
 @send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
+
+let indexOfFromOpt: (array<'a>, 'a, int) => option<int>
 
 /**
 `joinWith(array, separator)` produces a string where all items of `array` are printed, separated by `separator`. Under the hood this will run JavaScript's `toString` on all the array items.

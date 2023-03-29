@@ -154,11 +154,20 @@ function findLastIndexWithIndexOpt(xs, pred) {
   
 }
 
+function indexOfFromOpt(xs, val, fromInx) {
+  var inx = xs.indexOf(val, fromInx);
+  if (inx !== -1) {
+    return inx;
+  }
+  
+}
+
 export {
   make ,
   fromInitializer ,
   sort ,
   indexOfOpt ,
+  indexOfFromOpt ,
   lastIndexOfOpt ,
   reduce ,
   reduceWithIndex ,
