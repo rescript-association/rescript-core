@@ -2,7 +2,10 @@ open RescriptCore
 
 let eq = (a, b) => a == b
 
-Test.run(__POS_OF__("make"), Array.make(~length=6, 7), eq, [7, 7, 7, 7, 7, 7])
+@genType
+let a = Array.make(~length=6, 7)
+
+Test.run(__POS_OF__("make"), a, eq, [7, 7, 7, 7, 7, 7])
 
 Test.run(
   __POS_OF__("fromInitializer"),

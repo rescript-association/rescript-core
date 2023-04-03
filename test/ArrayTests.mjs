@@ -7,15 +7,17 @@ import * as Core__Array from "../src/Core__Array.mjs";
 
 var eq = Caml_obj.equal;
 
+var a = Core__Array.make(6, 7);
+
 Test.run([
       [
         "ArrayTests.res",
-        5,
+        8,
         20,
         26
       ],
       "make"
-    ], Core__Array.make(6, 7), eq, [
+    ], a, eq, [
       7,
       7,
       7,
@@ -27,7 +29,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        8,
+        11,
         13,
         30
       ],
@@ -47,7 +49,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        14,
+        17,
         20,
         28
       ],
@@ -70,7 +72,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        15,
+        18,
         20,
         36
       ],
@@ -80,7 +82,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        18,
+        21,
         13,
         30
       ],
@@ -108,7 +110,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        24,
+        27,
         13,
         38
       ],
@@ -123,7 +125,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        31,
+        34,
         13,
         26
       ],
@@ -146,7 +148,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        36,
+        39,
         20,
         41
       ],
@@ -156,7 +158,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        39,
+        42,
         13,
         35
       ],
@@ -184,7 +186,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        45,
+        48,
         13,
         38
       ],
@@ -199,7 +201,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        51,
+        54,
         20,
         38
       ],
@@ -219,7 +221,7 @@ var arr = [
 Test.run([
       [
         "ArrayTests.res",
-        54,
+        57,
         13,
         38
       ],
@@ -229,7 +231,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        65,
+        68,
         13,
         24
       ],
@@ -255,7 +257,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        70,
+        73,
         20,
         42
       ],
@@ -274,7 +276,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        72,
+        75,
         13,
         32
       ],
@@ -289,7 +291,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        78,
+        81,
         20,
         30
       ],
@@ -306,7 +308,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        80,
+        83,
         13,
         34
       ],
@@ -324,7 +326,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        85,
+        88,
         20,
         41
       ],
@@ -338,7 +340,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        86,
+        89,
         20,
         38
       ],
@@ -348,7 +350,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        89,
+        92,
         13,
         22
       ],
@@ -370,7 +372,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        94,
+        97,
         20,
         40
       ],
@@ -389,7 +391,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        96,
+        99,
         13,
         30
       ],
@@ -403,5 +405,6 @@ Test.run([
 
 export {
   eq ,
+  a ,
 }
-/*  Not a pure module */
+/* a Not a pure module */
