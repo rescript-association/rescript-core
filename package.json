@@ -22,7 +22,7 @@
     "src/**/*.resi"
   ],
   "devDependencies": {
-    "rescript": "^10.1.2",
+    "rescript": "10.1.4",
     "@babel/code-frame": "7.18.6"
   }
 }
