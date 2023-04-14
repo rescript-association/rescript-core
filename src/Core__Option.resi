@@ -80,7 +80,7 @@ Option.getExn(None) /* Raises an Error */
 let getExn: option<'a> => 'a
 
 /**
-`getUnsafe(value)` returns `value` if `opt` is `Some(value)`, otherwise `undefined`.
+`getUnsafe(opt)` returns `value` if `opt` is `Some(value)`, otherwise `undefined`.
 
 ## Examples
 
