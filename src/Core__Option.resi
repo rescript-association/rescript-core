@@ -80,18 +80,18 @@ Option.getExn(None) /* Raises an Error */
 let getExn: option<'a> => 'a
 
 /**
-`getUnsafe(value)` returns `value`.
+`getUnsafe(opt)` returns `value` if `opt` is `Some(value)`, otherwise `undefined`.
 
 ## Examples
 
 ```rescript
 Option.getUnsafe(Some(3)) == 3
-Option.getUnsafe(None) // Raises an error
+Option.getUnsafe(None: option<int>) // Returns `undefined`, which is not a valid `int`
 ```
 
-## Exceptions
+## Notes
 
-- This is an unsafe operation, it assumes `value` is neither `None` nor `Some(None(...)))`
+- This is an unsafe operation. It assumes `value` is not `None`, and may cause undefined behaviour if it is.
 */
 external getUnsafe: option<'a> => 'a = "%identity"
 
