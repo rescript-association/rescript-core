@@ -138,11 +138,36 @@ function findMap(arr, f) {
   };
 }
 
+function findLastIndexOpt(xs, pred) {
+  var inx = xs.findLastIndex(pred);
+  if (inx !== -1) {
+    return inx;
+  }
+  
+}
+
+function findLastIndexWithIndexOpt(xs, pred) {
+  var inx = xs.findLastIndex(pred);
+  if (inx !== -1) {
+    return inx;
+  }
+  
+}
+
+function indexOfFromOpt(xs, val, fromInx) {
+  var inx = xs.indexOf(val, fromInx);
+  if (inx !== -1) {
+    return inx;
+  }
+  
+}
+
 export {
   make ,
   fromInitializer ,
   sort ,
   indexOfOpt ,
+  indexOfFromOpt ,
   lastIndexOfOpt ,
   reduce ,
   reduceWithIndex ,
@@ -155,5 +180,7 @@ export {
   shuffle ,
   shuffleInPlace ,
   findMap ,
+  findLastIndexOpt ,
+  findLastIndexWithIndexOpt ,
 }
 /* No side effect */

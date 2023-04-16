@@ -98,3 +98,58 @@ Test.run(
   eq,
   None,
 )
+
+Test.run(__POS_OF__("lastIndexOf"), [3, 5, 7, 5, 8]->Array.lastIndexOf(5), eq, 3)
+Test.run(__POS_OF__("lastIndexOf"), [3, 5, 7, 5, 8]->Array.lastIndexOf(100), eq, -1)
+Test.run(__POS_OF__("lastIndexOf"), []->Array.lastIndexOf(100), eq, -1)
+Test.run(__POS_OF__("lastIndexOf"), [{"a": 1}]->Array.lastIndexOf({"a": 1}), eq, -1)
+
+Test.run(__POS_OF__("lastIndexOfOpt"), [3, 5, 7, 5, 8]->Array.lastIndexOfOpt(5), eq, Some(3))
+Test.run(__POS_OF__("lastIndexOfOpt"), [3, 5, 7, 5, 8]->Array.lastIndexOfOpt(100), eq, None)
+Test.run(__POS_OF__("lastIndexOfOpt"), []->Array.lastIndexOfOpt(100), eq, None)
+Test.run(__POS_OF__("lastIndexOfOpt"), [{"a": 1}]->Array.lastIndexOfOpt({"a": 1}), eq, None)
+
+Test.run(__POS_OF__("lastIndexOfFrom"), [3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, -3), eq, 1)
+Test.run(__POS_OF__("lastIndexOfFrom"), [3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, 4), eq, 3)
+Test.run(__POS_OF__("lastIndexOfFrom"), [3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, 0), eq, -1)
+
+Test.run(__POS_OF__("findLast"), [3, 5, 7, 5, 8]->Array.findLast(i => i < 8), eq, Some(5))
+Test.run(__POS_OF__("findLast"), []->Array.findLast(_ => true), eq, None)
+Test.run(__POS_OF__("findLast"), [3, 5, 7, 5, 8]->Array.findLast(i => i > 100), eq, None)
+
+Test.run(__POS_OF__("findLastIndex"), [3, 5, 7, 5, 8]->Array.findLastIndex(i => i == 5), eq, 3)
+Test.run(__POS_OF__("findLastIndex"), [3, 5, 7, 5, 8]->Array.findLastIndex(i => i > 100), eq, -1)
+Test.run(__POS_OF__("findLastIndex"), []->Array.findLastIndex(_ => true), eq, -1)
+
+Test.run(
+  __POS_OF__("findLastIndexOpt"),
+  [3, 5, 7, 5, 8]->Array.findLastIndexOpt(i => i == 5),
+  eq,
+  Some(3),
+)
+Test.run(
+  __POS_OF__("findLastIndexOpt"),
+  [3, 5, 7, 5, 8]->Array.findLastIndexOpt(i => i > 100),
+  eq,
+  None,
+)
+Test.run(__POS_OF__("findLastIndexOpt"), []->Array.findLastIndexOpt(_ => true), eq, None)
+
+Test.run(
+  __POS_OF__("findLastIndexWithIndex"),
+  [3, 5, 7, 5, 8]->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx <= 2),
+  eq,
+  1,
+)
+Test.run(
+  __POS_OF__("findLastIndexWithIndex"),
+  [3, 5, 7, 5, 8]->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx >= 1),
+  eq,
+  3,
+)
+Test.run(
+  __POS_OF__("findLastIndexWithIndex"),
+  [3, 5, 7, 5, 8]->Array.findLastIndexWithIndex((val, inx) => val >= 8 && inx < 2),
+  eq,
+  -1,
+)

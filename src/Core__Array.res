@@ -214,3 +214,30 @@ let findMap = (arr, f) => {
 }
 
 @send external at: (array<'a>, int) => option<'a> = "at"
+
+@send
+external findLast: (array<'a>, 'a => bool) => option<'a> = "findLast"
+
+@send
+external findLastIndex: (array<'a>, 'a => bool) => int = "findLastIndex"
+
+let findLastIndexOpt = (xs, pred) =>
+  switch findLastIndex(xs, pred) {
+  | -1 => None
+  | inx => Some(inx)
+  }
+
+@send
+external findLastIndexWithIndex: (array<'a>, ('a, int) => bool) => int = "findLastIndex"
+
+let findLastIndexWithIndexOpt = (xs, pred) =>
+  switch findLastIndexWithIndex(xs, pred) {
+  | -1 => None
+  | inx => Some(inx)
+  }
+
+let indexOfFromOpt = (xs, val, fromInx) =>
+  switch indexOfFrom(xs, val, fromInx) {
+  | -1 => None
+  | inx => Some(inx)
+  }

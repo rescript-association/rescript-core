@@ -401,6 +401,376 @@ Test.run([
             
           })), eq, undefined);
 
+Test.run([
+      [
+        "ArrayTests.res",
+        102,
+        20,
+        33
+      ],
+      "lastIndexOf"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].lastIndexOf(5), eq, 3);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        103,
+        20,
+        33
+      ],
+      "lastIndexOf"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].lastIndexOf(100), eq, -1);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        104,
+        20,
+        33
+      ],
+      "lastIndexOf"
+    ], [].lastIndexOf(100), eq, -1);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        105,
+        20,
+        33
+      ],
+      "lastIndexOf"
+    ], [{
+          a: 1
+        }].lastIndexOf({
+          a: 1
+        }), eq, -1);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        107,
+        20,
+        36
+      ],
+      "lastIndexOfOpt"
+    ], Core__Array.lastIndexOfOpt([
+          3,
+          5,
+          7,
+          5,
+          8
+        ], 5), eq, 3);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        108,
+        20,
+        36
+      ],
+      "lastIndexOfOpt"
+    ], Core__Array.lastIndexOfOpt([
+          3,
+          5,
+          7,
+          5,
+          8
+        ], 100), eq, undefined);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        109,
+        20,
+        36
+      ],
+      "lastIndexOfOpt"
+    ], Core__Array.lastIndexOfOpt([], 100), eq, undefined);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        110,
+        20,
+        36
+      ],
+      "lastIndexOfOpt"
+    ], Core__Array.lastIndexOfOpt([{
+            a: 1
+          }], {
+          a: 1
+        }), eq, undefined);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        112,
+        20,
+        37
+      ],
+      "lastIndexOfFrom"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].lastIndexOf(5, -3), eq, 1);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        113,
+        20,
+        37
+      ],
+      "lastIndexOfFrom"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].lastIndexOf(5, 4), eq, 3);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        114,
+        20,
+        37
+      ],
+      "lastIndexOfFrom"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].lastIndexOf(5, 0), eq, -1);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        116,
+        20,
+        30
+      ],
+      "findLast"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].findLast(function (i) {
+          return i < 8;
+        }), eq, 5);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        117,
+        20,
+        30
+      ],
+      "findLast"
+    ], [].findLast(function (param) {
+          return true;
+        }), eq, undefined);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        118,
+        20,
+        30
+      ],
+      "findLast"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].findLast(function (i) {
+          return i > 100;
+        }), eq, undefined);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        120,
+        20,
+        35
+      ],
+      "findLastIndex"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].findLastIndex(function (i) {
+          return i === 5;
+        }), eq, 3);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        121,
+        20,
+        35
+      ],
+      "findLastIndex"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].findLastIndex(function (i) {
+          return i > 100;
+        }), eq, -1);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        122,
+        20,
+        35
+      ],
+      "findLastIndex"
+    ], [].findLastIndex(function (param) {
+          return true;
+        }), eq, -1);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        125,
+        13,
+        31
+      ],
+      "findLastIndexOpt"
+    ], Core__Array.findLastIndexOpt([
+          3,
+          5,
+          7,
+          5,
+          8
+        ], (function (i) {
+            return i === 5;
+          })), eq, 3);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        131,
+        13,
+        31
+      ],
+      "findLastIndexOpt"
+    ], Core__Array.findLastIndexOpt([
+          3,
+          5,
+          7,
+          5,
+          8
+        ], (function (i) {
+            return i > 100;
+          })), eq, undefined);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        136,
+        20,
+        38
+      ],
+      "findLastIndexOpt"
+    ], Core__Array.findLastIndexOpt([], (function (param) {
+            return true;
+          })), eq, undefined);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        139,
+        13,
+        37
+      ],
+      "findLastIndexWithIndex"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].findLastIndex(function (val, inx) {
+          if (val === 5) {
+            return inx <= 2;
+          } else {
+            return false;
+          }
+        }), eq, 1);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        145,
+        13,
+        37
+      ],
+      "findLastIndexWithIndex"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].findLastIndex(function (val, inx) {
+          if (val === 5) {
+            return inx >= 1;
+          } else {
+            return false;
+          }
+        }), eq, 3);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        151,
+        13,
+        37
+      ],
+      "findLastIndexWithIndex"
+    ], [
+        3,
+        5,
+        7,
+        5,
+        8
+      ].findLastIndex(function (val, inx) {
+          if (val >= 8) {
+            return inx < 2;
+          } else {
+            return false;
+          }
+        }), eq, -1);
+
 export {
   eq ,
 }

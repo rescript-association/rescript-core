@@ -369,7 +369,10 @@ Console.log([{"language": "ReScript"}]->Array.indexOfOpt({"language": "ReScript"
 ```
 */
 let indexOfOpt: (array<'a>, 'a) => option<int>
+
 @send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
+
+let indexOfFromOpt: (array<'a>, 'a, int) => option<int>
 
 /**
 `joinWith(array, separator)` produces a string where all items of `array` are printed, separated by `separator`. Under the hood this will run JavaScript's `toString` on all the array items.
@@ -383,9 +386,53 @@ Console.log(array->Array.joinWith(" -- ")) // 1 -- 2 -- 3
 */
 @send
 external joinWith: (array<'a>, string) => string = "join"
-@send external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
+
+/**
+`lastIndexOf(array, item)` returns the last index of `item` in `array`, or `-1` if it is not present. **Note:** [Strict equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) is used when searching, which may produce unexpected results; use `Array.findLastIndexOf` to search by value.
+
+See [Array.lastIndexOf on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf).
+
+## Examples
+```rescript
+[3, 5, 7, 5, 8]->Array.lastIndexOf(5) // 3
+[3, 5, 7, 5, 8]->Array.lastIndexOf(99) // -1
+[{"color": "red"}]->Array.lastIndexOf({"color": "red"}) // -1, because of strict equality
+```
+*/
+@send
+external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
+
+/**
+`lastIndexOfOpt(array, item)` returns the last index of `item` in `array`, or `None` if it is not present. **Note:** [Strict equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) is used when searching, which may produce unexpected results; use `Array.findLastIndexOf` to search by value.
+
+See [Array.lastIndexOf on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf).
+
+## Examples
+```rescript
+[3, 5, 7, 5, 8]->Array.lastIndexOf(5) // Some(3)
+[3, 5, 7, 5, 8]->Array.lastIndexOf(99) // None
+[{"color": "red"}]->Array.lastIndexOf({"color": "red"}) // None, because of strict equality
+```
+*/
 let lastIndexOfOpt: (array<'a>, 'a) => option<int>
-@send external lastIndexOfFrom: (array<'a>, 'a, int) => int = "lastIndexOf"
+
+/**
+`lastIndexOfFrom(array, item, fromIndex)` returns the last index of `item` in `array`, or `-1` if it is not present. The search begins at `fromIndex`. A negative index counts back from the end of the array.
+
+**Note:** [Strict equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) is used when searching, which may produce unexpected results; use `Array.findLastIndexOf` to search by value.
+
+See [Array.lastIndexOf on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf).
+
+## Examples
+```rescript
+[3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, -3) // 1
+[3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, 4) // 3
+[3, 5, 7, 5, 8]->Array.lastIndexOfFrom(5, 0) // -1
+[{"color": "red"}]->Array.lastIndexOfFrom({"color": "red"}, 99) // -1, because of strict equality
+```
+*/
+@send
+external lastIndexOfFrom: (array<'a>, 'a, int) => int = "lastIndexOf"
 
 /**
 `slice(array, ~start, ~end)` creates a new array of items copied from `array` from `start` until (but not including) `end`.
@@ -955,3 +1002,81 @@ let findMap: (array<'a>, 'a => option<'b>) => option<'b>
 */
 @send
 external at: (array<'a>, int) => option<'a> = "at"
+
+/**
+`findLast(array, predicate)` iterates the array in **reverse** order and returns the value of the first element that satisfies the provided testing function. Returns `None` if no elements satisfy the predicate.
+
+See [Array.findLast on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLast)
+
+## Examples
+```rescript
+let nums = [3, 5, 7, 5, 8] 
+nums->Array.findLast(i => i < 7) // Some(5)
+nums->Array.findLast(i=> i > 100) // None
+[]->Array.findLast(_ => true) // None
+```
+*/
+@send
+external findLast: (array<'a>, 'a => bool) => option<'a> = "findLast"
+
+/**
+`findLastIndex(array, predicate)` iterates the array in **reverse** order and returns the index of the first element that satisfies the provided testing function. Returns `-1` if no elements satisfy the predicate.
+
+See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex)
+
+## Examples
+```rescript
+let nums = [3, 5, 7, 5, 8]
+nums->Array.findLastIndex(i => i < 7) // 3
+nums->Array.findLast(i => i > 100) // -1
+[]->Array.findLast(_ => true) // -1
+```
+*/
+@send
+external findLastIndex: (array<'a>, 'a => bool) => int = "findLastIndex"
+
+/**
+`findLastIndexOpt(array, predicate)` iterates the array in **reverse** order and returns the index of the first element that satisfies the provided testing function. Returns `None` if no elements satisfy the predicate.
+
+See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex)
+
+## Examples
+```rescript
+let nums = [3, 5, 7, 5, 8] 
+nums->Array.findLastIndex(i => i < 7) // Some(3)
+nums->Array.findLast(i => i > 100) // None
+[]->Array.findLast(_ => true) // None
+```
+*/
+let findLastIndexOpt: (array<'a>, 'a => bool) => option<int>
+
+/**
+`findLastIndexWithIndex(array, predicate)` iterates the array in **reverse** order and returns the index of the first element that satisfies the callback `predicate`. The callback receives the current element being processed followed by its index. Returns `-1` if no elements satisfy the predicate.
+
+See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex)
+
+## Examples
+```rescript
+let nums = [3, 5, 7, 5, 8] 
+nums->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx <= 2) // 1
+nums->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx >= 1) // 3
+nums->Array.findLastIndexWithIndex((val, inx) => val >= 8 && inx < 2) // -1
+```
+*/
+@send
+external findLastIndexWithIndex: (array<'a>, ('a, int) => bool) => int = "findLastIndex"
+
+/**
+`findLastIndexWithIndexOpt(array, predicate)` iterates the array in **reverse** order and returns the index of the first element that satisfies the callback `predicate`. The callback receives the current element being processed followed by its index. Returns `None` if no elements satisfy the predicate.
+
+See [Array.findLastIndex on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex)
+
+## Examples
+```rescript
+let nums = [3, 5, 7, 5, 8] 
+nums->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx <= 2) // 1
+nums->Array.findLastIndexWithIndex((val, inx) => val == 5 && inx >= 1) // 3
+nums->Array.findLastIndexWithIndex((val, inx) => val >= 8 && inx < 2) // None 
+```
+*/
+let findLastIndexWithIndexOpt: (array<'a>, ('a, int) => bool) => option<int>
