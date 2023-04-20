@@ -21,6 +21,9 @@
     "src/**/*.res",
     "src/**/*.resi"
   ],
+  "peerDependencies": {
+    "rescript": "^10.0.0 || next"
+  },
   "devDependencies": {
     "rescript": "10.1.4",
     "@babel/code-frame": "7.18.6"
