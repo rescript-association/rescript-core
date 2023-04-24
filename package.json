@@ -22,7 +22,7 @@
     "src/**/*.resi"
   ],
   "peerDependencies": {
-    "rescript": "^10.0.0 || next"
+    "rescript": ">= 10.1.0"
   },
   "devDependencies": {
     "rescript": "10.1.4",
