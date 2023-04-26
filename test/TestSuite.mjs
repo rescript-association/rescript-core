@@ -27,6 +27,8 @@ var Concurrently = PromiseTest.Concurrently;
 
 var panicTest = ErrorTests.panicTest;
 
+var catchCustomError = ErrorTests.catchCustomError;
+
 var $$catch = IntTests.$$catch;
 
 var eq = ResultTests.eq;
@@ -46,6 +48,7 @@ export {
   Catching ,
   Concurrently ,
   panicTest ,
+  catchCustomError ,
   $$catch ,
   eq ,
   forEachIfOkCallFunction ,

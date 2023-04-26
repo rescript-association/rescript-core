@@ -2,6 +2,7 @@
 
 import * as Test from "./Test.mjs";
 import * as Js_exn from "rescript/lib/es6/js_exn.js";
+import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as RescriptCore from "../src/RescriptCore.mjs";
 import * as Caml_js_exceptions from "rescript/lib/es6/caml_js_exceptions.js";
 
@@ -33,7 +34,43 @@ function panicTest(param) {
 
 panicTest(undefined);
 
+function catchCustomError(param) {
+  var authenticationError = new Error("authentication error");
+  var codeCaught;
+  authenticationError["code"] = "invalid-password";
+  try {
+    throw authenticationError;
+  }
+  catch (raw_exn){
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+    var err = Caml_js_exceptions.as_js_exn(exn);
+    if (err !== undefined) {
+      var code = Caml_option.valFromOption(err)["code"];
+      if (code !== undefined) {
+        codeCaught = Caml_option.valFromOption(code);
+      }
+      
+    } else {
+      throw exn;
+    }
+  }
+  Test.run([
+        [
+          "ErrorTests.res",
+          34,
+          15,
+          39
+        ],
+        "Can access custom code"
+      ], codeCaught, (function (prim0, prim1) {
+          return prim0 === prim1;
+        }), "invalid-password");
+}
+
+catchCustomError(undefined);
+
 export {
   panicTest ,
+  catchCustomError ,
 }
 /*  Not a pure module */
