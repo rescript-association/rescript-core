@@ -2,9 +2,12 @@
 
 ## main
 
+## 0.3.0
+
 ### API changes
 
 - Add `Result.forEach` https://github.com/rescript-association/rescript-core/pull/116
+- Set peer dependencies range for ReScript compiler https://github.com/rescript-association/rescript-core/pull/133
 
 ## 0.2.0
 
