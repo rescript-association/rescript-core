@@ -5,7 +5,7 @@ import * as Test from "./Test.mjs";
 function shouldHandleNullableValues(param) {
   var tNull = null;
   var tUndefined = undefined;
-  var tPresent = "hello";
+  var tValue = "hello";
   var tmp;
   tmp = (tNull === null || tNull === undefined) && tNull === null ? true : false;
   Test.run([
@@ -33,15 +33,15 @@ function shouldHandleNullableValues(param) {
           return prim0 === prim1;
         }), true);
   var tmp$2;
-  tmp$2 = tPresent === null || tPresent === undefined || tPresent !== "hello" ? false : true;
+  tmp$2 = tValue === null || tValue === undefined || tValue !== "hello" ? false : true;
   Test.run([
         [
           "NullableTests.res",
           29,
           15,
-          38
+          36
         ],
-        "Should handle present"
+        "Should handle value"
       ], tmp$2, (function (prim0, prim1) {
           return prim0 === prim1;
         }), true);

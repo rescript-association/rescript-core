@@ -1,4 +1,4 @@
-type t<'a> = Js.Null.t<'a>
+@unboxed type t<'a> = Js.Null.t<'a> = Value('a) | @as(null) Null
 
 external asNullable: t<'a> => Core__Nullable.t<'a> = "%identity"
 

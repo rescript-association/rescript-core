@@ -65,6 +65,11 @@ type null<+'a> = Js.null<'a>
 
 type undefined<+'a> = Js.undefined<'a>
 
-type nullable<+'a> = Js.nullable<'a>
+// We're intentionally only bringing the constructors of `nullable` into scope
+// here. Reason is if we do the same for `null`, we'll get issues with inference
+// in the global scope, and we prioritize nullable higher because that covers
+// more cases.
+@unboxed
+type nullable<+'a> = Js.nullable<'a> = Value('a) | @as(null) Null | @as(undefined) Undefined
 
 let panic = Core__Error.panic

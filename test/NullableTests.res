@@ -3,7 +3,7 @@ open RescriptCore
 let shouldHandleNullableValues = () => {
   let tNull: Nullable.t<string> = %raw("null")
   let tUndefined: Nullable.t<string> = %raw("undefined")
-  let tPresent: Nullable.t<string> = %raw(`"hello"`)
+  let tValue: Nullable.t<string> = %raw(`"hello"`)
 
   Test.run(
     __POS_OF__("Should handle null"),
@@ -26,8 +26,8 @@ let shouldHandleNullableValues = () => {
   )
 
   Test.run(
-    __POS_OF__("Should handle present"),
-    switch tPresent {
+    __POS_OF__("Should handle value"),
+    switch tValue {
     | Value("hello") => true
     | _ => false
     },
