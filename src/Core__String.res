@@ -130,4 +130,4 @@ external splitByRegExpAtMost: (string, Core__RegExp.t, ~limit: int) => array<opt
 @get_index external getSymbolUnsafe: (string, Core__Symbol.t) => 'a = ""
 @set_index external setSymbol: (string, Core__Symbol.t, 'a) => unit = ""
 
-@send external localeCompare: (string, string) => float = "localeCompare"
+@send external localeCompare: (string, string) => int = "localeCompare"

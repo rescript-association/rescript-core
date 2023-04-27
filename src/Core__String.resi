@@ -970,9 +970,9 @@ See [`String.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaSc
 ## Examples
 
 ```rescript
-String.localeCompare("a", "c") < 0.0 == true
-String.localeCompare("a", "a") == 0.0
+String.localeCompare("a", "c") < 0 == true
+String.localeCompare("a", "a") == 0
 ```
 */
 @send
-external localeCompare: (string, string) => float = "localeCompare"
+external localeCompare: (string, string) => int = "localeCompare"
