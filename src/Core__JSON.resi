@@ -3,9 +3,17 @@ Functions for interacting with JSON.
 */
 
 /** 
-A type representing a JSON object.
+A type representing a valid JSON value.
 */
-type t = Js.Json.t
+@unboxed
+type rec t = Js.Json.t =
+  | @as(false) False
+  | @as(true) True
+  | @as(null) Null
+  | String(string)
+  | Number(float)
+  | Object(Js.Dict.t<t>)
+  | Array(array<t>)
 
 /** 
 `parseExn(string)` 

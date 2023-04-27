@@ -3,7 +3,7 @@
 import * as Curry from "rescript/lib/es6/curry.js";
 
 function getExn(x) {
-  if (x.TAG === /* Ok */0) {
+  if (x.TAG === "Ok") {
     return x._0;
   }
   throw {
@@ -13,7 +13,7 @@ function getExn(x) {
 }
 
 function mapOr(opt, $$default, f) {
-  if (opt.TAG === /* Ok */0) {
+  if (opt.TAG === "Ok") {
     return Curry._1(f, opt._0);
   } else {
     return $$default;
@@ -21,9 +21,9 @@ function mapOr(opt, $$default, f) {
 }
 
 function map(opt, f) {
-  if (opt.TAG === /* Ok */0) {
+  if (opt.TAG === "Ok") {
     return {
-            TAG: /* Ok */0,
+            TAG: "Ok",
             _0: Curry._1(f, opt._0)
           };
   } else {
@@ -32,7 +32,7 @@ function map(opt, f) {
 }
 
 function flatMap(opt, f) {
-  if (opt.TAG === /* Ok */0) {
+  if (opt.TAG === "Ok") {
     return Curry._1(f, opt._0);
   } else {
     return opt;
@@ -40,7 +40,7 @@ function flatMap(opt, f) {
 }
 
 function getOr(opt, $$default) {
-  if (opt.TAG === /* Ok */0) {
+  if (opt.TAG === "Ok") {
     return opt._0;
   } else {
     return $$default;
@@ -48,7 +48,7 @@ function getOr(opt, $$default) {
 }
 
 function isOk(x) {
-  if (x.TAG === /* Ok */0) {
+  if (x.TAG === "Ok") {
     return true;
   } else {
     return false;
@@ -56,7 +56,7 @@ function isOk(x) {
 }
 
 function isError(x) {
-  if (x.TAG === /* Ok */0) {
+  if (x.TAG === "Ok") {
     return false;
   } else {
     return true;
@@ -64,13 +64,13 @@ function isError(x) {
 }
 
 function equal(a, b, f) {
-  if (a.TAG === /* Ok */0) {
-    if (b.TAG === /* Ok */0) {
+  if (a.TAG === "Ok") {
+    if (b.TAG === "Ok") {
       return Curry._2(f, a._0, b._0);
     } else {
       return false;
     }
-  } else if (b.TAG === /* Ok */0) {
+  } else if (b.TAG === "Ok") {
     return false;
   } else {
     return true;
@@ -78,13 +78,13 @@ function equal(a, b, f) {
 }
 
 function compare(a, b, f) {
-  if (a.TAG === /* Ok */0) {
-    if (b.TAG === /* Ok */0) {
+  if (a.TAG === "Ok") {
+    if (b.TAG === "Ok") {
       return Curry._2(f, a._0, b._0);
     } else {
       return 1;
     }
-  } else if (b.TAG === /* Ok */0) {
+  } else if (b.TAG === "Ok") {
     return -1;
   } else {
     return 0;
@@ -92,18 +92,18 @@ function compare(a, b, f) {
 }
 
 function forEach(r, f) {
-  if (r.TAG === /* Ok */0) {
+  if (r.TAG === "Ok") {
     return Curry._1(f, r._0);
   }
   
 }
 
 function mapError(r, f) {
-  if (r.TAG === /* Ok */0) {
+  if (r.TAG === "Ok") {
     return r;
   } else {
     return {
-            TAG: /* Error */1,
+            TAG: "Error",
             _0: Curry._1(f, r._0)
           };
   }

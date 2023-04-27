@@ -121,11 +121,11 @@ var json$1 = Core__JSON.Classify.classify(json);
 
 var tmp;
 
-if (typeof json$1 === "number" || json$1.TAG !== /* Object */3) {
+if (typeof json$1 !== "object" || json$1.TAG !== "Object") {
   tmp = undefined;
 } else {
   var value = Core__JSON.Classify.classify(json$1._0["foo"]);
-  tmp = typeof value === "number" || value.TAG !== /* String */1 ? undefined : value._0;
+  tmp = typeof value !== "object" || value.TAG !== "String" ? undefined : value._0;
 }
 
 console.log(tmp);
@@ -283,7 +283,7 @@ var x = Symbol.for("Foo");
 
 console.log(x);
 
-var array$1 = Array.from("foo"[Symbol.iterator]());
+var array$1 = Array.from("foo"[Symbol.iterator](undefined));
 
 console.log(array$1);
 

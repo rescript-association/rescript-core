@@ -7,3 +7,4 @@ include ObjectTests
 include ResultTests
 include TypedArrayTests
 include FloatTests
+include JsonTests

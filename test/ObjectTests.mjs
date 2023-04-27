@@ -430,7 +430,7 @@ function assignOverwritesTarget(title, source) {
           22,
           39
         ],
-        "assign " + title + ""
+        "assign " + title
       ], Object.assign({
             a: 1
           }, sourceObj), eq, sourceObj);
@@ -441,7 +441,7 @@ function assignOverwritesTarget(title, source) {
           22,
           39
         ],
-        "assign " + title + ""
+        "assign " + title
       ], Object.assign({
             a: undefined
           }, sourceObj), eq, sourceObj);
@@ -452,7 +452,7 @@ function assignOverwritesTarget(title, source) {
           22,
           39
         ],
-        "assign " + title + ""
+        "assign " + title
       ], Object.assign({
             a: null
           }, sourceObj), eq, sourceObj);
@@ -474,7 +474,7 @@ function runGetTest(i) {
           22,
           46
         ],
-        "Object.get: " + i.title + ""
+        "Object.get: " + i.title
       ], Curry._1(i.get, Curry._1(i.source, undefined)), eq, i.expected);
 }
 

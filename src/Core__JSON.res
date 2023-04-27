@@ -1,4 +1,12 @@
-type t = Js.Json.t
+@unboxed
+type rec t = Js.Json.t =
+  | @as(false) False
+  | @as(true) True
+  | @as(null) Null
+  | String(string)
+  | Number(float)
+  | Object(Js.Dict.t<t>)
+  | Array(array<t>)
 
 @raises @val external parseExn: string => t = "JSON.parse"
 @raises @val external parseExnWithReviver: (string, (string, t) => t) => t = "JSON.parse"
