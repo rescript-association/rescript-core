@@ -1,4 +1,4 @@
-type t<'a> = Js.Nullable.t<'a>
+@unboxed type t<'a> = Js.Nullable.t<'a> = Value('a) | @as(null) Null | @as(undefined) Undefined
 
 external null: t<'a> = "#null"
 

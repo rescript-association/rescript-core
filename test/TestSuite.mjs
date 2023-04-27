@@ -9,6 +9,7 @@ import * as FloatTests from "./FloatTests.mjs";
 import * as ObjectTests from "./ObjectTests.mjs";
 import * as PromiseTest from "./PromiseTest.mjs";
 import * as ResultTests from "./ResultTests.mjs";
+import * as NullableTests from "./NullableTests.mjs";
 import * as TypedArrayTests from "./TypedArrayTests.mjs";
 
 var bign = TestTests.bign;
@@ -69,6 +70,8 @@ var eq = FloatTests.eq;
 
 var decodeJsonTest = JsonTests.decodeJsonTest;
 
+var shouldHandleNullableValues = NullableTests.shouldHandleNullableValues;
+
 export {
   bign ,
   TestError ,
@@ -99,5 +102,6 @@ export {
   o ,
   eq ,
   decodeJsonTest ,
+  shouldHandleNullableValues ,
 }
 /* IntTests Not a pure module */

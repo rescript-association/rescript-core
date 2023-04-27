@@ -8,3 +8,4 @@ include ResultTests
 include TypedArrayTests
 include FloatTests
 include JsonTests
+include NullableTests
