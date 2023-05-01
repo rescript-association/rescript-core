@@ -2,6 +2,12 @@
 
 ## main
 
+## 0.3.1
+
+### Bug fixes
+
+- Fix peer dependency range so later versions of npm don't complain as `Core` is used with ReScript `v11` alpha.
+
 ## 0.3.0
 
 ### API changes
