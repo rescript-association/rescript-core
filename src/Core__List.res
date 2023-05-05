@@ -870,14 +870,14 @@ let partitionU = (l, p) =>
         nextX,
         switch nextY {
         | list{_, ...tail} => tail
-        | list{} => assert false
+        | list{} => assert(false)
         },
       )
     } else {
       (
         switch nextX {
         | list{_, ...tail} => tail
-        | list{} => assert false
+        | list{} => assert(false)
         },
         nextY,
       )
