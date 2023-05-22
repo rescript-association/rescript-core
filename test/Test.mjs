@@ -9,25 +9,6 @@ import * as CodeFrame from "@babel/code-frame";
 
 var dirname = (new URL('.', import.meta.url).pathname);
 
-function cleanUpStackTrace(stack) {
-  var removeInternalLines = function (lines, _i) {
-    while(true) {
-      var i = _i;
-      if (i >= lines.length) {
-        return lines;
-      }
-      if (lines[i].indexOf(" (internal/") >= 0) {
-        return lines.slice(0, i);
-      }
-      _i = i + 1 | 0;
-      continue ;
-    };
-  };
-  return removeInternalLines(stack.split("\n").slice(2), 0).map(function (line) {
-                return line.slice(2);
-              }).join("\n");
-}
-
 function print(value) {
   var match = typeof value;
   if (match === "object" || match === "bigint") {
@@ -62,12 +43,11 @@ function run(loc, left, comparator, right) {
   console.log(errorMessage);
   var obj = {};
   Error.captureStackTrace(obj);
-  console.log(cleanUpStackTrace(obj.stack));
+  console.log(obj.stack.replace(/\n    /g, "\n  ").replace(/^Error\n/, "").replace(/^.+\n/, "").replace(/\n  at .+\(node:internal.+\n?/g, ""));
 }
 
 export {
   dirname ,
-  cleanUpStackTrace ,
   print ,
   run ,
 }
