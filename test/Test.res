@@ -11,29 +11,6 @@ external codeFrameColumns: (string, {..}, {..}) => string = "codeFrameColumns"
 
 let dirname = %raw("new URL('.', import.meta.url).pathname")
 
-let cleanUpStackTrace = stack => {
-  // Stack format: https://nodejs.org/api/errors.html#errors_error_stack
-  // Remove the node loader and other lines. No point in showing them
-  let rec removeInternalLines = (lines, i) => {
-    if i >= Array.length(lines) {
-      lines
-    } else if Array.getUnsafe(lines, i)->String.indexOf(" (internal/") >= 0 {
-      lines->Array.slice(~start=0, ~end=i)
-    } else {
-      removeInternalLines(lines, i + 1)
-    }
-  }
-
-  stack
-  ->String.split("\n")
-  // first line is "Error ...". Second line is this frame's stack trace. Ignore the 2
-  ->Array.sliceToEnd(~start=2)
-  ->removeInternalLines(0)
-  // stack is indented 4 spaces. Remove 2
-  ->Array.map(line => line->String.sliceToEnd(~start=2))
-  ->Array.joinWith("\n")
-}
-
 @val @module("util") external inspect: _ => string = "inspect"
 let print = value =>
   switch Type.typeof(value) {
@@ -64,6 +41,12 @@ ${codeFrame}
     // API: https://nodejs.org/api/errors.html#errors_error_capturestacktrace_targetobject_constructoropt
     let obj = Object.empty()
     captureStackTrace(obj)
-    Console.log(obj["stack"]->cleanUpStackTrace)
+    // clean up stack trace! Stack format: https://nodejs.org/api/errors.html#errors_error_stack
+    obj["stack"]
+    ->String.replaceRegExp(%re("/\n    /g"), "\n  ") // indent 2 spaces instead of 4, to align with code frame
+    ->String.replaceRegExp(%re("/^Error\n/"), "") // first line is just the word "Error"
+    ->String.replaceRegExp(%re("/^.+\n/"), "") // second line (now first) is this Test module's own stack frame
+    ->String.replaceRegExp(%re("/\n  at .+\(node:internal.+\n?/g"), "") // remove internal lines like "  at ModuleJob.run (node:internal/modules/esm/module_job:193:25)"
+    ->Console.log
   }
 }
