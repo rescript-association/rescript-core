@@ -239,9 +239,10 @@ external sort: (array<'a>, ('a, 'a) => int) => unit = "sort"
 external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit = "splice"
 
 @variadic @send
-external toSpliced: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit = "toSpliced"
+external toSpliced: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => array<'a> =
+  "toSpliced"
 
-@send external with: (array<'a>, int, 'a) => unit = "with"
+@send external with: (array<'a>, int, 'a) => array<'a> = "with"
 
 /**
 `unshift(array, item)` inserts a new item at the start of the array.

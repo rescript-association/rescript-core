@@ -27,7 +27,7 @@ external copyWithin: (t<'a>, ~target: int, ~start: int, ~end: int) => array<'a> 
 @send external sort: (t<'a>, ('a, 'a) => int) => unit = "sort"
 @send external toSorted: (t<'a>, ('a, 'a) => int) => t<'a> = "toSorted"
 
-@send external with: (t<'a>, int, 'a) => unit = "with"
+@send external with: (t<'a>, int, 'a) => t<'a> = "with"
 
 @send external includes: (t<'a>, 'a) => bool = "includes"
 
