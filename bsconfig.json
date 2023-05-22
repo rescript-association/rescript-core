@@ -4,11 +4,10 @@
   "sources": [
     {
       "dir": "src",
-      "subdirs": true
+      "subdirs": ["intl", "typed-arrays"]
     },
     {
       "dir": "test",
-      "subdirs": true,
       "type": "dev"
     }
   ],
