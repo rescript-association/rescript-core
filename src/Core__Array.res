@@ -51,13 +51,17 @@ external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<
 
 @variadic @send external pushMany: (array<'a>, array<'a>) => unit = "push"
 
-@send external reverseInPlace: array<'a> => unit = "reverse"
+@send external reverse: array<'a> => unit = "reverse"
+@send external toReversed: array<'a> => array<'a> = "toReversed"
 
 @send external shift: array<'a> => option<'a> = "shift"
 
 @variadic @send
-external spliceInPlace: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit =
-  "splice"
+external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit = "splice"
+@variadic @send
+external toSpliced: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit = "toSpliced"
+
+@send external with: (array<'a>, int, 'a) => unit = "with"
 
 @send external unshift: (array<'a>, 'a) => unit = "unshift"
 
@@ -92,13 +96,8 @@ let lastIndexOfOpt = (arr, item) =>
 @send external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
 @send external copy: array<'a> => array<'a> = "slice"
 
-@send external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
-
-let sort = (arr, cmp) => {
-  let result = copy(arr)
-  sortInPlace(result, cmp)
-  result
-}
+@send external sort: (array<'a>, ('a, 'a) => int) => unit = "sort"
+@send external toSorted: (array<'a>, ('a, 'a) => int) => array<'a> = "toSorted"
 
 @send external toString: array<'a> => string = "toString"
 @send external toLocaleString: array<'a> => string = "toLocaleString"
@@ -152,15 +151,6 @@ let swapUnsafe = (xs, i, j) => {
   let tmp = getUnsafe(xs, i)
   setUnsafe(xs, i, getUnsafe(xs, j))
   setUnsafe(xs, j, tmp)
-}
-
-let reverse = xs => {
-  let len = length(xs)
-  let result = makeUninitializedUnsafe(len)
-  for i in 0 to len - 1 {
-    setUnsafe(result, i, getUnsafe(xs, len - 1 - i))
-  }
-  result
 }
 
 let shuffleInPlace = xs => {

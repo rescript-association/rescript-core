@@ -795,7 +795,7 @@ let setAssoc = (xs, x, k, eq) => setAssocU(xs, x, k, (. a, b) => eq(a, b))
 
 let sort = (xs, cmp) => {
   let arr = toArray(xs)
-  Core__Array.sortInPlace(arr, cmp)
+  Core__Array.sort(arr, cmp)
   fromArray(arr)
 }
 

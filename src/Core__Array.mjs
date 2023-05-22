@@ -40,12 +40,6 @@ function lastIndexOfOpt(arr, item) {
   
 }
 
-function sort(arr, cmp) {
-  var result = arr.slice();
-  result.sort(cmp);
-  return result;
-}
-
 function reduce(arr, init, f) {
   return arr.reduce(f, init);
 }
@@ -74,15 +68,6 @@ function swapUnsafe(xs, i, j) {
   var tmp = xs[i];
   xs[i] = xs[j];
   xs[j] = tmp;
-}
-
-function reverse(xs) {
-  var len = xs.length;
-  var result = new Array(len);
-  for(var i = 0; i < len; ++i){
-    result[i] = xs[(len - 1 | 0) - i | 0];
-  }
-  return result;
 }
 
 function shuffleInPlace(xs) {
@@ -141,7 +126,6 @@ function findMap(arr, f) {
 export {
   make ,
   fromInitializer ,
-  sort ,
   indexOfOpt ,
   lastIndexOfOpt ,
   reduce ,
@@ -149,7 +133,6 @@ export {
   reduceRight ,
   reduceRightWithIndex ,
   findIndexOpt ,
-  reverse ,
   filterMap ,
   keepSome ,
   shuffle ,

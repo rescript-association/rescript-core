@@ -165,7 +165,7 @@ Console.log(someArray) // ["hi", "hello", "yay", "wehoo"]
 external pushMany: (array<'a>, array<'a>) => unit = "push"
 
 /**
-`reverseInPlace(array)` reverses the order of the items in the array.
+`reverse(array)` reverses the order of the items in `array`.
 
 Beware this will *mutate* the array.
 
@@ -174,13 +174,13 @@ See [`Array.reverse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 ## Examples
 ```rescript
 let someArray = ["hi", "hello"]
-someArray->Array.reverseInPlace
+someArray->Array.reverse
 
 Console.log(someArray) // ["hello", "h1"]
 ```
 */
 @send
-external reverseInPlace: array<'a> => unit = "reverse"
+external reverse: array<'a> => unit = "reverse"
 
 /**
 `shift(array)` removes the first item in the array, and returns it.
@@ -201,22 +201,24 @@ Console.log(someArray) // ["hello"]. Notice first item is gone.
 external shift: array<'a> => option<'a> = "shift"
 
 /**
-`sort(array, comparator)` returns a new, sorted array from `array`, using the provided `comparator` function.
+`toSorted(array, comparator)` returns a new, sorted array from `array`, using the `comparator` function.
 
-See [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) on MDN.
+See [`Array.toSorted`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted) on MDN.
 
 ## Examples
 ```rescript
 let someArray = [3, 2, 1]
-let sortedArray = someArray->Array.sort((a, b) => a > b ? 1 : -1)
+let sorted = someArray->Array.toSorted((a, b) => a - b)
 
-Console.log(sortedArray) // [1, 2, 3]
+Console.log(sorted) // [1, 2, 3]
+Console.log(someArray) // [3, 2, 1]. Original unchanged
 ```
 */
-let sort: (array<'a>, ('a, 'a) => int) => array<'a>
+@send
+external toSorted: (array<'a>, ('a, 'a) => int) => array<'a> = "toSorted"
 
 /**
-`sortInPlace(array, comparator)` sorts `array` using the `comparator` function.
+`sort(array, comparator)` sorts `array` in-place using the `comparator` function.
 
 Beware this will *mutate* the array.
 
@@ -225,16 +227,21 @@ See [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 ## Examples
 ```rescript
 let someArray = [3, 2, 1]
-someArray->Array.sortInPlace((a, b) => a > b ? 1 : -1)
+someArray->Array.sort((a, b) => a - b)
 
 Console.log(someArray) // [1, 2, 3]
 ```
 */
 @send
-external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
+external sort: (array<'a>, ('a, 'a) => int) => unit = "sort"
+
 @variadic @send
-external spliceInPlace: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit =
-  "splice"
+external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit = "splice"
+
+@variadic @send
+external toSpliced: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit = "toSpliced"
+
+@send external with: (array<'a>, int, 'a) => unit = "with"
 
 /**
 `unshift(array, item)` inserts a new item at the start of the array.
@@ -805,7 +812,7 @@ Console.log(array[1]) // "Hello"
 external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 
 /**
-`findIndexOpt(array, checker)` returns the index of the first element of `array` where the provided `checker` function returns true. 
+`findIndexOpt(array, checker)` returns the index of the first element of `array` where the provided `checker` function returns true.
 
 Returns `None` if no item matches.
 
@@ -826,19 +833,21 @@ switch array->Array.findIndexOpt(item => item == ReScript) {
 let findIndexOpt: (array<'a>, 'a => bool) => option<int>
 
 /**
-`reverse(array)` creates a new array with all items from `array` in reversed order.
+`toReversed(array)` creates a new array with all items from `array` in reversed order.
 
-See [`Array.reverse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) on MDN.
+See [`Array.toReversed`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toReversed) on MDN.
 
 ## Examples
 ```rescript
 let someArray = ["hi", "hello"]
-let reversed = someArray->Array.reverse
+let reversed = someArray->Array.toReversed
 
 Console.log(reversed) // ["hello", "h1"]
+Console.log(someArray) // ["h1", "hello"]. Original unchanged
 ```
 */
-let reverse: array<'a> => array<'a>
+@send
+external toReversed: array<'a> => array<'a> = "toReversed"
 
 /**
 `get(array, index)` returns the element at `index` of `array`.
