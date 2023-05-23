@@ -21,8 +21,13 @@ external copyWithin: (t<'a>, ~target: int, ~start: int, ~end: int) => array<'a> 
 @send external fillInPlaceToEnd: (t<'a>, 'a, ~start: int) => t<'a> = "fill"
 @send external fillInPlace: (t<'a>, 'a, ~start: int, ~end: int) => t<'a> = "fill"
 
-@send external reverseInPlace: t<'a> => t<'a> = "reverse"
-@send external sortInPlace: (t<'a>, ('a, 'a) => int) => t<'a> = "sort"
+@send external reverse: t<'a> => unit = "reverse"
+@send external toReversed: t<'a> => t<'a> = "toReversed"
+
+@send external sort: (t<'a>, ('a, 'a) => int) => unit = "sort"
+@send external toSorted: (t<'a>, ('a, 'a) => int) => t<'a> = "toSorted"
+
+@send external with: (t<'a>, int, 'a) => t<'a> = "with"
 
 @send external includes: (t<'a>, 'a) => bool = "includes"
 
