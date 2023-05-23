@@ -56,7 +56,7 @@ external copyWithinToEnd: (array<'a>, ~target: int, ~start: int) => array<'a> = 
 external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<'a> = "copyWithin"
 
 /**
-`fillAllInPlace(array, value)` fills the entire `array` with `value`.
+`fillAll(array, value)` fills the entire `array` with `value`.
 
 Beware this will *mutate* the array.
 
@@ -65,16 +65,16 @@ See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 ## Examples
 ```rescript
 let myArray = [1, 2, 3, 4]
-myArray->Array.fillAllInPlace(9)
+myArray->Array.fillAll(9)
 
 Console.log(myArray) // [9, 9, 9, 9]
 ```
 */
 @send
-external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
+external fillAll: (array<'a>, 'a) => unit = "fill"
 
 /**
-`fillInPlaceToEnd(array, value, ~start)` fills `array` with `value` from the `start` index.
+`fillToEnd(array, value, ~start)` fills `array` with `value` from the `start` index.
 
 Beware this will *mutate* the array.
 
@@ -83,16 +83,16 @@ See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 ## Examples
 ```rescript
 let myArray = [1, 2, 3, 4]
-myArray->Array.fillInPlaceToEnd(9, ~start=1)
+myArray->Array.fillToEnd(9, ~start=1)
 
 Console.log(myArray) // [1, 9, 9, 9]
 ```
 */
 @send
-external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
+external fillToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
 
 /**
-`fillInPlace(array, value, ~start, ~end)` fills `array` with `value` from `start` to `end`.
+`fill(array, value, ~start, ~end)` fills `array` with `value` from `start` to `end`.
 
 Beware this will *mutate* the array.
 
@@ -101,13 +101,13 @@ See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 ## Examples
 ```rescript
 let myArray = [1, 2, 3, 4]
-myArray->Array.fillInPlace(9, ~start=1, ~end=2)
+myArray->Array.fill(9, ~start=1, ~end=2)
 
 Console.log(myArray) // [1, 9, 9, 4]
 ```
 */
 @send
-external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
+external fill: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
 
 /**
 `pop(array)` removes the last item from `array` and returns it.
@@ -885,20 +885,20 @@ let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
 let keepSome: array<option<'a>> => array<'a>
 
 /**
-`shuffle(array)` returns a new array with all items in `array` in a random order.
+`toShuffled(array)` returns a new array with all items in `array` in a random order.
 
 ## Examples
 ```rescript
 let array = ["Hello", "Hi", "Good bye"]
-let shuffledArray = array->Array.shuffle
+let shuffledArray = array->Array.toShuffled
 
 Console.log(shuffledArray)
 ```
 */
-let shuffle: array<'a> => array<'a>
+let toShuffled: array<'a> => array<'a>
 
 /**
-`shuffleInPlace(array)` randomizes the position of all items in `array`.
+`shuffle(array)` randomizes the position of all items in `array`.
 
 Beware this will *mutate* the array.
 
@@ -910,7 +910,7 @@ array->Array.shuffle
 Console.log(array)
 ```
 */
-let shuffleInPlace: array<'a> => unit
+let shuffle: array<'a> => unit
 
 /**
 `flatMap(array, mapper)` returns a new array concatenating the arrays returned from running `mapper` on all items in `array`.

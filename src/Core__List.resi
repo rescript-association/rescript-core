@@ -193,15 +193,15 @@ List.makeBy(5, i => i * i) // list{0, 1, 4, 9, 16}
 let makeBy: (int, int => 'a) => t<'a>
 
 /**
-`shuffle(list)` returns a new list in random order.
+`toShuffled(list)` returns a new list in random order.
 
 ## Examples
 
 ```rescript
-List.shuffle(list{1, 2, 3}) // list{2, 1, 3}
+List.toShuffled(list{1, 2, 3}) // list{2, 1, 3}
 ```
 */
-let shuffle: t<'a> => t<'a>
+let toShuffled: t<'a> => t<'a>
 
 /**
 `drop(list, value)` return a new list, dropping the first `value` element.
@@ -391,7 +391,7 @@ let f = x => x * x
 let l = list{3, 4, 5}
 
 let withMap = List.map(l, f)->List.reverse
-let withMapReverse = l->List.mapReverse(f) 
+let withMapReverse = l->List.mapReverse(f)
 
 Console.log(withMap == withMapReverse) // true
 ```

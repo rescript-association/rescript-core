@@ -17,9 +17,9 @@ type t<'a>
 @send
 external copyWithin: (t<'a>, ~target: int, ~start: int, ~end: int) => array<'a> = "copyWithin"
 
-@send external fillAllInPlace: (t<'a>, 'a) => t<'a> = "fill"
-@send external fillInPlaceToEnd: (t<'a>, 'a, ~start: int) => t<'a> = "fill"
-@send external fillInPlace: (t<'a>, 'a, ~start: int, ~end: int) => t<'a> = "fill"
+@send external fillAll: (t<'a>, 'a) => t<'a> = "fill"
+@send external fillToEnd: (t<'a>, 'a, ~start: int) => t<'a> = "fill"
+@send external fill: (t<'a>, 'a, ~start: int, ~end: int) => t<'a> = "fill"
 
 @send external reverse: t<'a> => unit = "reverse"
 @send external toReversed: t<'a> => t<'a> = "toReversed"

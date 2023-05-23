@@ -201,10 +201,10 @@ Test.run([
         "ArrayTests.res",
         51,
         20,
-        38
+        41
       ],
-      "shuffle - length"
-    ], Core__Array.shuffle([
+      "toShuffled - length"
+    ], Core__Array.toShuffled([
           1,
           2,
           3
@@ -221,10 +221,10 @@ Test.run([
         "ArrayTests.res",
         54,
         13,
-        38
+        31
       ],
-      "shuffleInPlace - length"
-    ], (Core__Array.shuffleInPlace(arr), arr.length), eq, 3);
+      "shuffle - length"
+    ], (Core__Array.shuffle(arr), arr.length), eq, 3);
 
 Test.run([
       [
