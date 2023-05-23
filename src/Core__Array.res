@@ -7,18 +7,18 @@ external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 @val
 external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b> = "Array.from"
 
-@send external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
+@send external fillAll: (array<'a>, 'a) => unit = "fill"
 
-@send external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
+@send external fillToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
 
-@send external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
+@send external fill: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
 
 let make = (~length, x) =>
   if length <= 0 {
     []
   } else {
     let arr = makeUninitializedUnsafe(length)
-    arr->fillAllInPlace(x)
+    arr->fillAll(x)
     arr
   }
 
@@ -154,16 +154,16 @@ let swapUnsafe = (xs, i, j) => {
   setUnsafe(xs, j, tmp)
 }
 
-let shuffleInPlace = xs => {
+let shuffle = xs => {
   let len = length(xs)
   for i in 0 to len - 1 {
     swapUnsafe(xs, i, Js.Math.random_int(i, len)) /* [i,len) */
   }
 }
 
-let shuffle = xs => {
+let toShuffled = xs => {
   let result = copy(xs)
-  shuffleInPlace(result)
+  shuffle(result)
   result
 }
 

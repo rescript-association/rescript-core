@@ -651,9 +651,9 @@ function toArray(x) {
   return arr;
 }
 
-function shuffle(xs) {
+function toShuffled(xs) {
   var v = toArray(xs);
-  Core__Array.shuffleInPlace(v);
+  Core__Array.shuffle(v);
   return fromArray(v);
 }
 
@@ -1357,7 +1357,7 @@ export {
   getExn ,
   make ,
   makeBy ,
-  shuffle ,
+  toShuffled ,
   drop ,
   take ,
   splitAt ,

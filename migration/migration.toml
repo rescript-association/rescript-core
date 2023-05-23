@@ -150,7 +150,7 @@ match="Math.min_float"
 rewrite="Math.min"
 
 ## BELT
-## Below are migrations that cover moving from Belt to equivalents 
+## Below are migrations that cover moving from Belt to equivalents
 ## available in the new stdlib.
 [belt-option]
 match="Belt.Option"
@@ -182,6 +182,10 @@ rewrite="Array.filterMap"
 
 [belt-array-a-shuffle]
 match="Belt.Array.shuffle"
+rewrite="Array.toShuffled"
+
+[belt-array-a-shuffle-in-place]
+match="Belt.Array.shuffleInPlace"
 rewrite="Array.shuffle"
 
 [belt-array-a-flat-map]

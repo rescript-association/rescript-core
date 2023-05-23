@@ -1,6 +1,26 @@
 # @rescript/core Changelog
 
-## main
+## Next version
+
+### API changes
+
+- `Array` mutable & immutable helper name changed to conform to JS' upcoming APIs [such as `toSorted`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted)
+  - `sort` -> `toSorted`, `sortInPlace` -> `sort`
+  - `reverse` -> `toReversed`, `reverseInPlace` -> `reverse`
+  - `splice` -> `toSpliced`, `spliceInPlace` -> `splice`
+  - `shuffle` -> `toShuffled`, `shuffleInPlace` -> `shuffle`
+  - `fillAllInPlace` -> `fillAll`, `fillInPlaceToEnd` -> `fillToEnd`, `fillInPlace` -> `fill`
+  - added `with`
+- Same for `TypedArray`:
+  - `sort` -> `toSorted`, `sortInPlace` -> `sort`
+  - `reverse` -> `toReversed`, `reverseInPlace` -> `reverse`
+  - `fillAllInPlace` -> `fillAll`, `fillInPlaceToEnd` -> `fillToEnd`, `fillInPlace` -> `fill`
+- And `List`:
+  - `shuffle` -> `toShuffled`
+
+**Note 1**: These changes should all produce the correct type errors. Though `TypedArray`'s `reverse` and `sort` previously mutated _and_ returned the mutated array itself, whereas now they'd be copies. Please be careful refactoring these 2.
+
+**Note 2**: the newly added helpers, `Array.toSorted`, `Array.toSpliced`, `Array.toReversed`, `Array.with`, `TypedArray.toSorted` and `TypedArray.toReversed` require their respective polyfill, as [they're not currently supported by Firefox](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted).
 
 ## 0.3.1
 

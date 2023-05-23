@@ -70,16 +70,16 @@ function swapUnsafe(xs, i, j) {
   xs[j] = tmp;
 }
 
-function shuffleInPlace(xs) {
+function shuffle(xs) {
   var len = xs.length;
   for(var i = 0; i < len; ++i){
     swapUnsafe(xs, i, Js_math.random_int(i, len));
   }
 }
 
-function shuffle(xs) {
+function toShuffled(xs) {
   var result = xs.slice();
-  shuffleInPlace(result);
+  shuffle(result);
   return result;
 }
 
@@ -135,8 +135,8 @@ export {
   findIndexOpt ,
   filterMap ,
   keepSome ,
+  toShuffled ,
   shuffle ,
-  shuffleInPlace ,
   findMap ,
 }
 /* No side effect */

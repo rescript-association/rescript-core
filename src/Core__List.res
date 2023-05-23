@@ -481,9 +481,9 @@ let toArray = (x: t<_>) => {
   arr
 }
 
-let shuffle = xs => {
+let toShuffled = xs => {
   let v = toArray(xs)
-  Core__Array.shuffleInPlace(v)
+  Core__Array.shuffle(v)
   fromArray(v)
 }
 
