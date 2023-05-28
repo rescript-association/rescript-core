@@ -4,6 +4,7 @@
 
 ### API changes
 
+- Map, Set, WeakMap, WeakSet: use the types defined in the Js namespace. https://github.com/rescript-association/rescript-core/pull/143
 - `Array` mutable & immutable helper name changed to conform to JS' upcoming APIs [such as `toSorted`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted)
   - `sort` -> `toSorted`, `sortInPlace` -> `sort`
   - `reverse` -> `toReversed`, `reverseInPlace` -> `reverse`
