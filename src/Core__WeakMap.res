@@ -1,4 +1,4 @@
-type t<'k, 'v>
+type t<'k, 'v> = Js.WeakMap.t<'k, 'v>
 
 @new external make: unit => t<'k, 'v> = "WeakMap"
 

@@ -1,4 +1,4 @@
-type t<'a>
+type t<'a> = Js.Set.t<'a>
 
 @new external make: unit => t<'a> = "Set"
 @new external fromArray: array<'a> => t<'a> = "Set"
