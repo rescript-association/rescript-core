@@ -37,6 +37,48 @@ let fromInitializer = (~length, f) =>
 
 @get external length: array<'a> => int = "length"
 
+let rec equalFromIndex = (a, b, i, eq, len) =>
+  if i === len {
+    true
+  } else if eq(a->getUnsafe(i), b->getUnsafe(i)) {
+    equalFromIndex(a, b, i + 1, eq, len)
+  } else {
+    false
+  }
+
+let equal = (a, b, eq) => {
+  let len = a->length
+  if len === b->length {
+    equalFromIndex(a, b, 0, eq, len)
+  } else {
+    false
+  }
+}
+
+let rec compareFromIndex = (a, b, i, cmp, len) =>
+  if i === len {
+    0
+  } else {
+    let c = cmp(a->getUnsafe(i), b->getUnsafe(i))
+    if c === 0 {
+      compareFromIndex(a, b, i + 1, cmp, len)
+    } else {
+      c
+    }
+  }
+
+let compare = (a, b, cmp) => {
+  let lenA = a->length
+  let lenB = b->length
+  if lenA > lenB {
+    1
+  } else if lenA < lenB {
+    -1
+  } else {
+    compareFromIndex(a, b, 0, cmp, lenA)
+  }
+}
+
 @send external copyAllWithin: (array<'a>, ~target: int) => array<'a> = "copyWithin"
 
 @send

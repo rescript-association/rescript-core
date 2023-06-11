@@ -118,6 +118,10 @@ String.fromCodePointMany([0xd55c, 0xae00, 0x1f63a]) == `한글😺`
 @val
 external fromCodePointMany: array<int> => string = "String.fromCodePoint"
 
+let equal: (string, string) => bool
+
+let compare: (string, string) => int
+
 /**
 `length(str)` returns the length of the given `string`.
 See [`String.length`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length) on MDN.
@@ -961,7 +965,7 @@ external padEnd: (string, int, string) => string = "padEnd"
 
 /**
 `localeCompare(referenceStr, compareStr)` returns a float than indicatings
-whether a reference string comes before or fater, or is the same as the given
+whether a reference string comes before or after, or is the same as the given
 string in sort order. If `referenceStr` occurs before `compareStr` positive if
 the `referenceStr` occurs after `compareStr`, `0` if they are equivalent.
 Do not rely on exact return values of `-1` or `1`

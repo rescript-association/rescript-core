@@ -72,11 +72,10 @@ function isError(x) {
   }
 }
 
-function eq(a, b, f) {
-  var f$1 = Curry.__2(f);
+function equal(a, b, f) {
   if (a.TAG === /* Ok */0) {
     if (b.TAG === /* Ok */0) {
-      return f$1(a._0, b._0);
+      return Curry._2(f, a._0, b._0);
     } else {
       return false;
     }
@@ -87,11 +86,10 @@ function eq(a, b, f) {
   }
 }
 
-function cmp(a, b, f) {
-  var f$1 = Curry.__2(f);
+function compare(a, b, f) {
   if (a.TAG === /* Ok */0) {
     if (b.TAG === /* Ok */0) {
-      return f$1(a._0, b._0);
+      return Curry._2(f, a._0, b._0);
     } else {
       return 1;
     }
@@ -117,8 +115,8 @@ export {
   getWithDefault ,
   isOk ,
   isError ,
-  eq ,
-  cmp ,
+  equal ,
+  compare ,
   forEach ,
 }
 /* No side effect */
