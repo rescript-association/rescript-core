@@ -10,12 +10,12 @@ module Constants = {
 let equal = (a: float, b: float) => a === b
 
 let compare = (a: float, b: float) =>
-  if a === b {
-    0
-  } else if a > b {
-    1
-  } else {
+  if a < b {
     -1
+  } else if a === b {
+    0
+  } else {
+    1
   }
 
 @val external isNaN: float => bool = "isNaN"

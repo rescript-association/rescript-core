@@ -5,7 +5,14 @@ module Constants = {
 
 let equal = (a: int, b: int) => a === b
 
-let compare = (a, b) => a - b
+let compare = (a: int, b: int) =>
+  if a < b {
+    -1
+  } else if a === b {
+    0
+  } else {
+    1
+  }
 
 @send external toExponential: int => string = "toExponential"
 @send external toExponentialWithPrecision: (int, ~digits: int) => string = "toExponential"
