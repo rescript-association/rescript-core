@@ -25,7 +25,6 @@ function fromInitializer(length, f) {
 }
 
 function equal(a, b, eq) {
-  var eq$1 = Curry.__2(eq);
   var len = a.length;
   if (len === b.length) {
     var _i = 0;
@@ -34,7 +33,7 @@ function equal(a, b, eq) {
       if (i === len) {
         return true;
       }
-      if (!eq$1(a[i], b[i])) {
+      if (!Curry._2(eq, a[i], b[i])) {
         return false;
       }
       _i = i + 1 | 0;
@@ -46,7 +45,6 @@ function equal(a, b, eq) {
 }
 
 function compare(a, b, cmp) {
-  var cmp$1 = Curry.__2(cmp);
   var lenA = a.length;
   var lenB = b.length;
   if (lenA > lenB) {
@@ -60,7 +58,7 @@ function compare(a, b, cmp) {
       if (i === lenA) {
         return 0;
       }
-      var c = cmp$1(a[i], b[i]);
+      var c = Curry._2(cmp, a[i], b[i]);
       if (c !== 0) {
         return c;
       }

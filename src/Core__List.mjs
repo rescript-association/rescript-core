@@ -989,55 +989,49 @@ function compareLength(_l1, _l2) {
   };
 }
 
-function compare(l1, l2, f) {
-  var _l1 = l1;
-  var _l2 = l2;
-  var p = Curry.__2(f);
+function compare(_l1, _l2, p) {
   while(true) {
-    var l2$1 = _l2;
-    var l1$1 = _l1;
-    if (!l1$1) {
-      if (l2$1) {
+    var l2 = _l2;
+    var l1 = _l1;
+    if (!l1) {
+      if (l2) {
         return -1;
       } else {
         return 0;
       }
     }
-    if (!l2$1) {
+    if (!l2) {
       return 1;
     }
-    var c = p(l1$1.hd, l2$1.hd);
+    var c = Curry._2(p, l1.hd, l2.hd);
     if (c !== 0) {
       return c;
     }
-    _l2 = l2$1.tl;
-    _l1 = l1$1.tl;
+    _l2 = l2.tl;
+    _l1 = l1.tl;
     continue ;
   };
 }
 
-function equal(l1, l2, f) {
-  var _l1 = l1;
-  var _l2 = l2;
-  var p = Curry.__2(f);
+function equal(_l1, _l2, p) {
   while(true) {
-    var l2$1 = _l2;
-    var l1$1 = _l1;
-    if (!l1$1) {
-      if (l2$1) {
+    var l2 = _l2;
+    var l1 = _l1;
+    if (!l1) {
+      if (l2) {
         return false;
       } else {
         return true;
       }
     }
-    if (!l2$1) {
+    if (!l2) {
       return false;
     }
-    if (!p(l1$1.hd, l2$1.hd)) {
+    if (!Curry._2(p, l1.hd, l2.hd)) {
       return false;
     }
-    _l2 = l2$1.tl;
-    _l1 = l1$1.tl;
+    _l2 = l2.tl;
+    _l1 = l1.tl;
     continue ;
   };
 }

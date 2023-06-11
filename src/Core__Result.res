@@ -72,25 +72,21 @@ let isError = x =>
   | Error(_) => true
   }
 
-let equalU = (a, b, f) =>
+let equal = (a, b, f) =>
   switch (a, b) {
-  | (Ok(a), Ok(b)) => f(. a, b)
+  | (Ok(a), Ok(b)) => f(a, b)
   | (Error(_), Ok(_))
   | (Ok(_), Error(_)) => false
   | (Error(_), Error(_)) => true
   }
 
-let equal = (a, b, f) => equalU(a, b, (. x, y) => f(x, y))
-
-let compareU = (a, b, f) =>
+let compare = (a, b, f) =>
   switch (a, b) {
-  | (Ok(a), Ok(b)) => f(. a, b)
+  | (Ok(a), Ok(b)) => f(a, b)
   | (Error(_), Ok(_)) => -1
   | (Ok(_), Error(_)) => 1
   | (Error(_), Error(_)) => 0
   }
-
-let compare = (a, b, f) => compareU(a, b, (. x, y) => f(x, y))
 
 let forEach = (r, f) =>
   switch r {
