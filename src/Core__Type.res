@@ -1,43 +1,96 @@
-type t = [#undefined | #object | #boolean | #number | #bigint | #string | #symbol | #function]
+type typeof = [
+  | #undefined
+  | #object
+  | #boolean
+  | #number
+  | #bigint
+  | #string
+  | #symbol
+  | #function
+]
 
-external typeof: 'a => t = "#typeof"
+external typeof: 'a => typeof = "#typeof"
 
-module Classify = {
-  type function
-  type object
-  type symbol
+type unknown
+external toUnknown: 'a => unknown = "%identity"
 
-  type t =
-    | Bool(bool)
-    | Null
-    | Undefined
-    | String(string)
-    | Number(float)
-    | Object(object)
-    | Function(function)
-    | Symbol(symbol)
+type object // How to use with the Object module?
+type function
 
-  @val external _internalClass: 'a => string = "Object.prototype.toString.call"
-  external _asBool: 'a => bool = "%identity"
-  external _asString: 'a => string = "%identity"
-  external _asFloat: 'a => float = "%identity"
-  external _asObject: 'a => object = "%identity"
-  external _asFunction: 'a => function = "%identity"
-  external _asSymbol: 'a => symbol = "%identity"
+// typeof null == "object". Gotta love that! Do better here.
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof#typeof_null
+type jsType =
+  | Undefined
+  | Null
+  | Object(object)
+  | Bool(bool)
+  | Number(float)
+  | BigInt(Core__BigInt.t)
+  | String(string)
+  | Symbol(Core__Symbol.t)
+  | Function(function)
 
-  let classify = value => {
-    switch _internalClass(value) {
-    | "[object Boolean]" => Bool(_asBool(value))
-    | "[object Null]" => Null
-    | "[object Undefined]" => Undefined
-    | "[object String]" => String(_asString(value))
-    | "[object Number]" => Number(_asFloat(value))
-    | "[object Function]"
-    | "[object GeneratorFunction]"
-    | "[object AsyncFunction]" =>
-      Function(_asFunction(value))
-    | "[object Symbol]" => Symbol(_asSymbol(value))
-    | _ => Object(_asObject(value))
+external toObjectUnsafe: 'a => object = "%identity"
+external toBoolUnsafe: 'a => bool = "%identity"
+external toFloatUnsafe: 'a => float = "%identity"
+external toBigIntUnsafe: 'a => Core__BigInt.t = "%identity"
+external toStringUnsafe: 'a => string = "%identity"
+external toSymbolUnsafe: 'a => Core__Symbol.t = "%identity"
+external toFunctionUnsafe: 'a => function = "%identity"
+
+module N = Core__Nullable
+let isNull = i => N.make(i) == N.null
+let isNullOrUndefined = i => N.make(i) == N.null || N.make(i) == N.undefined
+let isUndefined = i => N.make(i) == N.undefined
+
+let classify = value => {
+  switch typeof(value) {
+  | #number => value->toFloatUnsafe->Number
+  | #string => value->toStringUnsafe->String
+  | #boolean => value->toBoolUnsafe->Bool
+  | #undefined => Undefined
+  | #function => value->toFunctionUnsafe->Function
+  | #bigint => value->toBigIntUnsafe->BigInt
+  | #symbol => value->toSymbolUnsafe->Symbol
+  | #object =>
+    switch isNull(value) {
+    | true => Null
+    | false => value->toObjectUnsafe->Object
     }
   }
 }
+
+let toObject = i => typeof(i) === #object ? Some((Obj.magic(i): object)) : None
+let toBool = i => typeof(i) === #boolean ? Some((Obj.magic(i): bool)) : None
+let toFloat = i => typeof(i) === #number ? Some((Obj.magic(i): float)) : None
+let toBigInt = i => typeof(i) === #bigint ? Some((Obj.magic(i): Core__BigInt.t)) : None
+let toString = i => typeof(i) === #string ? Some((Obj.magic(i): string)) : None
+let toSymbol = i => typeof(i) === #symbol ? Some((Obj.magic(i): Core__Symbol.t)) : None
+let toFunction = i => typeof(i) === #function ? Some((Obj.magic(i): function)) : None
+
+// Implicitly creates a wrapper object for primitives that is promptly discard.
+// Throws if the object is null or undefined.
+@get_index external getUnsafe: ('a, string) => unknown = ""
+@get_index external getBySymbolUnsafe: ('a, Core__Symbol.t) => unknown = ""
+
+let getObject = (o, n) => isNullOrUndefined(o) ? None : o->getUnsafe(n)->toObject
+let getObjectBySymbol = (o, s) => isNullOrUndefined(o) ? None : o->getBySymbolUnsafe(s)->toObject
+
+let getBool = (o, n) => isNullOrUndefined(o) ? None : o->getUnsafe(n)->toBool
+let getBoolBySymbol = (o, s) => isNullOrUndefined(o) ? None : o->getBySymbolUnsafe(s)->toBool
+
+let getFloat = (o, n) => isNullOrUndefined(o) ? None : o->getUnsafe(n)->toFloat
+let getFloatBySymbol = (o, s) => isNullOrUndefined(o) ? None : o->getBySymbolUnsafe(s)->toFloat
+
+let getBigInt = (o, n) => isNullOrUndefined(o) ? None : o->getUnsafe(n)->toBigInt
+let getBigIntBySymbol = (o, s) => isNullOrUndefined(o) ? None : o->getBySymbolUnsafe(s)->toBigInt
+
+let getString = (o, n) => isNullOrUndefined(o) ? None : o->getUnsafe(n)->toString
+let getStringBySymbol = (o, s) => isNullOrUndefined(o) ? None : o->getBySymbolUnsafe(s)->toString
+
+let getSymbol = (o, n) => isNullOrUndefined(o) ? None : o->getUnsafe(n)->toSymbol
+let getSymbolBySymbol = (o, s) => isNullOrUndefined(o) ? None : o->getBySymbolUnsafe(s)->toSymbol
+
+let getFunction = (o, n) => isNullOrUndefined(o) ? None : o->getUnsafe(n)->toFunction
+let getFunctionBySymbol = (o, s) =>
+  isNullOrUndefined(o) ? None : o->getBySymbolUnsafe(s)->toFunction

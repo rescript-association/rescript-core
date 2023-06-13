@@ -49,7 +49,7 @@ module Intl = Core__Intl
 
 external null: Core__Nullable.t<'a> = "#null"
 external undefined: Core__Nullable.t<'a> = "#undefined"
-external typeof: 'a => Core__Type.t = "#typeof"
+external typeof: 'a => Core__Type.typeof = "#typeof"
 
 type t<'a> = Js.t<'a>
 module MapperRt = Js.MapperRt
