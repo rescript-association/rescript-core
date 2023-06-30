@@ -48,13 +48,6 @@ module Classify: {
   type object
 
   /**
-  An abstract type representing a JavaScript symbol.
-
-  See [`symbol`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) on MDN.
-  */
-  type symbol
-
-  /**
   The type representing a classified JavaScript value.
   */
   type t =
@@ -65,7 +58,8 @@ module Classify: {
     | Number(float)
     | Object(object)
     | Function(function)
-    | Symbol(symbol)
+    | Symbol(Core__Symbol.t)
+    | BigInt(Core__BigInt.t)
 
   /**
 `classify(anyValue)`
