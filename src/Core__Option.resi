@@ -222,14 +222,14 @@ let equal: (option<'a>, option<'b>, ('a, 'b) => bool) => bool
 /**
 `compare(opt1, opt2, f)` compares two optional values with respect to given `f`.
 
-If both `opt1` and `opt2` are `None`, it returns `0`. If the first argument is `Some(value1)` and the second is `None`, returns `1` (something is greater than nothing).
+If both `opt1` and `opt2` are `None`, it returns `0.`. If the first argument is `Some(value1)` and the second is `None`, returns `1.` (something is greater than nothing).
 
-If the first argument is `None` and the second is `Some(value2)`, returns `-1`
+If the first argument is `None` and the second is `Some(value2)`, returns `-1.`
 (nothing is less than something).
 
 If the arguments are `Some(value1)` and `Some(value2)`, returns the result of
-`f(value1, value2)`, `f` takes two arguments and returns `-1` if the first
-argument is less than the second, `0` if the arguments are equal, and `1` if
+`f(value1, value2)`, `f` takes two arguments and returns `-1.` if the first
+argument is less than the second, `0.` if the arguments are equal, and `1.` if
 the first argument is greater than the second.
 
 ## Examples
@@ -239,12 +239,12 @@ let clockCompare = (a, b) => compare(mod(a, 12), mod(b, 12))
 
 open Option
 
-compare(Some(3), Some(15), clockCompare) // 0
-compare(Some(3), Some(14), clockCompare) // 1
-compare(Some(2), Some(15), clockCompare) // (-1)
-compare(None, Some(15), clockCompare) // (-1)
-compare(Some(14), None, clockCompare) // 1
-compare(None, None, clockCompare) // 0
+compare(Some(3), Some(15), clockCompare) // 0.
+compare(Some(3), Some(14), clockCompare) // 1.
+compare(Some(2), Some(15), clockCompare) // (-1.)
+compare(None, Some(15), clockCompare) // (-1.)
+compare(Some(14), None, clockCompare) // 1.
+compare(None, None, clockCompare) // 0.
 ```
 */
-let compare: (option<'a>, option<'b>, ('a, 'b) => int) => int
+let compare: (option<'a>, option<'b>, ('a, 'b) => float) => float

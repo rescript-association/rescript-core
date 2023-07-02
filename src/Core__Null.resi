@@ -33,7 +33,7 @@ Console.log(null) // Logs `null` to the console.
 external null: t<'a> = "#null"
 
 /**
-Creates a new `Null.t` from the provided value. 
+Creates a new `Null.t` from the provided value.
 This means the compiler will enforce null checks for the new value.
 
 ## Examples
@@ -46,7 +46,7 @@ external make: 'a => t<'a> = "%identity"
 
 let equal: (t<'a>, t<'b>, ('a, 'b) => bool) => bool
 
-let compare: (t<'a>, t<'b>, ('a, 'b) => int) => int
+let compare: (t<'a>, t<'b>, ('a, 'b) => float) => float
 
 /**
 Converts a nullable value into an option, so it can be pattern matched on.

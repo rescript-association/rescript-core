@@ -164,15 +164,15 @@ let equal: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
 
 /**
   `compare(res1, res2, f)`: Compare two `Result` variables with respect to a
-  comparison function. The comparison function returns -1 if the first variable
-  is "less than" the second, 0 if the two variables are equal, and 1 if the first
+  comparison function. The comparison function returns -1. if the first variable
+  is "less than" the second, 0. if the two variables are equal, and 1. if the first
   is "greater than" the second.
 
   If `res1` and `res2` are of the form `Ok(n)` and `Ok(m)`, return the result of
   `f(n, m)`. If `res1` is of the form `Error(e)` and `res2` of the form `Ok(n)`,
-  return -1 (nothing is less than something) If `res1` is of the form `Ok(n)` and
-  `res2` of the form `Error(e)`, return 1 (something is greater than nothing) If
-  both `res1` and `res2` are of the form `Error(e)`, return 0 (equal)
+  return -1. (nothing is less than something) If `res1` is of the form `Ok(n)` and
+  `res2` of the form `Error(e)`, return 1. (something is greater than nothing) If
+  both `res1` and `res2` are of the form `Error(e)`, return 0. (equal)
 
   ```res example
   let good1 = Result.Ok(59)
@@ -185,21 +185,21 @@ let equal: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
 
   let mod10cmp = (a, b) => Pervasives.compare(mod(a, 10), mod(b, 10))
 
-  Result.compare(Ok(39), Ok(57), mod10cmp) == 1
+  Result.compare(Ok(39), Ok(57), mod10cmp) == 1.
 
-  Result.compare(Ok(57), Ok(39), mod10cmp) == (-1)
+  Result.compare(Ok(57), Ok(39), mod10cmp) == (-1.)
 
-  Result.compare(Ok(39), Error("y"), mod10cmp) == 1
+  Result.compare(Ok(39), Error("y"), mod10cmp) == 1.
 
-  Result.compare(Error("x"), Ok(57), mod10cmp) == (-1)
+  Result.compare(Error("x"), Ok(57), mod10cmp) == (-1.)
 
-  Result.compare(Error("x"), Error("y"), mod10cmp) == 0
+  Result.compare(Error("x"), Error("y"), mod10cmp) == 0.
   ```
 */
-let compare: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => int) => int
+let compare: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => float) => float
 
 /**
-`forEach(res, f)` runs the provided function `f` on the `Ok` value. If `res` is `Error`, nothing happens. 
+`forEach(res, f)` runs the provided function `f` on the `Ok` value. If `res` is `Error`, nothing happens.
 
 ## Examples
 

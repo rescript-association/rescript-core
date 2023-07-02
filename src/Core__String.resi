@@ -120,7 +120,7 @@ external fromCodePointMany: array<int> => string = "String.fromCodePoint"
 
 let equal: (string, string) => bool
 
-let compare: (string, string) => int
+let compare: (string, string) => float
 
 /**
 `length(str)` returns the length of the given `string`.
@@ -653,9 +653,9 @@ let searchOpt: (string, Core__RegExp.t) => option<int>
 /**
 `slice(str, ~start, ~end)` returns the substring of `str` starting at
 character `start` up to but not including `end`.
-- If either `start` or `end` is negative, then it is evaluated as 
+- If either `start` or `end` is negative, then it is evaluated as
 `length(str - start)` or `length(str - end)`.
-- If `end` is greater than the length of `str`, then it is treated as 
+- If `end` is greater than the length of `str`, then it is treated as
 `length(str)`.
 - If `start` is greater than `end`, slice returns the empty string.
 See [`String.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) on MDN.

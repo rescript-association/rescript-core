@@ -83,9 +83,9 @@ let equal = (a, b, f) =>
 let compare = (a, b, f) =>
   switch (a, b) {
   | (Ok(a), Ok(b)) => f(a, b)
-  | (Error(_), Ok(_)) => -1
-  | (Ok(_), Error(_)) => 1
-  | (Error(_), Error(_)) => 0
+  | (Error(_), Ok(_)) => -1.
+  | (Ok(_), Error(_)) => 1.
+  | (Error(_), Error(_)) => 0.
   }
 
 let forEach = (r, f) =>

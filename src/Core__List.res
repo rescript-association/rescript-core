@@ -682,20 +682,20 @@ let every2 = (l1, l2, p) => every2U(l1, l2, (. a, b) => p(a, b))
 
 let rec compareLength = (l1, l2) =>
   switch (l1, l2) {
-  | (list{}, list{}) => 0
-  | (_, list{}) => 1
-  | (list{}, _) => -1
+  | (list{}, list{}) => 0.
+  | (_, list{}) => 1.
+  | (list{}, _) => -1.
   | (list{_, ...l1s}, list{_, ...l2s}) => compareLength(l1s, l2s)
   }
 
 let rec compare = (l1, l2, p) =>
   switch (l1, l2) {
-  | (list{}, list{}) => 0
-  | (_, list{}) => 1
-  | (list{}, _) => -1
+  | (list{}, list{}) => 0.
+  | (_, list{}) => 1.
+  | (list{}, _) => -1.
   | (list{a1, ...l1}, list{a2, ...l2}) =>
     let c = p(a1, a2)
-    if c == 0 {
+    if c == 0. {
       compare(l1, l2, p)
     } else {
       c
