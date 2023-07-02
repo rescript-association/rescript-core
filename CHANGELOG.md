@@ -22,6 +22,8 @@
   - `fillAllInPlace` -> `fillAll`, `fillInPlaceToEnd` -> `fillToEnd`, `fillInPlace` -> `fill`
 - And `List`:
   - `shuffle` -> `toShuffled`
+- Use `float` instead of `int` for ordering to avoid premature overflow. https://github.com/rescript-association/rescript-core/pull/149
+- Add `Ordering` module. https://github.com/rescript-association/rescript-core/pull/149
 
 **Note 1**: These changes should all produce the correct type errors. Though `TypedArray`'s `reverse` and `sort` previously mutated _and_ returned the mutated array itself, whereas now they'd be copies. Please be careful refactoring these 2.
 
