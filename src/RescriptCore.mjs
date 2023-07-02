@@ -28,6 +28,8 @@ var Nullable;
 
 var $$Object;
 
+var Ordering;
+
 var $$Promise;
 
 var $$RegExp;
@@ -110,6 +112,7 @@ export {
   Null ,
   Nullable ,
   $$Object ,
+  Ordering ,
   $$Promise ,
   $$RegExp ,
   $$String ,
