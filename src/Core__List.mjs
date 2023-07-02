@@ -4,6 +4,7 @@ import * as Curry from "rescript/lib/es6/curry.js";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Core__Array from "./Core__Array.mjs";
+import * as Core__Ordering from "./Core__Ordering.mjs";
 
 function head(x) {
   if (x) {
@@ -975,13 +976,13 @@ function compareLength(_l1, _l2) {
     var l1 = _l1;
     if (!l1) {
       if (l2) {
-        return -1;
+        return Core__Ordering.less;
       } else {
-        return 0;
+        return Core__Ordering.equal;
       }
     }
     if (!l2) {
-      return 1;
+      return Core__Ordering.greater;
     }
     _l2 = l2.tl;
     _l1 = l1.tl;
@@ -995,16 +996,16 @@ function compare(_l1, _l2, p) {
     var l1 = _l1;
     if (!l1) {
       if (l2) {
-        return -1;
+        return Core__Ordering.less;
       } else {
-        return 0;
+        return Core__Ordering.equal;
       }
     }
     if (!l2) {
-      return 1;
+      return Core__Ordering.greater;
     }
     var c = Curry._2(p, l1.hd, l2.hd);
-    if (c !== 0) {
+    if (!Core__Ordering.isEqual(c)) {
       return c;
     }
     _l2 = l2.tl;

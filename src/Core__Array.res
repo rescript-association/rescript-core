@@ -57,10 +57,10 @@ let equal = (a, b, eq) => {
 
 let rec compareFromIndex = (a, b, i, cmp, len) =>
   if i === len {
-    0.
+    Core__Ordering.equal
   } else {
     let c = cmp(a->getUnsafe(i), b->getUnsafe(i))
-    if c === 0. {
+    if c->Core__Ordering.isEqual {
       compareFromIndex(a, b, i + 1, cmp, len)
     } else {
       c
@@ -70,13 +70,11 @@ let rec compareFromIndex = (a, b, i, cmp, len) =>
 let compare = (a, b, cmp) => {
   let lenA = a->length
   let lenB = b->length
-  if lenA > lenB {
-    1.
-  } else if lenA < lenB {
-    -1.
-  } else {
-    compareFromIndex(a, b, 0, cmp, lenA)
-  }
+  lenA < lenB
+    ? Core__Ordering.less
+    : lenA > lenB
+    ? Core__Ordering.greater
+    : compareFromIndex(a, b, 0, cmp, lenA)
 }
 
 @send external copyAllWithin: (array<'a>, ~target: int) => array<'a> = "copyWithin"
@@ -139,8 +137,8 @@ let lastIndexOfOpt = (arr, item) =>
 @send external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
 @send external copy: array<'a> => array<'a> = "slice"
 
-@send external sort: (array<'a>, ('a, 'a) => float) => unit = "sort"
-@send external toSorted: (array<'a>, ('a, 'a) => float) => array<'a> = "toSorted"
+@send external sort: (array<'a>, ('a, 'a) => Core__Ordering.t) => unit = "sort"
+@send external toSorted: (array<'a>, ('a, 'a) => Core__Ordering.t) => array<'a> = "toSorted"
 
 @send external toString: array<'a> => string = "toString"
 @send external toLocaleString: array<'a> => string = "toLocaleString"

@@ -9,13 +9,7 @@
 let equal = (a: string, b: string) => a === b
 
 let compare = (a: string, b: string) =>
-  if a === b {
-    0.
-  } else if a > b {
-    1.
-  } else {
-    -1.
-  }
+  a < b ? Core__Ordering.less : a > b ? Core__Ordering.greater : Core__Ordering.equal
 
 @get external length: string => int = "length"
 @get_index external get: (string, int) => option<string> = ""

@@ -58,7 +58,7 @@ module Constants: {
 
 let equal: (int, int) => bool
 
-let compare: (int, int) => float
+let compare: (int, int) => Core__Ordering.t
 
 /**
 `toExponential(n)` return a `string` representing the given value in exponential

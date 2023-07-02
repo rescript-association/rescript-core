@@ -120,7 +120,7 @@ external fromCodePointMany: array<int> => string = "String.fromCodePoint"
 
 let equal: (string, string) => bool
 
-let compare: (string, string) => float
+let compare: (string, string) => Core__Ordering.t
 
 /**
 `length(str)` returns the length of the given `string`.

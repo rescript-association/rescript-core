@@ -434,7 +434,7 @@ external now: unit => msSinceEpoch = "Date.now"
 
 let equal: (t, t) => bool
 
-let compare: (t, t) => float
+let compare: (t, t) => Core__Ordering.t
 
 /**
 `getTime(date)`
