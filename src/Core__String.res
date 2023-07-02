@@ -10,11 +10,11 @@ let equal = (a: string, b: string) => a === b
 
 let compare = (a: string, b: string) =>
   if a === b {
-    0
+    0.
   } else if a > b {
-    1
+    1.
   } else {
-    -1
+    -1.
   }
 
 @get external length: string => int = "length"

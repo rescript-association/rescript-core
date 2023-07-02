@@ -24,8 +24,8 @@ external copyWithin: (t<'a>, ~target: int, ~start: int, ~end: int) => array<'a> 
 @send external reverse: t<'a> => unit = "reverse"
 @send external toReversed: t<'a> => t<'a> = "toReversed"
 
-@send external sort: (t<'a>, ('a, 'a) => int) => unit = "sort"
-@send external toSorted: (t<'a>, ('a, 'a) => int) => t<'a> = "toSorted"
+@send external sort: (t<'a>, ('a, 'a) => float) => unit = "sort"
+@send external toSorted: (t<'a>, ('a, 'a) => float) => t<'a> = "toSorted"
 
 @send external with: (t<'a>, int, 'a) => t<'a> = "with"
 

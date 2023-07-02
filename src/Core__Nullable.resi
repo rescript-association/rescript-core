@@ -5,7 +5,7 @@ Primarily useful when interoping with JavaScript when you don't know whether you
 */
 
 /**
-Type representing a nullable value. 
+Type representing a nullable value.
 A nullable value can be the value `'a`, `null` or `undefined`.
 */
 type t<'a> = Js.Nullable.t<'a>
@@ -35,7 +35,7 @@ Console.log(undefined) // Logs `undefined` to the console.
 external undefined: t<'a> = "#undefined"
 
 /**
-Creates a new nullable value from the provided value. 
+Creates a new nullable value from the provided value.
 This means the compiler will enforce null checks for the new value.
 
 ## Examples
@@ -57,7 +57,7 @@ external make: 'a => t<'a> = "%identity"
 
 let equal: (t<'a>, t<'b>, ('a, 'b) => bool) => bool
 
-let compare: (t<'a>, t<'b>, ('a, 'b) => int) => int
+let compare: (t<'a>, t<'b>, ('a, 'b) => float) => float
 
 /**
 Converts a nullable value into an option, so it can be pattern matched on.

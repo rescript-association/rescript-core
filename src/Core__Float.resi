@@ -111,7 +111,7 @@ module Constants: {
 
 let equal: (float, float) => bool
 
-let compare: (float, float) => int
+let compare: (float, float) => float
 
 /**
 `isNaN(v)` tests if the given `v` is `NaN`.

@@ -11,11 +11,11 @@ let equal = (a: float, b: float) => a === b
 
 let compare = (a: float, b: float) =>
   if a < b {
-    -1
+    -1.
   } else if a === b {
-    0
+    0.
   } else {
-    1
+    1.
   }
 
 @val external isNaN: float => bool = "isNaN"

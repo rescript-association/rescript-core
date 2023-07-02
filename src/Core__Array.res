@@ -57,10 +57,10 @@ let equal = (a, b, eq) => {
 
 let rec compareFromIndex = (a, b, i, cmp, len) =>
   if i === len {
-    0
+    0.
   } else {
     let c = cmp(a->getUnsafe(i), b->getUnsafe(i))
-    if c === 0 {
+    if c === 0. {
       compareFromIndex(a, b, i + 1, cmp, len)
     } else {
       c
@@ -71,9 +71,9 @@ let compare = (a, b, cmp) => {
   let lenA = a->length
   let lenB = b->length
   if lenA > lenB {
-    1
+    1.
   } else if lenA < lenB {
-    -1
+    -1.
   } else {
     compareFromIndex(a, b, 0, cmp, lenA)
   }
@@ -139,8 +139,8 @@ let lastIndexOfOpt = (arr, item) =>
 @send external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
 @send external copy: array<'a> => array<'a> = "slice"
 
-@send external sort: (array<'a>, ('a, 'a) => int) => unit = "sort"
-@send external toSorted: (array<'a>, ('a, 'a) => int) => array<'a> = "toSorted"
+@send external sort: (array<'a>, ('a, 'a) => float) => unit = "sort"
+@send external toSorted: (array<'a>, ('a, 'a) => float) => array<'a> = "toSorted"
 
 @send external toString: array<'a> => string = "toString"
 @send external toLocaleString: array<'a> => string = "toLocaleString"
