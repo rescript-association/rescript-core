@@ -13,6 +13,7 @@ module Math = Core__Math
 module Null = Core__Null
 module Nullable = Core__Nullable
 module Object = Core__Object
+module Ordering = Core__Ordering
 module Promise = Core__Promise
 module RegExp = Core__RegExp
 module String = Core__String
