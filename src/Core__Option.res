@@ -100,7 +100,7 @@ let equal = (a, b, eq) =>
 let compare = (a, b, cmp) =>
   switch (a, b) {
   | (Some(a), Some(b)) => cmp(a, b)
-  | (None, Some(_)) => -1.
-  | (Some(_), None) => 1.
-  | (None, None) => 0.
+  | (None, Some(_)) => Core__Ordering.less
+  | (Some(_), None) => Core__Ordering.greater
+  | (None, None) => Core__Ordering.equal
   }

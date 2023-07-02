@@ -2,6 +2,7 @@
 
 import * as Pervasives from "rescript/lib/es6/pervasives.js";
 import * as Core__Array from "./Core__Array.mjs";
+import * as Core__Ordering from "./Core__Ordering.mjs";
 
 function equal(a, b) {
   return a === b;
@@ -9,11 +10,11 @@ function equal(a, b) {
 
 function compare(a, b) {
   if (a < b) {
-    return -1;
-  } else if (a === b) {
-    return 0;
+    return Core__Ordering.less;
+  } else if (a > b) {
+    return Core__Ordering.greater;
   } else {
-    return 1;
+    return Core__Ordering.equal;
   }
 }
 

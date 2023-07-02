@@ -196,7 +196,7 @@ let equal: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
   Result.compare(Error("x"), Error("y"), mod10cmp) == 0.
   ```
 */
-let compare: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => float) => float
+let compare: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => Core__Ordering.t) => Core__Ordering.t
 
 /**
 `forEach(res, f)` runs the provided function `f` on the `Ok` value. If `res` is `Error`, nothing happens.

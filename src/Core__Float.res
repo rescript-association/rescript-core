@@ -10,13 +10,7 @@ module Constants = {
 let equal = (a: float, b: float) => a === b
 
 let compare = (a: float, b: float) =>
-  if a < b {
-    -1.
-  } else if a === b {
-    0.
-  } else {
-    1.
-  }
+  a < b ? Core__Ordering.less : a > b ? Core__Ordering.greater : Core__Ordering.equal
 
 @val external isNaN: float => bool = "isNaN"
 @val external isFinite: float => bool = "isFinite"

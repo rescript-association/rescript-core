@@ -29,7 +29,7 @@ let fromInitializer: (~length: int, int => 'a) => array<'a>
 
 let equal: (array<'a>, array<'a>, ('a, 'a) => bool) => bool
 
-let compare: (array<'a>, array<'a>, ('a, 'a) => float) => float
+let compare: (array<'a>, array<'a>, ('a, 'a) => Core__Ordering.t) => Core__Ordering.t
 
 @val external isArray: 'a => bool = "Array.isArray"
 
@@ -212,14 +212,14 @@ See [`Array.toSorted`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/R
 ## Examples
 ```rescript
 let someArray = [3, 2, 1]
-let sorted = someArray->Array.toSorted((a, b) => float(a - b))
+let sorted = someArray->Array.toSorted(Int.compare)
 
 Console.log(sorted) // [1, 2, 3]
 Console.log(someArray) // [3, 2, 1]. Original unchanged
 ```
 */
 @send
-external toSorted: (array<'a>, ('a, 'a) => float) => array<'a> = "toSorted"
+external toSorted: (array<'a>, ('a, 'a) => Core__Ordering.t) => array<'a> = "toSorted"
 
 /**
 `sort(array, comparator)` sorts `array` in-place using the `comparator` function.
@@ -237,7 +237,7 @@ Console.log(someArray) // [1, 2, 3]
 ```
 */
 @send
-external sort: (array<'a>, ('a, 'a) => float) => unit = "sort"
+external sort: (array<'a>, ('a, 'a) => Core__Ordering.t) => unit = "sort"
 
 @variadic @send
 external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit = "splice"
