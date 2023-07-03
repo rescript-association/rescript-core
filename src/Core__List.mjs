@@ -976,13 +976,13 @@ function compareLength(_l1, _l2) {
     var l1 = _l1;
     if (!l1) {
       if (l2) {
-        return Core__Ordering.less;
+        return -1;
       } else {
-        return Core__Ordering.equal;
+        return 0;
       }
     }
     if (!l2) {
-      return Core__Ordering.greater;
+      return 1;
     }
     _l2 = l2.tl;
     _l1 = l1.tl;
@@ -996,13 +996,13 @@ function compare(_l1, _l2, p) {
     var l1 = _l1;
     if (!l1) {
       if (l2) {
-        return Core__Ordering.less;
+        return -1;
       } else {
-        return Core__Ordering.equal;
+        return 0;
       }
     }
     if (!l2) {
-      return Core__Ordering.greater;
+      return 1;
     }
     var c = Curry._2(p, l1.hd, l2.hd);
     if (!Core__Ordering.isEqual(c)) {

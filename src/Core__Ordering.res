@@ -1,8 +1,8 @@
 type t = float
 
-let less = -1.
-let equal = 0.
-let greater = 1.
+@inline let less = -1.
+@inline let equal = 0.
+@inline let greater = 1.
 
 let isLess = ord => ord < equal
 let isEqual = ord => ord == equal

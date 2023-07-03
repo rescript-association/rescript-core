@@ -27,16 +27,7 @@ function fromInt(n) {
   }
 }
 
-var less = -1;
-
-var equal = 0;
-
-var greater = 1;
-
 export {
-  less ,
-  equal ,
-  greater ,
   isLess ,
   isEqual ,
   isGreater ,
