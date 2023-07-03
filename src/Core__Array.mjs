@@ -49,15 +49,15 @@ function compare(a, b, cmp) {
   var lenA = a.length;
   var lenB = b.length;
   if (lenA < lenB) {
-    return Core__Ordering.less;
+    return -1;
   } else if (lenA > lenB) {
-    return Core__Ordering.greater;
+    return 1;
   } else {
     var _i = 0;
     while(true) {
       var i = _i;
       if (i === lenA) {
-        return Core__Ordering.equal;
+        return 0;
       }
       var c = Curry._2(cmp, a[i], b[i]);
       if (!Core__Ordering.isEqual(c)) {

@@ -2,7 +2,6 @@
 
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
-import * as Core__Ordering from "./Core__Ordering.mjs";
 
 function filter(opt, p) {
   var p$1 = Curry.__1(p);
@@ -96,12 +95,12 @@ function compare(a, b, cmp) {
     if (b !== undefined) {
       return Curry._2(cmp, Caml_option.valFromOption(a), Caml_option.valFromOption(b));
     } else {
-      return Core__Ordering.greater;
+      return 1;
     }
   } else if (b !== undefined) {
-    return Core__Ordering.less;
+    return -1;
   } else {
-    return Core__Ordering.equal;
+    return 0;
   }
 }
 
