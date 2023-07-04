@@ -695,7 +695,7 @@ let rec compare = (l1, l2, p) =>
   | (list{}, _) => Core__Ordering.less
   | (list{a1, ...l1}, list{a2, ...l2}) =>
     let c = p(a1, a2)
-    if c->Core__Ordering.isEqual {
+    if c == Core__Ordering.equal {
       compare(l1, l2, p)
     } else {
       c
