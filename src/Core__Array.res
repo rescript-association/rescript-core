@@ -60,7 +60,7 @@ let rec compareFromIndex = (a, b, i, cmp, len) =>
     Core__Ordering.equal
   } else {
     let c = cmp(a->getUnsafe(i), b->getUnsafe(i))
-    if c->Core__Ordering.isEqual {
+    if c == Core__Ordering.equal {
       compareFromIndex(a, b, i + 1, cmp, len)
     } else {
       c

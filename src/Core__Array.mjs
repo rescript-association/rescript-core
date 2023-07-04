@@ -3,7 +3,6 @@
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as Js_math from "rescript/lib/es6/js_math.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
-import * as Core__Ordering from "./Core__Ordering.mjs";
 
 function make(length, x) {
   if (length <= 0) {
@@ -60,7 +59,7 @@ function compare(a, b, cmp) {
         return 0;
       }
       var c = Curry._2(cmp, a[i], b[i]);
-      if (!Core__Ordering.isEqual(c)) {
+      if (c !== 0) {
         return c;
       }
       _i = i + 1 | 0;

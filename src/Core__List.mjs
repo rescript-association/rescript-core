@@ -4,7 +4,6 @@ import * as Curry from "rescript/lib/es6/curry.js";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Core__Array from "./Core__Array.mjs";
-import * as Core__Ordering from "./Core__Ordering.mjs";
 
 function head(x) {
   if (x) {
@@ -1005,7 +1004,7 @@ function compare(_l1, _l2, p) {
       return 1;
     }
     var c = Curry._2(p, l1.hd, l2.hd);
-    if (!Core__Ordering.isEqual(c)) {
+    if (c !== 0) {
       return c;
     }
     _l2 = l2.tl;
