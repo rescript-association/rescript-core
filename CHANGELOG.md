@@ -2,6 +2,8 @@
 
 ## Next version
 
+## 0.4.0
+
 ### API changes
 
 - Map, Set, WeakMap, WeakSet: use the types defined in the Js namespace. https://github.com/rescript-association/rescript-core/pull/143
