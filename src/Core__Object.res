@@ -57,9 +57,10 @@ y->Object.get("fruit") // Some("banana")
 @val
 external create: {..} => {..} = "Object.create"
 
-@val
-external createWithProperties: ({..}, {..}) => {..} = "Object.create"
+@val external createWithProperties: ({..}, {..}) => {..} = "Object.create"
+
 @val external createWithNull: (@as(json`null`) _, unit) => {..} = "Object.create"
+
 @val external createWithNullAndProperties: (@as(json`null`) _, {..}) => {..} = "Object.create"
 
 /**
@@ -80,8 +81,6 @@ Object.assign({"a": 1}, {"a": null}) // {"a": null}
 @val
 external assign: ({..}, {..}) => {..} = "Object.assign"
 
-@variadic
-@val
 /**
 `assignMany(target, sources)` copies enumerable own properties from each source to the target, overwriting properties with the same name. Later sources' properties overwrite earlier ones. It returns the modified target object. A deep clone is not created; properties are copied by reference.
 
@@ -89,6 +88,8 @@ external assign: ({..}, {..}) => {..} = "Object.assign"
 
 See [Object.assign on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) or [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.assign).
 */
+@variadic
+@val
 external assignMany: ({..}, array<{..}>) => {..} = "Object.assign"
 
 @val external copy: (@as(json`{}`) _, {..} as 'a) => 'a = "Object.assign"
@@ -123,6 +124,7 @@ x->Object.getSymbol(fruit) // Some("banana")
 */
 @get_index
 external getSymbol: ({..}, Core__Symbol.t) => option<'a> = ""
+
 @get_index external getSymbolUnsafe: ({..}, Core__Symbol.t) => 'a = ""
 
 /**
