@@ -245,3 +245,5 @@ let findMap = (arr, f) => {
 }
 
 @send external at: (array<'a>, int) => option<'a> = "at"
+
+@val external of1: 'a => array<'a> = "Array.of"

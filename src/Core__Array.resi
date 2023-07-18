@@ -969,3 +969,24 @@ let findMap: (array<'a>, 'a => option<'b>) => option<'b>
 */
 @send
 external at: (array<'a>, int) => option<'a> = "at"
+
+/**
+`of1` generates a new array from a single value. See [Array.of on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of)
+
+## Examples
+
+```rescript
+3->Array.of1 // [3]
+undefined->Array.of1 // [undefined]
+Some("abc")->Array.of1 // [Some("abc")]
+[1,2,3]->Array.of1 // [[1,2,3]]
+{"x": 3, "y": 5}->Array.of1 // Some({"x": 3, "y": 5})
+```
+
+## Specifications
+
+- [Array.of MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of)
+- [Array.of ECMAScript Language Specification](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.of)
+*/
+@val
+external of1: 'a => array<'a> = "Array.of"

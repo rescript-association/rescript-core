@@ -401,7 +401,66 @@ Test.run([
             
           })), eq, undefined);
 
+function of1Test(a, title) {
+  Test.run([
+        [
+          "ArrayTests.res",
+          103,
+          22,
+          38
+        ],
+        "of1 : " + title + ""
+      ], Array.of(a), Caml_obj.equal, [a]);
+  Test.run([
+        [
+          "ArrayTests.res",
+          104,
+          22,
+          38
+        ],
+        "of1 : " + title + ""
+      ], Array.of(a).length, eq, 1);
+  Test.run([
+        [
+          "ArrayTests.res",
+          105,
+          22,
+          38
+        ],
+        "of1 : " + title + ""
+      ], Array.of(a)[0], (function (i, j) {
+          return i === j;
+        }), a);
+}
+
+var m = Array.of({
+      x: 3,
+      y: 5
+    });
+
+of1Test(3, "Single integer");
+
+of1Test("abc", "Single string");
+
+of1Test(undefined, "undefined");
+
+of1Test(null, "null");
+
+of1Test([
+      1,
+      2,
+      3
+    ], "full array of integers");
+
+of1Test([], "empty array");
+
+of1Test(5, "Some");
+
+of1Test(undefined, "None");
+
 export {
   eq ,
+  of1Test ,
+  m ,
 }
 /*  Not a pure module */
