@@ -2,6 +2,10 @@
 
 ## Next version
 
+### API changes
+
+- `Array.of1` https://github.com/rescript-association/rescript-core/pull/109
+
 ## 0.4.0
 
 ### API changes
