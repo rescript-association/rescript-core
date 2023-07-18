@@ -99,22 +99,17 @@ Test.run(
   None,
 )
 
-let singletonTest = (a, title) => {
-  Test.run(__POS_OF__(`fromSingleton : ${title}`), Array.fromSingleton(a), (i, j) => i == j, [a])
-  Test.run(__POS_OF__(`fromSingleton : ${title}`), Array.fromSingleton(a)->Array.length, eq, 1)
-  Test.run(
-    __POS_OF__(`fromSingleton : ${title}`),
-    Array.fromSingleton(a)->Array.getUnsafe(0),
-    (i, j) => i === j,
-    a,
-  )
+let of1Test = (a, title) => {
+  Test.run(__POS_OF__(`of1 : ${title}`), Array.of1(a), (i, j) => i == j, [a])
+  Test.run(__POS_OF__(`of1 : ${title}`), Array.of1(a)->Array.length, eq, 1)
+  Test.run(__POS_OF__(`of1 : ${title}`), Array.of1(a)->Array.getUnsafe(0), (i, j) => i === j, a)
 }
-let m = {"x": 3, "y": 5}->Array.fromSingleton
-3->singletonTest("Single integer")
-"abc"->singletonTest("Single string")
-undefined->singletonTest("undefined")
-null->singletonTest("null")
-[1, 2, 3]->singletonTest("full array of integers")
-[]->singletonTest("empty array")
-Some(5)->singletonTest("Some")
-None->singletonTest("None")
+let m = {"x": 3, "y": 5}->Array.of1
+3->of1Test("Single integer")
+"abc"->of1Test("Single string")
+undefined->of1Test("undefined")
+null->of1Test("null")
+[1, 2, 3]->of1Test("full array of integers")
+[]->of1Test("empty array")
+Some(5)->of1Test("Some")
+None->of1Test("None")

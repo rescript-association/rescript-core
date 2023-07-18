@@ -401,33 +401,33 @@ Test.run([
             
           })), eq, undefined);
 
-function singletonTest(a, title) {
+function of1Test(a, title) {
   Test.run([
         [
           "ArrayTests.res",
           103,
           22,
-          48
+          38
         ],
-        "fromSingleton : " + title + ""
+        "of1 : " + title + ""
       ], Array.of(a), Caml_obj.equal, [a]);
   Test.run([
         [
           "ArrayTests.res",
           104,
           22,
-          48
+          38
         ],
-        "fromSingleton : " + title + ""
+        "of1 : " + title + ""
       ], Array.of(a).length, eq, 1);
   Test.run([
         [
           "ArrayTests.res",
-          106,
-          15,
-          41
+          105,
+          22,
+          38
         ],
-        "fromSingleton : " + title + ""
+        "of1 : " + title + ""
       ], Array.of(a)[0], (function (i, j) {
           return i === j;
         }), a);
@@ -438,29 +438,29 @@ var m = Array.of({
       y: 5
     });
 
-singletonTest(3, "Single integer");
+of1Test(3, "Single integer");
 
-singletonTest("abc", "Single string");
+of1Test("abc", "Single string");
 
-singletonTest(undefined, "undefined");
+of1Test(undefined, "undefined");
 
-singletonTest(null, "null");
+of1Test(null, "null");
 
-singletonTest([
+of1Test([
       1,
       2,
       3
     ], "full array of integers");
 
-singletonTest([], "empty array");
+of1Test([], "empty array");
 
-singletonTest(5, "Some");
+of1Test(5, "Some");
 
-singletonTest(undefined, "None");
+of1Test(undefined, "None");
 
 export {
   eq ,
-  singletonTest ,
+  of1Test ,
   m ,
 }
 /*  Not a pure module */
