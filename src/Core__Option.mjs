@@ -104,6 +104,22 @@ function compare(a, b, cmp) {
   }
 }
 
+function isSomeAnd(o, p) {
+  if (o !== undefined) {
+    return Curry._1(p, Caml_option.valFromOption(o));
+  } else {
+    return false;
+  }
+}
+
+function isNoneOr(o, p) {
+  if (o !== undefined) {
+    return Curry._1(p, Caml_option.valFromOption(o));
+  } else {
+    return true;
+  }
+}
+
 export {
   filter ,
   forEach ,
@@ -117,5 +133,7 @@ export {
   isNone ,
   equal ,
   compare ,
+  isSomeAnd ,
+  isNoneOr ,
 }
 /* No side effect */

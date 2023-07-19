@@ -5,3 +5,4 @@ include ArrayTests
 include IntTests
 include ResultTests
 include TypedArrayTests
+include OptionTests
