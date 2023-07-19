@@ -49,3 +49,7 @@ let flatMap = (value, f) =>
   | Some(x) => f(x)
   | None => Obj.magic(value)
   }
+
+let isNull = i => i == null
+let isUndefined = i => i == undefined
+let isNullOrUndefined = i => i == undefined || i == null

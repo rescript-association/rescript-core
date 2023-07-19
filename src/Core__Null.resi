@@ -174,3 +174,17 @@ Null.flatMap(null, addIfAboveOne) // null
 ```
 */
 let flatMap: (t<'a>, 'a => t<'b>) => t<'b>
+
+/**
+`isNull(value)` checks if `value===null`
+
+## Examples
+
+```rescript
+"abc"->Null.make->Null.isNull // false
+Nullable.undefined->Null.make->Null.isNull // false
+Null.null->Null.isNull // true
+None->Null.make->Null.isNull // false
+```
+*/
+let isNull: t<'a> => bool

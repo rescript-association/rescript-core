@@ -63,6 +63,10 @@ function flatMap(value, f) {
   }
 }
 
+function isNull(i) {
+  return i === null;
+}
+
 export {
   equal ,
   compare ,
@@ -72,5 +76,6 @@ export {
   map ,
   mapWithDefault ,
   flatMap ,
+  isNull ,
 }
 /* No side effect */

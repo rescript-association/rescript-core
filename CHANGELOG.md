@@ -2,6 +2,10 @@
 
 ## Next version
 
+### API changes
+
+- Add `Nullable.isNull`, `Nullable.isUndefined`, and similar functions to `Nullable` and `Null` modules. https://github.com/rescript-association/rescript-core/pull/125
+
 ## 0.4.0
 
 ### API changes

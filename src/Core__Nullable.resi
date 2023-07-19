@@ -184,3 +184,45 @@ Nullable.flatMap(Nullable.null, addIfAboveOne) // undefined
 ```
 */
 let flatMap: (t<'a>, 'a => t<'b>) => t<'b>
+
+/**
+`isNull(value)` checks if `value===null`
+
+## Examples
+
+```rescript
+"abc"->Nullable.make->Nullable.isNull // false
+Nullable.undefined->Nullable.isNull // false
+Nullable.null->Nullable.isNull // true
+None->Nullable.make->Nullable.isNull // false
+```
+*/
+let isNull: t<'a> => bool
+
+/**
+`isUndefined(value)` checks if `value===undefined`
+
+## Examples
+
+```rescript
+"abc"->Nullable.make->Nullable.isUndefined // false
+Nullable.null->Nullable.isUndefined // false
+Nullable.undefined->Nullable.isUndefined // true
+None->Nullable.make->Nullable.isUndefined // true
+```
+*/
+let isUndefined: t<'a> => bool
+
+/**
+`isNullOrUndefined(value)` checks if `value===undefined || value===null`
+
+## Examples
+
+```rescript
+"abc"->Nullable.make->Nullable.isNullOrUndefined // false
+Nullable.null->Nullable.isNullOrUndefined // true
+Nullable.undefined->Nullable.isUndefined // true
+None->Nullable.make->Nullable.isNullOrUndefined // true
+```
+*/
+let isNullOrUndefined: t<'a> => bool
