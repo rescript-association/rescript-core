@@ -45,7 +45,7 @@ Test.run(
   __POS_OF__("rangeWithOptions - positive, increasing, step 0"),
   catch(() => Int.rangeWithOptions(3, 6, {step: 0})),
   eq,
-  Error.RangeError.make("Incorrect range arguments"),
+  Error.makeRangeError("Incorrect range arguments"),
 )
 Test.run(
   __POS_OF__("rangeWithOptions - start == end, step 0"),
@@ -117,7 +117,7 @@ Test.run(
   __POS_OF__("rangeWithOptions - positive, increasing, step 0, inclusive"),
   catch(() => Int.rangeWithOptions(3, 6, {step: 0, inclusive: true})),
   eq,
-  Error.RangeError.make("Incorrect range arguments"),
+  Error.makeRangeError("Incorrect range arguments"),
 )
 Test.run(
   __POS_OF__("rangeWithOptions - start == end, step 0, inclusive"),

@@ -48,7 +48,7 @@ let rangeWithOptions = (start, end, options) => {
   let step = switch options.step {
   | None => isInverted ? -1 : 1
   | Some(0) if start !== end =>
-    Core__Error.raise(Core__Error.RangeError.make("Incorrect range arguments"))
+    Core__Error.raise(Core__Error.makeRangeError("Incorrect range arguments"))
   | Some(n) => n
   }
 

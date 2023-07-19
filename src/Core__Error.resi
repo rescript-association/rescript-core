@@ -85,63 +85,51 @@ Console.log(error->Error.name) // Logs "Error" to the console, because this is a
 @new
 external make: string => t = "Error"
 
-module EvalError: {
-  /**
+/**
   Creates a new `EvalError` with the provided `message`.
 
   See [`EvalError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError) on MDN.
   */
-  @new
-  external make: string => t = "EvalError"
-}
-module RangeError: {
-  /**
+@new
+external makeEvalError: string => t = "EvalError"
+/**
   Creates a new `RangeError` with the provided `message`.
 
   See [`RangeError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError) on MDN.
   */
-  @new
-  external make: string => t = "RangeError"
-}
-module ReferenceError: {
-  /**
+@new
+external makeRangeError: string => t = "RangeError"
+/**
   Creates a new `ReferenceError` with the provided `message`.
 
   See [`ReferenceError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError) on MDN.
   */
-  @new
-  external make: string => t = "ReferenceError"
-}
-module SyntaxError: {
-  /**
+@new
+external makeReferenceError: string => t = "ReferenceError"
+/**
   Creates a new `SyntaxError` with the provided `message`.
 
   See [`SyntaxError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError) on MDN.
   */
-  @new
-  external make: string => t = "SyntaxError"
-}
-module TypeError: {
-  /**
+@new
+external makeSyntaxError: string => t = "SyntaxError"
+/**
   Creates a new `TypeError` with the provided `message`.
 
   See [`TypeError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError) on MDN.
   */
-  @new
-  external make: string => t = "TypeError"
-}
-module URIError: {
-  /**
+@new
+external makeTypeError: string => t = "TypeError"
+/**
   Creates a new `URIError` with the provided `message`.
 
   See [`URIError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError) on MDN.
   */
-  @new
-  external make: string => t = "URIError"
-}
+@new
+external makeURIError: string => t = "URIError"
 
 /**
-Raises (throws in JavaScript language) the provided `Error.t`, which will stop execution.
+Raises (throws in JavaScript language) the provided `Error.t`, which will stop execution. See [Exceptions in ReScript](https://rescript-lang.org/docs/manual/latest/exception)
 
 ## Examples
 ```rescript

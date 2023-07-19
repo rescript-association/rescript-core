@@ -27,7 +27,7 @@ Console.info("Error")
 Console.info("---")
 let f = () => {
   let error = Error.make("hello")
-  let typeError = Error.TypeError.make("error")
+  let typeError = Error.makeTypeError("error")
   let g = () => Error.raise(error)
   let h = () => Error.raise(typeError)
   (g, h)
