@@ -6,6 +6,10 @@
 
 - Add `Result.mapError` https://github.com/rescript-association/rescript-core/pull/98
 
+### Documentation
+
+- Docstrings for `Object`. Not yet complete. https://github.com/rescript-association/rescript-core/pull/117
+
 ## 0.4.0
 
 ### API changes

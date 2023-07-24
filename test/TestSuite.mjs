@@ -4,6 +4,7 @@ import * as IntTests from "./IntTests.mjs";
 import * as TestTests from "./TestTests.mjs";
 import * as ArrayTests from "./ArrayTests.mjs";
 import * as ErrorTests from "./ErrorTests.mjs";
+import * as ObjectTests from "./ObjectTests.mjs";
 import * as PromiseTest from "./PromiseTest.mjs";
 import * as ResultTests from "./ResultTests.mjs";
 import * as TypedArrayTests from "./TypedArrayTests.mjs";
@@ -29,6 +30,20 @@ var Concurrently = PromiseTest.Concurrently;
 var panicTest = ErrorTests.panicTest;
 
 var $$catch = IntTests.$$catch;
+
+var nums = ObjectTests.nums;
+
+var d = ObjectTests.d;
+
+var x = ObjectTests.x;
+
+var mkBig = ObjectTests.mkBig;
+
+var assignOverwritesTarget = ObjectTests.assignOverwritesTarget;
+
+var runGetTest = ObjectTests.runGetTest;
+
+var getSymbolTestWhenExists = ObjectTests.getSymbolTestWhenExists;
 
 var forEachIfOkCallFunction = ResultTests.forEachIfOkCallFunction;
 
@@ -62,6 +77,13 @@ export {
   Concurrently ,
   panicTest ,
   $$catch ,
+  nums ,
+  d ,
+  x ,
+  mkBig ,
+  assignOverwritesTarget ,
+  runGetTest ,
+  getSymbolTestWhenExists ,
   forEachIfOkCallFunction ,
   forEachIfErrorDoNotCallFunction ,
   eq ,
