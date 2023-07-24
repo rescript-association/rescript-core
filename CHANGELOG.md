@@ -2,6 +2,8 @@
 
 ## Next version
 
+## 0.5.0
+
 ### API changes
 
 - Add `Result.mapError` https://github.com/rescript-association/rescript-core/pull/98
