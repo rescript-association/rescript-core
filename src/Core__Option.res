@@ -22,21 +22,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. */
 
-let filterU = (opt, p) =>
+let filter = (opt, p) =>
   switch opt {
-  | Some(x) as some if p(. x) => some
+  | Some(x) as option if p(x) => option
   | _ => None
   }
 
-let filter = (opt, p) => filterU(opt, (. x) => p(x))
-
-let forEachU = (opt, f) =>
+let forEach = (opt, f) =>
   switch opt {
-  | Some(x) => f(. x)
+  | Some(x) => f(x)
   | None => ()
   }
-
-let forEach = (opt, f) => forEachU(opt, (. x) => f(x))
 
 let getExn = x =>
   switch x {
@@ -46,31 +42,25 @@ let getExn = x =>
 
 external getUnsafe: option<'a> => 'a = "%identity"
 
-let mapOrU = (opt, default, f) =>
+let mapOr = (opt, default, f) =>
   switch opt {
-  | Some(x) => f(. x)
+  | Some(x) => f(x)
   | None => default
   }
 
-let mapOr = (opt, default, f) => mapOrU(opt, default, (. x) => f(x))
-
 let mapWithDefault = mapOr
 
-let mapU = (opt, f) =>
+let map = (opt, f) =>
   switch opt {
-  | Some(x) => Some(f(. x))
+  | Some(x) => Some(f(x))
   | None => None
   }
 
-let map = (opt, f) => mapU(opt, (. x) => f(x))
-
-let flatMapU = (opt, f) =>
+let flatMap = (opt, f) =>
   switch opt {
-  | Some(x) => f(. x)
+  | Some(x) => f(x)
   | None => None
   }
-
-let flatMap = (opt, f) => flatMapU(opt, (. x) => f(x))
 
 let getOr = (opt, default) =>
   switch opt {

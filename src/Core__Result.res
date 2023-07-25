@@ -30,31 +30,25 @@ let getExn = x =>
   | Error(_) => raise(Not_found)
   }
 
-let mapOrU = (opt, default, f) =>
+let mapOr = (opt, default, f) =>
   switch opt {
-  | Ok(x) => f(. x)
+  | Ok(x) => f(x)
   | Error(_) => default
   }
 
-let mapOr = (opt, default, f) => mapOrU(opt, default, (. x) => f(x))
-
 let mapWithDefault = mapOr
 
-let mapU = (opt, f) =>
+let map = (opt, f) =>
   switch opt {
-  | Ok(x) => Ok(f(. x))
-  | Error(y) => Error(y)
+  | Ok(x) => Ok(f(x))
+  | Error(_) as result => result
   }
 
-let map = (opt, f) => mapU(opt, (. x) => f(x))
-
-let flatMapU = (opt, f) =>
+let flatMap = (opt, f) =>
   switch opt {
-  | Ok(x) => f(. x)
-  | Error(y) => Error(y)
+  | Ok(x) => f(x)
+  | Error(_) as result => result
   }
-
-let flatMap = (opt, f) => flatMapU(opt, (. x) => f(x))
 
 let getOr = (opt, default) =>
   switch opt {
@@ -98,14 +92,8 @@ let forEach = (r, f) =>
   | Error(_) => ()
   }
 
-// If the source result is Ok, should we return that instance, or
-// create it again? In this implementation I'm returning that specific
-// instance. However this is not consistent with the implementation for
-// other functions like mapU and flatMapU, which recreate the result.
-// This is more efficient. I'm not sure why the other implementations
-// return a new instance.
 let mapError = (r, f) =>
   switch r {
-  | Ok(_) as ok => ok
+  | Ok(_) as result => result
   | Error(e) => Error(f(e))
   }
