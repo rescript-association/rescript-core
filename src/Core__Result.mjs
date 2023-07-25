@@ -13,38 +13,29 @@ function getExn(x) {
 }
 
 function mapOr(opt, $$default, f) {
-  var f$1 = Curry.__1(f);
   if (opt.TAG === /* Ok */0) {
-    return f$1(opt._0);
+    return Curry._1(f, opt._0);
   } else {
     return $$default;
   }
 }
 
 function map(opt, f) {
-  var f$1 = Curry.__1(f);
   if (opt.TAG === /* Ok */0) {
     return {
             TAG: /* Ok */0,
-            _0: f$1(opt._0)
+            _0: Curry._1(f, opt._0)
           };
   } else {
-    return {
-            TAG: /* Error */1,
-            _0: opt._0
-          };
+    return opt;
   }
 }
 
 function flatMap(opt, f) {
-  var f$1 = Curry.__1(f);
   if (opt.TAG === /* Ok */0) {
-    return f$1(opt._0);
+    return Curry._1(f, opt._0);
   } else {
-    return {
-            TAG: /* Error */1,
-            _0: opt._0
-          };
+    return opt;
   }
 }
 

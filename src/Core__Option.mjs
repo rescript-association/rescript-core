@@ -4,17 +4,15 @@ import * as Curry from "rescript/lib/es6/curry.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 
 function filter(opt, p) {
-  var p$1 = Curry.__1(p);
-  if (opt !== undefined && p$1(Caml_option.valFromOption(opt))) {
+  if (opt !== undefined && Curry._1(p, Caml_option.valFromOption(opt))) {
     return opt;
   }
   
 }
 
 function forEach(opt, f) {
-  var f$1 = Curry.__1(f);
   if (opt !== undefined) {
-    return f$1(Caml_option.valFromOption(opt));
+    return Curry._1(f, Caml_option.valFromOption(opt));
   }
   
 }
@@ -30,26 +28,23 @@ function getExn(x) {
 }
 
 function mapOr(opt, $$default, f) {
-  var f$1 = Curry.__1(f);
   if (opt !== undefined) {
-    return f$1(Caml_option.valFromOption(opt));
+    return Curry._1(f, Caml_option.valFromOption(opt));
   } else {
     return $$default;
   }
 }
 
 function map(opt, f) {
-  var f$1 = Curry.__1(f);
   if (opt !== undefined) {
-    return Caml_option.some(f$1(Caml_option.valFromOption(opt)));
+    return Caml_option.some(Curry._1(f, Caml_option.valFromOption(opt)));
   }
   
 }
 
 function flatMap(opt, f) {
-  var f$1 = Curry.__1(f);
   if (opt !== undefined) {
-    return f$1(Caml_option.valFromOption(opt));
+    return Curry._1(f, Caml_option.valFromOption(opt));
   }
   
 }
