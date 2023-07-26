@@ -24,6 +24,50 @@ function fromInitializer(length, f) {
   return arr;
 }
 
+function equal(a, b, eq) {
+  var len = a.length;
+  if (len === b.length) {
+    var _i = 0;
+    while(true) {
+      var i = _i;
+      if (i === len) {
+        return true;
+      }
+      if (!Curry._2(eq, a[i], b[i])) {
+        return false;
+      }
+      _i = i + 1 | 0;
+      continue ;
+    };
+  } else {
+    return false;
+  }
+}
+
+function compare(a, b, cmp) {
+  var lenA = a.length;
+  var lenB = b.length;
+  if (lenA < lenB) {
+    return -1;
+  } else if (lenA > lenB) {
+    return 1;
+  } else {
+    var _i = 0;
+    while(true) {
+      var i = _i;
+      if (i === lenA) {
+        return 0;
+      }
+      var c = Curry._2(cmp, a[i], b[i]);
+      if (c !== 0) {
+        return c;
+      }
+      _i = i + 1 | 0;
+      continue ;
+    };
+  }
+}
+
 function indexOfOpt(arr, item) {
   var index = arr.indexOf(item);
   if (index !== -1) {
@@ -38,12 +82,6 @@ function lastIndexOfOpt(arr, item) {
     return index;
   }
   
-}
-
-function sort(arr, cmp) {
-  var result = arr.slice();
-  result.sort(cmp);
-  return result;
 }
 
 function reduce(arr, init, f) {
@@ -76,25 +114,16 @@ function swapUnsafe(xs, i, j) {
   xs[j] = tmp;
 }
 
-function reverse(xs) {
-  var len = xs.length;
-  var result = new Array(len);
-  for(var i = 0; i < len; ++i){
-    result[i] = xs[(len - 1 | 0) - i | 0];
-  }
-  return result;
-}
-
-function shuffleInPlace(xs) {
+function shuffle(xs) {
   var len = xs.length;
   for(var i = 0; i < len; ++i){
     swapUnsafe(xs, i, Js_math.random_int(i, len));
   }
 }
 
-function shuffle(xs) {
+function toShuffled(xs) {
   var result = xs.slice();
-  shuffleInPlace(result);
+  shuffle(result);
   return result;
 }
 
@@ -141,7 +170,8 @@ function findMap(arr, f) {
 export {
   make ,
   fromInitializer ,
-  sort ,
+  equal ,
+  compare ,
   indexOfOpt ,
   lastIndexOfOpt ,
   reduce ,
@@ -149,11 +179,10 @@ export {
   reduceRight ,
   reduceRightWithIndex ,
   findIndexOpt ,
-  reverse ,
   filterMap ,
   keepSome ,
+  toShuffled ,
   shuffle ,
-  shuffleInPlace ,
   findMap ,
 }
 /* No side effect */

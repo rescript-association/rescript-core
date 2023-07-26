@@ -80,34 +80,37 @@ Option.getExn(None) /* Raises an Error */
 let getExn: option<'a> => 'a
 
 /**
-`getUnsafe(value)` returns `value`.
+`getUnsafe(opt)` returns `value` if `opt` is `Some(value)`, otherwise `undefined`.
 
 ## Examples
 
 ```rescript
 Option.getUnsafe(Some(3)) == 3
-Option.getUnsafe(None) // Raises an error
+Option.getUnsafe(None: option<int>) // Returns `undefined`, which is not a valid `int`
 ```
 
-## Exceptions
+## Notes
 
-- This is an unsafe operation, it assumes `value` is neither `None` nor `Some(None(...)))`
+- This is an unsafe operation. It assumes `value` is not `None`, and may cause undefined behaviour if it is.
 */
 external getUnsafe: option<'a> => 'a = "%identity"
 
 /**
-`mapWithDefault(opt, default, f)` returns `f(value)` if `opt` is `Some(value)`, otherwise `default`.
+`mapOr(opt, default, f)` returns `f(value)` if `opt` is `Some(value)`, otherwise `default`.
 
 ## Examples
 
 ```rescript
 let someValue = Some(3)
-someValue->Option.mapWithDefault(0, x => x + 5) // 8
+someValue->Option.mapOr(0, x => x + 5) // 8
 
 let noneValue = None
-noneValue->Option.mapWithDefault(0, x => x + 5) // 0
+noneValue->Option.mapOr(0, x => x + 5) // 0
 ```
 */
+let mapOr: (option<'a>, 'b, 'a => 'b) => 'b
+
+@deprecated("Use mapOr instead")
 let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b
 
 /**
@@ -143,21 +146,24 @@ Option.flatMap(None, addIfAboveOne) // None
 let flatMap: (option<'a>, 'a => option<'b>) => option<'b>
 
 /**
-`getWithDefault(opt, default)` returns `value` if `opt` is `Some(value)`, otherwise `default`.
+`getOr(opt, default)` returns `value` if `opt` is `Some(value)`, otherwise `default`.
 
 ## Examples
 
 ```rescript
-Option.getWithDefault(None, "Banana") // Banana
-Option.getWithDefault(Some("Apple"), "Banana") // Apple
+Option.getOr(None, "Banana") // Banana
+Option.getOr(Some("Apple"), "Banana") // Apple
 
 let greet = (firstName: option<string>) =>
-  "Greetings " ++ firstName->Option.getWithDefault("Anonymous")
+  "Greetings " ++ firstName->Option.getOr("Anonymous")
 
 Some("Jane")->greet // "Greetings Jane"
 None->greet // "Greetings Anonymous"
 ```
 */
+let getOr: (option<'a>, 'a) => 'a
+
+@deprecated("Use getOr instead")
 let getWithDefault: (option<'a>, 'a) => 'a
 
 /**
@@ -198,7 +204,7 @@ Option.isNone(Some(1)) // false
 let isNone: option<'a> => bool
 
 /**
-`eq(opt1, opt2, f)` evaluates two optional values for equality with respect to a predicate function `f`. If both `opt1` and `opt2` are `None`, returns `true`.
+`equal(opt1, opt2, f)` evaluates two optional values for equality with respect to a predicate function `f`. If both `opt1` and `opt2` are `None`, returns `true`.
 If one of the arguments is `Some(value)` and the other is `None`, returns
 `false`.
 If arguments are `Some(value1)` and `Some(value2)`, returns the result of
@@ -211,25 +217,25 @@ let clockEqual = (a, b) => mod(a, 12) == mod(b, 12)
 
 open Option
 
-eq(Some(3), Some(15), clockEqual) // true
-eq(Some(3), None, clockEqual) // false
-eq(None, Some(3), clockEqual) // false
-eq(None, None, clockEqual) // true
+equal(Some(3), Some(15), clockEqual) // true
+equal(Some(3), None, clockEqual) // false
+equal(None, Some(3), clockEqual) // false
+equal(None, None, clockEqual) // true
 ```
 */
-let eq: (option<'a>, option<'b>, ('a, 'b) => bool) => bool
+let equal: (option<'a>, option<'b>, ('a, 'b) => bool) => bool
 
 /**
-`cmp(opt1, opt2, f)` compares two optional values with respect to given `f`.
+`compare(opt1, opt2, f)` compares two optional values with respect to given `f`.
 
-If both `opt1` and `opt2` are `None`, it returns `0`. If the first argument is `Some(value1)` and the second is `None`, returns `1` (something is greater than nothing).
+If both `opt1` and `opt2` are `None`, it returns `0.`. If the first argument is `Some(value1)` and the second is `None`, returns `1.` (something is greater than nothing).
 
-If the first argument is `None` and the second is `Some(value2)`, returns `-1`
+If the first argument is `None` and the second is `Some(value2)`, returns `-1.`
 (nothing is less than something).
 
 If the arguments are `Some(value1)` and `Some(value2)`, returns the result of
-`f(value1, value2)`, `f` takes two arguments and returns `-1` if the first
-argument is less than the second, `0` if the arguments are equal, and `1` if
+`f(value1, value2)`, `f` takes two arguments and returns `-1.` if the first
+argument is less than the second, `0.` if the arguments are equal, and `1.` if
 the first argument is greater than the second.
 
 ## Examples
@@ -239,12 +245,12 @@ let clockCompare = (a, b) => compare(mod(a, 12), mod(b, 12))
 
 open Option
 
-cmp(Some(3), Some(15), clockCompare) // 0
-cmp(Some(3), Some(14), clockCompare) // 1
-cmp(Some(2), Some(15), clockCompare) // (-1)
-cmp(None, Some(15), clockCompare) // (-1)
-cmp(Some(14), None, clockCompare) // 1
-cmp(None, None, clockCompare) // 0
+compare(Some(3), Some(15), clockCompare) // 0.
+compare(Some(3), Some(14), clockCompare) // 1.
+compare(Some(2), Some(15), clockCompare) // (-1.)
+compare(None, Some(15), clockCompare) // (-1.)
+compare(Some(14), None, clockCompare) // 1.
+compare(None, None, clockCompare) // 0.
 ```
 */
-let cmp: (option<'a>, option<'b>, ('a, 'b) => int) => int
+let compare: (option<'a>, option<'b>, ('a, 'b) => Core__Ordering.t) => Core__Ordering.t

@@ -3,9 +3,8 @@ type t = [#undefined | #object | #boolean | #number | #bigint | #string | #symbo
 external typeof: 'a => t = "#typeof"
 
 module Classify = {
-  type function
-  type object
-  type symbol
+  type function = Js.Types.function_val
+  type object = Js.Types.obj_val
 
   type t =
     | Bool(bool)
@@ -15,7 +14,8 @@ module Classify = {
     | Number(float)
     | Object(object)
     | Function(function)
-    | Symbol(symbol)
+    | Symbol(Core__Symbol.t)
+    | BigInt(Core__BigInt.t)
 
   @val external _internalClass: 'a => string = "Object.prototype.toString.call"
   external _asBool: 'a => bool = "%identity"
@@ -23,7 +23,8 @@ module Classify = {
   external _asFloat: 'a => float = "%identity"
   external _asObject: 'a => object = "%identity"
   external _asFunction: 'a => function = "%identity"
-  external _asSymbol: 'a => symbol = "%identity"
+  external _asSymbol: 'a => Core__Symbol.t = "%identity"
+  external _asBigInt: 'a => Core__BigInt.t = "%identity"
 
   let classify = value => {
     switch _internalClass(value) {
@@ -37,6 +38,7 @@ module Classify = {
     | "[object AsyncFunction]" =>
       Function(_asFunction(value))
     | "[object Symbol]" => Symbol(_asSymbol(value))
+    | "[object BigInt]" => BigInt(_asBigInt(value))
     | _ => Object(_asObject(value))
     }
   }

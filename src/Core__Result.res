@@ -30,13 +30,15 @@ let getExn = x =>
   | Error(_) => raise(Not_found)
   }
 
-let mapWithDefaultU = (opt, default, f) =>
+let mapOrU = (opt, default, f) =>
   switch opt {
   | Ok(x) => f(. x)
   | Error(_) => default
   }
 
-let mapWithDefault = (opt, default, f) => mapWithDefaultU(opt, default, (. x) => f(x))
+let mapOr = (opt, default, f) => mapOrU(opt, default, (. x) => f(x))
+
+let mapWithDefault = mapOr
 
 let mapU = (opt, f) =>
   switch opt {
@@ -54,11 +56,13 @@ let flatMapU = (opt, f) =>
 
 let flatMap = (opt, f) => flatMapU(opt, (. x) => f(x))
 
-let getWithDefault = (opt, default) =>
+let getOr = (opt, default) =>
   switch opt {
   | Ok(x) => x
   | Error(_) => default
   }
+
+let getWithDefault = getOr
 
 let isOk = x =>
   switch x {
@@ -72,22 +76,36 @@ let isError = x =>
   | Error(_) => true
   }
 
-let eqU = (a, b, f) =>
+let equal = (a, b, f) =>
   switch (a, b) {
-  | (Ok(a), Ok(b)) => f(. a, b)
+  | (Ok(a), Ok(b)) => f(a, b)
   | (Error(_), Ok(_))
   | (Ok(_), Error(_)) => false
   | (Error(_), Error(_)) => true
   }
 
-let eq = (a, b, f) => eqU(a, b, (. x, y) => f(x, y))
-
-let cmpU = (a, b, f) =>
+let compare = (a, b, f) =>
   switch (a, b) {
-  | (Ok(a), Ok(b)) => f(. a, b)
-  | (Error(_), Ok(_)) => -1
-  | (Ok(_), Error(_)) => 1
-  | (Error(_), Error(_)) => 0
+  | (Ok(a), Ok(b)) => f(a, b)
+  | (Error(_), Ok(_)) => Core__Ordering.less
+  | (Ok(_), Error(_)) => Core__Ordering.greater
+  | (Error(_), Error(_)) => Core__Ordering.equal
   }
 
-let cmp = (a, b, f) => cmpU(a, b, (. x, y) => f(x, y))
+let forEach = (r, f) =>
+  switch r {
+  | Ok(ok) => f(ok)
+  | Error(_) => ()
+  }
+
+// If the source result is Ok, should we return that instance, or
+// create it again? In this implementation I'm returning that specific
+// instance. However this is not consistent with the implementation for
+// other functions like mapU and flatMapU, which recreate the result.
+// This is more efficient. I'm not sure why the other implementations
+// return a new instance.
+let mapError = (r, f) =>
+  switch r {
+  | Ok(_) as ok => ok
+  | Error(e) => Error(f(e))
+  }

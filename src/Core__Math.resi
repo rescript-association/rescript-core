@@ -372,7 +372,7 @@ Math.atanh(0.5) // 0.5493061443340548
 external atanh: float => float = "Math.atanh"
 
 /**
-`atan2(~x, ~y)` returns the angle (in radians) of the quotient `y /. x`. It is
+`atan2(~y, ~x)` returns the angle (in radians) of the quotient `y /. x`. It is
 also the angle between the *x*-axis and point (*x*, *y*).
 See [`Math.atan2`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2) on MDN.
 
@@ -386,7 +386,7 @@ Math.atan2(~x=15.0, ~y=90.0) // 0.16514867741462683
 ```
 */
 @val
-external atan2: (~x: float, ~y: float) => float = "Math.atan2"
+external atan2: (~y: float, ~x: float) => float = "Math.atan2"
 
 /**
 `cbrt(v)` returns the cube root of argument `v`.

@@ -6,6 +6,11 @@
 @val external fromCodePoint: int => string = "String.fromCodePoint"
 @variadic @val external fromCodePointMany: array<int> => string = "String.fromCodePoint"
 
+let equal = (a: string, b: string) => a === b
+
+let compare = (a: string, b: string) =>
+  a < b ? Core__Ordering.less : a > b ? Core__Ordering.greater : Core__Ordering.equal
+
 @get external length: string => int = "length"
 @get_index external get: (string, int) => option<string> = ""
 @send external charAt: (string, int) => string = "charAt"

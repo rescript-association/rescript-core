@@ -7,6 +7,11 @@ module Constants = {
   @val external maxValue: float = "Number.MAX_VALUE"
 }
 
+let equal = (a: float, b: float) => a === b
+
+let compare = (a: float, b: float) =>
+  a < b ? Core__Ordering.less : a > b ? Core__Ordering.greater : Core__Ordering.equal
+
 @val external isNaN: float => bool = "isNaN"
 @val external isFinite: float => bool = "isFinite"
 @val external parseFloat: 'a => float = "parseFloat"
@@ -37,3 +42,14 @@ external toInt: float => int = "%intoffloat"
 external fromInt: int => float = "%identity"
 
 @unboxed @noalloc external mod: (float, float) => float = "?fmod_float"
+
+let clamp = (~min=?, ~max=?, value): float => {
+  let value = switch max {
+  | Some(max) if max < value => max
+  | _ => value
+  }
+  switch min {
+  | Some(min) if min > value => min
+  | _ => value
+  }
+}

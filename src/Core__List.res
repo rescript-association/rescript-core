@@ -481,9 +481,9 @@ let toArray = (x: t<_>) => {
   arr
 }
 
-let shuffle = xs => {
+let toShuffled = xs => {
   let v = toArray(xs)
-  Core__Array.shuffleInPlace(v)
+  Core__Array.shuffle(v)
   fromArray(v)
 }
 
@@ -680,43 +680,40 @@ let rec every2U = (l1, l2, p) =>
 
 let every2 = (l1, l2, p) => every2U(l1, l2, (. a, b) => p(a, b))
 
-let rec cmpByLength = (l1, l2) =>
+let rec compareLength = (l1, l2) =>
   switch (l1, l2) {
-  | (list{}, list{}) => 0
-  | (_, list{}) => 1
-  | (list{}, _) => -1
-  | (list{_, ...l1s}, list{_, ...l2s}) => cmpByLength(l1s, l2s)
+  | (list{}, list{}) => Core__Ordering.equal
+  | (_, list{}) => Core__Ordering.greater
+  | (list{}, _) => Core__Ordering.less
+  | (list{_, ...l1s}, list{_, ...l2s}) => compareLength(l1s, l2s)
   }
 
-let rec cmpU = (l1, l2, p) =>
+let rec compare = (l1, l2, p) =>
   switch (l1, l2) {
-  | (list{}, list{}) => 0
-  | (_, list{}) => 1
-  | (list{}, _) => -1
+  | (list{}, list{}) => Core__Ordering.equal
+  | (_, list{}) => Core__Ordering.greater
+  | (list{}, _) => Core__Ordering.less
   | (list{a1, ...l1}, list{a2, ...l2}) =>
-    let c = p(. a1, a2)
-    if c == 0 {
-      cmpU(l1, l2, p)
+    let c = p(a1, a2)
+    if c == Core__Ordering.equal {
+      compare(l1, l2, p)
     } else {
       c
     }
   }
 
-let cmp = (l1, l2, f) => cmpU(l1, l2, (. x, y) => f(x, y))
-
-let rec eqU = (l1, l2, p) =>
+let rec equal = (l1, l2, p) =>
   switch (l1, l2) {
   | (list{}, list{}) => true
   | (_, list{})
   | (list{}, _) => false
   | (list{a1, ...l1}, list{a2, ...l2}) =>
-    if p(. a1, a2) {
-      eqU(l1, l2, p)
+    if p(a1, a2) {
+      equal(l1, l2, p)
     } else {
       false
     }
   }
-let eq = (l1, l2, f) => eqU(l1, l2, (. x, y) => f(x, y))
 
 let rec some2U = (l1, l2, p) =>
   switch (l1, l2) {
@@ -795,7 +792,7 @@ let setAssoc = (xs, x, k, eq) => setAssocU(xs, x, k, (. a, b) => eq(a, b))
 
 let sort = (xs, cmp) => {
   let arr = toArray(xs)
-  Core__Array.sortInPlace(arr, cmp)
+  Core__Array.sort(arr, cmp)
   fromArray(arr)
 }
 

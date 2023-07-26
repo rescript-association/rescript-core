@@ -3,28 +3,22 @@
 external getUnsafe: (array<'a>, int) => 'a = "%array_unsafe_get"
 external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 
-@val external from: 'a => array<'b> = "Array.from"
-@val external fromWithMap: ('a, 'b => 'c) => array<'c> = "Array.from"
-
 @val external fromArrayLike: Js.Array2.array_like<'a> => array<'a> = "Array.from"
 @val
 external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b> = "Array.from"
 
-@val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
-@val external fromIteratorWithMap: (Core__Iterator.t<'a>, 'a => 'b) => array<'b> = "Array.from"
+@send external fillAll: (array<'a>, 'a) => unit = "fill"
 
-@send external fillAllInPlace: (array<'a>, 'a) => unit = "fill"
+@send external fillToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
 
-@send external fillInPlaceToEnd: (array<'a>, 'a, ~start: int) => unit = "fill"
-
-@send external fillInPlace: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
+@send external fill: (array<'a>, 'a, ~start: int, ~end: int) => unit = "fill"
 
 let make = (~length, x) =>
   if length <= 0 {
     []
   } else {
     let arr = makeUninitializedUnsafe(length)
-    arr->fillAllInPlace(x)
+    arr->fillAll(x)
     arr
   }
 
@@ -43,6 +37,46 @@ let fromInitializer = (~length, f) =>
 
 @get external length: array<'a> => int = "length"
 
+let rec equalFromIndex = (a, b, i, eq, len) =>
+  if i === len {
+    true
+  } else if eq(a->getUnsafe(i), b->getUnsafe(i)) {
+    equalFromIndex(a, b, i + 1, eq, len)
+  } else {
+    false
+  }
+
+let equal = (a, b, eq) => {
+  let len = a->length
+  if len === b->length {
+    equalFromIndex(a, b, 0, eq, len)
+  } else {
+    false
+  }
+}
+
+let rec compareFromIndex = (a, b, i, cmp, len) =>
+  if i === len {
+    Core__Ordering.equal
+  } else {
+    let c = cmp(a->getUnsafe(i), b->getUnsafe(i))
+    if c == Core__Ordering.equal {
+      compareFromIndex(a, b, i + 1, cmp, len)
+    } else {
+      c
+    }
+  }
+
+let compare = (a, b, cmp) => {
+  let lenA = a->length
+  let lenB = b->length
+  lenA < lenB
+    ? Core__Ordering.less
+    : lenA > lenB
+    ? Core__Ordering.greater
+    : compareFromIndex(a, b, 0, cmp, lenA)
+}
+
 @send external copyAllWithin: (array<'a>, ~target: int) => array<'a> = "copyWithin"
 
 @send
@@ -57,13 +91,18 @@ external copyWithin: (array<'a>, ~target: int, ~start: int, ~end: int) => array<
 
 @variadic @send external pushMany: (array<'a>, array<'a>) => unit = "push"
 
-@send external reverseInPlace: array<'a> => unit = "reverse"
+@send external reverse: array<'a> => unit = "reverse"
+@send external toReversed: array<'a> => array<'a> = "toReversed"
 
 @send external shift: array<'a> => option<'a> = "shift"
 
 @variadic @send
-external spliceInPlace: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit =
-  "splice"
+external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit = "splice"
+@variadic @send
+external toSpliced: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => array<'a> =
+  "toSpliced"
+
+@send external with: (array<'a>, int, 'a) => array<'a> = "with"
 
 @send external unshift: (array<'a>, 'a) => unit = "unshift"
 
@@ -98,13 +137,8 @@ let lastIndexOfOpt = (arr, item) =>
 @send external sliceToEnd: (array<'a>, ~start: int) => array<'a> = "slice"
 @send external copy: array<'a> => array<'a> = "slice"
 
-@send external sortInPlace: (array<'a>, ('a, 'a) => int) => unit = "sort"
-
-let sort = (arr, cmp) => {
-  let result = copy(arr)
-  sortInPlace(result, cmp)
-  result
-}
+@send external sort: (array<'a>, ('a, 'a) => Core__Ordering.t) => unit = "sort"
+@send external toSorted: (array<'a>, ('a, 'a) => Core__Ordering.t) => array<'a> = "toSorted"
 
 @send external toString: array<'a> => string = "toString"
 @send external toLocaleString: array<'a> => string = "toLocaleString"
@@ -160,25 +194,16 @@ let swapUnsafe = (xs, i, j) => {
   setUnsafe(xs, j, tmp)
 }
 
-let reverse = xs => {
-  let len = length(xs)
-  let result = makeUninitializedUnsafe(len)
-  for i in 0 to len - 1 {
-    setUnsafe(result, i, getUnsafe(xs, len - 1 - i))
-  }
-  result
-}
-
-let shuffleInPlace = xs => {
+let shuffle = xs => {
   let len = length(xs)
   for i in 0 to len - 1 {
     swapUnsafe(xs, i, Js.Math.random_int(i, len)) /* [i,len) */
   }
 }
 
-let shuffle = xs => {
+let toShuffled = xs => {
   let result = copy(xs)
-  shuffleInPlace(result)
+  shuffle(result)
   result
 }
 

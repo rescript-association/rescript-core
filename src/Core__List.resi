@@ -193,15 +193,15 @@ List.makeBy(5, i => i * i) // list{0, 1, 4, 9, 16}
 let makeBy: (int, int => 'a) => t<'a>
 
 /**
-`shuffle(list)` returns a new list in random order.
+`toShuffled(list)` returns a new list in random order.
 
 ## Examples
 
 ```rescript
-List.shuffle(list{1, 2, 3}) // list{2, 1, 3}
+List.toShuffled(list{1, 2, 3}) // list{2, 1, 3}
 ```
 */
-let shuffle: t<'a> => t<'a>
+let toShuffled: t<'a> => t<'a>
 
 /**
 `drop(list, value)` return a new list, dropping the first `value` element.
@@ -391,7 +391,7 @@ let f = x => x * x
 let l = list{3, 4, 5}
 
 let withMap = List.map(l, f)->List.reverse
-let withMapReverse = l->List.mapReverse(f) 
+let withMapReverse = l->List.mapReverse(f)
 
 Console.log(withMap == withMapReverse) // true
 ```
@@ -615,70 +615,70 @@ List.some2(list{0, 1}, list{5, 0}, (a, b) => a > b) // true
 let some2: (t<'a>, t<'b>, ('a, 'b) => bool) => bool
 
 /**
-`cmpByLength(list1, list2)` compare two lists solely by length. Returns `-1` if
-`length(list1)` is less than `length(list2)`, `0` if `length(list1)` equals
-`length(list2)`, and `1` if `length(list1)` is greater than `length(list2)`.
+`compareLength(list1, list2)` compare two lists solely by length. Returns `-1.` if
+`length(list1)` is less than `length(list2)`, `0.` if `length(list1)` equals
+`length(list2)`, and `1.` if `length(list1)` is greater than `length(list2)`.
 
 ## Examples
 
 ```rescript
-List.cmpByLength(list{1, 2}, list{3, 4, 5, 6}) // -1
+List.compareLength(list{1, 2}, list{3, 4, 5, 6}) // -1.
 
-List.cmpByLength(list{1, 2, 3}, list{4, 5, 6}) // 0
+List.compareLength(list{1, 2, 3}, list{4, 5, 6}) // 0.
 
-List.cmpByLength(list{1, 2, 3, 4}, list{5, 6}) // 1
+List.compareLength(list{1, 2, 3, 4}, list{5, 6}) // 1.
 ```
 */
-let cmpByLength: (t<'a>, t<'a>) => int
+let compareLength: (t<'a>, t<'a>) => Core__Ordering.t
 
 /**
-`cmp(list1, list2, f)` compare elements one by one `f`. `f` returns a negative
+`compare(list1, list2, f)` compare elements one by one `f`. `f` returns a negative
 number if `list1` is "less than" `list2`, zero if `list1` is "equal to" `list2`,
 a positive number if `list1` is "greater than" `list2`.
 
 The comparison returns the first non-zero result of `f`, or zero if `f` returns
 zero for all `list1` and `list2`.
 
-- If all items have compared equal, but `list1` is exhausted first, return `-1`. (`list1` is shorter).
-- If all items have compared equal, but `list2` is exhausted first, return `1` (`list1` is longer).
+- If all items have compared equal, but `list1` is exhausted first, return `-1.`. (`list1` is shorter).
+- If all items have compared equal, but `list2` is exhausted first, return `1.` (`list1` is longer).
 
 ## Examples
 
 ```rescript
-List.cmp(list{3}, list{3, 7}, (a, b) => compare(a, b)) /* (-1) */
+List.compare(list{3}, list{3, 7}, (a, b) => compare(a, b)) /* (-1.) */
 
-List.cmp(list{5, 3}, list{5}, (a, b) => compare(a, b)) /* 1 */
+List.compare(list{5, 3}, list{5}, (a, b) => compare(a, b)) /* 1. */
 
-List.cmp(list{1, 3, 5}, list{1, 4, 2}, (a, b) => compare(a, b)) /* (-1) */
+List.compare(list{1, 3, 5}, list{1, 4, 2}, (a, b) => compare(a, b)) /* (-1.) */
 
-List.cmp(list{1, 3, 5}, list{1, 2, 3}, (a, b) => compare(a, b)) /* 1 */
+List.compare(list{1, 3, 5}, list{1, 2, 3}, (a, b) => compare(a, b)) /* 1. */
 
-List.cmp(list{1, 3, 5}, list{1, 3, 5}, (a, b) => compare(a, b)) /* 0 */
+List.compare(list{1, 3, 5}, list{1, 3, 5}, (a, b) => compare(a, b)) /* 0. */
 ```
 
 **Please note:** The total ordering of List is different from Array,
 for Array, we compare the length first and, only if the lengths are equal, elements one by one.
 For lists, we just compare elements one by one.
 */
-let cmp: (t<'a>, t<'a>, ('a, 'a) => int) => int
+let compare: (t<'a>, t<'a>, ('a, 'a) => Core__Ordering.t) => Core__Ordering.t
 
 /**
-`eq(list1, list2, f)` check equality of `list2` and `list2` using `f` for
+`equal(list1, list2, f)` check equality of `list2` and `list2` using `f` for
 equality on elements, where `f` is a function that returns `true` if items `x` and
-`y` meet some criterion for equality, `false` otherwise. eq `false` if length
+`y` meet some criterion for equality, `false` otherwise. equal `false` if length
 of `list1` and `list2` are not the same.
 
 ## Examples
 
 ```rescript
-List.eq(list{1, 2, 3}, list{1, 2}, (a, b) => a == b) // false
+List.equal(list{1, 2, 3}, list{1, 2}, (a, b) => a == b) // false
 
-List.eq(list{1, 2}, list{1, 2}, (a, b) => a == b) // true
+List.equal(list{1, 2}, list{1, 2}, (a, b) => a == b) // true
 
-List.eq(list{1, 2, 3}, list{(-1), (-2), (-3)}, (a, b) => abs(a) == abs(b)) // true
+List.equal(list{1, 2, 3}, list{(-1), (-2), (-3)}, (a, b) => abs(a) == abs(b)) // true
 ```
 */
-let eq: (t<'a>, t<'a>, ('a, 'a) => bool) => bool
+let equal: (t<'a>, t<'a>, ('a, 'a) => bool) => bool
 
 /**
 `has(list, element, f)` returns `true` if the list contains at least one
@@ -874,7 +874,7 @@ let setAssoc: (t<('a, 'c)>, 'a, 'c, ('a, 'a) => bool) => t<('a, 'c)>
 ## Examples
 
 ```rescript
-List.sort(list{5, 4, 9, 3, 7}, (a, b) => a - b) // list{3, 4, 5, 7, 9}
+List.sort(list{5, 4, 9, 3, 7}, Int.compare) // list{3, 4, 5, 7, 9}
 ```
 */
-let sort: (t<'a>, ('a, 'a) => int) => t<'a>
+let sort: (t<'a>, ('a, 'a) => Core__Ordering.t) => t<'a>
