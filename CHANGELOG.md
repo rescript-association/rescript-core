@@ -2,6 +2,11 @@
 
 ## Next version
 
+### API changes
+
+- Do not return `Infinity` or `-Infinity` when passing an empty array to `Math.Int.minMany`, `Math.Int.maxMany`, `Math.minMany` and `Math.maxMany` functions. https://github.com/rescript-association/rescript-core/pull/82
+
+
 ## 0.5.0
 
 ### API changes
