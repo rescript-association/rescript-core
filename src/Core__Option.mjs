@@ -29,7 +29,7 @@ function getExn(x) {
       };
 }
 
-function mapWithDefault(opt, $$default, f) {
+function mapOr(opt, $$default, f) {
   var f$1 = Curry.__1(f);
   if (opt !== undefined) {
     return f$1(Caml_option.valFromOption(opt));
@@ -54,7 +54,7 @@ function flatMap(opt, f) {
   
 }
 
-function getWithDefault(opt, $$default) {
+function getOr(opt, $$default) {
   if (opt !== undefined) {
     return Caml_option.valFromOption(opt);
   } else {
@@ -78,11 +78,10 @@ function isNone(x) {
   return x === undefined;
 }
 
-function eq(a, b, f) {
-  var f$1 = Curry.__2(f);
+function equal(a, b, eq) {
   if (a !== undefined) {
     if (b !== undefined) {
-      return f$1(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
+      return Curry._2(eq, Caml_option.valFromOption(a), Caml_option.valFromOption(b));
     } else {
       return false;
     }
@@ -91,11 +90,10 @@ function eq(a, b, f) {
   }
 }
 
-function cmp(a, b, f) {
-  var f$1 = Curry.__2(f);
+function compare(a, b, cmp) {
   if (a !== undefined) {
     if (b !== undefined) {
-      return f$1(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
+      return Curry._2(cmp, Caml_option.valFromOption(a), Caml_option.valFromOption(b));
     } else {
       return 1;
     }
@@ -106,18 +104,24 @@ function cmp(a, b, f) {
   }
 }
 
+var mapWithDefault = mapOr;
+
+var getWithDefault = getOr;
+
 export {
   filter ,
   forEach ,
   getExn ,
+  mapOr ,
   mapWithDefault ,
   map ,
   flatMap ,
+  getOr ,
   getWithDefault ,
   orElse ,
   isSome ,
   isNone ,
-  eq ,
-  cmp ,
+  equal ,
+  compare ,
 }
 /* No side effect */

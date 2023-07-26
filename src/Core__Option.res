@@ -46,13 +46,15 @@ let getExn = x =>
 
 external getUnsafe: option<'a> => 'a = "%identity"
 
-let mapWithDefaultU = (opt, default, f) =>
+let mapOrU = (opt, default, f) =>
   switch opt {
   | Some(x) => f(. x)
   | None => default
   }
 
-let mapWithDefault = (opt, default, f) => mapWithDefaultU(opt, default, (. x) => f(x))
+let mapOr = (opt, default, f) => mapOrU(opt, default, (. x) => f(x))
+
+let mapWithDefault = mapOr
 
 let mapU = (opt, f) =>
   switch opt {
@@ -70,11 +72,13 @@ let flatMapU = (opt, f) =>
 
 let flatMap = (opt, f) => flatMapU(opt, (. x) => f(x))
 
-let getWithDefault = (opt, default) =>
+let getOr = (opt, default) =>
   switch opt {
   | Some(x) => x
   | None => default
   }
+
+let getWithDefault = getOr
 
 let orElse = (opt, other) =>
   switch opt {
@@ -90,24 +94,17 @@ let isSome = x =>
 
 let isNone = x => x == None
 
-let eqU = (a, b, f) =>
-  switch a {
-  | Some(a) =>
-    switch b {
-    | None => false
-    | Some(b) => f(. a, b)
-    }
-  | None => b == None
-  }
-
-let eq = (a, b, f) => eqU(a, b, (. x, y) => f(x, y))
-
-let cmpU = (a, b, f) =>
+let equal = (a, b, eq) =>
   switch (a, b) {
-  | (Some(a), Some(b)) => f(. a, b)
-  | (None, Some(_)) => -1
-  | (Some(_), None) => 1
-  | (None, None) => 0
+  | (Some(a), Some(b)) => eq(a, b)
+  | (None, None) => true
+  | (None, Some(_)) | (Some(_), None) => false
   }
 
-let cmp = (a, b, f) => cmpU(a, b, (. x, y) => f(x, y))
+let compare = (a, b, cmp) =>
+  switch (a, b) {
+  | (Some(a), Some(b)) => cmp(a, b)
+  | (None, Some(_)) => Core__Ordering.less
+  | (Some(_), None) => Core__Ordering.greater
+  | (None, None) => Core__Ordering.equal
+  }

@@ -12,7 +12,7 @@ function getExn(x) {
       };
 }
 
-function mapWithDefault(opt, $$default, f) {
+function mapOr(opt, $$default, f) {
   var f$1 = Curry.__1(f);
   if (opt.TAG === /* Ok */0) {
     return f$1(opt._0);
@@ -48,7 +48,7 @@ function flatMap(opt, f) {
   }
 }
 
-function getWithDefault(opt, $$default) {
+function getOr(opt, $$default) {
   if (opt.TAG === /* Ok */0) {
     return opt._0;
   } else {
@@ -72,11 +72,10 @@ function isError(x) {
   }
 }
 
-function eq(a, b, f) {
-  var f$1 = Curry.__2(f);
+function equal(a, b, f) {
   if (a.TAG === /* Ok */0) {
     if (b.TAG === /* Ok */0) {
-      return f$1(a._0, b._0);
+      return Curry._2(f, a._0, b._0);
     } else {
       return false;
     }
@@ -87,11 +86,10 @@ function eq(a, b, f) {
   }
 }
 
-function cmp(a, b, f) {
-  var f$1 = Curry.__2(f);
+function compare(a, b, f) {
   if (a.TAG === /* Ok */0) {
     if (b.TAG === /* Ok */0) {
-      return f$1(a._0, b._0);
+      return Curry._2(f, a._0, b._0);
     } else {
       return 1;
     }
@@ -102,15 +100,41 @@ function cmp(a, b, f) {
   }
 }
 
+function forEach(r, f) {
+  if (r.TAG === /* Ok */0) {
+    return Curry._1(f, r._0);
+  }
+  
+}
+
+function mapError(r, f) {
+  if (r.TAG === /* Ok */0) {
+    return r;
+  } else {
+    return {
+            TAG: /* Error */1,
+            _0: Curry._1(f, r._0)
+          };
+  }
+}
+
+var mapWithDefault = mapOr;
+
+var getWithDefault = getOr;
+
 export {
   getExn ,
+  mapOr ,
   mapWithDefault ,
   map ,
   flatMap ,
+  getOr ,
   getWithDefault ,
   isOk ,
   isError ,
-  eq ,
-  cmp ,
+  equal ,
+  compare ,
+  forEach ,
+  mapError ,
 }
 /* No side effect */

@@ -109,6 +109,10 @@ module Constants: {
   external maxValue: float = "Number.MAX_VALUE"
 }
 
+let equal: (float, float) => bool
+
+let compare: (float, float) => Core__Ordering.t
+
 /**
 `isNaN(v)` tests if the given `v` is `NaN`.
 See [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN) on MDN.
@@ -404,3 +408,19 @@ Int.mod(7.0, 4.0) == 3
 ```
 */
 external mod: (float, float) => float = "?fmod_float"
+
+/**
+`clamp(~min=?, ~max=?, value)` returns `value`, optionally bounded by `min` and `max`.
+
+if `max` < `min` returns `min`.
+
+## Examples
+
+```rescript
+Int.clamp(4.2) == 4.2
+Int.clamp(4.2, ~min=4.3) == 4.3
+Int.clamp(4.2, ~max=4.1) == 4.1
+Int.clamp(4.2, ~min=4.3, ~max=4.1) == 4.3
+```
+*/
+let clamp: (~min: float=?, ~max: float=?, float) => float

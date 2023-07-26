@@ -1,13 +1,15 @@
 {
   "name": "@rescript/core",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "scripts": {
     "clean": "rescript clean",
     "build": "rescript",
     "watch": "rescript build -w",
     "test": "node test/TestSuite.mjs && node test/TempTests.mjs"
   },
-  "keywords": ["rescript"],
+  "keywords": [
+    "rescript"
+  ],
   "homepage": "https://github.com/rescript-association/rescript-core",
   "author": "ReScript Team",
   "license": "MIT",
@@ -17,10 +19,14 @@
     "LICENSE",
     "bsconfig.json",
     "src/**/*.res",
-    "src/**/*.resi"
+    "src/**/*.resi",
+    "src/**/*.mjs"
   ],
+  "peerDependencies": {
+    "rescript": "^10.1.0 || ^11.0.0-alpha.0 || next"
+  },
   "devDependencies": {
-    "rescript": "^10.1.2",
+    "rescript": "10.1.4",
     "@babel/code-frame": "7.18.6"
   }
 }

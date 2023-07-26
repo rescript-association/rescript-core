@@ -4,6 +4,11 @@
 function classify(value) {
   var match = Object.prototype.toString.call(value);
   switch (match) {
+    case "[object BigInt]" :
+        return {
+                TAG: /* BigInt */6,
+                _0: value
+              };
     case "[object Boolean]" :
         return {
                 TAG: /* Bool */0,

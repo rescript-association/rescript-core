@@ -59,17 +59,20 @@ type t<'a, 'b> = result<'a, 'b> = Ok('a) | Error('b)
 let getExn: t<'a, 'b> => 'a
 
 /**
-  `mapWithDefault(res, default, f)`: When res is `Ok(n)`, returns `f(n)`,
+  `mapOr(res, default, f)`: When res is `Ok(n)`, returns `f(n)`,
   otherwise `default`.
 
   ```res example
   let ok = Result.Ok(42)
-  Result.mapWithDefault(ok, 0, (x) => x / 2) == 21
+  Result.mapOr(ok, 0, (x) => x / 2) == 21
 
   let error = Result.Error("Invalid data")
-  Result.mapWithDefault(error, 0, (x) => x / 2) == 0
+  Result.mapOr(error, 0, (x) => x / 2) == 0
   ```
 */
+let mapOr: (t<'a, 'c>, 'b, 'a => 'b) => 'b
+
+@deprecated("Use mapOr instead")
 let mapWithDefault: (t<'a, 'c>, 'b, 'a => 'b) => 'b
 
 /**
@@ -110,15 +113,18 @@ let map: (t<'a, 'c>, 'a => 'b) => t<'b, 'c>
 let flatMap: (t<'a, 'c>, 'a => t<'b, 'c>) => t<'b, 'c>
 
 /**
-  `getWithDefault(res, defaultValue)`: If `res` is `Ok(n)`, returns `n`,
+  `getOr(res, defaultValue)`: If `res` is `Ok(n)`, returns `n`,
   otherwise `default`
 
   ```res example
-  Result.getWithDefault(Ok(42), 0) == 42
+  Result.getOr(Ok(42), 0) == 42
 
-  Result.getWithDefault(Error("Invalid Data"), 0) == 0
+  Result.getOr(Error("Invalid Data"), 0) == 0
   ```
 */
+let getOr: (t<'a, 'b>, 'a) => 'a
+
+@deprecated("Use getOr instead")
 let getWithDefault: (t<'a, 'b>, 'a) => 'a
 
 /**
@@ -134,7 +140,7 @@ let isOk: t<'a, 'b> => bool
 let isError: t<'a, 'b> => bool
 
 /**
-  `eq(res1, res2, f)`: Determine if two `Result` variables are equal with
+  `equal(res1, res2, f)`: Determine if two `Result` variables are equal with
   respect to an equality function. If `res1` and `res2` are of the form `Ok(n)`
   and `Ok(m)`, return the result of `f(n, m)`. If one of `res1` and `res2` are of
   the form `Error(e)`, return false If both `res1` and `res2` are of the form
@@ -151,28 +157,28 @@ let isError: t<'a, 'b> => bool
 
   let mod10equal = (a, b) => mod(a, 10) === mod(b, 10)
 
-  Result.eq(good1, good2, mod10equal) == true
+  Result.equal(good1, good2, mod10equal) == true
 
-  Result.eq(good1, bad1, mod10equal) == false
+  Result.equal(good1, bad1, mod10equal) == false
 
-  Result.eq(bad2, good2, mod10equal) == false
+  Result.equal(bad2, good2, mod10equal) == false
 
-  Result.eq(bad1, bad2, mod10equal) == true
+  Result.equal(bad1, bad2, mod10equal) == true
   ```
 */
-let eq: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
+let equal: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
 
 /**
-  `cmp(res1, res2, f)`: Compare two `Result` variables with respect to a
-  comparison function. The comparison function returns -1 if the first variable
-  is "less than" the second, 0 if the two variables are equal, and 1 if the first
+  `compare(res1, res2, f)`: Compare two `Result` variables with respect to a
+  comparison function. The comparison function returns -1. if the first variable
+  is "less than" the second, 0. if the two variables are equal, and 1. if the first
   is "greater than" the second.
 
   If `res1` and `res2` are of the form `Ok(n)` and `Ok(m)`, return the result of
   `f(n, m)`. If `res1` is of the form `Error(e)` and `res2` of the form `Ok(n)`,
-  return -1 (nothing is less than something) If `res1` is of the form `Ok(n)` and
-  `res2` of the form `Error(e)`, return 1 (something is greater than nothing) If
-  both `res1` and `res2` are of the form `Error(e)`, return 0 (equal)
+  return -1. (nothing is less than something) If `res1` is of the form `Ok(n)` and
+  `res2` of the form `Error(e)`, return 1. (something is greater than nothing) If
+  both `res1` and `res2` are of the form `Error(e)`, return 0. (equal)
 
   ```res example
   let good1 = Result.Ok(59)
@@ -185,15 +191,40 @@ let eq: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
 
   let mod10cmp = (a, b) => Pervasives.compare(mod(a, 10), mod(b, 10))
 
-  Result.cmp(Ok(39), Ok(57), mod10cmp) == 1
+  Result.compare(Ok(39), Ok(57), mod10cmp) == 1.
 
-  Result.cmp(Ok(57), Ok(39), mod10cmp) == (-1)
+  Result.compare(Ok(57), Ok(39), mod10cmp) == (-1.)
 
-  Result.cmp(Ok(39), Error("y"), mod10cmp) == 1
+  Result.compare(Ok(39), Error("y"), mod10cmp) == 1.
 
-  Result.cmp(Error("x"), Ok(57), mod10cmp) == (-1)
+  Result.compare(Error("x"), Ok(57), mod10cmp) == (-1.)
 
-  Result.cmp(Error("x"), Error("y"), mod10cmp) == 0
+  Result.compare(Error("x"), Error("y"), mod10cmp) == 0.
   ```
 */
-let cmp: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => int) => int
+let compare: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => Core__Ordering.t) => Core__Ordering.t
+
+/**
+`forEach(res, f)` runs the provided function `f` on the `Ok` value. If `res` is `Error`, nothing happens.
+
+## Examples
+
+```rescript
+Result.forEach(Ok(3), Console.log) // Logs "3", returns ()
+Result.forEach(Error("x"), Console.log) // Does nothing, returns ()
+```
+*/
+let forEach: (t<'a, 'b>, 'a => unit) => unit
+
+/**
+`mapError(r, f)` generates a new `result` by applying the function `f` to the `Error` value. If the source is `Ok`, return it as-is.
+
+## Examples
+
+```rescript
+let format = n => `Error code: ${n->Int.toString}`
+mapError(Error(14), format) // Error("Error code: 14")
+mapError(Ok("abc"), format) // Ok("abc")
+```
+*/
+let mapError: (result<'a, 'b>, 'b => 'c) => result<'a, 'c>

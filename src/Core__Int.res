@@ -3,6 +3,11 @@ module Constants = {
   @inline let maxValue = 2147483647
 }
 
+let equal = (a: int, b: int) => a === b
+
+let compare = (a: int, b: int) =>
+  a < b ? Core__Ordering.less : a > b ? Core__Ordering.greater : Core__Ordering.equal
+
 @send external toExponential: int => string = "toExponential"
 @send external toExponentialWithPrecision: (int, ~digits: int) => string = "toExponential"
 
@@ -35,3 +40,40 @@ let fromString = (~radix=?, x) => {
 }
 
 external mod: (int, int) => int = "%modint"
+
+type rangeOptions = {step?: int, inclusive?: bool}
+let rangeWithOptions = (start, end, options) => {
+  let isInverted = start > end
+
+  let step = switch options.step {
+  | None => isInverted ? -1 : 1
+  | Some(0) if start !== end =>
+    Core__Error.raise(Core__Error.RangeError.make("Incorrect range arguments"))
+  | Some(n) => n
+  }
+
+  let length = if isInverted === (step >= 0) {
+    0 // infinite because step goes in opposite direction of end
+  } else if step == 0 {
+    options.inclusive === Some(true) ? 1 : 0
+  } else {
+    let range = isInverted ? start - end : end - start
+    let range = options.inclusive === Some(true) ? range + 1 : range
+    ceil(float(range) /. float(abs(step)))->Core__Float.toInt
+  }
+
+  Core__Array.fromInitializer(~length, i => start + i * step)
+}
+
+let range = (start, end) => rangeWithOptions(start, end, {})
+
+let clamp = (~min=?, ~max=?, value): int => {
+  let value = switch max {
+  | Some(max) if max < value => max
+  | _ => value
+  }
+  switch min {
+  | Some(min) if min > value => min
+  | _ => value
+  }
+}

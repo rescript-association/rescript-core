@@ -56,6 +56,10 @@ module Constants: {
   let maxValue: int
 }
 
+let equal: (int, int) => bool
+
+let compare: (int, int) => Core__Ordering.t
+
 /**
 `toExponential(n)` return a `string` representing the given value in exponential
 notation.
@@ -268,3 +272,73 @@ Int.mod(7, 4) == 3
 ```
 */
 external mod: (int, int) => int = "%modint"
+
+/**
+`range(start, end)` returns an int array of the sequence of integers in the
+range `[start, end)`. That is, including `start` but excluding `end`.
+
+If `start < end` the sequence will be increasing in steps of 1.
+
+If `start > end` the sequence will be decreasing in steps of -1.
+
+This is equivalent to `rangeWithOptions` with `inclusive` set to `false` and
+`step` set to `1` if `start < end` and `-1` otherwise.
+
+## Examples
+
+```rescript
+Int.range(3, 6) == [3, 4, 5]
+Int.range(-3, -1) == [-3, -2]
+Int.range(3, 1) == [3, 2]
+```
+*/
+let range: (int, int) => array<int>
+
+/**
+The options for `rangeWithOptions`.
+*/
+type rangeOptions = {step?: int, inclusive?: bool}
+
+/**
+`rangeWithOptions(start, end, options)` is like `range`, but with `step` and
+`inclusive` options configurable.
+
+If `step` is set, the sequence will increase or decrease by that amount for each
+step. If `start < end` and `step` is negative, or vice versa, an empty array is
+returned since the sequence would otherwise never reach or exceed the end value
+and hence be infinite. If `step` is `0` and `start !=` end, a `RangeError` is
+raised as the sequence would never reach or exceed the end value and hence be
+infinite.
+
+If `inclusive` is set to `true`, the sequence will include `end` if `step` is
+set such that the sequence includes it.
+
+## Examples
+
+```rescript
+Int.rangeWithOptions(3, 7, {step: 2}) == [3, 5]
+Int.rangeWithOptions(3, 7, {step: 2, inclusive: true}) == [3, 5, 7]
+Int.rangeWithOptions(3, 6, {step: -2}) // RangeError
+```
+
+## Exceptions
+
+- Raises `RangeError` if `step == 0 && start != end`.
+*/
+let rangeWithOptions: (int, int, rangeOptions) => array<int>
+
+/**
+`clamp(~min=?, ~max=?, value)` returns `value`, optionally bounded by `min` and `max`.
+
+if `max` < `min` returns `min`.
+
+## Examples
+
+```rescript
+Int.clamp(42) == 42
+Int.clamp(42, ~min=50) == 50
+Int.clamp(42, ~max=40) == 40
+Int.clamp(42, ~min=50, ~max=40) == 50
+```
+*/
+let clamp: (~min: int=?, ~max: int=?, int) => int

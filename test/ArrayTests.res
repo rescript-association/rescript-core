@@ -48,13 +48,13 @@ Test.run(
   list{},
 )
 
-Test.run(__POS_OF__("shuffle - length"), Array.shuffle([1, 2, 3])->Array.length, eq, 3)
+Test.run(__POS_OF__("toShuffled - length"), Array.toShuffled([1, 2, 3])->Array.length, eq, 3)
 
 Test.run(
-  __POS_OF__("shuffleInPlace - length"),
+  __POS_OF__("shuffle - length"),
   {
     let arr = [1, 2, 3]
-    Array.shuffleInPlace(arr)
+    Array.shuffle(arr)
     arr->Array.length
   },
   eq,

@@ -38,7 +38,7 @@ module Int = {
 @val external asinh: float => float = "Math.asinh"
 @val external atan: float => float = "Math.atan"
 @val external atanh: float => float = "Math.atanh"
-@val external atan2: (~x: float, ~y: float) => float = "Math.atan2"
+@val external atan2: (~y: float, ~x: float) => float = "Math.atan2"
 @val external cbrt: float => float = "Math.cbrt"
 @val external ceil: float => float = "Math.ceil"
 @val external cos: float => float = "Math.cos"

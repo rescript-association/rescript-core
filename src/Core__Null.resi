@@ -33,7 +33,7 @@ Console.log(null) // Logs `null` to the console.
 external null: t<'a> = "#null"
 
 /**
-Creates a new `Null.t` from the provided value. 
+Creates a new `Null.t` from the provided value.
 This means the compiler will enforce null checks for the new value.
 
 ## Examples
@@ -43,6 +43,10 @@ let asNullValue = myStr->Null.make // The compiler now thinks this can be `strin
 ```
 */
 external make: 'a => t<'a> = "%identity"
+
+let equal: (t<'a>, t<'b>, ('a, 'b) => bool) => bool
+
+let compare: (t<'a>, t<'b>, ('a, 'b) => Core__Ordering.t) => Core__Ordering.t
 
 /**
 Converts a nullable value into an option, so it can be pattern matched on.
@@ -73,22 +77,25 @@ Console.log(asNull == null) // Logs `true` to the console.
 let fromOption: option<'a> => t<'a>
 
 /**
-`getWithDefault(value, default)` returns `value` if not `null`, otherwise return
+`getOr(value, default)` returns `value` if not `null`, otherwise return
 `default`.
 
 ## Examples
 
 ```rescript
-Null.getWithDefault(null, "Banana") // Banana
-Null.getWithDefault(Nulalble.make("Apple"), "Banana") // Apple
+Null.getOr(null, "Banana") // Banana
+Null.getOr(Nulalble.make("Apple"), "Banana") // Apple
 
 let greet = (firstName: option<string>) =>
-  "Greetings " ++ firstName->Null.getWithDefault("Anonymous")
+  "Greetings " ++ firstName->Null.getOr("Anonymous")
 
 Null.make("Jane")->greet // "Greetings Jane"
 null->greet // "Greetings Anonymous"
 ```
 */
+let getOr: (t<'a>, 'a) => 'a
+
+@deprecated("Use getOr instead")
 let getWithDefault: (t<'a>, 'a) => 'a
 
 /**
@@ -135,19 +142,22 @@ Null.map(null, x => x * x) // null
 let map: (t<'a>, 'a => 'b) => t<'b>
 
 /**
-`mapWithDefault(value, default, f)` returns `f(value)` if `value` is not `null`,
+`mapOr(value, default, f)` returns `f(value)` if `value` is not `null`,
 otherwise returns `default`.
 
 ## Examples
 
 ```rescript
 let someValue = Null.make(3)
-someValue->Null.mapWithDefault(0, x => x + 5) // 8
+someValue->Null.mapOr(0, x => x + 5) // 8
 
 let noneValue = null
-noneValue->Null.mapWithDefault(0, x => x + 5) // 0
+noneValue->Null.mapOr(0, x => x + 5) // 0
 ```
 */
+let mapOr: (t<'a>, 'b, 'a => 'b) => 'b
+
+@deprecated("Use mapOr instead")
 let mapWithDefault: (t<'a>, 'b, 'a => 'b) => 'b
 
 /**

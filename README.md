@@ -109,9 +109,9 @@ This standard library is based on `rescript-js`, but with the tweaks and modific
 - `findIndexOpt`/`lastIndexOf`/`indexOfOpt` are added, returning `None` instead of `-1` if the item searched for does not exist. These are in addition to `findIndex`/`lastIndexOf`, which still returns `-1` when the item you're looking for does not exist.
 - `getUnsafe` added (copied from `Belt`).
 - `setUnsafe` added (copied from `Belt`).
-- `reverse` added (copied from `Belt`), in addition to existing `reverseInPlace`. `reverseInPlace` is zero cost but does not produce a new array. `reverse` does produce a new array.
+- `sort`, `toSorted`, `reverse`, `toReversed`, `splice`, `toSpliced` are the same as their JS counterpart (mutable and immutable, respectively).
 - `keepMap` is added from `Belt`, but **renamed to `filterMap`**. Rationale: `filterMap` is closer to the JS convention of naming. It's also available in other languages like Rust. `keep` et al can confuse beginners, who're bound to be looking for `filter` style names since that's what JS has.
-- `shuffle` and `shuffleInPlace` are added (copied from `Belt`).
+- `shuffle` and `toShuffled` are added (copied from `Belt`'s `shuffleInPlace` and `shuffle`).
 - `flatMap` added (copied from `Belt`, but using native `map` and `concat` functions).
 
 ### Float

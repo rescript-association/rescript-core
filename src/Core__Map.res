@@ -1,4 +1,4 @@
-type t<'k, 'v>
+type t<'k, 'v> = Js.Map.t<'k, 'v>
 
 @new external make: unit => t<'k, 'v> = "Map"
 @new external fromArray: array<('k, 'v)> => t<'k, 'v> = "Map"
