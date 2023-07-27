@@ -14,18 +14,18 @@ module Int = {
   @val external clz32: int => int = "Math.clz32"
   @val external imul: (int, int) => int = "Math.imul"
   @val external min: (int, int) => int = "Math.min"
-  @variadic @val external _minMany: array<int> => int = "Math.min"
+  @variadic @val external minMany: array<int> => int = "Math.min"
   let minMany = arr =>
     switch arr {
     | [] => 0
-    | arr => _minMany(arr)
+    | arr => minMany(arr)
     }
   @val external max: (int, int) => int = "Math.max"
-  @variadic @val external _maxMany: array<int> => int = "Math.max"
+  @variadic @val external maxMany: array<int> => int = "Math.max"
   let maxMany = arr =>
     switch arr {
     | [] => 0
-    | arr => _maxMany(arr)
+    | arr => maxMany(arr)
     }
   @val external pow: (int, ~exp: int) => int = "Math.pow"
   @val external sign: int => int = "Math.sign"
@@ -54,18 +54,18 @@ module Int = {
 @val external log10: float => float = "Math.log10"
 @val external log2: float => float = "Math.log2"
 @val external min: (float, float) => float = "Math.min"
-@variadic @val external _minMany: array<float> => float = "Math.min"
+@variadic @val external minMany: array<float> => float = "Math.min"
 let minMany = arr =>
   switch arr {
   | [] => 0.0
-  | arr => _minMany(arr)
+  | arr => minMany(arr)
   }
 @val external max: (float, float) => float = "Math.max"
-@variadic @val external _maxMany: array<float> => float = "Math.max"
+@variadic @val external maxMany: array<float> => float = "Math.max"
 let maxMany = arr =>
   switch arr {
   | [] => 0.0
-  | arr => _maxMany(arr)
+  | arr => maxMany(arr)
   }
 @val external pow: (float, ~exp: float) => float = "Math.pow"
 @val external random: unit => float = "Math.random"
