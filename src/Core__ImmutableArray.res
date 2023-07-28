@@ -9,6 +9,8 @@ external setUnsafe: (t<'a>, int, 'a) => unit = "%array_unsafe_set"
 @val
 external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => t<'b> = "Array.from"
 
+let fromArray = (a: array<'a>) => a
+
 @send external fillAll: (t<'a>, 'a) => unit = "fill"
 
 let make = (~length, x) =>
