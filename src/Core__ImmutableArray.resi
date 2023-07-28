@@ -717,4 +717,5 @@ let findMap: (t<'a>, 'a => option<'b>) => option<'b>
 @send
 external at: (t<'a>, int) => option<'a> = "at"
 
-let fromArray: array<'a> => t<'a>
+@send
+external fromArray: array<'a> => t<'a> = "slice"

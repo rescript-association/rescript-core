@@ -4,10 +4,6 @@ import * as Curry from "rescript/lib/es6/curry.js";
 import * as Js_math from "rescript/lib/es6/js_math.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 
-function fromArray(a) {
-  return a;
-}
-
 function make(length, x) {
   if (length <= 0) {
     return [];
@@ -141,6 +137,5 @@ export {
   keepSome ,
   toShuffled ,
   findMap ,
-  fromArray ,
 }
 /* No side effect */
