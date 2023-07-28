@@ -1,6 +1,7 @@
 include Core__Global
 
 module Array = Core__Array
+module ImmurableArray = Core__ImmutableArray
 module Console = Core__Console
 module DataView = Core__DataView
 module Date = Core__Date
