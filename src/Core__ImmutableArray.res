@@ -10,6 +10,7 @@ external setUnsafe: (t<'a>, int, 'a) => unit = "%array_unsafe_set"
 external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => t<'b> = "Array.from"
 
 @send external fromArray: t<'a> => t<'a> = "slice"
+@send external toArray: t<'a> => t<'a> = "slice"
 
 @send external fillAll: (t<'a>, 'a) => unit = "fill"
 

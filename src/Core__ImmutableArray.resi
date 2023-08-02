@@ -719,3 +719,6 @@ external at: (t<'a>, int) => option<'a> = "at"
 
 @send
 external fromArray: array<'a> => t<'a> = "slice"
+
+@send
+external toArray: t<'a> => array<'a> = "slice"
