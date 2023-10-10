@@ -33,9 +33,33 @@ rewrite="Array.sliceToEnd(~start=:[from])"
 match="Js.Array2.slice(~start=:[from], ~end_=:[to])"
 rewrite="Array.slice(~start=:[from], ~end=:[to])"
 
+[array-filteri]
+match="Js.Array2.filteri"
+rewrite="Array.filterWithIndex"
+
+[array-findi]
+match="Js.Array2.findi"
+rewrite="Array.findWithIndex"
+
+[array-mapi]
+match="Js.Array2.mapi"
+rewrite="Array.mapWithIndex"
+
+[array-forEachi]
+match="Js.Array2.forEachi"
+rewrite="Array.forEachWithIndex"
+
+[array-splice]
+match="Js.Array2.spliceInPlace(~pos=:[pos], ~remove=:[remove], ~add=:[add])->ignore"
+rewrite="Js.Array2.splice(~start=:[pos], ~remove=:[remove], ~insert=:[add])"
+
 [array-z]
 match="Js.Array2"
 rewrite="Array"
+
+[js-option]
+match="Js.Option"
+rewrite="Option"
 
 [string-a-slice]
 match="Js.String2.slice(~from=:[from], ~to_=:[to])"
@@ -48,6 +72,18 @@ rewrite="String.sliceToEnd(~start=:[from])"
 [string-a-replace]
 match="Js.String2.replace"
 rewrite="String.replaceString"
+
+[string-a-substring]
+match="Js.String2.substring(~from=:[from], ~to_=:[to])"
+rewrite="String.substring(~start=:[from], ~end=:[to])"
+
+[string-a-substringToEnd]
+match="Js.String2.substringToEnd(~from=:[from])"
+rewrite="String.substringToEnd(~start=:[from])"
+
+[string-replaceStringByRe]
+match="Js.String2.replaceStringByRe"
+rewrite="String.replaceRegExp"
 
 [string-z]
 match="Js.String2"
@@ -89,8 +125,28 @@ rewrite="Dict"
 match="Js.Dict.t"
 rewrite="Dict.t"
 
+[js-null-make]
+match="Js.Null.return"
+rewrite="Null.make"
+
+[js-null-z]
+match="Js.Null"
+rewrite="Null"
+
+[js-nullable-make]
+match="Js.Nullable.return"
+rewrite="Nullable.make"
+
 [js-nullable-z]
 match="Js.Nullable"
+rewrite="Nullable"
+
+[js-null-undefined-make]
+match="Js.Null_undefined.return"
+rewrite="Nullable.make"
+
+[js-null-undefined-z]
+match="Js.Null_undefined"
 rewrite="Nullable"
 
 [js-log-z]
@@ -108,6 +164,94 @@ rewrite="RegExp.test"
 [json-t-a]
 match="Js.Json.t"
 rewrite="JSON.t"
+
+[json-stringify]
+match="Js.Json.stringify"
+rewrite="JSON.stringify"
+
+[json-enc-null]
+match="Js.Json.null"
+rewrite="JSON.Encode.null"
+
+[json-enc-object]
+match="Js.Json.object_"
+rewrite="JSON.Encode.object"
+
+[json-enc-string]
+match="Js.Json.string"
+rewrite="JSON.Encode.string"
+
+[json-enc-bool]
+match="Js.Json.boolean"
+rewrite="JSON.Encode.bool"
+
+[json-enc-int]
+match="Js.Json.int"
+rewrite="JSON.Encode.int"
+
+[json-enc-float]
+match="Js.Json.number"
+rewrite="JSON.Encode.float"
+
+[json-enc-array]
+match="Js.Json.array"
+rewrite="JSON.Encode.array"
+
+[json-dec-bool]
+match="Js.Json.decodeBoolean"
+rewrite="JSON.Decode.bool"
+
+[json-dec-null]
+match="Js.Json.decodeNull"
+rewrite="JSON.Decode.null"
+
+[json-dec-string]
+match="Js.Json.decodeString"
+rewrite="JSON.Decode.string"
+
+[json-dec-float]
+match="Js.Json.decodeNumber"
+rewrite="JSON.Decode.float"
+
+[json-dec-obj]
+match="Js.Json.decodeObject"
+rewrite="JSON.Decode.object"
+
+[json-dec-array]
+match="Js.Json.decodeArray"
+rewrite="JSON.Decode.array"
+
+[json-classify]
+match="Js.Json.classify"
+rewrite="JSON.Classify.classify"
+
+[json-classify-False]
+match="JSONFalse"
+rewrite="Bool(false)"
+
+[json-classify-True]
+match="JSONTrue"
+rewrite="Bool(true)"
+
+[json-classify-Null]
+match="JSONNull"
+rewrite="Null"
+
+[json-classify-String]
+match="JSONString(:[string])"
+rewrite="String(:[string])"
+
+[json-classify-Number]
+match="JSONNumber(:[float])"
+rewrite="Number(:[float])"
+
+[json-classify-Object]
+match="JSONObject(:[dict])"
+rewrite="Object(:[dict])"
+
+[json-classify-Array]
+match="JSONArray(:[array])"
+rewrite="Array(:[array])"
 
 [json-t-rest]
 match="Js.Json"
@@ -275,3 +419,4 @@ rewrite="Date"
 [js-global-a]
 match="Js.Global."
 rewrite=""
+
