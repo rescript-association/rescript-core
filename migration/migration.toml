@@ -51,7 +51,7 @@ rewrite="Array.forEachWithIndex"
 
 [array-splice]
 match="Js.Array2.spliceInPlace(~pos=:[pos], ~remove=:[remove], ~add=:[add])->ignore"
-rewrite="Js.Array2.splice(~start=:[pos], ~remove=:[remove], ~insert=:[add])"
+rewrite="Array.splice(~start=:[pos], ~remove=:[remove], ~insert=:[add])"
 
 [array-z]
 match="Js.Array2"
