@@ -2,6 +2,10 @@
 
 ## Next version
 
+### API changes
+
+- Remove `Math.Int.pow`. https://github.com/rescript-association/rescript-core/pull/81
+
 ## 0.5.0
 
 ### API changes
