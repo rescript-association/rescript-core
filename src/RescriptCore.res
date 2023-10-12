@@ -68,3 +68,13 @@ type undefined<+'a> = Js.undefined<'a>
 type nullable<+'a> = Js.nullable<'a>
 
 let panic = Core__Error.panic
+
+let protect = (~finally, f) => {
+  let result = try f() catch {
+  | exn =>
+    finally()
+    raise(exn)
+  }
+  finally()
+  result
+}
