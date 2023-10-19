@@ -5,13 +5,19 @@ var Constants = {};
 
 var Int = {};
 
+function floor_int(f) {
+  return Math.floor(f) | 0;
+}
+
 function random_int(min, max) {
-  return (Math.floor(Math.random() * (max - min | 0)) | 0) + min | 0;
+  var f = Math.random() * (max - min | 0);
+  return (Math.floor(f) | 0) + min | 0;
 }
 
 export {
   Constants ,
   Int ,
+  floor_int ,
   random_int ,
 }
 /* No side effect */
