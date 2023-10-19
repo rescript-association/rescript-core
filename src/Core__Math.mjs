@@ -5,8 +5,13 @@ var Constants = {};
 
 var Int = {};
 
+function random_int(min, max) {
+  return (Math.floor(Math.random() * (max - min | 0)) | 0) + min | 0;
+}
+
 export {
   Constants ,
   Int ,
+  random_int ,
 }
 /* No side effect */
