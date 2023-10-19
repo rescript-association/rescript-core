@@ -845,3 +845,5 @@ Math.trunc(42.84) // 42.0
 */
 @val
 external trunc: float => float = "Math.trunc"
+
+let random_int: (int, int) => int

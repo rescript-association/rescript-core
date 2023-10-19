@@ -57,3 +57,6 @@ module Int = {
 @val external tan: float => float = "Math.tan"
 @val external tanh: float => float = "Math.tanh"
 @val external trunc: float => float = "Math.trunc"
+
+let random_int: (int, int) => int = (min, max) =>
+  floor(random() *. Core__Int.toFloat(max - min))->Core__Float.toInt + min
