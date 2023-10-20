@@ -276,6 +276,9 @@ module Int: {
   */
   @val
   external sign: int => int = "Math.sign"
+
+  let floor: float => int
+  let random: (int, int) => int
 }
 
 /**
@@ -845,7 +848,3 @@ Math.trunc(42.84) // 42.0
 */
 @val
 external trunc: float => float = "Math.trunc"
-
-let floor_int: float => int
-
-let random_int: (int, int) => int
