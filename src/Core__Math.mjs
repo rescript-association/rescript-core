@@ -3,21 +3,22 @@
 
 var Constants = {};
 
-var Int = {};
-
-function floor_int(f) {
+function floor(f) {
   return Math.floor(f) | 0;
 }
 
-function random_int(min, max) {
+function random(min, max) {
   var f = Math.random() * (max - min | 0);
   return (Math.floor(f) | 0) + min | 0;
 }
 
+var Int = {
+  floor: floor,
+  random: random
+};
+
 export {
   Constants ,
   Int ,
-  floor_int ,
-  random_int ,
 }
 /* No side effect */

@@ -9,18 +9,6 @@ module Constants = {
   @val external sqrt2: float = "Math.SQRT2"
 }
 
-module Int = {
-  @val external abs: int => int = "Math.abs"
-  @val external clz32: int => int = "Math.clz32"
-  @val external imul: (int, int) => int = "Math.imul"
-  @val external min: (int, int) => int = "Math.min"
-  @variadic @val external minMany: array<int> => int = "Math.min"
-  @val external max: (int, int) => int = "Math.max"
-  @variadic @val external maxMany: array<int> => int = "Math.max"
-  @val external pow: (int, ~exp: int) => int = "Math.pow"
-  @val external sign: int => int = "Math.sign"
-}
-
 @val external abs: float => float = "Math.abs"
 @val external acos: float => float = "Math.acos"
 @val external acosh: float => float = "Math.acosh"
@@ -58,7 +46,17 @@ module Int = {
 @val external tanh: float => float = "Math.tanh"
 @val external trunc: float => float = "Math.trunc"
 
-let floor_int: float => int = f => f->floor->Core__Float.toInt
-
-let random_int: (int, int) => int = (min, max) =>
-  floor_int(random() *. Core__Int.toFloat(max - min)) + min
+module Int = {
+  @val external abs: int => int = "Math.abs"
+  @val external clz32: int => int = "Math.clz32"
+  @val external imul: (int, int) => int = "Math.imul"
+  @val external min: (int, int) => int = "Math.min"
+  @variadic @val external minMany: array<int> => int = "Math.min"
+  @val external max: (int, int) => int = "Math.max"
+  @variadic @val external maxMany: array<int> => int = "Math.max"
+  @val external pow: (int, ~exp: int) => int = "Math.pow"
+  @val external sign: int => int = "Math.sign"
+  let floor: float => int = f => f->floor->Core__Float.toInt
+  let random: (int, int) => int = (min, max) =>
+    floor(random() *. Core__Int.toFloat(max - min)) + min
+}
