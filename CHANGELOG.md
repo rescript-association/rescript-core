@@ -82,6 +82,7 @@
 - Remove `Array.fromIterator` and `Array.fromIteratorWithMap`. The same functions exist in `Iterator` as `Iterator.fromArray` and `Iterator.fromArrayWithMapper`. https://github.com/rescript-association/rescript-core/pull/78
 - Remove unsafe `Array.from` and `Array.fromWithMap`. https://github.com/rescript-association/rescript-core/pull/78
 - Add `Int.clamp` and `Float.clamp`, https://github.com/rescript-association/rescript-core/pull/90
+- Add `Math.Int.floor` and `Math.Int.random`, https://github.com/rescript-association/rescript-core/pull/156
 
 ### Documentation
 
@@ -96,4 +97,5 @@
 - Docstrings for `Date`. https://github.com/rescript-association/rescript-core/pull/61
 - Docstrings for `Float`. https://github.com/rescript-association/rescript-core/pull/54
 - Docstrings for `String`. https://github.com/rescript-association/rescript-core/pull/27
-- Docstrings from `Array`. https://github.com/rescript-association/rescript-core/pull/78
+- Docstrings for `Array`. https://github.com/rescript-association/rescript-core/pull/78
+- Docstrings for `Math.Int.floor` and `Math.Int.random`. https://github.com/rescript-association/rescript-core/pull/156
