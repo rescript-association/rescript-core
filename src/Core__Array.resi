@@ -384,17 +384,30 @@ let indexOfOpt: (array<'a>, 'a) => option<int>
 @send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
 
 /**
-`joinWith(array, separator)` produces a string where all items of `array` are printed, separated by `separator`. Under the hood this will run JavaScript's `toString` on all the array items.
+`joinWith(array, separator)` produces a string where all items of `array` are printed, separated by `separator`. Array items must be strings, to join number or other arrays, use `joinWithUnsafe`. Under the hood this will run JavaScript's `toString` on all the array items.
+
+## Examples
+```rescript
+let array = ["One", "Two", "Three"]
+
+Console.log(array->Array.joinWith(" -- ")) // One -- Two -- Three
+```
+*/
+@send
+external joinWith: (array<string>, string) => string = "join"
+
+/**
+`joinWithUnsafe(array, separator)` produces a string where all items of `array` are printed, separated by `separator`. Under the hood this will run JavaScript's `toString` on all the array items.
 
 ## Examples
 ```rescript
 let array = [1, 2, 3]
 
-Console.log(array->Array.joinWith(" -- ")) // 1 -- 2 -- 3
+Console.log(array->Array.joinWithUnsafe(" -- ")) // 1 -- 2 -- 3
 ```
 */
 @send
-external joinWith: (array<'a>, string) => string = "join"
+external joinWithUnsafe: (array<'a>, string) => string = "join"
 @send external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
 let lastIndexOfOpt: (array<'a>, 'a) => option<int>
 @send external lastIndexOfFrom: (array<'a>, 'a, int) => int = "lastIndexOf"
