@@ -125,6 +125,8 @@ let indexOfOpt = (arr, item) =>
 
 @send external joinWith: (array<string>, string) => string = "join"
 
+@send external joinWithUnsafe: (array<'a>, string) => string = "join"
+
 @send external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
 let lastIndexOfOpt = (arr, item) =>
   switch arr->lastIndexOf(item) {
