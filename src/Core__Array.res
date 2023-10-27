@@ -123,7 +123,7 @@ let indexOfOpt = (arr, item) =>
   }
 @send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
 
-@send external joinWith: (array<'a>, string) => string = "join"
+@send external joinWith: (array<string>, string) => string = "join"
 
 @send external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
 let lastIndexOfOpt = (arr, item) =>
