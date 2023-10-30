@@ -68,3 +68,29 @@ type undefined<+'a> = Js.undefined<'a>
 type nullable<+'a> = Js.nullable<'a>
 
 let panic = Core__Error.panic
+
+/**
+  `protect(~finally, f)`
+
+  Tries to execute the function `f`, and ensures that `finally` will be called
+  whether `f` raises an exception or not.
+
+  Any exception raised by `f` will be re-raised in order to be handled by the
+  user. If `finally` raises, then that exception will be emitted instead, and
+  any exception raised by `f` will go unnoticed.
+
+  ```res example
+  try protect(~finally=() => Js.log("finally"), () => failwith("oh no!")) catch {
+  | Failure(err) => Js.log(err)
+  }
+  ```
+*/
+let protect = (~finally, f) => {
+  let result = try f() catch {
+  | exn =>
+    finally()
+    raise(exn)
+  }
+  finally()
+  result
+}
