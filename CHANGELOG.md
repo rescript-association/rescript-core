@@ -5,6 +5,7 @@
 ### API changes
 
 - Add `Math.Int.floor` and `Math.Int.random`, https://github.com/rescript-association/rescript-core/pull/156
+- Add `protect` https://github.com/rescript-association/rescript-core/pull/155
 
 ### Documentation
 
