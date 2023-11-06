@@ -39,6 +39,13 @@ function getExn(value) {
       };
 }
 
+function forEach(value, f) {
+  if (value !== null) {
+    return Curry._1(f, value);
+  }
+  
+}
+
 function map(value, f) {
   if (value !== null) {
     return Curry._1(f, value);
@@ -74,6 +81,7 @@ export {
   getOr ,
   getWithDefault ,
   getExn ,
+  forEach ,
   map ,
   mapOr ,
   mapWithDefault ,

@@ -129,6 +129,19 @@ Null.getUnsafe(null) // Raises an error
 external getUnsafe: t<'a> => 'a = "%identity"
 
 /**
+`forEach(value, f)` call `f` on `value`. if `value` is not `null`, then if calls
+`f`, otherwise returns `unit`.
+
+## Examples
+
+```rescript
+Null.forEach(Null.make("thing"), x => Console.log(x)) // logs "thing"
+Null.forEach(null, x => Console.log(x)) // returns ()
+```
+*/
+let forEach: (t<'a>, 'a => unit) => unit
+
+/**
 `map(value, f)` returns `f(value)` if `value` is not `null`, otherwise returns
 `value` unchanged.
 
