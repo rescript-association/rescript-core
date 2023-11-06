@@ -139,6 +139,20 @@ Nullable.getUnsafe(Nullable.null) // Raises an error
 external getUnsafe: t<'a> => 'a = "%identity"
 
 /**
+`forEach(value, f)` call `f` on `value`. if `value` is not `null` or `undefined`, 
+then if calls `f`, otherwise returns `unit`.
+
+## Examples
+
+```rescript
+Nullable.forEach(Nullable.make("thing"), x => Console.log(x)) // logs "thing"
+Nullable.forEach(Nullable.null, x => Console.log(x)) // returns ()
+Nullable.forEach(undefined, x => Console.log(x)) // returns ()
+```
+*/
+let forEach: (t<'a>, 'a => unit) => unit
+
+/**
 `map(value, f)` returns `f(value)` if `value` is not `null` or `undefined`,
 otherwise returns `value` unchanged.
 
