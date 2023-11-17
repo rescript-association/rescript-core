@@ -2,6 +2,8 @@
 
 ## Next version
 
+## 0.6.0
+
 ### API changes
 
 - Add `Math.Int.floor` and `Math.Int.random`, https://github.com/rescript-association/rescript-core/pull/156
