@@ -219,7 +219,7 @@ module Catching = {
     ->catch(_ => {
       resolve()
     })
-    ->finally(() => {
+    ->finally(_ => {
       wasCalled := true
     })
     ->then(v => {
@@ -237,7 +237,7 @@ module Catching = {
     ->then(v => {
       resolve(v + 5)
     })
-    ->finally(() => {
+    ->finally(_ => {
       wasCalled := true
     })
     ->then(v => {

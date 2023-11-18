@@ -2,7 +2,7 @@
 
 import * as Test from "./Test.mjs";
 
-function shouldHandleNullableValues(param) {
+function shouldHandleNullableValues() {
   var tNull = null;
   var tUndefined = undefined;
   var tValue = "hello";
@@ -47,7 +47,7 @@ function shouldHandleNullableValues(param) {
         }), true);
 }
 
-shouldHandleNullableValues(undefined);
+shouldHandleNullableValues();
 
 export {
   shouldHandleNullableValues ,

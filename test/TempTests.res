@@ -123,7 +123,7 @@ let _ =
     Console.log(x)
     Promise.resolve()
   })
-  ->Promise.finally(() => {
+  ->Promise.finally(_ => {
     Console.log("Promise finally")
   })
 

@@ -5,7 +5,7 @@ import * as Js_exn from "rescript/lib/es6/js_exn.js";
 import * as RescriptCore from "../src/RescriptCore.mjs";
 import * as Caml_js_exceptions from "rescript/lib/es6/caml_js_exceptions.js";
 
-function panicTest(param) {
+function panicTest() {
   var caught;
   try {
     caught = RescriptCore.panic("uh oh");
@@ -31,7 +31,7 @@ function panicTest(param) {
         }), "Panic! uh oh");
 }
 
-panicTest(undefined);
+panicTest();
 
 export {
   panicTest ,

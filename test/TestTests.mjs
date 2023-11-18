@@ -2,7 +2,7 @@
 
 import * as Test from "./Test.mjs";
 import * as Caml_obj from "rescript/lib/es6/caml_obj.js";
-import * as Pervasives from "rescript/lib/es6/pervasives.js";
+import * as PervasivesU from "rescript/lib/es6/pervasivesU.js";
 
 var eq = Caml_obj.equal;
 
@@ -48,7 +48,7 @@ Test.run([
         36
       ],
       "print infinity"
-    ], Test.print(Pervasives.infinity), eq, "Infinity");
+    ], Test.print(PervasivesU.infinity), eq, "Infinity");
 
 Test.run([
       [
@@ -144,9 +144,9 @@ Test.run([
         29
       ],
       "print function"
-    ], Test.print(function (param) {
+    ], Test.print(function () {
           return 42;
-        }), eq, "function (param) {\n          return 42;\n        }");
+        }), eq, "function () {\n          return 42;\n        }");
 
 Test.run([
       [

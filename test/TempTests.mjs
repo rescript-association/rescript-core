@@ -62,13 +62,13 @@ console.info("Error");
 
 console.info("---");
 
-function f(param) {
+function f() {
   var error = new Error("hello");
   var typeError = new TypeError("error");
-  var g = function (param) {
+  var g = function () {
     throw error;
   };
-  var h = function (param) {
+  var h = function () {
     throw typeError;
   };
   return [
@@ -201,7 +201,7 @@ console.info("Promise");
 console.info("---");
 
 var promise = new Promise((function (resolve, _reject) {
-        setTimeout((function (param) {
+        setTimeout((function () {
                 resolve(1);
               }), 100);
       }));
@@ -212,8 +212,8 @@ promise.then(function (x) {
           return Promise.resolve(x + 2 | 0);
         }).then(function (x) {
         console.log(x);
-        return Promise.resolve(undefined);
-      }).finally(function (param) {
+        return Promise.resolve();
+      }).finally(function () {
       console.log("Promise finally");
     });
 
@@ -283,7 +283,7 @@ var x = Symbol.for("Foo");
 
 console.log(x);
 
-var array$1 = Array.from("foo"[Symbol.iterator](undefined));
+var array$1 = Array.from("foo"[Symbol.iterator]());
 
 console.log(array$1);
 
@@ -295,7 +295,7 @@ console.info("---");
 
 console.log("number");
 
-var timeout = setTimeout((function (param) {
+var timeout = setTimeout((function () {
         console.log("Hello!");
       }), 100);
 

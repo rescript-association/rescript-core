@@ -8,7 +8,7 @@ let decodeJsonTest = () => {
     switch dict->Dict.get("someProp") {
     | Some(Object(dict)) =>
       switch dict->Dict.get("thirdProp") {
-      | Some(Array([True, False])) => true
+      | Some(Array([Boolean(true), Boolean(false)])) => true
       | _ => false
       }
     | _ => false

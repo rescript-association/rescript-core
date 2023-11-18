@@ -2,22 +2,22 @@
 
 import * as Test from "./Test.mjs";
 
-function decodeJsonTest(param) {
+function decodeJsonTest() {
   var json = {"someProp":{"otherProp": null, "thirdProp": [true, false]}};
   var decodedCorrectly;
-  if (!Array.isArray(json) && (json === null || typeof json !== "object") && typeof json !== "number" && typeof json !== "string" || !(typeof json === "object" && !Array.isArray(json))) {
+  if (!Array.isArray(json) && (json === null || typeof json !== "object") && typeof json !== "number" && typeof json !== "string" && typeof json !== "boolean" || !(typeof json === "object" && !Array.isArray(json))) {
     decodedCorrectly = false;
   } else {
     var match = json["someProp"];
-    if (match !== undefined && !(!Array.isArray(match) && (match === null || typeof match !== "object") && typeof match !== "number" && typeof match !== "string" || !(typeof match === "object" && !Array.isArray(match)))) {
+    if (match !== undefined && !(!Array.isArray(match) && (match === null || typeof match !== "object") && typeof match !== "number" && typeof match !== "string" && typeof match !== "boolean" || !(typeof match === "object" && !Array.isArray(match)))) {
       var match$1 = match["thirdProp"];
-      if (match$1 !== undefined && !(!Array.isArray(match$1) && (match$1 === null || typeof match$1 !== "object") && typeof match$1 !== "number" && typeof match$1 !== "string" || !(Array.isArray(match$1) && match$1.length === 2))) {
+      if (match$1 !== undefined && !(!Array.isArray(match$1) && (match$1 === null || typeof match$1 !== "object") && typeof match$1 !== "number" && typeof match$1 !== "string" && typeof match$1 !== "boolean" || !(Array.isArray(match$1) && match$1.length === 2))) {
         var match$2 = match$1[0];
-        if (!Array.isArray(match$2) && (match$2 === null || typeof match$2 !== "object") && typeof match$2 !== "number" && typeof match$2 !== "string" && match$2 === true) {
-          var match$3 = match$1[1];
-          decodedCorrectly = !Array.isArray(match$3) && (match$3 === null || typeof match$3 !== "object") && typeof match$3 !== "number" && typeof match$3 !== "string" && match$3 === false ? true : false;
-        } else {
+        if (!Array.isArray(match$2) && (match$2 === null || typeof match$2 !== "object") && typeof match$2 !== "number" && typeof match$2 !== "string" && typeof match$2 !== "boolean" || !(typeof match$2 === "boolean" && match$2)) {
           decodedCorrectly = false;
+        } else {
+          var match$3 = match$1[1];
+          decodedCorrectly = !Array.isArray(match$3) && (match$3 === null || typeof match$3 !== "object") && typeof match$3 !== "number" && typeof match$3 !== "string" && typeof match$3 !== "boolean" || !(typeof match$3 === "boolean" && !match$3) ? false : true;
         }
       } else {
         decodedCorrectly = false;
@@ -39,7 +39,7 @@ function decodeJsonTest(param) {
         }), true);
 }
 
-decodeJsonTest(undefined);
+decodeJsonTest();
 
 export {
   decodeJsonTest ,

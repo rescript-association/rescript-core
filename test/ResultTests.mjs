@@ -6,7 +6,7 @@ import * as Core__Result from "../src/Core__Result.mjs";
 
 var eq = Caml_obj.equal;
 
-function forEachIfOkCallFunction(param) {
+function forEachIfOkCallFunction() {
   var called = {
     contents: []
   };
@@ -27,9 +27,9 @@ function forEachIfOkCallFunction(param) {
       ], called.contents, eq, [3]);
 }
 
-forEachIfOkCallFunction(undefined);
+forEachIfOkCallFunction();
 
-function forEachIfErrorDoNotCallFunction(param) {
+function forEachIfErrorDoNotCallFunction() {
   var called = {
     contents: []
   };
@@ -50,7 +50,7 @@ function forEachIfErrorDoNotCallFunction(param) {
       ], called.contents, eq, []);
 }
 
-forEachIfErrorDoNotCallFunction(undefined);
+forEachIfErrorDoNotCallFunction();
 
 Test.run([
       [
