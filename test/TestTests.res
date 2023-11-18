@@ -21,7 +21,7 @@ Test.run(
   __POS_OF__("print function"),
   Test.print(() => 42),
   eq,
-  "function () {\n          return 42;\n        }",
+  "function (param) {\n          return 42;\n        }",
 )
 Test.run(__POS_OF__("print es6 function"), Test.print(%raw("() => 42")), eq, "() => 42")
 Test.run(

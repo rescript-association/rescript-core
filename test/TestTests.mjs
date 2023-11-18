@@ -146,7 +146,7 @@ Test.run([
       "print function"
     ], Test.print(function () {
           return 42;
-        }), eq, "function () {\n          return 42;\n        }");
+        }), eq, "function (param) {\n          return 42;\n        }");
 
 Test.run([
       [
