@@ -526,6 +526,39 @@ String.replaceRegExp("Juan Fulano", %re("/(\w+) (\w+)/"), "$2, $1") == "Fulano, 
 external replaceRegExp: (string, Core__RegExp.t, string) => string = "replace"
 
 /**
+`replaceAll(str, substr, newSubstr)` returns a new `string` which is
+identical to `str` except with all matching instances of `substr` replaced
+by `newSubstr`. `substr` is treated as a verbatim string to match, not a
+regular expression.
+See [`String.replaceAll`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll) on MDN.
+
+## Examples
+
+```rescript
+String.replaceAll("old old string", "old", "new") == "new new string"
+String.replaceAll("the cat and the dog", "the", "this") == "this cat and this dog"
+```
+*/
+@send
+external replaceAll: (string, string, string) => string = "replaceAll"
+
+/**
+`replaceAllRegExp(str, regex, replacement)` returns a new `string` where
+all occurrences matching regex have been replaced by `replacement`.
+The pattern must include the global (`g`) flag or a runtime TypeError will be thrown.
+See [`String.replaceAll`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll) on MDN.
+
+## Examples
+
+```rescript
+String.replaceAllRegExp("vowels be gone", %re("/[aeiou]/g"), "x") == "vxwxls bx gxnx"
+String.replaceAllRegExp("aabbcc", %re("/b/g"), ".") == "aa..cc"
+```
+*/
+@send
+external replaceAllRegExp: (string, Core__RegExp.t, string) => string = "replaceAll"
+
+/**
 `unsafeReplaceRegExpBy0(str, regex, f)` returns a new `string` with some or all
 matches of a pattern with no capturing parentheses replaced by the value
 returned from the given function. The function receives as its parameters the
