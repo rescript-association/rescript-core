@@ -1,4 +1,7 @@
 // TODO: Docs
+@val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
+
+// TODO: Docs
 @val external fromArrayLike: Js.Array2.array_like<'a> => array<'a> = "Array.from"
 
 // TODO: Docs
