@@ -1,5 +1,16 @@
-// TODO: Docs
-@val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
+/**
+ `fromIterator(iterator)`
+
+  Creates an array from the provided `iterator`
+
+  ```res example
+  let map = Map.fromArray([("foo", 1), ("bar", 2)])
+
+  Array.fromIterator(map->Map.values) // [1, 2]
+  ```
+ */
+@val
+external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
 
 // TODO: Docs
 @val external fromArrayLike: Js.Array2.array_like<'a> => array<'a> = "Array.from"
