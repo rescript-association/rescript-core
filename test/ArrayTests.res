@@ -98,3 +98,10 @@ Test.run(
   eq,
   None,
 )
+
+Test.run(
+  __POS_OF__("fromIterator"),
+  Array.fromIterator(Map.fromArray([(1, 3), (2, 4)])->Map.values),
+  eq,
+  [3, 4],
+)

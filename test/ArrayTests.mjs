@@ -401,6 +401,28 @@ Test.run([
             
           })), eq, undefined);
 
+Test.run([
+      [
+        "ArrayTests.res",
+        103,
+        13,
+        27
+      ],
+      "fromIterator"
+    ], Array.from(new Map([
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ]
+              ]).values()), eq, [
+      3,
+      4
+    ]);
+
 export {
   eq ,
 }
