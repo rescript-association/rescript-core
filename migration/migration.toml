@@ -117,6 +117,10 @@ rewrite="Dict.make"
 match="Js.Dict.keys"
 rewrite="Dict.keysToArray"
 
+[js-dict-a-get-unsafe]
+match="Js.Dict.unsafeGet"
+rewrite="Dict.getUnsafe"
+
 [js-dict-z]
 match="Js.Dict"
 rewrite="Dict"
