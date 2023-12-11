@@ -2,6 +2,8 @@
 
 ## Next version
 
+- Add `Dict.getUnsafe` https://github.com/rescript-association/rescript-core/pull/167
+
 ## 0.6.0
 
 ### API changes
