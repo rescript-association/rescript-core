@@ -9,13 +9,15 @@ Type representing a dictionary of value `'a`.
 type t<'a> = Js.Dict.t<'a>
 
 /**
-Returns the value at the provided key. Assumes the value always exists.
-Use `Dict.getUnsafe` only when you are sure the key exists (i.e. when having used the `Dict.keys` function to check that the key is valid).
+`getUnsafe(dict, key)` Returns the `value` at the provided `key`.
+
+This is _unsafe_, meaning it will return `undefined` value if `key` does not exist in `dict`.
+
+Use `Dict.getUnsafe` only when you are sure the key exists (i.e. when iterating `Dict.keys` result).
 
 ## Examples
 ```rescript
 let keys = dict->Dict.keys
-
 keys->Array.forEach(key => {
   let value = dict->Dict.getUnsafe(key)
   Console.log(value)

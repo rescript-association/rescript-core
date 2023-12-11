@@ -4,6 +4,9 @@ let eq = (a, b) => a == b
 
 Test.run(__POS_OF__("make"), Array.make(~length=6, 7), eq, [7, 7, 7, 7, 7, 7])
 
+Test.run(__POS_OF__("getUnsafe - existing"), [0, 1, 2]->Array.getUnsafe(1), eq, 1)
+Test.run(__POS_OF__("getUnsafe - missing"), [0, 1, 2]->Array.getUnsafe(10), eq, %raw(`undefined`))
+
 Test.run(
   __POS_OF__("fromInitializer"),
   Array.fromInitializer(~length=7, i => i + 3),

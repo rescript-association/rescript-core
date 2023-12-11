@@ -699,9 +699,9 @@ Console.log(mappedArray) // ["Hello at position 0", "Hi at position 1", "Good by
 external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
 /**
-  `reduce(xs, f, init)`
+  `reduce(xs, fn, init)`
 
-  Applies `f` to each element of `xs` from beginning to end. Function `f` has two parameters: the item from the list and an “accumulator”; which starts with a value of `init`. `reduce` returns the final value of the accumulator.
+  Applies `fn` to each element of `xs` from beginning to end. Function `fn` has two parameters: the item from the list and an “accumulator”; which starts with a value of `init`. `reduce` returns the final value of the accumulator.
 
   ```res example
   Array.reduce([2, 3, 4], (a, b) => a + b, 1) == 10
@@ -712,9 +712,9 @@ external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 let reduce: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
 
 /**
-  `reduceWithIndex(xs, f, init)`
+  `reduceWithIndex(xs, fn, init)`
 
-  Applies `f` to each element of `xs` from beginning to end. Function `f` has three parameters: the item from the array and an “accumulator”, which starts with a value of `init` and the index of each element. `reduceWithIndex` returns the final value of the accumulator.
+  Applies `fn` to each element of `xs` from beginning to end. Function `fn` has three parameters: the item from the array and an “accumulator”, which starts with a value of `init` and the index of each element. `reduceWithIndex` returns the final value of the accumulator.
 
   ```res example
   Array.reduceWithIndex([1, 2, 3, 4], (acc, x, i) => acc + x + i, 0) == 16
@@ -723,9 +723,9 @@ let reduce: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
 let reduceWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
 
 /**
-  `reduceRight(xs, f, init)`
+  `reduceRight(xs, fn, init)`
 
-  Works like `Array.reduce`; except that function `f` is applied to each item of `xs` from the last back to the first.
+  Works like `Array.reduce`; except that function `fn` is applied to each item of `xs` from the last back to the first.
 
   ```res example
   Array.reduceRight(["a", "b", "c", "d"], (a, b) => a ++ b, "") == "dcba"
@@ -784,6 +784,7 @@ Returns `None` if the index does not exist in the array. Equivalent to doing `ar
 let array = ["Hello", "Hi", "Good bye"]
 
 array->Array.get(0) == Some("Hello") // true
+array->Array.get(3) == None // true
 ```
 */
 @get_index
@@ -811,21 +812,18 @@ external set: (array<'a>, int, 'a) => unit = ""
 /**
 `getUnsafe(array, index)` returns the element at `index` of `array`.
 
-This is _unsafe_, meaning it will fail with an exception if `index` does not exist in `array`.
+This is _unsafe_, meaning it will return `undefined` value if `index` does not exist in `array`.
 
-## Exceptions
-
-- `Not_found`: If the provided `index` does not exist in `array`.
+Use `Array.getUnsafe` only when you are sure the `index` exists (i.e. when using for-loop).
 
 ## Examples
 ```rescript
-let array = ["Hello", "Hi", "Good bye"]
-
-Console.log(array->Array.getUnsafe(0)) // "Hello"
-Console.log(array->Array.getUnsafe(3)) // Fails and raises exception
+for index in 0 to array->Array.length - 1 {
+  let value = array->Array.getUnsafe(index)
+  Console.log(value)
+}
 ```
 */
-@raises(Not_found)
 external getUnsafe: (array<'a>, int) => 'a = "%array_unsafe_get"
 
 /**
@@ -882,9 +880,9 @@ Console.log(someArray) // ["h1", "hello"]. Original unchanged
 external toReversed: array<'a> => array<'a> = "toReversed"
 
 /**
-`get(array, index)` returns the element at `index` of `array`.
+`filterMap(array, fn)`
 
-Returns `None` if the index does not exist in the array. Equivalent to doing `array[index]` in JavaScript.
+Calls `fn` for each element and returns a new array containing results of the `fn` calls which are not `None`.
 
 ## Examples
 ```rescript
@@ -897,8 +895,7 @@ Console.log(
     | _ => None
     }
   ),
-)
-// [5]
+) // [5]
 ```
 */
 let filterMap: (array<'a>, 'a => option<'b>) => array<'b>
@@ -968,9 +965,9 @@ Console.log(
 external flatMap: (array<'a>, 'a => array<'b>) => array<'b> = "flatMap"
 
 /**
-  `findMap(arr, f)`
+  `findMap(arr, fn)`
 
-  Calls `f` for each element and returns the first value from `f` that is `Some(_)`.
+  Calls `fn` for each element and returns the first value from `fn` that is `Some(_)`.
   Otherwise returns `None`
 
   ```res example
