@@ -167,6 +167,10 @@ function findMap(arr, f) {
   };
 }
 
+function last(a) {
+  return a[a.length - 1 | 0];
+}
+
 export {
   make ,
   fromInitializer ,
@@ -184,5 +188,6 @@ export {
   toShuffled ,
   shuffle ,
   findMap ,
+  last ,
 }
 /* No side effect */
