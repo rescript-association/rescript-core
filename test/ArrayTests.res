@@ -105,3 +105,6 @@ Test.run(
   eq,
   [3, 4],
 )
+
+Test.run(__POS_OF__("last - with items"), [1, 2, 3]->Array.last, eq, Some(3))
+Test.run(__POS_OF__("last - empty"), []->Array.last, eq, None)

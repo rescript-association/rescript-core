@@ -423,6 +423,30 @@ Test.run([
       4
     ]);
 
+Test.run([
+      [
+        "ArrayTests.res",
+        109,
+        20,
+        39
+      ],
+      "last - with items"
+    ], Core__Array.last([
+          1,
+          2,
+          3
+        ]), eq, 3);
+
+Test.run([
+      [
+        "ArrayTests.res",
+        110,
+        20,
+        34
+      ],
+      "last - empty"
+    ], Core__Array.last([]), eq, undefined);
+
 export {
   eq ,
 }
