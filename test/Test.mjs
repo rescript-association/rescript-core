@@ -39,7 +39,7 @@ function run(loc, left, comparator, right) {
       }, {
         highlightCode: true
       });
-  var errorMessage = "\n  \u001b[31mTest Failure!\n  \u001b[36m" + file + "\u001b[0m:\u001b[2m" + String(line) + "\n" + codeFrame + "\n  \u001b[39mLeft: \u001b[31m" + left$1 + "\n  \u001b[39mRight: \u001b[31m" + right$1 + "\u001b[0m\n";
+  var errorMessage = "\r\n  \u001b[31mTest Failure!\r\n  \u001b[36m" + file + "\u001b[0m:\u001b[2m" + String(line) + "\r\n" + codeFrame + "\r\n  \u001b[39mLeft: \u001b[31m" + left$1 + "\r\n  \u001b[39mRight: \u001b[31m" + right$1 + "\u001b[0m\r\n";
   console.log(errorMessage);
   var obj = {};
   Error.captureStackTrace(obj);
