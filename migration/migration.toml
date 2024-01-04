@@ -306,7 +306,7 @@ match="Math.abs_int"
 rewrite="Math.Int.abs"
 
 [math-a-h]
-match="Math.abs"
+match="Math.abs_float"
 rewrite="Math.abs"
 
 ## BELT
