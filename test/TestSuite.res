@@ -9,3 +9,5 @@ include TypedArrayTests
 include FloatTests
 include JsonTests
 include NullableTests
+include DictTests
+include IteratorTests

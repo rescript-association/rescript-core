@@ -79,3 +79,19 @@ Console.log(mapKeysAsArray) // Logs [7, 8] to the console.
 ```
 */
 external toArrayWithMapper: (t<'a>, 'a => 'b) => array<'b> = "Array.from"
+
+/**
+`forEach(iterator, fn)` consumes all values in the iterator and runs the callback `fn` for each value.
+
+See [iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) on MDN.
+
+## Examples
+```rescript
+someIterator->Iterator.forEach(value => {
+  if value > 10 {
+    Console.log("More than 10!")
+  }
+})
+```
+*/
+let forEach: (t<'a>, option<'a> => unit) => unit

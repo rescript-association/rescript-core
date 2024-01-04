@@ -58,3 +58,19 @@ let processMyAsyncIterator = async () => {
 */
 @send
 external next: t<'a> => promise<value<'a>> = "next"
+
+/**
+`forEach(iterator, fn)` consumes all values in the async iterator and runs the callback `fn` for each value.
+
+See [iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) on MDN.
+
+## Examples
+```rescript
+await someAsyncIterator->AsyncIterator.forEach(value => {
+  if value > 10 {
+    Console.log("More than 10!")
+  }
+})
+```
+*/
+let forEach: (t<'a>, option<'a> => unit) => promise<unit>
