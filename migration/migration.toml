@@ -69,9 +69,13 @@ rewrite="String.slice(~start=:[from], ~end=:[to])"
 match="Js.String2.sliceToEnd(~from=:[from])"
 rewrite="String.sliceToEnd(~start=:[from])"
 
-[string-a-replace]
+[string-a-replace-a]
+match="Js.String2.replaceByRe"
+rewrite="String.replaceRegExp"
+
+[string-a-replace-b]
 match="Js.String2.replace"
-rewrite="String.replaceString"
+rewrite="String.replace"
 
 [string-a-substring]
 match="Js.String2.substring(~from=:[from], ~to_=:[to])"
@@ -297,10 +301,26 @@ rewrite="Math.max"
 match="Math.min_float"
 rewrite="Math.min"
 
+[math-a-g]
+match="Math.abs_int"
+rewrite="Math.Int.abs"
+
+[math-a-h]
+match="Math.abs"
+rewrite="Math.abs"
+
 ## BELT
 ## Below are migrations that cover moving from Belt to equivalents
 ## available in the new stdlib.
-[belt-option]
+[belt-option-a-getWithDefault]
+match="Belt.Option.getWithDefault"
+rewrite="Option.getOr"
+
+[belt-option-a-mapWithDefault]
+match="Belt.Option.mapWithDefault"
+rewrite="Option.mapOr"
+
+[belt-option-z]
 match="Belt.Option"
 rewrite="Option"
 
