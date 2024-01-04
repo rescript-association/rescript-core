@@ -66,11 +66,12 @@ See [iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 ## Examples
 ```rescript
-await someAsyncIterator->AsyncIterator.forEach(value => {
-  if value > 10 {
-    Console.log("More than 10!")
+await someAsyncIterator->AsyncIterator.forEach(value =>
+  switch value {
+  | Some(value) if value > 10 => Console.log("More than 10!")
+  | _ => ()
   }
-})
+)
 ```
 */
 let forEach: (t<'a>, option<'a> => unit) => promise<unit>

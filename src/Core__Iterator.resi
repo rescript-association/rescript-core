@@ -87,11 +87,12 @@ See [iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 ## Examples
 ```rescript
-someIterator->Iterator.forEach(value => {
-  if value > 10 {
-    Console.log("More than 10!")
+someIterator->Iterator.forEach(value =>
+  switch value {
+  | Some(value) if value > 10 => Console.log("More than 10!")
+  | _ => ()
   }
-})
+)
 ```
 */
 let forEach: (t<'a>, option<'a> => unit) => unit
