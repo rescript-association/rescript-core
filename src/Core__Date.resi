@@ -402,7 +402,6 @@ module UTC: {
 
   ## Examples
   ```rescript
-  ```
   Date.UTC.makeWithYMDHMSM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=0, ~milliseconds=0)->Console.log
   // 1676911200000
 
@@ -411,6 +410,7 @@ module UTC: {
 
   Date.UTC.makeWithYMDHMSM(~year=2023, ~month=1, ~date=20, ~hours=16, ~minutes=40, ~seconds=0, ~milliseconds=-1)->Console.log
   // 1676911199999
+  ```
   */
   @val
   external makeWithYMDHMSM: (
