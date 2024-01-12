@@ -1,10 +1,12 @@
 # @rescript/core
 
-A drop-in standard library for ReScript. Intended to be familiar for JavaScript developers, easy to use, and be rich enough (without being bloated) so that you don't need to reach for anything else for typical ReScript development.
+ReScript's new standard library. Intended to be familiar for JavaScript developers, easy to use, and be rich enough (without being bloated) so that you don't need to reach for anything else for typical ReScript development.
+
+In ReScript 11, it is shipped as a separate npm package @rescript/core that is added to your project as per the [installation instructions](https://rescript-lang.org/docs/manual/latest/installation). In future ReScript versions, it will be included with the `rescript` npm package itself.
 
 ## Background
 
-We're proposing a new, experimental drop-in standard library intended to solve a number of problems we see in ReScript development today. This proposed standard library has the following purposes:
+Goals:
 
 1. Adding a rich (enough) standard library that's familiar to JavaScript developers
 2. Clearing up the current confusing situation with regards to t-first vs t-last, OCaml pervasives, `Js.Array2` etc
