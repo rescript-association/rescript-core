@@ -450,7 +450,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        109,
+        112,
         20,
         39
       ],
@@ -464,7 +464,7 @@ Test.run([
 Test.run([
       [
         "ArrayTests.res",
-        110,
+        113,
         20,
         34
       ],

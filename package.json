@@ -26,7 +26,7 @@
     "rescript": "^10.1.0 || ^11.0.0-alpha.0 || next"
   },
   "devDependencies": {
-    "rescript": "10.1.4",
-    "@babel/code-frame": "7.18.6"
+    "@babel/code-frame": "7.18.6",
+    "rescript": "^11.0.0"
   }
 }

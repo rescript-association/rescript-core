@@ -6,43 +6,43 @@ function classify(value) {
   switch (match) {
     case "[object BigInt]" :
         return {
-                TAG: /* BigInt */6,
+                TAG: "BigInt",
                 _0: value
               };
     case "[object Boolean]" :
         return {
-                TAG: /* Bool */0,
+                TAG: "Bool",
                 _0: value
               };
     case "[object AsyncFunction]" :
     case "[object Function]" :
     case "[object GeneratorFunction]" :
         return {
-                TAG: /* Function */4,
+                TAG: "Function",
                 _0: value
               };
     case "[object Null]" :
-        return /* Null */0;
+        return "Null";
     case "[object Number]" :
         return {
-                TAG: /* Number */2,
+                TAG: "Number",
                 _0: value
               };
     case "[object String]" :
         return {
-                TAG: /* String */1,
+                TAG: "String",
                 _0: value
               };
     case "[object Symbol]" :
         return {
-                TAG: /* Symbol */5,
+                TAG: "Symbol",
                 _0: value
               };
     case "[object Undefined]" :
-        return /* Undefined */1;
+        return "Undefined";
     default:
       return {
-              TAG: /* Object */3,
+              TAG: "Object",
               _0: value
             };
   }

@@ -7,29 +7,29 @@ function classify(value) {
   switch (match) {
     case "[object Array]" :
         return {
-                TAG: /* Array */4,
+                TAG: "Array",
                 _0: value
               };
     case "[object Boolean]" :
         return {
-                TAG: /* Bool */0,
+                TAG: "Bool",
                 _0: value
               };
     case "[object Null]" :
-        return /* Null */0;
+        return "Null";
     case "[object Number]" :
         return {
-                TAG: /* Number */2,
+                TAG: "Number",
                 _0: value
               };
     case "[object String]" :
         return {
-                TAG: /* String */1,
+                TAG: "String",
                 _0: value
               };
     default:
       return {
-              TAG: /* Object */3,
+              TAG: "Object",
               _0: value
             };
   }
