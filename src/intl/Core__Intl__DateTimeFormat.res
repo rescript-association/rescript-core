@@ -32,4 +32,4 @@ external formatRangeToParts: (
   "type": string,
   "value": string,
   "source": string,
-}> = "formatRange"
+}> = "formatRangeToParts"
