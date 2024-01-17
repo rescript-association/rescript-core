@@ -16,6 +16,6 @@ external supportedLocalesOfWithOptions: (array<string>, {..}) => t =
 
 type rule = [#zero | #one | #two | #few | #many | #other]
 
-@send external select: (t, float) => rule = "format"
-@send external selectInt: (t, int) => rule = "format"
-@send external selectBigInt: (t, Core__BigInt.t) => rule = "format"
+@send external select: (t, float) => rule = "select"
+@send external selectInt: (t, int) => rule = "select"
+@send external selectBigInt: (t, Core__BigInt.t) => rule = "select"
