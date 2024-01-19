@@ -23,3 +23,11 @@ let delete = (dict, string) => {
 @val external assign: (t<'a>, t<'a>) => t<'a> = "Object.assign"
 
 @val external copy: (@as(json`{}`) _, t<'a>) => t<'a> = "Object.assign"
+
+let forEach = (dict, f) => {
+  dict->valuesToArray->Core__Array.forEach(value => f(value))
+}
+
+let forEachWithKey = (dict, f) => {
+  dict->toArray->Core__Array.forEach(((key, value)) => f(value, key))
+}

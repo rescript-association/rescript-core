@@ -190,3 +190,33 @@ Console.log2(dict->Dict.keysToArray, dict2->Dict.keysToArray)
 */
 @val
 external copy: (@as(json`{}`) _, t<'a>) => t<'a> = "Object.assign"
+
+/**
+`forEach(dictionary, f)` iterates through all values of the dict.
+
+> Please note that this is *without the keys*, just the values. If you need the key as well, use `Dict.forEachWithKey`.
+
+## Examples
+```rescript
+let dict = Dict.fromArray([("key1", "value1"), ("key2", "value2")])
+
+dict->Dict.forEach(value => {
+  Console.log(value)
+})
+```
+*/
+let forEach: (t<'a>, 'a => unit) => unit
+
+/**
+`forEachWithKey(dictionary, f)` iterates through all values of the dict, including the key for each value.
+
+## Examples
+```rescript
+let dict = Dict.fromArray([("key1", "value1"), ("key2", "value2")])
+
+dict->Dict.forEachWithKey((value, key) => {
+  Console.log2(value, key)
+})
+```
+*/
+let forEachWithKey: (t<'a>, ('a, string) => unit) => unit
