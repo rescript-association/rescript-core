@@ -220,3 +220,17 @@ dict->Dict.forEachWithKey((value, key) => {
 ```
 */
 let forEachWithKey: (t<'a>, ('a, string) => unit) => unit
+
+/**
+`mapValues(dictionary, f)` returns a new dictionary with the same keys, and `f` applied to each value in the original dictionary.
+
+## Examples
+
+```rescript
+let dict = Dict.fromArray([("key1", 1), ("key2", 2)])
+
+dict->Dict.mapValues(v => v + 10)->Dict.toArray // [("key1", 11), ("key2", 12)]
+dict->Dict.mapValues(Int.toString)->Dict.toArray // [("key1", "1"), ("key2", "2")]
+```
+*/
+let mapValues: (t<'a>, 'a => 'b) => t<'b>

@@ -31,3 +31,11 @@ let forEach = (dict, f) => {
 let forEachWithKey = (dict, f) => {
   dict->toArray->Core__Array.forEach(((key, value)) => f(value, key))
 }
+
+let mapValues = (dict, f) => {
+  let target = make()
+  dict->forEachWithKey((value, key) => {
+    target->set(key, f(value))
+  })
+  target
+}

@@ -17,9 +17,18 @@ function forEachWithKey(dict, f) {
       });
 }
 
+function mapValues(dict, f) {
+  var target = {};
+  forEachWithKey(dict, (function (value, key) {
+          target[key] = f(value);
+        }));
+  return target;
+}
+
 export {
   $$delete$1 as $$delete,
   forEach ,
   forEachWithKey ,
+  mapValues ,
 }
 /* No side effect */
