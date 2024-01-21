@@ -723,23 +723,23 @@ let reduce: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
 let reduceWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
 
 /**
-  `reduceRight(xs, fn, init)`
+  `reduceRight(xs, init, fn)`
 
   Works like `Array.reduce`; except that function `fn` is applied to each item of `xs` from the last back to the first.
 
   ```res example
-  Array.reduceRight(["a", "b", "c", "d"], (a, b) => a ++ b, "") == "dcba"
+  Array.reduceRight(["a", "b", "c", "d"], "", (a, b) => a ++ b) == "dcba"
   ```
 */
 let reduceRight: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
 
 /**
-  `reduceRightWithIndex(xs, f, init)`
+  `reduceRightWithIndex(xs, init, fn)`
 
   Like `reduceRight`, but with an additional index argument on the callback function.
 
   ```res example
-  Array.reduceRightWithIndex([1, 2, 3, 4], (acc, x, i) => acc + x + i, 0) == 16
+  Array.reduceRightWithIndex([1, 2, 3, 4], 0, (acc, x, i) => acc + x + i, 0) == 16
   ```
 */
 let reduceRightWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
