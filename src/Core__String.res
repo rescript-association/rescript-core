@@ -54,6 +54,8 @@ type normalizeForm = [#NFC | #NFD | #NFKC | #NFKD]
 
 @send external replace: (string, string, string) => string = "replace"
 @send external replaceRegExp: (string, Core__RegExp.t, string) => string = "replace"
+@send external replaceAll: (string, string, string) => string = "replaceAll"
+@send external replaceAllRegExp: (string, Core__RegExp.t, string) => string = "replaceAll"
 
 @send
 external unsafeReplaceRegExpBy0: (

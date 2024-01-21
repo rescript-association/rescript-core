@@ -3,6 +3,7 @@
 external getUnsafe: (array<'a>, int) => 'a = "%array_unsafe_get"
 external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
 
+@val external fromIterator: Core__Iterator.t<'a> => array<'a> = "Array.from"
 @val external fromArrayLike: Js.Array2.array_like<'a> => array<'a> = "Array.from"
 @val
 external fromArrayLikeWithMap: (Js.Array2.array_like<'a>, 'a => 'b) => array<'b> = "Array.from"
@@ -123,7 +124,9 @@ let indexOfOpt = (arr, item) =>
   }
 @send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
 
-@send external joinWith: (array<'a>, string) => string = "join"
+@send external joinWith: (array<string>, string) => string = "join"
+
+@send external joinWithUnsafe: (array<'a>, string) => string = "join"
 
 @send external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
 let lastIndexOfOpt = (arr, item) =>
@@ -245,3 +248,5 @@ let findMap = (arr, f) => {
 }
 
 @send external at: (array<'a>, int) => option<'a> = "at"
+
+let last = a => a->get(a->length - 1)

@@ -2,6 +2,26 @@
 
 ## Next version
 
+- Add `Dict.getUnsafe` https://github.com/rescript-association/rescript-core/pull/167
+- Fixes mis-bound `Intl` functions https://github.com/rescript-association/rescript-core/pull/180
+  - `Intl.DateTimeFormat.formatRangeToParts` was bound to `formatRange` instead of `formatRangeToParts`
+  - `Intl.PluralRules.select`, `Intl.PluralRules.selectInt`, and `Intl.PluralRules.selectBigInt` were bound to `format` instead of `select`
+
+### Documentation
+
+- Fix docstring for `Array.getUnsafe` and `Array.filterMap` https://github.com/rescript-association/rescript-core/pull/168
+
+## 0.6.0
+
+### API changes
+
+- Add `Math.Int.floor` and `Math.Int.random`, https://github.com/rescript-association/rescript-core/pull/156
+- Change `Array.joinWith`s signature to accept only string arrays and add `Array.joinWithUnsafe` with the polymorphic signature of the former https://github.com/rescript-association/rescript-core/pull/157
+
+### Documentation
+
+- Docstrings for `Math.Int.floor` and `Math.Int.random`. https://github.com/rescript-association/rescript-core/pull/156
+
 ## 0.5.0
 
 ### API changes
@@ -96,4 +116,4 @@
 - Docstrings for `Date`. https://github.com/rescript-association/rescript-core/pull/61
 - Docstrings for `Float`. https://github.com/rescript-association/rescript-core/pull/54
 - Docstrings for `String`. https://github.com/rescript-association/rescript-core/pull/27
-- Docstrings from `Array`. https://github.com/rescript-association/rescript-core/pull/78
+- Docstrings for `Array`. https://github.com/rescript-association/rescript-core/pull/78

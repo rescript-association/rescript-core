@@ -276,6 +276,39 @@ module Int: {
   */
   @val
   external sign: int => int = "Math.sign"
+
+  /**
+  floor(v) returns the largest `int` less than or equal to the argument; 
+  the result is pinned to the range of the `int` data type: -2147483648 to 2147483647. 
+  See [`Math.floor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor)
+  on MDN.
+
+  ## Examples
+
+  ```rescript
+  Math.Int.floor(3.7) == 3
+  Math.Int.floor(3.0) == 3
+  Math.Int.floor(-3.1) == -4
+  Math.Int.floor(-1.0e15) == -2147483648
+  Math.Int.floor(1.0e15) == 2147483647
+  ```
+  */
+  let floor: float => int
+
+  /**
+  `random(minVal, maxVal)` returns a random integer number in the half-closed interval [minVal, maxVal).
+   See [`Math.random`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
+  on MDN.
+
+  ## Examples
+
+  ```rescript
+  Math.Int.random(2, 5) == 4
+  Math.Int.random(505, 2000) == 1276
+  Math.Int.random(-7, -2) == -4
+  ```
+  */
+  let random: (int, int) => int
 }
 
 /**

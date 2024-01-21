@@ -4,6 +4,9 @@ let eq = (a, b) => a == b
 
 Test.run(__POS_OF__("make"), Array.make(~length=6, 7), eq, [7, 7, 7, 7, 7, 7])
 
+Test.run(__POS_OF__("getUnsafe - existing"), [0, 1, 2]->Array.getUnsafe(1), eq, 1)
+Test.run(__POS_OF__("getUnsafe - missing"), [0, 1, 2]->Array.getUnsafe(10), eq, %raw(`undefined`))
+
 Test.run(
   __POS_OF__("fromInitializer"),
   Array.fromInitializer(~length=7, i => i + 3),
@@ -98,3 +101,13 @@ Test.run(
   eq,
   None,
 )
+
+Test.run(
+  __POS_OF__("fromIterator"),
+  Array.fromIterator(Map.fromArray([(1, 3), (2, 4)])->Map.values),
+  eq,
+  [3, 4],
+)
+
+Test.run(__POS_OF__("last - with items"), [1, 2, 3]->Array.last, eq, Some(3))
+Test.run(__POS_OF__("last - empty"), []->Array.last, eq, None)
