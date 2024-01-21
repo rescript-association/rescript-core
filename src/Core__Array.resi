@@ -699,47 +699,47 @@ Console.log(mappedArray) // ["Hello at position 0", "Hi at position 1", "Good by
 external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
 /**
-  `reduce(xs, fn, init)`
+  `reduce(xs, init, fn)`
 
   Applies `fn` to each element of `xs` from beginning to end. Function `fn` has two parameters: the item from the list and an “accumulator”; which starts with a value of `init`. `reduce` returns the final value of the accumulator.
 
   ```res example
-  Array.reduce([2, 3, 4], (a, b) => a + b, 1) == 10
+  Array.reduce([2, 3, 4], 1, (a, b) => a + b) == 10
 
-  Array.reduce(["a", "b", "c", "d"], (a, b) => a ++ b, "") == "abcd"
+  Array.reduce(["a", "b", "c", "d"], "", (a, b) => a ++ b) == "abcd"
   ```
 */
 let reduce: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
 
 /**
-  `reduceWithIndex(xs, fn, init)`
+  `reduceWithIndex(x, init, fn)`
 
   Applies `fn` to each element of `xs` from beginning to end. Function `fn` has three parameters: the item from the array and an “accumulator”, which starts with a value of `init` and the index of each element. `reduceWithIndex` returns the final value of the accumulator.
 
   ```res example
-  Array.reduceWithIndex([1, 2, 3, 4], (acc, x, i) => acc + x + i, 0) == 16
+  Array.reduceWithIndex([1, 2, 3, 4], 0, (acc, x, i) => acc + x + i) == 16
   ```
 */
 let reduceWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
 
 /**
-  `reduceRight(xs, fn, init)`
+  `reduceRight(xs, init, fn)`
 
   Works like `Array.reduce`; except that function `fn` is applied to each item of `xs` from the last back to the first.
 
   ```res example
-  Array.reduceRight(["a", "b", "c", "d"], (a, b) => a ++ b, "") == "dcba"
+  Array.reduceRight(["a", "b", "c", "d"], "", (a, b) => a ++ b) == "dcba"
   ```
 */
 let reduceRight: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
 
 /**
-  `reduceRightWithIndex(xs, f, init)`
+  `reduceRightWithIndex(xs, init, fn)`
 
   Like `reduceRight`, but with an additional index argument on the callback function.
 
   ```res example
-  Array.reduceRightWithIndex([1, 2, 3, 4], (acc, x, i) => acc + x + i, 0) == 16
+  Array.reduceRightWithIndex([1, 2, 3, 4], 0, (acc, x, i) => acc + x + i, 0) == 16
   ```
 */
 let reduceRightWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
