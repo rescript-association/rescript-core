@@ -712,12 +712,12 @@ external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 let reduce: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
 
 /**
-  `reduceWithIndex(xs, fn, init)`
+  `reduceWithIndex(x, init, fn)`
 
   Applies `fn` to each element of `xs` from beginning to end. Function `fn` has three parameters: the item from the array and an “accumulator”, which starts with a value of `init` and the index of each element. `reduceWithIndex` returns the final value of the accumulator.
 
   ```res example
-  Array.reduceWithIndex([1, 2, 3, 4], (acc, x, i) => acc + x + i, 0) == 16
+  Array.reduceWithIndex([1, 2, 3, 4], 0, (acc, x, i) => acc + x + i) == 16
   ```
 */
 let reduceWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
