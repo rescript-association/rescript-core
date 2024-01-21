@@ -699,7 +699,7 @@ Console.log(mappedArray) // ["Hello at position 0", "Hi at position 1", "Good by
 external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
 /**
-  `reduce(xs, fn, init)`
+  `reduce(xs, init, f)`
 
   Applies `fn` to each element of `xs` from beginning to end. Function `fn` has two parameters: the item from the list and an “accumulator”; which starts with a value of `init`. `reduce` returns the final value of the accumulator.
 
