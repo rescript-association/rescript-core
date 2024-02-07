@@ -2,6 +2,8 @@
 
 ## Next version
 
+## 0.7.0
+
 - Add `Dict.getUnsafe` https://github.com/rescript-association/rescript-core/pull/167
 - Fixes mis-bound `Intl` functions https://github.com/rescript-association/rescript-core/pull/180
   - `Intl.DateTimeFormat.formatRangeToParts` was bound to `formatRange` instead of `formatRangeToParts`
