@@ -3,6 +3,7 @@
 ## Next version
 
 - Up ReScript dependency to 11+.
+- `JSON`, `Null` and `Nullable` untagged variants are now properly exposed.
 
 ## 0.7.0
 

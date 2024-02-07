@@ -5,7 +5,14 @@ Functions for interacting with JSON.
 /** 
 A type representing a JSON object.
 */
-type t = Js.Json.t
+@unboxed
+type rec t = Js.Json.t =
+  | Boolean(bool)
+  | @as(null) Null
+  | String(string)
+  | Number(float)
+  | Object(Js.Dict.t<t>)
+  | Array(array<t>)
 
 /** 
 `parseExn(string)` 
