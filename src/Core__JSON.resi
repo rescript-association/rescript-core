@@ -11,7 +11,7 @@ type rec t = Js.Json.t =
   | @as(null) Null
   | String(string)
   | Number(float)
-  | Object(Js.Dict.t<t>)
+  | Object(Core__Dict.t<t>)
   | Array(array<t>)
 
 /** 
