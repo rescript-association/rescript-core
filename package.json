@@ -23,7 +23,7 @@
     "src/**/*.mjs"
   ],
   "peerDependencies": {
-    "rescript": "^10.1.0 || ^11.0.0-alpha.0 || next"
+    "rescript": "^10.1.0 || ^11.0.0"
   },
   "devDependencies": {
     "rescript": "10.1.4",
