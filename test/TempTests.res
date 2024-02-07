@@ -111,7 +111,7 @@ Console.info("Promise")
 Console.info("---")
 let promise: promise<int> = Promise.make((resolve, _reject) => {
   let _ = setTimeout(() => {
-    resolve(. 1)
+    resolve(1)
   }, 100)
 })
 
@@ -171,7 +171,7 @@ Console.info("Symbol")
 Console.info("---")
 let x = Symbol.getFor("Foo")
 Console.log(x)
-let array: array<string> = String.getSymbolUnsafe("foo", Symbol.iterator)(.)->Iterator.toArray
+let array: array<string> = String.getSymbolUnsafe("foo", Symbol.iterator)()->Iterator.toArray
 Console.log(array)
 
 Console.info("")

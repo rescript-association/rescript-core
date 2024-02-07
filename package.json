@@ -23,10 +23,10 @@
     "src/**/*.mjs"
   ],
   "peerDependencies": {
-    "rescript": "^10.1.0 || ^11.0.0"
+    "rescript": ">=11.0.0"
   },
   "devDependencies": {
-    "rescript": "10.1.4",
+    "rescript": "11.1.0-rc.1",
     "@babel/code-frame": "7.18.6"
   }
 }

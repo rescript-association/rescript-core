@@ -2,6 +2,8 @@
 
 ## Next version
 
+- Up ReScript dependency to 11+.
+
 ## 0.7.0
 
 - Add `Dict.getUnsafe` https://github.com/rescript-association/rescript-core/pull/167
