@@ -4,6 +4,7 @@
 
 - Up ReScript dependency to 11+.
 - `JSON`, `Null` and `Nullable` untagged variants are now properly exposed.
+- BREAKING: Duplicated definition of `result` in `Result` module removed, as `result` is now a built in. Switch out any `Result.t` type annotations to point to the built in `result` instead.
 
 ## 0.7.0
 
