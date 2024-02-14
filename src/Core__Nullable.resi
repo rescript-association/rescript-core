@@ -8,7 +8,11 @@ Primarily useful when interoping with JavaScript when you don't know whether you
 Type representing a nullable value.
 A nullable value can be the value `'a`, `null` or `undefined`.
 */
-type t<'a> = Js.Nullable.t<'a>
+@unboxed
+type t<'a> = Js.Nullable.t<'a> =
+  | Value('a)
+  | @as(null) Null
+  | @as(undefined) Undefined
 
 /**
 The value `null`.

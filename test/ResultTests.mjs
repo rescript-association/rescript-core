@@ -6,12 +6,12 @@ import * as Core__Result from "../src/Core__Result.mjs";
 
 var eq = Caml_obj.equal;
 
-function forEachIfOkCallFunction(param) {
+function forEachIfOkCallFunction() {
   var called = {
     contents: []
   };
   Core__Result.forEach({
-        TAG: /* Ok */0,
+        TAG: "Ok",
         _0: 3
       }, (function (i) {
           called.contents.push(i);
@@ -27,14 +27,14 @@ function forEachIfOkCallFunction(param) {
       ], called.contents, eq, [3]);
 }
 
-forEachIfOkCallFunction(undefined);
+forEachIfOkCallFunction();
 
-function forEachIfErrorDoNotCallFunction(param) {
+function forEachIfErrorDoNotCallFunction() {
   var called = {
     contents: []
   };
   Core__Result.forEach({
-        TAG: /* Error */1,
+        TAG: "Error",
         _0: 3
       }, (function (i) {
           called.contents.push(i);
@@ -50,7 +50,7 @@ function forEachIfErrorDoNotCallFunction(param) {
       ], called.contents, eq, []);
 }
 
-forEachIfErrorDoNotCallFunction(undefined);
+forEachIfErrorDoNotCallFunction();
 
 Test.run([
       [
@@ -61,12 +61,12 @@ Test.run([
       ],
       "mapError: if ok, return it"
     ], Core__Result.mapError({
-          TAG: /* Ok */0,
+          TAG: "Ok",
           _0: 5
         }, (function (i) {
             return Math.imul(i, 3);
           })), eq, {
-      TAG: /* Ok */0,
+      TAG: "Ok",
       _0: 5
     });
 
@@ -79,12 +79,12 @@ Test.run([
       ],
       "mapError: if error, apply f"
     ], Core__Result.mapError({
-          TAG: /* Error */1,
+          TAG: "Error",
           _0: 5
         }, (function (i) {
             return Math.imul(i, 3);
           })), eq, {
-      TAG: /* Error */1,
+      TAG: "Error",
       _0: 15
     });
 

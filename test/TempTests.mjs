@@ -62,13 +62,13 @@ console.info("Error");
 
 console.info("---");
 
-function f(param) {
+function f() {
   var error = new Error("hello");
   var typeError = new TypeError("error");
-  var g = function (param) {
+  var g = function () {
     throw error;
   };
-  var h = function (param) {
+  var h = function () {
     throw typeError;
   };
   return [
@@ -121,11 +121,11 @@ var json$1 = Core__JSON.Classify.classify(json);
 
 var tmp;
 
-if (typeof json$1 === "number" || json$1.TAG !== /* Object */3) {
+if (typeof json$1 !== "object" || json$1.TAG !== "Object") {
   tmp = undefined;
 } else {
   var value = Core__JSON.Classify.classify(json$1._0["foo"]);
-  tmp = typeof value === "number" || value.TAG !== /* String */1 ? undefined : value._0;
+  tmp = typeof value !== "object" || value.TAG !== "String" ? undefined : value._0;
 }
 
 console.log(tmp);
@@ -201,7 +201,7 @@ console.info("Promise");
 console.info("---");
 
 var promise = new Promise((function (resolve, _reject) {
-        setTimeout((function (param) {
+        setTimeout((function () {
                 resolve(1);
               }), 100);
       }));
@@ -212,8 +212,8 @@ promise.then(function (x) {
           return Promise.resolve(x + 2 | 0);
         }).then(function (x) {
         console.log(x);
-        return Promise.resolve(undefined);
-      }).finally(function (param) {
+        return Promise.resolve();
+      }).finally(function () {
       console.log("Promise finally");
     });
 
@@ -295,7 +295,7 @@ console.info("---");
 
 console.log("number");
 
-var timeout = setTimeout((function (param) {
+var timeout = setTimeout((function () {
         console.log("Hello!");
       }), 100);
 

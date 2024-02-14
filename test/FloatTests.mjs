@@ -2,8 +2,8 @@
 
 import * as Test from "./Test.mjs";
 import * as Caml_obj from "rescript/lib/es6/caml_obj.js";
-import * as Pervasives from "rescript/lib/es6/pervasives.js";
 import * as Core__Float from "../src/Core__Float.mjs";
+import * as PervasivesU from "rescript/lib/es6/pervasivesU.js";
 
 var eq = Caml_obj.equal;
 
@@ -115,7 +115,7 @@ Test.run([
         38
       ],
       "clamp - infinity"
-    ], Core__Float.clamp(4.1, 4.3, Pervasives.infinity), eq, 4.3);
+    ], Core__Float.clamp(4.1, 4.3, PervasivesU.infinity), eq, 4.3);
 
 Test.run([
       [
@@ -125,7 +125,7 @@ Test.run([
         39
       ],
       "clamp - -infinity"
-    ], Core__Float.clamp(4.1, 4.3, Pervasives.neg_infinity), eq, 4.1);
+    ], Core__Float.clamp(4.1, 4.3, PervasivesU.neg_infinity), eq, 4.1);
 
 Test.run([
       [
@@ -165,7 +165,7 @@ Test.run([
         42
       ],
       "clamp - min infinity"
-    ], Core__Float.clamp(Pervasives.infinity, undefined, 4.2), eq, Pervasives.infinity);
+    ], Core__Float.clamp(PervasivesU.infinity, undefined, 4.2), eq, PervasivesU.infinity);
 
 Test.run([
       [
@@ -175,7 +175,7 @@ Test.run([
         42
       ],
       "clamp - max infinity"
-    ], Core__Float.clamp(undefined, Pervasives.infinity, 4.2), eq, 4.2);
+    ], Core__Float.clamp(undefined, PervasivesU.infinity, 4.2), eq, 4.2);
 
 Test.run([
       [
@@ -185,7 +185,7 @@ Test.run([
         43
       ],
       "clamp - min -infinity"
-    ], Core__Float.clamp(Pervasives.neg_infinity, undefined, 4.2), eq, 4.2);
+    ], Core__Float.clamp(PervasivesU.neg_infinity, undefined, 4.2), eq, 4.2);
 
 Test.run([
       [
@@ -195,7 +195,7 @@ Test.run([
         43
       ],
       "clamp - max -infinity"
-    ], Core__Float.clamp(undefined, Pervasives.neg_infinity, 4.2), eq, Pervasives.neg_infinity);
+    ], Core__Float.clamp(undefined, PervasivesU.neg_infinity, 4.2), eq, PervasivesU.neg_infinity);
 
 Test.run([
       [
@@ -205,7 +205,7 @@ Test.run([
         49
       ],
       "clamp - min infinity, max infinity"
-    ], Core__Float.clamp(Pervasives.infinity, Pervasives.infinity, 4.2), eq, Pervasives.infinity);
+    ], Core__Float.clamp(PervasivesU.infinity, PervasivesU.infinity, 4.2), eq, PervasivesU.infinity);
 
 Test.run([
       [
@@ -215,7 +215,7 @@ Test.run([
         50
       ],
       "clamp - min -infinity, max infinity"
-    ], Core__Float.clamp(Pervasives.neg_infinity, Pervasives.infinity, 4.2), eq, 4.2);
+    ], Core__Float.clamp(PervasivesU.neg_infinity, PervasivesU.infinity, 4.2), eq, 4.2);
 
 Test.run([
       [
@@ -225,7 +225,7 @@ Test.run([
         50
       ],
       "clamp - min infinity, max -infinity"
-    ], Core__Float.clamp(Pervasives.infinity, Pervasives.neg_infinity, 4.2), eq, Pervasives.infinity);
+    ], Core__Float.clamp(PervasivesU.infinity, PervasivesU.neg_infinity, 4.2), eq, PervasivesU.infinity);
 
 Test.run([
       [
@@ -235,7 +235,7 @@ Test.run([
         51
       ],
       "clamp - min -infinity, max -infinity"
-    ], Core__Float.clamp(Pervasives.neg_infinity, Pervasives.neg_infinity, 4.2), eq, Pervasives.neg_infinity);
+    ], Core__Float.clamp(PervasivesU.neg_infinity, PervasivesU.neg_infinity, 4.2), eq, PervasivesU.neg_infinity);
 
 export {
   eq ,

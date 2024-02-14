@@ -7,7 +7,10 @@ If you also need to cover `undefined`, check out `Nullable` instead.
 /**
 A type representing a value that can be either `'a` or `null`.
 */
-type t<'a> = Js.Null.t<'a>
+@unboxed
+type t<'a> = Js.Null.t<'a> =
+  | Value('a)
+  | @as(null) Null
 
 /**
 Converts a `Null.t` into a `Nullable.t`.

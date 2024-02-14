@@ -216,7 +216,7 @@ let filterMapU = (a, f) => {
   let j = ref(0)
   for i in 0 to l - 1 {
     let v = getUnsafe(a, i)
-    switch f(. v) {
+    switch f(v) {
     | None => ()
     | Some(v) =>
       setUnsafe(r, j.contents, v)
@@ -227,7 +227,7 @@ let filterMapU = (a, f) => {
   r
 }
 
-let filterMap = (a, f) => filterMapU(a, (. a) => f(a))
+let filterMap = (a, f) => filterMapU(a, a => f(a))
 
 let keepSome = filterMap(_, x => x)
 

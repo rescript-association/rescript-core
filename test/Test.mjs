@@ -3,7 +3,6 @@
 import * as Fs from "fs";
 import * as Path from "path";
 import * as Util from "util";
-import * as Curry from "rescript/lib/es6/curry.js";
 import * as Core__Option from "../src/Core__Option.mjs";
 import * as CodeFrame from "@babel/code-frame";
 
@@ -21,7 +20,7 @@ function print(value) {
 }
 
 function run(loc, left, comparator, right) {
-  if (Curry._2(comparator, left, right)) {
+  if (comparator(left, right)) {
     return ;
   }
   var match = loc[0];

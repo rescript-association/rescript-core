@@ -38,15 +38,13 @@
 
   ```res example
   type responseError = NotAvailable | NotFound
-  type queryResult = t<string, responseError>
+  type queryResult = result<string, responseError>
 
   let failQueryUser = (username: string): queryResult => {
     Error(NotAvailable)
   }
 ```
 */
-type t<'a, 'b> = result<'a, 'b> = Ok('a) | Error('b)
-
 /**
   `getExn(res)`: when `res` is `Ok(n)`, returns `n` when `res` is `Error(m)`, raise an exception
 
@@ -56,7 +54,7 @@ type t<'a, 'b> = result<'a, 'b> = Ok('a) | Error('b)
   Result.getExn(Result.Error("Invalid data")) /* raises exception */
   ```
 */
-let getExn: t<'a, 'b> => 'a
+let getExn: result<'a, 'b> => 'a
 
 /**
   `mapOr(res, default, f)`: When res is `Ok(n)`, returns `f(n)`,
@@ -70,10 +68,10 @@ let getExn: t<'a, 'b> => 'a
   Result.mapOr(error, 0, (x) => x / 2) == 0
   ```
 */
-let mapOr: (t<'a, 'c>, 'b, 'a => 'b) => 'b
+let mapOr: (result<'a, 'c>, 'b, 'a => 'b) => 'b
 
 @deprecated("Use mapOr instead")
-let mapWithDefault: (t<'a, 'c>, 'b, 'a => 'b) => 'b
+let mapWithDefault: (result<'a, 'c>, 'b, 'a => 'b) => 'b
 
 /**
   `map(res, f)`: When res is `Ok(n)`, returns `Ok(f(n))`. Otherwise returns res
@@ -88,7 +86,7 @@ let mapWithDefault: (t<'a, 'c>, 'b, 'a => 'b) => 'b
   Result.map(Error("Invalid data"), f) == Error("Invalid data")
   ```
 */
-let map: (t<'a, 'c>, 'a => 'b) => t<'b, 'c>
+let map: (result<'a, 'c>, 'a => 'b) => result<'b, 'c>
 
 /**
   `flatMap(res, f)`: When res is `Ok(n)`, returns `f(n)`. Otherwise, returns res
@@ -110,7 +108,7 @@ let map: (t<'a, 'c>, 'a => 'b) => t<'b, 'c>
   Result.flatMap(Error("Already bad"), recip) == Error("Already bad")
   ```
 */
-let flatMap: (t<'a, 'c>, 'a => t<'b, 'c>) => t<'b, 'c>
+let flatMap: (result<'a, 'c>, 'a => result<'b, 'c>) => result<'b, 'c>
 
 /**
   `getOr(res, defaultValue)`: If `res` is `Ok(n)`, returns `n`,
@@ -122,22 +120,22 @@ let flatMap: (t<'a, 'c>, 'a => t<'b, 'c>) => t<'b, 'c>
   Result.getOr(Error("Invalid Data"), 0) == 0
   ```
 */
-let getOr: (t<'a, 'b>, 'a) => 'a
+let getOr: (result<'a, 'b>, 'a) => 'a
 
 @deprecated("Use getOr instead")
-let getWithDefault: (t<'a, 'b>, 'a) => 'a
+let getWithDefault: (result<'a, 'b>, 'a) => 'a
 
 /**
   `isOk(res)`: Returns `true` if `res` is of the form `Ok(n)`, `false` if it is
   the `Error(e)` variant.
 */
-let isOk: t<'a, 'b> => bool
+let isOk: result<'a, 'b> => bool
 
 /**
   `isError(res)`: Returns `true` if `res` is of the form `Error(e)`, `false` if
   it is the `Ok(n)` variant.
 */
-let isError: t<'a, 'b> => bool
+let isError: result<'a, 'b> => bool
 
 /**
   `equal(res1, res2, f)`: Determine if two `Result` variables are equal with
@@ -166,7 +164,7 @@ let isError: t<'a, 'b> => bool
   Result.equal(bad1, bad2, mod10equal) == true
   ```
 */
-let equal: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
+let equal: (result<'a, 'c>, result<'b, 'd>, ('a, 'b) => bool) => bool
 
 /**
   `compare(res1, res2, f)`: Compare two `Result` variables with respect to a
@@ -202,7 +200,7 @@ let equal: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => bool) => bool
   Result.compare(Error("x"), Error("y"), mod10cmp) == 0.
   ```
 */
-let compare: (t<'a, 'c>, t<'b, 'd>, ('a, 'b) => Core__Ordering.t) => Core__Ordering.t
+let compare: (result<'a, 'c>, result<'b, 'd>, ('a, 'b) => Core__Ordering.t) => Core__Ordering.t
 
 /**
 `forEach(res, f)` runs the provided function `f` on the `Ok` value. If `res` is `Error`, nothing happens.
@@ -214,7 +212,7 @@ Result.forEach(Ok(3), Console.log) // Logs "3", returns ()
 Result.forEach(Error("x"), Console.log) // Does nothing, returns ()
 ```
 */
-let forEach: (t<'a, 'b>, 'a => unit) => unit
+let forEach: (result<'a, 'b>, 'a => unit) => unit
 
 /**
 `mapError(r, f)` generates a new `result` by applying the function `f` to the `Error` value. If the source is `Ok`, return it as-is.

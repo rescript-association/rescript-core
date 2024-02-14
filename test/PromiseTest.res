@@ -268,7 +268,7 @@ module Concurrently = {
       Promise.make((resolve, _) => {
         setTimeout(() => {
           place := place.contents + 1
-          resolve(. (place.contents, msg))
+          resolve((place.contents, msg))
         }, ms)->ignore
       })
     }
@@ -290,7 +290,7 @@ module Concurrently = {
     let racer = (ms, name) => {
       Promise.make((resolve, _) => {
         setTimeout(() => {
-          resolve(. name)
+          resolve(name)
         }, ms)->ignore
       })
     }
@@ -312,7 +312,7 @@ module Concurrently = {
       Promise.make((resolve, _) => {
         setTimeout(() => {
           place := place.contents + 1
-          resolve(. (place.contents, msg))
+          resolve((place.contents, msg))
         }, ms)->ignore
       })
     }
@@ -336,7 +336,7 @@ module Concurrently = {
       Promise.make((resolve, _) => {
         setTimeout(() => {
           place := place.contents + 1
-          resolve(. (place.contents, msg))
+          resolve((place.contents, msg))
         }, ms)->ignore
       })
     }
@@ -361,7 +361,7 @@ module Concurrently = {
       Promise.make((resolve, _) => {
         setTimeout(() => {
           place := place.contents + 1
-          resolve(. (place.contents, msg))
+          resolve((place.contents, msg))
         }, ms)->ignore
       })
     }
@@ -387,7 +387,7 @@ module Concurrently = {
       Promise.make((resolve, _) => {
         setTimeout(() => {
           place := place.contents + 1
-          resolve(. (place.contents, msg))
+          resolve((place.contents, msg))
         }, ms)->ignore
       })
     }
@@ -414,7 +414,7 @@ module Concurrently = {
       Promise.make((resolve, _) => {
         setTimeout(() => {
           place := place.contents + 1
-          resolve(. (place.contents, msg))
+          resolve((place.contents, msg))
         }, ms)->ignore
       })
     }

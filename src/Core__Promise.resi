@@ -73,7 +73,7 @@ Promise.make((resolve, reject) => {
 ```
 */
 @new
-external make: ((@uncurry (. 'a) => unit, (. 'e) => unit) => unit) => t<'a> = "Promise"
+external make: (('a => unit, 'e => unit) => unit) => t<'a> = "Promise"
 
 /**
 `catch(promise, errorCallback)` registers an exception handler in a promise chain.
@@ -139,7 +139,7 @@ Promise.resolve(5)
 ```
 */
 @send
-external then: (t<'a>, @uncurry ('a => t<'b>)) => t<'b> = "then"
+external then: (t<'a>, 'a => t<'b>) => t<'b> = "then"
 
 /**
 `thenResolve(promise, callback)` converts an encapsulated value of a promise
@@ -163,7 +163,7 @@ In case you want to return another promise in your `callback`, consider using
 `then` instead.
 */
 @send
-external thenResolve: (t<'a>, @uncurry ('a => 'b)) => t<'b> = "then"
+external thenResolve: (t<'a>, 'a => 'b) => t<'b> = "then"
 
 /**
 `finally(promise, callback)` is used to execute a function that is called no
