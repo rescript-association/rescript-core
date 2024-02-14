@@ -61,27 +61,21 @@ type normalizeForm = [#NFC | #NFD | #NFKC | #NFKD]
 external unsafeReplaceRegExpBy0: (
   string,
   Core__RegExp.t,
-  (@uncurry ~match: string, ~offset: int, ~input: string) => string,
+  (~match: string, ~offset: int, ~input: string) => string,
 ) => string = "replace"
 
 @send
 external unsafeReplaceRegExpBy1: (
   string,
   Core__RegExp.t,
-  (@uncurry ~match: string, ~group1: string, ~offset: int, ~input: string) => string,
+  (~match: string, ~group1: string, ~offset: int, ~input: string) => string,
 ) => string = "replace"
 
 @send
 external unsafeReplaceRegExpBy2: (
   string,
   Core__RegExp.t,
-  (
-    @uncurry ~match: string,
-    ~group1: string,
-    ~group2: string,
-    ~offset: int,
-    ~input: string,
-  ) => string,
+  (~match: string, ~group1: string, ~group2: string, ~offset: int, ~input: string) => string,
 ) => string = "replace"
 
 @send
@@ -89,7 +83,7 @@ external unsafeReplaceRegExpBy3: (
   string,
   Core__RegExp.t,
   (
-    @uncurry ~match: string,
+    ~match: string,
     ~group1: string,
     ~group2: string,
     ~group3: string,
