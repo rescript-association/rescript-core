@@ -2,6 +2,8 @@
 
 ## Next version
 
+- Add `Dict.forEach`, `Dict.forEachWithKey` and `Dict.mapValues` https://github.com/rescript-association/rescript-core/pull/181
+
 ## 1.0.0
 
 - Up ReScript dependency to 11+.
