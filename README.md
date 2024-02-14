@@ -6,7 +6,7 @@ In ReScript 11, it is shipped as a separate npm package @rescript/core that is a
 
 ## Versioning
 
-- Versions `0.x` targets ReScript v10.1 and below.
+- Versions [`0.x`](https://github.com/rescript-association/rescript-core/tree/0.x) targets ReScript v10.1 and below.
 - Versions `1.x` targets ReScript v11 and above, and contains code that will not work with v10.1 and below.
 
 ## Background
