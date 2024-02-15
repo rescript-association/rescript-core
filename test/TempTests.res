@@ -46,7 +46,7 @@ Console.info("Intl")
 Console.info("---")
 let currencyFormatter = Intl.NumberFormat.makeWithLocaleAndOptions(
   "fr-FR",
-  {"currency": "EUR", "style": "currency"},
+  {currency: "EUR", style: #currency},
 )
 
 Console.log(Intl.NumberFormat.supportedLocalesOf(["fr-FR", "en-US"]))
