@@ -40,7 +40,7 @@ Test.run(__POS_OF__("is: date"), Object.is(d, d), eq, true)
 let x = {"a": 1}
 Test.run(__POS_OF__("is: objects"), Object.is(x, x), eq, true)
 Test.run(__POS_OF__("is: objects"), Object.is({"a": 1}, {"a": 1}), eq, false)
-Test.run(__POS_OF__("is: objects"), Object.is(Object.empty(), Object.empty()), eq, false) // hmm...
+Test.run(__POS_OF__("is: objects"), Object.is(Object.make(), Object.make()), eq, false) // hmm...
 Test.run(__POS_OF__("is: === and == operator"), x === x, eq, true)
 Test.run(__POS_OF__("is: === and == operator"), x == x, eq, true)
 Test.run(__POS_OF__("is: === and == operator"), {"a": 1} == {"a": 1}, eq, true)
@@ -142,7 +142,7 @@ let runGetTest = i =>
 // ===== getSymbol =====
 
 let getSymbolTestWhenExists = () => {
-  let obj = Object.empty()
+  let obj = Object.make()
   let fruit = Symbol.make("fruit")
   obj->Object.setSymbol(fruit, "banana")
   let retrieved = obj->Object.getSymbol(fruit)
@@ -157,7 +157,7 @@ getSymbolTestWhenExists()
 
 Test.run(
   __POS_OF__(`Object.getSymbol when not exists return it as None`),
-  Object.empty()->Object.getSymbol(Symbol.make("fruit")),
+  Object.make()->Object.getSymbol(Symbol.make("fruit")),
   eq,
   None,
 )
