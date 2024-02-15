@@ -51,6 +51,8 @@ let currencyFormatter = Intl.NumberFormat.makeWithLocaleAndOptions(
 
 Console.log(Intl.NumberFormat.supportedLocalesOf(["fr-FR", "en-US"]))
 Console.log(currencyFormatter->Intl.NumberFormat.format(123.23))
+let resolvedOptions = Intl.DateTimeFormat.make()->Intl.DateTimeFormat.resolvedOptions
+Console.log(resolvedOptions.timeZone)
 
 Console.info("")
 Console.info("JSON")
@@ -190,9 +192,6 @@ if globalThis["hello"] !== undefined {
   Console.log(globalThis["hello"]["bar"])
   Console.log("hello")
 }
-
-let resolvedOptions = Intl.DateTimeFormat.make()->Intl.DateTimeFormat.resolvedOptions
-let timeZone = resolvedOptions["timeZone"]
 
 let z = Float.mod(1.2, 1.4)
 

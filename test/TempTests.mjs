@@ -109,6 +109,10 @@ console.log(Intl.NumberFormat.supportedLocalesOf([
 
 console.log(currencyFormatter.format(123.23));
 
+var resolvedOptions = new Intl.DateTimeFormat().resolvedOptions();
+
+console.log(resolvedOptions.timeZone);
+
 console.info("");
 
 console.info("JSON");
@@ -306,10 +310,6 @@ if (globalThis.hello !== undefined) {
   console.log("hello");
 }
 
-var resolvedOptions = new Intl.DateTimeFormat().resolvedOptions();
-
-var timeZone = resolvedOptions.timeZone;
-
 var z = 1.2 % 1.4;
 
 var intFromBigInt = Core__BigInt.toInt(BigInt("10000000000"));
@@ -336,6 +336,7 @@ export {
   dict2 ,
   f ,
   currencyFormatter ,
+  resolvedOptions ,
   json ,
   map ,
   myObject ,
@@ -350,8 +351,6 @@ export {
   x ,
   array$1 as array,
   timeout ,
-  resolvedOptions ,
-  timeZone ,
   z ,
   intFromBigInt ,
   Bugfix ,
