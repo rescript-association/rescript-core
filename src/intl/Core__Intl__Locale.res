@@ -1,7 +1,19 @@
 type t
 
+type options = {
+  language?: string,
+  script?: string,
+  region?: string,
+  calendar?: string,
+  collation?: string,
+  numberingSystem?: string,
+  caseFirst?: [#upper | #lower | #"false"],
+  hourCycle?: [#h11 | #h12 | #h23 | #h24],
+  numeric?: bool,
+}
+
 @new external make: string => t = "Intl.Locale"
-@new external makeWithOptions: (string, {..}) => t = "Intl.Locale"
+@new external makeWithOptions: (string, options) => t = "Intl.Locale"
 
 @get external baseName: t => string = "baseName"
 @get external calendar: t => option<string> = "calendar"
