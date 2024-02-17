@@ -283,7 +283,7 @@ let rec copyAuxWithMap2 = (f, cellX, cellY, prec) =>
 let rec copyAuxWithMapI = (f, i, cellX, prec) =>
   switch cellX {
   | list{h, ...t} =>
-    let next = mutableCell(f(i, h), list{})
+    let next = mutableCell(f(h, i), list{})
     unsafeMutateTail(prec, next)
     copyAuxWithMapI(f, i + 1, t, next)
   | list{} => ()
@@ -401,12 +401,12 @@ let mapWithIndex = (xs, f) =>
   switch xs {
   | list{} => list{}
   | list{h, ...t} =>
-    let cell = mutableCell(f(0, h), list{})
+    let cell = mutableCell(f(h, 0), list{})
     copyAuxWithMapI(f, 1, t, cell)
     cell
   }
 
-let makeBy = (n, f) =>
+let fromInitializer = (~length as n, f) =>
   if n <= 0 {
     list{}
   } else {
@@ -423,7 +423,7 @@ let makeBy = (n, f) =>
     headX
   }
 
-let make = (type a, n, v: a): list<a> =>
+let make = (type a, ~length as n, v: a): list<a> =>
   if n <= 0 {
     list{}
   } else {
@@ -507,19 +507,19 @@ let rec reverseConcat = (l1, l2) =>
 
 let reverse = l => reverseConcat(l, list{})
 
-let rec flattenAux = (prec, xs) =>
+let rec flatAux = (prec, xs) =>
   switch xs {
   | list{} => unsafeMutateTail(prec, list{})
-  | list{h, ...r} => flattenAux(copyAuxCont(h, prec), r)
+  | list{h, ...r} => flatAux(copyAuxCont(h, prec), r)
   }
 
-let rec flatten = xs =>
+let rec flat = xs =>
   switch xs {
   | list{} => list{}
-  | list{list{}, ...xs} => flatten(xs)
+  | list{list{}, ...xs} => flat(xs)
   | list{list{h, ...t}, ...r} =>
     let cell = mutableCell(h, list{})
-    flattenAux(copyAuxCont(t, cell), r)
+    flatAux(copyAuxCont(t, cell), r)
     cell
   }
 
@@ -548,19 +548,19 @@ let rec forEach = (xs, f) =>
   switch xs {
   | list{} => ()
   | list{a, ...l} =>
-    f(a)->ignore
+    f(a)
     forEach(l, f)
   }
 
-let rec iteri = (xs, i, f) =>
+let rec forEachWithIndexAux = (xs, f, i) =>
   switch xs {
   | list{} => ()
   | list{a, ...l} =>
-    f(i, a)->ignore
-    iteri(l, i + 1, f)
+    f(a, i)
+    forEachWithIndexAux(l, f, i + 1)
   }
 
-let forEachWithIndex = (l, f) => iteri(l, 0, f)
+let forEachWithIndex = (l, f) => forEachWithIndexAux(l, f, 0)
 
 let rec reduce = (l, accu, f) =>
   switch l {
@@ -751,14 +751,14 @@ let sort = (xs, cmp) => {
   fromArray(arr)
 }
 
-let rec getBy = (xs, p) =>
+let rec find = (xs, p) =>
   switch xs {
   | list{} => None
   | list{x, ...l} =>
     if p(x) {
       Some(x)
     } else {
-      getBy(l, p)
+      find(l, p)
     }
   }
 

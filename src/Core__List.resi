@@ -173,10 +173,10 @@ with `value`. Returns an empty list if `value` is negative.
 ## Examples
 
 ```rescript
-List.make(3, 1) // list{1, 1, 1}
+List.make(~length=3, 1) // list{1, 1, 1}
 ```
 */
-let make: (int, 'a) => t<'a>
+let make: (~length: int, 'a) => t<'a>
 
 /**
 `makeBy(length, f)` return a list of length `length` with element initialized
@@ -185,12 +185,12 @@ with `f`. Returns an empty list if `length` is negative.
 ## Examples
 
 ```rescript
-List.makeBy(5, i => i) // list{0, 1, 2, 3, 4}
+List.fromInitializer(5, i => i) // list{0, 1, 2, 3, 4}
 
-List.makeBy(5, i => i * i) // list{0, 1, 4, 9, 16}
+List.fromInitializer(5, i => i * i) // list{0, 1, 4, 9, 16}
 ```
 */
-let makeBy: (int, int => 'a) => t<'a>
+let fromInitializer: (~length: int, int => 'a) => t<'a>
 
 /**
 `toShuffled(list)` returns a new list in random order.
@@ -284,16 +284,16 @@ List.reverseConcat(list{1, 2}, list{3, 4}) // list{2, 1, 3, 4}
 let reverseConcat: (t<'a>, t<'a>) => t<'a>
 
 /**
-`flatten(list)` return the list obtained by concatenating all the lists in
+`flat(list)` return the list obtained by concatenating all the lists in
 `list`, in order.
 
 ## Examples
 
 ```rescript
-List.flatten(list{list{1, 2, 3}, list{}, list{3}}) // list{1, 2, 3, 3}
+List.flat(list{list{1, 2, 3}, list{}, list{3}}) // list{1, 2, 3, 3}
 ```
 */
-let flatten: t<t<'a>> => t<'a>
+let flat: t<t<'a>> => t<'a>
 
 /**
 `map(list, f)` returns a new list with `f` applied to each element of `list`.
@@ -337,10 +337,10 @@ that order.
 ## Examples
 
 ```rescript
-list{1, 2, 3}->List.mapWithIndex((index, x) => index + x) // list{1, 3, 5}
+list{1, 2, 3}->List.mapWithIndex((x, index) => index + x) // list{1, 3, 5}
 ```
 */
-let mapWithIndex: (t<'a>, (int, 'a) => 'b) => t<'b>
+let mapWithIndex: (t<'a>, ('a, int) => 'b) => t<'b>
 
 /**
 `fromArray(arr)` converts the given array `arr` to a list.
@@ -415,7 +415,7 @@ List.forEach(list{"a", "b", "c"}, x => Console.log("Item: " ++ x))
 */
 ```
 */
-let forEach: (t<'a>, 'a => 'b) => unit
+let forEach: (t<'a>, 'a => unit) => unit
 
 /**
 `forEachWithIndex(list, f, index)` call `f` on each element of `list` from beginning
@@ -425,7 +425,7 @@ element from `list`. `f` returns `unit`.
 ## Examples
 
 ```rescript
-List.forEachWithIndex(list{"a", "b", "c"}, (index, x) => {
+List.forEachWithIndex(list{"a", "b", "c"}, (x, index) => {
   Console.log("Item " ++ Int.toString(index) ++ " is " ++ x)
 })
 /*
@@ -436,7 +436,7 @@ List.forEachWithIndex(list{"a", "b", "c"}, (index, x) => {
 */
 ```
 */
-let forEachWithIndex: (t<'a>, (int, 'a) => 'b) => unit
+let forEachWithIndex: (t<'a>, ('a, int) => unit) => unit
 
 /**
 `reduce(list, initialValue, f)` applies `f` to each element of `list` from
@@ -697,19 +697,19 @@ list{(-1), (-2), (-3)}->List.has(2, (a, b) => abs(a) == abs(b)) // true
 let has: (t<'a>, 'b, ('a, 'b) => bool) => bool
 
 /**
-`getBy(list, f)` returns `Some(value)` for the first value in `list` that
+`find(list, f)` returns `Some(value)` for the first value in `list` that
 satisfies the predicate function `f`. Returns `None` if no element satisfies
 the function.
 
 ## Examples
 
 ```rescript
-List.getBy(list{1, 4, 3, 2}, x => x > 3) // Some(4)
+List.find(list{1, 4, 3, 2}, x => x > 3) // Some(4)
 
-List.getBy(list{1, 4, 3, 2}, x => x > 4) // None
+List.find(list{1, 4, 3, 2}, x => x > 4) // None
 ```
 */
-let getBy: (t<'a>, 'a => bool) => option<'a>
+let find: (t<'a>, 'a => bool) => option<'a>
 
 /**
 `filter(list, f)` returns a list of all elements in `list` which satisfy the
