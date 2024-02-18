@@ -1,0 +1,6 @@
+rescript = 1
+rule cp
+  command = cp $i $out
+rule touch
+ command = touch $out
+build install.stamp : touch 

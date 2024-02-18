@@ -127,15 +127,12 @@ function toShuffled(xs) {
 }
 
 function filterMap(a, f) {
-  var f$1 = function (a) {
-    return f(a);
-  };
   var l = a.length;
   var r = new Array(l);
   var j = 0;
   for(var i = 0; i < l; ++i){
     var v = a[i];
-    var v$1 = f$1(v);
+    var v$1 = f(v);
     if (v$1 !== undefined) {
       r[j] = Caml_option.valFromOption(v$1);
       j = j + 1 | 0;

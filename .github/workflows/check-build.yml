@@ -1,0 +1,22 @@
+name: Check JS Files
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 19
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19
+      - run: npm install
+      - run: npm run build
+      - name: JS Files Changed
+        run: git diff --exit-code

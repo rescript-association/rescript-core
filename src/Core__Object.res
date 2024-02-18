@@ -1,16 +1,16 @@
 /**
-`empty` create a new object that inherits the properties and methods from the standard built-in Object, such as `toString`. See [Object on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
+`make` create a new object that inherits the properties and methods from the standard built-in Object, such as `toString`. See [Object on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 ## Examples
 
 ```rescript
-let x = Object.empty()
+let x = Object.make()
 x->Object.keysToArray->Array.length // 0
 x->Object.get("toString")->Option.isSome // true
 ```
 */
 @obj
-external empty: unit => {..} = ""
+external make: unit => {..} = ""
 
 /**
 `is` determines if two objects are identical in all contexts. Objects, arrays, records, and other non-primitives are only identical if they reference the **exact** same object in memory. Primitives like ints, floats, and strings are identical if they have the same value. `+0` and `-0` are distinct. NaN is equal to itself. See [Object.is on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
@@ -117,7 +117,7 @@ external get: ({..}, string) => option<'a> = ""
 
 ```rescript
 let fruit = Symbol.make("fruit")
-let x = Object.empty()
+let x = Object.make()
 x->Object.setSymbol(fruit, "banana")
 x->Object.getSymbol(fruit) // Some("banana")
 ```
@@ -152,7 +152,7 @@ or [Object.keys on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/
 ```rescript
 {"a": 1, "b": 2}->Object.keysToArray // ["a", "b"]
 {"a": None}->Object.keysToArray // ["a"]
-Object.empty()->Object.keysToArray // []
+Object.make()->Object.keysToArray // []
 ```
 */
 @val

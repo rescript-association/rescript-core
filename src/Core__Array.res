@@ -210,7 +210,7 @@ let toShuffled = xs => {
   result
 }
 
-let filterMapU = (a, f) => {
+let filterMap = (a, f) => {
   let l = length(a)
   let r = makeUninitializedUnsafe(l)
   let j = ref(0)
@@ -226,8 +226,6 @@ let filterMapU = (a, f) => {
   truncateToLengthUnsafe(r, j.contents)
   r
 }
-
-let filterMap = (a, f) => filterMapU(a, a => f(a))
 
 let keepSome = filterMap(_, x => x)
 

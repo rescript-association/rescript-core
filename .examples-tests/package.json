@@ -1,0 +1,8 @@
+{
+  "name": "test-compiler-examples",
+  "version": "1.0.0",
+  "dependencies": {
+    "@rescript/core": "file:rescript-core-1.0.0.tgz",
+    "rescript": "^11.0.1"
+  }
+}

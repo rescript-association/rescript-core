@@ -39,7 +39,7 @@ ${codeFrame}
 `
     Console.log(errorMessage)
     // API: https://nodejs.org/api/errors.html#errors_error_capturestacktrace_targetobject_constructoropt
-    let obj = Object.empty()
+    let obj = Object.make()
     captureStackTrace(obj)
     // clean up stack trace! Stack format: https://nodejs.org/api/errors.html#errors_error_stack
     obj["stack"]
