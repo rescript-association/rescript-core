@@ -11,9 +11,9 @@ async function main() {
                 "ImportTests.res",
                 5,
                 22,
-                61
+                55
               ],
-              "import - range - positive, increasing"
+              "dynamic import - Int tests - eq"
             ], 1, eq, 1);
 }
 

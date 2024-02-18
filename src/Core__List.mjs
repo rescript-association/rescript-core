@@ -753,9 +753,6 @@ function forEach(_xs, f) {
 }
 
 function forEachWithIndex(l, f) {
-  var f$1 = function (i, x) {
-    return f(i, x);
-  };
   var _xs = l;
   var _i = 0;
   while(true) {
