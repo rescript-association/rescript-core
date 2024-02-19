@@ -6,8 +6,9 @@ import * as Core__Option from "./Core__Option.mjs";
 function fromOption(option) {
   if (option !== undefined) {
     return Caml_option.valFromOption(option);
+  } else {
+    return null;
   }
-  
 }
 
 function equal(a, b, eq) {
