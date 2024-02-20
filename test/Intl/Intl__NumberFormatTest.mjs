@@ -20,8 +20,9 @@ console.log(Intl.NumberFormat.supportedLocalesOf([
 console.log(currencyFormatter.format(123.23));
 
 var roundingFormatter = new Intl.NumberFormat(undefined, {
-      roundingPriority: "lessPrecision",
-      roundingIncrement: 500
+      roundingIncrement: 500,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     });
 
 var groupingFormatter1 = new Intl.NumberFormat(undefined, {

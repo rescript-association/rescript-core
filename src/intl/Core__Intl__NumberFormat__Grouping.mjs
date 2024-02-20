@@ -4,16 +4,16 @@ import * as Core__Type from "../Core__Type.mjs";
 
 function parseJsValue(value) {
   var value$1 = Core__Type.Classify.classify(value);
-  if (typeof value$1 === "number") {
+  if (typeof value$1 !== "object") {
     return ;
   }
-  switch (value$1.TAG | 0) {
-    case /* Bool */0 :
+  switch (value$1.TAG) {
+    case "Bool" :
         return {
                 NAME: "bool",
                 VAL: value$1._0
               };
-    case /* String */1 :
+    case "String" :
         switch (value$1._0) {
           case "always" :
               return "always";

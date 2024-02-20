@@ -12,8 +12,9 @@ Console.log(Intl.NumberFormat.supportedLocalesOf(["fr-FR", "en-US"]))
 Console.log(currencyFormatter->Intl.NumberFormat.format(123.23))
 
 let roundingFormatter = Intl.NumberFormat.makeWithOptions({
-  roundingPriority: #lessPrecision,
   roundingIncrement: #500,
+  minimumFractionDigits: #2,
+  maximumFractionDigits: #2,
 })
 
 let groupingFormatter1 = Intl.NumberFormat.makeWithOptions({
