@@ -11,16 +11,18 @@ type day = [#numeric | #"2-digit"]
 type hour = [#numeric | #"2-digit"]
 type minute = [#numeric | #"2-digit"]
 type second = [#numeric | #"2-digit"]
-// Firefox also supports IANA time zone names here
+
+/**
+Firefox also supports IANA time zone names here
+*/
 type timeZoneName = [
   | #short
   | #long
+  | #shortOffset
+  | #shortGeneric
+  | #longOffset
+  | #longGeneric
 ]
-// TODO unsupported in node?
-// | #shortOffset
-// | #shortGeneric
-// | #longOffset
-// | #longGeneric
 
 type hourCycle = [#h11 | #h12 | #h23 | #h24]
 type formatMatcher = [#basic | @as("best fit") #bestFit]

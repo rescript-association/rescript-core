@@ -15,12 +15,12 @@ Used only when notation is #compact
 */
 type compactDisplay = [#short | #long]
 
-// TODO: "negative" is not yet well supported
 type signDisplay = [
   | #auto
   | #always
   | #exceptZero
   | #never
+  | #negative
 ]
 
 type style = [#decimal | #currency | #percent | #unit]
@@ -174,7 +174,7 @@ type numberFormatRangePart = {
 @new external makeWithOptions: (@as(json`undefined`) _, options) => t = "Intl.NumberFormat"
 
 @val external supportedLocalesOf: array<string> => t = "Intl.NumberFormat.supportedLocalesOf"
-// TODO
+
 @val
 external supportedLocalesOfWithOptions: (array<string>, supportedLocalesOptions) => t =
   "Intl.NumberFormat.supportedLocalesOf"
@@ -182,47 +182,33 @@ external supportedLocalesOfWithOptions: (array<string>, supportedLocalesOptions)
 @send external resolvedOptions: t => resolvedOptions = "resolvedOptions"
 
 @send external format: (t, float) => string = "format"
-/**
-Not available in firefox v110
-*/
 @send
 external formatRange: (t, ~start: float, ~end: float) => array<string> = "formatRange"
 @send
 external formatToParts: (t, float) => array<numberFormatPart> = "formatToParts"
-/**
-Not available in firefox v110
-*/
 @send
 external formatRangeToParts: (t, ~start: float, ~end: float) => array<numberFormatRangePart> =
   "formatRange"
 
 @send external formatInt: (t, int) => string = "format"
-/**
-Not available in firefox v110
-*/
+
 @send
 external formatIntRange: (t, ~start: int, ~end: int) => array<string> = "formatRange"
 @send
 external formatIntToParts: (t, int) => array<numberFormatPart> = "formatToParts"
-/**
-Not available in firefox v110
-*/
+
 @send
 external formatIntRangeToParts: (t, ~start: int, ~end: int) => array<numberFormatRangePart> =
   "formatRange"
 
 @send external formatBigInt: (t, Core__BigInt.t) => string = "format"
-/**
-Not available in firefox v110
-*/
+
 @send
 external formatBigIntRange: (t, ~start: Core__BigInt.t, ~end: Core__BigInt.t) => array<string> =
   "formatRange"
 @send
 external formatBigIntToParts: (t, Core__BigInt.t) => array<numberFormatPart> = "formatToParts"
-/**
-Not available in firefox v110
-*/
+
 @send
 external formatBigIntRangeToParts: (
   t,
@@ -231,5 +217,6 @@ external formatBigIntRangeToParts: (
 ) => array<numberFormatPart> = "formatRange"
 
 @send external formatString: (t, string) => string = "format"
+
 @send
 external formatStringToParts: (t, string) => array<numberFormatRangePart> = "formatToParts"

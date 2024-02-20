@@ -58,19 +58,12 @@ type rule = [#zero | #one | #two | #few | #many | #other]
 @send external selectInt: (t, int) => rule = "select"
 @send external selectBigInt: (t, Core__BigInt.t) => rule = "select"
 
-/**
-Not supported in Firefox v110
-*/
 @send
 external selectRange: (t, ~start: float, ~end: float) => rule = "selectRange"
-/**
-Not supported in Firefox v110
-*/
+
 @send
 external selectRangeInt: (t, ~start: int, ~end: int) => rule = "selectRange"
-/**
-Not supported in Firefox v110
-*/
+
 @send
 external selectRangeBigInt: (t, ~start: Core__BigInt.t, ~end: Core__BigInt.t) => rule =
   "selectRange"

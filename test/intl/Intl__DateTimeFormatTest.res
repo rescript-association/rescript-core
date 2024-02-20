@@ -20,7 +20,7 @@ Console.log(
   ),
 )
 
-let formatter = Intl.DateTimeFormat.makeWithOptions({
+let options = {
   hour12: false,
   hourCycle: #h24,
   timeZone: "UTC",
@@ -33,9 +33,25 @@ let formatter = Intl.DateTimeFormat.makeWithOptions({
   minute: #"2-digit",
   second: #"2-digit",
   fractionalSecondDigits: #3,
-  timeZoneName: #short,
-})
+  timeZoneName: #longGeneric,
+}
+let formatter = Intl.DateTimeFormat.makeWithOptions(options)
 
+Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
+
+let formatter = Intl.DateTimeFormat.makeWithOptions({...options, timeZoneName: #long})
+Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
+
+let formatter = Intl.DateTimeFormat.makeWithOptions({...options, timeZoneName: #longOffset})
+Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
+
+let formatter = Intl.DateTimeFormat.makeWithOptions({...options, timeZoneName: #short})
+Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
+
+let formatter = Intl.DateTimeFormat.makeWithOptions({...options, timeZoneName: #shortGeneric})
+Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
+
+let formatter = Intl.DateTimeFormat.makeWithOptions({...options, timeZoneName: #shortOffset})
 Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
 
 let resolvedOptions = Intl.DateTimeFormat.make()->Intl.DateTimeFormat.resolvedOptions

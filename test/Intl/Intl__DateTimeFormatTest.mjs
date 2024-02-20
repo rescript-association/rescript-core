@@ -39,7 +39,7 @@ var formatter$1 = new Intl.DateTimeFormat(undefined, {
       minute: "2-digit",
       second: "2-digit",
       fractionalSecondDigits: 3,
-      timeZoneName: "short"
+      timeZoneName: "longGeneric"
     });
 
 console.log(formatter$1.format(new Date(Date.now())));

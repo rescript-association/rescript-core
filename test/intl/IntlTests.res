@@ -37,6 +37,9 @@ try {
 
   Console.error("Shouldn't have been hit")
 } catch {
-| Exn.Error(e) => Console.error(e)
-// Expected output: RangeError: invalid key: "someInvalidKey"
+| Exn.Error(e) =>
+  switch Exn.message(e)->String.toLowerCase {
+  | "rangeerror: invalid key: \"someinvalidkey\"" => Console.log("Caught expected error")
+  | _ => Error.raise(e)
+  }
 }
