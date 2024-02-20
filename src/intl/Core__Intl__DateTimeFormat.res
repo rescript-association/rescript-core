@@ -14,6 +14,7 @@ type second = [#numeric | #"2-digit"]
 
 /**
 Firefox also supports IANA time zone names here
+Node v19+ supports "shortOffset", "shortGeneric", "longOffset", and "longGeneric".
 */
 type timeZoneName = [
   | #short
