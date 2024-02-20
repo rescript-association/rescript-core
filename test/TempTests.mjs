@@ -309,11 +309,15 @@ console.log(Core__Int.fromString(undefined, "99999999999999999"));
 
 console.log(Core__Int.fromString(2, "010101"));
 
+var _collator = IntlTests._collator;
+
 var collator = IntlTests.collator;
 
 var resolvedOptions = IntlTests.resolvedOptions;
 
 var timeZone = IntlTests.timeZone;
+
+var _locale = IntlTests._locale;
 
 var locale = IntlTests.locale;
 
@@ -329,14 +333,18 @@ var sigFormatter = IntlTests.sigFormatter;
 
 var options = IntlTests.options;
 
+var _formatter = IntlTests._formatter;
+
 var formatter = IntlTests.formatter;
 
 var segments = IntlTests.segments;
 
 export {
+  _collator ,
   collator ,
   resolvedOptions ,
   timeZone ,
+  _locale ,
   locale ,
   currencyFormatter ,
   roundingFormatter ,
@@ -344,6 +352,7 @@ export {
   groupingFormatter2 ,
   sigFormatter ,
   options ,
+  _formatter ,
   formatter ,
   segments ,
   date ,

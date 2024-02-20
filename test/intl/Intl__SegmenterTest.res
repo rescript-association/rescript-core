@@ -6,13 +6,13 @@ Console.log("Intl.Segmenter")
 Intl.Segmenter.supportedLocalesOf(["en-US", "en-GB"])->ignore
 Intl.Segmenter.supportedLocalesOfWithOptions(["en-US", "en-GB"], {localeMatcher: #lookup})->ignore
 
-let formatter = Intl.Segmenter.make()
-let formatter = Intl.Segmenter.makeWithLocale("en-US")
-let formatter = Intl.Segmenter.makeWithLocales(["en-US", "en-GB"])
-let formatter = Intl.Segmenter.makeWithOptions({
+let _formatter = Intl.Segmenter.make()
+let _formatter = Intl.Segmenter.makeWithLocale("en-US")
+let _formatter = Intl.Segmenter.makeWithLocales(["en-US", "en-GB"])
+let _formatter = Intl.Segmenter.makeWithOptions({
   granularity: #word,
 })
-let formatter = Intl.Segmenter.makeWithLocaleAndOptions(
+let _formatter = Intl.Segmenter.makeWithLocaleAndOptions(
   "en-US",
   {
     granularity: #word,

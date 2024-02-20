@@ -3,9 +3,9 @@ open RescriptCore
 Console.log("---")
 Console.log("Intl.Collator")
 
-let collator = Intl.Collator.make()
-let collator = Intl.Collator.makeWithLocale("en-US")
-let collator = Intl.Collator.makeWithLocales(["en-US", "en-GB"])
+let _collator = Intl.Collator.make()
+let _collator = Intl.Collator.makeWithLocale("en-US")
+let _collator = Intl.Collator.makeWithLocales(["en-US", "en-GB"])
 let collator = Intl.Collator.makeWithLocaleAndOptions(
   "en-US",
   {caseFirst: #upper, sensitivity: #base, ignorePunctuation: true, numeric: true},

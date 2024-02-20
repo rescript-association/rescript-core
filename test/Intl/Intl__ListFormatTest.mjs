@@ -19,7 +19,7 @@ new Intl.ListFormat("en-US", {
       style: "long"
     });
 
-new Intl.ListFormat([
+var _formatter = new Intl.ListFormat([
       "en-US",
       "en-GB"
     ], {
@@ -59,6 +59,7 @@ console.log(formatter.formatToParts([
         ]));
 
 export {
+  _formatter ,
   formatter ,
 }
 /*  Not a pure module */

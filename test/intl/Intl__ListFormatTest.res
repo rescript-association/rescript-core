@@ -3,14 +3,14 @@ open RescriptCore
 Console.log("---")
 Console.log("Intl.ListFormat")
 
-let formatter = Intl.ListFormat.make()
-let formatter = Intl.ListFormat.makeWithLocale("en-US")
-let formatter = Intl.ListFormat.makeWithLocales(["en-US", "en-GB"])
-let formatter = Intl.ListFormat.makeWithLocaleAndOptions(
+let _formatter = Intl.ListFormat.make()
+let _formatter = Intl.ListFormat.makeWithLocale("en-US")
+let _formatter = Intl.ListFormat.makeWithLocales(["en-US", "en-GB"])
+let _formatter = Intl.ListFormat.makeWithLocaleAndOptions(
   "en-US",
   {style: #long, \"type": #conjunction},
 )
-let formatter = Intl.ListFormat.makeWithLocalesAndOptions(
+let _formatter = Intl.ListFormat.makeWithLocalesAndOptions(
   ["en-US", "en-GB"],
   {style: #long, \"type": #conjunction},
 )

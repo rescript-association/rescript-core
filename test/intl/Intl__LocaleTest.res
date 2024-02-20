@@ -3,7 +3,7 @@ open RescriptCore
 Console.log("---")
 Console.log("Intl.Locale")
 
-let locale = Intl.Locale.make("en-US")
+let _locale = Intl.Locale.make("en-US")
 let locale = Intl.Locale.makeWithOptions(
   "en-US",
   {

@@ -5,7 +5,7 @@ console.log("---");
 
 console.log("Intl.Locale");
 
-new Intl.Locale("en-US");
+var _locale = new Intl.Locale("en-US");
 
 var locale = new Intl.Locale("en-US", {
       calendar: "hebrew",
@@ -40,6 +40,7 @@ console.log(locale.maximize());
 console.log(locale.minimize());
 
 export {
+  _locale ,
   locale ,
 }
 /*  Not a pure module */

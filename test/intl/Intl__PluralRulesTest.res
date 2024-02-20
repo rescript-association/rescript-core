@@ -3,15 +3,15 @@ open RescriptCore
 Console.log("---")
 Console.log("Intl.PluralRules")
 
-let formatter = Intl.PluralRules.make()
-let formatter = Intl.PluralRules.makeWithLocale("en-US")
-let formatter = Intl.PluralRules.makeWithLocales(["en-US", "en-GB"])
-let formatter = Intl.PluralRules.makeWithOptions({
+let _formatter = Intl.PluralRules.make()
+let _formatter = Intl.PluralRules.makeWithLocale("en-US")
+let _formatter = Intl.PluralRules.makeWithLocales(["en-US", "en-GB"])
+let _formatter = Intl.PluralRules.makeWithOptions({
   \"type": #ordinal,
   maximumSignificantDigits: #5,
   minimumSignificantDigits: #3,
 })
-let formatter = Intl.PluralRules.makeWithLocaleAndOptions(
+let _formatter = Intl.PluralRules.makeWithLocaleAndOptions(
   "en-US",
   {
     \"type": #ordinal,

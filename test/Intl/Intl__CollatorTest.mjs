@@ -9,7 +9,7 @@ new Intl.Collator();
 
 new Intl.Collator("en-US");
 
-new Intl.Collator([
+var _collator = new Intl.Collator([
       "en-US",
       "en-GB"
     ]);
@@ -40,6 +40,7 @@ console.log(collator.compare("hi", "hï"));
 console.log(Intl.Collator.supportedLocalesOf(["hi"]));
 
 export {
+  _collator ,
   collator ,
 }
 /*  Not a pure module */

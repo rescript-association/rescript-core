@@ -30,7 +30,7 @@ new Intl.Segmenter(undefined, {
       granularity: "word"
     });
 
-new Intl.Segmenter("en-US", {
+var _formatter = new Intl.Segmenter("en-US", {
       granularity: "word"
     });
 
@@ -49,6 +49,7 @@ console.log(segments.containing());
 console.log(segments.containing(1));
 
 export {
+  _formatter ,
   formatter ,
   segments ,
 }

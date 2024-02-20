@@ -20,7 +20,7 @@ Console.log(
   ),
 )
 
-let options = {
+let options: Intl.DateTimeFormat.options = {
   hour12: false,
   hourCycle: #h24,
   timeZone: "UTC",

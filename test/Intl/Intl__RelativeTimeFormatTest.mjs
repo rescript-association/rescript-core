@@ -31,7 +31,7 @@ new Intl.RelativeTimeFormat(undefined, {
       style: "narrow"
     });
 
-new Intl.RelativeTimeFormat("en-US", {
+var _formatter = new Intl.RelativeTimeFormat("en-US", {
       numeric: "always",
       style: "narrow"
     });
@@ -48,6 +48,7 @@ console.log(formatter.format(3, "hour"));
 console.log(formatter.formatToParts(3, "hour"));
 
 export {
+  _formatter ,
   formatter ,
 }
 /*  Not a pure module */

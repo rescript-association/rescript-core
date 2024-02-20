@@ -38,8 +38,16 @@ try {
   Console.error("Shouldn't have been hit")
 } catch {
 | Exn.Error(e) =>
-  switch Exn.message(e)->String.toLowerCase {
-  | "rangeerror: invalid key: \"someinvalidkey\"" => Console.log("Caught expected error")
-  | _ => Error.raise(e)
+  switch Error.message(e)->Option.map(String.toLowerCase) {
+  | Some("invalid key : someinvalidkey") => Console.log("Caught expected error")
+  | message => {
+      Console.warn(`Unexpected error message: "${message->Option.getUnsafe}"`)
+      Error.raise(e)
+    }
+  }
+| e =>
+  switch Error.fromException(e) {
+  | Some(e) => Error.raise(e)
+  | None => Console.error("Unexpected error")
   }
 }

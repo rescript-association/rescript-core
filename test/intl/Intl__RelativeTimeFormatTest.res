@@ -9,14 +9,14 @@ Intl.RelativeTimeFormat.supportedLocalesOfWithOptions(
   {localeMatcher: #lookup},
 )->ignore
 
-let formatter = Intl.RelativeTimeFormat.make()
-let formatter = Intl.RelativeTimeFormat.makeWithLocale("en-US")
-let formatter = Intl.RelativeTimeFormat.makeWithLocales(["en-US", "en-GB"])
-let formatter = Intl.RelativeTimeFormat.makeWithOptions({
+let _formatter = Intl.RelativeTimeFormat.make()
+let _formatter = Intl.RelativeTimeFormat.makeWithLocale("en-US")
+let _formatter = Intl.RelativeTimeFormat.makeWithLocales(["en-US", "en-GB"])
+let _formatter = Intl.RelativeTimeFormat.makeWithOptions({
   numeric: #always,
   style: #narrow,
 })
-let formatter = Intl.RelativeTimeFormat.makeWithLocaleAndOptions(
+let _formatter = Intl.RelativeTimeFormat.makeWithLocaleAndOptions(
   "en-US",
   {
     numeric: #always,

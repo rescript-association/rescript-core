@@ -20,7 +20,7 @@ new Intl.PluralRules(undefined, {
       maximumSignificantDigits: 5
     });
 
-new Intl.PluralRules("en-US", {
+var _formatter = new Intl.PluralRules("en-US", {
       type: "ordinal",
       minimumSignificantDigits: 3,
       maximumSignificantDigits: 5
@@ -39,6 +39,7 @@ console.log(formatter.select(2.0));
 console.log(formatter.select(2));
 
 export {
+  _formatter ,
   formatter ,
 }
 /*  Not a pure module */
