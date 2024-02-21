@@ -9,6 +9,10 @@
     {
       "dir": "test",
       "type": "dev"
+    },
+    {
+      "dir": "scripts",
+      "type": "dev"
     }
   ],
   "suffix": ".mjs",
@@ -16,6 +20,7 @@
     "module": "es6",
     "in-source": true
   },
+  "bs-dev-dependencies": ["@rescript/tools"],
   "warnings": {
     "error": "+101"
   }
