@@ -98,13 +98,13 @@ otherwise return `default`.
 
 ```rescript
 Nullable.getOr(Nullable.null, "Banana") // Banana
-Nullable.getOr(Nulalble.make("Apple"), "Banana") // Apple
+Nullable.getOr(Nullable.make("Apple"), "Banana") // Apple
 
 let greet = (firstName: option<string>) =>
-  "Greetings " ++ firstName->Nullable.getOr("Anonymous")
+  "Greetings " ++ firstName->Option.getOr("Anonymous")
 
-Nullable.make("Jane")->greet // "Greetings Jane"
-Nullable.null->greet // "Greetings Anonymous"
+Nullable.make("Jane")->Nullable.toOption->greet // "Greetings Jane"
+Nullable.null->Nullable.toOption->greet // "Greetings Anonymous"
 ```
 */
 let getOr: (t<'a>, 'a) => 'a

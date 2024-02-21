@@ -30,8 +30,9 @@ See [iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 ## Examples
 ```rescript
+@val external someIterator: Iterator.t<int> = "someIterator"
 // Pulls out the next value of the iterator
-let {done, value} = someIterator->Iterator.next
+let {Iterator.done, value} = someIterator->Iterator.next
 ```
 */
 @send

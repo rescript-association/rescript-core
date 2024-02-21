@@ -51,7 +51,7 @@ module Constants: {
   ## Examples
 
   ```rescript
-  Math.Constants.LN2
+  Math.Constants.ln2
   ```
   */
   @val
@@ -209,7 +209,7 @@ module Int: {
   ```rescript
   Math.Int.minMany([1, 2]) // 1
   Math.Int.minMany([-1, -2]) // -2
-  Math.Int.minMany([])->Float.isFinite // false
+  Math.Int.minMany([])->Int.toFloat->Float.isFinite // false
   ```
   */
   @variadic
@@ -240,7 +240,7 @@ module Int: {
   ```rescript
   Math.Int.maxMany([1, 2]) // 2
   Math.Int.maxMany([-1, -2]) // -1
-  Math.Int.maxMany([])->Float.isFinite // false
+  Math.Int.maxMany([])->Int.toFloat->Float.isFinite // false
   ```
   */
   @variadic
@@ -333,8 +333,8 @@ See [`Math.acos`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 ## Examples
 
 ```rescript
-Math.acos(-1) // 3.141592653589793
-Math.acos(-3)->Float.isNaN // true
+Math.acos(-1.0) // 3.141592653589793
+Math.acos(-3.0)->Float.isNaN // true
 ```
 */
 @val
@@ -348,7 +348,7 @@ See [`Math.acosh`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 ## Examples
 
 ```rescript
-Math.acosh(1) // 0.0
+Math.acosh(1.0) // 0.0
 Math.acosh(0.5)->Float.isNaN // true
 ```
 */
@@ -377,8 +377,8 @@ See [`Math.asinh`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 ## Examples
 
 ```rescript
-Math.asinh(-1) // -0.881373587019543
-Math.asinh(-0) // -0.0
+Math.asinh(-1.0) // -0.881373587019543
+Math.asinh(-0.0) // -0.0
 ```
 */
 @val
@@ -393,7 +393,7 @@ See [`Math.atan`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 ```rescript
 Math.atan(-0.0) // -0.0
 Math.atan(0.0) // 0.0
-Math.atan(1) // 0.7853981633974483
+Math.atan(1.0) // 0.7853981633974483
 ```
 */
 @val
@@ -583,8 +583,8 @@ See [`Math.hypot`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 ## Examples
 
 ```rescript
-Math.hypot([3.0, 4.0, 5.0]) // 7.0710678118654755
-Math.hypot([]) // 0.0
+Math.hypotMany([3.0, 4.0, 5.0]) // 7.0710678118654755
+Math.hypotMany([]) // 0.0
 ```
 */
 @variadic

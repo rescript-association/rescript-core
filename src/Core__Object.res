@@ -165,9 +165,9 @@ external keysToArray: {..} => array<string> = "Object.keys"
 
 ```rescript
 let point = {"x": 1, "y": 2}
-{"a": 1}->hasOwnProperty("a") // true
-{"a": 1}->hasOwnProperty("b") // false
-{"a": 1}->hasOwnProperty("toString") // false
+{"a": 1}->Object.hasOwnProperty("a") // true
+{"a": 1}->Object.hasOwnProperty("b") // false
+{"a": 1}->Object.hasOwnProperty("toString") // false
 ```
 */
 @val

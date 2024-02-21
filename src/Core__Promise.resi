@@ -65,7 +65,7 @@ Promise.make((resolve, reject) => {
 ->then(str => {
   Console.log(str)->resolve
 })
-->catch(e => {
+->catch(_ => {
   Console.log("Error occurred")
   resolve()
 })
@@ -127,7 +127,8 @@ See [`Promise.then`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Ref
 ## Examples
 
 ```rescript
-Promise.resolve(5)
+open Promise
+resolve(5)
 ->then(num => {
   resolve(num + 5)
 })
@@ -149,6 +150,7 @@ within the provided callback (e.g. `thenResolve(value => resolve(value))`).
 ## Examples
 
 ```rescript
+open Promise
 resolve("Anna")
 ->thenResolve(str => {
   "Hello " ++ str
@@ -173,12 +175,13 @@ it originally received. See [`Promise.finally`](https://developer.mozilla.org/en
 ## Examples
 
 ```rescript
+open Promise
 exception SomeError(string)
 let isDone = ref(false)
 
 resolve(5)
 ->then(_ => {
-  reject(TestError("test"))
+  reject(SomeError("test"))
 })
 ->then(v => {
   Console.log2("final result", v)
@@ -211,8 +214,8 @@ external finally: (t<'a>, unit => unit) => t<'a> = "finally"
 open Promise
 let racer = (ms, name) => {
   Promise.make((resolve, _) => {
-    Global.setTimeout(() => {
-      resolve(. name)
+    setTimeout(() => {
+      resolve(name)
     }, ms)->ignore
   })
 }
