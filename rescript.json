@@ -8,6 +8,7 @@
     },
     {
       "dir": "test",
+      "subdirs": ["intl"],
       "type": "dev"
     }
   ],
