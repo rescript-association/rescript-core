@@ -52,6 +52,43 @@ external null: Core__Nullable.t<'a> = "#null"
 external undefined: Core__Nullable.t<'a> = "#undefined"
 external typeof: 'a => Core__Type.t = "#typeof"
 
+/**
+`import(value)` dynamically import a value or function from a ReScript
+module. The import call will return a `promise`, resolving to the dynamically loaded
+value.
+
+## Examples
+
+`MathUtils.res` file:
+
+```rescript
+let add = (a, b) => a + b
+let sub = (a, b) => a - b
+```
+In other file you can import the `add` value defined in `MathUtils.res`
+
+```rescript
+let main = async () => {
+  let add = await import(MathUtils.add)
+  let onePlusOne = add(1, 1)
+  Console.log(onePlusOne)
+}
+```
+
+Compiles to:
+
+```javascript
+async function main() {
+  var add = await import("./MathUtils.mjs").then(function(m) {
+    return m.add;
+  });
+  var onePlusOne = add(1, 1);
+  console.log(onePlusOne);
+}
+```
+*/
+external import: 'a => promise<'a> = "#import"
+
 type t<'a> = Js.t<'a>
 module MapperRt = Js.MapperRt
 module Internal = Js.Internal

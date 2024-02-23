@@ -7,6 +7,7 @@
 - Add `Dict.forEach`, `Dict.forEachWithKey` and `Dict.mapValues` https://github.com/rescript-association/rescript-core/pull/181
 - Remove internal xxxU helper functions that are not needed anymore in uncurried mode. https://github.com/rescript-association/rescript-core/pull/191
 - Rename `Object.empty` to `Object.make` for consistency.
+- Add dynamic `import`. https://github.com/rescript-association/rescript-core/pull/178
 
 ## 1.0.0
 
