@@ -57,16 +57,17 @@
 let getExn: result<'a, 'b> => 'a
 
 /**
-  `mapOr(res, default, f)`: When res is `Ok(n)`, returns `f(n)`,
-  otherwise `default`.
+`mapOr(res, default, f)`: When res is `Ok(n)`, returns `f(n)`, otherwise `default`.
 
-  ```res example
-  let ok = Result.Ok(42)
-  Result.mapOr(ok, 0, (x) => x / 2) == 21
+## Examples
 
-  let error = Result.Error("Invalid data")
-  Result.mapOr(error, 0, (x) => x / 2) == 0
-  ```
+```rescript
+let ok = Ok(42)
+Result.mapOr(ok, 0, (x) => x / 2) == 21
+
+let error = Error("Invalid data")
+Result.mapOr(error, 0, (x) => x / 2) == 0
+```
 */
 let mapOr: (result<'a, 'c>, 'b, 'a => 'b) => 'b
 
@@ -74,51 +75,56 @@ let mapOr: (result<'a, 'c>, 'b, 'a => 'b) => 'b
 let mapWithDefault: (result<'a, 'c>, 'b, 'a => 'b) => 'b
 
 /**
-  `map(res, f)`: When res is `Ok(n)`, returns `Ok(f(n))`. Otherwise returns res
-  unchanged. Function `f` takes a value of the same type as `n` and returns an
-  ordinary value.
+`map(res, f)`: When res is `Ok(n)`, returns `Ok(f(n))`. Otherwise returns res
+unchanged. Function `f` takes a value of the same type as `n` and returns an
+ordinary value.
 
-  ```res example
-  let f = (x) => sqrt(Int.toFloat(x))
+## Examples
 
-  Result.map(Ok(64), f) == Ok(8.0)
+```rescript
+let f = (x) => sqrt(Int.toFloat(x))
 
-  Result.map(Error("Invalid data"), f) == Error("Invalid data")
-  ```
+Result.map(Ok(64), f) == Ok(8.0)
+
+Result.map(Error("Invalid data"), f) == Error("Invalid data")
+```
 */
 let map: (result<'a, 'c>, 'a => 'b) => result<'b, 'c>
 
 /**
-  `flatMap(res, f)`: When res is `Ok(n)`, returns `f(n)`. Otherwise, returns res
-  unchanged. Function `f` takes a value of the same type as `n` and returns a
-  `Result`.
+`flatMap(res, f)`: When res is `Ok(n)`, returns `f(n)`. Otherwise, returns res
+unchanged. Function `f` takes a value of the same type as `n` and returns a
+`Result`.
 
-  ```res example
-  let recip = (x) =>
-    if (x !== 0.0) {
-      Result.Ok(1.0 /. x)
-    } else {
-      Result.Error("Divide by zero")
-    }
+## Examples
 
-  Result.flatMap(Ok(2.0), recip) == Ok(0.5)
+```rescript
+let recip = (x) =>
+  if (x !== 0.0) {
+    Ok(1.0 /. x)
+  } else {
+    Error("Divide by zero")
+  }
 
-  Result.flatMap(Ok(0.0), recip) == Error("Divide by zero")
+Result.flatMap(Ok(2.0), recip) == Ok(0.5)
 
-  Result.flatMap(Error("Already bad"), recip) == Error("Already bad")
-  ```
+Result.flatMap(Ok(0.0), recip) == Error("Divide by zero")
+
+Result.flatMap(Error("Already bad"), recip) == Error("Already bad")
+```
 */
 let flatMap: (result<'a, 'c>, 'a => result<'b, 'c>) => result<'b, 'c>
 
 /**
-  `getOr(res, defaultValue)`: If `res` is `Ok(n)`, returns `n`,
-  otherwise `default`
+`getOr(res, defaultValue)`: If `res` is `Ok(n)`, returns `n`, otherwise `default`
 
-  ```res example
-  Result.getOr(Ok(42), 0) == 42
+## Examples
 
-  Result.getOr(Error("Invalid Data"), 0) == 0
-  ```
+```rescript
+Result.getOr(Ok(42), 0) == 42
+
+Result.getOr(Error("Invalid Data"), 0) == 0
+```
 */
 let getOr: (result<'a, 'b>, 'a) => 'a
 
@@ -126,79 +132,81 @@ let getOr: (result<'a, 'b>, 'a) => 'a
 let getWithDefault: (result<'a, 'b>, 'a) => 'a
 
 /**
-  `isOk(res)`: Returns `true` if `res` is of the form `Ok(n)`, `false` if it is
-  the `Error(e)` variant.
+`isOk(res)`: Returns `true` if `res` is of the form `Ok(n)`, `false` if it is the `Error(e)` variant.
 */
 let isOk: result<'a, 'b> => bool
 
 /**
-  `isError(res)`: Returns `true` if `res` is of the form `Error(e)`, `false` if
-  it is the `Ok(n)` variant.
+`isError(res)`: Returns `true` if `res` is of the form `Error(e)`, `false` if it is the `Ok(n)` variant.
 */
 let isError: result<'a, 'b> => bool
 
 /**
-  `equal(res1, res2, f)`: Determine if two `Result` variables are equal with
-  respect to an equality function. If `res1` and `res2` are of the form `Ok(n)`
-  and `Ok(m)`, return the result of `f(n, m)`. If one of `res1` and `res2` are of
-  the form `Error(e)`, return false If both `res1` and `res2` are of the form
-  `Error(e)`, return true
+`equal(res1, res2, f)`: Determine if two `Result` variables are equal with
+respect to an equality function. If `res1` and `res2` are of the form `Ok(n)`
+and `Ok(m)`, return the result of `f(n, m)`. If one of `res1` and `res2` are of
+the form `Error(e)`, return false If both `res1` and `res2` are of the form
+`Error(e)`, return true
 
-  ```res example
-  let good1 = Result.Ok(42)
+## Examples
 
-  let good2 = Result.Ok(32)
+```rescript
+let good1 = Ok(42)
 
-  let bad1 = Result.Error("invalid")
+let good2 = Ok(32)
 
-  let bad2 = Result.Error("really invalid")
+let bad1 = Error("invalid")
 
-  let mod10equal = (a, b) => mod(a, 10) === mod(b, 10)
+let bad2 = Error("really invalid")
 
-  Result.equal(good1, good2, mod10equal) == true
+let mod10equal = (a, b) => mod(a, 10) === mod(b, 10)
 
-  Result.equal(good1, bad1, mod10equal) == false
+Result.equal(good1, good2, mod10equal) == true
 
-  Result.equal(bad2, good2, mod10equal) == false
+Result.equal(good1, bad1, mod10equal) == false
 
-  Result.equal(bad1, bad2, mod10equal) == true
-  ```
+Result.equal(bad2, good2, mod10equal) == false
+
+Result.equal(bad1, bad2, mod10equal) == true
+```
 */
 let equal: (result<'a, 'c>, result<'b, 'd>, ('a, 'b) => bool) => bool
 
 /**
-  `compare(res1, res2, f)`: Compare two `Result` variables with respect to a
-  comparison function. The comparison function returns -1. if the first variable
-  is "less than" the second, 0. if the two variables are equal, and 1. if the first
-  is "greater than" the second.
+`compare(res1, res2, f)`: Compare two `Result` variables with respect to a
+comparison function. The comparison function returns -1. if the first variable
+is "less than" the second, 0. if the two variables are equal, and 1. if the first
+is "greater than" the second.
 
-  If `res1` and `res2` are of the form `Ok(n)` and `Ok(m)`, return the result of
-  `f(n, m)`. If `res1` is of the form `Error(e)` and `res2` of the form `Ok(n)`,
-  return -1. (nothing is less than something) If `res1` is of the form `Ok(n)` and
-  `res2` of the form `Error(e)`, return 1. (something is greater than nothing) If
-  both `res1` and `res2` are of the form `Error(e)`, return 0. (equal)
+If `res1` and `res2` are of the form `Ok(n)` and `Ok(m)`, return the result of
+`f(n, m)`. If `res1` is of the form `Error(e)` and `res2` of the form `Ok(n)`,
+return -1. (nothing is less than something) If `res1` is of the form `Ok(n)` and
+`res2` of the form `Error(e)`, return 1. (something is greater than nothing) If
+both `res1` and `res2` are of the form `Error(e)`, return 0. (equal)
 
-  ```res example
-  let good1 = Result.Ok(59)
+## Examples
 
-  let good2 = Result.Ok(37)
+```rescript
+let good1 = Ok(59)
 
-  let bad1 = Result.Error("invalid")
+let good2 = Ok(37)
 
-  let bad2 = Result.Error("really invalid")
+let bad1 = Error("invalid")
 
-  let mod10cmp = (a, b) => Pervasives.compare(mod(a, 10), mod(b, 10))
+let bad2 = Error("really invalid")
 
-  Result.compare(Ok(39), Ok(57), mod10cmp) == 1.
+let mod10cmp = (a, b) => Int.compare(mod(a, 10), mod(b, 10))
 
-  Result.compare(Ok(57), Ok(39), mod10cmp) == (-1.)
+Result.compare(Ok(39), Ok(57), mod10cmp) == 1.
 
-  Result.compare(Ok(39), Error("y"), mod10cmp) == 1.
+Result.compare(Ok(57), Ok(39), mod10cmp) == (-1.)
 
-  Result.compare(Error("x"), Ok(57), mod10cmp) == (-1.)
+Result.compare(Ok(39), Error("y"), mod10cmp) == 1.
 
-  Result.compare(Error("x"), Error("y"), mod10cmp) == 0.
-  ```
+Result.compare(Error("x"), Ok(57), mod10cmp) == (-1.)
+
+Result.compare(Error("x"), Error("y"), mod10cmp) == 0.
+```
 */
 let compare: (result<'a, 'c>, result<'b, 'd>, ('a, 'b) => Core__Ordering.t) => Core__Ordering.t
 
@@ -221,8 +229,8 @@ let forEach: (result<'a, 'b>, 'a => unit) => unit
 
 ```rescript
 let format = n => `Error code: ${n->Int.toString}`
-mapError(Error(14), format) // Error("Error code: 14")
-mapError(Ok("abc"), format) // Ok("abc")
+Result.mapError(Error(14), format) // Error("Error code: 14")
+Result.mapError(Ok("abc"), format) // Ok("abc")
 ```
 */
 let mapError: (result<'a, 'b>, 'b => 'c) => result<'a, 'c>

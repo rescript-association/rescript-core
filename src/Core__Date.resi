@@ -67,20 +67,15 @@ You can use the result like any valid date, but many functions like `toString` w
 
 ## Examples
 ```rescript
-Date.fromString("2023")
-// 2023-01-01T00:00:00.000Z
+Date.fromString("2023") // 2023-01-01T00:00:00.000Z
 
-Date.fromString("2023-02-20")
-// 2023-02-20T00:00:00.000Z
+Date.fromString("2023-02-20") // 2023-02-20T00:00:00.000Z
 
-Date.fromString("2023-02-20T16:40:00.00Z")
-// 2023-02-20T16:40:00.000Z
+Date.fromString("2023-02-20T16:40:00.00Z") // 2023-02-20T16:40:00.000Z
 
-Date.fromString("")
-// Invalid Date
+Date.fromString("") // Invalid Date
 
-Date.fromString("")->getTime
-// NaN
+Date.fromString("")->Date.getTime // NaN
 ```
 */
 @new
@@ -801,8 +796,7 @@ Returns the year of a given date (according to UTC time).
 
 ## Examples
 ```rescript
-Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCFullYear
-// 2022
+Date.fromString("2023-01-01T00:00:00.00+01:00")->Date.getUTCFullYear // 2022
 ```
 */
 @send
@@ -815,8 +809,7 @@ Returns the month of a given date (according to UTC time).
 
 ## Examples
 ```rescript
-Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCMonth
-// 11
+Date.fromString("2023-01-01T00:00:00.00+01:00")->Date.getUTCMonth // 11
 ```
 */
 @send
@@ -829,8 +822,7 @@ Returns the date (day of month) of a given date (according to UTC time).
 
 ## Examples
 ```rescript
-Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCDate
-// 31
+Date.fromString("2023-01-01T00:00:00.00+01:00")->Date.getUTCDate // 31
 ```
 */
 @send
@@ -843,8 +835,7 @@ Returns the hours of a given date (according to UTC time).
 
 ## Examples
 ```rescript
-Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCHours
-// 23
+Date.fromString("2023-01-01T00:00:00.00+01:00")->Date.getUTCHours // 23
 ```
 */
 @send
@@ -857,8 +848,7 @@ Returns the minutes of a given date (according to UTC time).
 
 ## Examples
 ```rescript
-Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCMinutes
-// 0
+Date.fromString("2023-01-01T00:00:00.00+01:00")->Date.getUTCMinutes // 0
 ```
 */
 @send
@@ -871,8 +861,7 @@ Returns the seconds of a given date (according to UTC time).
 
 ## Examples
 ```rescript
-Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCSeconds
-// 0
+Date.fromString("2023-01-01T00:00:00.00+01:00")->Date.getUTCSeconds // 0
 ```
 */
 @send
@@ -885,8 +874,7 @@ Returns the milliseconds of a given date (according to UTC time).
 
 ## Examples
 ```rescript
-Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCMilliseconds
-// 0
+Date.fromString("2023-01-01T00:00:00.00+01:00")->Date.getUTCMilliseconds // 0
 ```
 */
 @send
@@ -900,8 +888,7 @@ Returns the day (day of week) of a given date (according to UTC time).
 
 ## Examples
 ```rescript
-Date.fromString("2023-01-01T00:00:00.00+01:00").getUTCDay
-// 6
+Date.fromString("2023-01-01T00:00:00.00+01:00")->Date.getUTCDay // 6
 ```
 */
 @send

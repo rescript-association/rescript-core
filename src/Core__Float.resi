@@ -153,7 +153,7 @@ See [`parseFloat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 ```rescript
 Float.parseFloat("1.0") // 1.0
 Float.parseFloat("  3.14   ") // 3.14
-Float.parseFloat(3.0) // 3.0
+Float.parseFloat("3.0") // 3.0
 Float.parseFloat("3.14some non-digit characters") // 3.14
 Float.parseFloat("error")->Float.isNaN // true
 ```
@@ -190,10 +190,10 @@ See [`parseInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referen
 ## Examples
 
 ```rescript
-Float.parseInt("10.0", ~radix=2) // 2.0
-Float.parseInt("15 * 3", ~radix=10) // 15.0
-Float.parseInt("12", ~radix=13) // 15.0
-Float.parseInt("17", ~radix=40)->Float.isNaN // true
+Float.parseIntWithRadix("10.0", ~radix=2) // 2.0
+Float.parseIntWithRadix("15 * 3", ~radix=10) // 15.0
+Float.parseIntWithRadix("12", ~radix=13) // 15.0
+Float.parseIntWithRadix("17", ~radix=40)->Float.isNaN // true
 ```
 */
 @val
@@ -258,8 +258,8 @@ See [`Number.toFixed`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/R
 ## Examples
 
 ```rescript
-Float.toFixed(300.0, ~digits=4) // "300.0000"
-Float.toFixed(300.0, ~digits=1) // "300.0"
+Float.toFixedWithPrecision(300.0, ~digits=4) // "300.0000"
+Float.toFixedWithPrecision(300.0, ~digits=1) // "300.0"
 ```
 
 ## Exceptions
@@ -286,15 +286,15 @@ Float.toPrecision(1.0) // "1"
 external toPrecision: float => string = "toPrecision"
 
 /**
-`toPrecision(v, ~digits)` return a `string` representing the giver value with
+`toPrecisionWithPrecision(v, ~digits)` return a `string` representing the giver value with
 precision. `digits` specifies the number of significant digits.
 See [`Number.toPrecision`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toPrecision) on MDN.
 
 ## Examples
 
 ```rescript
-Float.toPrecision(100.0, ~digits=2) // "1.0e+2"
-Float.toPrecision(1.0) // "1.0"
+Float.toPrecisionWithPrecision(100.0, ~digits=2) // "1.0e+2"
+Float.toPrecisionWithPrecision(1.0, ~digits=1) // "1"
 ```
 
 ## Exceptions
@@ -329,8 +329,8 @@ See [`Number.toString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/
 ## Examples
 
 ```rescript
-Float.toString(6.0, ~radix=2) // "110"
-Float.toString(3735928559.0, ~radix=16) // "deadbeef"
+Float.toStringWithRadix(6.0, ~radix=2) // "110"
+Float.toStringWithRadix(3735928559.0, ~radix=16) // "deadbeef"
 Float.toStringWithRadix(123456.0, ~radix=36) // "2n9c"
 ```
 
@@ -350,10 +350,10 @@ See [`Number.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaS
 
 ```rescript
 // If the application uses English as the default language
-Int.toLocaleString(1000.0) // "1,000"
+Float.toLocaleString(1000.0) // "1,000"
 
 // If the application uses Portuguese Brazil as the default language
-Int.toLocaleString(1000.0) // "1.000"
+Float.toLocaleString(1000.0) // "1.000"
 ```
 */
 @send
@@ -404,7 +404,7 @@ external fromInt: int => float = "%identity"
 ## Examples
 
 ```rescript
-Int.mod(7.0, 4.0) == 3
+Float.mod(7.0, 4.0) == 3.0
 ```
 */
 external mod: (float, float) => float = "?fmod_float"
@@ -417,10 +417,10 @@ if `max` < `min` returns `min`.
 ## Examples
 
 ```rescript
-Int.clamp(4.2) == 4.2
-Int.clamp(4.2, ~min=4.3) == 4.3
-Int.clamp(4.2, ~max=4.1) == 4.1
-Int.clamp(4.2, ~min=4.3, ~max=4.1) == 4.3
+Float.clamp(4.2) == 4.2
+Float.clamp(4.2, ~min=4.3) == 4.3
+Float.clamp(4.2, ~max=4.1) == 4.1
+Float.clamp(4.2, ~min=4.3, ~max=4.1) == 4.3
 ```
 */
 let clamp: (~min: float=?, ~max: float=?, float) => float

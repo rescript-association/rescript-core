@@ -645,15 +645,11 @@ zero for all `list1` and `list2`.
 ## Examples
 
 ```rescript
-List.compare(list{3}, list{3, 7}, (a, b) => compare(a, b)) /* (-1.) */
-
-List.compare(list{5, 3}, list{5}, (a, b) => compare(a, b)) /* 1. */
-
-List.compare(list{1, 3, 5}, list{1, 4, 2}, (a, b) => compare(a, b)) /* (-1.) */
-
-List.compare(list{1, 3, 5}, list{1, 2, 3}, (a, b) => compare(a, b)) /* 1. */
-
-List.compare(list{1, 3, 5}, list{1, 3, 5}, (a, b) => compare(a, b)) /* 0. */
+List.compare(list{3}, list{3, 7}, (a, b) => Int.compare(a, b)) // -1.
+List.compare(list{5, 3}, list{5}, (a, b) => Int.compare(a, b)) // 1.
+List.compare(list{1, 3, 5}, list{1, 4, 2}, (a, b) => Int.compare(a, b)) // -1.
+List.compare(list{1, 3, 5}, list{1, 2, 3}, (a, b) => Int.compare(a, b)) // 1.
+List.compare(list{1, 3, 5}, list{1, 3, 5}, (a, b) => Int.compare(a, b)) // 0.
 ```
 
 **Please note:** The total ordering of List is different from Array,

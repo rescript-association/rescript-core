@@ -68,7 +68,7 @@ See [`String.fromCharCode`](https://developer.mozilla.org/en-US/docs/Web/JavaScr
 
 ```rescript
 String.fromCharCodeMany([189, 43, 190, 61]) == "½+¾="
-String.fromCharCode([65, 66, 67]) == "ABC"
+String.fromCharCodeMany([65, 66, 67]) == "ABC"
 ```
 */
 @variadic
@@ -324,8 +324,8 @@ external indexOf: (string, string) => int = "indexOf"
 ## Examples
 
 ```rescript
-String.indexOf("bookseller", "ok") == Some(2)
-String.indexOf("bookseller", "xyz") == None
+String.indexOfOpt("bookseller", "ok") == Some(2)
+String.indexOfOpt("bookseller", "xyz") == None
 ```
 */
 let indexOfOpt: (string, string) => option<int>
@@ -374,9 +374,9 @@ external lastIndexOf: (string, string) => int = "lastIndexOf"
 ## Examples
 
 ```rescript
-String.lastIndexOf("bookseller", "ok") == Some(2)
-String.lastIndexOf("beekeeper", "ee") == Some(4)
-String.lastIndexOf("abcdefg", "xyz") == None
+String.lastIndexOfOpt("bookseller", "ok") == Some(2)
+String.lastIndexOfOpt("beekeeper", "ee") == Some(4)
+String.lastIndexOfOpt("abcdefg", "xyz") == None
 ```
 */
 let lastIndexOfOpt: (string, string) => option<int>
@@ -440,8 +440,8 @@ let string1 = "\uFB00"
 let string2 = "\u0066\u0066"
 Console.log(string1 === string2) // false
 
-let normalizeString1 = String.normalize(string1, "NFKD")
-let normalizeString2 = String.normalize(string2, "NFKD")
+let normalizeString1 = String.normalize(string1)
+let normalizeString2 = String.normalize(string2)
 assert(normalizeString1 === normalizeString2)
 ```
 */
@@ -571,7 +571,7 @@ See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/R
 ```rescript
 let str = "beautiful vowels"
 let re = %re("/[aeiou]/g")
-let matchFn = (matchPart, _offset, _wholeString) => String.toUpperCase(matchPart)
+let matchFn = (~match, ~offset as _, ~input as _) => String.toUpperCase(match)
 String.unsafeReplaceRegExpBy0(str, re, matchFn) == "bEAUtIfUl vOwEls"
 ```
 */
@@ -592,8 +592,8 @@ See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/R
 ```rescript
 let str = "Jony is 40"
 let re = %re("/(Jony is )\d+/g")
-let matchFn = (_match, part1, _offset, _wholeString) => {
-  part1 ++ "41"
+let matchFn = (~match as _, ~group1, ~offset as _, ~input as _) => {
+  group1 ++ "41"
 }
 String.unsafeReplaceRegExpBy1(str, re, matchFn) == "Jony is 41"
 ```
@@ -615,8 +615,8 @@ See [`String.replace`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/R
 ```rescript
 let str = "7 times 6"
 let re = %re("/(\d+) times (\d+)/")
-let matchFn = (_match, p1, p2, _offset, _wholeString) => {
-  switch (Int.fromString(p1), Int.fromString(p2)) {
+let matchFn = (~match as _, ~group1, ~group2, ~offset as _, ~input as _) => {
+  switch (Int.fromString(group1), Int.fromString(group2)) {
   | (Some(x), Some(y)) => Int.toString(x * y)
   | _ => "???"
   }
@@ -671,8 +671,8 @@ external search: (string, Core__RegExp.t) => int = "search"
 ## Examples
 
 ```rescript
-String.search("testing 1 2 3", %re("/\d+/")) == Some(8)
-String.search("no numbers", %re("/\d+/")) == None
+String.searchOpt("testing 1 2 3", %re("/\d+/")) == Some(8)
+String.searchOpt("no numbers", %re("/\d+/")) == None
 ```
 */
 let searchOpt: (string, Core__RegExp.t) => option<int>
@@ -743,9 +743,9 @@ the array will contain all the substrings.
 ## Examples
 
 ```rescript
-String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=3) = ["ant", "bee", "cat"]
-String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=0) = []
-String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=9) = ["ant", "bee", "cat", "dog", "elk"]
+String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=3) == ["ant", "bee", "cat"]
+String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=0) == []
+String.splitAtMost("ant/bee/cat/dog/elk", "/", ~limit=9) == ["ant", "bee", "cat", "dog", "elk"]
 ```
 */
 @send

@@ -121,8 +121,8 @@ on MDN.
 ## Examples
 
 ```rescript
-Int.toFixed(300, ~digits=4) // "300.0000"
-Int.toFixed(300, ~digits=1) // "300.0"
+Int.toFixedWithPrecision(300, ~digits=4) // "300.0000"
+Int.toFixedWithPrecision(300, ~digits=1) // "300.0"
 ```
 
 ## Exceptions
@@ -148,14 +148,14 @@ Int.toPrecision(1) // "1"
 external toPrecision: int => string = "toPrecision"
 
 /**
-`toPrecision(n, ~digits)` return a `string` representing the giver value with
+`toPrecisionWithPrecision(n, ~digits)` return a `string` representing the giver value with
 precision. `digits` specifies the number of significant digits. See [`Number.toPrecision`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toPrecision) on MDN.
 
 ## Examples
 
 ```rescript
-Int.toPrecision(100, ~digits=2) // "1.0e+2"
-Int.toPrecision(1) // "1.0"
+Int.toPrecisionWithPrecision(100, ~digits=2) // "1.0e+2"
+Int.toPrecisionWithPrecision(1, ~digits=2) // "1.0"
 ```
 
 ## Exceptions
@@ -192,8 +192,8 @@ on MDN.
 ## Examples
 
 ```rescript
-Int.toString(6, ~radix=2) // "110"
-Int.toString(3735928559, ~radix=16) // "deadbeef"
+Int.toStringWithRadix(6, ~radix=2) // "110"
+Int.toStringWithRadix(373592855, ~radix=16) // "16449317"
 Int.toStringWithRadix(123456, ~radix=36) // "2n9c"
 ```
 
