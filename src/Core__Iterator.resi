@@ -31,6 +31,7 @@ See [iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 ## Examples
 ```rescript
 @val external someIterator: Iterator.t<int> = "someIterator"
+
 // Pulls out the next value of the iterator
 let {Iterator.done, value} = someIterator->Iterator.next
 ```
@@ -87,6 +88,8 @@ See [iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 ## Examples
 ```rescript
+@val external someIterator: Iterator.t<int> = "someIterator"
+
 someIterator->Iterator.forEach(value =>
   switch value {
   | Some(value) if value > 10 => Console.log("More than 10!")

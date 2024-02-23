@@ -66,7 +66,10 @@ See [iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 ## Examples
 ```rescript
-await someAsyncIterator->AsyncIterator.forEach(value =>
+// Let's pretend we get an async iterator returning ints from somewhere.
+@val external asyncIterator: AsyncIterator.t<int> = "someAsyncIterator"
+
+await asyncIterator->AsyncIterator.forEach(value =>
   switch value {
   | Some(value) if value > 10 => Console.log("More than 10!")
   | _ => ()

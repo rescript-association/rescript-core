@@ -59,19 +59,24 @@ value.
 
 ## Examples
 
-`MathUtils.res` file:
+`Core__Array.res` file:
 
 ```rescript
-let add = (a, b) => a + b
-let sub = (a, b) => a - b
+@send external indexOf: (array<'a>, 'a) => int = "indexOf"
+
+let indexOfOpt = (arr, item) =>
+  switch arr->indexOf(item) {
+  | -1 => None
+  | index => Some(index)
+  }
 ```
-In other file you can import the `add` value defined in `MathUtils.res`
+In other file you can import the `indexOfOpt` value defined in `Core__Array.res`
 
 ```rescript
 let main = async () => {
-  let add = await import(MathUtils.add)
-  let onePlusOne = add(1, 1)
-  Console.log(onePlusOne)
+  let indexOfOpt = await import(Core__Array.indexOfOpt)
+  let index = indexOfOpt([1, 2], 2)
+  Console.log(index)
 }
 ```
 
@@ -79,11 +84,11 @@ Compiles to:
 
 ```javascript
 async function main() {
-  var add = await import("./MathUtils.mjs").then(function(m) {
-    return m.add;
+  var add = await import("./Core__Array.mjs").then(function(m) {
+    return m.indexOfOpt;
   });
-  var onePlusOne = add(1, 1);
-  console.log(onePlusOne);
+  var index = indexOfOpt([1, 2], 2);
+  console.log(index);
 }
 ```
 */
