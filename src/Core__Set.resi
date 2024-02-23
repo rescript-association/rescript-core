@@ -90,10 +90,10 @@ Clears all entries in the set.
 let set = Set.make()
 
 set->Set.add("someKey")
-let size = set->Set.size // 1
+set->Set.size // 1
 
 set->Set.clear
-let size = set->Set.size // 0
+set->Set.size // 0
 ```
 */
 @send

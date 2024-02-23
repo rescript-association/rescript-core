@@ -29,7 +29,7 @@ try {
   let _ = JSON.parseExn("")
   // error
 } catch {
-| Exn.Error(obj) => Console.log("error")
+| Exn.Error(_) => Console.log("error")
 }
 ```
 
@@ -50,7 +50,7 @@ It returns a JSON type.
 
 ## Examples
 ```rescript
-let reviver = (key, value) => {
+let reviver = (_, value) => {
   let valueType = JSON.Classify.classify(value)
 
   switch valueType {
@@ -145,7 +145,7 @@ let json =
     ("someNumber", JSON.Encode.int(42)),
   ])->JSON.Encode.object
 
-let replacer = (key, value) => {
+let replacer = (_, value) => {
   let decodedValue = value->JSON.Decode.string
 
   switch decodedValue {
@@ -162,7 +162,7 @@ JSON.stringifyWithReplacer(json, replacer)
 external stringifyWithReplacer: (t, (string, t) => t) => string = "JSON.stringify"
 
 /** 
-`stringifyWithReplacerAndIndent(json, replacer, indentation)` 
+`stringifyWithReplacerAndIndent(json, replacer, indentation)`
 
 Converts a JSON object to a JSON string. The output will be indented.
 The replacer describes how the value should be transformed. It is a function which receives a key and a value.
@@ -177,7 +177,7 @@ let json =
     ("someNumber", JSON.Encode.int(42)),
   ])->JSON.Encode.object
 
-let replacer = (key, value) => {
+let replacer = (_, value) => {
   let decodedValue = value->JSON.Decode.string
 
   switch decodedValue {
@@ -188,10 +188,10 @@ let replacer = (key, value) => {
 
 JSON.stringifyWithReplacerAndIndent(json, replacer, 2)
 // {
-  "foo": "BAR",
-  "hello": "WORLD",
-  "someNumber": 42
-}
+//   "foo": "BAR",
+//   "hello": "WORLD",
+//   "someNumber": 42
+// }
 ```
 */
 @val
@@ -321,7 +321,7 @@ BigInt.fromInt(0)->JSON.stringifyAny
 external stringifyAnyWithIndent: ('a, @as(json`null`) _, int) => option<string> = "JSON.stringify"
 
 /** 
-`stringifyAnyWithReplacer(json, replacer)` 
+`stringifyAnyWithReplacer(json, replacer)`
 
 Converts any type to a JSON string.
 The replacer describes how the value should be transformed. It is a function which receives a key and a value.
@@ -337,7 +337,7 @@ let dict = Dict.fromArray([
   ("someNumber", JSON.Encode.int(42)),
 ])
 
-let replacer = (key, value) => {
+let replacer = (_, value) => {
   let decodedValue = value->JSON.Decode.string
 
   switch decodedValue {
@@ -382,7 +382,7 @@ let dict = Dict.fromArray([
   ("someNumber", JSON.Encode.int(42)),
 ])
 
-let replacer = (key, value) => {
+let replacer = (_, value) => {
   let decodedValue = value->JSON.Decode.string
 
   switch decodedValue {

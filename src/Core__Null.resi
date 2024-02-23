@@ -74,7 +74,7 @@ Turns an `option` into a `Null.t`. `None` will be converted to `null`.
 ```rescript
 let optString: option<string> = None
 let asNull = optString->Null.fromOption // Null.t<string>
-Console.log(asNull == null) // Logs `true` to the console.
+Console.log(asNull == Null.null) // Logs `true` to the console.
 ```
 */
 let fromOption: option<'a> => t<'a>
@@ -86,14 +86,14 @@ let fromOption: option<'a> => t<'a>
 ## Examples
 
 ```rescript
-Null.getOr(null, "Banana") // Banana
-Null.getOr(Nulalble.make("Apple"), "Banana") // Apple
+Null.getOr(Null.null, "Banana") // Banana
+Null.getOr(Null.make("Apple"), "Banana") // Apple
 
 let greet = (firstName: option<string>) =>
-  "Greetings " ++ firstName->Null.getOr("Anonymous")
+  "Greetings " ++ firstName->Option.getOr("Anonymous")
 
-Null.make("Jane")->greet // "Greetings Jane"
-null->greet // "Greetings Anonymous"
+Null.make("Jane")->Null.toOption->greet // "Greetings Jane"
+Null.null->Null.toOption->greet // "Greetings Anonymous"
 ```
 */
 let getOr: (t<'a>, 'a) => 'a
@@ -106,7 +106,7 @@ let getWithDefault: (t<'a>, 'a) => 'a
 
 ```rescript
 Null.getExn(Null.make(3)) // 3
-Null.getExn(null) /* Raises an Error */
+Null.getExn(Null.null) /* Raises an Error */
 ```
 
 ## Exceptions
@@ -122,7 +122,7 @@ let getExn: t<'a> => 'a
 
 ```rescript
 Null.getUnsafe(Null.make(3)) == 3
-Null.getUnsafe(null) // Raises an error
+Null.getUnsafe(Null.null) // Raises an error
 ```
 
 ## Important
@@ -139,7 +139,7 @@ external getUnsafe: t<'a> => 'a = "%identity"
 
 ```rescript
 Null.forEach(Null.make("thing"), x => Console.log(x)) // logs "thing"
-Null.forEach(null, x => Console.log(x)) // returns ()
+Null.forEach(Null.null, x => Console.log(x)) // logs nothing
 ```
 */
 let forEach: (t<'a>, 'a => unit) => unit
@@ -152,7 +152,7 @@ let forEach: (t<'a>, 'a => unit) => unit
 
 ```rescript
 Null.map(Null.make(3), x => x * x) // Null.make(9)
-Null.map(null, x => x * x) // null
+Null.map(Null.null, x => x * x) // null
 ```
 */
 let map: (t<'a>, 'a => 'b) => t<'b>
@@ -167,7 +167,7 @@ otherwise returns `default`.
 let someValue = Null.make(3)
 someValue->Null.mapOr(0, x => x + 5) // 8
 
-let noneValue = null
+let noneValue = Null.null
 noneValue->Null.mapOr(0, x => x + 5) // 0
 ```
 */
@@ -187,12 +187,12 @@ let addIfAboveOne = value =>
   if (value > 1) {
     Null.make(value + 1)
   } else {
-    null
+    Null.null
   }
 
 Null.flatMap(Null.make(2), addIfAboveOne) // Null.make(3)
 Null.flatMap(Null.make(-4), addIfAboveOne) // null
-Null.flatMap(null, addIfAboveOne) // null
+Null.flatMap(Null.null, addIfAboveOne) // null
 ```
 */
 let flatMap: (t<'a>, 'a => t<'b>) => t<'b>

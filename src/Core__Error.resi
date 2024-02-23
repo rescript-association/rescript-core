@@ -28,7 +28,8 @@ See [`Error.prototype.stack`](https://developer.mozilla.org/en-US/docs/Web/JavaS
 
 ## Example
 ```rescript
-Console.log(someError->Error.stack) // Logs `stack` if it exists on `someError`
+let error = Error.make("error")
+Console.log(error->Error.stack) // Logs `stack` if it exists on `someError`
 ```
 */
 @get

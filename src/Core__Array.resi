@@ -36,7 +36,7 @@ let make: (~length: int, 'a) => array<'a>
   Creates an array of length `length` initialized with the value returned from `f ` for each index.
 
   ```res example
-  Array.make(~length=3, i => i + 3) == [3, 4, 5]
+  Array.fromInitializer(~length=3, i => i + 3) == [3, 4, 5]
   ```
 */
 let fromInitializer: (~length: int, int => 'a) => array<'a>
@@ -622,8 +622,11 @@ type languages = ReScript | TypeScript | JavaScript
 
 let array = [ReScript, JavaScript]
 
-Console.log(array->Array.findIndexWithIndex((item, index) => index === 0 && item == ReScript)) // 0
-Console.log(array->Array.findIndex((item, index) => index === 0 && item == TypeScript)) // -1
+let isReScriptFirst = array->Array.findIndexWithIndex((item, index) => index === 0 && item == ReScript)
+let isTypeScriptFirst = array->Array.findIndexWithIndex((item, index) => index === 0 && item == TypeScript)
+
+Console.log(isReScriptFirst) // 0
+Console.log(isTypeScriptFirst) // -1
 ```
 */
 @send
@@ -739,7 +742,7 @@ let reduceRight: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
   Like `reduceRight`, but with an additional index argument on the callback function.
 
   ```res example
-  Array.reduceRightWithIndex([1, 2, 3, 4], 0, (acc, x, i) => acc + x + i, 0) == 16
+  Array.reduceRightWithIndex([1, 2, 3, 4], 0, (acc, x, i) => acc + x + i) == 16
   ```
 */
 let reduceRightWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
@@ -818,6 +821,7 @@ Use `Array.getUnsafe` only when you are sure the `index` exists (i.e. when using
 
 ## Examples
 ```rescript
+let array = [1, 2, 3]
 for index in 0 to array->Array.length - 1 {
   let value = array->Array.getUnsafe(index)
   Console.log(value)
@@ -971,7 +975,7 @@ external flatMap: (array<'a>, 'a => array<'b>) => array<'b> = "flatMap"
   Otherwise returns `None`
 
   ```res example
-  Array.findMap([1, 2, 3], n => mod(n, 2) ? Some(n - 2) : None) == 0
+  Array.findMap([1, 2, 3], n => mod(n, 2) == 0 ? Some(n - 2) : None) == Some(0) // true
   ```
 */
 let findMap: (array<'a>, 'a => option<'b>) => option<'b>

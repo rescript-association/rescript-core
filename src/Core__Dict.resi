@@ -17,11 +17,9 @@ Use `Dict.getUnsafe` only when you are sure the key exists (i.e. when iterating 
 
 ## Examples
 ```rescript
-let keys = dict->Dict.keys
-keys->Array.forEach(key => {
-  let value = dict->Dict.getUnsafe(key)
-  Console.log(value)
-})
+let dict = Dict.fromArray([("key1", "value1"), ("key2", "value2")])
+let value = dict->Dict.getUnsafe("key1")
+Console.log(value) // value1
 ```
 */
 @get_index

@@ -29,7 +29,8 @@ See [async iterator protocols](https://developer.mozilla.org/en-US/docs/Web/Java
 ## Examples
 - A simple example, getting the next value:
 ```rescript
-let {done, value} = await someAsyncIterator->AsyncIterator.next
+@val external asyncIterator: AsyncIterator.t<int> = "someAsyncIterator"
+let {AsyncIterator.done, value} = await asyncIterator->AsyncIterator.next
 ```
 
 - Complete example, including looping over all values:

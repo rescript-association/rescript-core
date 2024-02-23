@@ -173,7 +173,7 @@ let getWithDefault: (option<'a>, 'a) => 'a
 
 ```rescript
 Option.orElse(Some(1812), Some(1066)) == Some(1812)
-Option.orElse(None, Some(1066) == Some(1066)
+Option.orElse(None, Some(1066)) == Some(1066)
 Option.orElse(None, None) == None
 ```
 */
@@ -241,16 +241,14 @@ the first argument is greater than the second.
 ## Examples
 
 ```rescript
-let clockCompare = (a, b) => compare(mod(a, 12), mod(b, 12))
+let clockCompare = (a, b) => Int.compare(mod(a, 12), mod(b, 12))
 
-open Option
-
-compare(Some(3), Some(15), clockCompare) // 0.
-compare(Some(3), Some(14), clockCompare) // 1.
-compare(Some(2), Some(15), clockCompare) // (-1.)
-compare(None, Some(15), clockCompare) // (-1.)
-compare(Some(14), None, clockCompare) // 1.
-compare(None, None, clockCompare) // 0.
+Option.compare(Some(3), Some(15), clockCompare) // 0.
+Option.compare(Some(3), Some(14), clockCompare) // 1.
+Option.compare(Some(2), Some(15), clockCompare) // (-1.)
+Option.compare(None, Some(15), clockCompare) // (-1.)
+Option.compare(Some(14), None, clockCompare) // 1.
+Option.compare(None, None, clockCompare) // 0.
 ```
 */
 let compare: (option<'a>, option<'b>, ('a, 'b) => Core__Ordering.t) => Core__Ordering.t

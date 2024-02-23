@@ -89,10 +89,10 @@ Clears all entries in the map.
 let map = Map.make()
 
 map->Map.set("someKey", "someValue")
-let size = map->Map.size // 1
+map->Map.size // 1
 
 map->Map.clear
-let size = map->Map.size // 0
+map->Map.size // 0
 ```
 */
 @send
