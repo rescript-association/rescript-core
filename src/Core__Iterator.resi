@@ -31,6 +31,7 @@ See [iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 ## Examples
 ```rescript
 @val external someIterator: Iterator.t<int> = "someIterator"
+
 // Pulls out the next value of the iterator
 let {Iterator.done, value} = someIterator->Iterator.next
 ```
@@ -79,3 +80,22 @@ Console.log(mapKeysAsArray) // Logs [7, 8] to the console.
 ```
 */
 external toArrayWithMapper: (t<'a>, 'a => 'b) => array<'b> = "Array.from"
+
+/**
+`forEach(iterator, fn)` consumes all values in the iterator and runs the callback `fn` for each value.
+
+See [iterator protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) on MDN.
+
+## Examples
+```rescript
+@val external someIterator: Iterator.t<int> = "someIterator"
+
+someIterator->Iterator.forEach(value =>
+  switch value {
+  | Some(value) if value > 10 => Console.log("More than 10!")
+  | _ => ()
+  }
+)
+```
+*/
+let forEach: (t<'a>, option<'a> => unit) => unit

@@ -185,9 +185,9 @@ with `f`. Returns an empty list if `length` is negative.
 ## Examples
 
 ```rescript
-List.fromInitializer(5, i => i) // list{0, 1, 2, 3, 4}
+List.fromInitializer(~length=5, i => i) // list{0, 1, 2, 3, 4}
 
-List.fromInitializer(5, i => i * i) // list{0, 1, 4, 9, 16}
+List.fromInitializer(~length=5, i => i * i) // list{0, 1, 4, 9, 16}
 ```
 */
 let fromInitializer: (~length: int, int => 'a) => t<'a>

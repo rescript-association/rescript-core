@@ -8,6 +8,7 @@
 - Remove internal xxxU helper functions that are not needed anymore in uncurried mode. https://github.com/rescript-association/rescript-core/pull/191
 - Rename `Object.empty` to `Object.make` for consistency.
 - Add dynamic `import`. https://github.com/rescript-association/rescript-core/pull/178
+- Add `Iterator.forEach` and `AsyncIterator.forEach` helpers for iterators. https://github.com/rescript-association/rescript-core/pull/175
 
 ## 1.0.0
 
