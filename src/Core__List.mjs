@@ -370,7 +370,7 @@ function copyAuxWithMapI(f, _i, _cellX, _prec) {
       return ;
     }
     var next = {
-      hd: f(i, cellX.hd),
+      hd: f(cellX.hd, i),
       tl: /* [] */0
     };
     prec.tl = next;
@@ -541,14 +541,14 @@ function mapWithIndex(xs, f) {
     return /* [] */0;
   }
   var cell = {
-    hd: f(0, xs.hd),
+    hd: f(xs.hd, 0),
     tl: /* [] */0
   };
   copyAuxWithMapI(f, 1, xs.tl, cell);
   return cell;
 }
 
-function makeBy(n, f) {
+function fromInitializer(n, f) {
   if (n <= 0) {
     return /* [] */0;
   }
@@ -672,7 +672,7 @@ function reverse(l) {
   return reverseConcat(l, /* [] */0);
 }
 
-function flattenAux(_prec, _xs) {
+function flatAux(_prec, _xs) {
   while(true) {
     var xs = _xs;
     var prec = _prec;
@@ -686,7 +686,7 @@ function flattenAux(_prec, _xs) {
   };
 }
 
-function flatten(_xs) {
+function flat(_xs) {
   while(true) {
     var xs = _xs;
     if (!xs) {
@@ -698,7 +698,7 @@ function flatten(_xs) {
         hd: match.hd,
         tl: /* [] */0
       };
-      flattenAux(copyAuxCont(match.tl, cell), xs.tl);
+      flatAux(copyAuxCont(match.tl, cell), xs.tl);
       return cell;
     }
     _xs = xs.tl;
@@ -761,7 +761,7 @@ function forEachWithIndex(l, f) {
     if (!xs) {
       return ;
     }
-    f(i, xs.hd);
+    f(xs.hd, i);
     _i = i + 1 | 0;
     _xs = xs.tl;
     continue ;
@@ -1134,7 +1134,7 @@ function sort(xs, cmp) {
   return fromArray(arr);
 }
 
-function getBy(_xs, p) {
+function find(_xs, p) {
   while(true) {
     var xs = _xs;
     if (!xs) {
@@ -1301,7 +1301,7 @@ export {
   get ,
   getExn ,
   make ,
-  makeBy ,
+  fromInitializer ,
   toShuffled ,
   drop ,
   take ,
@@ -1309,7 +1309,7 @@ export {
   concat ,
   concatMany ,
   reverseConcat ,
-  flatten ,
+  flat ,
   map ,
   zip ,
   zipBy ,
@@ -1335,7 +1335,7 @@ export {
   compare ,
   equal ,
   has ,
-  getBy ,
+  find ,
   filter ,
   filterWithIndex ,
   filterMap ,
