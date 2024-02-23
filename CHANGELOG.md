@@ -2,6 +2,8 @@
 
 ## Next version
 
+## 1.1.0
+
 - BREAKING: Align List api with other modules (`List.getBy` -> `List.find` etc.). https://github.com/rescript-association/rescript-core/pull/195
 - BREAKING: Adds typed bindings to `Intl`, replacing the options type of `{..}` with records. https://github.com/rescript-association/rescript-core/pull/65
 - Add `Dict.forEach`, `Dict.forEachWithKey` and `Dict.mapValues` https://github.com/rescript-association/rescript-core/pull/181
