@@ -1,3 +1,4 @@
+module Common = Core__Intl__Common
 module Collator = Core__Intl__Collator
 module DateTimeFormat = Core__Intl__DateTimeFormat
 module ListFormat = Core__Intl__ListFormat
