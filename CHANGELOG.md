@@ -2,6 +2,8 @@
 
 ## Next version
 
+- Fix: Expose Intl.Common. https://github.com/rescript-association/rescript-core/pull/197
+
 ## 1.1.0
 
 - BREAKING: Align List api with other modules (`List.getBy` -> `List.find` etc.). https://github.com/rescript-association/rescript-core/pull/195
