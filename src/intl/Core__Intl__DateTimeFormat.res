@@ -105,16 +105,10 @@ type dateTimeRangePart = {
   source: dateTimeRangeSource,
 }
 
-@new external make: unit => t = "Intl.DateTimeFormat"
-@new external makeWithLocale: string => t = "Intl.DateTimeFormat"
-@new external makeWithLocales: array<string> => t = "Intl.DateTimeFormat"
-@new external makeWithLocaleAndOptions: (string, options) => t = "Intl.DateTimeFormat"
-@new external makeWithLocalesAndOptions: (array<string>, options) => t = "Intl.DateTimeFormat"
-@new external makeWithOptions: (@as(json`undefined`) _, options) => t = "Intl.DateTimeFormat"
+@new external make: (~locales: array<string>=?, ~options: options=?) => t = "Intl.DateTimeFormat"
 
-@val external supportedLocalesOf: array<string> => t = "Intl.DateTimeFormat.supportedLocalesOf"
 @val
-external supportedLocalesOfWithOptions: (array<string>, supportedLocalesOptions) => t =
+external supportedLocalesOf: (array<string>, ~options: supportedLocalesOptions=?) => t =
   "Intl.DateTimeFormat.supportedLocalesOf"
 
 @send external resolvedOptions: t => resolvedOptions = "resolvedOptions"

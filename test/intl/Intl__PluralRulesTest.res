@@ -4,24 +4,17 @@ Console.log("---")
 Console.log("Intl.PluralRules")
 
 let _formatter = Intl.PluralRules.make()
-let _formatter = Intl.PluralRules.makeWithLocale("en-US")
-let _formatter = Intl.PluralRules.makeWithLocales(["en-US", "en-GB"])
-let _formatter = Intl.PluralRules.makeWithOptions({
-  \"type": #ordinal,
-  maximumSignificantDigits: #5,
-  minimumSignificantDigits: #3,
-})
-let _formatter = Intl.PluralRules.makeWithLocaleAndOptions(
-  "en-US",
-  {
+let _formatter = Intl.PluralRules.make(~locales=["en-US", "en-GB"])
+let _formatter = Intl.PluralRules.make(
+  ~options={
     \"type": #ordinal,
     maximumSignificantDigits: #5,
     minimumSignificantDigits: #3,
   },
 )
-let formatter = Intl.PluralRules.makeWithLocalesAndOptions(
-  ["en-US"],
-  {
+let formatter = Intl.PluralRules.make(
+  ~locales=["en-US"],
+  ~options={
     \"type": #ordinal,
     maximumSignificantDigits: #5,
     minimumSignificantDigits: #3,

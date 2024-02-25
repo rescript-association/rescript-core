@@ -13,8 +13,7 @@ type options = {
   region?: string,
 }
 
-@new external make: string => t = "Intl.Locale"
-@new external makeWithOptions: (string, options) => t = "Intl.Locale"
+@new external make: (string, ~options: options=?) => t = "Intl.Locale"
 
 @get external baseName: t => string = "baseName"
 @get external calendar: t => option<string> = "calendar"

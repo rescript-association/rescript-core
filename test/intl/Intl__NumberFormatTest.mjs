@@ -7,7 +7,7 @@ console.log("---");
 
 console.log("Intl.NumberFormat");
 
-var currencyFormatter = new Intl.NumberFormat("fr-FR", {
+var currencyFormatter = new Intl.NumberFormat(["fr-FR"], {
       currency: "EUR",
       style: "currency"
     });
@@ -15,7 +15,7 @@ var currencyFormatter = new Intl.NumberFormat("fr-FR", {
 console.log(Intl.NumberFormat.supportedLocalesOf([
           "fr-FR",
           "en-US"
-        ]));
+        ], undefined));
 
 console.log(currencyFormatter.format(123.23));
 
