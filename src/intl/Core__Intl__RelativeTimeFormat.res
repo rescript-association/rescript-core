@@ -26,17 +26,11 @@ type relativeTimePart = {
   unit?: timeUnit,
 }
 
-@new external make: unit => t = "Intl.RelativeTimeFormat"
-@new external makeWithLocale: string => t = "Intl.RelativeTimeFormat"
-@new external makeWithLocales: array<string> => t = "Intl.RelativeTimeFormat"
-@new external makeWithLocaleAndOptions: (string, options) => t = "Intl.RelativeTimeFormat"
-@new external makeWithLocalesAndOptions: (array<string>, options) => t = "Intl.RelativeTimeFormat"
-@new external makeWithOptions: (@as(json`undefined`) _, options) => t = "Intl.RelativeTimeFormat"
+@new
+external make: (~locales: array<string>=?, ~options: options=?) => t = "Intl.RelativeTimeFormat"
 
 @val
-external supportedLocalesOf: array<string> => t = "Intl.RelativeTimeFormat.supportedLocalesOf"
-@val
-external supportedLocalesOfWithOptions: (array<string>, supportedLocalesOptions) => t =
+external supportedLocalesOf: (array<string>, ~options: supportedLocalesOptions=?) => t =
   "Intl.RelativeTimeFormat.supportedLocalesOf"
 
 @send external resolvedOptions: t => resolvedOptions = "resolvedOptions"

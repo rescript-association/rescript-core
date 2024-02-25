@@ -4,9 +4,9 @@ Console.log("---")
 Console.log("Intl.Locale")
 
 let _locale = Intl.Locale.make("en-US")
-let locale = Intl.Locale.makeWithOptions(
+let locale = Intl.Locale.make(
   "en-US",
-  {
+  ~options={
     calendar: #hebrew,
     collation: #compat,
     hourCycle: #h24,

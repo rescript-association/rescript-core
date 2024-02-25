@@ -4,12 +4,12 @@ Console.log("---")
 Console.log("Intl.DateTimeFormat")
 
 Intl.DateTimeFormat.supportedLocalesOf(["en-US", "en-GB"])->ignore
-Intl.DateTimeFormat.supportedLocalesOfWithOptions(
+Intl.DateTimeFormat.supportedLocalesOf(
   ["en-US", "en-GB"],
-  {localeMatcher: #lookup},
+  ~options={localeMatcher: #lookup},
 )->ignore
 
-let formatter = Intl.DateTimeFormat.makeWithOptions({dateStyle: #full, timeStyle: #full})
+let formatter = Intl.DateTimeFormat.make(~options={dateStyle: #full, timeStyle: #full})
 
 Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
 
@@ -35,23 +35,23 @@ let options: Intl.DateTimeFormat.options = {
   fractionalSecondDigits: #3,
   timeZoneName: #longGeneric,
 }
-let formatter = Intl.DateTimeFormat.makeWithOptions(options)
+let formatter = Intl.DateTimeFormat.make(~options)
 
 Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
 
-let formatter = Intl.DateTimeFormat.makeWithOptions({...options, timeZoneName: #long})
+let formatter = Intl.DateTimeFormat.make(~options={...options, timeZoneName: #long})
 Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
 
-let formatter = Intl.DateTimeFormat.makeWithOptions({...options, timeZoneName: #longOffset})
+let formatter = Intl.DateTimeFormat.make(~options={...options, timeZoneName: #longOffset})
 Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
 
-let formatter = Intl.DateTimeFormat.makeWithOptions({...options, timeZoneName: #short})
+let formatter = Intl.DateTimeFormat.make(~options={...options, timeZoneName: #short})
 Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
 
-let formatter = Intl.DateTimeFormat.makeWithOptions({...options, timeZoneName: #shortGeneric})
+let formatter = Intl.DateTimeFormat.make(~options={...options, timeZoneName: #shortGeneric})
 Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
 
-let formatter = Intl.DateTimeFormat.makeWithOptions({...options, timeZoneName: #shortOffset})
+let formatter = Intl.DateTimeFormat.make(~options={...options, timeZoneName: #shortOffset})
 Console.log(formatter->Intl.DateTimeFormat.format(Date.fromTime(Date.now())))
 
 let resolvedOptions = Intl.DateTimeFormat.make()->Intl.DateTimeFormat.resolvedOptions

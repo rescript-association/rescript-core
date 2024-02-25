@@ -9,7 +9,7 @@ console.log("Intl.DateTimeFormat");
 Intl.DateTimeFormat.supportedLocalesOf([
       "en-US",
       "en-GB"
-    ]);
+    ], undefined);
 
 Intl.DateTimeFormat.supportedLocalesOf([
       "en-US",
@@ -77,7 +77,7 @@ var formatter$6 = new Intl.DateTimeFormat(undefined, (newrecord$4.timeZoneName =
 
 console.log(formatter$6.format(new Date(Date.now())));
 
-var resolvedOptions = new Intl.DateTimeFormat().resolvedOptions();
+var resolvedOptions = new Intl.DateTimeFormat(undefined, undefined).resolvedOptions();
 
 var timeZone = resolvedOptions.timeZone;
 

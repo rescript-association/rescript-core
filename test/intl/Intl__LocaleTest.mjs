@@ -5,7 +5,7 @@ console.log("---");
 
 console.log("Intl.Locale");
 
-var _locale = new Intl.Locale("en-US");
+var _locale = new Intl.Locale("en-US", undefined);
 
 var locale = new Intl.Locale("en-US", {
       calendar: "hebrew",

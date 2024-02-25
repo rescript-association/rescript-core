@@ -38,16 +38,10 @@ type resolvedOptions = {
 
 type supportedLocalesOptions = {localeMatcher: Core__Intl__Common.localeMatcher}
 
-@new external make: unit => t = "Intl.PluralRules"
-@new external makeWithLocale: string => t = "Intl.PluralRules"
-@new external makeWithLocales: array<string> => t = "Intl.PluralRules"
-@new external makeWithLocaleAndOptions: (string, options) => t = "Intl.PluralRules"
-@new external makeWithLocalesAndOptions: (array<string>, options) => t = "Intl.PluralRules"
-@new external makeWithOptions: (@as(json`undefined`) _, options) => t = "Intl.PluralRules"
+@new external make: (~locales: array<string>=?, ~options: options=?) => t = "Intl.PluralRules"
 
-@val external supportedLocalesOf: array<string> => t = "Intl.PluralRules.supportedLocalesOf"
 @val
-external supportedLocalesOfWithOptions: (array<string>, supportedLocalesOptions) => t =
+external supportedLocalesOf: (array<string>, ~options: supportedLocalesOptions=?) => t =
   "Intl.PluralRules.supportedLocalesOf"
 
 @send external resolvedOptions: t => resolvedOptions = "resolvedOptions"

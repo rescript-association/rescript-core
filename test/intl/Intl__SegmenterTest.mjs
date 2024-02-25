@@ -8,7 +8,7 @@ console.log("Intl.Segmenter");
 Intl.Segmenter.supportedLocalesOf([
       "en-US",
       "en-GB"
-    ]);
+    ], undefined);
 
 Intl.Segmenter.supportedLocalesOf([
       "en-US",
@@ -17,20 +17,14 @@ Intl.Segmenter.supportedLocalesOf([
       localeMatcher: "lookup"
     });
 
-new Intl.Segmenter();
-
-new Intl.Segmenter("en-US");
+new Intl.Segmenter(undefined, undefined);
 
 new Intl.Segmenter([
       "en-US",
       "en-GB"
-    ]);
+    ], undefined);
 
-new Intl.Segmenter(undefined, {
-      granularity: "word"
-    });
-
-var _formatter = new Intl.Segmenter("en-US", {
+var _formatter = new Intl.Segmenter(undefined, {
       granularity: "word"
     });
 

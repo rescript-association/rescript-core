@@ -4,28 +4,22 @@ Console.log("---")
 Console.log("Intl.RelativeTimeFormat")
 
 Intl.RelativeTimeFormat.supportedLocalesOf(["en-US", "en-GB"])->ignore
-Intl.RelativeTimeFormat.supportedLocalesOfWithOptions(
+Intl.RelativeTimeFormat.supportedLocalesOf(
   ["en-US", "en-GB"],
-  {localeMatcher: #lookup},
+  ~options={localeMatcher: #lookup},
 )->ignore
 
 let _formatter = Intl.RelativeTimeFormat.make()
-let _formatter = Intl.RelativeTimeFormat.makeWithLocale("en-US")
-let _formatter = Intl.RelativeTimeFormat.makeWithLocales(["en-US", "en-GB"])
-let _formatter = Intl.RelativeTimeFormat.makeWithOptions({
-  numeric: #always,
-  style: #narrow,
-})
-let _formatter = Intl.RelativeTimeFormat.makeWithLocaleAndOptions(
-  "en-US",
-  {
+let _formatter = Intl.RelativeTimeFormat.make(~locales=["en-US", "en-GB"])
+let _formatter = Intl.RelativeTimeFormat.make(
+  ~options={
     numeric: #always,
     style: #narrow,
   },
 )
-let formatter = Intl.RelativeTimeFormat.makeWithLocalesAndOptions(
-  ["en-US"],
-  {
+let formatter = Intl.RelativeTimeFormat.make(
+  ~locales=["en-US"],
+  ~options={
     numeric: #always,
     style: #narrow,
   },

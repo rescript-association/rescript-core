@@ -4,23 +4,18 @@ Console.log("---")
 Console.log("Intl.Segmenter")
 
 Intl.Segmenter.supportedLocalesOf(["en-US", "en-GB"])->ignore
-Intl.Segmenter.supportedLocalesOfWithOptions(["en-US", "en-GB"], {localeMatcher: #lookup})->ignore
+Intl.Segmenter.supportedLocalesOf(["en-US", "en-GB"], ~options={localeMatcher: #lookup})->ignore
 
 let _formatter = Intl.Segmenter.make()
-let _formatter = Intl.Segmenter.makeWithLocale("en-US")
-let _formatter = Intl.Segmenter.makeWithLocales(["en-US", "en-GB"])
-let _formatter = Intl.Segmenter.makeWithOptions({
-  granularity: #word,
-})
-let _formatter = Intl.Segmenter.makeWithLocaleAndOptions(
-  "en-US",
-  {
+let _formatter = Intl.Segmenter.make(~locales=["en-US", "en-GB"])
+let _formatter = Intl.Segmenter.make(
+  ~options={
     granularity: #word,
   },
 )
-let formatter = Intl.Segmenter.makeWithLocalesAndOptions(
-  ["en-US"],
-  {
+let formatter = Intl.Segmenter.make(
+  ~locales=["en-US"],
+  ~options={
     granularity: #word,
   },
 )

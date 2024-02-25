@@ -166,17 +166,10 @@ type numberFormatRangePart = {
   source: rangeSource,
 }
 
-@new external make: unit => t = "Intl.NumberFormat"
-@new external makeWithLocale: string => t = "Intl.NumberFormat"
-@new external makeWithLocales: array<string> => t = "Intl.NumberFormat"
-@new external makeWithLocaleAndOptions: (string, options) => t = "Intl.NumberFormat"
-@new external makeWithLocalesAndOptions: (array<string>, options) => t = "Intl.NumberFormat"
-@new external makeWithOptions: (@as(json`undefined`) _, options) => t = "Intl.NumberFormat"
-
-@val external supportedLocalesOf: array<string> => t = "Intl.NumberFormat.supportedLocalesOf"
+@new external make: (~locales: array<string>=?, ~options: options=?) => t = "Intl.NumberFormat"
 
 @val
-external supportedLocalesOfWithOptions: (array<string>, supportedLocalesOptions) => t =
+external supportedLocalesOf: (array<string>, ~options: supportedLocalesOptions=?) => t =
   "Intl.NumberFormat.supportedLocalesOf"
 
 @send external resolvedOptions: t => resolvedOptions = "resolvedOptions"

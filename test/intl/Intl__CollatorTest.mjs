@@ -5,16 +5,16 @@ console.log("---");
 
 console.log("Intl.Collator");
 
-new Intl.Collator();
+new Intl.Collator(undefined, undefined);
 
-new Intl.Collator("en-US");
+new Intl.Collator(["en-US"], undefined);
 
 var _collator = new Intl.Collator([
       "en-US",
       "en-GB"
-    ]);
+    ], undefined);
 
-var collator = new Intl.Collator("en-US", {
+var collator = new Intl.Collator(["en-US"], {
       sensitivity: "base",
       ignorePunctuation: true,
       numeric: true,
@@ -24,7 +24,7 @@ var collator = new Intl.Collator("en-US", {
 Intl.Collator.supportedLocalesOf([
       "en-US",
       "en-GB"
-    ]);
+    ], undefined);
 
 Intl.Collator.supportedLocalesOf([
       "en-US",
@@ -37,7 +37,7 @@ console.log(collator.resolvedOptions());
 
 console.log(collator.compare("hi", "hï"));
 
-console.log(Intl.Collator.supportedLocalesOf(["hi"]));
+console.log(Intl.Collator.supportedLocalesOf(["hi"], undefined));
 
 export {
   _collator ,

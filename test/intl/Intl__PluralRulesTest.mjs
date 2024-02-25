@@ -5,22 +5,14 @@ console.log("---");
 
 console.log("Intl.PluralRules");
 
-new Intl.PluralRules();
-
-new Intl.PluralRules("en-US");
+new Intl.PluralRules(undefined, undefined);
 
 new Intl.PluralRules([
       "en-US",
       "en-GB"
-    ]);
+    ], undefined);
 
-new Intl.PluralRules(undefined, {
-      type: "ordinal",
-      minimumSignificantDigits: 3,
-      maximumSignificantDigits: 5
-    });
-
-var _formatter = new Intl.PluralRules("en-US", {
+var _formatter = new Intl.PluralRules(undefined, {
       type: "ordinal",
       minimumSignificantDigits: 3,
       maximumSignificantDigits: 5
