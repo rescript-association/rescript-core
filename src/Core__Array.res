@@ -230,6 +230,7 @@ let filterMap = (a, f) => {
 let keepSome = filterMap(_, x => x)
 
 @send external flatMap: (array<'a>, 'a => array<'b>) => array<'b> = "flatMap"
+@send external flatMapWithIndex: (array<'a>, ('a, int) => array<'b>) => array<'b> = "flatMap"
 
 let findMap = (arr, f) => {
   let rec loop = i =>
