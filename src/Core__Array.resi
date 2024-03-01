@@ -969,6 +969,30 @@ Console.log(
 external flatMap: (array<'a>, 'a => array<'b>) => array<'b> = "flatMap"
 
 /**
+`flatMapWithIndex(array, mapper)` returns a new array concatenating the arrays returned from running `mapper` on all items in `array`.
+
+## Examples
+```rescript
+type language = ReScript | TypeScript | JavaScript
+
+let array = [ReScript, TypeScript, JavaScript]
+
+Console.log(
+  array->Array.flatMapWithIndex((item, index) =>
+    switch item {
+    | ReScript => [index]
+    | TypeScript => [index, index + 1]
+    | JavaScript => [index, index + 1, index + 2]
+    }
+  ),
+)
+// [0, 1, 2, 2, 3, 4]
+```
+*/
+@send
+external flatMapWithIndex: (array<'a>, ('a, int) => array<'b>) => array<'b> = "flatMap"
+
+/**
   `findMap(arr, fn)`
 
   Calls `fn` for each element and returns the first value from `fn` that is `Some(_)`.

@@ -3,6 +3,7 @@
 ## Next version
 
 - Fix: Expose Intl.Common. https://github.com/rescript-association/rescript-core/pull/197
+- Add `Array.flatMapWithIndex` https://github.com/rescript-association/rescript-core/pull/199
 
 ## 1.1.0
 
