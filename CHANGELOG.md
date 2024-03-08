@@ -2,6 +2,7 @@
 
 ## Next version
 
+- Add optional arguments to `JSON.stringify` and `JSON.parseExn` and deprecate `JSON.stringifyWithIndent`, `JSON.stringifyWithReplacer`, `JSON.parseExnWithReviver` etc. https://github.com/rescript-association/rescript-core/pull/201
 - Add `Array.join` and deprecate `Array.joinWith`. https://github.com/rescript-association/rescript-core/pull/205
 - BREAKING: Intl types: simplify bindings for constructors / functions with optional arguments. https://github.com/rescript-association/rescript-core/pull/198
 - Fix: Expose Intl.Common. https://github.com/rescript-association/rescript-core/pull/197
