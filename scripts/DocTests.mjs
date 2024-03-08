@@ -65,7 +65,7 @@ function prepareCompiler() {
         stdio: "ignore",
         cwd: compilerDir
       });
-  var dict = JSON.parse(Fs.readFileSync(Path.join(corePath, "package.json")));
+  var dict = JSON.parse(Fs.readFileSync(Path.join(corePath, "package.json")), undefined);
   var currentCoreVersion;
   if (!Array.isArray(dict) && (dict === null || typeof dict !== "object") && typeof dict !== "number" && typeof dict !== "string" && typeof dict !== "boolean") {
     throw {
@@ -179,7 +179,7 @@ function extractDocFromFile(file) {
         "doc",
         file
       ]);
-  return Tools_Docgen.decodeFromJson(JSON.parse(spawn.stdout.toString()));
+  return Tools_Docgen.decodeFromJson(JSON.parse(spawn.stdout.toString(), undefined));
 }
 
 function getExamples(param) {
