@@ -98,7 +98,7 @@ console.info("JSON");
 
 console.info("---");
 
-var json = JSON.parse("{\"foo\": \"bar\"}");
+var json = JSON.parse("{\"foo\": \"bar\"}", undefined);
 
 var json$1 = Core__JSON.Classify.classify(json);
 

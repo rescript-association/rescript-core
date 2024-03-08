@@ -7,26 +7,16 @@ type rec t = Js.Json.t =
   | Object(Core__Dict.t<t>)
   | Array(array<t>)
 
-@raises @val external parseExn: string => t = "JSON.parse"
-@raises @val external parseExnWithReviver: (string, (string, t) => t) => t = "JSON.parse"
-@val external stringify: t => string = "JSON.stringify"
-@val external stringifyWithIndent: (t, @as(json`null`) _, int) => string = "JSON.stringify"
-@val external stringifyWithReplacer: (t, (string, t) => t) => string = "JSON.stringify"
-@val
-external stringifyWithReplacerAndIndent: (t, (string, t) => t, int) => string = "JSON.stringify"
-@val external stringifyWithFilter: (t, array<string>) => string = "JSON.stringify"
-@val external stringifyWithFilterAndIndent: (t, array<string>, int) => string = "JSON.stringify"
-@raises @val external stringifyAny: 'a => option<string> = "JSON.stringify"
+@raises @val external parseExn: (string, ~reviver: (string, t) => t=?) => t = "JSON.parse"
+
+@unboxed
+type replacer = Array(array<string>) | Function((string, t) => t)
+
+@val external stringify: (t, ~replacer: replacer=?, ~indent: int=?) => string = "JSON.stringify"
+
 @raises @val
-external stringifyAnyWithIndent: ('a, @as(json`null`) _, int) => option<string> = "JSON.stringify"
-@raises @val
-external stringifyAnyWithReplacer: ('a, (string, t) => t) => option<string> = "JSON.stringify"
-@raises @val
-external stringifyAnyWithReplacerAndIndent: ('a, (string, t) => t, int) => option<string> =
+external stringifyAny: ('a, ~replacer: replacer=?, ~indent: int=?) => option<string> =
   "JSON.stringify"
-@raises @val external stringifyAnyWithFilter: ('a, array<string>) => string = "JSON.stringify"
-@raises @val
-external stringifyAnyWithFilterAndIndent: ('a, array<string>, int) => string = "JSON.stringify"
 
 module Classify = {
   type t =
