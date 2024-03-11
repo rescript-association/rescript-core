@@ -4,6 +4,8 @@ import * as Core__Error from "./Core__Error.mjs";
 
 var $$Array;
 
+var ImmurableArray;
+
 var Console;
 
 var $$DataView;
@@ -100,6 +102,7 @@ var panic = Core__Error.panic;
 
 export {
   $$Array ,
+  ImmurableArray ,
   Console ,
   $$DataView ,
   $$Date ,
