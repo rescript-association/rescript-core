@@ -108,6 +108,30 @@ function mapError(r, f) {
   }
 }
 
+function all(results) {
+  var acc = [];
+  var returnValue;
+  var index = 0;
+  while(returnValue === undefined && index < results.length) {
+    var err = results[index];
+    if (err.TAG === "Ok") {
+      acc.push(err._0);
+      index = index + 1 | 0;
+    } else {
+      returnValue = err;
+    }
+  };
+  var error = returnValue;
+  if (error !== undefined) {
+    return error;
+  } else {
+    return {
+            TAG: "Ok",
+            _0: acc
+          };
+  }
+}
+
 var mapWithDefault = mapOr;
 
 var getWithDefault = getOr;
@@ -126,5 +150,6 @@ export {
   compare ,
   forEach ,
   mapError ,
+  all ,
 }
 /* No side effect */

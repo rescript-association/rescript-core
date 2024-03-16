@@ -234,3 +234,15 @@ Result.mapError(Ok("abc"), format) // Ok("abc")
 ```
 */
 let mapError: (result<'a, 'b>, 'b => 'c) => result<'a, 'c>
+
+/**
+`all(results)` returns a result of array if all options are Ok, otherwise returns Error.
+
+## Examples
+
+```rescript
+Result.all([Ok(1), Ok(2), Ok(3)]) // Ok([1, 2, 3])
+Result.all([Ok(1), Error(1)]) // Error(1)
+```
+*/
+let all: array<result<'a, 'b>> => result<array<'a>, 'b>
