@@ -98,3 +98,21 @@ let compare = (a, b, cmp) =>
   | (Some(_), None) => Core__Ordering.greater
   | (None, None) => Core__Ordering.equal
   }
+
+let all = options => {
+  let acc = []
+  let returnValue = ref(None)
+  let index = ref(0)
+  while returnValue.contents == None && index.contents < options->Core__Array.length {
+    switch options->Core__Array.getUnsafe(index.contents) {
+    | None => returnValue.contents = Some(None)
+    | Some(value) =>
+      acc->Core__Array.push(value)
+      index.contents = index.contents + 1
+    }
+  }
+  switch returnValue.contents {
+  | Some(_) => None
+  | None => Some(acc)
+  }
+}

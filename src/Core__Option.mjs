@@ -98,6 +98,27 @@ function compare(a, b, cmp) {
   }
 }
 
+function all(options) {
+  var acc = [];
+  var returnValue;
+  var index = 0;
+  while(returnValue === undefined && index < options.length) {
+    var value = options[index];
+    if (value !== undefined) {
+      acc.push(Caml_option.valFromOption(value));
+      index = index + 1 | 0;
+    } else {
+      returnValue = Caml_option.some(undefined);
+    }
+  };
+  var match = returnValue;
+  if (match !== undefined) {
+    return ;
+  } else {
+    return acc;
+  }
+}
+
 var mapWithDefault = mapOr;
 
 var getWithDefault = getOr;
@@ -117,5 +138,6 @@ export {
   isNone ,
   equal ,
   compare ,
+  all ,
 }
 /* No side effect */

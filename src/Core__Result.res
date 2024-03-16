@@ -95,3 +95,21 @@ let mapError = (r, f) =>
   | Ok(_) as result => result
   | Error(e) => Error(f(e))
   }
+
+let all = results => {
+  let acc = []
+  let returnValue = ref(None)
+  let index = ref(0)
+  while returnValue.contents == None && index.contents < results->Core__Array.length {
+    switch results->Core__Array.getUnsafe(index.contents) {
+    | Error(_) as err => returnValue.contents = Some(err)
+    | Ok(value) =>
+      acc->Core__Array.push(value)
+      index.contents = index.contents + 1
+    }
+  }
+  switch returnValue.contents {
+  | Some(error) => error
+  | None => Ok(acc)
+  }
+}

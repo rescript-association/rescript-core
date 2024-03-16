@@ -252,3 +252,15 @@ Option.compare(None, None, clockCompare) // 0.
 ```
 */
 let compare: (option<'a>, option<'b>, ('a, 'b) => Core__Ordering.t) => Core__Ordering.t
+
+/**
+`all(options)` returns an option of array if all options are Some, otherwise returns None.
+
+## Examples
+
+```rescript
+Option.all([Some(1), Some(2), Some(3)]) // Some([1, 2, 3])
+Option.all([Some(1), None]) // None
+```
+*/
+let all: array<option<'a>> => option<array<'a>>
