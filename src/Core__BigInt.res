@@ -32,7 +32,7 @@ external lor: (t, t) => t = "%orint"
 external lxor: (t, t) => t = "%xorint"
 
 external lsl: (t, t) => t = "%lslint"
-external asr: (t, t) => t = "%asrint"
+external lsr: (t, t) => t = "%lsrint"
 
 let exp = (x: t, y: t) => {
   let _ = x
