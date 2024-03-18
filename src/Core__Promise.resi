@@ -75,6 +75,37 @@ Promise.make((resolve, reject) => {
 @new
 external make: (('a => unit, 'e => unit) => unit) => t<'a> = "Promise"
 
+type resolvers<'a> = {
+  promise: t<'a>,
+  resolve: 'a => unit,
+  reject: exn => unit,
+}
+
+/**
+`withResolvers()` returns a object containing a new promise with functions to resolve or reject it. See [`Promise.withResolvers`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers) on MDN.
+
+## Examples
+
+```rescript
+open Promise
+
+let {promise, resolve, _} = Promise.withResolvers()
+
+setTimeout(() => {
+  resolve(. "success")
+}, 1000)->ignore
+
+promise
+->thenResolve(str => {
+  Console.log(str)
+})
+->ignore
+```
+*/
+@scope("Promise")
+@val
+external withResolvers: unit => resolvers<_> = "withResolvers"
+
 /**
 `catch(promise, errorCallback)` registers an exception handler in a promise chain.
 The `errorCallback` receives an `exn` value that can later be refined into a JS
@@ -206,7 +237,7 @@ resolve(5)
 external finally: (t<'a>, unit => unit) => t<'a> = "finally"
 
 /**
-`race(arr)` combining `array` of promises. See [`Promise.race`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race) on MDN.
+`race(arr)` runs all promises concurrently and returns promise settles with the eventual state of the first promise that settles. See [`Promise.race`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race) on MDN.
 
 ## Examples
 
@@ -233,8 +264,34 @@ race(promises)->then(winner => {
 external race: array<t<'a>> => t<'a> = "race"
 
 /**
-`all(promises)` runs all promises in parallel and returns a new promise resolving
-all gathered results in a unified array. See [`Promise.all`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) on MDN.
+`any(arr)` runs all promises concurrently and returns promise fulfills when any of the input's promises fulfills, with this first fulfillment value. See [`Promise.any`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any) on MDN.
+
+## Examples
+
+```rescript
+open Promise
+let racer = (ms, name) => {
+  Promise.make((resolve, _) => {
+    setTimeout(() => {
+      resolve(name)
+    }, ms)->ignore
+  })
+}
+
+let promises = [racer(1000, "Turtle"), racer(500, "Hare"), racer(100, "Eagle")]
+
+any(promises)->then(winner => {
+  Console.log("The winner is " ++ winner)
+  resolve()
+})
+```
+*/
+@scope("Promise")
+@val
+external any: array<t<'a>> => t<'a> = "any"
+
+/**
+`all(promises)` runs all promises concurrently and returns a promise fulfills when all of the input's promises fulfill, with an array of the fulfillment values. See [`Promise.all`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) on MDN.
 
 ```rescript
 open Promise
@@ -289,6 +346,97 @@ external all5: ((t<'a>, t<'b>, t<'c>, t<'d>, t<'e>)) => t<('a, 'b, 'c, 'd, 'e)> 
 @scope("Promise")
 @val
 external all6: ((t<'a>, t<'b>, t<'c>, t<'d>, t<'e>, t<'f>)) => t<('a, 'b, 'c, 'd, 'e, 'f)> = "all"
+
+@tag("status")
+type settledResult<+'a> =
+  | @as("fulfilled") Fulfilled({value: 'a}) | @as("rejected") Rejected({reason: exn})
+
+/**
+`allSettled(promises)` runs all promises concurrently and returns promise fulfills when all of the input's promises settle with an array of objects that describe the outcome of each promise. See [`Promise.allSettled`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled) on MDN.
+
+```rescript
+open Promise
+
+exception TestError(string)
+
+let promises = [resolve(1), resolve(2), reject(TestError("some rejected promise"))]
+
+allSettled(promises)
+->then((results) => {
+  results->Array.forEach((result) => {
+    switch result {
+      | Fulfilled({value: num}) => 
+        Console.log2("Number: ", num)
+      | Rejected({reason}) =>
+        Console.log(reason)
+    }
+  })
+
+  resolve()
+})
+->ignore
+```
+*/
+@scope("Promise")
+@val
+external allSettled: array<t<'a>> => t<array<settledResult<'a>>> = "allSettled"
+
+/**
+`allSettled2((p1, p2))`. Like `allSettled()`, but with a fixed size tuple of 2
+*/
+@scope("Promise")
+@val
+external allSettled2: ((t<'a>, t<'b>)) => t<(settledResult<'a>, settledResult<'b>)> = "allSettled"
+
+/**
+`allSettled3((p1, p2, p3))`. Like `allSettled()`, but with a fixed size tuple of 3
+*/
+@scope("Promise")
+@val
+external allSettled3: ((t<'a>, t<'b>, t<'c>)) => t<(
+  settledResult<'a>,
+  settledResult<'b>,
+  settledResult<'c>,
+)> = "allSettled"
+
+/**
+`allSettled4((p1, p2, p3, p4))`. Like `allSettled()`, but with a fixed size tuple of 4
+*/
+@scope("Promise")
+@val
+external allSettled4: ((t<'a>, t<'b>, t<'c>, t<'d>)) => t<(
+  settledResult<'a>,
+  settledResult<'b>,
+  settledResult<'c>,
+  settledResult<'d>,
+)> = "allSettled"
+
+/**
+`allSettled5((p1, p2, p3, p4, p5))`. Like `allSettled()`, but with a fixed size tuple of 5
+*/
+@scope("Promise")
+@val
+external allSettled5: ((t<'a>, t<'b>, t<'c>, t<'d>, t<'e>)) => t<(
+  settledResult<'a>,
+  settledResult<'b>,
+  settledResult<'c>,
+  settledResult<'d>,
+  settledResult<'e>,
+)> = "allSettled"
+
+/**
+`allSettled6((p1, p2, p4, p5, p6))`. Like `allSettled()`, but with a fixed size tuple of 6
+")*/
+@scope("Promise")
+@val
+external allSettled6: ((t<'a>, t<'b>, t<'c>, t<'d>, t<'e>, t<'f>)) => t<(
+  settledResult<'a>,
+  settledResult<'b>,
+  settledResult<'c>,
+  settledResult<'d>,
+  settledResult<'e>,
+  settledResult<'f>,
+)> = "allSettled"
 
 /**
 `done(p)` is a safe way to ignore a promise. If a value is anything else than a
