@@ -36,15 +36,12 @@ try {
 | Exn.Error(_) => Console.log("error")
 }
 
-let reviver = (_, value) => {
-  let valueType = JSON.Classify.classify(value)
-
-  switch valueType {
+let reviver = (_, value: JSON.t) =>
+  switch value {
   | String(string) => string->String.toUpperCase->JSON.Encode.string
   | Number(number) => (number *. 2.0)->JSON.Encode.float
   | _ => value
   }
-}
 
 let jsonString = `{"hello":"world","someNumber":21}`
 
@@ -76,15 +73,12 @@ It returns a JSON type.
 
 ## Examples
 ```rescript
-let reviver = (_, value) => {
-  let valueType = JSON.Classify.classify(value)
-
-  switch valueType {
+let reviver = (_, value: JSON.t) =>
+  switch value {
   | String(string) => string->String.toUpperCase->JSON.Encode.string
   | Number(number) => (number *. 2.0)->JSON.Encode.float
   | _ => value
   }
-}
 
 let jsonString = `{"hello":"world","someNumber":21}`
 
