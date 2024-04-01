@@ -143,7 +143,7 @@ async function testCode(id, code) {
     "-I",
     rescriptCoreCompiled,
     "-w",
-    "-109",
+    "-3-109",
     "-uncurried",
     "-open",
     "RescriptCore"

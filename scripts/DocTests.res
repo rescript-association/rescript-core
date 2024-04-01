@@ -163,7 +163,7 @@ let testCode = async (~id, ~code) => {
     "-I",
     rescriptCoreCompiled,
     "-w",
-    "-109",
+    "-3-109",
     "-uncurried",
     "-open",
     "RescriptCore",
@@ -184,7 +184,7 @@ let testCode = async (~id, ~code) => {
   | true =>
     promise
     ->Array.map(e => e->Buffer.toString)
-    ->Array.joinWith("")
+    ->Array.join("")
     ->Error
   | false => Ok()
   }
@@ -259,7 +259,7 @@ let getCodeBlocks = example => {
             code
             ->List.reverse
             ->List.toArray
-            ->Array.joinWith("\n"),
+            ->Array.join("\n"),
             ...acc,
           },
         )
@@ -325,9 +325,9 @@ let main = async () => {
         e
         ->String.split("\n")
         ->Array.filterWithIndex((_, i) => i !== 2)
-        ->Array.joinWith("\n")
+        ->Array.join("\n")
       })
-      ->Array.joinWith("\n")
+      ->Array.join("\n")
 
     let message = `${"error"->red}: failed to compile examples from ${kind} ${test.id->cyan}\n${errorMessage}`
 
