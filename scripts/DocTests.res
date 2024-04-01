@@ -40,7 +40,7 @@ module Node = {
     external spawnSync: (string, array<string>) => spawnSyncReturns = "spawnSync"
 
     type readable
-    type spawnReturns = {stderr: readable}
+    type spawnReturns = {stderr: readable, stdout: readable}
     @module("child_process")
     external spawn: (string, array<string>) => spawnReturns = "spawn"
 
@@ -153,7 +153,7 @@ type example = {
 
 let createFileInTempDir = id => Path.join2(OS.tmpdir(), id)
 
-let testCode = async (~id, ~code) => {
+let compileTest = async (~id, ~code) => {
   let tempFileName = createFileInTempDir(id)
 
   let () = await Fs.writeFile(tempFileName ++ ".res", code)
@@ -171,22 +171,56 @@ let testCode = async (~id, ~code) => {
 
   let promise = await Promise.make((resolve, _reject) => {
     let spawn = ChildProcess.spawn(bscBin, args)
+    let stdout = []
     let stderr = []
+    spawn.stdout->ChildProcess.on("data", data => {
+      Array.push(stdout, data)
+    })
     spawn.stderr->ChildProcess.on("data", data => {
       Array.push(stderr, data)
     })
     spawn->ChildProcess.once("close", (_code, _signal) => {
-      resolve(stderr)
+      resolve((stdout, stderr))
     })
   })
 
-  switch Array.length(promise) > 0 {
+  let (stdout, stderr) = promise
+
+  switch Array.length(stderr) > 0 {
   | true =>
-    promise
+    stderr
     ->Array.map(e => e->Buffer.toString)
     ->Array.joinWith("")
     ->Error
-  | false => Ok()
+  | false =>
+    stdout
+    ->Array.map(e => e->Buffer.toString)
+    ->Array.joinWith("")
+    ->Ok
+  }
+}
+
+module SpawnAsync = {
+  type t = {
+    stdout: array<Buffer.t>,
+    stderr: array<Buffer.t>,
+    code: Null.t<float>,
+  }
+  let run = async (~command, ~args) => {
+    await Promise.make((resolve, _reject) => {
+      let spawn = ChildProcess.spawn(command, args)
+      let stdout = []
+      let stderr = []
+      spawn.stdout->ChildProcess.on("data", data => {
+        Array.push(stdout, data)
+      })
+      spawn.stderr->ChildProcess.on("data", data => {
+        Array.push(stderr, data)
+      })
+      spawn->ChildProcess.once("close", (code, _signal) => {
+        resolve({stdout, stderr, code})
+      })
+    })
   }
 }
 
@@ -278,7 +312,7 @@ let getCodeBlocks = example => {
 
 let main = async () => {
   let results =
-    await extractDocFromFile("src/RescriptCore.res")
+    await extractDocFromFile("src/Core__Test.res")
     ->getExamples
     ->Array.map(async example => {
       let id = example.id->String.replaceAll(".", "_")
@@ -287,7 +321,7 @@ let main = async () => {
         await codes
         ->Array.mapWithIndex(async (code, int) => {
           let id = `${id}_${Int.toString(int)}`
-          await testCode(~id, ~code)
+          await compileTest(~id, ~code)
         })
         ->Promise.all
       (example, results)
@@ -297,7 +331,7 @@ let main = async () => {
   let errors = results->Belt.Array.keepMap(((example, results)) => {
     let errors = results->Belt.Array.keepMap(result =>
       switch result {
-      | Ok() => None
+      | Ok(_) => None
       | Error(msg) => Some(msg)
       }
     )

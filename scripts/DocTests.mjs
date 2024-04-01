@@ -135,7 +135,7 @@ function createFileInTempDir(id) {
   return Path.join(Os.tmpdir(), id);
 }
 
-async function testCode(id, code) {
+async function compileTest(id, code) {
   var tempFileName = Path.join(Os.tmpdir(), id);
   await Promises.writeFile(tempFileName + ".res", code);
   var args = [
@@ -150,28 +150,63 @@ async function testCode(id, code) {
   ];
   var promise = await new Promise((function (resolve, _reject) {
           var spawn = Child_process.spawn(bscBin, args);
+          var stdout = [];
           var stderr = [];
+          spawn.stdout.on("data", (function (data) {
+                  stdout.push(data);
+                }));
           spawn.stderr.on("data", (function (data) {
                   stderr.push(data);
                 }));
           spawn.once("close", (function (_code, _signal) {
-                  resolve(stderr);
+                  resolve([
+                        stdout,
+                        stderr
+                      ]);
                 }));
         }));
-  if (promise.length > 0) {
+  var stderr = promise[1];
+  if (stderr.length > 0) {
     return {
             TAG: "Error",
-            _0: promise.map(function (e) {
+            _0: stderr.map(function (e) {
                     return e.toString();
                   }).join("")
           };
   } else {
     return {
             TAG: "Ok",
-            _0: undefined
+            _0: promise[0].map(function (e) {
+                    return e.toString();
+                  }).join("")
           };
   }
 }
+
+async function run(command, args) {
+  return await new Promise((function (resolve, _reject) {
+                var spawn = Child_process.spawn(command, args);
+                var stdout = [];
+                var stderr = [];
+                spawn.stdout.on("data", (function (data) {
+                        stdout.push(data);
+                      }));
+                spawn.stderr.on("data", (function (data) {
+                        stderr.push(data);
+                      }));
+                spawn.once("close", (function (code, _signal) {
+                        resolve({
+                              stdout: stdout,
+                              stderr: stderr,
+                              code: code
+                            });
+                      }));
+              }));
+}
+
+var SpawnAsync = {
+  run: run
+};
 
 function extractDocFromFile(file) {
   var toolsBin = Path.join(Path.dirname(dirname), "node_modules", ".bin", "rescript-tools");
@@ -302,12 +337,12 @@ function getCodeBlocks(example) {
 }
 
 async function main() {
-  var results = await Promise.all(getExamples(extractDocFromFile("src/RescriptCore.res")).map(async function (example) {
+  var results = await Promise.all(getExamples(extractDocFromFile("src/Core__Test.res")).map(async function (example) {
             var id = example.id.replaceAll(".", "_");
             var codes = getCodeBlocks(example);
             var results = await Promise.all(codes.map(async function (code, $$int) {
                       var id$1 = id + "_" + $$int.toString();
-                      return await testCode(id$1, code);
+                      return await compileTest(id$1, code);
                     }));
             return [
                     example,
@@ -370,7 +405,8 @@ export {
   rescriptJson ,
   prepareCompiler ,
   createFileInTempDir ,
-  testCode ,
+  compileTest ,
+  SpawnAsync ,
   extractDocFromFile ,
   getExamples ,
   getCodeBlocks ,
