@@ -398,6 +398,21 @@ let indexOfOpt: (array<'a>, 'a) => option<int>
 @send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
 
 /**
+`join(array, separator)` produces a string where all items of `array` are printed, separated by `separator`. Array items must be strings, to join number or other arrays, use `joinUnsafe`. Under the hood this will run JavaScript's `toString` on all the array items.
+
+See [Array.join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
+
+## Examples
+```rescript
+let array = ["One", "Two", "Three"]
+
+Console.log(array->Array.join(" -- ")) // One -- Two -- Three
+```
+*/
+@send
+external join: (array<string>, string) => string = "join"
+
+/**
 `joinWith(array, separator)` produces a string where all items of `array` are printed, separated by `separator`. Array items must be strings, to join number or other arrays, use `joinWithUnsafe`. Under the hood this will run JavaScript's `toString` on all the array items.
 
 ## Examples
@@ -407,8 +422,24 @@ let array = ["One", "Two", "Three"]
 Console.log(array->Array.joinWith(" -- ")) // One -- Two -- Three
 ```
 */
+@deprecated("Use `join` instead")
 @send
 external joinWith: (array<string>, string) => string = "join"
+
+/**
+`joinUnsafe(array, separator)` produces a string where all items of `array` are printed, separated by `separator`. Under the hood this will run JavaScript's `toString` on all the array items.
+
+See [Array.join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
+
+## Examples
+```rescript
+let array = [1, 2, 3]
+
+Console.log(array->Array.joinUnsafe(" -- ")) // 1 -- 2 -- 3
+```
+*/
+@send
+external joinUnsafe: (array<'a>, string) => string = "join"
 
 /**
 `joinWithUnsafe(array, separator)` produces a string where all items of `array` are printed, separated by `separator`. Under the hood this will run JavaScript's `toString` on all the array items.
@@ -420,6 +451,7 @@ let array = [1, 2, 3]
 Console.log(array->Array.joinWithUnsafe(" -- ")) // 1 -- 2 -- 3
 ```
 */
+@deprecated("Use `joinUnsafe` instead")
 @send
 external joinWithUnsafe: (array<'a>, string) => string = "join"
 @send external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
