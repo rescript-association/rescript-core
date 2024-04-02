@@ -5,12 +5,12 @@ function toInt(t) {
   return Number(t) | 0;
 }
 
-function exp(x, y) {
-  return (x ** y);
+function lnot(x) {
+  return x ^ -1n;
 }
 
 export {
   toInt ,
-  exp ,
+  lnot ,
 }
 /* No side effect */
