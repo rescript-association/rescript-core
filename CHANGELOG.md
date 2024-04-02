@@ -5,6 +5,7 @@
 - BREAKING: Intl types: simplify bindings for constructors / functions with optional arguments. https://github.com/rescript-association/rescript-core/pull/198
 - Fix: Expose Intl.Common. https://github.com/rescript-association/rescript-core/pull/197
 - Add `Array.flatMapWithIndex` https://github.com/rescript-association/rescript-core/pull/199
+- Add `Promise.any`, `Promise.allSettled`, `Promise.withResolvers` https://github.com/rescript-association/rescript-core/pull/204
 
 ## 1.1.0
 
