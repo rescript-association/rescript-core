@@ -75,7 +75,7 @@ Promise.make((resolve, reject) => {
 @new
 external make: (('a => unit, 'e => unit) => unit) => t<'a> = "Promise"
 
-type resolvers<'a> = {
+type promiseAndResolvers<'a> = {
   promise: t<'a>,
   resolve: 'a => unit,
   reject: exn => unit,
@@ -104,7 +104,7 @@ promise
 */
 @scope("Promise")
 @val
-external withResolvers: unit => resolvers<_> = "withResolvers"
+external withResolvers: unit => promiseAndResolvers<_> = "withResolvers"
 
 /**
 `catch(promise, errorCallback)` registers an exception handler in a promise chain.

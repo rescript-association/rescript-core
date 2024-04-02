@@ -3,14 +3,14 @@ type t<+'a> = promise<'a>
 @new
 external make: (('a => unit, 'e => unit) => unit) => t<'a> = "Promise"
 
-type resolvers<'a> = {
+type promiseAndResolvers<'a> = {
   promise: t<'a>,
   resolve: 'a => unit,
   reject: exn => unit,
 }
 
 @scope("Promise") @val
-external withResolvers: unit => resolvers<_> = "withResolvers"
+external withResolvers: unit => promiseAndResolvers<_> = "withResolvers"
 
 @scope("Promise") @val
 external resolve: 'a => t<'a> = "resolve"
