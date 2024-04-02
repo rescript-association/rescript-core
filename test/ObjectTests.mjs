@@ -386,7 +386,7 @@ Test.run([
         32
       ],
       "is: bigint"
-    ], Caml_obj.equal(BigInt("123"), BigInt("123")), eq, true);
+    ], BigInt("123") === BigInt("123"), eq, true);
 
 Test.run([
       [

@@ -9,7 +9,7 @@ console.log("Intl.DateTimeFormat");
 Intl.DateTimeFormat.supportedLocalesOf([
       "en-US",
       "en-GB"
-    ], undefined);
+    ]);
 
 Intl.DateTimeFormat.supportedLocalesOf([
       "en-US",

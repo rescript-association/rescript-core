@@ -1,40 +1,38 @@
-type t = Js.Types.bigint_val
+@val external asIntN: (~width: int, bigint) => bigint = "BigInt.asIntN"
+@val external asUintN: (~width: int, bigint) => bigint = "BigInt.asUintN"
 
-@val external asIntN: (~width: int, t) => t = "BigInt.asIntN"
-@val external asUintN: (~width: int, t) => t = "BigInt.asUintN"
+@val external fromString: string => bigint = "BigInt"
+@val external fromInt: int => bigint = "BigInt"
+@val external fromFloat: float => bigint = "BigInt"
 
-@val external fromString: string => t = "BigInt"
-@val external fromInt: int => t = "BigInt"
-@val external fromFloat: float => t = "BigInt"
+@send external toString: bigint => string = "toString"
+@send external toStringWithRadix: (bigint, ~radix: int) => string = "toString"
+@send external toLocaleString: bigint => string = "toLocaleString"
 
-@send external toString: t => string = "toString"
-@send external toStringWithRadix: (t, ~radix: int) => string = "toString"
-@send external toLocaleString: t => string = "toLocaleString"
-
-@val external toFloat: t => float = "Number"
+@val external toFloat: bigint => float = "Number"
 
 let toInt = t => t->toFloat->Core__Int.fromFloat
 
-external \"+": (t, t) => t = "%addfloat"
-external \"-": (t, t) => t = "%subfloat"
-external \"*": (t, t) => t = "%mulfloat"
-external \"/": (t, t) => t = "%divfloat"
+external \"+": (bigint, bigint) => bigint = "%addfloat"
+external \"-": (bigint, bigint) => bigint = "%subfloat"
+external \"*": (bigint, bigint) => bigint = "%mulfloat"
+external \"/": (bigint, bigint) => bigint = "%divfloat"
 
-external add: (t, t) => t = "%addfloat"
-external sub: (t, t) => t = "%subfloat"
-external mul: (t, t) => t = "%mulfloat"
-external div: (t, t) => t = "%divfloat"
+external add: (bigint, bigint) => bigint = "%addfloat"
+external sub: (bigint, bigint) => bigint = "%subfloat"
+external mul: (bigint, bigint) => bigint = "%mulfloat"
+external div: (bigint, bigint) => bigint = "%divfloat"
 
-@noalloc external mod: (t, t) => t = "?fmod_float"
+@noalloc external mod: (bigint, bigint) => bigint = "?fmod_float"
 
-external land: (t, t) => t = "%andint"
-external lor: (t, t) => t = "%orint"
-external lxor: (t, t) => t = "%xorint"
+external land: (bigint, bigint) => bigint = "%andint"
+external lor: (bigint, bigint) => bigint = "%orint"
+external lxor: (bigint, bigint) => bigint = "%xorint"
 
-external lsl: (t, t) => t = "%lslint"
-external asr: (t, t) => t = "%asrint"
+external lsl: (bigint, bigint) => bigint = "%lslint"
+external asr: (bigint, bigint) => bigint = "%asrint"
 
-let exp = (x: t, y: t) => {
+let exp = (x: bigint, y: bigint) => {
   let _ = x
   let _ = y
   %raw(`x ** y`)

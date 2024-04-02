@@ -20,8 +20,8 @@ external fromBufferWithRange: (Core__ArrayBuffer.t, ~byteOffset: int, ~length: i
 @send external getFloat32: t => float = "getFloat32"
 @send external getFloat64: t => float = "getFloat64"
 
-@send external getBigInt64: t => Core__BigInt.t = "getBigInt64"
-@send external getBigUint64: t => Core__BigInt.t = "getBigUint64"
+@send external getBigInt64: t => bigint = "getBigInt64"
+@send external getBigUint64: t => bigint = "getBigUint64"
 
 @send external setInt8: (t, int) => unit = "setInt8"
 @send external setUint8: (t, int) => unit = "setUint8"
@@ -33,5 +33,5 @@ external fromBufferWithRange: (Core__ArrayBuffer.t, ~byteOffset: int, ~length: i
 @send external setFloat32: (t, float) => unit = "setFloat32"
 @send external setFloat64: (t, float) => unit = "setFloat64"
 
-@send external setBigInt64: (t, Core__BigInt.t) => unit = "setBigInt64"
-@send external setBigUint64: (t, Core__BigInt.t) => unit = "setBigUint64"
+@send external setBigInt64: (t, bigint) => unit = "setBigInt64"
+@send external setBigUint64: (t, bigint) => unit = "setBigUint64"

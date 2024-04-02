@@ -59,7 +59,7 @@ module Classify: {
     | Object(object)
     | Function(function)
     | Symbol(Core__Symbol.t)
-    | BigInt(Core__BigInt.t)
+    | BigInt(bigint)
 
   /**
 `classify(anyValue)`
