@@ -2,38 +2,94 @@
 @val external asUintN: (~width: int, bigint) => bigint = "BigInt.asUintN"
 
 @val external fromString: string => bigint = "BigInt"
+
+@val
+/**
+Parses the given `string` into a `bigint` using JavaScript semantics. Return the
+number as a `bigint` if successfully parsed. Uncaught syntax exception otherwise.
+
+## Examples
+
+```rescript
+/* returns 123n */
+BigInt.fromStringExn("123")
+
+/* returns 0n */
+BigInt.fromStringExn("")
+
+/* returns 17n */
+BigInt.fromStringExn("0x11")
+
+/* returns 3n */
+BigInt.fromStringExn("0b11")
+
+/* returns 9n */
+BigInt.fromStringExn("0o11")
+
+/* catch exception */
+try {
+  BigInt.fromStringExn("a")
+} catch {
+| _ => ...
+}
+```
+*/
+external fromStringExn: string => bigint = "BigInt"
 @val external fromInt: int => bigint = "BigInt"
 @val external fromFloat: float => bigint = "BigInt"
 
-@send external toString: bigint => string = "toString"
+@send
+/**
+Formats a `bigint` as a string. Return a `string` representing the given value.
+See [`toString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString) on MDN.
+
+## Examples
+
+```rescript
+/* prints "123" */
+Js.BigInt.toString(123n)->Js.log
+```
+*/
+external toString: bigint => string = "toString"
 @send external toStringWithRadix: (bigint, ~radix: int) => string = "toString"
-@send external toLocaleString: bigint => string = "toLocaleString"
+
+@send
+/**
+Returns a string with a language-sensitive representation of this BigInt value.
+
+## Examples
+
+```rescript
+/* prints "123" */
+Js.BigInt.toString(123n)->Js.log
+```
+*/
+external toLocaleString: bigint => string = "toLocaleString"
 
 @val external toFloat: bigint => float = "Number"
 
 let toInt = t => t->toFloat->Core__Int.fromFloat
 
-external \"+": (bigint, bigint) => bigint = "%addfloat"
-external \"-": (bigint, bigint) => bigint = "%subfloat"
-external \"*": (bigint, bigint) => bigint = "%mulfloat"
-external \"/": (bigint, bigint) => bigint = "%divfloat"
+external \"+": (bigint, bigint) => bigint = "%addbigint"
+external \"-": (bigint, bigint) => bigint = "%subbigint"
+external \"*": (bigint, bigint) => bigint = "%mulbigint"
+external \"/": (bigint, bigint) => bigint = "%divbigint"
+external \"~-": bigint => bigint = "%negbigint"
+external \"~+": bigint => bigint = "%identity"
+external \"**": (bigint, bigint) => bigint = "%powbigint"
 
 external add: (bigint, bigint) => bigint = "%addfloat"
 external sub: (bigint, bigint) => bigint = "%subfloat"
 external mul: (bigint, bigint) => bigint = "%mulfloat"
 external div: (bigint, bigint) => bigint = "%divfloat"
 
-@noalloc external mod: (bigint, bigint) => bigint = "?fmod_float"
+external mod: (bigint, bigint) => bigint = "%modbigint"
 
-external land: (bigint, bigint) => bigint = "%andint"
-external lor: (bigint, bigint) => bigint = "%orint"
-external lxor: (bigint, bigint) => bigint = "%xorint"
+external land: (bigint, bigint) => bigint = "%andbigint"
+external lor: (bigint, bigint) => bigint = "%orbigint"
+external lxor: (bigint, bigint) => bigint = "%xorbigint"
 
-external lsl: (bigint, bigint) => bigint = "%lslint"
-external asr: (bigint, bigint) => bigint = "%asrint"
+external lsl: (bigint, bigint) => bigint = "%lslbigint"
+external asr: (bigint, bigint) => bigint = "%asrbigint"
 
-let exp = (x: bigint, y: bigint) => {
-  let _ = x
-  let _ = y
-  %raw(`x ** y`)
-}
+let lnot = x => lxor(x, -1n)
