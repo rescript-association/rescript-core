@@ -4,6 +4,7 @@ import * as Core__Int from "../src/Core__Int.mjs";
 import * as IntlTests from "./intl/IntlTests.mjs";
 import * as Core__Dict from "../src/Core__Dict.mjs";
 import * as Core__JSON from "../src/Core__JSON.mjs";
+import * as Caml_bigint from "rescript/lib/es6/caml_bigint.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Core__Array from "../src/Core__Array.mjs";
 import * as Core__Float from "../src/Core__Float.mjs";
@@ -98,7 +99,7 @@ console.info("JSON");
 
 console.info("---");
 
-var json = JSON.parse("{\"foo\": \"bar\"}", undefined);
+var json = JSON.parse("{\"foo\": \"bar\"}");
 
 var json$1 = Core__JSON.Classify.classify(json);
 
@@ -143,7 +144,7 @@ console.info("BigInt");
 
 console.info("---");
 
-console.log(BigInt(1) / BigInt(12.0));
+console.log(Caml_bigint.div(BigInt(1), BigInt(12.0)));
 
 console.info("");
 

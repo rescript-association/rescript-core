@@ -32,7 +32,7 @@ let assertWillThrow = (message, f) => {
   }
 }
 
-let areSame = (x: BigInt.t, y: BigInt.t) => BigInt.toString(x) == BigInt.toString(y)
+let areSame = (x: bigint, y: bigint) => BigInt.toString(x) == BigInt.toString(y)
 
 // What's going on here?
 // assertTrue("big ints if different then not equal", () => num1 != num2)

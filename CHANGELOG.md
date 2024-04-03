@@ -2,6 +2,8 @@
 
 ## Next version
 
+- BREAKING: Use new native `bigint` type. This requires ReScript compiler version "11.1.0-rc.6" or higher. https://github.com/rescript-association/rescript-core/pull/207
+
 ## 1.2.0
 
 - Add optional arguments to `JSON.stringify` and `JSON.parseExn` and deprecate `JSON.stringifyWithIndent`, `JSON.stringifyWithReplacer`, `JSON.parseExnWithReviver` etc. https://github.com/rescript-association/rescript-core/pull/201

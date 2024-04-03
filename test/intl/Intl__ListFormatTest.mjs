@@ -23,7 +23,7 @@ var _formatter = new Intl.ListFormat([
 Intl.ListFormat.supportedLocalesOf([
       "en-US",
       "en-GB"
-    ], undefined);
+    ]);
 
 Intl.ListFormat.supportedLocalesOf([
       "en-US",

@@ -194,20 +194,16 @@ external formatIntToParts: (t, int) => array<numberFormatPart> = "formatToParts"
 external formatIntRangeToParts: (t, ~start: int, ~end: int) => array<numberFormatRangePart> =
   "formatRange"
 
-@send external formatBigInt: (t, Core__BigInt.t) => string = "format"
+@send external formatBigInt: (t, bigint) => string = "format"
 
 @send
-external formatBigIntRange: (t, ~start: Core__BigInt.t, ~end: Core__BigInt.t) => array<string> =
+external formatBigIntRange: (t, ~start: bigint, ~end: bigint) => array<string> = "formatRange"
+@send
+external formatBigIntToParts: (t, bigint) => array<numberFormatPart> = "formatToParts"
+
+@send
+external formatBigIntRangeToParts: (t, ~start: bigint, ~end: bigint) => array<numberFormatPart> =
   "formatRange"
-@send
-external formatBigIntToParts: (t, Core__BigInt.t) => array<numberFormatPart> = "formatToParts"
-
-@send
-external formatBigIntRangeToParts: (
-  t,
-  ~start: Core__BigInt.t,
-  ~end: Core__BigInt.t,
-) => array<numberFormatPart> = "formatRange"
 
 @send external formatString: (t, string) => string = "format"
 

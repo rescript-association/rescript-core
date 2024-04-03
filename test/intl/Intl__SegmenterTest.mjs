@@ -8,7 +8,7 @@ console.log("Intl.Segmenter");
 Intl.Segmenter.supportedLocalesOf([
       "en-US",
       "en-GB"
-    ], undefined);
+    ]);
 
 Intl.Segmenter.supportedLocalesOf([
       "en-US",
