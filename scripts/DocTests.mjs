@@ -48,7 +48,7 @@ var bscBin = Path.join(compilerDir, "node_modules", ".bin", "bsc");
 var rescriptCoreCompiled = Path.join(compilerDir, "node_modules", "@rescript", "core", "lib", "ocaml");
 
 function makePackageJson(coreVersion) {
-  return "{\n  \"name\": \"test-compiler-examples\",\n  \"version\": \"1.0.0\",\n  \"dependencies\": {\n    \"@rescript/core\": \"file:rescript-core-" + coreVersion + ".tgz\",\n    \"rescript\": \"^11.0.1\"\n  }\n}\n";
+  return "{\n  \"name\": \"test-compiler-examples\",\n  \"version\": \"1.0.0\",\n  \"dependencies\": {\n    \"@rescript/core\": \"file:rescript-core-" + coreVersion + ".tgz\",\n    \"rescript\": \"11.1.0-rc.7\"\n  }\n}\n";
 }
 
 var rescriptJson = "{\n  \"name\": \"dummy\",\n  \"sources\": {\n    \"dir\": \"dummy\",\n    \"subdirs\": true\n  },\n  \"bs-dependencies\": [\n    \"@rescript/core\"\n  ],\n  \"bsc-flags\": [\n    \"-open RescriptCore\"\n  ]\n}";

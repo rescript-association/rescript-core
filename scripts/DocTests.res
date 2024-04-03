@@ -89,7 +89,7 @@ let makePackageJson = coreVersion =>
   "version": "1.0.0",
   "dependencies": {
     "@rescript/core": "file:rescript-core-${coreVersion}.tgz",
-    "rescript": "^11.0.1"
+    "rescript": "11.1.0-rc.7"
   }
 }
 `
