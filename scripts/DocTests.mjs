@@ -7,6 +7,7 @@ import * as Path from "path";
 import * as Belt_List from "rescript/lib/es6/belt_List.js";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 import * as Core__List from "../src/Core__List.mjs";
+import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Core__Array from "../src/Core__Array.mjs";
 import * as RescriptCore from "../src/RescriptCore.mjs";
 import * as Tools_Docgen from "@rescript/tools/npm/Tools_Docgen.mjs";
@@ -72,7 +73,7 @@ function prepareCompiler() {
           RE_EXN_ID: "Assert_failure",
           _1: [
             "DocTests.res",
-            128,
+            129,
             9
           ],
           Error: new Error()
@@ -85,7 +86,7 @@ function prepareCompiler() {
             RE_EXN_ID: "Assert_failure",
             _1: [
               "DocTests.res",
-              126,
+              127,
               11
             ],
             Error: new Error()
@@ -98,7 +99,7 @@ function prepareCompiler() {
             RE_EXN_ID: "Assert_failure",
             _1: [
               "DocTests.res",
-              126,
+              127,
               11
             ],
             Error: new Error()
@@ -109,7 +110,7 @@ function prepareCompiler() {
           RE_EXN_ID: "Assert_failure",
           _1: [
             "DocTests.res",
-            128,
+            129,
             9
           ],
           Error: new Error()
@@ -131,61 +132,9 @@ function prepareCompiler() {
 
 prepareCompiler();
 
-function createFileInTempDir(id) {
-  return Path.join(Os.tmpdir(), id);
-}
-
-async function compileTest(id, code) {
-  var tempFileName = Path.join(Os.tmpdir(), id);
-  await Promises.writeFile(tempFileName + ".res", code);
-  var args = [
-    tempFileName + ".res",
-    "-I",
-    rescriptCoreCompiled,
-    "-w",
-    "-3-109",
-    "-uncurried",
-    "-open",
-    "RescriptCore"
-  ];
-  var promise = await new Promise((function (resolve, _reject) {
-          var spawn = Child_process.spawn(bscBin, args);
-          var stdout = [];
-          var stderr = [];
-          spawn.stdout.on("data", (function (data) {
-                  stdout.push(data);
-                }));
-          spawn.stderr.on("data", (function (data) {
-                  stderr.push(data);
-                }));
-          spawn.once("close", (function (_code, _signal) {
-                  resolve([
-                        stdout,
-                        stderr
-                      ]);
-                }));
-        }));
-  var stderr = promise[1];
-  if (stderr.length > 0) {
-    return {
-            TAG: "Error",
-            _0: stderr.map(function (e) {
-                    return e.toString();
-                  }).join("")
-          };
-  } else {
-    return {
-            TAG: "Ok",
-            _0: promise[0].map(function (e) {
-                    return e.toString();
-                  }).join("")
-          };
-  }
-}
-
-async function run(command, args) {
+async function run(command, args, options) {
   return await new Promise((function (resolve, _reject) {
-                var spawn = Child_process.spawn(command, args);
+                var spawn = Child_process.spawn(command, args, options !== undefined ? Caml_option.valFromOption(options) : undefined);
                 var stdout = [];
                 var stderr = [];
                 spawn.stdout.on("data", (function (data) {
@@ -207,6 +156,42 @@ async function run(command, args) {
 var SpawnAsync = {
   run: run
 };
+
+function createFileInTempDir(id) {
+  return Path.join(Os.tmpdir(), id);
+}
+
+async function compileTest(id, code) {
+  var tempFileName = Path.join(Os.tmpdir(), id);
+  await Promises.writeFile(tempFileName + ".res", code);
+  var args = [
+    tempFileName + ".res",
+    "-I",
+    rescriptCoreCompiled,
+    "-w",
+    "-3-109",
+    "-uncurried",
+    "-open",
+    "RescriptCore"
+  ];
+  var match = await run(bscBin, args, undefined);
+  var stderr = match.stderr;
+  if (stderr.length > 0) {
+    return {
+            TAG: "Error",
+            _0: stderr.map(function (e) {
+                    return e.toString();
+                  }).join("")
+          };
+  } else {
+    return {
+            TAG: "Ok",
+            _0: match.stdout.map(function (e) {
+                    return e.toString();
+                  }).join("")
+          };
+  }
+}
 
 function extractDocFromFile(file) {
   var toolsBin = Path.join(Path.dirname(dirname), "node_modules", ".bin", "rescript-tools");
@@ -336,49 +321,142 @@ function getCodeBlocks(example) {
                           }))), /* [] */0));
 }
 
-async function main() {
-  var results = await Promise.all(getExamples(extractDocFromFile("src/Core__Test.res")).map(async function (example) {
+async function runtimeTests(code) {
+  var match = await run("node", [
+        "-p",
+        code
+      ], {
+        cwd: compilerDir
+      });
+  var stderr = match.stderr;
+  if (stderr.length > 0) {
+    return {
+            TAG: "Error",
+            _0: stderr.map(function (e) {
+                    return e.toString();
+                  }).join("")
+          };
+  } else {
+    return {
+            TAG: "Ok",
+            _0: match.stdout.map(function (e) {
+                    return e.toString();
+                  }).join("")
+          };
+  }
+}
+
+function indentOutputCode(code) {
+  var indent = " ".repeat(2);
+  return code.split("\n").map(function (s) {
+                return indent + s;
+              }).join("\n");
+}
+
+async function compilerResults() {
+  var results = await Promise.all(getExamples(extractDocFromFile("src/RescriptCore.res")).map(async function (example) {
             var id = example.id.replaceAll(".", "_");
             var codes = getCodeBlocks(example);
             var results = await Promise.all(codes.map(async function (code, $$int) {
                       var id$1 = id + "_" + $$int.toString();
-                      return await compileTest(id$1, code);
+                      return [
+                              code,
+                              await compileTest(id$1, code)
+                            ];
                     }));
             return [
                     example,
                     results
                   ];
           }));
-  var errors = Belt_Array.keepMap(results, (function (param) {
-          var errors = Belt_Array.keepMap(param[1], (function (result) {
-                  if (result.TAG === "Ok") {
-                    return ;
-                  } else {
-                    return result._0;
-                  }
-                }));
-          if (errors.length > 0) {
+  var examples = results.map(function (param) {
+        var match = Core__Array.reduce(param[1], [
+              [],
+              []
+            ], (function (acc, param) {
+                var errors = acc[1];
+                var oks = acc[0];
+                var result = param[1];
+                if (result.TAG === "Ok") {
+                  return [
+                          Belt_Array.concatMany([
+                                oks,
+                                [[
+                                    param[0],
+                                    result._0
+                                  ]]
+                              ]),
+                          errors
+                        ];
+                } else {
+                  return [
+                          oks,
+                          Belt_Array.concatMany([
+                                errors,
+                                [{
+                                    TAG: "ReScript",
+                                    error: result._0
+                                  }]
+                              ])
+                        ];
+                }
+              }));
+        return [
+                param[0],
+                [
+                  match[0],
+                  match[1]
+                ]
+              ];
+      });
+  var errors = await Promise.all(examples.map(async function (param) {
+            var match = param[1];
+            var nodeTests = await Promise.all(match[0].map(async function (param) {
+                      var js = param[1];
+                      return [
+                              param[0],
+                              js,
+                              await runtimeTests(js)
+                            ];
+                    }));
+            var runtimeErrors = Belt_Array.keepMap(nodeTests, (function (param) {
+                    var output = param[2];
+                    if (output.TAG === "Ok") {
+                      return ;
+                    } else {
+                      return {
+                              TAG: "Runtime",
+                              rescript: param[0],
+                              js: param[1],
+                              error: output._0
+                            };
+                    }
+                  }));
             return [
                     param[0],
-                    errors
+                    runtimeErrors.concat(match[1])
                   ];
-          }
-          
-        }));
+          }));
   errors.forEach(function (param) {
-        var test = param[0];
+        var example = param[0];
         var cyan = function (s) {
           return "\x1b[36m" + s + "\x1b[0m";
         };
-        var other = test.kind;
+        var other = example.kind;
         var kind = other === "moduleAlias" ? "module alias" : other;
-        var errorMessage = param[1].map(function (e) {
-                return e.split("\n").filter(function (param, i) {
-                              return i !== 2;
-                            }).join("\n");
-              }).join("\n");
-        var message = "\x1B[1;31merror\x1B[0m: failed to compile examples from " + kind + " " + cyan(test.id) + "\n" + errorMessage;
-        process.stderr.write(message);
+        var errorMessage = param[1].map(function (err) {
+              if (err.TAG === "ReScript") {
+                var err$1 = err.error.split("\n").filter(function (param, i) {
+                        return i !== 2;
+                      }).join("\n");
+                return "\x1B[1;31merror\x1B[0m: failed to compile examples from " + kind + " " + cyan(example.id) + "\n" + err$1;
+              }
+              var indent = " ".repeat(2);
+              return "\x1B[1;31mruntime error\x1B[0m: failed to run examples from " + kind + " " + cyan(example.id) + "\n\n" + indent + "\x1b[36mReScript\x1b[0m\n\n" + indentOutputCode(err.rescript) + "\n\n" + indent + "\x1b[36mCompiled Js\x1b[0m\n\n" + indentOutputCode(err.js) + "\n\n" + indent + "\x1B[1;31mstacktrace\x1B[0m\n\n" + indentOutputCode(err.error) + "\n";
+            });
+        errorMessage.forEach(function (e) {
+              process.stderr.write(e);
+            });
       });
   if (errors.length === 0) {
     return 0;
@@ -387,7 +465,7 @@ async function main() {
   }
 }
 
-var exitCode = await main();
+var exitCode = await compilerResults();
 
 process.exit(exitCode);
 
@@ -404,13 +482,15 @@ export {
   makePackageJson ,
   rescriptJson ,
   prepareCompiler ,
+  SpawnAsync ,
   createFileInTempDir ,
   compileTest ,
-  SpawnAsync ,
   extractDocFromFile ,
   getExamples ,
   getCodeBlocks ,
-  main ,
+  runtimeTests ,
+  indentOutputCode ,
+  compilerResults ,
   exitCode ,
 }
 /* dirname Not a pure module */
