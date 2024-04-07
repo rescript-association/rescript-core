@@ -124,9 +124,15 @@ let indexOfOpt = (arr, item) =>
   }
 @send external indexOfFrom: (array<'a>, 'a, int) => int = "indexOf"
 
-@send external joinWith: (array<string>, string) => string = "join"
+@send external join: (array<string>, string) => string = "join"
 
-@send external joinWithUnsafe: (array<'a>, string) => string = "join"
+@deprecated("Use `join` instead") @send
+external joinWith: (array<string>, string) => string = "join"
+
+@send external joinUnsafe: (array<'a>, string) => string = "join"
+
+@deprecated("Use `joinUnsafe` instead") @send
+external joinWithUnsafe: (array<'a>, string) => string = "join"
 
 @send external lastIndexOf: (array<'a>, 'a) => int = "lastIndexOf"
 let lastIndexOfOpt = (arr, item) =>

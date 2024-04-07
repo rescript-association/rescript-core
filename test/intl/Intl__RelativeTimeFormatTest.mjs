@@ -8,7 +8,7 @@ console.log("Intl.RelativeTimeFormat");
 Intl.RelativeTimeFormat.supportedLocalesOf([
       "en-US",
       "en-GB"
-    ], undefined);
+    ]);
 
 Intl.RelativeTimeFormat.supportedLocalesOf([
       "en-US",

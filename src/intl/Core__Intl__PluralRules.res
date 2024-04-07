@@ -50,7 +50,7 @@ type rule = [#zero | #one | #two | #few | #many | #other]
 
 @send external select: (t, float) => rule = "select"
 @send external selectInt: (t, int) => rule = "select"
-@send external selectBigInt: (t, Core__BigInt.t) => rule = "select"
+@send external selectBigInt: (t, bigint) => rule = "select"
 
 @send
 external selectRange: (t, ~start: float, ~end: float) => rule = "selectRange"
@@ -59,5 +59,4 @@ external selectRange: (t, ~start: float, ~end: float) => rule = "selectRange"
 external selectRangeInt: (t, ~start: int, ~end: int) => rule = "selectRange"
 
 @send
-external selectRangeBigInt: (t, ~start: Core__BigInt.t, ~end: Core__BigInt.t) => rule =
-  "selectRange"
+external selectRangeBigInt: (t, ~start: bigint, ~end: bigint) => rule = "selectRange"

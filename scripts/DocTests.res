@@ -89,7 +89,7 @@ let makePackageJson = coreVersion =>
   "version": "1.0.0",
   "dependencies": {
     "@rescript/core": "file:rescript-core-${coreVersion}.tgz",
-    "rescript": "^11.0.1"
+    "rescript": "11.1.0-rc.7"
   }
 }
 `
@@ -163,7 +163,7 @@ let compileTest = async (~id, ~code) => {
     "-I",
     rescriptCoreCompiled,
     "-w",
-    "-109",
+    "-3-109",
     "-uncurried",
     "-open",
     "RescriptCore",
@@ -190,7 +190,7 @@ let compileTest = async (~id, ~code) => {
   | true =>
     stderr
     ->Array.map(e => e->Buffer.toString)
-    ->Array.joinWith("")
+    ->Array.join("")
     ->Error
   | false =>
     stdout
@@ -293,7 +293,7 @@ let getCodeBlocks = example => {
             code
             ->List.reverse
             ->List.toArray
-            ->Array.joinWith("\n"),
+            ->Array.join("\n"),
             ...acc,
           },
         )
@@ -359,9 +359,9 @@ let main = async () => {
         e
         ->String.split("\n")
         ->Array.filterWithIndex((_, i) => i !== 2)
-        ->Array.joinWith("\n")
+        ->Array.join("\n")
       })
-      ->Array.joinWith("\n")
+      ->Array.join("\n")
 
     let message = `${"error"->red}: failed to compile examples from ${kind} ${test.id->cyan}\n${errorMessage}`
 
