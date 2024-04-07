@@ -1,3 +1,5 @@
+open RescriptCore
+
 module Node = {
   module Path = {
     @module("path") external join2: (string, string) => string = "join"
@@ -41,14 +43,13 @@ module Node = {
 
     type readable
     type spawnReturns = {stderr: readable, stdout: readable}
-    type options = {cwd?: string}
+    type options = {cwd?: string, env?: Dict.t<string>, timeout?: int}
     @module("child_process")
     external spawn: (string, array<string>, ~options: options=?) => spawnReturns = "spawn"
 
     @send external on: (readable, string, Buffer.t => unit) => unit = "on"
     @send
-    external once: (spawnReturns, string, (Js.Null.t<float>, Js.Null.t<string>) => unit) => unit =
-      "once"
+    external once: (spawnReturns, string, (Null.t<float>, Null.t<string>) => unit) => unit = "once"
   }
 
   module OS = {
@@ -57,7 +58,6 @@ module Node = {
   }
 }
 
-open RescriptCore
 open Node
 
 module Docgen = RescriptTools.Docgen
@@ -299,8 +299,11 @@ let getCodeBlocks = example => {
 let runtimeTests = async code => {
   let {stdout, stderr} = await SpawnAsync.run(
     ~command="node",
-    ~args=["-p", code],
-    ~options={cwd: compilerDir},
+    ~args=["-e", code],
+    ~options={
+      cwd: compilerDir,
+      timeout: 2000,
+    },
   )
 
   switch Array.length(stderr) > 0 {

@@ -323,10 +323,11 @@ function getCodeBlocks(example) {
 
 async function runtimeTests(code) {
   var match = await run("node", [
-        "-p",
+        "-e",
         code
       ], {
-        cwd: compilerDir
+        cwd: compilerDir,
+        timeout: 2000
       });
   var stderr = match.stderr;
   if (stderr.length > 0) {
