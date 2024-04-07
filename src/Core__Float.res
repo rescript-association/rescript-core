@@ -16,20 +16,25 @@ let compare = (a: float, b: float) =>
 @val external isFinite: float => bool = "isFinite"
 @val external parseFloat: 'a => float = "parseFloat"
 // parseInt's return type is a float because it can be NaN
-@val external parseInt: 'a => float = "parseInt"
-@val external parseIntWithRadix: ('a, ~radix: int) => float = "parseInt"
+@val external parseInt: ('a, ~radix: int=?) => float = "parseInt"
+@deprecated("Use `parseInt` instead") @val
+external parseIntWithRadix: ('a, ~radix: int) => float = "parseInt"
 
-@send external toExponential: float => string = "toExponential"
-@send external toExponentialWithPrecision: (float, ~digits: int) => string = "toExponential"
+@send external toExponential: (float, ~digits: int=?) => string = "toExponential"
+@deprecated("Use `toExponential` instead") @send
+external toExponentialWithPrecision: (float, ~digits: int) => string = "toExponential"
 
-@send external toFixed: float => string = "toFixed"
-@send external toFixedWithPrecision: (float, ~digits: int) => string = "toFixed"
+@send external toFixed: (float, ~digits: int=?) => string = "toFixed"
+@deprecated("Use `toFixed` instead") @send
+external toFixedWithPrecision: (float, ~digits: int) => string = "toFixed"
 
-@send external toPrecision: float => string = "toPrecision"
-@send external toPrecisionWithPrecision: (float, ~digits: int) => string = "toPrecision"
+@send external toPrecision: (float, ~digits: int=?) => string = "toPrecision"
+@deprecated("Use `toPrecision` instead") @send
+external toPrecisionWithPrecision: (float, ~digits: int) => string = "toPrecision"
 
-@send external toString: float => string = "toString"
-@send external toStringWithRadix: (float, ~radix: int) => string = "toString"
+@send external toString: (float, ~radix: int=?) => string = "toString"
+@deprecated("Use `toString` instead") @send
+external toStringWithRadix: (float, ~radix: int) => string = "toString"
 @send external toLocaleString: float => string = "toLocaleString"
 
 let fromString = i =>

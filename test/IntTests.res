@@ -18,146 +18,141 @@ Test.run(__POS_OF__("range - positive, decreasing"), Int.range(3, 1), eq, [3, 2]
 Test.run(__POS_OF__("range - negative, decreasing"), Int.range(-1, -3), eq, [-1, -2])
 
 Test.run(
-  __POS_OF__("rangeWithOptions - positive, increasing, step 2"),
-  Int.rangeWithOptions(3, 6, {step: 2}),
+  __POS_OF__("range - positive, increasing, step 2"),
+  Int.range(3, 6, ~options={step: 2}),
   eq,
   [3, 5],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, increasing, step 2"),
-  Int.rangeWithOptions(3, 7, {step: 2}),
+  __POS_OF__("range + positive, increasing, step 2"),
+  Int.range(3, 7, ~options={step: 2}),
   eq,
   [3, 5],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, increasing, step 2"),
-  Int.rangeWithOptions(3, 8, {step: 2}),
+  __POS_OF__("range + positive, increasing, step 2"),
+  Int.range(3, 8, ~options={step: 2}),
   eq,
   [3, 5, 7],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions - negative, increasing, step 2"),
-  Int.rangeWithOptions(-6, -3, {step: 2}),
+  __POS_OF__("range - negative, increasing, step 2"),
+  Int.range(-6, -3, ~options={step: 2}),
   eq,
   [-6, -4],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions - positive, increasing, step 0"),
-  catch(() => Int.rangeWithOptions(3, 6, {step: 0})),
+  __POS_OF__("range - positive, increasing, step 0"),
+  catch(() => Int.range(3, 6, ~options={step: 0})),
   eq,
   Error.RangeError.make("Incorrect range arguments"),
 )
+Test.run(__POS_OF__("range - start == end, step 0"), Int.range(3, 3, ~options={step: 0}), eq, [])
 Test.run(
-  __POS_OF__("rangeWithOptions - start == end, step 0"),
-  Int.rangeWithOptions(3, 3, {step: 0}),
+  __POS_OF__("range + positive, increasing, step -1"),
+  Int.range(3, 6, ~options={step: -1}),
   eq,
   [],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, increasing, step -1"),
-  Int.rangeWithOptions(3, 6, {step: -1}),
+  __POS_OF__("range + positive, decreasing, step 1"),
+  Int.range(6, 3, ~options={step: 1}),
   eq,
   [],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, decreasing, step 1"),
-  Int.rangeWithOptions(6, 3, {step: 1}),
-  eq,
-  [],
-)
-Test.run(
-  __POS_OF__("rangeWithOptions + positive, decreasing, step -2"),
-  Int.rangeWithOptions(6, 3, {step: -2}),
+  __POS_OF__("range + positive, decreasing, step -2"),
+  Int.range(6, 3, ~options={step: -2}),
   eq,
   [6, 4],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, increasing, step -2"),
-  Int.rangeWithOptions(6, 2, {step: -2}),
+  __POS_OF__("range + positive, increasing, step -2"),
+  Int.range(6, 2, ~options={step: -2}),
   eq,
   [6, 4],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, increasing, step -2"),
-  Int.rangeWithOptions(6, 1, {step: -2}),
+  __POS_OF__("range + positive, increasing, step -2"),
+  Int.range(6, 1, ~options={step: -2}),
   eq,
   [6, 4, 2],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + negative, decreasing, step -2"),
-  Int.rangeWithOptions(-3, -6, {step: -2}),
+  __POS_OF__("range + negative, decreasing, step -2"),
+  Int.range(-3, -6, ~options={step: -2}),
   eq,
   [-3, -5],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions - positive, increasing, step 2, inclusive"),
-  Int.rangeWithOptions(3, 6, {step: 2, inclusive: true}),
+  __POS_OF__("range - positive, increasing, step 2, inclusive"),
+  Int.range(3, 6, ~options={step: 2, inclusive: true}),
   eq,
   [3, 5],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, increasing, step 2, inclusive"),
-  Int.rangeWithOptions(3, 7, {step: 2, inclusive: true}),
+  __POS_OF__("range + positive, increasing, step 2, inclusive"),
+  Int.range(3, 7, ~options={step: 2, inclusive: true}),
   eq,
   [3, 5, 7],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, increasing, step 2, inclusive"),
-  Int.rangeWithOptions(3, 8, {step: 2, inclusive: true}),
+  __POS_OF__("range + positive, increasing, step 2, inclusive"),
+  Int.range(3, 8, ~options={step: 2, inclusive: true}),
   eq,
   [3, 5, 7],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions - negative, increasing, step 2, inclusive"),
-  Int.rangeWithOptions(-6, -3, {step: 2, inclusive: true}),
+  __POS_OF__("range - negative, increasing, step 2, inclusive"),
+  Int.range(-6, -3, ~options={step: 2, inclusive: true}),
   eq,
   [-6, -4],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions - positive, increasing, step 0, inclusive"),
-  catch(() => Int.rangeWithOptions(3, 6, {step: 0, inclusive: true})),
+  __POS_OF__("range - positive, increasing, step 0, inclusive"),
+  catch(() => Int.range(3, 6, ~options={step: 0, inclusive: true})),
   eq,
   Error.RangeError.make("Incorrect range arguments"),
 )
 Test.run(
-  __POS_OF__("rangeWithOptions - start == end, step 0, inclusive"),
-  Int.rangeWithOptions(3, 3, {step: 0, inclusive: true}),
+  __POS_OF__("range - start == end, step 0, inclusive"),
+  Int.range(3, 3, ~options={step: 0, inclusive: true}),
   eq,
   [3],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, increasing, step -1, inclusive"),
-  Int.rangeWithOptions(3, 6, {step: -1, inclusive: true}),
+  __POS_OF__("range + positive, increasing, step -1, inclusive"),
+  Int.range(3, 6, ~options={step: -1, inclusive: true}),
   eq,
   [],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, decreasing, step 1, inclusive"),
-  Int.rangeWithOptions(6, 3, {step: 1, inclusive: true}),
+  __POS_OF__("range + positive, decreasing, step 1, inclusive"),
+  Int.range(6, 3, ~options={step: 1, inclusive: true}),
   eq,
   [],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, decreasing, step -2, inclusive"),
-  Int.rangeWithOptions(6, 3, {step: -2, inclusive: true}),
+  __POS_OF__("range + positive, decreasing, step -2, inclusive"),
+  Int.range(6, 3, ~options={step: -2, inclusive: true}),
   eq,
   [6, 4],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, increasing, step -2, inclusive"),
-  Int.rangeWithOptions(6, 2, {step: -2, inclusive: true}),
+  __POS_OF__("range + positive, increasing, step -2, inclusive"),
+  Int.range(6, 2, ~options={step: -2, inclusive: true}),
   eq,
   [6, 4, 2],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + positive, increasing, step -2, inclusive"),
-  Int.rangeWithOptions(6, 1, {step: -2, inclusive: true}),
+  __POS_OF__("range + positive, increasing, step -2, inclusive"),
+  Int.range(6, 1, ~options={step: -2, inclusive: true}),
   eq,
   [6, 4, 2],
 )
 Test.run(
-  __POS_OF__("rangeWithOptions + negative, decreasing, step -2, inclusive"),
-  Int.rangeWithOptions(-3, -6, {step: -2, inclusive: true}),
+  __POS_OF__("range + negative, decreasing, step -2, inclusive"),
+  Int.range(-3, -6, ~options={step: -2, inclusive: true}),
   eq,
   [-3, -5],
 )

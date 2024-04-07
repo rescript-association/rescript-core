@@ -61,20 +61,25 @@ let equal: (int, int) => bool
 let compare: (int, int) => Core__Ordering.t
 
 /**
-`toExponential(n)` return a `string` representing the given value in exponential
-notation.
-See [`Number.toExponential`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toExponential)
-on MDN.
+`toExponential(n, ~digits=?)` return a `string` representing the given value in
+exponential notation. `digits` specifies how many digits should appear after
+the decimal point. See [`Number.toExponential`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toExponential)
 
 ## Examples
 
 ```rescript
 Int.toExponential(1000) // "1e+3"
 Int.toExponential(-1000) // "-1e+3"
+Int.toExponential(77, ~digits=2) // "7.70e+1"
+Int.toExponential(5678, ~digits=2) // "5.68e+3"
 ```
+
+## Exceptions
+
+- `RangeError`: If `digits` less than 0 or greater than 10.
 */
 @send
-external toExponential: int => string = "toExponential"
+external toExponential: (int, ~digits: int=?) => string = "toExponential"
 
 /**
 `toExponential(n, ~digits)` return a `string` representing the given value in
@@ -93,24 +98,31 @@ Int.toExponentialWithPrecision(5678, ~digits=2) // "5.68e+3"
 
 - `RangeError`: If `digits` less than 0 or greater than 10.
 */
+@deprecated("Use `toExponential` instead")
 @send
 external toExponentialWithPrecision: (int, ~digits: int) => string = "toExponential"
 
 /**
-`toFixed(n)` return a `string` representing the given value using fixed-point
-notation. See [`Number.toFixed`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed)
+`toFixed(n, ~digits=?)` return a `string` representing the given
+value using fixed-point notation. `digits` specifies how many digits should
+appear after the decimal point. See [`Number.toFixed`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed)
 on MDN.
-
 
 ## Examples
 
 ```rescript
 Int.toFixed(123456) // "123456.00"
 Int.toFixed(10) // "10.00"
+Int.toFixed(300, ~digits=4) // "300.0000"
+Int.toFixed(300, ~digits=1) // "300.0"
 ```
+
+## Exceptions
+
+- `RangeError`: If `digits` is less than 0 or larger than 100.
 */
 @send
-external toFixed: int => string = "toFixed"
+external toFixed: (int, ~digits: int=?) => string = "toFixed"
 
 /**
 `toFixedWithPrecision(n, ~digits)` return a `string` representing the given
@@ -129,23 +141,31 @@ Int.toFixedWithPrecision(300, ~digits=1) // "300.0"
 
 - `RangeError`: If `digits` is less than 0 or larger than 100.
 */
+@deprecated("Use `toFixed` instead")
 @send
 external toFixedWithPrecision: (int, ~digits: int) => string = "toFixed"
 
 /**
-`toPrecision(n)` return a `string` representing the giver value with precision.
-This function omits the argument that controls precision, so it behaves like
-`toString`. See `toPrecisionWithPrecision` to control precision. See [`Number.toPrecision`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toPrecision) on MDN.
+`toPrecision(n, ~digits=?)` return a `string` representing the giver value with
+precision. `digits` specifies the number of significant digits. See [`Number.toPrecision`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toPrecision) on MDN.
 
 ## Examples
 
 ```rescript
 Int.toPrecision(100) // "100"
 Int.toPrecision(1) // "1"
+Int.toPrecision(100, ~digits=2) // "1.0e+2"
+Int.toPrecision(1, ~digits=2) // "1.0"
 ```
+
+## Exceptions
+
+- `RangeError`: If `digits` is not between 1 and 100 (inclusive).
+Implementations are allowed to support larger and smaller values as well.
+ECMA-262 only requires a precision of up to 21 significant digits.
 */
 @send
-external toPrecision: int => string = "toPrecision"
+external toPrecision: (int, ~digits: int=?) => string = "toPrecision"
 
 /**
 `toPrecisionWithPrecision(n, ~digits)` return a `string` representing the giver value with
@@ -166,10 +186,12 @@ ECMA-262 only requires a precision of up to 21 significant digits.
 
 */
 @send
+@deprecated("Use `toPrecision` instead")
 external toPrecisionWithPrecision: (int, ~digits: int) => string = "toPrecision"
 
 /**
-`toString(n)` return a `string` representing the given value.
+`toString(n, ~radix=?)` return a `string` representing the given value.
+`~radix` specifies the radix base to use for the formatted number.
 See [`Number.toString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)
 on MDN.
 
@@ -178,10 +200,17 @@ on MDN.
 ```rescript
 Int.toString(1000) // "1000"
 Int.toString(-1000) // "-1000"
+Int.toString(6, ~radix=2) // "110"
+Int.toString(373592855, ~radix=16) // "16449317"
+Int.toString(123456, ~radix=36) // "2n9c"
 ```
+
+## Exceptions
+
+`RangeError`: if `radix` is less than 2 or greater than 36.
 */
 @send
-external toString: int => string = "toString"
+external toString: (int, ~radix: int=?) => string = "toString"
 
 /**
 `toStringWithRadix(n, ~radix)` return a `string` representing the given value.
@@ -201,6 +230,7 @@ Int.toStringWithRadix(123456, ~radix=36) // "2n9c"
 
 `RangeError`: if `radix` is less than 2 or greater than 36.
 */
+@deprecated("Use `toString` instead")
 @send
 external toStringWithRadix: (int, ~radix: int) => string = "toString"
 
@@ -249,7 +279,7 @@ Int.fromFloat(0.9999) == 0
 external fromFloat: float => int = "%intoffloat"
 
 /**
-`fromString(~radix?, str)` return an `option<int>` representing the given value
+`fromString(str, ~radix=?)` return an `option<int>` representing the given value
 `str`. `~radix` specifies the radix base to use for the formatted number.
 
 ## Examples
@@ -257,10 +287,10 @@ external fromFloat: float => int = "%intoffloat"
 ```rescript
 Int.fromString("0") == Some(0)
 Int.fromString("NaN") == None
-Int.fromString(~radix=2, "6") == None
+Int.fromString("6", ~radix=2) == None
 ```
 */
-let fromString: (~radix: int=?, string) => option<int>
+let fromString: (string, ~radix: int=?) => option<int>
 
 /**
 `mod(n1, n2)` calculates the modulo (remainder after division) of two integers.
@@ -274,15 +304,27 @@ Int.mod(7, 4) == 3
 external mod: (int, int) => int = "%modint"
 
 /**
-`range(start, end)` returns an int array of the sequence of integers in the
+The options for `range`.
+*/
+type rangeOptions = {step?: int, inclusive?: bool}
+
+/**
+`range(start, end, ~options=?)` returns an int array of the sequence of integers in the
 range `[start, end)`. That is, including `start` but excluding `end`.
 
-If `start < end` the sequence will be increasing in steps of 1.
+If `step` is not set and `start < end`, the sequence will be increasing in steps of 1.
 
-If `start > end` the sequence will be decreasing in steps of -1.
+If `step` is not set and `start > end`, the sequence will be decreasing in steps of -1.
 
-This is equivalent to `rangeWithOptions` with `inclusive` set to `false` and
-`step` set to `1` if `start < end` and `-1` otherwise.
+If `step` is set, the sequence will increase or decrease by that amount for each
+step. If `start < end` and `step` is negative, or vice versa, an empty array is
+returned since the sequence would otherwise never reach or exceed the end value
+and hence be infinite. If `step` is `0` and `start !=` end, a `RangeError` is
+raised as the sequence would never reach or exceed the end value and hence be
+infinite.
+
+If `inclusive` is set to `true`, the sequence will include `end` if `step` is
+set such that the sequence includes it.
 
 ## Examples
 
@@ -290,14 +332,17 @@ This is equivalent to `rangeWithOptions` with `inclusive` set to `false` and
 Int.range(3, 6) == [3, 4, 5]
 Int.range(-3, -1) == [-3, -2]
 Int.range(3, 1) == [3, 2]
+Int.range(3, 7, ~options={step: 2}) == [3, 5]
+Int.range(3, 7, ~options={step: 2, inclusive: true}) == [3, 5, 7]
+Int.range(3, 6, ~options={step: -2}) // RangeError
+```
+
+## Exceptions
+
+- Raises `RangeError` if `step == 0 && start != end`.
 ```
 */
-let range: (int, int) => array<int>
-
-/**
-The options for `rangeWithOptions`.
-*/
-type rangeOptions = {step?: int, inclusive?: bool}
+let range: (int, int, ~options: rangeOptions=?) => array<int>
 
 /**
 `rangeWithOptions(start, end, options)` is like `range`, but with `step` and
@@ -325,6 +370,7 @@ Int.rangeWithOptions(3, 6, {step: -2}) // RangeError
 
 - Raises `RangeError` if `step == 0 && start != end`.
 */
+@deprecated("Use `range` instead")
 let rangeWithOptions: (int, int, rangeOptions) => array<int>
 
 /**
