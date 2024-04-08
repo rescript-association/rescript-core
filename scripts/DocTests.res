@@ -297,7 +297,7 @@ let getCodeBlocks = example => {
 }
 
 let runtimeTests = async code => {
-  let {stdout, stderr} = await SpawnAsync.run(
+  let {stdout, stderr, code: exitCode} = await SpawnAsync.run(
     ~command="node",
     ~args=["-e", code],
     ~options={
@@ -306,17 +306,25 @@ let runtimeTests = async code => {
     },
   )
 
-  switch Array.length(stderr) > 0 {
-  | true =>
-    stderr
-    ->Array.map(e => e->Buffer.toString)
-    ->Array.join("")
-    ->Error
-  | false =>
-    stdout
+  // Some expressions, like, `console.error("error")` is printed to stderr but
+  // exit code is 0
+  let std = switch exitCode->Null.toOption {
+  | Some(exitCode) if exitCode == 0.0 && Array.length(stderr) > 0 => stderr->Ok
+  | Some(exitCode) if exitCode == 0.0 => stdout->Ok
+  | None | Some(_) => Error(Array.length(stderr) > 0 ? stderr : stdout)
+  }
+
+  switch std {
+  | Ok(buf) =>
+    buf
     ->Array.map(e => e->Buffer.toString)
     ->Array.join("")
     ->Ok
+  | Error(buf) =>
+    buf
+    ->Array.map(e => e->Buffer.toString)
+    ->Array.join("")
+    ->Error
   }
 }
 
@@ -363,7 +371,7 @@ let compilerResults = async () => {
     (example, (compiled, errors))
   })
 
-  let errors =
+  let exampleErrors =
     await examples
     ->Array.map(async ((example, (compiled, errors))) => {
       let nodeTests =
@@ -383,7 +391,7 @@ let compilerResults = async () => {
     ->Promise.all
 
   // Print Errors
-  let () = errors->Array.forEach(((example, errors)) => {
+  let () = exampleErrors->Array.forEach(((example, errors)) => {
     let red = s => `\x1B[1;31m${s}\x1B[0m`
     let cyan = s => `\x1b[36m${s}\x1b[0m`
     let kind = switch example.kind {
@@ -425,7 +433,9 @@ ${error->indentOutputCode}
     errorMessage->Array.forEach(e => Process.stderrWrite(e))
   })
 
-  errors->Array.length == 0 ? 0 : 1
+  let someError = exampleErrors->Array.some(((_, err)) => Array.length(err) > 0)
+
+  someError ? 1 : 0
 }
 
 let exitCode = await compilerResults()

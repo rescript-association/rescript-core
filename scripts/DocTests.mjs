@@ -329,18 +329,45 @@ async function runtimeTests(code) {
         cwd: compilerDir,
         timeout: 2000
       });
+  var exitCode = match.code;
   var stderr = match.stderr;
-  if (stderr.length > 0) {
+  var stdout = match.stdout;
+  var std;
+  var exit = 0;
+  if (exitCode !== null) {
+    if (exitCode === 0.0 && stderr.length > 0) {
+      std = {
+        TAG: "Ok",
+        _0: stderr
+      };
+    } else if (exitCode === 0.0) {
+      std = {
+        TAG: "Ok",
+        _0: stdout
+      };
+    } else {
+      exit = 1;
+    }
+  } else {
+    exit = 1;
+  }
+  if (exit === 1) {
+    std = {
+      TAG: "Error",
+      _0: stderr.length > 0 ? stderr : stdout
+    };
+  }
+  if (std.TAG === "Ok") {
     return {
-            TAG: "Error",
-            _0: stderr.map(function (e) {
+            TAG: "Ok",
+            _0: std._0.map(function (e) {
                     return e.toString();
                   }).join("")
           };
   } else {
     return {
-            TAG: "Ok",
-            _0: match.stdout.map(function (e) {
+            TAG: "Error",
+            _0: std._0.map(function (e) {
                     return e.toString();
                   }).join("")
           };
@@ -410,7 +437,7 @@ async function compilerResults() {
                 ]
               ];
       });
-  var errors = await Promise.all(examples.map(async function (param) {
+  var exampleErrors = await Promise.all(examples.map(async function (param) {
             var match = param[1];
             var nodeTests = await Promise.all(match[0].map(async function (param) {
                       var js = param[1];
@@ -438,7 +465,7 @@ async function compilerResults() {
                     runtimeErrors.concat(match[1])
                   ];
           }));
-  errors.forEach(function (param) {
+  exampleErrors.forEach(function (param) {
         var example = param[0];
         var cyan = function (s) {
           return "\x1b[36m" + s + "\x1b[0m";
@@ -459,10 +486,13 @@ async function compilerResults() {
               process.stderr.write(e);
             });
       });
-  if (errors.length === 0) {
-    return 0;
-  } else {
+  var someError = exampleErrors.some(function (param) {
+        return param[1].length > 0;
+      });
+  if (someError) {
     return 1;
+  } else {
+    return 0;
   }
 }
 
