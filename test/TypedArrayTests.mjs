@@ -49,7 +49,7 @@ function assertWillThrow(message, f) {
 }
 
 function areSame(x, y) {
-  return x.toString() === y.toString();
+  return x.toString(undefined) === y.toString(undefined);
 }
 
 assertTrue("fromArray", (function () {

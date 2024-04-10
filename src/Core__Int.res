@@ -8,27 +8,32 @@ let equal = (a: int, b: int) => a === b
 let compare = (a: int, b: int) =>
   a < b ? Core__Ordering.less : a > b ? Core__Ordering.greater : Core__Ordering.equal
 
-@send external toExponential: int => string = "toExponential"
-@send external toExponentialWithPrecision: (int, ~digits: int) => string = "toExponential"
+@send external toExponential: (int, ~digits: int=?) => string = "toExponential"
+@deprecated("Use `toExponential` instead") @send
+external toExponentialWithPrecision: (int, ~digits: int) => string = "toExponential"
 
-@send external toFixed: int => string = "toFixed"
-@send external toFixedWithPrecision: (int, ~digits: int) => string = "toFixed"
+@send external toFixed: (int, ~digits: int=?) => string = "toFixed"
+@deprecated("Use `toFixed` instead") @send
+external toFixedWithPrecision: (int, ~digits: int) => string = "toFixed"
 
-@send external toPrecision: int => string = "toPrecision"
-@send external toPrecisionWithPrecision: (int, ~digits: int) => string = "toPrecision"
+@send external toPrecision: (int, ~digits: int=?) => string = "toPrecision"
+@deprecated("Use `toPrecision` instead") @send
+external toPrecisionWithPrecision: (int, ~digits: int) => string = "toPrecision"
 
-@send external toString: int => string = "toString"
-@send external toStringWithRadix: (int, ~radix: int) => string = "toString"
+@send external toString: (int, ~radix: int=?) => string = "toString"
+@deprecated("Use `toString` instead") @send
+external toStringWithRadix: (int, ~radix: int) => string = "toString"
 @send external toLocaleString: int => string = "toLocaleString"
 
 external toFloat: int => float = "%identity"
 external fromFloat: float => int = "%intoffloat"
 
-let fromString = (~radix=?, x) => {
+let fromString = (x, ~radix=?) => {
   let maybeInt = switch radix {
-  | Some(radix) => Core__Float.parseIntWithRadix(x, ~radix)
+  | Some(radix) => Core__Float.parseInt(x, ~radix)
   | None => Core__Float.parseInt(x)
   }
+
   if Core__Float.isNaN(maybeInt) {
     None
   } else if maybeInt > Constants.maxValue->toFloat || maybeInt < Constants.minValue->toFloat {
@@ -42,7 +47,8 @@ let fromString = (~radix=?, x) => {
 external mod: (int, int) => int = "%modint"
 
 type rangeOptions = {step?: int, inclusive?: bool}
-let rangeWithOptions = (start, end, options) => {
+
+let range = (start, end, ~options: rangeOptions={}) => {
   let isInverted = start > end
 
   let step = switch options.step {
@@ -65,7 +71,8 @@ let rangeWithOptions = (start, end, options) => {
   Core__Array.fromInitializer(~length, i => start + i * step)
 }
 
-let range = (start, end) => rangeWithOptions(start, end, {})
+@deprecated("Use `range` instead") @send
+let rangeWithOptions = (start, end, options) => range(start, end, ~options)
 
 let clamp = (~min=?, ~max=?, value): int => {
   let value = switch max {

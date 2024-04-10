@@ -17,7 +17,7 @@ function compare(a, b) {
   }
 }
 
-function fromString(radix, x) {
+function fromString(x, radix) {
   var maybeInt = radix !== undefined ? parseInt(x, radix) : parseInt(x);
   if (isNaN(maybeInt) || maybeInt > 2147483647 || maybeInt < -2147483648) {
     return ;
@@ -26,7 +26,8 @@ function fromString(radix, x) {
   }
 }
 
-function rangeWithOptions(start, end, options) {
+function range(start, end, optionsOpt) {
+  var options = optionsOpt !== undefined ? optionsOpt : ({});
   var isInverted = start > end;
   var n = options.step;
   var step;
@@ -48,17 +49,17 @@ function rangeWithOptions(start, end, options) {
   } else if (step === 0) {
     length = options.inclusive === true ? 1 : 0;
   } else {
-    var range = isInverted ? start - end | 0 : end - start | 0;
-    var range$1 = options.inclusive === true ? range + 1 | 0 : range;
-    length = Math.ceil(range$1 / PervasivesU.abs(step)) | 0;
+    var range$1 = isInverted ? start - end | 0 : end - start | 0;
+    var range$2 = options.inclusive === true ? range$1 + 1 | 0 : range$1;
+    length = Math.ceil(range$2 / PervasivesU.abs(step)) | 0;
   }
   return Core__Array.fromInitializer(length, (function (i) {
                 return start + Math.imul(i, step) | 0;
               }));
 }
 
-function range(start, end) {
-  return rangeWithOptions(start, end, {});
+function rangeWithOptions(start, end, options) {
+  return range(start, end, options);
 }
 
 function clamp(min, max, value) {

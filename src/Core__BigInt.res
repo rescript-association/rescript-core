@@ -50,8 +50,10 @@ See [`toString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referen
 Js.BigInt.toString(123n)->Js.log
 ```
 */
-external toString: bigint => string = "toString"
-@send external toStringWithRadix: (bigint, ~radix: int) => string = "toString"
+external toString: (bigint, ~radix: int=?) => string = "toString"
+
+@deprecated("Use `toString` with `~radix` instead") @send
+external toStringWithRadix: (bigint, ~radix: int) => string = "toString"
 
 @send
 /**

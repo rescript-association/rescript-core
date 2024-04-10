@@ -306,7 +306,7 @@ async function main() {
             var id = example.id.replaceAll(".", "_");
             var codes = getCodeBlocks(example);
             var results = await Promise.all(codes.map(async function (code, $$int) {
-                      var id$1 = id + "_" + $$int.toString();
+                      var id$1 = id + "_" + $$int.toString(undefined);
                       return await testCode(id$1, code);
                     }));
             return [
