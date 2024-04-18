@@ -13,7 +13,7 @@ function print(value) {
   if (match === "object" || match === "bigint") {
     return Util.inspect(value);
   } else if (match === "string") {
-    return Core__Option.getExn(JSON.stringify(value));
+    return Core__Option.getExn(JSON.stringify(value), undefined);
   } else {
     return String(value);
   }
