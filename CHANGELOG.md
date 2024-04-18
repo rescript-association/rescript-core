@@ -4,6 +4,7 @@
 
 - BREAKING: Use new native `bigint` type. This requires ReScript compiler version "11.1.0-rc.6" or higher. https://github.com/rescript-association/rescript-core/pull/207
 - `Int`, `Float`, `BigInt`: use optional args and deprecate `xxxWithRadix`, `xxxWithPrecision` etc. https://github.com/rescript-association/rescript-core/pull/209
+- Add optional `~message: string=?` to `Option.getExn`.
 
 ## 1.2.0
 
