@@ -340,7 +340,6 @@ Int.range(3, 6, ~options={step: -2}) // RangeError
 ## Exceptions
 
 - Raises `RangeError` if `step == 0 && start != end`.
-```
 */
 let range: (int, int, ~options: rangeOptions=?) => array<int>
 

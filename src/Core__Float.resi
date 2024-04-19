@@ -225,7 +225,6 @@ Float.toExponential(5678.0, ~digits=2) // "5.68e+3"
 ## Exceptions
 
 - `RangeError`: If `digits` less than 0 or greater than 10.
-```
 */
 @send
 external toExponential: (float, ~digits: int=?) => string = "toExponential"
