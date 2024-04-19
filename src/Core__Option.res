@@ -34,10 +34,16 @@ let forEach = (opt, f) =>
   | None => ()
   }
 
-let getExn = x =>
+let getExn = (x, ~message=?) =>
   switch x {
   | Some(x) => x
-  | None => raise(Not_found)
+  | None =>
+    Core__Error.panic(
+      switch message {
+      | None => "Option.getExn called for None value"
+      | Some(message) => message
+      },
+    )
   }
 
 external getUnsafe: option<'a> => 'a = "%identity"
