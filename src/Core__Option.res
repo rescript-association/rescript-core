@@ -40,7 +40,7 @@ let getExn = (x, ~message=?) =>
   | None =>
     Core__Error.panic(
       switch message {
-      | None => "Not found."
+      | None => "Option.getExn called for None value"
       | Some(message) => message
       },
     )
