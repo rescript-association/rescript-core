@@ -21,7 +21,7 @@ function getExn(x, message) {
   if (x !== undefined) {
     return Caml_option.valFromOption(x);
   } else {
-    return Core__Error.panic(message !== undefined ? message : "Not found.");
+    return Core__Error.panic(message !== undefined ? message : "Option.getExn called for None value");
   }
 }
 
