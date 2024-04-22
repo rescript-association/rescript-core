@@ -387,7 +387,10 @@ async function compilerResults() {
             var codes = getCodeBlocks(example);
             var results = await Promise.all(codes.map(async function (code, $$int) {
                       var id$1 = id + "_" + $$int.toString(undefined);
-                      return await testCode(id$1, code);
+                      return [
+                              code,
+                              await compileTest(id$1, code)
+                            ];
                     }));
             return [
                     example,
