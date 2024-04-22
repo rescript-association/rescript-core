@@ -38,8 +38,8 @@ let f = () => {
 Console.info("")
 Console.info("Float/Int")
 Console.info("---")
-Console.log(10.2->Float.toFixedWithPrecision(~digits=2))
-Console.log(10->Int.toFixedWithPrecision(~digits=2))
+Console.log(10.2->Float.toFixed(~digits=2))
+Console.log(10->Int.toFixed(~digits=2))
 Console.log("0"->Int.fromString)
 Console.log("0.1"->Float.fromString)
 

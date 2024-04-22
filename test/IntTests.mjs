@@ -31,7 +31,7 @@ Test.run([
         50
       ],
       "range - positive, increasing"
-    ], Core__Int.range(3, 6), eq, [
+    ], Core__Int.range(3, 6, undefined), eq, [
       3,
       4,
       5
@@ -45,7 +45,7 @@ Test.run([
         50
       ],
       "range - negative, increasing"
-    ], Core__Int.range(-3, -1), eq, [
+    ], Core__Int.range(-3, -1, undefined), eq, [
       -3,
       -2
     ]);
@@ -58,7 +58,7 @@ Test.run([
         51
       ],
       "range - cross-zero, incresing"
-    ], Core__Int.range(-1, 2), eq, [
+    ], Core__Int.range(-1, 2, undefined), eq, [
       -1,
       0,
       1
@@ -72,7 +72,7 @@ Test.run([
         42
       ],
       "range - start == end"
-    ], Core__Int.range(3, 3), eq, []);
+    ], Core__Int.range(3, 3, undefined), eq, []);
 
 Test.run([
       [
@@ -82,7 +82,7 @@ Test.run([
         50
       ],
       "range - positive, decreasing"
-    ], Core__Int.range(3, 1), eq, [
+    ], Core__Int.range(3, 1, undefined), eq, [
       3,
       2
     ]);
@@ -95,7 +95,7 @@ Test.run([
         50
       ],
       "range - negative, decreasing"
-    ], Core__Int.range(-1, -3), eq, [
+    ], Core__Int.range(-1, -3, undefined), eq, [
       -1,
       -2
     ]);
@@ -105,10 +105,10 @@ Test.run([
         "IntTests.res",
         21,
         13,
-        62
+        51
       ],
-      "rangeWithOptions - positive, increasing, step 2"
-    ], Core__Int.rangeWithOptions(3, 6, {
+      "range - positive, increasing, step 2"
+    ], Core__Int.range(3, 6, {
           step: 2
         }), eq, [
       3,
@@ -120,10 +120,10 @@ Test.run([
         "IntTests.res",
         27,
         13,
-        62
+        51
       ],
-      "rangeWithOptions + positive, increasing, step 2"
-    ], Core__Int.rangeWithOptions(3, 7, {
+      "range + positive, increasing, step 2"
+    ], Core__Int.range(3, 7, {
           step: 2
         }), eq, [
       3,
@@ -135,10 +135,10 @@ Test.run([
         "IntTests.res",
         33,
         13,
-        62
+        51
       ],
-      "rangeWithOptions + positive, increasing, step 2"
-    ], Core__Int.rangeWithOptions(3, 8, {
+      "range + positive, increasing, step 2"
+    ], Core__Int.range(3, 8, {
           step: 2
         }), eq, [
       3,
@@ -151,10 +151,10 @@ Test.run([
         "IntTests.res",
         39,
         13,
-        62
+        51
       ],
-      "rangeWithOptions - negative, increasing, step 2"
-    ], Core__Int.rangeWithOptions(-6, -3, {
+      "range - negative, increasing, step 2"
+    ], Core__Int.range(-6, -3, {
           step: 2
         }), eq, [
       -6,
@@ -166,11 +166,11 @@ Test.run([
         "IntTests.res",
         45,
         13,
-        62
+        51
       ],
-      "rangeWithOptions - positive, increasing, step 0"
+      "range - positive, increasing, step 0"
     ], $$catch(function () {
-          return Core__Int.rangeWithOptions(3, 6, {
+          return Core__Int.range(3, 6, {
                       step: 0
                     });
         }), eq, new RangeError("Incorrect range arguments"));
@@ -178,48 +178,48 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        51,
-        13,
-        54
+        50,
+        20,
+        50
       ],
-      "rangeWithOptions - start == end, step 0"
-    ], Core__Int.rangeWithOptions(3, 3, {
+      "range - start == end, step 0"
+    ], Core__Int.range(3, 3, {
           step: 0
         }), eq, []);
 
 Test.run([
       [
         "IntTests.res",
-        57,
+        52,
         13,
-        63
+        52
       ],
-      "rangeWithOptions + positive, increasing, step -1"
-    ], Core__Int.rangeWithOptions(3, 6, {
+      "range + positive, increasing, step -1"
+    ], Core__Int.range(3, 6, {
           step: -1
         }), eq, []);
 
 Test.run([
       [
         "IntTests.res",
-        63,
+        58,
         13,
-        62
+        51
       ],
-      "rangeWithOptions + positive, decreasing, step 1"
-    ], Core__Int.rangeWithOptions(6, 3, {
+      "range + positive, decreasing, step 1"
+    ], Core__Int.range(6, 3, {
           step: 1
         }), eq, []);
 
 Test.run([
       [
         "IntTests.res",
-        69,
+        64,
         13,
-        63
+        52
       ],
-      "rangeWithOptions + positive, decreasing, step -2"
-    ], Core__Int.rangeWithOptions(6, 3, {
+      "range + positive, decreasing, step -2"
+    ], Core__Int.range(6, 3, {
           step: -2
         }), eq, [
       6,
@@ -229,12 +229,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        75,
+        70,
         13,
-        63
+        52
       ],
-      "rangeWithOptions + positive, increasing, step -2"
-    ], Core__Int.rangeWithOptions(6, 2, {
+      "range + positive, increasing, step -2"
+    ], Core__Int.range(6, 2, {
           step: -2
         }), eq, [
       6,
@@ -244,12 +244,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        81,
+        76,
         13,
-        63
+        52
       ],
-      "rangeWithOptions + positive, increasing, step -2"
-    ], Core__Int.rangeWithOptions(6, 1, {
+      "range + positive, increasing, step -2"
+    ], Core__Int.range(6, 1, {
           step: -2
         }), eq, [
       6,
@@ -260,12 +260,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        87,
+        82,
         13,
-        63
+        52
       ],
-      "rangeWithOptions + negative, decreasing, step -2"
-    ], Core__Int.rangeWithOptions(-3, -6, {
+      "range + negative, decreasing, step -2"
+    ], Core__Int.range(-3, -6, {
           step: -2
         }), eq, [
       -3,
@@ -275,12 +275,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        93,
+        88,
         13,
-        73
+        62
       ],
-      "rangeWithOptions - positive, increasing, step 2, inclusive"
-    ], Core__Int.rangeWithOptions(3, 6, {
+      "range - positive, increasing, step 2, inclusive"
+    ], Core__Int.range(3, 6, {
           step: 2,
           inclusive: true
         }), eq, [
@@ -291,12 +291,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        99,
+        94,
         13,
-        73
+        62
       ],
-      "rangeWithOptions + positive, increasing, step 2, inclusive"
-    ], Core__Int.rangeWithOptions(3, 7, {
+      "range + positive, increasing, step 2, inclusive"
+    ], Core__Int.range(3, 7, {
           step: 2,
           inclusive: true
         }), eq, [
@@ -308,12 +308,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        105,
+        100,
         13,
-        73
+        62
       ],
-      "rangeWithOptions + positive, increasing, step 2, inclusive"
-    ], Core__Int.rangeWithOptions(3, 8, {
+      "range + positive, increasing, step 2, inclusive"
+    ], Core__Int.range(3, 8, {
           step: 2,
           inclusive: true
         }), eq, [
@@ -325,12 +325,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        111,
+        106,
         13,
-        73
+        62
       ],
-      "rangeWithOptions - negative, increasing, step 2, inclusive"
-    ], Core__Int.rangeWithOptions(-6, -3, {
+      "range - negative, increasing, step 2, inclusive"
+    ], Core__Int.range(-6, -3, {
           step: 2,
           inclusive: true
         }), eq, [
@@ -341,13 +341,13 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        117,
+        112,
         13,
-        73
+        62
       ],
-      "rangeWithOptions - positive, increasing, step 0, inclusive"
+      "range - positive, increasing, step 0, inclusive"
     ], $$catch(function () {
-          return Core__Int.rangeWithOptions(3, 6, {
+          return Core__Int.range(3, 6, {
                       step: 0,
                       inclusive: true
                     });
@@ -356,12 +356,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        123,
+        118,
         13,
-        65
+        54
       ],
-      "rangeWithOptions - start == end, step 0, inclusive"
-    ], Core__Int.rangeWithOptions(3, 3, {
+      "range - start == end, step 0, inclusive"
+    ], Core__Int.range(3, 3, {
           step: 0,
           inclusive: true
         }), eq, [3]);
@@ -369,12 +369,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        129,
+        124,
         13,
-        74
+        63
       ],
-      "rangeWithOptions + positive, increasing, step -1, inclusive"
-    ], Core__Int.rangeWithOptions(3, 6, {
+      "range + positive, increasing, step -1, inclusive"
+    ], Core__Int.range(3, 6, {
           step: -1,
           inclusive: true
         }), eq, []);
@@ -382,12 +382,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        135,
+        130,
         13,
-        73
+        62
       ],
-      "rangeWithOptions + positive, decreasing, step 1, inclusive"
-    ], Core__Int.rangeWithOptions(6, 3, {
+      "range + positive, decreasing, step 1, inclusive"
+    ], Core__Int.range(6, 3, {
           step: 1,
           inclusive: true
         }), eq, []);
@@ -395,12 +395,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        141,
+        136,
         13,
-        74
+        63
       ],
-      "rangeWithOptions + positive, decreasing, step -2, inclusive"
-    ], Core__Int.rangeWithOptions(6, 3, {
+      "range + positive, decreasing, step -2, inclusive"
+    ], Core__Int.range(6, 3, {
           step: -2,
           inclusive: true
         }), eq, [
@@ -411,12 +411,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        147,
+        142,
         13,
-        74
+        63
       ],
-      "rangeWithOptions + positive, increasing, step -2, inclusive"
-    ], Core__Int.rangeWithOptions(6, 2, {
+      "range + positive, increasing, step -2, inclusive"
+    ], Core__Int.range(6, 2, {
           step: -2,
           inclusive: true
         }), eq, [
@@ -428,12 +428,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        153,
+        148,
         13,
-        74
+        63
       ],
-      "rangeWithOptions + positive, increasing, step -2, inclusive"
-    ], Core__Int.rangeWithOptions(6, 1, {
+      "range + positive, increasing, step -2, inclusive"
+    ], Core__Int.range(6, 1, {
           step: -2,
           inclusive: true
         }), eq, [
@@ -445,12 +445,12 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        159,
+        154,
         13,
-        74
+        63
       ],
-      "rangeWithOptions + negative, decreasing, step -2, inclusive"
-    ], Core__Int.rangeWithOptions(-3, -6, {
+      "range + negative, decreasing, step -2, inclusive"
+    ], Core__Int.range(-3, -6, {
           step: -2,
           inclusive: true
         }), eq, [
@@ -461,7 +461,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        165,
+        160,
         20,
         27
       ],
@@ -471,7 +471,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        166,
+        161,
         20,
         35
       ],
@@ -481,7 +481,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        167,
+        162,
         20,
         35
       ],
@@ -491,7 +491,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        168,
+        163,
         20,
         35
       ],
@@ -501,7 +501,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        169,
+        164,
         20,
         35
       ],
@@ -511,7 +511,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        170,
+        165,
         20,
         42
       ],
@@ -521,7 +521,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        171,
+        166,
         20,
         42
       ],
@@ -531,7 +531,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        172,
+        167,
         20,
         42
       ],
@@ -541,7 +541,7 @@ Test.run([
 Test.run([
       [
         "IntTests.res",
-        173,
+        168,
         20,
         42
       ],

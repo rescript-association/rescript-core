@@ -228,7 +228,7 @@ let forEachWithKey: (t<'a>, ('a, string) => unit) => unit
 let dict = Dict.fromArray([("key1", 1), ("key2", 2)])
 
 dict->Dict.mapValues(v => v + 10)->Dict.toArray // [("key1", 11), ("key2", 12)]
-dict->Dict.mapValues(Int.toString)->Dict.toArray // [("key1", "1"), ("key2", "2")]
+dict->Dict.mapValues(v => Int.toString(v))->Dict.toArray // [("key1", "1"), ("key2", "2")]
 ```
 */
 let mapValues: (t<'a>, 'a => 'b) => t<'b>

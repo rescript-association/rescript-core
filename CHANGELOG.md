@@ -2,7 +2,13 @@
 
 ## Next version
 
+## 1.3.0
+
+This version requires ReScript `>=11.1.0-rc.6`.
+
 - BREAKING: Use new native `bigint` type. This requires ReScript compiler version "11.1.0-rc.6" or higher. https://github.com/rescript-association/rescript-core/pull/207
+- `Int`, `Float`, `BigInt`: use optional args and deprecate `xxxWithRadix`, `xxxWithPrecision` etc. https://github.com/rescript-association/rescript-core/pull/209
+- BREAKING: Add optional `~message: string=?` to `Option.getExn`. This also changes the error raised by `Option.getExn` from `Not_found` to a regular JS error. https://github.com/rescript-association/rescript-core/pull/212
 
 ## 1.2.0
 

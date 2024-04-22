@@ -89,7 +89,7 @@ console.log((10.2).toFixed(2));
 
 console.log((10).toFixed(2));
 
-console.log(Core__Int.fromString(undefined, "0"));
+console.log(Core__Int.fromString("0", undefined));
 
 console.log(Core__Float.fromString("0.1"));
 
@@ -300,15 +300,15 @@ console.log({
 
 var Bugfix = {};
 
-console.log(Core__Int.fromString(undefined, "1231231"));
+console.log(Core__Int.fromString("1231231", undefined));
 
-console.log(Core__Int.fromString(undefined, "12.22"));
+console.log(Core__Int.fromString("12.22", undefined));
 
-console.log(Core__Int.fromString(undefined, "99999999999999999"));
+console.log(Core__Int.fromString("99999999999999999", undefined));
 
-console.log(Core__Int.fromString(undefined, "99999999999999999"));
+console.log(Core__Int.fromString("99999999999999999", undefined));
 
-console.log(Core__Int.fromString(2, "010101"));
+console.log(Core__Int.fromString("010101", 2));
 
 var _collator = IntlTests._collator;
 

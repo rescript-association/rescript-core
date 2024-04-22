@@ -4,10 +4,13 @@ ReScript's new standard library. Intended to be familiar for JavaScript develope
 
 In ReScript 11, it is shipped as a separate npm package @rescript/core that is added to your project as per the [installation instructions](https://rescript-lang.org/docs/manual/latest/installation). In future ReScript versions, it will be included with the `rescript` npm package itself.
 
-## Versioning
+## Versioning and Compatibility
 
-- Versions [`0.x`](https://github.com/rescript-association/rescript-core/tree/0.x) targets ReScript v10.1 and below.
-- Versions `1.x` targets ReScript v11 and above, and contains code that will not work with v10.1 and below.
+| @rescript/core                                                        | ReScript              |
+| --------------------------------------------------------------------- | --------------------- |
+| 1.3.0                                                                 | 11.1+, uncurried mode |
+| 1.0.0-1.2.0                                                           | 11.0+                 |
+| [0.x](https://github.com/rescript-association/rescript-core/tree/0.x) | 10.1+                 |
 
 ## Background
 
