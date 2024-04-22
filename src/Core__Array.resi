@@ -135,8 +135,7 @@ See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 ```rescript
 let myArray = [1, 2, 3, 4]
 
-myArray
-->Array.fill(9, ~start=1, ~end=2)
+myArray->Array.fill(9, ~start=1, ~end=3)
 
 myArray->assert_eq([1, 9, 9, 4])
 ```
