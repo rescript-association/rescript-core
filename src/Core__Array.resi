@@ -98,9 +98,8 @@ See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ```rescript
 let myArray = [1, 2, 3, 4]
-myArray
-->Array.fillAll(9)
-->assert_eq([9, 9, 9, 9])
+myArray->Array.fillAll(9)
+myArray->assert_eq([9, 9, 9, 9])
 ```
 */
 @send
@@ -117,10 +116,8 @@ See [`Array.fill`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ```rescript
 let myArray = [1, 2, 3, 4]
-
-myArray
-->Array.fillToEnd(9, ~start=1)
-->assert_eq([1, 9, 9, 9])
+myArray->Array.fillToEnd(9, ~start=1)
+myArray->assert_eq([1, 9, 9, 9])
 ```
 */
 @send
@@ -140,7 +137,8 @@ let myArray = [1, 2, 3, 4]
 
 myArray
 ->Array.fill(9, ~start=1, ~end=2)
-->assert_eq([1, 9, 9, 4])
+
+myArray->assert_eq([1, 9, 9, 4])
 ```
 */
 @send
@@ -221,7 +219,7 @@ See [`Array.reverse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 let someArray = ["hi", "hello"]
 someArray->Array.reverse
 
-someArray->assert_eq(["hello", "h1"])
+someArray->assert_eq(["hello", "hi"])
 ```
 */
 @send
@@ -279,9 +277,9 @@ See [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 ## Examples
 
 ```rescript
-[3, 2, 1]
-->Array.sort((a, b) => float(a - b))
-->assert_eq([1, 2, 3])
+let array = [3, 2, 1]
+array->Array.sort((a, b) => float(a - b))
+array->assert_eq([1, 2, 3])
 ```
 */
 @send
@@ -587,7 +585,7 @@ See [`Array.every`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 let array = [1, 2, 3, 4]
 
 array
-->Array.every(num => num > 4)
+->Array.every(num => num <= 4)
 ->assert_eq(true)
 
 array
@@ -609,7 +607,7 @@ See [`Array.every`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 let array = [1, 2, 3, 4]
 
 array
-->Array.everyWithIndex((num, index) => index < 2 && num <= 2)
+->Array.everyWithIndex((num, index) => index < 5 && num <= 4)
 ->assert_eq(true)
 
 array
@@ -954,7 +952,7 @@ Beware this will *mutate* the array.
 let array = ["Hello", "Hi", "Good bye"]
 array->Array.set(1, "Hello")
 
-array[1]->assert_eq("Hello")
+array[1]->assert_eq(Some("Hello"))
 ```
 */
 @set_index
@@ -1001,7 +999,7 @@ Beware this will *mutate* the array, and is *unsafe*.
 let array = ["Hello", "Hi", "Good bye"]
 array->Array.setUnsafe(1, "Hello")
 
-assert_eq(array[1], "Hello")
+assert_eq(array[1], Some("Hello"))
 ```
 */
 external setUnsafe: (array<'a>, int, 'a) => unit = "%array_unsafe_set"
@@ -1038,7 +1036,7 @@ See [`Array.toReversed`](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 let someArray = ["hi", "hello"]
 let reversed = someArray->Array.toReversed
 
-reversed->assert_eq(["hello", "h1"])
+reversed->assert_eq(["hello", "hi"])
 someArray->assert_eq(["h1", "hello"]) // Original unchanged
 ```
 */
@@ -1122,8 +1120,10 @@ let array = ["Hello", "Hi", "Good bye"]
 array->Array.shuffle
 Console.log(array)
 
-[1, 2, 3]
-->Array.shuffle
+let array2 = [1, 2, 3]
+array2->Array.shuffle
+
+array2
 ->Array.length
 ->assert_eq(3)
 ```
