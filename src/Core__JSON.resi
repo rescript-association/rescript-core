@@ -532,6 +532,7 @@ If the value contains circular references or `BigInt`s, the function will throw 
 If you want to stringify a JSON object, use `JSON.stringifyWithFilter` instead.
 
 ## Examples
+
 ```rescript
 let dict = Dict.fromArray([
   ("foo", JSON.Encode.string("bar")),
@@ -541,7 +542,7 @@ let dict = Dict.fromArray([
 
 dict
 ->JSON.stringifyAnyWithFilter(["foo", "someNumber"])
-->assert_eq(`{"foo": "bar","someNumber": 42}`)
+->assert_eq(`{"foo":"bar","someNumber":42}`)
 
 JSON.stringifyAny(() => "hello world")
 ->Option.isNone

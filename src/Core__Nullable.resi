@@ -117,7 +117,10 @@ let getWithDefault: (t<'a>, 'a) => 'a
 
 ```rescript
 Nullable.getExn(Nullable.make(3)) // 3
-Nullable.getExn(Nullable.null) /* Raises an Error */
+switch Nullable.getExn(Nullable.null) {
+| exception _ => assert(true)
+| _ => assert(false)
+}
 ```
 
 ## Exceptions
@@ -133,10 +136,10 @@ let getExn: t<'a> => 'a
 
 ```rescript
 Nullable.getUnsafe(Nullable.make(3)) == 3
-switch Nullable.getUnsafe(Nullable.null) {
-| exception _ => assert(true)
-| _ => assert(false)
-}
+
+Nullable.getUnsafe(Nullable.null)
+->Type.Classify.classify
+->assert_eq(Null)
 ```
 
 ## Important
