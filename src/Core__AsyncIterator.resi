@@ -88,12 +88,15 @@ let asyncIterator: AsyncIterator.t<(string, string)> = %raw(`
   })()
 `)
 
-await asyncIterator->AsyncIterator.forEach(v => {
-  switch v {
-  | Some(("second", value)) => assert_eq(value, "2")
-  | _ => ()
-  }
-})
+let main = async () =>
+  await asyncIterator->AsyncIterator.forEach(v => {
+    switch v {
+    | Some(("second", value)) => assert_eq(value, "2")
+    | _ => ()
+    }
+  })
+
+main()->ignore
 ```
 */
 let forEach: (t<'a>, option<'a> => unit) => promise<unit>

@@ -316,10 +316,12 @@ let dict = Dict.fromArray([
 
 dict
 ->JSON.stringifyAny
+->Option.getUnsafe
 ->assert_eq(`{"foo":"bar","hello":"world","someNumber":42}`)
 
 dict
 ->JSON.stringifyAny(~space=2)
+->Option.getUnsafe
 ->assert_eq(`{
   "foo": "bar",
   "hello": "world",
@@ -328,6 +330,7 @@ dict
 
 dict
 ->JSON.stringifyAny(~replacer=Keys(["foo", "someNumber"]))
+->Option.getUnsafe
 ->assert_eq(`{"foo":"bar","someNumber":42}`)
 
 let replacer = JSON.Replacer((_, value) => {
@@ -341,9 +344,12 @@ let replacer = JSON.Replacer((_, value) => {
 
 dict
 ->JSON.stringifyAny(~replacer)
+->Option.getUnsafe
 ->assert_eq(`{"foo":"BAR","hello":"WORLD","someNumber":42}`)
 
-JSON.stringifyAny(() => "hello world")->assert_eq(None)
+JSON.stringifyAny(() => "hello world")
+->Option.isNone
+->assert_eq(true)
 
 switch BigInt.fromInt(0)->JSON.stringifyAny {
 | exception _ => assert(true)
@@ -380,13 +386,16 @@ let dict = Dict.fromArray([
 
 dict
 ->JSON.stringifyAnyWithIndent(2)
+->Option.getUnsafe
 ->assert_eq(`{
   "foo": "bar",
   "hello": "world",
   "someNumber": 42
 }`)
 
-JSON.stringifyAny(() => "hello world")->assert_eq(None)
+JSON.stringifyAny(() => "hello world")
+->Option.isNone
+->assert_eq(true)
 
 switch BigInt.fromInt(0)->JSON.stringifyAny {
 | exception _ => assert(true)
@@ -436,7 +445,9 @@ dict
 ->Option.getUnsafe
 ->assert_eq(`{"foo":"BAR","hello":"WORLD","someNumber":42}`)
 
-JSON.stringifyAny(() => "hello world")->assert_eq(None)
+JSON.stringifyAny(() => "hello world")
+->Option.isNone
+->assert_eq(true)
 
 switch BigInt.fromInt(0)->JSON.stringifyAny {
 | exception _ => assert(true)
@@ -490,7 +501,9 @@ dict
   "someNumber": 42
 }`)
 
-JSON.stringifyAny(() => "hello world")->assert_eq(None)
+JSON.stringifyAny(() => "hello world")
+->Option.isNone
+->assert_eq(true)
 
 switch BigInt.fromInt(0)->JSON.stringifyAny {
 | exception _ => assert(true)
@@ -509,8 +522,8 @@ switch BigInt.fromInt(0)->JSON.stringifyAny {
 external stringifyAnyWithReplacerAndIndent: ('a, (string, t) => t, int) => option<string> =
   "JSON.stringify"
 
-/** 
-`stringifyAnyWithFilter(json, filter)` 
+/**
+`stringifyAnyWithFilter(json, filter)`
 
 Converts any type to a JSON string.
 The filter is an array of keys, which should be included in the output.
@@ -526,14 +539,18 @@ let dict = Dict.fromArray([
   ("someNumber", JSON.Encode.int(42)),
 ])
 
-JSON.stringifyAnyWithFilter(dict, ["foo", "someNumber"])
-// {"foo": "bar","someNumber": 42}
+dict
+->JSON.stringifyAnyWithFilter(["foo", "someNumber"])
+->assert_eq(`{"foo": "bar","someNumber": 42}`)
 
 JSON.stringifyAny(() => "hello world")
-// None
+->Option.isNone
+->assert_eq(true)
 
-BigInt.fromInt(0)->JSON.stringifyAny
-// exception
+switch BigInt.fromInt(0)->JSON.stringifyAny {
+| exception _ => assert(true)
+| _ => assert(false)
+}
 ```
 
 ## Exceptions 
@@ -571,7 +588,9 @@ dict
   "someNumber": 42
 }`)
 
-JSON.stringifyAny(() => "hello world")->assert_eq(None)
+JSON.stringifyAny(() => "hello world")
+->Option.isNone
+->assert_eq(true)
 
 switch BigInt.fromInt(0)->JSON.stringifyAny {
 | exception _ => assert(true)
