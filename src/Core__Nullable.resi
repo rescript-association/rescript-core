@@ -133,7 +133,10 @@ let getExn: t<'a> => 'a
 
 ```rescript
 Nullable.getUnsafe(Nullable.make(3)) == 3
-Nullable.getUnsafe(Nullable.null) // Raises an error
+switch Nullable.getUnsafe(Nullable.null) {
+| exception _ => assert(true)
+| _ => assert(false)
+}
 ```
 
 ## Important

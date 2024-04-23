@@ -122,7 +122,10 @@ let getExn: t<'a> => 'a
 
 ```rescript
 Null.getUnsafe(Null.make(3)) == 3
-Null.getUnsafe(Null.null) // Raises an error
+switch Null.getUnsafe(Null.null) {
+| exception _ => assert(true)
+| _ => assert(false)
+}
 ```
 
 ## Important
