@@ -16,10 +16,10 @@ See [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) 
 
 ## Examples
 ```rescript
-// Log to the console after 2 seconds (2000 milliseconds).
+// Log to the console after 200 milliseconds.
 let timeoutId = setTimeout(() => {
-  Console.log("This prints in 2 seconds.")
-}, 2000)
+  Console.log("This prints in 200 ms.")
+}, 200)
 ```
 */
 @val
@@ -34,10 +34,10 @@ See [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) 
 
 ## Examples
 ```rescript
-// Log to the console after 2 seconds (2000 milliseconds).
+// Log to the console after 200 milliseconds.
 let timeoutId = setTimeoutFloat(() => {
-  Console.log("This prints in 2 seconds.")
-}, 2000.)
+  Console.log("This prints in 200 ms.")
+}, 200.)
 ```
 */
 @val
@@ -75,10 +75,14 @@ See [`setInterval`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval
 
 ## Examples
 ```rescript
-// Log to the console ever 2 seconds (2000 milliseconds).
+// Log to the console ever 200 ms (200 milliseconds).
 let intervalId = setInterval(() => {
-  Console.log("This prints every 2 seconds.")
-}, 2000)
+  Console.log("This prints every 200 ms.")
+}, 200)
+
+let timeoutId = setTimeout(() => {
+  clearInterval(intervalId)
+}, 500)
 ```
 */
 @val
@@ -93,10 +97,15 @@ See [`setInterval`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval
 
 ## Examples
 ```rescript
-// Log to the console ever 2 seconds (2000 milliseconds).
+// Log to the console ever 2 seconds (200 milliseconds).
 let intervalId = setIntervalFloat(() => {
-  Console.log("This prints every 2 seconds.")
-}, 2000.)
+  Console.log("This prints every 200 ms")
+}, 200.)
+
+// Stop the interval after 500 ms
+let timeoutId = setTimeoutFloat(() => {
+  clearInterval(intervalId)
+}, 500.0)
 ```
 */
 @val
@@ -110,13 +119,13 @@ See [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInte
 ## Examples
 ```rescript
 let intervalId = setInterval(() => {
-  Console.log("This prints in 2 seconds.")
-}, 2000)
+  Console.log("This prints in 100 ms")
+}, 100)
 
-// Stop the interval after 10 seconds
+// Stop the interval after 500 ms
 let timeoutId = setTimeout(() => {
   clearInterval(intervalId)
-}, 10000)
+}, 500)
 ```
 */
 @val
