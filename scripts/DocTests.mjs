@@ -5,6 +5,7 @@ import * as Os from "os";
 import * as Url from "url";
 import * as Path from "path";
 import * as Belt_List from "rescript/lib/es6/belt_List.js";
+import * as Nodeutil from "node:util";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 import * as Core__List from "../src/Core__List.mjs";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
@@ -28,6 +29,8 @@ var ChildProcess = {};
 
 var OS = {};
 
+var Util = {};
+
 var $$Node = {
   Path: Path$1,
   $$URL: $$URL,
@@ -35,7 +38,8 @@ var $$Node = {
   Fs: Fs$1,
   $$Buffer: $$Buffer,
   ChildProcess: ChildProcess,
-  OS: OS
+  OS: OS,
+  Util: Util
 };
 
 var dirname = Path.dirname(Url.fileURLToPath(import.meta.url));
@@ -73,7 +77,7 @@ function prepareCompiler() {
           RE_EXN_ID: "Assert_failure",
           _1: [
             "DocTests.res",
-            129,
+            145,
             9
           ],
           Error: new Error()
@@ -86,7 +90,7 @@ function prepareCompiler() {
             RE_EXN_ID: "Assert_failure",
             _1: [
               "DocTests.res",
-              127,
+              143,
               11
             ],
             Error: new Error()
@@ -99,7 +103,7 @@ function prepareCompiler() {
             RE_EXN_ID: "Assert_failure",
             _1: [
               "DocTests.res",
-              127,
+              143,
               11
             ],
             Error: new Error()
@@ -110,7 +114,7 @@ function prepareCompiler() {
           RE_EXN_ID: "Assert_failure",
           _1: [
             "DocTests.res",
-            129,
+            145,
             9
           ],
           Error: new Error()
@@ -129,6 +133,24 @@ function prepareCompiler() {
         cwd: compilerDir
       });
 }
+
+var options = Object.fromEntries([[
+        "ignore-runtime-tests",
+        {
+          type: "string"
+        }
+      ]]);
+
+var match = Nodeutil.parseArgs({
+      args: process.argv.slice(2),
+      options: options
+    });
+
+var values = match.values;
+
+var v = values["ignore-runtime-tests"];
+
+var ignoreRuntimeTests = v !== undefined ? v.split(",") : [];
 
 prepareCompiler();
 
@@ -437,7 +459,9 @@ async function compilerResults() {
                 ]
               ];
       });
-  var exampleErrors = await Promise.all(examples.map(async function (param) {
+  var exampleErrors = await Promise.all(examples.filter(function (param) {
+              return !ignoreRuntimeTests.includes(param[0].id);
+            }).map(async function (param) {
             var match = param[1];
             var nodeTests = await Promise.all(match[0].map(async function (param) {
                       var js = param[1];
@@ -513,6 +537,9 @@ export {
   makePackageJson ,
   rescriptJson ,
   prepareCompiler ,
+  options ,
+  values ,
+  ignoreRuntimeTests ,
   SpawnAsync ,
   createFileInTempDir ,
   compileTest ,

@@ -15,6 +15,9 @@ module Node = {
     @scope("process") external exit: int => unit = "exit"
     @scope(("process", "stderr"))
     external stderrWrite: string => unit = "write"
+
+    @val @scope("process")
+    external argv: array<string> = "argv"
   }
 
   module Fs = {
@@ -55,6 +58,19 @@ module Node = {
   module OS = {
     @module("os")
     external tmpdir: unit => string = "tmpdir"
+  }
+
+  module Util = {
+    type arg = {@as("type") type_: string}
+    type config = {
+      args: array<string>,
+      options: Dict.t<arg>,
+    }
+    type parsed = {
+      values: Dict.t<string>,
+      positionals: array<string>,
+    }
+    @module("node:util") external parseArgs: config => parsed = "parseArgs"
   }
 }
 
@@ -141,6 +157,18 @@ let prepareCompiler = () => {
   ChildProcess.execFileSync("npm", ["install"], {cwd: compilerDir})->ignore
 
   ChildProcess.execFileSync(rescriptBin, ["build"], {cwd: compilerDir})->ignore
+}
+
+let options = Dict.fromArray([("ignore-runtime-tests", {Util.type_: "string"})])
+
+let {Util.values: values} = Util.parseArgs({
+  args: Process.argv->Array.sliceToEnd(~start=2),
+  options,
+})
+
+let ignoreRuntimeTests = switch values->Dict.get("ignore-runtime-tests") {
+| Some(v) => v->String.split(",")
+| None => []
 }
 
 prepareCompiler()
@@ -373,6 +401,7 @@ let compilerResults = async () => {
 
   let exampleErrors =
     await examples
+    ->Array.filter((({id}, _)) => !Array.includes(ignoreRuntimeTests, id))
     ->Array.map(async ((example, (compiled, errors))) => {
       let nodeTests =
         await compiled
