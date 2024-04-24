@@ -150,7 +150,9 @@ var values = match.values;
 
 var v = values["ignore-runtime-tests"];
 
-var ignoreRuntimeTests = v !== undefined ? v.split(",") : [];
+var ignoreRuntimeTests = v !== undefined ? v.split(",").map(function (s) {
+        return s.trim();
+      }) : [];
 
 prepareCompiler();
 

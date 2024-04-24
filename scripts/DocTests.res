@@ -167,7 +167,10 @@ let {Util.values: values} = Util.parseArgs({
 })
 
 let ignoreRuntimeTests = switch values->Dict.get("ignore-runtime-tests") {
-| Some(v) => v->String.split(",")
+| Some(v) =>
+  v
+  ->String.split(",")
+  ->Array.map(s => s->String.trim)
 | None => []
 }
 
