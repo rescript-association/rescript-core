@@ -279,7 +279,6 @@ module Int: {
 
   /**
   floor(v) returns the largest `int` less than or equal to the argument; 
-  the result is pinned to the range of the `int` data type: -2147483648 to 2147483647. 
   See [`Math.floor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor)
   on MDN.
 
@@ -289,8 +288,6 @@ module Int: {
   Math.Int.floor(3.7) == 3
   Math.Int.floor(3.0) == 3
   Math.Int.floor(-3.1) == -4
-  Math.Int.floor(-1.0e15) == -2147483648
-  Math.Int.floor(1.0e15) == 2147483647
   ```
   */
   let floor: float => int
