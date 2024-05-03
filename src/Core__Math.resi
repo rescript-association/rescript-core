@@ -296,6 +296,21 @@ module Int: {
   let floor: float => int
 
   /**
+  ceil(v) returns the smallest `int` greater than or equal to the argument;
+  See [`Math.floor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor)
+  on MDN.
+
+  ## Examples
+
+  ```rescript
+  Math.Int.ceil(3.7) == 4
+  Math.Int.ceil(3.0) == 3
+  Math.Int.ceil(-3.1) == -3
+  ```
+  */
+  let ceil: float => int
+
+  /**
   `random(minVal, maxVal)` returns a random integer number in the half-closed interval [minVal, maxVal).
    See [`Math.random`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
   on MDN.
