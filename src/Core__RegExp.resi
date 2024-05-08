@@ -171,6 +171,26 @@ Console.log(regexp->RegExp.lastIndex) // Logs `4` to the console
 external lastIndex: t => int = "lastIndex"
 
 /**
+`setLastIndex(regexp, index)` set the index the next match will start from.
+
+See [`RegExp.lastIndex`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastIndex) on MDN.
+
+## Examples
+```rescript
+// Match the first word in a sentence
+let regexp = RegExp.fromString("\\w+")
+let someStr = "Many words here."
+
+regexp->RegExp.setLastIndex(4)
+regexp->RegExp.exec(someStr)->ignore
+
+Console.log(regexp->RegExp.lastIndex) // Logs `10` to the console
+```
+*/
+@set
+external setLastIndex: (t, int) => unit = "lastIndex"
+
+/**
 `ignoreCase(regexp)` returns whether the ignore case (`i`) flag is set on this `RegExp`.
 
 See [`RegExp.ignoreCase`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/ignoreCase) on MDN.

@@ -15,6 +15,7 @@ module Result = {
 @return(nullable) @send external exec: (t, string) => option<Result.t> = "exec"
 
 @get external lastIndex: t => int = "lastIndex"
+@set external setLastIndex: (t, int) => unit = "lastIndex"
 @get external ignoreCase: t => bool = "ignoreCase"
 @get external global: t => bool = "global"
 @get external multiline: t => bool = "multiline"
