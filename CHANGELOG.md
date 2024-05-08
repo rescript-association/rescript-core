@@ -46,6 +46,7 @@ This version requires ReScript `>=11.1.0-rc.6`.
 
 ### Documentation
 
+- Fix docstring for `Array.getUnsafe` and `Array.filterMap` https://github.com/rescript-association/rescript-core/pull/168
 
 ## 0.6.0
 
