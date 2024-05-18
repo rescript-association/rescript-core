@@ -13,6 +13,7 @@ let compare = (a: string, b: string) =>
 
 @get external length: string => int = "length"
 @get_index external get: (string, int) => option<string> = ""
+@get_index external getUnsafe: (string, int) => string = ""
 @send external charAt: (string, int) => string = "charAt"
 
 @send external charCodeAt: (string, int) => float = "charCodeAt"

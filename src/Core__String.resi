@@ -151,6 +151,22 @@ String.get(`JS`, 4) == None
 external get: (string, int) => option<string> = ""
 
 /**
+`getUnsafe(str, index)` returns an `string` at the given `index` number.
+
+This is _unsafe_, meaning it will return `undefined` value if `index` does not exist in `string`.
+
+Use `String.getUnsafe` only when you are sure the `index` exists.
+## Examples
+
+```rescript
+String.getUnsafe("ReScript", 0) == "R"
+String.getUnsafe("Hello", 4) == "o"
+```
+*/
+@get_index
+external getUnsafe: (string, int) => string = ""
+
+/**
 `charAt(str, index)` gets the character at `index` within string `str`. If
 `index` is negative or greater than the length of `str`, it returns the empty
 string. If the string contains characters outside the range \u0000-\uffff, it
