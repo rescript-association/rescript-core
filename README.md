@@ -70,6 +70,12 @@ Open it so it's available in the global scope.
  }
 ```
 
+## ESM and CJS
+To use this library with CommonJS modules you should set the file extension in your project's `rescript.json` to `.res.js`, `.js`, `.res.cjs`, or `.cjs`. This will work with older versions of Node and most web projects using a bundler.
+
+To use this library with EcmaScript modules you should set the file extension in your project's `rescript.json` to `.res.mjs`, or `.mjs`.
+This will work with newer versions of Node and web projects using a modern bundler like Vite.
+
 ## What it looks like
 
 All relevant standard library modules are designed to be available directly in
