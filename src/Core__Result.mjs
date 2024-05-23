@@ -132,6 +132,226 @@ function all(results) {
   }
 }
 
+function all2(param) {
+  var b = param[1];
+  var a = param[0];
+  if (a.TAG === "Ok") {
+    if (b.TAG === "Ok") {
+      return {
+              TAG: "Ok",
+              _0: [
+                a._0,
+                b._0
+              ]
+            };
+    } else {
+      return {
+              TAG: "Error",
+              _0: b._0
+            };
+    }
+  } else {
+    return {
+            TAG: "Error",
+            _0: a._0
+          };
+  }
+}
+
+function all3(param) {
+  var c = param[2];
+  var b = param[1];
+  var a = param[0];
+  if (a.TAG === "Ok") {
+    if (b.TAG === "Ok") {
+      if (c.TAG === "Ok") {
+        return {
+                TAG: "Ok",
+                _0: [
+                  a._0,
+                  b._0,
+                  c._0
+                ]
+              };
+      } else {
+        return {
+                TAG: "Error",
+                _0: c._0
+              };
+      }
+    } else {
+      return {
+              TAG: "Error",
+              _0: b._0
+            };
+    }
+  } else {
+    return {
+            TAG: "Error",
+            _0: a._0
+          };
+  }
+}
+
+function all4(param) {
+  var d = param[3];
+  var c = param[2];
+  var b = param[1];
+  var a = param[0];
+  if (a.TAG === "Ok") {
+    if (b.TAG === "Ok") {
+      if (c.TAG === "Ok") {
+        if (d.TAG === "Ok") {
+          return {
+                  TAG: "Ok",
+                  _0: [
+                    a._0,
+                    b._0,
+                    c._0,
+                    d._0
+                  ]
+                };
+        } else {
+          return {
+                  TAG: "Error",
+                  _0: d._0
+                };
+        }
+      } else {
+        return {
+                TAG: "Error",
+                _0: c._0
+              };
+      }
+    } else {
+      return {
+              TAG: "Error",
+              _0: b._0
+            };
+    }
+  } else {
+    return {
+            TAG: "Error",
+            _0: a._0
+          };
+  }
+}
+
+function all5(param) {
+  var e = param[4];
+  var d = param[3];
+  var c = param[2];
+  var b = param[1];
+  var a = param[0];
+  if (a.TAG === "Ok") {
+    if (b.TAG === "Ok") {
+      if (c.TAG === "Ok") {
+        if (d.TAG === "Ok") {
+          if (e.TAG === "Ok") {
+            return {
+                    TAG: "Ok",
+                    _0: [
+                      a._0,
+                      b._0,
+                      c._0,
+                      d._0,
+                      e._0
+                    ]
+                  };
+          } else {
+            return {
+                    TAG: "Error",
+                    _0: e._0
+                  };
+          }
+        } else {
+          return {
+                  TAG: "Error",
+                  _0: d._0
+                };
+        }
+      } else {
+        return {
+                TAG: "Error",
+                _0: c._0
+              };
+      }
+    } else {
+      return {
+              TAG: "Error",
+              _0: b._0
+            };
+    }
+  } else {
+    return {
+            TAG: "Error",
+            _0: a._0
+          };
+  }
+}
+
+function all6(param) {
+  var f = param[5];
+  var e = param[4];
+  var d = param[3];
+  var c = param[2];
+  var b = param[1];
+  var a = param[0];
+  if (a.TAG === "Ok") {
+    if (b.TAG === "Ok") {
+      if (c.TAG === "Ok") {
+        if (d.TAG === "Ok") {
+          if (e.TAG === "Ok") {
+            if (f.TAG === "Ok") {
+              return {
+                      TAG: "Ok",
+                      _0: [
+                        a._0,
+                        b._0,
+                        c._0,
+                        d._0,
+                        e._0,
+                        f._0
+                      ]
+                    };
+            } else {
+              return {
+                      TAG: "Error",
+                      _0: f._0
+                    };
+            }
+          } else {
+            return {
+                    TAG: "Error",
+                    _0: e._0
+                  };
+          }
+        } else {
+          return {
+                  TAG: "Error",
+                  _0: d._0
+                };
+        }
+      } else {
+        return {
+                TAG: "Error",
+                _0: c._0
+              };
+      }
+    } else {
+      return {
+              TAG: "Error",
+              _0: b._0
+            };
+    }
+  } else {
+    return {
+            TAG: "Error",
+            _0: a._0
+          };
+  }
+}
+
 var mapWithDefault = mapOr;
 
 var getWithDefault = getOr;
@@ -151,5 +371,10 @@ export {
   forEach ,
   mapError ,
   all ,
+  all2 ,
+  all3 ,
+  all4 ,
+  all5 ,
+  all6 ,
 }
 /* No side effect */

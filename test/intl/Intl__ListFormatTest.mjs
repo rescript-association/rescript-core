@@ -5,12 +5,12 @@ console.log("---");
 
 console.log("Intl.ListFormat");
 
-new Intl.ListFormat(undefined, undefined);
+new Intl.ListFormat();
 
 new Intl.ListFormat([
       "en-US",
       "en-GB"
-    ], undefined);
+    ]);
 
 var _formatter = new Intl.ListFormat([
       "en-US",
@@ -23,7 +23,7 @@ var _formatter = new Intl.ListFormat([
 Intl.ListFormat.supportedLocalesOf([
       "en-US",
       "en-GB"
-    ], undefined);
+    ]);
 
 Intl.ListFormat.supportedLocalesOf([
       "en-US",

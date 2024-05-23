@@ -119,6 +119,86 @@ function all(options) {
   }
 }
 
+function all2(param) {
+  var b = param[1];
+  var a = param[0];
+  if (a !== undefined && b !== undefined) {
+    return [
+            Caml_option.valFromOption(a),
+            Caml_option.valFromOption(b)
+          ];
+  }
+  
+}
+
+function all3(param) {
+  var c = param[2];
+  var b = param[1];
+  var a = param[0];
+  if (a !== undefined && b !== undefined && c !== undefined) {
+    return [
+            Caml_option.valFromOption(a),
+            Caml_option.valFromOption(b),
+            Caml_option.valFromOption(c)
+          ];
+  }
+  
+}
+
+function all4(param) {
+  var d = param[3];
+  var c = param[2];
+  var b = param[1];
+  var a = param[0];
+  if (a !== undefined && b !== undefined && c !== undefined && d !== undefined) {
+    return [
+            Caml_option.valFromOption(a),
+            Caml_option.valFromOption(b),
+            Caml_option.valFromOption(c),
+            Caml_option.valFromOption(d)
+          ];
+  }
+  
+}
+
+function all5(param) {
+  var e = param[4];
+  var d = param[3];
+  var c = param[2];
+  var b = param[1];
+  var a = param[0];
+  if (a !== undefined && b !== undefined && c !== undefined && d !== undefined && e !== undefined) {
+    return [
+            Caml_option.valFromOption(a),
+            Caml_option.valFromOption(b),
+            Caml_option.valFromOption(c),
+            Caml_option.valFromOption(d),
+            Caml_option.valFromOption(e)
+          ];
+  }
+  
+}
+
+function all6(param) {
+  var f = param[5];
+  var e = param[4];
+  var d = param[3];
+  var c = param[2];
+  var b = param[1];
+  var a = param[0];
+  if (a !== undefined && b !== undefined && c !== undefined && d !== undefined && e !== undefined && f !== undefined) {
+    return [
+            Caml_option.valFromOption(a),
+            Caml_option.valFromOption(b),
+            Caml_option.valFromOption(c),
+            Caml_option.valFromOption(d),
+            Caml_option.valFromOption(e),
+            Caml_option.valFromOption(f)
+          ];
+  }
+  
+}
+
 var mapWithDefault = mapOr;
 
 var getWithDefault = getOr;
@@ -139,5 +219,10 @@ export {
   equal ,
   compare ,
   all ,
+  all2 ,
+  all3 ,
+  all4 ,
+  all5 ,
+  all6 ,
 }
 /* No side effect */

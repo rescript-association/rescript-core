@@ -5,12 +5,12 @@ console.log("---");
 
 console.log("Intl.PluralRules");
 
-new Intl.PluralRules(undefined, undefined);
+new Intl.PluralRules();
 
 new Intl.PluralRules([
       "en-US",
       "en-GB"
-    ], undefined);
+    ]);
 
 var _formatter = new Intl.PluralRules(undefined, {
       type: "ordinal",

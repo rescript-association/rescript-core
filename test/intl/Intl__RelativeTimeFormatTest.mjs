@@ -8,7 +8,7 @@ console.log("Intl.RelativeTimeFormat");
 Intl.RelativeTimeFormat.supportedLocalesOf([
       "en-US",
       "en-GB"
-    ], undefined);
+    ]);
 
 Intl.RelativeTimeFormat.supportedLocalesOf([
       "en-US",
@@ -17,12 +17,12 @@ Intl.RelativeTimeFormat.supportedLocalesOf([
       localeMatcher: "lookup"
     });
 
-new Intl.RelativeTimeFormat(undefined, undefined);
+new Intl.RelativeTimeFormat();
 
 new Intl.RelativeTimeFormat([
       "en-US",
       "en-GB"
-    ], undefined);
+    ]);
 
 var _formatter = new Intl.RelativeTimeFormat(undefined, {
       numeric: "always",

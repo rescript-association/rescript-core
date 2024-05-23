@@ -113,3 +113,53 @@ let all = results => {
   | None => Ok(acc)
   }
 }
+
+let all2 = ((a, b)) => {
+  switch (a, b) {
+  | (Ok(a), Ok(b)) => Ok((a, b))
+  | (Error(a), _) => Error(a)
+  | (_, Error(b)) => Error(b)
+  }
+}
+
+let all3 = ((a, b, c)) => {
+  switch (a, b, c) {
+  | (Ok(a), Ok(b), Ok(c)) => Ok((a, b, c))
+  | (Error(a), _, _) => Error(a)
+  | (_, Error(b), _) => Error(b)
+  | (_, _, Error(c)) => Error(c)
+  }
+}
+
+let all4 = ((a, b, c, d)) => {
+  switch (a, b, c, d) {
+  | (Ok(a), Ok(b), Ok(c), Ok(d)) => Ok((a, b, c, d))
+  | (Error(a), _, _, _) => Error(a)
+  | (_, Error(b), _, _) => Error(b)
+  | (_, _, Error(c), _) => Error(c)
+  | (_, _, _, Error(d)) => Error(d)
+  }
+}
+
+let all5 = ((a, b, c, d, e)) => {
+  switch (a, b, c, d, e) {
+  | (Ok(a), Ok(b), Ok(c), Ok(d), Ok(e)) => Ok((a, b, c, d, e))
+  | (Error(a), _, _, _, _) => Error(a)
+  | (_, Error(b), _, _, _) => Error(b)
+  | (_, _, Error(c), _, _) => Error(c)
+  | (_, _, _, Error(d), _) => Error(d)
+  | (_, _, _, _, Error(e)) => Error(e)
+  }
+}
+
+let all6 = ((a, b, c, d, e, f)) => {
+  switch (a, b, c, d, e, f) {
+  | (Ok(a), Ok(b), Ok(c), Ok(d), Ok(e), Ok(f)) => Ok((a, b, c, d, e, f))
+  | (Error(a), _, _, _, _, _) => Error(a)
+  | (_, Error(b), _, _, _, _) => Error(b)
+  | (_, _, Error(c), _, _, _) => Error(c)
+  | (_, _, _, Error(d), _, _) => Error(d)
+  | (_, _, _, _, Error(e), _) => Error(e)
+  | (_, _, _, _, _, Error(f)) => Error(f)
+  }
+}
