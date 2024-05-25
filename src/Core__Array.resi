@@ -528,7 +528,7 @@ See [`Array.every`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 ```rescript
 let array = [1, 2, 3, 4]
 
-Console.log(array->Array.every(num => num > 4)) // true
+Console.log(array->Array.every(num => num <= 4)) // true
 Console.log(array->Array.every(num => num === 1)) // false
 ```
 */
