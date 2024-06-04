@@ -2,6 +2,8 @@
 
 ## Next version
 
+- Add `Nullable.isNullable` function.
+
 ## 1.3.0
 
 This version requires ReScript `>=11.1.0-rc.6`.
