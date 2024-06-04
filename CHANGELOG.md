@@ -2,6 +2,7 @@
 
 ## Next version
 
+- Add `Nullable.isNullable` function. https://github.com/rescript-association/rescript-core/pull/227
 - Remove some deps to Belt, Pervasives and Js. https://github.com/rescript-association/rescript-core/pull/226/commits
 
 ## 1.3.0

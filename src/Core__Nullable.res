@@ -7,6 +7,8 @@ external null: t<'a> = "#null"
 
 external undefined: t<'a> = "#undefined"
 
+external isNullable: t<'a> => bool = "#is_nullable"
+
 external make: 'a => t<'a> = "%identity"
 
 external toOption: t<'a> => option<'a> = "#nullable_to_opt"
