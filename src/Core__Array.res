@@ -203,10 +203,20 @@ let swapUnsafe = (xs, i, j) => {
   setUnsafe(xs, j, tmp)
 }
 
+module M = {
+  @val external floor: float => float = "Math.floor"
+  @val external random: unit => float = "Math.random"
+  external fromFloat: float => int = "%intoffloat"
+  external toFloat: int => float = "%identity"
+
+  let random_int: (int, int) => int = (min, max) =>
+    floor(random() *. toFloat(max - min))->fromFloat + min
+}
+
 let shuffle = xs => {
   let len = length(xs)
   for i in 0 to len - 1 {
-    swapUnsafe(xs, i, Js.Math.random_int(i, len)) /* [i,len) */
+    swapUnsafe(xs, i, M.random_int(i, len)) /* [i,len) */
   }
 }
 
