@@ -2,6 +2,8 @@
 
 ## Next version
 
+- Remove some deps to Belt, Pervasives and Js. https://github.com/rescript-association/rescript-core/pull/226/commits
+
 ## 1.3.0
 
 This version requires ReScript `>=11.1.0-rc.6`.
