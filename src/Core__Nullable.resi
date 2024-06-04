@@ -137,9 +137,13 @@ let getWithDefault: (t<'a>, 'a) => 'a
 `getExn(value)` raises an exception if `null` or `undefined`, otherwise returns the value.
 
 ```rescript
-Nullable.getExn(Nullable.make(3)) // 3
+switch Nullable.getExn(Nullable.make("Hello")) {
+| exception Invalid_argument(_) => assert(false)
+| value => assert_eq(value, "Hello")
+}
+
 switch Nullable.getExn(Nullable.null) {
-| exception _ => assert(true)
+| exception Invalid_argument(_) => assert(true)
 | _ => assert(false)
 }
 ```
@@ -156,7 +160,9 @@ let getExn: t<'a> => 'a
 ## Examples
 
 ```rescript
-Nullable.getUnsafe(Nullable.make(3)) == 3
+Nullable.make(3)
+->Nullable.getUnsafe
+->assert_eq(3)
 
 Nullable.getUnsafe(Nullable.null)
 ->Type.Classify.classify
