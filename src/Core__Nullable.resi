@@ -39,6 +39,27 @@ Console.log(undefined) // Logs `undefined` to the console.
 external undefined: t<'a> = "#undefined"
 
 /**
+`isNullable(a)` returns `true` if `a` is null or undefined, `false` otherwise.
+
+## Examples
+
+```rescript
+let myStr = "Hello"
+let asNullable = myStr->Nullable.make
+
+// Can't do the below because we're now forced to check for nullability
+// myStr == asNullable
+
+// Check if asNullable is not null or undefined
+switch asNullable->Nullable.isNullable {
+| true => assert(false)
+| false => assert(true)
+}
+```
+*/
+external isNullable: t<'a> => bool = "#is_nullable"
+
+/**
 Creates a new nullable value from the provided value.
 This means the compiler will enforce null checks for the new value.
 

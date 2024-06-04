@@ -63,12 +63,26 @@
 
 type t<'a> = list<'a>
 
-// TODO: This module should be inlined eventually, if we end up removing Belt
-// from the compiler.
 module A = {
-  let makeUninitializedUnsafe = Belt_Array.makeUninitializedUnsafe
-  let reduceReverseU = Belt_Array.reduceReverseU
-  let reduceReverse2U = Belt_Array.reduceReverse2U
+  @new external makeUninitializedUnsafe: int => array<'a> = "Array"
+  external min: ('a, 'a) => 'a = "%bs_min"
+
+  let reduceReverseU = (a, x, f) => {
+    let r = ref(x)
+    for i in Core__Array.length(a) - 1 downto 0 {
+      r.contents = f(r.contents, Core__Array.getUnsafe(a, i))
+    }
+    r.contents
+  }
+
+  let reduceReverse2U = (a, b, x, f) => {
+    let r = ref(x)
+    let len = min(Core__Array.length(a), Core__Array.length(b))
+    for i in len - 1 downto 0 {
+      r.contents = f(r.contents, Core__Array.getUnsafe(a, i), Core__Array.getUnsafe(b, i))
+    }
+    r.contents
+  }
 }
 
 external mutableCell: ('a, t<'a>) => t<'a> = "#makemutablelist"
