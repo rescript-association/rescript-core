@@ -2,7 +2,7 @@
 
 ## Next version
 
-- Add `Nullable.isNullable` function.
+- Add `Nullable.isNullable` function. https://github.com/rescript-association/rescript-core/pull/227
 
 ## 1.3.0
 
