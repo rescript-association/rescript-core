@@ -109,7 +109,7 @@ let getWithDefault: (t<'a>, 'a) => 'a
 ```rescript
 Null.getExn(Null.make(3))->assert_eq(3)
 
-switch Null.getExn(%raw("ReScript")) {
+switch Null.getExn(%raw("'ReScript'")) {
 | exception Invalid_argument(_) => assert(false)
 | value => assert_eq(value, "ReScript")
 }
