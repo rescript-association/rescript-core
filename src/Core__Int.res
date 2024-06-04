@@ -48,6 +48,13 @@ external mod: (int, int) => int = "%modint"
 
 type rangeOptions = {step?: int, inclusive?: bool}
 
+let abs = x =>
+  if x >= 0 {
+    x
+  } else {
+    -x
+  }
+
 let range = (start, end, ~options: rangeOptions={}) => {
   let isInverted = start > end
 
