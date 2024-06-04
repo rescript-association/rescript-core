@@ -137,7 +137,7 @@ let getWithDefault: (t<'a>, 'a) => 'a
 `getExn(value)` raises an exception if `null` or `undefined`, otherwise returns the value.
 
 ```rescript
-switch Nullable.getExn(%raw("Hello")) {
+switch Nullable.getExn(%raw("'Hello'")) {
 | exception Invalid_argument(_) => assert(false)
 | value => assert_eq(value, "Hello")
 }
