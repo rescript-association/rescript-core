@@ -2,6 +2,8 @@
 
 ## Next version
 
+## 1.4.0
+
 - Add `RegExp.setLastIndex` function. https://github.com/rescript-association/rescript-core/pull/219
 - Add `Nullable.isNullable` function. https://github.com/rescript-association/rescript-core/pull/227
 - Remove some deps to Belt, Pervasives and Js. https://github.com/rescript-association/rescript-core/pull/226/commits
