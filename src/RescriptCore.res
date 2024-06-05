@@ -17,6 +17,7 @@ module Ordering = Core__Ordering
 module Promise = Core__Promise
 module RegExp = Core__RegExp
 module String = Core__String
+module Char = Core__Char
 module Symbol = Core__Symbol
 module Type = Core__Type
 module JSON = Core__JSON
