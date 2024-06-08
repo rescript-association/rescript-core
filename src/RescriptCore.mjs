@@ -4,10 +4,18 @@ import * as Caml_obj from "rescript/lib/es6/caml_obj.js";
 import * as Core__Error from "./Core__Error.mjs";
 
 function assert_eq(a, b) {
-  if (Caml_obj.notequal(a, b)) {
-    return Core__Error.panic("Assertion Failed");
+  if (!Caml_obj.notequal(a, b)) {
+    return ;
   }
-  
+  throw {
+        RE_EXN_ID: "Assert_failure",
+        _1: [
+          "RescriptCore.res",
+          127,
+          4
+        ],
+        Error: new Error()
+      };
 }
 
 var $$Array;

@@ -124,6 +124,6 @@ list{1, 2}
 */
 let assert_eq = (a, b) => {
   if a != b {
-    panic("Assertion Failed")
+    assert(false)
   }
 }
