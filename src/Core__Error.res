@@ -14,6 +14,7 @@ external toException: t => exn = "%identity"
 @new external make: string => t = "Error"
 
 external isCamlExceptionOrOpenVariant: 'a => bool = "?is_extension"
+external anyToExnInternal: 'a => exn = "#wrap_exn"
 
 module EvalError = {
   @new external make: string => t = "EvalError"
