@@ -127,7 +127,7 @@ reject(SomeError("this is an error"))
   let msg = switch(e) {
     | SomeError(msg) => "ReScript error occurred: " ++ msg
     | Error.Error(obj) =>
-      switch Exn.message(obj) {
+      switch Error.message(obj) {
         | Some(msg) => "JS exception occurred: " ++ msg
         | None => "Some other JS value has been thrown"
       }
