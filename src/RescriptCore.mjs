@@ -88,8 +88,6 @@ var Internal;
 
 var Re;
 
-var Exn;
-
 var $$Option;
 
 var List;
@@ -142,7 +140,6 @@ export {
   MapperRt ,
   Internal ,
   Re ,
-  Exn ,
   $$Option ,
   List ,
   Result ,

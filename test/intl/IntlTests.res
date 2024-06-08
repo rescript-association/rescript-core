@@ -18,7 +18,7 @@ Intl.getCanonicalLocalesManyExn(["EN-US", "Fr"])->Console.log
 try {
   Intl.getCanonicalLocalesExn("bloop")->Console.log
 } catch {
-| Exn.Error(e) => Console.error(e)
+| Error.Error(e) => Console.error(e)
 }
 
 try {
@@ -29,7 +29,7 @@ try {
   Intl.supportedValuesOfExn("timeZone")->Console.log
   Intl.supportedValuesOfExn("unit")->Console.log
 } catch {
-| Exn.Error(e) => Console.error(e)
+| Error.Error(e) => Console.error(e)
 }
 
 try {
@@ -37,7 +37,7 @@ try {
 
   Console.error("Shouldn't have been hit")
 } catch {
-| Exn.Error(e) =>
+| Error.Error(e) =>
   switch Error.message(e)->Option.map(String.toLowerCase) {
   | Some("invalid key : someinvalidkey") => Console.log("Caught expected error")
   | message => {

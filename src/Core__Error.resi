@@ -5,7 +5,10 @@ See [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/
 */
 
 /** Represents a JavaScript exception. */
-type t = Js.Exn.t
+type t
+
+type exn += private Error(t)
+
 
 external fromException: exn => option<t> = "?as_js_exn"
 
@@ -85,6 +88,9 @@ Console.log(error->Error.name) // Logs "Error" to the console, because this is a
 */
 @new
 external make: string => t = "Error"
+
+/** internal use only */
+external isCamlExceptionOrOpenVariant: 'a => bool = "?is_extension"
 
 module EvalError: {
   /**

@@ -7,7 +7,7 @@ let catch = f =>
     let _ = f()
     failwith("no exception raised")
   } catch {
-  | Exn.Error(err) => err
+  | Error.Error(err) => err
   }
 
 Test.run(__POS_OF__("range - positive, increasing"), Int.range(3, 6), eq, [3, 4, 5])
