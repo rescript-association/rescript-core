@@ -86,8 +86,6 @@ var MapperRt;
 
 var Internal;
 
-var Re;
-
 var Exn;
 
 var $$Option;
@@ -141,7 +139,6 @@ export {
   $$Intl ,
   MapperRt ,
   Internal ,
-  Re ,
   Exn ,
   $$Option ,
   List ,

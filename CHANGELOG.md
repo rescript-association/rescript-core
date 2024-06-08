@@ -2,6 +2,8 @@
 
 ## Next version
 
+- BREAKING: Remove `Re` module. Use the `RegExp` module
+
 ## 1.4.0
 
 - Add `RegExp.setLastIndex` function. https://github.com/rescript-association/rescript-core/pull/219
