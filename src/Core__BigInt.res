@@ -30,7 +30,7 @@ BigInt.fromStringExn("0o11")
 try {
   BigInt.fromStringExn("a")
 } catch {
-| Exn.Error(_error) => 0n
+| Error.Error(_error) => 0n
 }
 ```
 */

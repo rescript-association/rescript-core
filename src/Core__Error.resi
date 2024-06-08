@@ -93,7 +93,7 @@ external isCamlExceptionOrOpenVariant: 'a => bool = "?is_extension"
 
 /**
 `anyToExnInternal(obj)` will take any value `obj` and wrap it
-in a Js.Exn.Error if given value is not an exn already. If
+in a `Error.Error` if given value is not an exn already. If
 `obj` is an exn, it will return `obj` without any changes.
 
 This function is mostly useful for cases where you want to unify a type of a value
