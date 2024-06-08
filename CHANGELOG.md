@@ -2,7 +2,7 @@
 
 ## Next version
 
-- BREAKING: Remove `Re` module. Use the `RegExp` module
+- BREAKING: Remove `Re` module. Use the `RegExp` module. https://github.com/rescript-association/rescript-core/pull/231
 
 ## 1.4.0
 
