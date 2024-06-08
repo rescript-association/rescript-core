@@ -2,7 +2,7 @@
 
 ## Next version
 
-- BREAKING: Remove `Exn` module.
+- BREAKING: Remove `Exn` module. https://github.com/rescript-association/rescript-core/pull/230
 
 ## 1.4.0
 
