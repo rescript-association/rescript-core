@@ -6,7 +6,7 @@
     "build": "rescript",
     "watch": "rescript build -w",
     "test": "node test/TestSuite.mjs && node test/TempTests.mjs",
-    "test-doc-examples": "node scripts/DocTests.mjs"
+    "test-doc-examples": "node scripts/DocTests.mjs --ignore-runtime-tests 'RescriptCore.Array.toReversed, RescriptCore.Promise.withResolvers'"
   },
   "keywords": [
     "rescript"

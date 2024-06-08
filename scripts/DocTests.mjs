@@ -5,8 +5,10 @@ import * as Os from "os";
 import * as Url from "url";
 import * as Path from "path";
 import * as Belt_List from "rescript/lib/es6/belt_List.js";
+import * as Nodeutil from "node:util";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 import * as Core__List from "../src/Core__List.mjs";
+import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Core__Array from "../src/Core__Array.mjs";
 import * as RescriptCore from "../src/RescriptCore.mjs";
 import * as Tools_Docgen from "@rescript/tools/npm/Tools_Docgen.mjs";
@@ -27,6 +29,8 @@ var ChildProcess = {};
 
 var OS = {};
 
+var Util = {};
+
 var $$Node = {
   Path: Path$1,
   $$URL: $$URL,
@@ -34,7 +38,8 @@ var $$Node = {
   Fs: Fs$1,
   $$Buffer: $$Buffer,
   ChildProcess: ChildProcess,
-  OS: OS
+  OS: OS,
+  Util: Util
 };
 
 var dirname = Path.dirname(Url.fileURLToPath(import.meta.url));
@@ -72,7 +77,7 @@ function prepareCompiler() {
           RE_EXN_ID: "Assert_failure",
           _1: [
             "DocTests.res",
-            128,
+            145,
             9
           ],
           Error: new Error()
@@ -85,7 +90,7 @@ function prepareCompiler() {
             RE_EXN_ID: "Assert_failure",
             _1: [
               "DocTests.res",
-              126,
+              143,
               11
             ],
             Error: new Error()
@@ -98,7 +103,7 @@ function prepareCompiler() {
             RE_EXN_ID: "Assert_failure",
             _1: [
               "DocTests.res",
-              126,
+              143,
               11
             ],
             Error: new Error()
@@ -109,7 +114,7 @@ function prepareCompiler() {
           RE_EXN_ID: "Assert_failure",
           _1: [
             "DocTests.res",
-            128,
+            145,
             9
           ],
           Error: new Error()
@@ -129,13 +134,58 @@ function prepareCompiler() {
       });
 }
 
+var options = Object.fromEntries([[
+        "ignore-runtime-tests",
+        {
+          type: "string"
+        }
+      ]]);
+
+var match = Nodeutil.parseArgs({
+      args: process.argv.slice(2),
+      options: options
+    });
+
+var values = match.values;
+
+var v = values["ignore-runtime-tests"];
+
+var ignoreRuntimeTests = v !== undefined ? v.split(",").map(function (s) {
+        return s.trim();
+      }) : [];
+
 prepareCompiler();
+
+async function run(command, args, options) {
+  return await new Promise((function (resolve, _reject) {
+                var spawn = Child_process.spawn(command, args, options !== undefined ? Caml_option.valFromOption(options) : undefined);
+                var stdout = [];
+                var stderr = [];
+                spawn.stdout.on("data", (function (data) {
+                        stdout.push(data);
+                      }));
+                spawn.stderr.on("data", (function (data) {
+                        stderr.push(data);
+                      }));
+                spawn.once("close", (function (code, _signal) {
+                        resolve({
+                              stdout: stdout,
+                              stderr: stderr,
+                              code: code
+                            });
+                      }));
+              }));
+}
+
+var SpawnAsync = {
+  run: run
+};
 
 function createFileInTempDir(id) {
   return Path.join(Os.tmpdir(), id);
 }
 
-async function testCode(id, code) {
+async function compileTest(id, code) {
   var tempFileName = Path.join(Os.tmpdir(), id);
   await Promises.writeFile(tempFileName + ".res", code);
   var args = [
@@ -148,27 +198,21 @@ async function testCode(id, code) {
     "-open",
     "RescriptCore"
   ];
-  var promise = await new Promise((function (resolve, _reject) {
-          var spawn = Child_process.spawn(bscBin, args);
-          var stderr = [];
-          spawn.stderr.on("data", (function (data) {
-                  stderr.push(data);
-                }));
-          spawn.once("close", (function (_code, _signal) {
-                  resolve(stderr);
-                }));
-        }));
-  if (promise.length > 0) {
+  var match = await run(bscBin, args, undefined);
+  var stderr = match.stderr;
+  if (stderr.length > 0) {
     return {
             TAG: "Error",
-            _0: promise.map(function (e) {
+            _0: stderr.map(function (e) {
                     return e.toString();
                   }).join("")
           };
   } else {
     return {
             TAG: "Ok",
-            _0: undefined
+            _0: match.stdout.map(function (e) {
+                    return e.toString();
+                  }).join("")
           };
   }
 }
@@ -301,58 +345,184 @@ function getCodeBlocks(example) {
                           }))), /* [] */0));
 }
 
-async function main() {
+async function runtimeTests(code) {
+  var match = await run("node", [
+        "-e",
+        code
+      ], {
+        cwd: compilerDir,
+        timeout: 2000
+      });
+  var exitCode = match.code;
+  var stderr = match.stderr;
+  var stdout = match.stdout;
+  var std;
+  var exit = 0;
+  if (exitCode !== null) {
+    if (exitCode === 0.0 && stderr.length > 0) {
+      std = {
+        TAG: "Ok",
+        _0: stderr
+      };
+    } else if (exitCode === 0.0) {
+      std = {
+        TAG: "Ok",
+        _0: stdout
+      };
+    } else {
+      exit = 1;
+    }
+  } else {
+    exit = 1;
+  }
+  if (exit === 1) {
+    std = {
+      TAG: "Error",
+      _0: stderr.length > 0 ? stderr : stdout
+    };
+  }
+  if (std.TAG === "Ok") {
+    return {
+            TAG: "Ok",
+            _0: std._0.map(function (e) {
+                    return e.toString();
+                  }).join("")
+          };
+  } else {
+    return {
+            TAG: "Error",
+            _0: std._0.map(function (e) {
+                    return e.toString();
+                  }).join("")
+          };
+  }
+}
+
+function indentOutputCode(code) {
+  var indent = " ".repeat(2);
+  return code.split("\n").map(function (s) {
+                return indent + s;
+              }).join("\n");
+}
+
+async function compilerResults() {
   var results = await Promise.all(getExamples(extractDocFromFile("src/RescriptCore.res")).map(async function (example) {
             var id = example.id.replaceAll(".", "_");
             var codes = getCodeBlocks(example);
             var results = await Promise.all(codes.map(async function (code, $$int) {
                       var id$1 = id + "_" + $$int.toString(undefined);
-                      return await testCode(id$1, code);
+                      return [
+                              code,
+                              await compileTest(id$1, code)
+                            ];
                     }));
             return [
                     example,
                     results
                   ];
           }));
-  var errors = Belt_Array.keepMap(results, (function (param) {
-          var errors = Belt_Array.keepMap(param[1], (function (result) {
-                  if (result.TAG === "Ok") {
-                    return ;
-                  } else {
-                    return result._0;
-                  }
-                }));
-          if (errors.length > 0) {
+  var examples = results.map(function (param) {
+        var match = Core__Array.reduce(param[1], [
+              [],
+              []
+            ], (function (acc, param) {
+                var errors = acc[1];
+                var oks = acc[0];
+                var result = param[1];
+                if (result.TAG === "Ok") {
+                  return [
+                          Belt_Array.concatMany([
+                                oks,
+                                [[
+                                    param[0],
+                                    result._0
+                                  ]]
+                              ]),
+                          errors
+                        ];
+                } else {
+                  return [
+                          oks,
+                          Belt_Array.concatMany([
+                                errors,
+                                [{
+                                    TAG: "ReScript",
+                                    error: result._0
+                                  }]
+                              ])
+                        ];
+                }
+              }));
+        return [
+                param[0],
+                [
+                  match[0],
+                  match[1]
+                ]
+              ];
+      });
+  var exampleErrors = await Promise.all(examples.filter(function (param) {
+              return !ignoreRuntimeTests.includes(param[0].id);
+            }).map(async function (param) {
+            var match = param[1];
+            var nodeTests = await Promise.all(match[0].map(async function (param) {
+                      var js = param[1];
+                      return [
+                              param[0],
+                              js,
+                              await runtimeTests(js)
+                            ];
+                    }));
+            var runtimeErrors = Belt_Array.keepMap(nodeTests, (function (param) {
+                    var output = param[2];
+                    if (output.TAG === "Ok") {
+                      return ;
+                    } else {
+                      return {
+                              TAG: "Runtime",
+                              rescript: param[0],
+                              js: param[1],
+                              error: output._0
+                            };
+                    }
+                  }));
             return [
                     param[0],
-                    errors
+                    runtimeErrors.concat(match[1])
                   ];
-          }
-          
-        }));
-  errors.forEach(function (param) {
-        var test = param[0];
+          }));
+  exampleErrors.forEach(function (param) {
+        var example = param[0];
         var cyan = function (s) {
           return "\x1b[36m" + s + "\x1b[0m";
         };
-        var other = test.kind;
+        var other = example.kind;
         var kind = other === "moduleAlias" ? "module alias" : other;
-        var errorMessage = param[1].map(function (e) {
-                return e.split("\n").filter(function (param, i) {
-                              return i !== 2;
-                            }).join("\n");
-              }).join("\n");
-        var message = "\x1B[1;31merror\x1B[0m: failed to compile examples from " + kind + " " + cyan(test.id) + "\n" + errorMessage;
-        process.stderr.write(message);
+        var errorMessage = param[1].map(function (err) {
+              if (err.TAG === "ReScript") {
+                var err$1 = err.error.split("\n").filter(function (param, i) {
+                        return i !== 2;
+                      }).join("\n");
+                return "\x1B[1;31merror\x1B[0m: failed to compile examples from " + kind + " " + cyan(example.id) + "\n" + err$1;
+              }
+              var indent = " ".repeat(2);
+              return "\x1B[1;31mruntime error\x1B[0m: failed to run examples from " + kind + " " + cyan(example.id) + "\n\n" + indent + "\x1b[36mReScript\x1b[0m\n\n" + indentOutputCode(err.rescript) + "\n\n" + indent + "\x1b[36mCompiled Js\x1b[0m\n\n" + indentOutputCode(err.js) + "\n\n" + indent + "\x1B[1;31mstacktrace\x1B[0m\n\n" + indentOutputCode(err.error) + "\n";
+            });
+        errorMessage.forEach(function (e) {
+              process.stderr.write(e);
+            });
       });
-  if (errors.length === 0) {
-    return 0;
-  } else {
+  var someError = exampleErrors.some(function (param) {
+        return param[1].length > 0;
+      });
+  if (someError) {
     return 1;
+  } else {
+    return 0;
   }
 }
 
-var exitCode = await main();
+var exitCode = await compilerResults();
 
 process.exit(exitCode);
 
@@ -369,12 +539,18 @@ export {
   makePackageJson ,
   rescriptJson ,
   prepareCompiler ,
+  options ,
+  values ,
+  ignoreRuntimeTests ,
+  SpawnAsync ,
   createFileInTempDir ,
-  testCode ,
+  compileTest ,
   extractDocFromFile ,
   getExamples ,
   getCodeBlocks ,
-  main ,
+  runtimeTests ,
+  indentOutputCode ,
+  compilerResults ,
   exitCode ,
 }
 /* dirname Not a pure module */

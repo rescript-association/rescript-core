@@ -165,8 +165,12 @@ handled. Compared to a ReScript exception this will give a better stack trace an
 debugging experience.
 
 ## Examples
+
 ```rescript
-Error.panic("Uh oh. This was unexpected!")
+switch Error.panic("Uh oh. This was unexpected!") {
+| exception _ => assert(true)
+| _ => assert(false)
+}
 ```
 */
 let panic: string => 'a

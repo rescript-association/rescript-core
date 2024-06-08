@@ -1,3 +1,5 @@
+open RescriptCore
+
 module Node = {
   module Path = {
     @module("path") external join2: (string, string) => string = "join"
@@ -13,6 +15,9 @@ module Node = {
     @scope("process") external exit: int => unit = "exit"
     @scope(("process", "stderr"))
     external stderrWrite: string => unit = "write"
+
+    @val @scope("process")
+    external argv: array<string> = "argv"
   }
 
   module Fs = {
@@ -40,23 +45,35 @@ module Node = {
     external spawnSync: (string, array<string>) => spawnSyncReturns = "spawnSync"
 
     type readable
-    type spawnReturns = {stderr: readable}
+    type spawnReturns = {stderr: readable, stdout: readable}
+    type options = {cwd?: string, env?: Dict.t<string>, timeout?: int}
     @module("child_process")
-    external spawn: (string, array<string>) => spawnReturns = "spawn"
+    external spawn: (string, array<string>, ~options: options=?) => spawnReturns = "spawn"
 
     @send external on: (readable, string, Buffer.t => unit) => unit = "on"
     @send
-    external once: (spawnReturns, string, (Js.Null.t<float>, Js.Null.t<string>) => unit) => unit =
-      "once"
+    external once: (spawnReturns, string, (Null.t<float>, Null.t<string>) => unit) => unit = "once"
   }
 
   module OS = {
     @module("os")
     external tmpdir: unit => string = "tmpdir"
   }
+
+  module Util = {
+    type arg = {@as("type") type_: string}
+    type config = {
+      args: array<string>,
+      options: Dict.t<arg>,
+    }
+    type parsed = {
+      values: Dict.t<string>,
+      positionals: array<string>,
+    }
+    @module("node:util") external parseArgs: config => parsed = "parseArgs"
+  }
 }
 
-open RescriptCore
 open Node
 
 module Docgen = RescriptTools.Docgen
@@ -142,6 +159,21 @@ let prepareCompiler = () => {
   ChildProcess.execFileSync(rescriptBin, ["build"], {cwd: compilerDir})->ignore
 }
 
+let options = Dict.fromArray([("ignore-runtime-tests", {Util.type_: "string"})])
+
+let {Util.values: values} = Util.parseArgs({
+  args: Process.argv->Array.sliceToEnd(~start=2),
+  options,
+})
+
+let ignoreRuntimeTests = switch values->Dict.get("ignore-runtime-tests") {
+| Some(v) =>
+  v
+  ->String.split(",")
+  ->Array.map(s => s->String.trim)
+| None => []
+}
+
 prepareCompiler()
 
 type example = {
@@ -151,9 +183,33 @@ type example = {
   docstrings: array<string>,
 }
 
+module SpawnAsync = {
+  type t = {
+    stdout: array<Buffer.t>,
+    stderr: array<Buffer.t>,
+    code: Null.t<float>,
+  }
+  let run = async (~command, ~args, ~options=?) => {
+    await Promise.make((resolve, _reject) => {
+      let spawn = ChildProcess.spawn(command, args, ~options?)
+      let stdout = []
+      let stderr = []
+      spawn.stdout->ChildProcess.on("data", data => {
+        Array.push(stdout, data)
+      })
+      spawn.stderr->ChildProcess.on("data", data => {
+        Array.push(stderr, data)
+      })
+      spawn->ChildProcess.once("close", (code, _signal) => {
+        resolve({stdout, stderr, code})
+      })
+    })
+  }
+}
+
 let createFileInTempDir = id => Path.join2(OS.tmpdir(), id)
 
-let testCode = async (~id, ~code) => {
+let compileTest = async (~id, ~code) => {
   let tempFileName = createFileInTempDir(id)
 
   let () = await Fs.writeFile(tempFileName ++ ".res", code)
@@ -169,24 +225,19 @@ let testCode = async (~id, ~code) => {
     "RescriptCore",
   ]
 
-  let promise = await Promise.make((resolve, _reject) => {
-    let spawn = ChildProcess.spawn(bscBin, args)
-    let stderr = []
-    spawn.stderr->ChildProcess.on("data", data => {
-      Array.push(stderr, data)
-    })
-    spawn->ChildProcess.once("close", (_code, _signal) => {
-      resolve(stderr)
-    })
-  })
+  let {stderr, stdout} = await SpawnAsync.run(~command=bscBin, ~args)
 
-  switch Array.length(promise) > 0 {
+  switch Array.length(stderr) > 0 {
   | true =>
-    promise
+    stderr
     ->Array.map(e => e->Buffer.toString)
     ->Array.join("")
     ->Error
-  | false => Ok()
+  | false =>
+    stdout
+    ->Array.map(e => e->Buffer.toString)
+    ->Array.join("")
+    ->Ok
   }
 }
 
@@ -276,7 +327,52 @@ let getCodeBlocks = example => {
   ->List.toArray
 }
 
-let main = async () => {
+let runtimeTests = async code => {
+  let {stdout, stderr, code: exitCode} = await SpawnAsync.run(
+    ~command="node",
+    ~args=["-e", code],
+    ~options={
+      cwd: compilerDir,
+      timeout: 2000,
+    },
+  )
+
+  // Some expressions, like, `console.error("error")` is printed to stderr but
+  // exit code is 0
+  let std = switch exitCode->Null.toOption {
+  | Some(exitCode) if exitCode == 0.0 && Array.length(stderr) > 0 => stderr->Ok
+  | Some(exitCode) if exitCode == 0.0 => stdout->Ok
+  | None | Some(_) => Error(Array.length(stderr) > 0 ? stderr : stdout)
+  }
+
+  switch std {
+  | Ok(buf) =>
+    buf
+    ->Array.map(e => e->Buffer.toString)
+    ->Array.join("")
+    ->Ok
+  | Error(buf) =>
+    buf
+    ->Array.map(e => e->Buffer.toString)
+    ->Array.join("")
+    ->Error
+  }
+}
+
+let indentOutputCode = code => {
+  let indent = String.repeat(" ", 2)
+
+  code
+  ->String.split("\n")
+  ->Array.map(s => `${indent}${s}`)
+  ->Array.join("\n")
+}
+
+type error =
+  | ReScript({error: string})
+  | Runtime({rescript: string, js: string, error: string})
+
+let compilerResults = async () => {
   let results =
     await extractDocFromFile("src/RescriptCore.res")
     ->getExamples
@@ -287,55 +383,93 @@ let main = async () => {
         await codes
         ->Array.mapWithIndex(async (code, int) => {
           let id = `${id}_${Int.toString(int)}`
-          await testCode(~id, ~code)
+          (code, await compileTest(~id, ~code))
         })
         ->Promise.all
       (example, results)
     })
     ->Promise.all
 
-  let errors = results->Belt.Array.keepMap(((example, results)) => {
-    let errors = results->Belt.Array.keepMap(result =>
+  let examples = results->Array.map(((example, results)) => {
+    let (compiled, errors) = results->Array.reduce(([], []), (acc, (resCode, result)) => {
+      let (oks, errors) = acc
       switch result {
-      | Ok() => None
-      | Error(msg) => Some(msg)
+      | Ok(jsCode) => ([...oks, (resCode, jsCode)], errors)
+      | Error(output) => (oks, [...errors, ReScript({error: output})])
       }
-    )
+    })
 
-    if Array.length(errors) > 0 {
-      Some((example, errors))
-    } else {
-      None
-    }
+    (example, (compiled, errors))
   })
 
+  let exampleErrors =
+    await examples
+    ->Array.filter((({id}, _)) => !Array.includes(ignoreRuntimeTests, id))
+    ->Array.map(async ((example, (compiled, errors))) => {
+      let nodeTests =
+        await compiled
+        ->Array.map(async ((res, js)) => (res, js, await runtimeTests(js)))
+        ->Promise.all
+
+      let runtimeErrors = nodeTests->Belt.Array.keepMap(((res, js, output)) =>
+        switch output {
+        | Ok(_) => None
+        | Error(error) => Some(Runtime({rescript: res, js, error}))
+        }
+      )
+
+      (example, Array.concat(runtimeErrors, errors))
+    })
+    ->Promise.all
+
   // Print Errors
-  let () = errors->Array.forEach(((test, errors)) => {
+  let () = exampleErrors->Array.forEach(((example, errors)) => {
     let red = s => `\x1B[1;31m${s}\x1B[0m`
     let cyan = s => `\x1b[36m${s}\x1b[0m`
-    let kind = switch test.kind {
+    let kind = switch example.kind {
     | "moduleAlias" => "module alias"
     | other => other
     }
 
-    let errorMessage =
-      errors
-      ->Array.map(e => {
-        // Drop line from path file
-        e
-        ->String.split("\n")
-        ->Array.filterWithIndex((_, i) => i !== 2)
-        ->Array.join("\n")
-      })
-      ->Array.join("\n")
+    let errorMessage = errors->Array.map(err =>
+      switch err {
+      | ReScript({error}) =>
+        let err =
+          error
+          ->String.split("\n")
+          ->Array.filterWithIndex((_, i) => i !== 2)
+          ->Array.join("\n")
 
-    let message = `${"error"->red}: failed to compile examples from ${kind} ${test.id->cyan}\n${errorMessage}`
+        `${"error"->red}: failed to compile examples from ${kind} ${example.id->cyan}
+${err}`
+      | Runtime({rescript, js, error}) =>
+        let indent = String.repeat(" ", 2)
 
-    Process.stderrWrite(message)
+        `${"runtime error"->red}: failed to run examples from ${kind} ${example.id->cyan}
+
+${indent}${"ReScript"->cyan}
+
+${rescript->indentOutputCode}
+
+${indent}${"Compiled Js"->cyan}
+
+${js->indentOutputCode}
+
+${indent}${"stacktrace"->red}
+
+${error->indentOutputCode}
+`
+      }
+    )
+
+    errorMessage->Array.forEach(e => Process.stderrWrite(e))
   })
 
-  errors->Array.length == 0 ? 0 : 1
+  let someError = exampleErrors->Array.some(((_, err)) => Array.length(err) > 0)
+
+  someError ? 1 : 0
 }
-let exitCode = await main()
+
+let exitCode = await compilerResults()
 
 Process.exit(exitCode)

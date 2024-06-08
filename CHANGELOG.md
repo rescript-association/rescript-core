@@ -2,6 +2,8 @@
 
 ## Next version
 
+- Added `assert_eq` function. https://github.com/rescript-association/rescript-core/pull/210
+
 ## 1.4.0
 
 - Add `RegExp.setLastIndex` function. https://github.com/rescript-association/rescript-core/pull/219
