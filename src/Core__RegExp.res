@@ -1,7 +1,7 @@
 type t = Js.Re.t
 
 module Result = {
-  type t = array<string>
+  type t = array<option<string>>
   @get_index external fullMatch: (t, @as(0) _) => string = ""
   @send external matches: (t, @as(1) _) => array<string> = "slice"
   @get external index: t => int = "index"

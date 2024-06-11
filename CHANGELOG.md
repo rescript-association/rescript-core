@@ -2,6 +2,8 @@
 
 ## Next version
 
+- BREAKING: Fixes the type of `RegExp.Result.t` to be `array<option<string>>` instead of `array<string>`. https://github.com/rescript-association/rescript-core/pull/233.
+
 ## 0.7.0
 
 - Add `Dict.getUnsafe` https://github.com/rescript-association/rescript-core/pull/167
