@@ -2,6 +2,8 @@
 
 ## Next version
 
+- BREAKING: Fixes the type of `RegExp.Result.t` to be `array<option<string>>` instead of `array<string>`. https://github.com/rescript-association/rescript-core/pull/234.
+
 ## 1.4.0
 
 - Add `RegExp.setLastIndex` function. https://github.com/rescript-association/rescript-core/pull/219
