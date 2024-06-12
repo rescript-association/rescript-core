@@ -13,7 +13,7 @@ module Result: {
   /**
   Type representing the result of a `RegExp` execution.
   */
-  type t = array<string>
+  type t = array<option<string>>
 
   /**
   `fullMatch(regExpResult)` returns the full string that matched in this result.

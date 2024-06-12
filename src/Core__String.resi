@@ -429,10 +429,11 @@ See [`String.match`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Ref
 ## Examples
 
 ```rescript
-String.match("The better bats", %re("/b[aeiou]t/")) == Some(["bet"])
-String.match("The better bats", %re("/b[aeiou]t/g")) == Some(["bet", "bat"])
+String.match("The better bats", %re("/b[aeiou]t/")) == Some([Some("bet")])
+String.match("The better bats", %re("/b[aeiou]t/g")) == Some([Some("bet"), Some("bat")])
 String.match("Today is 2018-04-05.", %re("/(\d+)-(\d+)-(\d+)/")) ==
-  Some(["2018-04-05", "2018", "04", "05"])
+  Some([Some("2018-04-05"), Some("2018"), Some("04"), Some("05")])
+String.match("The optional example", %re("/(foo)?(example)/")) == Some([Some("example"), None, Some("example")])
 String.match("The large container.", %re("/b[aeiou]g/")) == None
 ```
 */
