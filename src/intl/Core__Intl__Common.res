@@ -1,4 +1,4 @@
-type localeMatcher = [#lookup | @as("best fit") #bestFit]
+type localeMatcher = [#lookup | #bestFit]
 
 type calendar = [
   | #buddhist
