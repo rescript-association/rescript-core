@@ -1,3 +1,4 @@
+@unboxed
 type t<'a> = Js.Nullable.t<'a> =
   | Value('a)
   | @as(null) Null
