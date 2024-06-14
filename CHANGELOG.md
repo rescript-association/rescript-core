@@ -2,6 +2,8 @@
 
 ## Next version
 
+## 1.5.0
+
 - BREAKING: Fixes the type of `RegExp.Result.t` to be `array<option<string>>` instead of `array<string>`. https://github.com/rescript-association/rescript-core/pull/234.
 - Fix type of `Nullable.t` which was not untagged in the implementation. https://github.com/rescript-association/rescript-core/pull/235
 
