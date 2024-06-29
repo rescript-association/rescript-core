@@ -5,14 +5,14 @@ console.log("---");
 
 console.log("Intl.Collator");
 
-new Intl.Collator(undefined, undefined);
+new Intl.Collator();
 
-new Intl.Collator(["en-US"], undefined);
+new Intl.Collator(["en-US"]);
 
 var _collator = new Intl.Collator([
       "en-US",
       "en-GB"
-    ], undefined);
+    ]);
 
 var collator = new Intl.Collator(["en-US"], {
       sensitivity: "base",

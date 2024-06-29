@@ -104,3 +104,56 @@ let compare = (a, b, cmp) =>
   | (Some(_), None) => Core__Ordering.greater
   | (None, None) => Core__Ordering.equal
   }
+
+let all = options => {
+  let acc = []
+  let returnValue = ref(None)
+  let index = ref(0)
+  while returnValue.contents == None && index.contents < options->Core__Array.length {
+    switch options->Core__Array.getUnsafe(index.contents) {
+    | None => returnValue.contents = Some(None)
+    | Some(value) =>
+      acc->Core__Array.push(value)
+      index.contents = index.contents + 1
+    }
+  }
+  switch returnValue.contents {
+  | Some(_) => None
+  | None => Some(acc)
+  }
+}
+
+let all2 = ((a, b)) => {
+  switch (a, b) {
+  | (Some(a), Some(b)) => Some((a, b))
+  | _ => None
+  }
+}
+
+let all3 = ((a, b, c)) => {
+  switch (a, b, c) {
+  | (Some(a), Some(b), Some(c)) => Some((a, b, c))
+  | _ => None
+  }
+}
+
+let all4 = ((a, b, c, d)) => {
+  switch (a, b, c, d) {
+  | (Some(a), Some(b), Some(c), Some(d)) => Some((a, b, c, d))
+  | _ => None
+  }
+}
+
+let all5 = ((a, b, c, d, e)) => {
+  switch (a, b, c, d, e) {
+  | (Some(a), Some(b), Some(c), Some(d), Some(e)) => Some((a, b, c, d, e))
+  | _ => None
+  }
+}
+
+let all6 = ((a, b, c, d, e, f)) => {
+  switch (a, b, c, d, e, f) {
+  | (Some(a), Some(b), Some(c), Some(d), Some(e), Some(f)) => Some((a, b, c, d, e, f))
+  | _ => None
+  }
+}
