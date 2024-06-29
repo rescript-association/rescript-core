@@ -26,7 +26,7 @@ type timeZoneName = [
 ]
 
 type hourCycle = [#h11 | #h12 | #h23 | #h24]
-type formatMatcher = [#basic | @as("best fit") #bestFit]
+type formatMatcher = [#basic | #"best fit"]
 type fractionalSecondDigits = [#0 | #1 | #2 | #3]
 
 type options = {
