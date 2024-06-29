@@ -82,12 +82,6 @@ var $$BigUint64Array;
 
 var $$Intl;
 
-var MapperRt;
-
-var Internal;
-
-var Re;
-
 var $$Option;
 
 var List;
@@ -137,9 +131,6 @@ export {
   $$BigInt64Array ,
   $$BigUint64Array ,
   $$Intl ,
-  MapperRt ,
-  Internal ,
-  Re ,
   $$Option ,
   List ,
   Result ,
