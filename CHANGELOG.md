@@ -2,6 +2,10 @@
 
 ## Next version
 
+## 1.5.2
+
+- Remove aliases for runtime modules (`MapperRt`, `Internal`) and `Re`. https://github.com/rescript-association/rescript-core/pull/237
+
 ## 1.5.1
 
 - Remove leftover top-level t<'a>. https://github.com/rescript-association/rescript-core/pull/236
