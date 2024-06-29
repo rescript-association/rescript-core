@@ -2,11 +2,14 @@
 
 ## Next version
 
+## 1.5.1
+
+- Remove leftover top-level t<'a>. https://github.com/rescript-association/rescript-core/pull/236
+
 ## 1.5.0
 
 - BREAKING: Fixes the type of `RegExp.Result.t` to be `array<option<string>>` instead of `array<string>`. https://github.com/rescript-association/rescript-core/pull/234.
 - Fix type of `Nullable.t` which was not untagged in the implementation. https://github.com/rescript-association/rescript-core/pull/235
-- Remove leftover top-level t<'a>. https://github.com/rescript-association/rescript-core/pull/236
 
 ## 1.4.0
 
