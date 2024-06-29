@@ -94,9 +94,6 @@ async function main() {
 */
 external import: 'a => promise<'a> = "#import"
 
-module MapperRt = Js.MapperRt
-module Internal = Js.Internal
-module Re = Core__RegExp // needed for the %re sugar
 module Exn = Js.Exn
 module Option = Core__Option
 module List = Core__List
