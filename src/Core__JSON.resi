@@ -33,7 +33,7 @@ try {
   let _ = JSON.parseExn("")
   // error
 } catch {
-| Exn.Error(_) => Console.log("error")
+| Error.Error(_) => Console.log("error")
 }
 
 let reviver = (_, value: JSON.t) =>
@@ -52,15 +52,15 @@ try {
   JSON.parseExn("", ~reviver)->Console.log
   // error
 } catch {
-| Exn.Error(_) => Console.log("error")
+| Error.Error(_) => Console.log("error")
 }
 ```
 
 ## Exceptions 
 
-- Raises a SyntaxError (Exn.t) if the string isn't valid JSON.
+- Raises a SyntaxError (Error.t) if the string isn't valid JSON.
 */
-@raises(Exn.t)
+@raises(Error.t)
 @val
 external parseExn: (string, ~reviver: (string, t) => t=?) => t = "JSON.parse"
 
@@ -89,7 +89,7 @@ try {
   JSON.parseExnWithReviver("", reviver)->Console.log
   // error
 } catch {
-| Exn.Error(_) => Console.log("error")
+| Error.Error(_) => Console.log("error")
 }
 ```
 
@@ -98,7 +98,7 @@ try {
 - Raises a SyntaxError if the string isn't valid JSON.
 */
 @deprecated("Use `parseExn` with optional parameter instead")
-@raises(Exn.t)
+@raises(Error.t)
 @val
 external parseExnWithReviver: (string, (string, t) => t) => t = "JSON.parse"
 
@@ -350,7 +350,7 @@ BigInt.fromInt(0)->JSON.stringifyAny
 - Raises a TypeError if the value contains circular references.
 - Raises a TypeError if the value contains `BigInt`s.
 */
-@raises(Exn.t)
+@raises(Error.t)
 @val
 external stringifyAny: ('a, ~replacer: replacer=?, ~space: int=?) => option<string> =
   "JSON.stringify"
@@ -391,7 +391,7 @@ BigInt.fromInt(0)->JSON.stringifyAny
 - Raises a TypeError if the value contains `BigInt`s.
 */
 @deprecated("Use `stringifyAny` with optional parameter instead")
-@raises(Exn.t)
+@raises(Error.t)
 @val
 external stringifyAnyWithIndent: ('a, @as(json`null`) _, int) => option<string> = "JSON.stringify"
 

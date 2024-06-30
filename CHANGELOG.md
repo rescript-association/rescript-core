@@ -2,6 +2,8 @@
 
 ## Next version
 
+- Deprecated `Exn` module. Use the `Error` module instead. https://github.com/rescript-association/rescript-core/pull/230
+
 ## 1.5.2
 
 - Remove aliases for runtime modules (`MapperRt`, `Internal`) and `Re`. https://github.com/rescript-association/rescript-core/pull/237

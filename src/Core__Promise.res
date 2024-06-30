@@ -99,7 +99,7 @@ external _catch: (t<'a>, exn => t<'a>) => t<'a> = "catch"
 
 let catch = (promise: promise<'a>, callback: exn => promise<'a>): promise<'a> => {
   _catch(promise, err => {
-    callback(Js.Exn.anyToExnInternal(err))
+    callback(Core__Error.anyToExnInternal(err))
   })
 }
 

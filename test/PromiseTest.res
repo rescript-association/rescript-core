@@ -3,7 +3,7 @@ open RescriptCore
 exception TestError(string)
 
 let fail = msg => {
-  Exn.raiseError(msg)
+  Error.raise(msg)
 }
 
 let equal = (a, b) => {
@@ -132,7 +132,7 @@ module Catching = {
     ->then(_ => resolve()) // Since our asyncParse will fail anyways, we convert to promise<unit> for our catch later
     ->catch(e => {
       let success = switch e {
-      | Exn.Error(err) => Exn.name(err) == Some("SyntaxError")
+      | Error.Error(err) => Error.name(err) == Some("SyntaxError")
       | _ => false
       }
 
@@ -166,7 +166,7 @@ module Catching = {
     open Promise
 
     let causeErr = () => {
-      Exn.raiseError("Some JS error")
+      Error.make("Some JS error")->Error.raise
     }
 
     resolve()
@@ -175,7 +175,7 @@ module Catching = {
     })
     ->catch(e => {
       let isTestErr = switch e {
-      | Exn.Error(err) => Exn.message(err) == Some("Some JS error")
+      | Error.Error(err) => Error.message(err) == Some("Some JS error")
       | _ => false
       }
       Test.run(__POS_OF__("Should be some JS error"), isTestErr, equal, true)

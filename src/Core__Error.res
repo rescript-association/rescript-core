@@ -1,4 +1,7 @@
-type t = Js.Exn.t
+type t = unknown
+
+@@warning("-38") /* unused extension constructor */
+exception Error = JsError
 
 external fromException: exn => option<t> = "?as_js_exn"
 external toException: t => exn = "%identity"
@@ -9,6 +12,9 @@ external toException: t => exn = "%identity"
 @get external fileName: t => option<string> = "fileName"
 
 @new external make: string => t = "Error"
+
+external isCamlExceptionOrOpenVariant: 'a => bool = "?is_extension"
+external anyToExnInternal: 'a => exn = "#wrap_exn"
 
 module EvalError = {
   @new external make: string => t = "EvalError"

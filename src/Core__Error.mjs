@@ -17,7 +17,10 @@ function panic(msg) {
   throw new Error("Panic! " + msg);
 }
 
+var $$Error$1 = "JsError";
+
 export {
+  $$Error$1 as $$Error,
   $$EvalError ,
   $$RangeError ,
   $$ReferenceError ,

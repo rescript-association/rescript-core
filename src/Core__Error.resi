@@ -5,7 +5,9 @@ See [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/
 */
 
 /** Represents a JavaScript exception. */
-type t = Js.Exn.t
+type t
+
+type exn += private Error(t)
 
 external fromException: exn => option<t> = "?as_js_exn"
 
@@ -85,6 +87,35 @@ Console.log(error->Error.name) // Logs "Error" to the console, because this is a
 */
 @new
 external make: string => t = "Error"
+
+/** internal use only */
+external isCamlExceptionOrOpenVariant: 'a => bool = "?is_extension"
+
+/**
+`anyToExnInternal(obj)` will take any value `obj` and wrap it
+in a `Error.Error` if given value is not an exn already. If
+`obj` is an exn, it will return `obj` without any changes.
+
+This function is mostly useful for cases where you want to unify a type of a value
+that potentially is either exn, a JS error, or any other JS value really (e.g. for
+a value passed to a Promise.catch callback)
+
+**IMPORTANT**: This is an internal API and may be changed / removed any time in the future.
+
+## Examples
+
+```rescript
+switch Error.anyToExnInternal("test") {
+| Error.Error(v) =>
+  switch(Error.message(v)) {
+  | Some(_) => assert(false)
+  | None => Console.log2("We will land here", v)
+  }
+| _ => assert(false)
+}
+```
+*/
+external anyToExnInternal: 'a => exn = "#wrap_exn"
 
 module EvalError: {
   /**
