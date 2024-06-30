@@ -94,6 +94,9 @@ async function main() {
 */
 external import: 'a => promise<'a> = "#import"
 
+@deprecated("Use `Error` module instead")
+module Exn = Js.Exn
+
 module Option = Core__Option
 module List = Core__List
 module Result = Core__Result

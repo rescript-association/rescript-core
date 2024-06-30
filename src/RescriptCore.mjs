@@ -82,6 +82,8 @@ var $$BigUint64Array;
 
 var $$Intl;
 
+var Exn;
+
 var $$Option;
 
 var List;
@@ -131,6 +133,7 @@ export {
   $$BigInt64Array ,
   $$BigUint64Array ,
   $$Intl ,
+  Exn ,
   $$Option ,
   List ,
   Result ,

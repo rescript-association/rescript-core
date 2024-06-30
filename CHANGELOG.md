@@ -2,7 +2,7 @@
 
 ## Next version
 
-- BREAKING: Remove `Exn` module. https://github.com/rescript-association/rescript-core/pull/230
+- Deprecated `Exn` module. Use the `Error` module instead. https://github.com/rescript-association/rescript-core/pull/230
 
 ## 1.5.2
 
