@@ -166,3 +166,5 @@ Test.run(__POS_OF__("clamp - < min, < max"), Int.clamp(~min=50, ~max=60, 42), eq
 Test.run(__POS_OF__("clamp - < min, > max"), Int.clamp(~min=50, ~max=40, 42), eq, 50) // min wins
 Test.run(__POS_OF__("clamp - > min, < max"), Int.clamp(~min=40, ~max=60, 42), eq, 42)
 Test.run(__POS_OF__("clamp - > min, > max"), Int.clamp(~min=40, ~max=40, 42), eq, 40)
+
+Test.run(__POS_OF__("Int.equal optimization"), Int.equal(1, 3), eq, false)

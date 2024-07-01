@@ -548,6 +548,16 @@ Test.run([
       "clamp - > min, > max"
     ], Core__Int.clamp(40, 40, 42), eq, 40);
 
+Test.run([
+      [
+        "IntTests.res",
+        170,
+        20,
+        44
+      ],
+      "Int.equal optimization"
+    ], false, eq, false);
+
 export {
   eq ,
   $$catch ,

@@ -3,10 +3,9 @@ module Constants = {
   @inline let maxValue = 2147483647
 }
 
-let equal = (a: int, b: int) => a === b
+external equal: (int, int) => bool = "%equal"
 
-let compare = (a: int, b: int) =>
-  a < b ? Core__Ordering.less : a > b ? Core__Ordering.greater : Core__Ordering.equal
+external compare: (int, int) => Core__Ordering.t = "%compare"
 
 @send external toExponential: (int, ~digits: int=?) => string = "toExponential"
 @deprecated("Use `toExponential` instead") @send
