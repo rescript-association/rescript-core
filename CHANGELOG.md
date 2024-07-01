@@ -2,6 +2,8 @@
 
 ## Next version
 
+- Optimize compare and equal functions. https://github.com/rescript-association/rescript-core/pull/238
+
 ## 1.5.2
 
 - Remove aliases for runtime modules (`MapperRt`, `Internal`) and `Re`. https://github.com/rescript-association/rescript-core/pull/237
