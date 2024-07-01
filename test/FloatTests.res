@@ -45,3 +45,5 @@ Test.run(
   eq,
   neg_infinity,
 )
+
+Test.run(__POS_OF__("Float.equal optimization"), Float.equal(1., 3.), eq, false)

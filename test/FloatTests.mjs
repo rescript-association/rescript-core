@@ -237,6 +237,16 @@ Test.run([
       "clamp - min -infinity, max -infinity"
     ], Core__Float.clamp(PervasivesU.neg_infinity, PervasivesU.neg_infinity, 4.2), eq, PervasivesU.neg_infinity);
 
+Test.run([
+      [
+        "FloatTests.res",
+        49,
+        20,
+        46
+      ],
+      "Float.equal optimization"
+    ], false, eq, false);
+
 export {
   eq ,
 }
