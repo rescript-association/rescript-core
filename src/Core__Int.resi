@@ -56,9 +56,9 @@ module Constants: {
   let maxValue: int
 }
 
-let equal: (int, int) => bool
+external equal: (int, int) => bool = "%equal"
 
-let compare: (int, int) => Core__Ordering.t
+external compare: (int, int) => Core__Ordering.t = "%compare"
 
 /**
 `toExponential(n, ~digits=?)` return a `string` representing the given value in

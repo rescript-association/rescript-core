@@ -109,9 +109,9 @@ module Constants: {
   external maxValue: float = "Number.MAX_VALUE"
 }
 
-let equal: (float, float) => bool
+external equal: (float, float) => bool = "%equal"
 
-let compare: (float, float) => Core__Ordering.t
+external compare: (float, float) => Core__Ordering.t = "%compare"
 
 /**
 `isNaN(v)` tests if the given `v` is `NaN`.

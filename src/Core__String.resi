@@ -118,9 +118,9 @@ String.fromCodePointMany([0xd55c, 0xae00, 0x1f63a]) == `한글😺`
 @val
 external fromCodePointMany: array<int> => string = "String.fromCodePoint"
 
-let equal: (string, string) => bool
+external equal: (string, string) => bool = "%equal"
 
-let compare: (string, string) => Core__Ordering.t
+external compare: (string, string) => Core__Ordering.t = "%compare"
 
 /**
 `length(str)` returns the length of the given `string`.

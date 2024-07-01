@@ -7,10 +7,9 @@ module Constants = {
   @val external maxValue: float = "Number.MAX_VALUE"
 }
 
-let equal = (a: float, b: float) => a === b
+external equal: (float, float) => bool = "%equal"
 
-let compare = (a: float, b: float) =>
-  a < b ? Core__Ordering.less : a > b ? Core__Ordering.greater : Core__Ordering.equal
+external compare: (float, float) => Core__Ordering.t = "%compare"
 
 @val external isNaN: float => bool = "isNaN"
 @val external isFinite: float => bool = "isFinite"

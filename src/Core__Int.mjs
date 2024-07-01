@@ -2,20 +2,6 @@
 
 import * as Core__Array from "./Core__Array.mjs";
 
-function equal(a, b) {
-  return a === b;
-}
-
-function compare(a, b) {
-  if (a < b) {
-    return -1;
-  } else if (a > b) {
-    return 1;
-  } else {
-    return 0;
-  }
-}
-
 function fromString(x, radix) {
   var maybeInt = radix !== undefined ? parseInt(x, radix) : parseInt(x);
   if (isNaN(maybeInt) || maybeInt > 2147483647 || maybeInt < -2147483648) {
@@ -85,8 +71,6 @@ var Constants = {
 
 export {
   Constants ,
-  equal ,
-  compare ,
   fromString ,
   range ,
   rangeWithOptions ,
