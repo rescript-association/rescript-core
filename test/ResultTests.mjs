@@ -88,6 +88,71 @@ Test.run([
       _0: 15
     });
 
+Test.run([
+      [
+        "ResultTests.res",
+        36,
+        20,
+        25
+      ],
+      "all"
+    ], Core__Result.all([]), eq, {
+      TAG: "Ok",
+      _0: []
+    });
+
+Test.run([
+      [
+        "ResultTests.res",
+        37,
+        20,
+        25
+      ],
+      "all"
+    ], Core__Result.all([
+          {
+            TAG: "Ok",
+            _0: 1
+          },
+          {
+            TAG: "Ok",
+            _0: 2
+          },
+          {
+            TAG: "Ok",
+            _0: 3
+          }
+        ]), eq, {
+      TAG: "Ok",
+      _0: [
+        1,
+        2,
+        3
+      ]
+    });
+
+Test.run([
+      [
+        "ResultTests.res",
+        38,
+        20,
+        25
+      ],
+      "all"
+    ], Core__Result.all([
+          {
+            TAG: "Ok",
+            _0: 1
+          },
+          {
+            TAG: "Error",
+            _0: 2
+          }
+        ]), eq, {
+      TAG: "Error",
+      _0: 2
+    });
+
 export {
   eq ,
   forEachIfOkCallFunction ,
