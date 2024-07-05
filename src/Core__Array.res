@@ -184,7 +184,13 @@ let reduceRightWithIndex = (arr, init, f) => reduceRightWithIndex(arr, f, init)
 @send external some: (array<'a>, 'a => bool) => bool = "some"
 @send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"
 
-@get_index external get: (array<'a>, int) => option<'a> = ""
+let get = (arr, i) =>
+  if i >= 0 && i < length(arr) {
+    Some(getUnsafe(arr, i))
+  } else {
+    None
+  }
+
 @set_index external set: (array<'a>, int, 'a) => unit = ""
 
 @get_index external getSymbol: (array<'a>, Core__Symbol.t) => option<'b> = ""

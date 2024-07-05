@@ -98,6 +98,13 @@ function reduceRightWithIndex(arr, init, f) {
   return arr.reduceRight(f, init);
 }
 
+function get(arr, i) {
+  if (i >= 0 && i < arr.length) {
+    return Caml_option.some(arr[i]);
+  }
+  
+}
+
 function findIndexOpt(array, finder) {
   var index = array.findIndex(finder);
   if (index !== -1) {
@@ -169,7 +176,7 @@ function findMap(arr, f) {
 }
 
 function last(a) {
-  return a[a.length - 1 | 0];
+  return get(a, a.length - 1 | 0);
 }
 
 export {
@@ -183,6 +190,7 @@ export {
   reduceWithIndex ,
   reduceRight ,
   reduceRightWithIndex ,
+  get ,
   findIndexOpt ,
   filterMap ,
   keepSome ,
