@@ -35,7 +35,7 @@ type value<'a> = {
     context := currentValue + 1
     
     {
-      value: Some(currentValue),
+      AsyncIterator.value: Some(currentValue),
       done: currentValue >= 3
     }
   })
@@ -110,7 +110,7 @@ See [async iterator protocols](https://developer.mozilla.org/en-US/docs/Web/Java
 - A simple example, getting the next value:
 ```rescript
 @val external asyncIterator: AsyncIterator.t<int> = "someAsyncIterator"
-let {done, value} = await asyncIterator->AsyncIterator.next
+let value = await asyncIterator->AsyncIterator.next
 ```
 
 - Complete example, including looping over all values:
