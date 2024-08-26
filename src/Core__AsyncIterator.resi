@@ -20,6 +20,86 @@ type value<'a> = {
 }
 
 /**
+ `make(nextFn)`
+
+  Creates an async iterator from a function that returns the next value of the iterator.
+
+  ## Examples
+  - A simple example, creating an async iterator that returns 1, 2, 3:
+  ```rescript
+  let context = ref(0)
+
+  let asyncIterator = AsyncIterator.make(async () => {
+    let currentValue = context.contents
+    // Increment current value
+    context := currentValue + 1
+    
+    {
+      value: Some(currentValue),
+      done: currentValue >= 3
+    }
+  })
+
+  // This will log 1, 2, 3
+  await asyncIterator->AsyncIterator.forEach(value =>
+    switch value {
+    | Some(value) => Console.log(value)
+    | None => ()
+    }
+  )
+  ```
+ */
+let make: (unit => promise<value<'value>>) => t<'value>
+
+/**
+ `value(value)`
+
+ Shorthand for creating a value object with the provided value, and the `done` property set to false.
+
+  ## Examples
+  ```rescript
+  let context = ref(0)
+
+  let asyncIterator = AsyncIterator.make(async () => {
+    let currentValue = context.contents
+    // Increment current value
+    context := currentValue + 1
+    
+    if currentValue >= 3 {
+      AsyncIterator.done()
+    } else {
+      AsyncIterator.value(currentValue)
+    }
+  })
+  ```
+ */
+let value: 'value => value<'value>
+
+/**
+ `done(~finalValue=?)`
+
+ Shorthand for creating a value object with the `done` property set to true, and the provided value as the final value, if any.
+
+  ## Examples
+  ```rescript
+  let context = ref(0)
+
+  let asyncIterator = AsyncIterator.make(async () => {
+    let currentValue = context.contents
+    // Increment current value
+    context := currentValue + 1
+    
+    if currentValue >= 3 {
+      AsyncIterator.done()
+    } else {
+      AsyncIterator.value(currentValue)
+    }
+  })
+  ```
+ */
+let done: (~finalValue: 'value=?) => value<'value>
+
+/**
 `next(asyncIterator)`
 
 Returns the next value of the iterator, if any.
@@ -30,7 +110,7 @@ See [async iterator protocols](https://developer.mozilla.org/en-US/docs/Web/Java
 - A simple example, getting the next value:
 ```rescript
 @val external asyncIterator: AsyncIterator.t<int> = "someAsyncIterator"
-let {AsyncIterator.done, value} = await asyncIterator->AsyncIterator.next
+let {done, value} = await asyncIterator->AsyncIterator.next
 ```
 
 - Complete example, including looping over all values:

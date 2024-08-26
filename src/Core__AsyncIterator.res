@@ -5,6 +5,16 @@ type value<'a> = {
   value: option<'a>,
 }
 
+let value = v => {
+  done: false,
+  value: Some(v),
+}
+
+let done = (~finalValue=?) => {
+  done: true,
+  value: finalValue,
+}
+
 @send external next: t<'a> => promise<value<'a>> = "next"
 
 let forEach = async (iterator, f) => {
@@ -16,3 +26,12 @@ let forEach = async (iterator, f) => {
     iteratorDone := done
   }
 }
+
+let make: (unit => promise<value<'value>>) => t<'value> = %raw(`function makeAsyncIterator(next) {
+  return {
+    next,
+    [Symbol.asyncIterator]() {
+      return this;
+    }
+  }
+}`)

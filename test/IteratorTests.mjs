@@ -67,11 +67,47 @@ Test.run([
       "Async forEach"
     ], asyncResult.contents, eq, "second");
 
+var asyncResult$1 = {
+  contents: undefined
+};
+
+var count = {
+  contents: 0
+};
+
+var asyncIterator$1 = Core__AsyncIterator.make(async function () {
+      var currentCount = count.contents;
+      count.contents = currentCount + 1 | 0;
+      if (currentCount === 3) {
+        return Core__AsyncIterator.done(currentCount);
+      } else {
+        return Core__AsyncIterator.value(currentCount);
+      }
+    });
+
+await Core__AsyncIterator.forEach(asyncIterator$1, (function (v) {
+        if (v === 3) {
+          asyncResult$1.contents = "done";
+        } else {
+          console.log("next..");
+        }
+      }));
+
+Test.run([
+      [
+        "IteratorTests.res",
+        69,
+        20,
+        54
+      ],
+      "Creating your own async iterator"
+    ], asyncResult$1.contents, eq, "done");
+
 export {
   eq ,
   iterator ,
   syncResult ,
-  asyncIterator ,
   asyncResult ,
+  asyncIterator$1 as asyncIterator,
 }
 /* iterator Not a pure module */
