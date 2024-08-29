@@ -78,9 +78,9 @@ var iterator = IteratorTests.iterator;
 
 var syncResult = IteratorTests.syncResult;
 
-var asyncIterator = IteratorTests.asyncIterator;
-
 var asyncResult = IteratorTests.asyncResult;
+
+var asyncIterator = IteratorTests.asyncIterator;
 
 export {
   bign ,
@@ -115,7 +115,7 @@ export {
   eq ,
   iterator ,
   syncResult ,
-  asyncIterator ,
   asyncResult ,
+  asyncIterator ,
 }
 /* IntTests Not a pure module */

@@ -42,3 +42,28 @@ await asyncIterator->AsyncIterator.forEach(v => {
 })
 
 Test.run(__POS_OF__("Async forEach"), asyncResult.contents, eq, Some("second"))
+
+%%private(
+  let asyncResult = ref(None)
+  let count = ref(0)
+)
+
+let asyncIterator = AsyncIterator.make(async () => {
+  let currentCount = count.contents
+  count := currentCount + 1
+
+  if currentCount === 3 {
+    AsyncIterator.done(~finalValue=currentCount)
+  } else {
+    AsyncIterator.value(currentCount)
+  }
+})
+
+await asyncIterator->AsyncIterator.forEach(v => {
+  switch v {
+  | Some(3) => asyncResult.contents = Some("done")
+  | _ => Console.log("next..")
+  }
+})
+
+Test.run(__POS_OF__("Creating your own async iterator"), asyncResult.contents, eq, Some("done"))
