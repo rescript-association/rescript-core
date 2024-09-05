@@ -293,6 +293,83 @@ Int.fromString("6", ~radix=2) == None
 let fromString: (string, ~radix: int=?) => option<int>
 
 /**
+`land(n1, n2)` calculates the bitwise logical AND of two integers.
+
+## Examples
+
+```rescript
+Int.land(7, 4) == 4
+```
+*/
+external land: (int, int) => int = "%andint"
+
+/**
+`lor(n1, n2)` calculates the bitwise logical OR of two integers.
+
+## Examples
+
+```rescript
+Int.lor(7, 4) == 7
+```
+*/
+external lor: (int, int) => int = "%orint"
+
+/**
+`lxor(n1, n2)` calculates the bitwise logical XOR of two integers.
+
+## Examples
+
+```rescript
+Int.lxor(7, 4) == 3
+```
+*/
+external lxor: (int, int) => int = "%xorint"
+
+/**
+`lnot(n)` calculates the bitwise logical NOT of an integer.
+
+## Examples
+
+```rescript
+Int.lnot(2) == -3
+```
+*/
+let lnot: int => int
+
+/**
+`lsl(n, length)` calculates the bitwise logical left shift of an integer `n` by `length`.
+
+## Examples
+
+```rescript
+Int.lsl(4, 1) == 8
+```
+*/
+external lsl: (int, int) => int = "%lslint"
+
+/**
+`lsr(n, length)` calculates the bitwise logical right shift of an integer `n` by `length`.
+
+## Examples
+
+```rescript
+Int.lsr(8, 1) == 4
+```
+*/
+external lsr: (int, int) => int = "%lsrint"
+
+/**
+`asr(n, length)` calculates the bitwise arithmetic right shift of an integer `n` by `length`.
+
+## Examples
+
+```rescript
+Int.asr(4, 1) == 2
+```
+*/
+external asr: (int, int) => int = "%asrint"
+
+/**
 `mod(n1, n2)` calculates the modulo (remainder after division) of two integers.
 
 ## Examples

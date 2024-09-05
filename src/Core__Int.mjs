@@ -11,6 +11,10 @@ function fromString(x, radix) {
   }
 }
 
+function lnot(x) {
+  return x ^ -1;
+}
+
 function abs(x) {
   if (x >= 0) {
     return x;
@@ -72,6 +76,7 @@ var Constants = {
 export {
   Constants ,
   fromString ,
+  lnot ,
   range ,
   rangeWithOptions ,
   clamp ,
