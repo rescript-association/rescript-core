@@ -4,6 +4,7 @@
 
 - Optimize compare and equal functions. https://github.com/rescript-association/rescript-core/pull/238
 - Add `make` and `done` + `value` functions to `AsyncIterator`. https://github.com/rescript-association/rescript-core/pull/243
+- Int: Add bitwise functions from Pervasives. https://github.com/rescript-association/rescript-core/pull/245
 
 ## 1.5.2
 
