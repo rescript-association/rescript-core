@@ -45,16 +45,6 @@ let fromString = (x, ~radix=?) => {
 
 external mod: (int, int) => int = "%modint"
 
-external land: (int, int) => int = "%andint"
-external lor: (int, int) => int = "%orint"
-external lxor: (int, int) => int = "%xorint"
-
-external lsl: (int, int) => int = "%lslint"
-external lsr: (int, int) => int = "%lsrint"
-external asr: (int, int) => int = "%asrint"
-
-let lnot = x => lxor(x, -1)
-
 type rangeOptions = {step?: int, inclusive?: bool}
 
 let abs = x =>
@@ -99,4 +89,16 @@ let clamp = (~min=?, ~max=?, value): int => {
   | Some(min) if min > value => min
   | _ => value
   }
+}
+
+module Bitwise = {
+  external land: (int, int) => int = "%andint"
+  external lor: (int, int) => int = "%orint"
+  external lxor: (int, int) => int = "%xorint"
+
+  external lsl: (int, int) => int = "%lslint"
+  external lsr: (int, int) => int = "%lsrint"
+  external asr: (int, int) => int = "%asrint"
+
+  let lnot = x => lxor(x, -1)
 }

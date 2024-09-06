@@ -11,10 +11,6 @@ function fromString(x, radix) {
   }
 }
 
-function lnot(x) {
-  return x ^ -1;
-}
-
 function abs(x) {
   if (x >= 0) {
     return x;
@@ -68,6 +64,14 @@ function clamp(min, max, value) {
   }
 }
 
+function lnot(x) {
+  return x ^ -1;
+}
+
+var Bitwise = {
+  lnot: lnot
+};
+
 var Constants = {
   minValue: -2147483648,
   maxValue: 2147483647
@@ -76,9 +80,9 @@ var Constants = {
 export {
   Constants ,
   fromString ,
-  lnot ,
   range ,
   rangeWithOptions ,
   clamp ,
+  Bitwise ,
 }
 /* No side effect */
