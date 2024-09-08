@@ -90,3 +90,15 @@ let clamp = (~min=?, ~max=?, value): int => {
   | _ => value
   }
 }
+
+module Bitwise = {
+  external land: (int, int) => int = "%andint"
+  external lor: (int, int) => int = "%orint"
+  external lxor: (int, int) => int = "%xorint"
+
+  external lsl: (int, int) => int = "%lslint"
+  external lsr: (int, int) => int = "%lsrint"
+  external asr: (int, int) => int = "%asrint"
+
+  let lnot = x => lxor(x, -1)
+}
