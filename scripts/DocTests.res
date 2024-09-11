@@ -212,6 +212,11 @@ let getExamples = ({items}: Docgen.doc) => {
         list{...rest, ...List.fromArray(items)},
         list{{id, name, docstrings, kind: "module"}, ...acc},
       )
+    | list{ModuleType({id, name, docstrings, items}), ...rest} =>
+      loop(
+        list{...rest, ...List.fromArray(items)},
+        list{{id, name, docstrings, kind: "moduleType"}, ...acc},
+      )
     | list{ModuleAlias({id, name, docstrings, items}), ...rest} =>
       loop(
         list{...rest, ...List.fromArray(items)},

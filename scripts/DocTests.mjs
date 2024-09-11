@@ -231,6 +231,21 @@ function getExamples(param) {
                   Core__List.fromArray(match.items)
                 ]);
             continue ;
+        case "moduleType" :
+            _acc = {
+              hd: {
+                id: match.id,
+                kind: "moduleType",
+                name: match.name,
+                docstrings: match.docstrings
+              },
+              tl: acc
+            };
+            _items = Belt_List.concatMany([
+                  items.tl,
+                  Core__List.fromArray(match.items)
+                ]);
+            continue ;
         case "moduleAlias" :
             _acc = {
               hd: {
@@ -306,7 +321,7 @@ async function main() {
             var id = example.id.replaceAll(".", "_");
             var codes = getCodeBlocks(example);
             var results = await Promise.all(codes.map(async function (code, $$int) {
-                      var id$1 = id + "_" + $$int.toString(undefined);
+                      var id$1 = id + "_" + $$int.toString();
                       return await testCode(id$1, code);
                     }));
             return [
