@@ -822,8 +822,7 @@ array->Array.get(0) == Some("Hello") // true
 array->Array.get(3) == None // true
 ```
 */
-@get_index
-external get: (array<'a>, int) => option<'a> = ""
+let get: (array<'a>, int) => option<'a>
 
 /**
 `set(array, index, item)` sets the provided `item` at `index` of `array`.
