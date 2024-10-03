@@ -254,7 +254,7 @@ Console.log(someArray) // [1, 2, 3]
 external sort: (array<'a>, ('a, 'a) => Core__Ordering.t) => unit = "sort"
 
 @variadic @send
-external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => unit = "splice"
+external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => array<'a> = "splice"
 
 @variadic @send
 external toSpliced: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => array<'a> =
