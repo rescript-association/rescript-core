@@ -68,6 +68,8 @@ external fromIterator: Core__Iterator.t<'a> => t<'a> = "Set"
 /**
 Returns the size, the number of unique values, of the set.
 
+See [`Set.prototype.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) on MDN.
+
 ## Examples
 ```rescript
 let set = Set.make()
@@ -84,6 +86,8 @@ external size: t<'a> => int = "size"
 
 /**
 Clears all entries in the set.
+
+See [`Set.clear`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) on MDN.
 
 ## Examples
 ```rescript
@@ -102,6 +106,8 @@ external clear: t<'a> => unit = "clear"
 /**
 Adds a new value to the set.
 
+See [`Set.add`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) on MDN.
+
 ## Examples
 ```rescript
 let set = Set.make()
@@ -113,6 +119,8 @@ external add: (t<'a>, 'a) => unit = "add"
 
 /**
 Deletes the provided `value` from the set. Returns a `bool` for whether the value existed, and was deleted.
+
+See [`Set.delete`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) on MDN.
 
 ## Examples
 ```rescript
@@ -131,6 +139,8 @@ external delete: (t<'a>, 'a) => bool = "delete"
 /**
 Checks whether the set has a specific value.
 
+See [`Set.has`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) on MDN.
+
 ## Examples
 ```rescript
 let set = Set.make()
@@ -148,6 +158,8 @@ external has: (t<'a>, 'a) => bool = "has"
 /**
 Iterates through all values of the set.
 
+See [`Set.forEach`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/forEach) on MDN.
+
 ## Examples
 ```rescript
 let set = Set.make()
@@ -164,6 +176,8 @@ external forEach: (t<'a>, 'a => unit) => unit = "forEach"
 
 /**
 Returns an iterator that holds all values of the set.
+
+See [`Set.values`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/values) on MDN.
 
 ## Examples
 ```rescript
@@ -183,3 +197,122 @@ Console.log(set->Set.values->Iterator.toArray)
 */
 @send
 external values: t<'a> => Core__Iterator.t<'a> = "values"
+
+/** 
+Returns a new set with the values of the set that are not in the other set.
+
+See [`Set.difference`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/difference) on MDN.
+
+## Examples
+```rescript
+let set1 = Set.fromArray(["apple", "orange", "banana"])
+let set2 = Set.fromArray(["apple", "banana", "pear"])
+set1->Set.difference(set2) // Set.fromArray(["orange"])
+```
+*/
+@send
+external difference: (t<'a>, t<'a>) => t<'a> = "difference"
+
+/**
+Returns a new set with the values containing the values which are in either the set, but not in both.
+
+See [`Set.symmetricDifference`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/symmetricDifference) on MDN.
+
+## Examples
+```rescript
+let set1 = Set.fromArray(["apple", "orange", "banana"])
+let set2 = Set.fromArray(["apple", "banana", "pear"])
+set1->Set.symmetricDifference(set2) // Set.fromArray(["orange", "pear"])
+```
+
+*/
+@send
+external symmetricDifference: (t<'a>, t<'a>) => t<'a> = "symmetricDifference"
+
+/**
+Returns a new set with the values containing the values which are in both the set and the other set.
+
+See [`Set.intersection`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/intersection) on MDN.
+
+## Examples
+```rescript
+let set1 = Set.fromArray(["apple", "orange", "banana"])
+let set2 = Set.fromArray(["apple", "banana", "pear"])
+set1->Set.intersection(set2) // Set.fromArray(["apple", "banana"])
+```
+*/
+@send
+external intersection: (t<'a>, t<'a>) => t<'a> = "intersection"
+
+/**
+Returns a bool indicating if this set has no elements in common with the given set.
+
+See [`Set.isDisjointFrom`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/isDisjointFrom) on MDN.
+
+## Examples
+```rescript
+let set1 = Set.fromArray(["apple", "orange", "banana"])
+let set2 = Set.fromArray(["kiwi", "melon", "pear"])
+set1->Set.isDisjointFrom(set2) // true
+```
+*/
+@send
+external isDisjointFrom: (t<'a>, t<'a>) => bool = "isDisjointFrom"
+
+/**
+Returns a bool indicating if the all values in the set are in the given set.
+
+See [`Set.isSubsetOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/isSubsetOf) on MDN.
+
+## Examples
+```rescript
+let set1 = Set.fromArray(["apple", "banana"])
+let set2 = Set.fromArray(["apple", "banana", "pear"])
+set1->Set.isSubsetOf(set2) // true
+```
+ */
+@send
+external isSubsetOf: (t<'a>, t<'a>) => bool = "isSubsetOf"
+
+/**
+Returns a bool indicating if the all values in the given set are in the set.
+
+See [`Set.isSupersetOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/isSupersetOf) on MDN.
+
+## Examples
+```rescript
+let set1 = Set.fromArray(["apple", "banana", "pear"])
+let set2 = Set.fromArray(["apple", "banana"])
+set1->Set.isSupersetOf(set2) // true
+ ```
+*/
+@send
+external isSupersetOf: (t<'a>, t<'a>) => bool = "isSupersetOf"
+
+/**
+ Returns a new set with the values of the set that are in both the set and the other set.
+
+See [`Set.union`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/union) on MDN.
+
+## Examples
+```rescript
+let set1 = Set.fromArray(["apple", "orange", "banana"])
+let set2 = Set.fromArray(["apple", "banana", "pear"])
+set1->Set.union(set2) // Set.fromArray(["apple", "orange", "banana", "pear"])
+```
+*/
+@send
+external union: (t<'a>, t<'a>) => t<'a> = "union"
+
+/**
+`toArray(set)` returns an array of all values of the set.
+
+See [`Array.from`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from) on MDN.
+
+## Examples
+```rescript
+let set = Set.fromArray(["apple", "orange", "apple", "banana"])
+set->Set.toArray // ["apple", "orange", "banana"]
+```
+*/
+external toArray: t<'a> => array<'a> = "Array.from"
