@@ -5,6 +5,7 @@
 ## 1.6.1
 
 - Add `difference`, `intersection`, `union`, `symmetricDifference`, `isSubsetOf`, `isSupersetOf`, `isDisjointFrom`, `toArray` functions to `Set`. https://github.com/rescript-association/rescript-core/pull/247
+- Fix bindings of DataView. https://github.com/rescript-association/rescript-core/pull/246
 
 ## 1.6.0
 
